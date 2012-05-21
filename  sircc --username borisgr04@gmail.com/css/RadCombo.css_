@@ -1,0 +1,79 @@
+﻿.rcbHeader ul,
+.rcbFooter ul,
+.rcbItem ul, .rcbHovered ul, .rcbDisabled ul
+{
+    width: 100%;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    z-index:200;
+}
+
+.col1, .col2, .col3
+{
+    float: left;
+    width: 110px;
+    margin: 0;
+    padding: 0 5px 0 0;
+    line-height: 14px;
+}
+
+label,
+.selection-result
+{
+    font: 13px 'Segoe UI', Arial, sans-serif;
+    color: #4888a2;
+}
+
+label
+{
+    padding: 0 10px 0 0;
+}
+
+.button
+{
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.selection-result
+{
+    padding: 10px 0 10px 0;
+    display: block;
+}
+
+div.bigModuleBottom
+{
+    padding-top: 25px;
+}
+
+
+        .multipleRowsColumns .rcbItem, .multipleRowsColumns .rcbHovered
+        {
+            float: left;
+            margin: 0 1px;
+            min-height: 13px;
+            overflow: hidden;
+            padding: 2px 19px 2px 6px;
+            width: 125px;
+        }
+        html.rfdButton a.rfdSkinnedButton 
+     {
+     vertical-align: middle;
+     margin: 0 0 0 5px;
+     }
+     label
+     {
+     display: inline-block;
+     width: 200px;
+     text-align: right;
+     padding-right: 5px;
+     margin-top: 10px;
+     }
+        * html.rfdButton a.rfdSkinnedButton,
+     * html.rfdButton input.rfdDecorated
+     {
+         vertical-align: top;
+     }
+    

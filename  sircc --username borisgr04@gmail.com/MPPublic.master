@@ -1,0 +1,85 @@
+﻿<%@ Master Language="VB" CodeFile="MPPublic.master.vb" Inherits="MPPublic" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+<title></title> 
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-1.2.6.js" type="text/javascript"></script>
+    <script src="js/General.js" type="text/javascript"></script>
+    <script src="js/jQuery.BlockUI.js" type="text/javascript"></script>
+     
+     </head>
+<body>
+     
+    <form id="form1" runat="server">
+
+     <div id="contenedor-general">
+        <div id="header">
+            <div id="barra-modulo-activo">
+                <asp:Label ID="LbModulo" runat="server" Text="" Font-Size="Large"></asp:Label></div>
+            <div id="barra-modulos">
+
+            </div>
+        </div>
+        <div id="barra_menu">
+
+        </div>
+        <div id="barra-infologin">
+
+        </div>
+        <div id="master_page">
+            <div id="master_content">
+                <div id="master_contentheader">
+                    <div style="position: relative; padding-right: 20px; top: 0px">
+                    
+                    </div>
+                </div>
+                <div id="master_contentplaceholder">
+                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
+                        <tr>
+                            <td colspan="2">
+                                <asp:ContentPlaceHolder ID="SampleContent" runat="server" />
+                            </td>
+                        </tr>
+                    </table>
+                
+    
+                </div>
+            
+            <div id="sombraFooder">
+               </div>
+                <div id="fooder">
+                  <div id="fooderText">
+                  
+                    Copyright &#169; 2007-2011 B&A Systems(Boris Arturo González Rivera). Todos los derechos reservados.<br />
+                    Licenciado para
+                    <asp:Label ID="LbEntidad" runat="server" Text=""></asp:Label>
+                    Nit:
+                    <asp:Label ID="LbNit" runat="server" Text=""></asp:Label>
+                    Código Dane:
+                    <asp:Label ID="LbCodigo" runat="server" Text=""></asp:Label>
+                    <hr />
+                    Correo Electrónico de Soporte:
+                    <%=ConfigurationManager.AppSettings("MailAdmin") %>
+                    Teléfono de Soporte:
+                    <%= ConfigurationManager.AppSettings("TelAdmin")%>
+                    <asp:Label ID="LbConex" runat="server" Text=""></asp:Label>
+
+                   
+                    </div>
+                </div>   
+            </div>
+
+            
+        </div>
+      
+        
+    </div>
+
+    
+               
+    
+    </form>
+</body>
+</html>

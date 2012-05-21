@@ -1,0 +1,51 @@
+<%--
+Plantilla de máscara predeterminada. Las siguientes máscaras se proporcionan sólo como ejemplos.
+
+1. Máscara de control con nombre. SkinId debería definirse de forma única porque
+no se permite que haya varios SkinId por tipo de control en el mismo tema.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Máscara predeterminada. Skinid no está definido Sólo se permite 
+   una máscara de control por tipo de control en el mismo tema.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+<%---'ImabeButton                                                 --%>
+<asp:ImageButton SkinId="IBtnGuardar" runat="server" Height="32px" 
+                        ImageUrl="~/images/mnProcesos/save.png" Width="32px" />
+<asp:ImageButton SkinId="IBtnCancelar" runat="server" Height="32px" 
+                        ImageUrl="~/images/mnProcesos/undo.png" Width="32px" />
+<asp:ImageButton SkinId="IBtnEditar" runat="server" Height="32px" 
+                        ImageUrl="~/images/Operaciones/Edit2.png" Width="32px" />                        
+<asp:ImageButton SkinId="IBtnAbrir" runat="server" Height="32px" 
+                        ImageUrl="~/images/mnProcesos/open-icon32.png" Width="32px" />                        
+<asp:ImageButton SkinId="IBtnNuevo" runat="server" Height="32px" 
+                        ImageUrl="~/images/Operaciones/New1.png" Width="32px" />                        
+<asp:ImageButton SkinId="IBtnSelect2" runat="server" Height="32px" 
+                        ImageUrl="~/images/Operaciones/Select.png" Width="32px" />               
+
+<asp:ImageButton SkinId="IBtnBuscar" runat="server" AccessKey="b" AlternateText="Buscar" Height="32px" Width="32px"
+                ImageUrl="~/images/Operaciones/search2.png"  />
+<asp:ImageButton SkinId="IBtnAdd" runat="server"  
+                        ImageUrl="~/images/mnProcesos/add.gif"  />
+
+<asp:ImageButton SkinId="IBtnMinuta" runat="server"  Height="32px" Width="32px"
+                        ImageUrl="~/images/imagev2/Contract-icon.png"  />
+                        
+<%---'Imagens                                                 --%>
+<asp:Image SkinId="ImgSel" runat="server" ImageUrl="~/images/BlueTheme/Select.png" />                        
+<asp:Image SkinId="ImgOK" runat="server" ImageUrl="~/images/BlueTheme/Ok.gif" />                        
+<asp:Image SkinId="ImgLogo" runat="server" ImageUrl="~/Images/BlueTheme/logo.jpg" />                        
+<asp:Image SkinId="ImgError" runat="server" ImageUrl="~/Images/BlueTheme/Error.gif" />                        
+<asp:Image SkinId="ImgFoot" runat="server" ImageUrl="~/Images/BlueTheme/img_foot.png" />                        
+<asp:Image SkinId="ImgProgress" runat="server" ImageUrl="~/Images/BlueTheme/loading.gif" />      
+
+
+<%-------- --%>
+<asp:Label SkinId="MsgResult" runat="server" Height="100%" ></asp:Label>      
+<asp:ValidationSummary runat="server" SkinID="ValidationSummary1" CssClass="alerta" />                  
+                                        
+                                        
