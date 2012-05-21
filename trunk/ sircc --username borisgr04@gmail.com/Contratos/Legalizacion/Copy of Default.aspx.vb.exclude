@@ -1,0 +1,22 @@
+﻿
+Partial Class Contratos_Legalizacion_Default
+    Inherits PaginaComun
+
+    Protected Sub DetContrato1_OnAceptarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles DetContrato1.AceptarClicked
+        Me.grdRP1.Cod_Con = Me.DetContrato1.Cod_Con
+        Me.grdRP1.LlenarGrid()
+        Me.grdImpC1.Cod_Con = Me.DetContrato1.Cod_Con
+        Me.grdImpC1.LlenarGrid()
+        Me.ExImpC1.Cod_Con = Me.DetContrato1.Cod_Con
+        Me.ExImpC1.dtContratos = Me.DetContrato1.dtContratos
+        Me.ExImpC1.Actualizar()
+        Me.grdPolC1.Cod_Con = Me.DetContrato1.Cod_Con
+        Me.grdPolC1.LlenarGrid()
+        Me.grdIntC1.Cod_Con = Me.DetContrato1.Cod_Con
+        Me.grdIntC1.LlenarGrid()
+        Me.grdLegC1.Cod_Con = Me.DetContrato1.Cod_Con
+        Me.grdLegC1.LlenarGrid()
+
+    End Sub
+
+End Class

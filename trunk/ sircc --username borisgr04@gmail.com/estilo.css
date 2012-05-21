@@ -1,0 +1,79 @@
+﻿body 
+{
+    background-image:url('imagenes/Fondo_.jpg');
+    background-repeat:no-repeat; 
+ }
+
+
+.formulario
+
+ {
+    position:absolute;
+    left:40px;
+    height:82px;
+    width:263px;
+    top: 38px;
+    margin-bottom: 19px;
+}
+
+
+#cajas
+{
+    position:absolute;
+    margin:7px;
+    height:335px;
+    width:465px;
+    top: 177px;
+    left: 510px;
+}
+
+
+.tablitas
+{
+    position:absolute;
+    top: 61px;
+    left: 135px;
+    width: 234px;
+    height:97px;
+    
+}
+
+
+.information
+
+{
+    position:absolute;
+    height:145px;
+    width:329px;
+    top: -161px;
+    left: 93px;
+}
+
+
+.imagenboton
+
+{
+    position:absolute;
+    height:32px;
+    top: 177px;
+    left: 358px;
+}
+
+#UsuarioL
+
+{
+    position:relative;
+   top:-359px;
+   left:-129px;
+   bottom:359px;
+    height: 268px;
+    width: 282px;
+}
+
+
+.letras
+{
+    font-family: Tahoma;
+     font-size: small;
+      color: #007777
+    }

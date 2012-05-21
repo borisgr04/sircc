@@ -1,0 +1,570 @@
+﻿Imports System.Data
+Imports System.IO
+
+Partial Class Procesos_GProceso_Default
+    Inherits PaginaComun
+    Dim obj As PContratos = New PContratos
+
+
+    Private Property TotalFP As Decimal
+        Set(ByVal value As Decimal)
+            ViewState("TotalFP") = value
+        End Set
+        Get
+            Return ViewState("TotalFP")
+        End Get
+    End Property
+
+    Private Property TotalPor As Decimal
+        Set(ByVal value As Decimal)
+            ViewState("TotalPor") = value
+        End Set
+        Get
+            Return ViewState("TotalPor")
+        End Get
+    End Property
+
+    Public Sub Guardar()
+        obj = New PContratos
+        'Me.MsgResult.Text = Me.valor_dec(Me.TxtValTot.Text)
+        Dim chk As New CheckBox, txt As New TextBox
+        Dim j As String = 0, mun(25) As String
+        'Municipios
+        For i = 0 To DataList1.Items.Count - 1
+            chk = DataList1.Items(i).FindControl("chknommun")
+            txt = DataList1.Items(i).FindControl("txtcodmun")
+            If chk.Checked = True Then
+                mun(j) = txt.Text
+                j = j + 1
+            End If
+        Next
+        Select Case Me.Oper
+            Case "nuevo"
+                Me.MsgResult.Text = obj.Insert(Me.CboTproc.SelectedValue, Me.TxtNProc.Text, Me.TxtObj.Text, "", Me.TxtNPla.Text, Me.cboDep.SelectedValue, Me.CboDepP.SelectedValue, Me.Vigencia.ToString, Me.CboTip.SelectedValue, Me.cboStip.SelectedValue, Publico.PuntoPorComa(Me.TxtValTot.Text), Publico.PuntoPorComa(Me.TxtValProp.Text), Me.CboSec.SelectedValue, Me.CboFor.SelectedValue, Me.TxtNPla.Text, Util.invN1_0(ChkUM.Checked), Util.invN1_0(ChkEC.Checked), "0", Me.TxtLugEje.Text, Me.CboTPlazo.SelectedValue)
+            Case "editar"
+                Me.MsgResult.Text = obj.Update(Me.Pk1, Me.CboTproc.SelectedValue, Me.TxtNProc.Text, Me.TxtObj.Text, "", Me.TxtPlazo.Text, Me.cboDep.SelectedValue, Me.CboDepP.SelectedValue, Me.Vigencia.ToString, Me.CboTip.SelectedValue, Me.cboStip.SelectedValue, Publico.PuntoPorComa(Me.TxtValTot.Text), Publico.PuntoPorComa(Me.TxtValProp.Text), Me.CboSec.SelectedValue, Me.CboFor.SelectedValue, Me.TxtNPla.Text, Util.invN1_0(ChkUM.Checked), Util.invN1_0(ChkEC.Checked), "0", Me.TxtLugEje.Text, Me.CboTPlazo.SelectedValue, Me.CboSec.SelectedValue, mun, j - 1)
+        End Select
+        MsgBox(MsgResult, obj.lErrorG)
+        If obj.lErrorG = False Then
+            Me.Habilitar(False)
+            Me.IBtnCancelar.Enabled = False
+            Me.IBtnNuevo.Enabled = True
+            Me.IBtnGuardar.Enabled = False
+            Me.IBtnAbrir.Enabled = True
+            Me.GrPagos.DataBind()
+            Me.UpdFpago.Update()
+        End If
+    End Sub
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+
+        If Not Page.IsPostBack Then
+            Me.TxtValTot.Attributes.Add("onkeyup", "javascript:AporOtros();")
+            Me.TxtValProp.Attributes.Add("onkeyup", "javascript:AporOtros();")
+            Me.TxtValOtros.Attributes.Add("onkeyup", "javascript:AporOtros();")
+            Me.TxtValRub.Attributes.Add("onblur", "javascript:ValRub();")
+            Me.TxtValPago.Attributes.Add("onblur", "javascript:ValPago();")
+            Me.TxtValTot.Attributes.Add("onblur", "javascript:ValTotal();")
+            Me.TxtValProp.Attributes.Add("onblur", "javascript:ValAporGob;")
+            Cancelar()
+        End If
+
+
+    End Sub
+
+    Private Sub Nuevo()
+        Me.Habilitar(True)
+        Me.Limpiar()
+        Me.TxtNProc.Enabled = False
+        Me.IBtnGuardar.Enabled = True
+        Me.IBtnNuevo.Enabled = False
+        Me.IBtnCancelar.Enabled = True
+        Me.iBtnEditar.Enabled = False
+        Me.grdOblig1.Limpiar()
+        Me.BtnDefinitivo.Visible = False
+        Me.BtnTramite.Visible = False
+        Me.LblDef.Visible = False
+        Me.LblTra.Visible = False
+        Me.Oper = "nuevo"
+    End Sub
+
+    Private Sub Habilitar(ByVal Valor As Boolean)
+        Me.TxtLugEje.Enabled = Valor
+        Me.TxtNPla.Enabled = Valor
+        Me.TxtNProc.Enabled = False
+        Me.TxtObj.Enabled = Valor
+        Me.TxtPlazo.Enabled = Valor
+        'Me.TxtPro.Enabled = Valor
+        Me.TxtValOtros.Enabled = Valor
+        Me.TxtValProp.Enabled = Valor
+        Me.TxtValTot.Enabled = Valor
+        Me.cboDep.Enabled = False
+        Me.CboDepP.Enabled = False
+        Me.DataList1.Enabled = Valor
+        Me.CboFor.Enabled = Valor
+        Me.CboSec.Enabled = Valor
+        Me.cboStip.Enabled = False
+        Me.CboTip.Enabled = False
+        Me.CboTproc.Enabled = False
+        Me.grdOblig1.Enabled = Valor
+        Me.grdCDP1.Enabled = Valor
+        Me.ChkEC.Enabled = Valor
+        Me.ChkUM.Enabled = Valor
+        Me.BtnBuscaProy.Enabled = Valor
+        Me.BtnGuardaProy.Enabled = Valor
+        Me.TxtProyecto.Enabled = Valor
+        Me.IbtnBucaRubro.Enabled = Valor
+        Me.BtnGuardaRubro.Enabled = Valor
+        Me.Txt_CodRub.Enabled = Valor
+        Me.CboCDP.Enabled = Valor
+        Me.TxtValRub.Enabled = Valor
+        Me.GrProyectos.Enabled = Valor
+        Me.GrRubros.Enabled = Valor
+        Me.TxtFecPago.Enabled = Valor
+        Me.TxtValPago.Enabled = Valor
+        Me.TxtCondicionPago.Enabled = Valor
+        Me.CboTipPago.Enabled = Valor
+        Me.GrPagos.Enabled = Valor
+        Me.BtnGuardarPago.Enabled = Valor
+        Me.CboTPlazo.Enabled = Valor
+        Me.BtnGuardarPol.Enabled = Valor
+        Me.CboCalVigPol.Enabled = Valor
+        Me.CboCalPol.Enabled = Valor
+        Me.CboAmparo.Enabled = Valor
+
+        Me.Grv_Ppol.Enabled = Valor
+        Me.TxtSMMLV.Enabled = Valor
+        Me.cboTipo.Enabled = Valor
+        Me.TxtVigencia.Enabled = Valor
+        Me.RbtPorcentaje.Enabled = Valor
+        Me.RbtValPago.Enabled = Valor
+        UpdateTodaAcordeon()
+    End Sub
+
+    Private Sub Limpiar()
+        Me.TxtLugEje.Text = ""
+        Me.TxtNPla.Text = ""
+        Me.TxtNProc.Text = ""
+        Me.TxtObj.Text = ""
+        Me.TxtPlazo.Text = 0
+        'Me.TxtPro.Text = ""
+
+        Me.TxtValOtros.Text = 0
+        Me.TxtValProp.Text = 0
+        Me.TxtValTot.Text = 0
+
+        Me.cboDep.SelectedIndex = -1
+        Me.CboDepP.SelectedIndex = -1
+
+        Me.CboFor.SelectedIndex = -1
+        Me.CboSec.SelectedIndex = -1
+        Me.cboStip.SelectedIndex = -1
+        Me.CboTip.SelectedIndex = -1
+        Me.CboTproc.SelectedIndex = -1
+
+        Me.grdOblig1.Limpiar()
+        Me.grdCDP1.Limpiar()
+    End Sub
+
+    Public Sub Cancelar()
+        Me.Limpiar()
+        Me.IBtnNuevo.Enabled = True
+        Me.IBtnAbrir.Enabled = True
+        Me.IBtnGuardar.Enabled = False
+        Me.IBtnCancelar.Enabled = False
+        Me.IbtnEditar.Enabled = False
+        Me.BtnGuardaProy.Enabled = False
+        Me.BtnBuscaProy.Enabled = False
+        Me.TxtProyecto.Enabled = False
+        Me.Habilitar(False)
+        Me.BtnDefinitivo.Visible = False
+        Me.BtnTramite.Visible = False
+        Me.LblDef.Visible = False
+        Me.LblTra.Visible = False
+        Me.Oper = ""
+        Me.MsgResult.Text = ""
+        UpdateTodaAcordeon()
+    End Sub
+
+    Public Sub Editar()
+        Habilitar(True)
+        Me.IbtnEditar.Enabled = False
+        Me.IBtnGuardar.Enabled = True
+        Me.IBtnCancelar.Enabled = True
+        Me.IBtnNuevo.Enabled = False
+        Me.Oper = "editar"
+        UpdateTodaAcordeon()
+    End Sub
+    ''' <summary>
+    ''' ''Actualiza todos los grid, solo cuando se cambia el proceso o cuando se le da editar o cualquier operacion comun para todo el formulario
+    ''' </summary>
+    ''' <remarks></remarks>
+    Sub UpdateTodaAcordeon()
+        UpdRubros.Update()
+        UpdCDP.Update()
+        UpdFpago.Update()
+        UpdProy.Update()
+        updOblig.Update()
+        UpdPolizas.Update()
+    End Sub
+    Sub Buscar()
+        Dim dt As DataTable = obj.GetxUsuario("Pro_Sel_Nro='" + Me.TxtNprocA.Text + "'") 'obj.GetByPk(Me.TxtNprocA.Text)
+        If dt.Rows.Count > 0 Then
+            'Me.TxtLugEje.Text=
+            Me.TxtNPla.Text = dt.Rows(0)("NRO_PLA_CON").ToString
+            Me.TxtNProc.Text = dt.Rows(0)("PRO_SEL_NRO").ToString
+            Me.Pk1 = dt.Rows(0)("PRO_SEL_NRO").ToString
+            Me.TxtObj.Text = dt.Rows(0)("obj_con").ToString
+            Me.TxtPlazo.Text = dt.Rows(0)("PLA_EJE_CON").ToString
+            'Me.TxtPro.Enabled = CStr(dt.Rows(0)("PRO_CON"))
+
+
+            Me.TxtValTot.Text = dt.Rows(0)("VAL_CON").ToString.Replace(Publico.Punto_DecOracle, ".")
+            Me.TxtValProp.Text = dt.Rows(0)("VAL_APO_GOB").ToString.Replace(Publico.Punto_DecOracle, ".")
+            Me.TxtValOtros.Text = dt.Rows(0)("VAL_OTROS").ToString.Replace(Publico.Punto_DecOracle, ".")
+
+            Me.cboDep.SelectedValue = dt.Rows(0)("DEP_CON").ToString
+            Me.CboDepP.SelectedValue = dt.Rows(0)("DEP_PCON").ToString
+
+            'Me.CboFor.SelectedValue = dt.Rows(0)("TIP_FOR").ToString
+            If dt.Rows(0)("COD_SEC").ToString <> "" Then
+                Me.CboSec.SelectedValue = dt.Rows(0)("COD_SEC").ToString
+            End If
+
+            Me.CboTip.SelectedValue = dt.Rows(0)("TIP_CON").ToString
+            Me.cboStip.DataBind()
+            Me.cboStip.SelectedValue = dt.Rows(0)("STIP_CON").ToString
+            Me.CboTproc.SelectedValue = dt.Rows(0)("COD_TPRO").ToString
+
+            Me.TxtLugEje.Text = dt.Rows(0)("LUG_EJE").ToString
+
+            Me.LbEstado.Text = dt.Rows(0)("NOM_EST").ToString
+
+            'Me.grdProy1.Num_Proc = dt.Rows(0)("PRO_SEL_NRO").ToString
+            'Me.grdProy1.LlenarGrid()
+            Me.grdOblig1.Num_Proc = dt.Rows(0)("PRO_SEL_NRO").ToString
+            Me.grdCDP1.Num_Proc = dt.Rows(0)("PRO_SEL_NRO").ToString
+            Me.ChkEC.Checked = Util.N1_0(dt.Rows(0)("EST_CONV").ToString)
+            Me.ChkUM.Checked = Util.N1_0(dt.Rows(0)("URG_MAN").ToString)
+            Me.TxtFecPago.Text = Today.ToShortDateString
+
+
+            'Me.grdOblig1.Enabled = Valor
+            Me.grdCDP1.LlenarGrid()
+            Me.grdOblig1.LlenarGrid()
+            'Me.grdCDP1.Enabled = Valor
+            Me.Habilitar(False)
+            Me.IBtnAbrir.Enabled = True
+            Me.IbtnEditar.Enabled = True
+            Me.IBtnGuardar.Enabled = False
+            Me.IBtnCancelar.Enabled = False
+            Me.BtnDefinitivo.Visible = False
+            Me.BtnTramite.Visible = False
+            Me.LblDef.Visible = False
+            Me.LblTra.Visible = False
+            Me.MsgResult.Text = ""
+            Me.MsgResult.CssClass = ""
+            UpdateTodaAcordeon()
+            Grv_Ppol.DataBind()
+        Else
+            MsgResult.Text = " No se encontro el Proceso " + Me.TxtNprocA.Text + " a cargo del Usuario " + Usuarios.UserName
+            MsgBoxAlert(MsgResult, True)
+        End If
+    End Sub
+    Public Sub Abrir()
+        If TxtNprocA.Text <> "" Then
+            Buscar()
+        Else
+            ' ModalPopupConP.Show()
+        End If
+    End Sub
+
+    Protected Sub IBtnNuevo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnNuevo.Click
+        Nuevo()
+    End Sub
+
+
+    Protected Sub TxtNprocA_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtNprocA.TextChanged
+        Abrir()
+    End Sub
+
+    Protected Sub IBtnAbrir_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAbrir.Click
+        Abrir()
+    End Sub
+
+    Protected Sub IbtnEditar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IbtnEditar.Click
+        Dim pcont As New PContratos
+        Dim dt As DataTable
+        dt = pcont.GetByPk(TxtNProc.Text)
+        Dim est As String = dt.Rows(0).Item("Estado").ToString
+        If est = "TR" Then
+            Editar()
+            Me.BtnDefinitivo.Visible = True
+            Me.BtnTramite.Visible = False
+            Me.LblDef.Visible = True
+            Me.LblTra.Visible = False
+        Else 'If est = "DF" Then
+            Me.BtnDefinitivo.Visible = False
+            Me.BtnTramite.Visible = True
+            Me.LblDef.Visible = False
+            Me.LblTra.Visible = True
+            Me.MsgResult.Text = "El proceso ya esta válidado y listo para Generar la Minuta y Radicar el Contrato, para modificarlo debe revertir la válidación"
+            MsgBoxAlert(MsgResult, True)
+
+        End If
+
+    End Sub
+
+    Protected Sub IBtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnGuardar.Click
+        If Val(Me.TxtValTot.Text) < Val(Me.TxtValProp.Text) Then
+            Me.MsgResult.Text = "El valor de los aportes propios no puede ser mayor que el valor del contrato"
+            MsgBoxAlert(MsgResult, True)
+            Exit Sub
+        End If
+
+        Guardar()
+        Me.IbtnEditar.Enabled = True
+    End Sub
+
+    Protected Sub IBtnCancelar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnCancelar.Click
+        Cancelar()
+    End Sub
+    Protected Sub BtnBuscaProy_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnBuscaProy.Click
+        Me.ModalPopupExtender1.Show()
+    End Sub
+
+    Protected Sub ConProyectos1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConProyectos1.SelClicked
+        TxtProyecto.Text = ConProyectos1.Num_Proy
+        TxtNomProyecto.Text = ConProyectos1.Nom_Proy
+        Me.ModalPopupExtender1.Hide()
+        UpdProy.Update()
+    End Sub
+    Sub BuscarProyecto()
+        Dim t As New Proyectos
+        Dim dt As DataTable = t.GetbyPk(Me.TxtProyecto.Text)
+        If dt.Rows.Count > 0 Then
+            Me.TxtNomProyecto.Text = dt.Rows(0)("Nombre_Proyecto").ToString()
+        Else
+            Me.TxtNomProyecto.Text = ""
+        End If
+    End Sub
+
+    Protected Sub TxtProyecto_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtProyecto.TextChanged
+        BuscarProyecto()
+        MsgBoxLimpiar(MsgProy)
+    End Sub
+
+    Protected Sub BtnGuardaProy_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardaProy.Click
+        Dim pproy As New PProyectos
+        MsgProy.Text = pproy.Insert(TxtProyecto.Text, TxtNProc.Text)
+        Me.GrProyectos.DataBind()
+    End Sub
+
+    Protected Sub GrProyectos_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GrProyectos.RowCommand
+        Select Case e.CommandName
+            Case "Eliminar"
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.GrProyectos.SelectedIndex = index
+                Dim pproy As New PProyectos
+                MsgProy.Text = pproy.Delete(Me.GrProyectos.DataKeys(index).Values(0).ToString, Me.GrProyectos.DataKeys(index).Values(1).ToString)
+                GrProyectos.DataBind()
+        End Select
+    End Sub
+
+    Protected Sub IbtnBucaRubro_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IbtnBucaRubro.Click
+        Me.ModalPopupRubros.Show()
+    End Sub
+    Protected Sub ConRubros1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConRubros1.SelClicked
+        Txt_CodRub.Text = ConRubros1.Cod_Rub
+        Txt_DesRub.Text = ConRubros1.Des_Rub
+        Me.ModalPopupRubros.Hide()
+        UpdRubros.Update()
+    End Sub
+    Sub BuscarRubro()
+        Dim t As New Rubros
+        Dim dt As DataTable = t.GetbyPK(Me.Txt_CodRub.Text)
+        If dt.Rows.Count > 0 Then
+            Me.Txt_DesRub.Text = dt.Rows(0)("Des_Rub").ToString()
+        Else
+            Me.Txt_DesRub.Text = ""
+        End If
+    End Sub
+
+    Protected Sub Txt_CodRub_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Txt_CodRub.TextChanged
+        BuscarRubro()
+    End Sub
+
+    Protected Sub BtnGuardaRubro_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardaRubro.Click
+        If CboCDP.Items.Count = 0 Then
+            MsgRubro.Text = "No existen certificados de disponibilidad"
+            MsgBoxAlert(MsgRubro, True)
+            Exit Sub
+        Else
+            Dim ObjRub As New RubrosPcontratos
+            Me.MsgRubro.Text = ObjRub.Insert(Me.Txt_CodRub.Text, Me.TxtNProc.Text, Me.TxtValRub.Text, Me.CboCDP.SelectedValue)
+            MsgBox(MsgRubro, ObjRub.lErrorG)
+            Me.GrRubros.DataBind()
+            LimpiarRubros()
+        End If
+    End Sub
+    Sub LimpiarRubros()
+        Me.Txt_CodRub.Text = ""
+        Me.TxtValRub.Text = ""
+    End Sub
+
+    Protected Sub GrRubros_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GrRubros.RowCommand
+        Select Case e.CommandName
+            Case "Eliminar"
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.GrProyectos.SelectedIndex = index
+                Dim objRubro As New RubrosPcontratos
+                MsgRubro.Text = objRubro.Delete(Me.GrRubros.DataKeys(index).Values(0).ToString, Me.GrRubros.DataKeys(index).Values(1).ToString)
+                MsgBox(MsgRubro, obj.lErrorG)
+                GrRubros.DataBind()
+        End Select
+    End Sub
+
+    Protected Sub BtnGuardarPago_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardarPago.Click
+        If IsDate(Me.TxtFecPago.Text) And IsNumeric(Me.TxtValPago.Text) Then
+            Dim pp As New PagosParciales
+            Me.MsgPagos.Text = pp.Insert(Me.TxtNProc.Text, Me.TxtFecPago.Text, Me.CboTipPago.SelectedValue, Publico.PuntoPorComa(Me.TxtValPago.Text), Me.TxtCondicionPago.Text, RbtPorcentaje.Checked)
+            GrPagos.DataBind()
+            limpiarPagos()
+            MsgBox(MsgPagos, pp.lErrorG)
+        Else
+            Me.fechavalida.Text = "Fecha Inválida"
+            MsgBoxAlert(Me.fechavalida, True)
+        End If
+        
+    End Sub
+
+    Protected Sub GrPagos_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GrPagos.RowCommand
+        Select Case e.CommandName
+            Case "Eliminar"
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.GrPagos.SelectedIndex = index
+                Dim pp As New PagosParciales
+                MsgPagos.Text = pp.Delete(Me.GrPagos.DataKeys(index).Values(0).ToString, Me.GrPagos.DataKeys(index).Values(1).ToString)
+                MsgBox(MsgPagos, obj.lErrorG)
+                GrPagos.DataBind()
+            Case "Editar"
+
+        End Select
+    End Sub
+
+    Protected Sub grdCDP1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdCDP1.SelClicked
+        Me.CboCDP.DataBind()
+        Me.GrRubros.DataBind()
+        'Me.MsgRubro.Text = "Se actualiza"
+        Me.UpdRubros.Update()
+    End Sub
+    Sub limpiarPagos()
+        Me.TxtValPago.Text = ""
+        Me.TxtFecPago.Text = Today.ToShortDateString
+        Me.TxtCondicionPago.Text = ""
+    End Sub
+
+    Protected Sub BtnDefinitivo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnDefinitivo.Click
+        Dim pcont As New PContratos
+        MsgResult.Text = pcont.Definitivo(TxtNProc.Text)
+        MsgBox(MsgResult, pcont.lErrorG)
+        If Not pcont.lErrorG Then
+            Habilitar(False)
+        End If
+
+    End Sub
+
+    Protected Sub BtnTramite_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnTramite.Click
+        Dim pcont As New PContratos
+        MsgResult.Text = pcont.Tramite(TxtNProc.Text)
+        MsgBox(MsgResult, pcont.lErrorG)
+        If Not pcont.lErrorG Then
+            Habilitar(False)
+        End If
+    End Sub
+
+    Protected Sub ConPContratos1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConPContratos1.SelClicked
+        Me.TxtNprocA.Text = ConPContratos1.Num_Proc
+        Buscar()
+        Me.ModalPopupConP.Hide()
+    End Sub
+
+    Protected Sub IbtnBucar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IbtnBucar.Click
+        Me.ModalPopupConP.Show()
+    End Sub
+
+    Protected Sub BtnGuardarPol_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnGuardarPol.Click
+        If CboAmparo.SelectedIndex = 0 Or CboCalPol.SelectedIndex = 0 Or CboCalVigPol.SelectedIndex = 0 Then
+            Me.MsgPol.Text = "Debe especificar toda la informacion necesaria"
+            MsgBoxAlert(MsgPol, True)
+
+        Else
+            Dim ppol As New PPolizas
+            MsgPol.Text = ppol.Insert(CboAmparo.SelectedValue, TxtNProc.Text, TxtSMMLV.Text, CboCalPol.SelectedValue, TxtVigencia.Text, CboCalVigPol.SelectedValue, cboTipo.SelectedValue)
+            If ppol.lErrorG = False Then
+                Me.Grv_Ppol.DataBind()
+                Me.TxtVigencia.Text = ""
+                Me.TxtSMMLV.Text = ""
+                Me.CboCalVigPol.SelectedIndex = 0
+                Me.CboCalPol.SelectedIndex = 0
+                Me.CboAmparo.SelectedIndex = 0
+            End If
+            MsgBox(MsgPol, obj.lErrorG)
+        End If
+    End Sub
+
+    Protected Sub Grv_Ppol_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles Grv_Ppol.RowCommand
+        Select Case e.CommandName
+            Case "Eliminar"
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.Grv_Ppol.SelectedIndex = index
+                Dim ppol As New PPolizas
+                MsgRubro.Text = ppol.Delete(Me.Grv_Ppol.DataKeys(index).Values(0).ToString, Me.Grv_Ppol.DataKeys(index).Values(1).ToString)
+                Grv_Ppol.DataBind()
+        End Select
+    End Sub
+
+    Protected Sub DataList1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DataList1.SelectedIndexChanged
+        If Me.DataList1.SelectedIndex = 0 Then
+            Dim chk As New CheckBox
+            chk = Me.DataList1.Items(0).FindControl("chknommun")
+            For i As Integer = 1 To Me.DataList1.Items.Count - 1
+
+            Next
+        End If
+    End Sub
+
+    Protected Sub GrPagos_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GrPagos.RowDataBound
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            'ASIGNA(EVENTOS)
+            e.Row.Attributes.Add("OnMouseOver", "Resaltar_On(this);")
+            e.Row.Attributes.Add("OnMouseOut", "Resaltar_Off(this);")
+
+        End If
+
+        Select Case e.Row.RowType
+            Case DataControlRowType.Header
+                Me.TotalFP = 0
+                Me.TotalPor = 0
+                e.Row.Cells(3).HorizontalAlign = HorizontalAlign.Center
+                e.Row.Cells(4).HorizontalAlign = HorizontalAlign.Center
+
+            Case DataControlRowType.DataRow
+
+                Me.TotalFP += CDec(DataBinder.Eval(e.Row.DataItem, "VALOR_PAGO"))
+                Me.TotalPor += CDec(DataBinder.Eval(e.Row.DataItem, "PORCENTAJE"))
+
+                e.Row.Cells(3).HorizontalAlign = HorizontalAlign.Right
+                e.Row.Cells(4).HorizontalAlign = HorizontalAlign.Right
+
+            Case DataControlRowType.Footer
+                e.Row.Cells(3).Text = FormatCurrency(Me.TotalFP.ToString, 3)
+                e.Row.Cells(3).HorizontalAlign = HorizontalAlign.Right
+                e.Row.Font.Bold = True
+
+                e.Row.Cells(4).Text = FormatPercent(Me.TotalPor.ToString, 3)
+                e.Row.Cells(4).HorizontalAlign = HorizontalAlign.Right
+                e.Row.Font.Bold = True
+        End Select
+    End Sub
+End Class

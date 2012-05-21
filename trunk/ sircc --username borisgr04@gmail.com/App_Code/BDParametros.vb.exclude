@@ -1,0 +1,15 @@
+Imports Microsoft.VisualBasic
+Imports System.Data.Common
+Imports System.Data
+
+Public Class BDParametros
+    Inherits Parameter
+
+    Public Sub New(ByVal name As String, ByVal TipoDato As DbType, ByVal Valor As Object, ByVal Direccion As ParameterDirection)
+
+        Me.Name = name
+        Me.DbType = TipoDato
+        Me.DefaultValue = Valor
+        Me.Direction = Direccion
+    End Sub
+End Class

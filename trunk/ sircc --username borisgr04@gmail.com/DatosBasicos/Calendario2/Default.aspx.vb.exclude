@@ -1,0 +1,122 @@
+﻿Imports System.Data
+Partial Class DatosBasicos_Calendario2_Default
+    Inherits PaginaComun
+    Protected dsHolidays As DataTable
+    Protected Sub BtnCargar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnCargar.Click
+        Cargar_Dias()
+    End Sub
+
+    Sub Cargar_Dias()
+        Dim startDate As DateTime = New DateTime(cal1.VisibleDate.Year, cal1.VisibleDate.Month, 1).AddDays(-7)
+        Dim endDate As DateTime = New DateTime(cal1.VisibleDate.Date.AddMonths(1).Year, cal1.VisibleDate.Date.AddMonths(1).Month, 1).AddDays(7)
+        Dim dt As DataTable = GetEventData(startDate, endDate)
+        cal1.DataSource = dt
+        'GridView1.DataSource = dt
+        'GridView1.DataBind()
+        FillHolidayDataset()
+    End Sub
+    Function GetEventData(ByVal startDate As DateTime, ByVal endDate As DateTime) As DataTable
+        '-- We'll avoid using a session variable this time and
+        '-- query the database each time the page is called;
+        '-- However, we'll make sure we're only loading events for the
+        '-- currently displayed month (plus the week before and week after)
+
+        '-- read data from an Access query
+        Dim Obj As Calendario = New Calendario
+        Return Obj.GetCronograma(startDate, endDate)
+
+    End Function
+
+
+    Sub Page_Load(ByVal o As Object, ByVal e As EventArgs)
+        '-- initially load the events based on the displaying calendar month
+        If Not IsPostBack Then
+            Dim startDate As DateTime = New DateTime(cal1.VisibleDate.Year, cal1.VisibleDate.Month, 1).AddDays(-7)
+            Dim endDate As DateTime = New DateTime(cal1.VisibleDate.Date.AddMonths(1).Year, cal1.VisibleDate.Date.AddMonths(1).Month, 1).AddDays(7)
+            Dim dt As DataTable = GetEventData(startDate, endDate)
+            FillHolidayDataset()
+            cal1.DataSource = dt
+
+        End If
+    End Sub
+
+
+    Sub MonthChange(ByVal o As Object, ByVal e As MonthChangedEventArgs)
+        '-- triggered when the month in the calendar changes;
+        '-- requery the database for the new month's events
+        Dim startDate As DateTime = e.NewDate.AddDays(-7)
+        Dim endDate As DateTime = e.NewDate.AddMonths(1).AddDays(7)
+
+        FillHolidayDataset()
+        Dim dt As DataTable = GetEventData(startDate, endDate)
+        cal1.DataSource = dt
+        'GridView1.DataSource = dt
+        'GridView1.DataBind()
+
+
+    End Sub
+
+    Protected Sub cal1_DayRender(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DayRenderEventArgs) Handles cal1.DayRender
+        ''Si es Domingo o Sábado
+        If (Weekday(e.Day.Date) = 1) Then
+            e.Day.IsSelectable = False
+            e.Cell.ToolTip = e.Day.Date.ToLongDateString
+        ElseIf (Weekday(e.Day.Date) = 7) Then
+            e.Day.IsSelectable = False
+            e.Cell.ToolTip = e.Day.Date.ToLongDateString
+        ElseIf IsFestivo(e.Day.Date) Then
+            e.Day.IsSelectable = False
+            e.Cell.BackColor = Util.HEXCOL2RGB("#992200") 'Casi Rojo #992200 #CCCCFF
+            e.Cell.Font.Name = "Arial"
+            e.Cell.ToolTip = "Festivo [" + e.Day.Date.ToLongDateString + "]"
+        Else
+            e.Cell.ToolTip = e.Day.Date.ToLongDateString
+        End If
+
+
+
+    End Sub
+    '------------------------------
+    ReadOnly Property IsFestivo(ByVal fecha As Date) As Boolean
+        Get
+            FillHolidayDataset()
+            Dim value As Boolean = False
+            Dim nextdate As DateTime
+            For Each dr As DataRow In dsHolidays.Rows
+                nextdate = CType(dr("Fecha"), DateTime)
+                If nextdate = fecha Then
+                    value = True
+                End If
+            Next
+            Return value
+        End Get
+    End Property
+    Protected Sub FillHolidayDataset()
+        Dim firstDate As New DateTime(cal1.VisibleDate.Year, _
+             cal1.VisibleDate.Month, 1)
+        Dim lastDate As DateTime = GetFirstDayOfNextMonth()
+        dsHolidays = GetCurrentMonthData(firstDate, lastDate)
+    End Sub
+    Protected Function GetFirstDayOfNextMonth() As DateTime
+        Dim monthNumber, yearNumber As Integer
+        If cal1.VisibleDate.Month = 12 Then
+            monthNumber = 1
+            yearNumber = cal1.VisibleDate.Year + 1
+        Else
+            monthNumber = cal1.VisibleDate.Month + 1
+            yearNumber = cal1.VisibleDate.Year
+        End If
+        Dim lastDate As New DateTime(yearNumber, monthNumber, 1)
+        Return lastDate
+    End Function
+    Function GetCurrentMonthData(ByVal firstDate As DateTime, ByVal lastDate As DateTime) As DataTable
+        Dim dsMonth As New DataSet
+        Dim Obj As Calendario = New Calendario
+        Return Obj.GetFestivos(firstDate, lastDate)
+    End Function
+
+
+    Protected Sub cal1_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cal1.SelectionChanged
+        Cargar_Dias()
+    End Sub
+End Class

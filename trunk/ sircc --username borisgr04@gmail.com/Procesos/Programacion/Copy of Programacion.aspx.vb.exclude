@@ -1,0 +1,57 @@
+﻿Imports System.Data
+Imports System.Math
+
+Partial Class Procesos_Programacion_Default
+    Inherits PaginaComun
+
+
+
+    Protected Sub DetPContrato1_AceptarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles DetPContrato1.AceptarClicked
+
+        If DetPContrato1.Encontrado = True Then
+            CalenProgl1.Visible = True
+            CalenProgl1.Num_Proc = Me.DetPContrato1.CodigoPContrato
+            CalenProgl1.MododeVista = CtrlUsr_CalenProg_CalenProgl.BgrModoVista.VistaTabla
+            CalenProgl1.Actualizar_Crono()
+            CalenProgl1.MostrarMododeVista = True
+            HyperLink1.NavigateUrl = "~/Procesos/Programacion/ImprimirCrono.aspx?Num_Proc=" + Me.DetPContrato1.CodigoPContrato
+            HyperLink2.NavigateUrl = "~/Procesos/Programacion/RptCrono.aspx?Num_Proc=" + Me.DetPContrato1.CodigoPContrato
+        Else
+            CalenProgl1.MododeVista = CtrlUsr_CalenProg_CalenProgl.BgrModoVista.Ninguno
+            CalenProgl1.MostrarMododeVista = False
+        End If
+    End Sub
+    Protected Sub DetPContrato1_BuscarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles DetPContrato1.BuscarClicked
+        'CalenProgl1.Num_Proc = Me.DetPContrato1.CodigoPContrato
+        'CalenProgl1.Est_Crono = Me.DetPContrato1.Est_Crono
+        'CalenProgl1.DataBind()
+        Me.ModalPopupConP.Show()
+    End Sub
+
+    Protected Sub ConPContratos1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConPContratos1.SelClicked
+        Me.DetPContrato1.CodigoPContrato = ConPContratos1.Num_Proc
+        Me.ModalPopupConP.Hide()
+    End Sub
+
+
+    Protected Sub CalenProgl1_CambiarEstProc(ByVal sender As Object, ByVal e As System.EventArgs) Handles CalenProgl1.CambiarEstProc
+        Me.DetPContrato1.Buscar()
+        'Me.DetPContrato1.CodigoPContrato = CalenProgl1.Num_Proc
+        'Me.Title = "Prueb"
+        'Me.UpdPCon.Update()
+    End Sub
+
+    Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            If Request.QueryString.Count > 0 Then
+                querystringSeguro = Me.GetRequest()
+                Me.ConPContratos1.Num_Proc = querystringSeguro("Num_Proc")
+                'Me.ConPContratos1.Num_Proc = Request.QueryString("Num_Proc")
+                Me.ModalPopupConP.Show()
+                'Me.DetPContrato1.CodigoPContrato = Request.QueryString("Num_Proc")
+            End If
+        End If
+
+
+    End Sub
+End Class

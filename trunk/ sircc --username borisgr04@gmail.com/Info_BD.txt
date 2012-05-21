@@ -1,0 +1,5 @@
+Base de Datos SIRCCGOB
+Fecha de Instalación:  7 de Marzo
+Por: Boris Arturo Gonzalez
+Precompiled Generado: xxxxx
+Instalado SI / NO
