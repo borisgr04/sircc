@@ -27,8 +27,8 @@
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
     </ajaxToolkit:ToolkitScriptManager>
-    <asp:Label ID="LbV" runat="server" Text="1.0"></asp:Label>
-&nbsp;<br />
+    <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+    <br />
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>
 &nbsp;<asp:Label id="Tit" runat="server" Width="398px" CssClass="Titulo" 
