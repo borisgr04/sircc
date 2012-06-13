@@ -11,7 +11,7 @@
         $addHandler($get("BtnCancelar"), 'click', CerrarModalTercero);
     }
     function CerrarModalTercero(ev) {
-        ev.preventDefault();
+        ev.preventDefault(); 
         var modalPopupBehavior2 = $find('programmaticModalPopupBehavior2');
         modalPopupBehavior2.hide();
     }
@@ -27,13 +27,15 @@
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
     </ajaxToolkit:ToolkitScriptManager>
-    <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+    &nbsp; &nbsp;
     <br />
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>
 &nbsp;<asp:Label id="Tit" runat="server" Width="398px" CssClass="Titulo" 
                 Text="REGIONES (MUNICIPIOS / CORREGIMIENTOS)" Height="17px"></asp:Label><BR />
-            <asp:Label id="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;<asp:GridView 
+            <asp:Label id="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;<asp:Label 
+                ID="Label5" runat="server" Text="Label"></asp:Label>
+            <asp:GridView 
                 id="GridView1" runat="server" Width="500px" ForeColor="#333333" 
                 AllowSorting="True" OnRowDataBound="GridView1_RowDataBound1" 
                 DataSourceID="ObjSource" GridLines="None" CellPadding="4" ShowFooter="True" 
