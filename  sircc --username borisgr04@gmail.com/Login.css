@@ -1,0 +1,73 @@
+﻿
+body 
+{
+  background-image:none;
+}
+
+
+.formulario
+
+ {
+    position:absolute;
+    left:40px;
+    height:82px;
+    width:263px;
+    top: 38px;
+    margin-bottom: 19px;
+}
+
+
+#cajas
+{
+    position:absolute;
+    margin:7px;
+    height:338px;
+    width:417px;
+    top: 214px;
+    left: 437px;
+}
+
+
+.tablitas
+{
+    position:relative;
+    top: -310px;
+    left: 89px;
+    width: 280px;
+    height:119px;
+    font-family:Tahoma;
+    font-size:small;
+}
+
+
+.usuario
+
+{
+    position:absolute;
+    height:243px;
+    width:237px;
+    top: 14px;
+    left: -138px;
+}
+
+.logo
+{
+    position:absolute;
+    height:94px;
+    width:414px;
+    top: -156px;
+    left: 18px;
+}
+
+
+.imagenboton
+
+{
+    position:relative;
+    height:27px;
+    width:68px;
+    top: -301px;
+    left: 328px;
+    font-family:Tahoma;
+    font-size:small;
+}
