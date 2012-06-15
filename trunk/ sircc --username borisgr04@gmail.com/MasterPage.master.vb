@@ -17,6 +17,7 @@ Partial Class MasterPage
             'Me.Menu2.MaximumDynamicDisplayLevels = 3
             'Me.Menu2.StaticDisplayLevels = 2
             'Me.Menu2.DynamicVerticalOffset = 0
+
             'Me.Menu2.StaticSubMenuIndent = 20
             Dim dt As DataTable = Me.UsuTercero.GetByUser()
             If dt.Rows.Count > 0 Then

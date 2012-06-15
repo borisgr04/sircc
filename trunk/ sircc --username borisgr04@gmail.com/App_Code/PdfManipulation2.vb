@@ -875,17 +875,17 @@ Public Class PdfManipulation2
         Return result
     End Function
 
-    Public Shared Function ExportBookmarksToXML(ByVal sourcePdf As String, ByVal outputXML As String) As Boolean
-        Try
-            Dim reader As New iTextSharp.text.pdf.PdfReader(sourcePdf)
-            Dim bookmarks As System.Collections.Generic.List(Of System.Collections.Generic.Dictionary(Of String, Object)) = SimpleBookmark.GetBookmark(reader)
-            Using outFile As New IO.StreamWriter(outputXML)
-                SimpleBookmark.ExportToXML(bookmarks, outFile, "ISO8859-1", True)
-            End Using
-        Catch ex As Exception
-            Throw New ApplicationException(ex.Message, ex)
-        End Try
-    End Function
+    Public Shared Sub ExportBookmarksToXML(ByVal sourcePdf As String, ByVal outputXML As String) 'As Boolean
+        'Try
+        Dim reader As New iTextSharp.text.pdf.PdfReader(sourcePdf)
+        Dim bookmarks As System.Collections.Generic.List(Of System.Collections.Generic.Dictionary(Of String, Object)) = SimpleBookmark.GetBookmark(reader)
+        Using outFile As New IO.StreamWriter(outputXML)
+            SimpleBookmark.ExportToXML(bookmarks, outFile, "ISO8859-1", True)
+        End Using
+        'Catch ex As Exception
+        'Throw New ApplicationException(ex.Message, ex)
+        'End Try
+    End Sub
 
     ''' <summary>
     ''' Merge multiple pdf files into a single pdf

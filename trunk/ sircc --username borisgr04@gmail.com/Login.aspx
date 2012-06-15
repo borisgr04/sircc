@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <title>Inicio Sesiòn</title>
+   <title>Inicio Sesión</title>
  <link rel="Stylesheet" href="login.css" type="text/css" media="all" />
          
 </head>

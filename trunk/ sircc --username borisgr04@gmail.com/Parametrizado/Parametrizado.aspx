@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Parametrizado.aspx.vb" Inherits="Reportes_Parametrizado_Default" %>
-<%@ Register src="../../CtrlUsr/AdmTercero/AdmTercero.ascx" tagname="AdmTercero" tagprefix="uc3" %>
-<%@ Register src="../../CtrlUsr/Terceros/ConsultaTerS.ascx" tagname="ConsultaTerS" tagprefix="uc1" %>
+<%@ Register src="~/CtrlUsr/AdmTercero/AdmTercero.ascx" tagname="AdmTercero" tagprefix="uc3" %>
+<%@ Register src="~/CtrlUsr/Terceros/ConsultaTerS.ascx" tagname="ConsultaTerS" tagprefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 <script type='text/javascript'>
@@ -472,6 +472,7 @@ runat="server" BackgroundCssClass="modalBackground" BehaviorID="programmaticModa
         OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
         TypeName="Sector">
     </asp:ObjectDataSource>
+    
 </div>
 </asp:Content>
 
