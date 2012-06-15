@@ -116,7 +116,7 @@ Partial Class Procesos_Proponentes_GPProponente
 
     Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardar.Click
         Dim Miembro As New Consorcios
-        Me.MsgMiembros.Text = Miembro.Insert(Me.Pk1, TxtIdMiembro.Text, "AC")
+        Me.MsgMiembros.Text = Miembro.Insert(Me.Pk1, TxtIdMiembro.Text, "AC", 0)
         Me.GridView2.DataBind()
         LimpiarMiembros()
         Me.MsgBox(MsgMiembros, obj.lErrorG)
