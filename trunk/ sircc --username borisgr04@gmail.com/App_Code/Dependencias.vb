@@ -179,8 +179,11 @@ Public Class Dependencias
     ''' <returns></returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
- Public Function Update(ByVal pk1_cod_dep As String, ByVal cod_dep As String, ByVal nom_dep As String, ByVal dep_del As String, ByVal dep_abr As String, ByVal ide_ter As String, ByVal norma_del As String, ByVal Email As String, ByVal Estado As String) As String
-        Me.Conectar()
+    Public Function Update(ByVal pk1_cod_dep As String, ByVal cod_dep As String, ByVal nom_dep As String, ByVal dep_del As String, ByVal dep_abr As String, ByVal ide_ter As String, ByVal norma_del As String, ByVal Email As String, ByVal Estado As String, Optional ByVal connect As Boolean = True) As String
+        If connect Then
+            Me.Conectar()
+        End If
+
         Try
             Dim queryString As String = "Update dependencia Set cod_dep=:cod_dep, nom_dep=:nom_dep, dep_del=:dep_del, dep_abr=:dep_abr, ide_ter=:ide_ter,norma_del=:norma_del, Email=:Email, Estado=:Estado Where cod_dep=:pk1_cod_dep"
             Me.CrearComando(queryString)
@@ -198,7 +201,9 @@ Public Class Dependencias
         Catch ex As Exception
             Me.Msg = "Error: " + ex.Message
         Finally
-            Me.Desconectar()
+            If connect Then
+                Me.Desconectar()
+            End If
         End Try
 
         Return Msg
@@ -244,8 +249,10 @@ Public Function Delete(ByVal cod_dep As String) As String
 
     ''' Asignar Abogado a Dependencia
     <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
-    Public Function AsignarAbogado(ByVal Cod_Dep As String, ByVal Ide_Ter As String, ByVal ASig_Proc As String, ByVal Coordinador As String) As String
-        Me.Conectar()
+    Public Function AsignarAbogado(ByVal Cod_Dep As String, ByVal Ide_Ter As String, ByVal ASig_Proc As String, ByVal Coordinador As String, Optional ByVal Conect As Boolean = True) As String
+        If Conect Then
+            Me.Conectar()
+        End If
         Try
             Dim queryString As String = "Insert Into HDEP_ABOGADOS(Cod_Dep,Ide_Ter,Asig_Proc,Coordinador)Values(:Cod_Dep,:Ide_Ter,:Asig_Proc,:Coordinador)"
             Me.CrearComando(queryString)
@@ -260,10 +267,11 @@ Public Function Delete(ByVal cod_dep As String) As String
             Me.Msg = "Error: " + ex.Message
             Me.lErrorG = True
         Finally
-            Me.Desconectar()
+            If Conect Then
+                Me.Desconectar()
+            End If
         End Try
         Return Msg
-
     End Function
     ''' <summary>
     ''' Evalua los procesos pendientes a cargo de un funcionario o contratista
@@ -302,9 +310,13 @@ Public Function Delete(ByVal cod_dep As String) As String
     ''' <returns></returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
-    Public Function DAsignarAbogado(ByVal ID_HDEP As String) As String
-        Me.Conectar()
+    Public Function DAsignarAbogado(ByVal ID_HDEP As String, Optional ByVal connect As Boolean = True) As String
+        If connect Then
+            Me.Conectar()
+        End If
+
         Try
+            'ComenzarTransaccion()
             Dim Sw As Boolean = False
             Dim cant_proc As Integer = ProcesosActxDepxUsu(ID_HDEP)
             If cant_proc > 0 Then
@@ -320,23 +332,22 @@ Public Function Delete(ByVal cod_dep As String) As String
                 lErrorG = True
                 Throw New Exception(Msg)
             End If
-
-            ComenzarTransaccion()
             Dim queryString As String = "UPDATE HDEP_ABOGADOS SET ESTADO='IN' WHERE ID_HDEP=:ID_HDEP"
             Me.CrearComando(queryString)
             Me.AsignarParametroCadena(":ID_HDEP", ID_HDEP)
-            'Throw New Exception(Me._Comando.CommandText)
             Me.num_reg = EjecutarComando()
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
-            Me.ConfirmarTransaccion()
+            'Me.ConfirmarTransaccion()
             lErrorG = False
 
         Catch ex As Exception
             Me.Msg = "Error: " + ex.Message
             lErrorG = True
-            Me.CancelarTransaccion()
+            ' Me.CancelarTransaccion()
         Finally
-            Me.Desconectar()
+            If connect Then
+                Me.Desconectar()
+            End If
         End Try
         Return Msg
 
@@ -399,11 +410,14 @@ Public Function Delete(ByVal cod_dep As String) As String
     ''' <returns></returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
-    Public Function Update(ByVal ID_HDEP As String, ByVal ASIG_PROC As String, ByVal Coordinador As String) As String
-        Me.Conectar()
+    Public Function Update(ByVal ID_HDEP As String, ByVal ASIG_PROC As String, ByVal Coordinador As String, Optional ByVal connect As Boolean = True) As String
+        If connect Then
+            Me.Conectar()
+        End If
+
         Try
-            Me.ComenzarTransaccion()
-            Dim queryString As String = "UPDATE HDEP_ABOGADOS SET ASIG_PROC=:ASIG_PROC, Coordinador=:Coordinador WHERE ID_HDEP=:ID_HDEP"
+            'Me.ComenzarTransaccion()
+            Dim queryString As String = "UPDATE HDEP_ABOGADOS SET ESTADO='AC',ASIG_PROC=:ASIG_PROC, Coordinador=:Coordinador WHERE ID_HDEP=:ID_HDEP"
             Me.CrearComando(queryString)
 
             Me.AsignarParametroCadena(":ASIG_PROC", ASIG_PROC)
@@ -412,15 +426,17 @@ Public Function Delete(ByVal cod_dep As String) As String
 
             Me.num_reg = EjecutarComando()
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
-            Me.ConfirmarTransaccion()
+            'Me.ConfirmarTransaccion()
             lErrorG = False
 
         Catch ex As Exception
             Me.Msg = "Error: " + ex.Message
             lErrorG = True
-            Me.CancelarTransaccion()
+            'Me.CancelarTransaccion()
         Finally
-            Me.Desconectar()
+            If connect Then
+                Me.Desconectar()
+            End If
         End Try
         Return Msg
 
