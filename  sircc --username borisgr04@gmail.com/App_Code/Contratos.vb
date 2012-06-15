@@ -405,6 +405,26 @@ Public Class Contratos
 
     End Function
     ''' <summary>
+    ''' Consulta de contratos por llave primaria, filtrando por dependencia delegada asociada.
+    ''' </summary>
+    ''' <param name="Cod_Con"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByPkD(ByVal Cod_Con As String) As DataTable
+        Me.NroCon = Cod_Con
+        Me.Conectar()
+        querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con And Dep_pCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo ) "
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":cod_con", Cod_Con)
+        Me.AsignarParametroCadena(":ide_ter_abo", Me.usuario)
+
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
+    ''' <summary>
     ''' Consulta de contratos por llave primaria
     ''' </summary>
     ''' <param name="Cod_Con"></param>
@@ -437,6 +457,7 @@ Public Class Contratos
         AsignarParametroCadena(":cod_con", Cod_Con)
         Return EjecutarConsultaDataTable()
     End Function
+
     Function GetByPKEncargado(ByVal Cod_Con As String) As DataTable
         Me.NroCon = Cod_Con
         Me.Conectar()
@@ -548,8 +569,6 @@ Public Class Contratos
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetSql(ByVal cSql As String) As System.Data.DataTable
-
-
         Conectar()
         CrearComando(cSql)
         Dim datat As DataTable = EjecutarConsultaDataTable()
