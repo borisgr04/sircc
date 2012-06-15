@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="ReportIP.aspx.vb" Inherits="Partial Class Reportes_ParametrizadoR_ReportI
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="ReportIP.aspx.vb" Inherits="Reportes_ParametrizadoR_ReportI
 " %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" 
 namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
