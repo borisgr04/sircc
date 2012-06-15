@@ -128,6 +128,8 @@
                 <EditRowStyle BackColor="#999999" />
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             </asp:GridView>
+            <asp:GridView ID="GridView2" runat="server">
+            </asp:GridView>
             <asp:ObjectDataSource id="ObjTipos" runat="server" TypeName="SubTipos" 
                 SelectMethod="GetByTipoDB" 
                 OldValuesParameterFormatString="original_{0}" UpdateMethod="Update" 
