@@ -8,12 +8,10 @@
         EnableScriptGlobalization="True" EnableTheming="True">
     </telerik:RadScriptManager>
     <div class="demoarea" style="text-align: left">
-  <h3>
-  <br />
-
-    <asp:Image ID="Image3" runat="server"  ImageUrl="~/images/Login/Img_gob.jpg" 
-          Height="50px" Width="137px"
-         />&nbsp;</h3>
+       <asp:Image ID="ImgControl" runat="server" 
+            AlternateText="No tiene imagenes asociadas" 
+            ImageUrl="~/ashx/logo.ashx" />
+         
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         </asp:UpdatePanel>
         <h3>

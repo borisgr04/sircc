@@ -2,6 +2,8 @@
 <%@ Register src="../../CtrlUsr/AyudaIzq/ctrAyudIzql.ascx" tagname="ctrAyudIzql" tagprefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 <div class="demoarea" >
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
     <asp:Label ID="LbTitulo" runat="server" 
                             CssClass="Titulo">CAMBIO DE CONTRASEÑA</asp:Label>
     <uc1:ctrAyudIzql ID="ctrAyudIzql1" runat="server" 
