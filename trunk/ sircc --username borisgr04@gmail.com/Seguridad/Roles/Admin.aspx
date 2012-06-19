@@ -89,10 +89,6 @@
                                     SortExpression="LastLockoutDate" />
                                 <asp:BoundField DataField="CreateDate" HeaderText="Fecha de Creaci&#243;n" ReadOnly="True"
                                     SortExpression="CreateDate" />
-                                <asp:BoundField DataField="LastLoginDate" HeaderText="LastLoginDate" SortExpression="LastLoginDate" />
-                                <asp:BoundField DataField="LastActivityDate" HeaderText="LastActivityDate" SortExpression="LastActivityDate" />
-                                <asp:BoundField DataField="LastPasswordChangedDate" HeaderText="LastPasswordChangedDate"
-                                    ReadOnly="True" SortExpression="LastPasswordChangedDate" />
                                 <asp:BoundField DataField="Perfil" HeaderText="Perfil Desktop" />
                                 <asp:TemplateField HeaderText="Activo" SortExpression="ISAPPROVED">
                                     <ItemTemplate>

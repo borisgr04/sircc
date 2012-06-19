@@ -87,7 +87,6 @@ Partial Class Seguridad_Roles_Admin
         Dim index As Integer = Convert.ToInt32(e.CommandArgument)
         Me.GridView1.SelectedIndex = index
         Dim User As String = GridView1.SelectedValue
-        MsgBox(MsgResult, True)
         Select Case e.CommandName
             Case "activar"
                 Membership.GetUser(User).IsApproved = Not Membership.GetUser(User).IsApproved
