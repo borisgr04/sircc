@@ -26,10 +26,12 @@ function enviarCSUT(ced,rsocial,tip_ter)
     <div class="demoarea">
         <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
         </ajaxToolkit:ToolkitScriptManager>
+        
         <asp:Label id="Tit" runat="server" Width="392px" CssClass="Titulo" 
-            Text="Consorcios y/o Uniones Temporales"></asp:Label><BR __designer:mapid="27" />
-            <asp:Label id="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR 
-                __designer:mapid="29" />&nbsp;<table style="width: 100%">
+            Text="Consorcios y/o Uniones Temporales"></asp:Label><BR />
+            <asp:Label id="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;
+            <BR 
+                 />&nbsp;<table style="width: 100%">
         <tr>
             <td style="width: 44px">
                 <asp:Label ID="Label2" runat="server" Text="Nit"></asp:Label>
@@ -131,18 +133,11 @@ function enviarCSUT(ced,rsocial,tip_ter)
                     Enabled="False" Width="307px"></asp:TextBox>
                                     </td>
             <td style="width: 44px">
-                                        <asp:Label ID="Label13" runat="server" Text="Estado"></asp:Label>
-                                    </td>
+                                        &nbsp;</td>
             <td style="width: 40px">
-                                        <asp:DropDownList ID="CmbEst" runat="server" Width="92px">
-                                            <asp:ListItem Value="AC">ACTIVO</asp:ListItem>
-                                            <asp:ListItem Value="IN">INACTIVO</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
+                                        &nbsp;</td>
             <td style="width: 63px">
-                                        <asp:Button ID="BtnAgregar" runat="server" Text="Agregar" 
-                                            ValidationGroup="AgregarGroup" />
-                                    </td>
+                                        &nbsp;</td>
             <td>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                             ControlToValidate="txtIde" 
@@ -156,12 +151,13 @@ function enviarCSUT(ced,rsocial,tip_ter)
         </tr>
         <tr>
             <td colspan="2">
-                                        <asp:Label ID="Label19" runat="server" Text="Porcentaje de Participación"></asp:Label>
+                                        <asp:Label ID="Label13" runat="server" Text="Estado"></asp:Label>
                                     </td>
             <td style="width: 24px">
                             &nbsp;</td>
             <td style="width: 314px">
-                                        &nbsp;</td>
+                                        <asp:Label ID="Label19" runat="server" Text="Porcentaje de Participación"></asp:Label>
+                                    </td>
             <td style="width: 44px">
                                         &nbsp;</td>
             <td style="width: 40px">
@@ -173,14 +169,30 @@ function enviarCSUT(ced,rsocial,tip_ter)
         </tr>
         <tr>
             <td colspan="2">
-                                        <asp:TextBox ID="TxtPP" runat="server"></asp:TextBox>
+                                        <asp:DropDownList ID="CmbEst" runat="server" Width="92px">
+                                            <asp:ListItem Value="AC">ACTIVO</asp:ListItem>
+                                            <asp:ListItem Value="IN">INACTIVO</asp:ListItem>
+                                        </asp:DropDownList>
                                     </td>
             <td style="width: 24px">
                             &nbsp;</td>
             <td style="width: 314px">
-                                        &nbsp;</td>
+                                        <asp:TextBox ID="TxtPP" runat="server"></asp:TextBox>
+                                    </td>
             <td style="width: 44px">
                                         &nbsp;</td>
+            <td style="width: 40px">
+                                        &nbsp;</td>
+            <td style="width: 63px">
+                                        &nbsp;</td>
+            <td>
+                                        &nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align: center">
+                                        <asp:Button ID="BtnAgregar" runat="server" Text="Agregar" 
+                                            ValidationGroup="AgregarGroup" />
+                                    </td>
             <td style="width: 40px">
                                         &nbsp;</td>
             <td style="width: 63px">
@@ -338,7 +350,8 @@ function enviarCSUT(ced,rsocial,tip_ter)
         CancelControlID="BtnCerrar" 
         BackgroundCssClass="modalBackground" 
         DropShadow="True">
-        </ajaxToolkit:ModalPopupExtender>   
+        </ajaxToolkit:ModalPopupExtender>  
+         
 </div>
 </asp:Content>
 
