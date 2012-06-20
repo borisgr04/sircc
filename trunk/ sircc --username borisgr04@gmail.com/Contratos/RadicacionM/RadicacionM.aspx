@@ -8,7 +8,7 @@
 <%@ Register src="../../CtrlUsr/AdmTercero/AdmTercero.ascx" tagname="AdmTercero" tagprefix="uc3" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 
-    <script src="js/Numeric.js" type="text/javascript"></script>
+    <%--<script src="js/Numeric.js" type="text/javascript"></script>--%>
     <script language="javascript" type="text/javascript">
 // <!CDATA[
 
