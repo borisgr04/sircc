@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Legalizacion.aspx.vb" Inherits="Contratos_Legalizacion_Default" %>
 
-<%@ Register src="../../CtrlUsr/DetContratos/DetContrato.ascx" tagname="DetContrato" tagprefix="uc1" %>
+<%@ Register src="../../CtrlUsr/DetContratos/DetContratoD.ascx" tagname="DetContrato" tagprefix="uc1" %>
 
 <%@ Register src="../../CtrlUsr/grdRP/grdRP.ascx" tagname="grdRP" tagprefix="uc2" %>
 

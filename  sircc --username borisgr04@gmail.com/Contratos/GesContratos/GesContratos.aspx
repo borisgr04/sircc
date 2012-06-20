@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="GesContratos.aspx.vb" Inherits="Contratos_GesContratos_Default" %>
 
-<%@ Register src="../../CtrlUsr/DetContratos/DetContrato.ascx" tagname="DetContrato" tagprefix="uc1" %>
+<%@ Register src="../../CtrlUsr/DetContratos/DetContratoD.ascx" tagname="DetContrato" tagprefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
     <div class="demoarea">
