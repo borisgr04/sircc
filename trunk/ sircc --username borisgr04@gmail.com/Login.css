@@ -1,7 +1,7 @@
 ﻿
 body 
 {
-  background-image:none;
+    background-image:none; 
 }
 
 
@@ -25,14 +25,15 @@ body
     width:417px;
     top: 214px;
     left: 437px;
+    z-index:2;
 }
 
 
 .tablitas
 {
     position:relative;
-    top: -310px;
-    left: 89px;
+    top: -297px;
+    left: 94px;
     width: 280px;
     height:119px;
     font-family:Tahoma;
@@ -48,6 +49,7 @@ body
     width:237px;
     top: 14px;
     left: -138px;
+    z-index:3;
 }
 
 .logo
@@ -57,6 +59,7 @@ body
     width:414px;
     top: -156px;
     left: 18px;
+    z-index:4;
 }
 
 
@@ -70,4 +73,16 @@ body
     left: 328px;
     font-family:Tahoma;
     font-size:small;
+}
+
+.arab 
+{
+    width:322px;
+    position:relative;
+    z-index:1;
+    background-image:url('imagenes/arab.png');
+    background-repeat:no-repeat;
+    top: 63px;
+    left: 273px;
+    height: 260px;
 }

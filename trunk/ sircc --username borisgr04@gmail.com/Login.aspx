@@ -13,6 +13,7 @@
     <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="Server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
     </ajaxToolkit:ToolkitScriptManager>  
+    <div class="arab"></div>
       <div id="cajas">
           <asp:Image ID="Image1" runat="server" ImageUrl="~/imagenes/NvaCaja.png" 
               Height="332px" Width="413px" />
@@ -86,10 +87,11 @@
           <div class="imagenboton">
           <asp:button id="cmdEnviar" runat="server" Text="Ingresar" OnClick="cmdEnviar_Click"/>
           </div>
-             </div>
+          
+             
             </contenttemplate>
         </asp:UpdatePanel>
-    
+     </div>
    <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"
             SelectMethod="GetRecords" TypeName="Vigencias"></asp:ObjectDataSource>
         <asp:ObjectDataSource ID="ObjModulos" runat="server" OldValuesParameterFormatString="original_{0}"
