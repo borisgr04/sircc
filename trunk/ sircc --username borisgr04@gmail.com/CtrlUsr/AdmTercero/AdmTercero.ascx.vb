@@ -10,6 +10,13 @@ Partial Class CtrlUsr_AdmTercero_AdmTercero
 
     End Property
 
+    Public ReadOnly Property Nom_Ter As String
+        Get
+            Return ConsultaTer21.Nom_Ter
+        End Get
+
+    End Property
+
     Public Property TipoTer As String
         Get
             Return ViewState("TipoTer")

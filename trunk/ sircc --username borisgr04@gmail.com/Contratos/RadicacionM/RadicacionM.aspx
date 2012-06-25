@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="RadicacionM.aspx.vb" Inherits="Contratos_RadicacionM_Default" %>
+<%@ Register src="../../CtrlUsr/ConsorciosUT/ConsorciosUT.ascx" tagname="ConsorciosUT" tagprefix="uc4" %>
+<%@ Register src="../../CtrlUsr/ConsorciosUT/ConMiembros.ascx" tagname="ConMiembros" tagprefix="uc5" %>
 <%--<%@ Register assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI" tagprefix="asp" %>--%>
 <%@ Register Assembly="eWorld.UI, Version=2.0.6.2393, Culture=neutral, PublicKeyToken=24d65337282035f2"
     Namespace="eWorld.UI" TagPrefix="ew" %>
@@ -8,7 +10,11 @@
 <%@ Register src="../../CtrlUsr/AdmTercero/AdmTercero.ascx" tagname="AdmTercero" tagprefix="uc3" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 
-    <%--<script src="js/Numeric.js" type="text/javascript"></script>--%>
+    <%--<ajaxToolkit:ConfirmButtonExtender ID="BtnAct_ConfirmButtonExtender" 
+                    runat="server" 
+                    ConfirmText="Revise los datos modificados. ¿Confirme si desea Guardar los Cambios Realizados?" 
+                    Enabled="True" TargetControlID="BtnAct">
+                </ajaxToolkit:ConfirmButtonExtender>--%>
     <script language="javascript" type="text/javascript">
 // <!CDATA[
 
@@ -193,7 +199,8 @@ function mayusculas(input){
                                 SkinID="IBtnNuevo" />
                         </td>
                         <td style="width: 100px; height: 10px">
-                            <asp:ImageButton ID="IBtnEditar" runat="server" SkinID="IBtnEditar" />
+                            <asp:ImageButton ID="IBtnEditar" runat="server" SkinID="IBtnEditar" 
+                                CausesValidation="False" />
                         </td>
                         <td style="width: 100px; height: 10px">
                             &nbsp;</td>
@@ -595,8 +602,6 @@ function mayusculas(input){
                         <div ID="DIV1" language="javascript" style="z-index: 101; overflow: auto; width: 237px;
                             height: 187px; background-color: transparent; border-bottom-style: outset" 
                             title="MUNICPIOS">
-                            REGIONES
-                            <br />
                             <asp:DataList ID="DataList1" runat="server" CellPadding="4" CellSpacing="5" 
                                 CssClass="txt" DataKeyField="COD_MUN" DataSourceID="ObjConMun" 
                                 ForeColor="#333333" GridLines="Vertical" Height="40px" RepeatColumns="1" 
@@ -620,6 +625,12 @@ function mayusculas(input){
                         </td>
                         <td valign="top">
                             <uc1:grdProyC ID="grdProyC1" runat="server" Visible="False" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <asp:LinkButton ID="LnkMiembros" runat="server">Editar Miembros</asp:LinkButton>
+                            <uc5:ConMiembros ID="ConMiembros1" runat="server" />
                         </td>
                     </tr>
                 </table>
@@ -659,8 +670,6 @@ function mayusculas(input){
                 </td>
             <td style="width: 146px; height: 15px;">
             </td>
-        </tr>
-        <tr>
         </tr>
         <tr>
             <td colspan="4" style="height: 15px">

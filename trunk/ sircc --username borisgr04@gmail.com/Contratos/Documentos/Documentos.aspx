@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Documentos.aspx.vb" Inherits="Contratos_Documentos_default" %>
 
 <%@ Register src="../../CtrlUsr/CargarDoc/CargarDoc.ascx" tagname="CargarDoc" tagprefix="uc1" %>
-<%@ Register src="../../CtrlUsr/DetContratos/DetContrato.ascx" tagname="DetContrato" tagprefix="uc2" %>
-<%@ Register src="../../CtrlUsr/ConDocContratos/ConDocContratos.ascx" tagname="ConDocContratos" tagprefix="uc3" %>
+<%@ Register src="../../CtrlUsr/DetContratos/DetContratoD.ascx" tagname="DetContrato" tagprefix="uc2" %>
+<%@ Register src="../../CtrlUsr/ConDocContratos/ConDocContratosE.ascx" tagname="ConDocContratos" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 <div class="demoarea">

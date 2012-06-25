@@ -13,13 +13,7 @@ Partial Class _Default
             Redireccionar_Pagina("Consultas/AvisosAct/AvisosAct.aspx")
         End If
 
-        'Dim objE As New Entidad
-        'Dim dt As DataTable = objE.GetRecords()
-        'Dim b As Byte() = DirectCast(dt.Rows(0)("Logo_Rpt"), Byte())
-        'Dim vFilename As String = "Docs/Logo.jpg"
-        'Dim FileName As String = Server.MapPath(vFilename)
-        'Util.SaveJPG(Util.Bytes2Image(b), FileName)
-        'Image3.ImageUrl = vFilename
 
+        
     End Sub
 End Class

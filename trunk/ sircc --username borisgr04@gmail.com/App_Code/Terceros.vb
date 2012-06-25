@@ -47,6 +47,21 @@ Public Class Terceros
 
     End Function
 
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByIdeCSUT(ByVal Ide_ter As String) As DataTable
+
+        Me.Conectar()
+        Dim queryString As String = "SELECT * FROM vTerceros WHERE Ide_Ter=:Ide_Ter And ((tipo='CS') or (tipo='UT'))"
+
+        Me.CrearComando(queryString)
+        Me.AsignarParametroCadena(":Ide_Ter", Ide_ter)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+
+    End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetByIde(ByVal Ide_ter As String) As DataTable
 

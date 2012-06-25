@@ -264,4 +264,25 @@ Public Class DocContratos
         Return CInt(datat.Rows(0)("C"))
     End Function
 
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Delete, True)> _
+    Public Function Delete(ByVal ID As String) As String
+        Msg = ""
+        Try
+            querystring = "DELETE FROM Doc_Contratos Where ID=:ID "
+            Me.Conectar()
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":ID", ID)
+            num_reg = EjecutarComando()
+            Msg = MsgOk + " Filas Afectadas" + num_reg.ToString
+            lErrorG = False
+        Catch ex As Exception
+            Msg = "Error:" + ex.Message
+            lErrorG = True
+        Finally
+            Me.Desconectar()
+        End Try
+        Return Msg
+
+    End Function
 End Class
