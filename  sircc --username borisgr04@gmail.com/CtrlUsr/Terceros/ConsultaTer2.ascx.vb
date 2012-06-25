@@ -67,7 +67,7 @@ Partial Class CtrlUsr_ConsultaTer2
 
     Public Property Ide_Ter() As String
         Get
-            Return ViewState("ide_ter")
+            Return GridView1.SelectedValue 'ViewState("ide_ter")
         End Get
         Set(ByVal value As String)
 
@@ -88,7 +88,7 @@ Partial Class CtrlUsr_ConsultaTer2
 
     Property Nom_Ter() As String
         Get
-            Return ViewState("nom_ter")
+            Return GridView1.SelectedRow.Cells(1).Text 'ViewState("nom_ter")
         End Get
         Set(ByVal value As String)
             ViewState("nom_ter") = value

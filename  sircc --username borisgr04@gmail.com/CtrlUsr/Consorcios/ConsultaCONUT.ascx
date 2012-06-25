@@ -31,47 +31,17 @@
             <td colspan="4">
                 <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
                     AutoGenerateColumns="False" DataKeyNames="IDE_TER" DataSourceID="ObjTerceros" 
-                    OnRowCommand="GridView1_RowCommand" OnRowDataBound="GridView1_RowDataBound" 
-                    OnSelectedIndexChanged="GridView1_SelectedIndexChanged" ShowFooter="True">
+                    OnRowCommand="GridView1_RowCommand" 
+                    OnRowDataBound="GridView1_RowDataBound" ShowFooter="True" 
+                    EnableModelValidation="True">
                     <Columns>
-                        <asp:TemplateField HeaderText="Tipo Doc" SortExpression="IDE_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbNom" runat="server" Text='<%# Bind("IDE_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="N° Identificación" SortExpression="NOM_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbUni1" runat="server" Text='<%# Bind("NOM_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Nombre" SortExpression="DIR_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbUni2" runat="server" Text='<%# Bind("DIR_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Teléfono" SortExpression="TEL_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbBar" runat="server" Text='<%# Bind("TEL_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Email" SortExpression="EMA_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbNor" runat="server" Text='<%# Bind("EMA_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField>
-                            <ItemStyle HorizontalAlign="Center" Width="16px" />
-                            <ItemTemplate>
-                                
-                                <div onclick='javascript:enviarCSUT(&#039;<%# Eval("ide_ter") %>&#039;,&#039;<%# Eval("NOM_TER") %>&#039;,&#039;<%= Me.Ret %>&#039;);' 
-                                    onmouseout="this.style.cursor = 'auto'" 
-                                    onmouseover="this.style.cursor = 'hand'" 
-                                    title="Enviar Registro" style="height: 32px; width: 32px;"  > 
-                                    <asp:Image ID="Image1" runat="server" SkinID="ImgSel" /> 
-                                    </div>
-                                 
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                    <asp:BoundField DataField="Ide_Ter" HeaderText="Identificacion"  />
+                    <asp:BoundField DataField="Nom_Ter" HeaderText="Nombre o Razón Social"  />
+                    <asp:BoundField DataField="Dir_Ter" HeaderText="Dirección"  />
+                    <asp:BoundField DataField="Tel_Ter" HeaderText="Teléfono"  />
+                    <asp:BoundField DataField="Ema_Ter" HeaderText="Email"  />
+                        <asp:CommandField ButtonType="Image" 
+                            SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" />
                     </Columns>
                     <EmptyDataTemplate>
                         <br />
@@ -79,6 +49,7 @@
                             Text="No se encontraron registros" Width="166px"></asp:Label>
                     </EmptyDataTemplate>
                 </asp:GridView>
+                
             </td>
         </tr>
 </table>

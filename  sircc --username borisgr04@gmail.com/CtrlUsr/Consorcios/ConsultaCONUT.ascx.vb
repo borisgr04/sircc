@@ -1,8 +1,17 @@
 
 Partial Class CtrlUsr_ConsultaCONUT
-    Inherits System.Web.UI.UserControl
+    Inherits CtrlUsrComun
     Dim sTipo As String
     Dim sRet As String
+
+#Region "Eventos del control"
+    Public Event SelClicked As EventHandler
+    Protected Overridable Sub OnClick(ByVal sender As Object)
+        RaiseEvent SelClicked(sender, New EventArgs())
+    End Sub
+#End Region
+
+    
     Property Ret() As String
         Get
             Return sRet
@@ -24,7 +33,7 @@ Partial Class CtrlUsr_ConsultaCONUT
 
     Property Ide_Ter() As String
         Get
-            Return ViewState("ide_ter")
+            Return GridView1.SelectedValue
         End Get
         Set(ByVal value As String)
             ViewState("ide_ter") = value
@@ -33,27 +42,23 @@ Partial Class CtrlUsr_ConsultaCONUT
 
     Property Nom_Ter() As String
         Get
-            Return ViewState("nom_ter")
+            Return GridView1.SelectedRow.Cells(1).Text
         End Get
         Set(ByVal value As String)
             ViewState("nom_ter") = value
         End Set
     End Property
     Protected Sub GridView1_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs)
-        If e.CommandName = "Seleccionar" Then
-            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-            Me.GridView1.SelectedIndex = index
-        End If
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Me.GridView1.SelectedIndex = index
         If e.CommandName = "enviar" Then
-            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-            Me.GridView1.SelectedIndex = index
-            Me.Ide_Ter = Me.GridView1.SelectedValue
-            Me.Nom_Ter = Me.GridView1.SelectedRow.Cells(2).ToString
+            'Me.Ide_Ter = Me.GridView1.SelectedValue
+            'Me.Nom_Ter = Me.GridView1.SelectedRow.Cells(2).Text
         End If
     End Sub
 
     Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
-
+        OnClick(sender)
     End Sub
 
     Protected Sub GridView1_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs)

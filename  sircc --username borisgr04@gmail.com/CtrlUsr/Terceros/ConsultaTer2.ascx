@@ -34,32 +34,11 @@
                     OnSelectedIndexChanged="GridView1_SelectedIndexChanged" ShowFooter="True" 
                     EnableModelValidation="True" Width="100%" AllowPaging="True">
                     <Columns>
-                        <asp:TemplateField HeaderText="Identificación" SortExpression="IDE_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbNom" runat="server" Text='<%# Bind("IDE_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Apellidos y Nombres / Razón Social" 
-                            SortExpression="NOM_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbUni1" runat="server" Text='<%# Bind("NOM_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Dirección" SortExpression="DIR_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbUni2" runat="server" Text='<%# Bind("DIR_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Teléfono" SortExpression="TEL_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbBar" runat="server" Text='<%# Bind("TEL_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Email" SortExpression="EMA_TER">
-                            <ItemTemplate>
-                                <asp:Label ID="LbNor" runat="server" Text='<%# Bind("EMA_TER") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                       <asp:BoundField DataField="Ide_Ter" HeaderText="Identificacion"  />
+                    <asp:BoundField DataField="Nom_Ter" HeaderText="Nombre o Razón Social"  />
+                    <asp:BoundField DataField="Dir_Ter" HeaderText="Dirección"  />
+                    <asp:BoundField DataField="Tel_Ter" HeaderText="Teléfono"  />
+                    <asp:BoundField DataField="Ema_Ter" HeaderText="Email"  />
                         <asp:CommandField ButtonType="Image" 
                             SelectImageUrl="~/images/BlueTheme/Select.png" ShowSelectButton="True" />
                         <asp:ButtonField ButtonType="Image" CommandName="editar" 

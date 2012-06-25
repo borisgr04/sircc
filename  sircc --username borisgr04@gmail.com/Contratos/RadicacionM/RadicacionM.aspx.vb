@@ -93,14 +93,21 @@ Partial Class Contratos_RadicacionM_Default
 
         Me.CboTip.Enabled = True
         CboDep.SelectedIndex = 0
-        CboDepP.SelectedIndex = 0
+        Try
+            CboDepP.SelectedIndex = 0
+        Catch ex As ArgumentOutOfRangeException
+            Me.MsgResult.Text = "El Usuario no tiene asociado ninguna dependencia delegada."
+            MsgBox(MsgResult, True)
+        End Try
+
 
         CboTproc.SelectedIndex = 0
         CboSec.SelectedIndex = 0
 
         Me.TxtValProp.Text = 0
         Me.TxtValOtros.Text = 0
-        Me.MsgResult.Visible = False
+        MsgBoxLimpiar(MsgResult)
+        Me.MsgResult.Visible = True
         Me.grdCDPC1.Visible = False
         Me.grdProyC1.Visible = False
 
@@ -172,6 +179,11 @@ Partial Class Contratos_RadicacionM_Default
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Thread.CurrentThread.CurrentCulture = New Globalization.CultureInfo("es-CO")
         If Not Page.IsPostBack Then
+            If Not String.IsNullOrEmpty(Request("Cod_Con")) Then
+                Me.TxtCodCon.Text = Request("Cod_Con")
+                Abrir()
+            End If
+
             Me.Editar(False)
             'Tabla de CDP
             MostrarUId("02")
@@ -181,7 +193,7 @@ Partial Class Contratos_RadicacionM_Default
 
             'Me.TxtVal.Attributes.Add("onfocusout", "javascript:ValProp();")
             Me.TxtVal.Attributes.Add("onblur", "javascript:CValProp();")
-            
+
             'Me.TxtObj.Attributes.Add("onkeypress", "javascript:mayusculas(this);")
             'Me.TxtObj.Attributes.Add("onblur", "javascript:mayusculas(this);")
             Me.TxtValProp.Attributes.Add("onblur", "javascript:CValOtros();")
@@ -215,7 +227,7 @@ Partial Class Contratos_RadicacionM_Default
         If Me.TxtCodCon.Text.Length <> 8 Then
             Me.TxtCodCon.Text = obj.GetCodigo(Me.CboTip.SelectedValue, Me.TxtCodCon.Text, Vigencia_Cookie)
         End If
-        dt = obj.GetByPk(Me.TxtCodCon.Text)
+        dt = obj.GetByPkD(Me.TxtCodCon.Text)
 
         If dt.Rows.Count > 0 Then
             Me.TxtObj.Text = dt.Rows(0)("obj_con").ToString
@@ -231,7 +243,18 @@ Partial Class Contratos_RadicacionM_Default
             TxtPro.Text = dt.Rows(0)("pro_con").ToString
             TxtFsus.Text = CDate(dt.Rows(0)("fec_sus_con")).ToShortDateString
             CboDep.SelectedValue = dt.Rows(0)("dep_con").ToString
-            CboDepP.SelectedValue = dt.Rows(0)("dep_pcon").ToString
+            Try
+                CboDepP.SelectedValue = dt.Rows(0)("dep_pcon").ToString
+                'TxtObj.Text = "asignar combop." + dt.Rows(0)("dep_pcon").ToString
+            Catch ex As Exception
+                Me.MsgResult.Text = "El usuario no puede acceder al contrato " + TxtCodCon.Text
+                TxtObj.Text = MsgResult.Text
+                Me.MsgResult.Visible = True
+                MsgBox(Me.MsgResult, True)
+                Me.IBtnGuardar.Enabled = False
+            End Try
+        
+
             TxtVal.Text = dt.Rows(0)("val_con").ToString.Replace(",", ".")
             CboSec.SelectedValue = dt.Rows(0)("cod_sec").ToString
             CboFor.SelectedValue = dt.Rows(0)("tip_for").ToString
@@ -281,10 +304,19 @@ Partial Class Contratos_RadicacionM_Default
             Me.grdCDPC1.Visible = True
             Me.grdCDPC1.Cod_Con = dt.Rows(0)("Numero").ToString
             Me.grdCDPC1.LlenarGrid()
+
+            Dim objT As New Terceros
+
+            Dim mostrarMiembros As Boolean = objT.GetByIdeCSUT(Me.TxtIde.Text).Rows.Count > 0 '(Si es CS o UT)
+            Me.LnkMiembros.Enabled = mostrarMiembros
+            Me.ConMiembros1.Ide_Ter = TxtIde.Text
+            Me.ConMiembros1.Visible = mostrarMiembros
+
+
         Else
             Me.LimpiarTxt()
-            MsgResult.Text = "No se encontró en la Base de Datos el Contrato/Convenio Buscado"
-            MsgBox(Me.MsgResult, True)
+            MsgResult.Text = "No se encontró en la Base de Datos el Contrato/Convenio Buscado o No tiene autorización para la Delegación asociada al Contrato"
+            MsgBoxAlert(Me.MsgResult, True)
             MsgResult.Visible = True
             Me.IBtnEditar.Enabled = False
             Me.TxtCodCon.Focus()
@@ -517,6 +549,10 @@ Partial Class Contratos_RadicacionM_Default
 
     Protected Sub iBtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnGuardar.Click
         Guardar()
+    End Sub
+
+    Protected Sub LnkMiembros_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkMiembros.Click
+        Response.Redirect("MiembrosCSUT.aspx?Cod_Con=" + TxtCodCon.Text)
     End Sub
 End Class
 
