@@ -135,4 +135,25 @@ Public Class Util
     Public Shared Function valor_dec(ByVal v As String) As Decimal
         Return v.Replace(".", ",")
     End Function
+
+
+    Public Shared Sub SortListBox(ByRef lbxId As ListBox)
+        Dim t As New List(Of ListItem)
+        Dim compare As New Comparison(Of ListItem)(AddressOf CompareListItems)
+        'Iterate through each ListItem in the Listbox, and add them to the 'List' object  
+        For Each lbItem As ListItem In lbxId.Items
+            t.Add(lbItem)
+        Next
+        'Sort the List 
+        t.Sort(compare)
+        'Clear the Listbox passed in, and add the sorted list from above  
+        lbxId.Items.Clear()
+        lbxId.Items.AddRange(t.ToArray())
+    End Sub
+    Public Shared Function CompareListItems(ByVal li1 As ListItem, ByVal li2 As ListItem) As Integer
+        'Return the strings in order that have been compared:  
+        Return [String].Compare(li1.Text, li2.Text)
+    End Function
+
+
 End Class

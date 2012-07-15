@@ -113,7 +113,6 @@ Partial Class DependenciasD_DependenciasD
                 e.Row.Cells(8).Controls.Clear()
                 e.Row.Cells(9).Controls.Clear()
             End If
-
         End If
     End Sub
 

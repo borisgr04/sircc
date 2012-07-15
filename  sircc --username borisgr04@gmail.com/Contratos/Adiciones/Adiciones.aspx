@@ -13,7 +13,7 @@
     <asp:UpdatePanel ID="UpdAdi" runat="server">
     <ContentTemplate>
     <uc1:DetContrato ID="DetContrato1" runat="server" OnAceptarClicked="DetContrato1_OnAceptarClicked" />
-    <uc2:grdAdiC ID="grdAdiC1" runat="server" />
+    <uc2:grdAdiC ID="grdAdiC1" runat="server" Visible="false" />
     </ContentTemplate>
     </asp:UpdatePanel>
       <asp:UpdateProgress ID="UpdPrgAdi" runat="server" AssociatedUpdatePanelID="UpdAdi">

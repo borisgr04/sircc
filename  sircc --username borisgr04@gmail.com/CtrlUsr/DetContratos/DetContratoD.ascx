@@ -16,7 +16,8 @@
                         <asp:TextBox ID="TxtCodCon" runat="server" AutoPostBack="True"></asp:TextBox>
                     </td>
                     <td  >
-                        <asp:ImageButton ID="ImageButton1" runat="server" SkinID="IBtnBuscar" />
+                        <asp:ImageButton ID="ImageButton1" runat="server" SkinID="IBtnBuscar" 
+                            CausesValidation="False" />
                     </td>
                
                     <td  >
@@ -73,7 +74,7 @@
                                  <asp:BoundField DataField="Valor_Total_Doc" DataFormatString="{0:c}" HeaderText="Valor Total del Contrato/Convenio"  />
 
                                  <asp:BoundField DataField="FechaInicio" HeaderText="Fecha de Acta de Inicio" DataFormatString="{0:d}"  />
-                                 <asp:BoundField DataField="fec_apr_pol" HeaderText="Fecha Aprobación de la Póliza" DataFormatString="{0:d}"  />
+                                 <asp:BoundField DataField="fec_apr_pol" HeaderText="Fecha Legalización" DataFormatString="{0:d}"  />
                                 
                                 <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" />
                                 <asp:BoundField DataField="Dependencia" HeaderText="Dependencia que Genera la Necesidad" SortExpression="Dependencia" />

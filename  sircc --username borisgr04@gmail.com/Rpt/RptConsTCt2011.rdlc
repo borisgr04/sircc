@@ -268,6 +268,10 @@
           <DataField>NOM_INT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="TIP_INT">
+          <DataField>TIP_INT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DSSircc</DataSourceName>
@@ -275,11 +279,11 @@
       </Query>
       <rd:DataSetInfo>
         <rd:DataSetName>DSSircc</rd:DataSetName>
-        <rd:SchemaPath>D:\x\SIRCC\SIRCC2011_35vDes\App_Code\DSSircc.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\x\SIRCC\RepositorioLocalSircc\App_Code\DSSircc.xsd</rd:SchemaPath>
         <rd:TableName>VCONTRATOSC_A</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>VCONTRATOSC_ATableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

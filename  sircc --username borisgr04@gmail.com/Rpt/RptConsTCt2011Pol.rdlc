@@ -264,6 +264,14 @@
           <DataField>TIP_POL</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="NOM_INT">
+          <DataField>NOM_INT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TIP_INT">
+          <DataField>TIP_INT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DSSircc</DataSourceName>
@@ -271,7 +279,7 @@
       </Query>
       <rd:DataSetInfo>
         <rd:DataSetName>DSSircc</rd:DataSetName>
-        <rd:SchemaPath>C:\ProgramasTrabajo\PARAPC\SIRCC\SIRCC_DES\SIRCC2011_35vDes11Nov11\SIRCC2011_35vDes\App_Code\DSSircc.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\x\SIRCC\RepositorioLocalSircc\App_Code\DSSircc.xsd</rd:SchemaPath>
         <rd:TableName>VCONTRATOSC_A</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -3303,14 +3311,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox458">
+                    <Textbox Name="NOM_INT">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NOM_TER.Value</Value>
+                              <Value>=Fields!NOM_INT.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -3320,7 +3328,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox458</rd:DefaultName>
+                      <rd:DefaultName>NOM_INT</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -5567,7 +5575,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

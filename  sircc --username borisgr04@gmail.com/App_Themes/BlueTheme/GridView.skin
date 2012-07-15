@@ -19,7 +19,7 @@
         <RowStyle BackColor="White" ForeColor="#284775" />
     </asp:GridView>
 
-    <asp:GridView runat="server"  SkinId="SinFormato"   >
+    <asp:GridView runat="server"  SkinId="SinFormato" GridLines="None"    >
        
     </asp:GridView>
 

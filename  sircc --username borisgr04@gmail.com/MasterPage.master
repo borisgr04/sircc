@@ -46,8 +46,8 @@
             font-weight: bold;
         }
     </style>
-    <link rel="shortcut icon" href="images/icono/favicon.ico">
-    <link rel="icon" type="image/gif" href="images/icono/animated_favicon1.gif">
+    <link rel="shortcut icon" href="~/imagenes/favicon.ico">
+    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -137,7 +137,7 @@
                 <div id="fooder">
                   <div id="fooderText">
                   
-                    Copyright &#169; 2007-2011 B&A Systems(Ing. Boris Arturo González Rivera). Todos los derechos reservados.<br />
+                    Copyright &#169; 2007-2012 B&A Systems(Ing. Boris Arturo González Rivera). Todos los derechos reservados.<br />
                     Licenciado para
                     <asp:Label ID="LbEntidad" runat="server" Text=""></asp:Label>
                     Nit:

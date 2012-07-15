@@ -6,7 +6,9 @@ Partial Class MasterPage
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'BDDatos.ResetConexion()
         'LbConex.Text = BDDatos.Estado_Conexion
-        LbConex.Text = "Usuarios en Linea:" + Membership.GetNumberOfUsersOnline().ToString
+        Dim c As New Contratos
+
+        LbConex.Text = "Usuarios en Linea:" + Membership.GetNumberOfUsersOnline().ToString + " Tipo de Filtro <b>" + c.GetFiltro_Contrato().ToString + "</b>"
 
         If Not Me.IsPostBack Then
             'mn.cargarMenu(Me.MnuPpal, Request.Cookies(Publico.Cookie)("Modulo"))

@@ -25,6 +25,11 @@ Partial Class Contratos_Documentos_default
   
 
     Protected Sub DetContrato1_AceptarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles DetContrato1.AceptarClicked
-        Me.ConDocContratos1.CodigoContrato = Me.DetContrato1.Cod_Con
+        If DetContrato1.Encontrado Then
+            Me.ConDocContratos1.CodigoContrato = Me.DetContrato1.Cod_Con
+            MyAccordion.Visible = True
+        Else
+            MyAccordion.Visible = False
+        End If
     End Sub
 End Class

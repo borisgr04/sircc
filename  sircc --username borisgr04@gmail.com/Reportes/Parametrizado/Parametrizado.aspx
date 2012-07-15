@@ -38,24 +38,30 @@
     <ContentTemplate>
     
     
-<table style="background-color: lavender; width: 99%;" cellpadding="5" 
+<table style="width: 99%;" cellpadding="5" 
         cellspacing="5" rules="none">
-        <tr>
+       <%-- <tr>
             <td class="Titulos" colspan="4" style="text-align: center">
                 DIGITE EL TITULO DEL REPORTE</td>
         </tr>
         <tr>
             <td colspan="4" style="height: 10px; width: 177px; text-align: center;">
                 <asp:TextBox ID="txtTitulo" runat="server" Width="600px" TextMode="MultiLine"></asp:TextBox></td>
+        </tr>--%>
+        <tr>
+        <td>
+        <asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" > REPORTE PARAMETRIZADO </asp:Label>
+        </td>
         </tr>
         <tr>
             <td colspan="4" style="text-align: center">
+            
                 <asp:Button ID="Generar_Reporte" runat="server" Text="Generar Reporte" /></td>
         </tr>
     </table>
 <table cellpadding="2">
         <tr>
-            <td class="Titulos" colspan="4">
+            <td class="STitulos" colspan="4">
                 ESCOJA LOS CAMPOS DEL FILTRO DE CONTRATOS</td>
             <td class="Titulos">
                 &nbsp;</td>

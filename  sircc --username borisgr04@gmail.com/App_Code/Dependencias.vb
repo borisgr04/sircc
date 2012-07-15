@@ -24,6 +24,27 @@ Public Class Dependencias
         Return dataSet
 
     End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetRecords(ByVal busc As String) As DataTable
+        busc = IIf(busc <> "", "%" + UCase(busc) + "%", "")
+        Dim queryString As String = "SELECT * FROM  vdependencia2 Where (COD_DEP like :busc) OR (upper(NOM_DEP) like :busc) OR (upper(DEP_ABR) like :busc) OR (upper(NOM_TER) like :busc) Order by Nom_Dep"
+        Me.Conectar()
+        Me.CrearComando(queryString)
+        Me.AsignarParametroCadena(":busc", busc)
+        Me.AsignarParametroCadena(":busc", busc)
+        Me.AsignarParametroCadena(":busc", busc)
+        Me.AsignarParametroCadena(":busc", busc)
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
+
+    End Function
+    ''' <summary>
+    ''' Dependencias con Opcion de Filtro
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overrides Function GetRecords() As DataTable
         Dim queryString As String = "SELECT * FROM  vdependencia2 Order by Nom_Dep"

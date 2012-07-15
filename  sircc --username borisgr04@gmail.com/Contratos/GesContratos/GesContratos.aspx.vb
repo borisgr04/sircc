@@ -47,11 +47,14 @@ Partial Class Contratos_GesContratos_Default
         grdEstContratos.DataBind()
     End Sub
     Protected Sub DetContrato1_AceptarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles DetContrato1.AceptarClicked
+
         If DetContrato1.Encontrado = True Then
+            Panel1.Visible = True
             Limpiar()
             Habilitar(False)
             BtnNuevo.Enabled = True
         Else
+            Panel1.Visible = False
             Limpiar()
             Habilitar(False)
         End If
