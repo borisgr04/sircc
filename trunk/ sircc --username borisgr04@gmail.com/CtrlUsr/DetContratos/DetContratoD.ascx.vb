@@ -1,4 +1,5 @@
-﻿Imports System.Data
+﻿'FILTRA POR DEPENDENCIA DELEGADA
+Imports System.Data
 Partial Class Controles_DetContratoD
     Inherits CtrlUsrComun
 
@@ -116,6 +117,7 @@ Partial Class Controles_DetContratoD
             ViewState("Ide_Con") = value
         End Set
     End Property
+
     ''' <summary>
     ''' Retorna si el Proceso Fue encontrado
     ''' </summary>
@@ -130,6 +132,7 @@ Partial Class Controles_DetContratoD
             ViewState("Encontrado") = value
         End Set
     End Property
+
     Public Property TipRadicacion() As String
         Get
             Return ViewState("TipRadicacion")
@@ -166,7 +169,7 @@ Partial Class Controles_DetContratoD
         Dim oC As New Contratos
         Me.Cod_Con = oC.GetCodigo(Me.CboTip.SelectedValue, Me.TxtCodCon.Text, Vigencia_Cookie)
         Me.TxtCodCon.Text = Cod_Con
-        Me.dtContratos = oC.GetByPkD(Me.Cod_Con)
+        Me.dtContratos = oC.GetByPkF(Me.Cod_Con)
         Me.DtPCon.DataSource = Me.dtContratos
         Me.DtPCon.DataBind()
         Me.Encontrado = IIf(dtContratos.Rows.Count > 0, True, False)

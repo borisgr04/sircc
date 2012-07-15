@@ -12,6 +12,26 @@ Public Class Contratos
     Dim Vigencia As String
     Dim Tip_Con As String
     Dim NroCon As String
+
+
+    Enum FiltroContratos
+        Todos
+        DepNec
+        DepDel
+    End Enum
+
+    Dim FiltroC As FiltroContratos
+
+    Public Function GetFiltro_Contrato() As FiltroContratos
+        Me.Conectar()
+        querystring = "select filtro_contrato from dual "
+        Me.CrearComando(querystring)
+        FiltroC = Me.EjecutarEscalar()
+        Me.Desconectar()
+        Return FiltroC
+    End Function
+
+
     ReadOnly Property Cod_Con As String
         Get
             Return NroCon
@@ -412,6 +432,48 @@ Public Class Contratos
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetByPkD(ByVal Cod_Con As String) As DataTable
+        Me.NroCon = Cod_Con
+        Me.Conectar()
+        querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con And Dep_pCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo ) "
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":cod_con", Cod_Con)
+        Me.AsignarParametroCadena(":ide_ter_abo", Me.usuario)
+
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
+    ''' <summary>
+    ''' Consulta de contratos por llave primaria, filtrando por dependencia necesidad asociada.
+    ''' </summary>
+    ''' <param name="Cod_Con"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByPkF(ByVal Cod_Con As String) As DataTable
+        GetFiltro_Contrato()
+        If FiltroC = FiltroContratos.DepDel Then
+            'Throw New Exception("Entro por DepDel:" + FiltroC.ToString)
+            Return GetByPkD(Cod_Con)
+        ElseIf FiltroC = FiltroContratos.DepNec Then
+            'Throw New Exception("Entro por DepNec:" + FiltroC.ToString)
+            Return GetByPkN(Cod_Con)
+        Else
+            'Throw New Exception("Entro por Todos:" + FiltroC.ToString)
+            Return GetByPk(Cod_Con)
+        End If
+
+    End Function
+
+    ''' <summary>
+    ''' Consulta de contratos por llave primaria, filtrando por dependencia necesidad asociada.
+    ''' </summary>
+    ''' <param name="Cod_Con"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByPkN(ByVal Cod_Con As String) As DataTable
         Me.NroCon = Cod_Con
         Me.Conectar()
         querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con And Dep_pCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo ) "

@@ -91,7 +91,7 @@ Public Class Vigencias
         Me.Conectar()
         ComenzarTransaccion()
         Try
-            Me.querystring = "INSERT INTO VIGENCIAS(YEAR_VIG,FEC_INI_VIG,FEC_FIN_VIG,POR_ADI_VIG,EST_VIG,RAD_AUT) VALUES(:YEAR_VIG,:FEC_INI_VIG,:FEC_FIN_VIG,:POR_ADI_VIG,:EST_VIG,:RAD_AUT)"
+            Me.querystring = "INSERT INTO VIGENCIAS(YEAR_VIG,FEC_INI_VIG,FEC_FIN_VIG,POR_ADI_VIG,EST_VIG,RAD_AUT) VALUES(:YEAR_VIG,to_date(:FEC_INI_VIG,'dd/mm/yyyy'),to_date(:FEC_FIN_VIG,'dd/mm/yyyy'),:POR_ADI_VIG,:EST_VIG,:RAD_AUT)"
             CrearComando(querystring)
             Me.AsignarParametroCadena(":YEAR_VIG", Año)
             Me.AsignarParametroCadena(":FEC_INI_VIG", fechaI.ToShortDateString)
@@ -116,7 +116,7 @@ Public Class Vigencias
         Me.Conectar()
         ComenzarTransaccion()
         Try
-            Me.querystring = "UPDATE VIGENCIAS SET YEAR_VIG=:YEAR_VIG,FEC_INI_VIG=:FEC_INI_VIG,FEC_FIN_VIG=:FEC_FIN_VIG,POR_ADI_VIG=:POR_ADI_VIG,EST_VIG=:EST_VIG,RAD_AUT=:RAD_AUT WHERE YEAR_VIG=:YEAR_VIG_PK"
+            Me.querystring = "UPDATE VIGENCIAS SET YEAR_VIG=:YEAR_VIG,FEC_INI_VIG=to_date(:FEC_INI_VIG,'dd/mm/yyyy'),FEC_FIN_VIG=to_date(:FEC_FIN_VIG,'dd/mm/yyyy'),POR_ADI_VIG=:POR_ADI_VIG,EST_VIG=:EST_VIG,RAD_AUT=:RAD_AUT WHERE YEAR_VIG=:YEAR_VIG_PK"
             CrearComando(querystring)
             Me.AsignarParametroCadena(":YEAR_VIG", Año)
             Me.AsignarParametroCadena(":FEC_INI_VIG", fechaI.ToShortDateString)

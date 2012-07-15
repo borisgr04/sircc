@@ -36,7 +36,7 @@
         <ajaxToolkit:Accordion ID="Accordion1" runat="server" SelectedIndex="-1"
             HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected"
             ContentCssClass="accordionContentByA" FadeTransitions="true" FramesPerSecond="40" 
-            TransitionDuration="250" AutoSize="None" RequireOpenedPane="false" SuppressHeaderPostbacks="true">
+            TransitionDuration="250" AutoSize="None" RequireOpenedPane="false" SuppressHeaderPostbacks="true" Visible="False">
         <Panes>
             <ajaxToolkit:AccordionPane ID="AccordionPane1" runat="server">
             <Header><a href="" class="accordionLink"> 1. REGISTRO PRESUPUESTAL </a></Header>

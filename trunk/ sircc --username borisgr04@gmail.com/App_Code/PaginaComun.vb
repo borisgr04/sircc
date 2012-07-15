@@ -201,6 +201,25 @@ Public Class PaginaComun
         Response.Write(sw.ToString())
         Response.End()
     End Sub
+    Public Sub ExportGridViewBody(ByVal grd As GridView)
+        Dim sw As New StringWriter()
+        Dim htw As New HtmlTextWriter(sw)
+        grd.RenderControl(htw)
+        Response.Write(sw.ToString())
+    End Sub
+
+    Public Sub ExportGridViewIni(Optional ByVal Archivo As String = "Export")
+        Dim attachment As String = String.Format("attachment; filename={0}.xls", Archivo)
+        Response.ClearContent()
+        Response.AddHeader("content-disposition", attachment)
+        Response.ContentType = "application/ms-excel"
+    End Sub
+    Public Sub ExportGridViewWrite(ByVal StrHtml As String)
+        Response.Write(StrHtml)
+    End Sub
+    Public Sub ExportGridViewFin()
+        Response.End()
+    End Sub
 
 
     Public ReadOnly Property RUTA_DOC_TMP() As String
@@ -321,9 +340,6 @@ Public Class PaginaComun
         Response.Cache.SetAllowResponseInBrowserHistory(False)
         Response.Cache.SetNoStore()
         Response.AddHeader("Pragma", "no-cache")
-
-
-
 
     End Sub
     Private Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

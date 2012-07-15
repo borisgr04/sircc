@@ -1,8 +1,6 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="ParametrizadoF20.aspx.vb" Inherits="Reportes_ParametrizadoF20_Default" %>
-<%@ Register src="../../../CtrlUsr/AdmTercero/AdmTercero.ascx" tagname="AdmTercero" tagprefix="uc3" %>
-<%@ Register src="../../../CtrlUsr/Terceros/ConsultaTerS.ascx" tagname="ConsultaTerS" tagprefix="uc1" %>
+﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="FiltroContratos.ascx.vb" Inherits="CtrlUsr_FiltroContratos_FiltroContratos" %>
+<%@ Register src="../AdmTercero/AdmTercero.ascx" tagname="AdmTercero" tagprefix="uc3" %><%@ Register src="../Terceros/ConsultaTerS.ascx" tagname="ConsultaTerS" tagprefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 <script type='text/javascript'>
     function cancelClick() {
         var label = $get('ctl00_SampleContent_LbRpt');
@@ -30,39 +28,18 @@
   
 
     </script>
-<div class="demoarea">
-    <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" 
-            EnableScriptGlobalization="True">
-        </ajaxToolkit:ToolkitScriptManager>
+    <br />
+    
+<asp:Label id="labelTit" runat="server" Text="Seleccione Filtro a Aplicar" class="SubTitulo"></asp:Label>
+<div id="div1" style="z-index: 101; overflow: auto; width: 800px; height: 350px;
+                        background-color: transparent; border-bottom-style: outset" title="Filtro">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-    
-    
-<table style="width: 99%;" cellpadding="5" 
-        cellspacing="5" rules="none">
-        <%--<tr>
-            <td class="Titulos" colspan="4" style="text-align: center">
-                DIGITE EL TITULO DEL REPORTE</td>
-        </tr>
-        <tr>
-            <td colspan="4" style="height: 10px; width: 177px; text-align: center;">
-                <asp:TextBox ID="txtTitulo" runat="server" Width="600px" TextMode="MultiLine"></asp:TextBox></td>
-        </tr>--%>
-        <tr>
-        <td colspan="4">
-        <asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" > REPORTE FORMATO 20 - CONTRALORIA  </asp:Label>
-        </td>
-        </tr>
-        <tr>
-            <td colspan="4" style="text-align: center">
-                <asp:Button ID="Generar_Reporte" runat="server" Text="Generar Reporte" />&nbsp;<asp:Button ID="BtnExport" runat="server" Text="Exportar a Excel" />
-            </td>
-        </tr>
-    </table>
+
 <table cellpadding="2">
         <tr>
-            <td class="STitulos" colspan="4" >
-                ESCOJA LOS CAMPOS DEL FILTRO DE CONTRATOS</td>
+            <td class="Titulos" colspan="4">
+                </td>
             <td class="Titulos">
                 &nbsp;</td>
         </tr>
@@ -117,7 +94,7 @@
                 <asp:UpdatePanel id="UpdatePanel2" runat="server" UpdateMode="Conditional">
                     <contenttemplate>
 <asp:DropDownList id="cboStip" runat="server" Font-Size="8pt" DataValueField="COD_STIP" 
-                            DataTextField="NOM_STIP" DataSourceID="ObjSubTipos" >
+                            DataTextField="NOM_STIP" DataSourceID="ObjSubTipos" __designer:wfdid="w9">
                 </asp:DropDownList> 
 </contenttemplate>
                     <triggers>
@@ -407,7 +384,8 @@
             <td style="width: 177px; height: 10px;">
                 &nbsp;</td>
             <td style="width: 126px; height: 10px;">
-                &nbsp;</td>
+                <asp:CheckBox ID="ChkGDep" runat="server" Text="Dependencias" Visible="False" />
+            </td>
             <td style="width: 150px; height: 10px;">
                 &nbsp;</td>
             <td style="width: 161px; height: 10px;">
@@ -417,42 +395,35 @@
         </tr>
         <tr>
             <td colspan="5" style="height: 10px;">
-                &nbsp;</td>
+                <asp:RadioButtonList ID="rdGroup" runat="server" RepeatDirection="Horizontal" 
+                    Visible="False">
+                    <asp:ListItem Value="Dep_Nec">Dependencia que Genera la Necesidad</asp:ListItem>
+                    <asp:ListItem Value="Dep_Del">Dependencia a Cargo del Proceso</asp:ListItem>
+                    <asp:ListItem Value="Pro_Con">Proyecto</asp:ListItem>
+                    <asp:ListItem Value="Pol_Con">Polizas</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
         </tr>
     </table>
-        
-
     </ContentTemplate>
-        <Triggers>
-            <asp:PostBackTrigger ControlID="BtnExport" />
-        </Triggers>
     </asp:UpdatePanel>
-    
-    
-    <div style="visibility:hidden" >
-        <asp:HiddenField ID="HdSql" runat="server" />
-        <asp:GridView ID="GridView1" runat="server" DataSourceID="ObjContratosF20" 
-            EnableModelValidation="True" EnableTheming="False" SkinID="SinFormato" 
-             >
-        </asp:GridView>
-        </div>
     <!-- Mensaje de Salida--><asp:Button style="DISPLAY: none" id="hiddenTargetControlForModalPopup" runat="server"></asp:Button> 
 <ajaxToolkit:ModalPopupExtender id="ModalPopup" 
 runat="server" BackgroundCssClass="modalBackground" BehaviorID="programmaticModalPopupBehavior" DropShadow="True" PopupControlID="programmaticPopup" PopupDragHandleControlID="programmaticPopupDragHandle" RepositionMode="RepositionOnWindowScroll" TargetControlID="hiddenTargetControlForModalPopup">
             </ajaxToolkit:ModalPopupExtender> 
             <asp:Panel id="programmaticPopup" runat="server" Width="800px" Height="600px" CssClass="ModalPanel2" ScrollBars="Auto" >
             <asp:Panel id="programmaticPopupDragHandle" runat="Server" Width="97%" Height="30px" CssClass="BarTitleModal2" >
-            <div style="PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; VERTICAL-ALIGN: middle; PADDING-TOP: 5px">
-            <div style="FLOAT: left">
-                Buscar Tercero </div>
-             <div style="FLOAT: right"   >
-            <input id="hideModalPopupViaClientButton" type="button" value="X"  /></div></div></asp:Panel>
-                <asp:panel id="pnCuadroInterno" runat="Server" scrollbars="Auto" >
+            <DIV style="PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; VERTICAL-ALIGN: middle; PADDING-TOP: 5px">
+            <DIV style="FLOAT: left">
+                Buscar Tercero </DIV>
+             <DIV style="FLOAT: right" __designer:dtid="1407383473487880"  >
+            <INPUT id="hideModalPopupViaClientButton" type=button value="X" __designer:dtid="1407383473487881" /></DIV></DIV></asp:Panel>
+                <panel id="pnCuadroInterno" runat="Server" ScrollBars="Auto" >
                     
-                    <br />
+                    <BR />
 
                     <uc1:ConsultaTerS ID="ConsultaTerS1" runat="server" />
-                </asp:panel>
+                </panel>
               </asp:Panel> 
             
      <asp:ObjectDataSource ID="ObjTipoProc" runat="server" 
@@ -485,14 +456,4 @@ runat="server" BackgroundCssClass="modalBackground" BehaviorID="programmaticModa
         OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
         TypeName="Sector">
     </asp:ObjectDataSource>
-    <asp:ObjectDataSource ID="ObjContratosF20" runat="server" 
-        OldValuesParameterFormatString="original_{0}" SelectMethod="GetSql" 
-        TypeName="Reportes">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="HdSql" Name="cSql" PropertyName="Value" 
-                Type="String" />
-        </SelectParameters>
-    </asp:ObjectDataSource>
 </div>
-</asp:Content>
-

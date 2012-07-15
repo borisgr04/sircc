@@ -35,6 +35,11 @@
         EnableScriptLocalization="true">
     </ajaxtoolkit:toolkitscriptmanager>
     <br />
+
+    <asp:UpdatePanel ID="UpdatePanel1" 
+        runat="server" UpdateMode="Conditional">
+        <contenttemplate>
+        
     <asp:Label id="Tit" runat="server" Width="388px" Text="CONFIGURACIÓN DE DEPENDENCIAS" 
                 CssClass="Titulo"></asp:Label>
     <br />
@@ -43,6 +48,23 @@
     
     <asp:MultiView ID="MultiView1" runat="server">
         <asp:View ID="View1" runat="server">
+            
+            <br />
+            <asp:Label ID="Label1" runat="server" 
+                Text="Buscar (Código, Nombre, Abreviatura,Encargado)"></asp:Label>
+            &nbsp;
+            <asp:TextBox ID="TxtBuscar" runat="server" Height="21px" Width="371px"></asp:TextBox>
+            <asp:DropDownList ID="CboClase" runat="server" Visible="False">
+                <asp:ListItem Value="T">Seleccione Filtro por Tipo</asp:ListItem>
+                <asp:ListItem Value="D">Con Delegacion para Contratar</asp:ListItem>
+                <asp:ListItem Value="N">Sin Delegación para Contratar</asp:ListItem>
+            </asp:DropDownList>
+            &nbsp;
+            <asp:ImageButton ID="ImageButton2" runat="server" SkinID="IBtnBuscar" />
+            <br />
+            <br />
+            <br />
+            <br />
             
             <asp:GridView ID="GridView1" runat="server" 
                 AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
@@ -64,6 +86,8 @@
                     </asp:TemplateField>
                     <asp:BoundField DataField="Dep_Abr" HeaderText="Abreviatura" 
                         SortExpression="Dep_Abr" />
+                    <asp:BoundField DataField="Dep_Del" HeaderText="Delegada" 
+                        SortExpression="Dep_Del" />
                     <asp:BoundField DataField="ide_ter" HeaderText="Ide Encargado" 
                         SortExpression="ide_ter" />
                     <asp:BoundField DataField="nom_ter" HeaderText="Encargado" 
@@ -187,7 +211,7 @@
             
         </asp:View>
         <asp:View ID="View2" runat="server">
-            <TABLE>
+            <table>
                 <tbody>
                     <tr>
                         <td colspan="6">
@@ -253,6 +277,9 @@
             </asp:View>
     </asp:MultiView>
                     <br />
+
+                    </contenttemplate>
+        </asp:UpdatePanel>
     <asp:UpdatePanel ID="UpdatePanel4" 
         runat="server" UpdateMode="Conditional">
         <contenttemplate>
@@ -307,6 +334,9 @@
                     <asp:Parameter Name="Ide_Ter" Type="String" />
                     <asp:Parameter Name="ASig_Proc" Type="String" />
                 </InsertParameters>
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="TxtBuscar" Name="busc" PropertyName="Text" />
+                </SelectParameters>
             </asp:ObjectDataSource>
 </div>
 </asp:Content>

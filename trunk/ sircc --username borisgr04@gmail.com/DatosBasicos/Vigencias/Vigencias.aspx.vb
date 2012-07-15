@@ -40,19 +40,28 @@ Partial Class DatosBasicos_Vigencias_Default
 
                 Dim tb As DataTable = Obj.GetByPK(GridView1.DataKeys(index).Values(0).ToString())
                 If tb.Rows.Count > 0 Then
-                    Me.TxtCodNew.Text = tb.Rows(0)("Year_Vig").ToString
-                    Me.DpFecIni.Text = CDate(tb.Rows(0)("Fec_Ini_Vig").ToString).ToShortDateString
-                    Me.DpFecFin.Text = CDate(tb.Rows(0)("Fec_Fin_Vig").ToString).ToShortDateString
-                    Me.CboEst.Text = tb.Rows(0)("Est_Vig").ToString
-                    Me.TxtPor.Text = tb.Rows(0)("Por_Adi_Vig").ToString
-                    Me.CboRadAut.SelectedValue = tb.Rows(0)("Rad_Aut").ToString
-                    Me.Pk1 = tb.Rows(0)("Year_Vig").ToString
-                    Habilitar(True)
-                    Me.ModalPopupTer.Show()
+                    Try
+                        Me.TxtCodNew.Text = tb.Rows(0)("Year_Vig").ToString
+                        Me.DpFecIni.Text = CDate(tb.Rows(0)("Fec_Ini_Vig").ToString).ToShortDateString
+                        'If Not tb.Rows(0)("Fec_Fin_Vig") Is DBNull.Value Then
+                        Me.DpFecFin.Text = CDate(tb.Rows(0)("Fec_Fin_Vig").ToString).ToShortDateString
+                        'End If
+                        Me.CboEst.Text = tb.Rows(0)("Est_Vig").ToString
+                        Me.TxtPor.Text = tb.Rows(0)("Por_Adi_Vig").ToString
+                        Me.CboRadAut.SelectedValue = tb.Rows(0)("Rad_Aut").ToString
+                        Me.Pk1 = tb.Rows(0)("Year_Vig").ToString
+                        Habilitar(True)
+                        Me.ModalPopupTer.Show()
+                        Me.MsgResult.Text = "Editando: Código [" + Me.TxtCodNew.Text + "]"
+                    Catch ex As Exception
+                        MsgResult.Text = ex.Message
+                        MsgBox(MsgResult, True)
+                    End Try
+
                 End If
 
                 'MultiView1.ActiveViewIndex = 0
-                Me.MsgResult.Text = "Editando: Código [" + Me.TxtCodNew.Text + "]"
+
 
             Case "Eliminar"
                 Dim index As Integer = Convert.ToInt32(e.CommandArgument)
@@ -162,5 +171,7 @@ Partial Class DatosBasicos_Vigencias_Default
         End If
 
     End Sub
+    Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
 
+    End Sub
 End Class

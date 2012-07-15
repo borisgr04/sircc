@@ -13,14 +13,17 @@
 
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
+                <asp:Label ID="Label1" runat="server" CssClass="Titulo" 
+                    Text="GESTIÓN DE CONTRATOS"></asp:Label>
                 <uc1:DetContrato ID="DetContrato1" runat="server"  />
                 <br />
+                    <asp:Panel ID="Panel1" runat="server" Visible="false">
+                    
     <table id="TABLE1" >
         <tr>
             <td colspan="4" 
                 style="text-align: left; empty-cells: show; vertical-align: top;">
-                <asp:Label ID="Label1" runat="server" CssClass="Titulo" 
-                    Text="GESTIÓN DE CONTRATOS"></asp:Label>
+                
             </td>
         </tr>
         <tr>
@@ -119,7 +122,6 @@
         </tr>
     </table>
     <br />
-
     <br />
                     <asp:Label ID="Label2" runat="server" Text="Total por Pagar"></asp:Label>
                     &nbsp;
@@ -197,6 +199,7 @@
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 </asp:DetailsView>
 
+                </asp:Panel>
                 </ContentTemplate>
                 </asp:UpdatePanel>
 

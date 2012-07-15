@@ -5,7 +5,8 @@ Partial Class Reportes_Contraloria_F201A_Default
     Protected Sub Generar_Reporte_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Generar_Reporte.Click
         Me.txtTitulo.Text = Sql()
         Me.HdSql.Value = Sql()
-        GridView1.DataBind()
+        'GridView1.DataBind()
+        'ExportGridView(GridView1, "Formato20_1A")
         'Response.Redirect("Report.aspx?sql=" + Server.UrlEncode(Sql()) & "&tit=" + Server.UrlEncode(txtTitulo.Text) & "&Rpte=" + Server.UrlEncode(Me.ChkGDep.Checked))
     End Sub
 
@@ -97,8 +98,8 @@ Partial Class Reportes_Contraloria_F201A_Default
 
         strsql = "SELECT c.*,Cant_Adicion(c.numero) nro_adi,Plazo_Adicion(c.numero) Pla_Adi,Valor_Adicion(c.numero) Val_Adi FROM vcontratosc2 c  " + cFiltro + " ORDER BY numero"
         ''Modificación 18 de Febrero 2011
-        strsql = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,IDE_INT IDENTIFICADOR_INTERVENTOR, NOM_TER NOMBRE_COMPLETO_INTERVENTOR,'' TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From( "
-        strsql += "SELECT c.*,Cant_Adicion(c.numero) nro_adi,Plazo_Adicion(c.numero) Pla_Adi,Valor_Adicion(c.numero) Val_Adi FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
+        strsql = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,ID_INTERVENTOR IDENTIFICADOR_INTERVENTOR, NOM_INTERVENTOR NOMBRE_COMPLETO_INTERVENTOR,TIP_VIN_INT TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From( "
+        strsql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
         strsql += ")"
 
         Return strsql

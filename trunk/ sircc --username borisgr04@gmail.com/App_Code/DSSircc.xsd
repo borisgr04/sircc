@@ -247,7 +247,6 @@
               <xs:element name="NOM_INT" msprop:Generator_ColumnVarNameInTable="columnNOM_INT" msprop:Generator_ColumnPropNameInRow="NOM_INT" msprop:Generator_ColumnPropNameInTable="NOM_INTColumn" msprop:Generator_UserColumnName="NOM_INT" type="xs:string" minOccurs="0" />
               <xs:element name="PRO_CTR_F20_1A" msprop:Generator_ColumnVarNameInTable="columnpro_ctr_f20_1a" msprop:Generator_ColumnPropNameInRow="pro_ctr_f20_1a" msprop:Generator_ColumnPropNameInTable="pro_ctr_f20_1aColumn" msprop:Generator_UserColumnName="PRO_CTR_F20_1A" type="xs:string" minOccurs="0" />
               <xs:element name="STI_CTR_F20_1A" msprop:Generator_ColumnVarNameInTable="columnsti_ctr_f20_1a" msprop:Generator_ColumnPropNameInRow="sti_ctr_f20_1a" msprop:Generator_ColumnPropNameInTable="sti_ctr_f20_1aColumn" msprop:Generator_UserColumnName="STI_CTR_F20_1A" type="xs:string" minOccurs="0" />
-              <xs:element name="ID_INT" msprop:Generator_ColumnVarNameInTable="columnID_INT" msprop:Generator_ColumnPropNameInRow="ID_INT" msprop:Generator_ColumnPropNameInTable="ID_INTColumn" msprop:Generator_UserColumnName="ID_INT" type="xs:string" minOccurs="0" />
               <xs:element name="TIP_INT" msprop:Generator_ColumnVarNameInTable="columnTIP_INT" msprop:Generator_ColumnPropNameInRow="TIP_INT" msprop:Generator_ColumnPropNameInTable="TIP_INTColumn" msprop:Generator_UserColumnName="TIP_INT" type="xs:string" minOccurs="0" />
               <xs:element name="P_ANTICIPO" msprop:Generator_ColumnVarNameInTable="columnP_ANTICIPO" msprop:Generator_ColumnPropNameInRow="P_ANTICIPO" msprop:Generator_ColumnPropNameInTable="P_ANTICIPOColumn" msprop:Generator_UserColumnName="P_ANTICIPO" type="xs:string" minOccurs="0" />
             </xs:sequence>
@@ -555,6 +554,7 @@
               <xs:element name="VAL_POL" msprop:Generator_ColumnVarNameInTable="columnVAL_POL" msprop:Generator_ColumnPropNameInRow="VAL_POL" msprop:Generator_ColumnPropNameInTable="VAL_POLColumn" msprop:Generator_UserColumnName="VAL_POL" type="xs:string" minOccurs="0" />
               <xs:element name="TIP_POL" msprop:Generator_ColumnVarNameInTable="columnTIP_POL" msprop:Generator_ColumnPropNameInRow="TIP_POL" msprop:Generator_ColumnPropNameInTable="TIP_POLColumn" msprop:Generator_UserColumnName="TIP_POL" type="xs:string" minOccurs="0" />
               <xs:element name="NOM_INT" msprop:Generator_ColumnVarNameInTable="columnNOM_INT" msprop:Generator_ColumnPropNameInRow="NOM_INT" msprop:Generator_ColumnPropNameInTable="NOM_INTColumn" msprop:Generator_UserColumnName="NOM_INT" type="xs:string" minOccurs="0" />
+              <xs:element name="TIP_INT" msprop:Generator_ColumnVarNameInTable="columnTIP_INT" msprop:Generator_ColumnPropNameInRow="TIP_INT" msprop:Generator_ColumnPropNameInTable="TIP_INTColumn" msprop:Generator_UserColumnName="TIP_INT" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

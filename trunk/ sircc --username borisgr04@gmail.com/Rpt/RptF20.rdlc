@@ -248,10 +248,6 @@
           <DataField>STI_CTR_F20_1A</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ID_INT">
-          <DataField>ID_INT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="TIP_INT">
           <DataField>TIP_INT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -267,7 +263,7 @@
       </Query>
       <rd:DataSetInfo>
         <rd:DataSetName>DSSircc</rd:DataSetName>
-        <rd:SchemaPath>C:\ProgramasTrabajo\PARAPC\LAJAGUA\SIRCC2011_35\App_Code\DSSircc.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\x\SIRCC\RepositorioLocalSircc\App_Code\DSSircc.xsd</rd:SchemaPath>
         <rd:TableName>VCONTRATOSC_AC</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -1408,14 +1404,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ID_INT">
+                    <Textbox Name="IDE_INT">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ID_INT.Value</Value>
+                              <Value>=Fields!IDE_INT.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -1425,7 +1421,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ID_INT</rd:DefaultName>
+                      <rd:DefaultName>IDE_INT</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>

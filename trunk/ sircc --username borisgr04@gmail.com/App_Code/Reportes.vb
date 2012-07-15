@@ -9,6 +9,7 @@ Imports System.ComponentModel
 
 <System.ComponentModel.DataObject()> _
 Public Class Reportes
+    Inherits BDDatos
     Dim _Caractar_Fecha As String = "-"
     Dim _Vacio_Contraloria As String = "ND"
     Public rptSql As String
@@ -192,11 +193,11 @@ Public Class Reportes
         'consultas = txtSql.Text
         If RSql = "" Then
             'consultas = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,IDE_INT IDENTIFICADOR_INTERVENTOR, NOM_TER NOMBRE_COMPLETO_INTERVENTOR,'' TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From( "
-            consultas = "SELECT c.* FROM vcontratos_sinc c Where 1<>0  ORDER BY numero"
+            consultas = "SELECT c.* FROM vcontratos_sinc_p c Where 1<>0  ORDER BY numero"
             'consultas += ")"
         Else
             'consultas = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,IDE_INT IDENTIFICADOR_INTERVENTOR, NOM_TER NOMBRE_COMPLETO_INTERVENTOR,'' TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From( "
-            consultas = "SELECT c.* FROM vcontratos_sinc c  Where " + RSql + " ORDER BY numero"
+            consultas = "SELECT c.* FROM vcontratos_sinc_p c  Where " + RSql + " ORDER BY numero"
             'Throw New Exception(consultas)
             'consultas = "SELECT c.* FROM vcontratos_sinc c  Where Vig_Con= '2011' ORDER BY numero"
 
@@ -248,7 +249,7 @@ Public Class Reportes
             'MODIFICADO POR ERICK-----------DEBE HABILITARSE
             dr("NOM_INT") = row("Nom_Interventor")
             dr("IDE_INT") = row("Id_Interventor")
-            dr("ID_INT") = row("Id_Interventor")
+            'dr("ID_INT") = row("Id_Interventor")
             dr("TIP_INT") = row("Tip_Vin_Int")
 
             ''---- MODIFIACO EL 22 D ABRIL DEL 2010
@@ -458,7 +459,7 @@ Public Class Reportes
 
             'MODIFICADO POR ERICK-----------DEBE HABILITARSE
             dr("NOM_INT") = row("Nom_Interventor")
-            dr("ID_INT") = row("Id_Interventor")
+            'dr("ID_INT") = row("Id_Interventor")
             dr("IDE_INT") = row("Id_Interventor")
             dr("TIP_INT") = row("Tip_Vin_Int")
 
@@ -605,11 +606,8 @@ Public Class Reportes
     End Function
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GenerarReport() As DataTable
-
         Dim cfiltro As String = "Where Vig_Con=2011"
         Return GenerarReport("SELECT c.*,Cant_Adicion(c.numero) nro_adi,Plazo_Adicion(c.numero) Pla_Adi,Valor_Adicion(c.numero) Val_Adi FROM vcontratos_Sinc c  " + cfiltro + " ORDER BY numero")
-
-
     End Function
 
 
@@ -687,9 +685,14 @@ Public Class Reportes
             dr("DEPENDENCIAP") = row("DEPENDENCIAP")
             dr("DEP_PCON") = row("DEP_PCON")
             'INTERVENTOS - 6 DE OCTUBRE DE 2010
-            dr("IDE_INT") = row("IDE_INT")
-            dr("NOM_TER") = row("NOM_TER")
-            dr("NOM_INT") = row("NOM_TER")
+            'dr("IDE_INT") = row("ID_INTERVENTOR")
+            'dr("NOM_TER") = row("NOM_TER")
+            'dr("NOM_INT") = row("NOM_INTERVENTOR")
+            ''modificado x
+            dr("NOM_INT") = row("Nom_Interventor")
+            dr("IDE_INT") = row("Id_Interventor")
+            'dr("ID_INT") = row("Id_Interventor")
+            dr("TIP_INT") = row("Tip_Vin_Int")
             'Valor Aportes Propios
             dr("VAL_PROP") = CDec(row("VAL_APO_GOB"))
 
@@ -832,9 +835,15 @@ Public Class Reportes
             dr("DEPENDENCIAP") = row("DEPENDENCIAP")
             dr("DEP_PCON") = row("DEP_PCON")
             'INTERVENTOS - 6 DE OCTUBRE DE 2010
-            dr("IDE_INT") = row("IDE_INT")
-            dr("NOM_TER") = row("NOM_TER")
+            'dr("IDE_INT") = row("ID_INTERVENTOR")
+            'dr("NOM_TER") = row("NOM_INTERVENTOR")
+            'MODIFICADO ERIC
+            dr("NOM_INT") = row("Nom_Interventor")
+            dr("IDE_INT") = row("Id_Interventor")
+            'dr("ID_INT") = row("Id_Interventor")
+            dr("TIP_INT") = row("Tip_Vin_Int")
             'Valor Aportes Propios
+
             dr("VAL_PROP") = CDec(row("VAL_APO_GOB"))
 
 
@@ -984,6 +993,11 @@ Public Class Reportes
             'INTERVENTOS - 6 DE OCTUBRE DE 2010
             dr("IDE_INT") = row("IDE_INT")
             dr("NOM_TER") = row("NOM_TER")
+            'MODIFICADO ERIC/ODIFIACO BORIS
+            dr("NOM_INT") = row("Nom_Interventor")
+            dr("IDE_INT") = row("Id_Interventor")
+            'dr("ID_INT") = row("Id_Interventor")
+            dr("TIP_INT") = row("Tip_Vin_Int")
             'Valor Aportes Propios
             dr("VAL_PROP") = CDec(row("VAL_APO_GOB"))
 
@@ -1174,7 +1188,28 @@ Public Class Reportes
         End If
     End Function
 
- 
+    ''' <summary>
+    ''' Genera Tabla a partir de la 
+    ''' </summary>
+    ''' <param name="cSql"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetSql(ByVal cSql As String) As System.Data.DataTable
+        Dim datat As DataTable
+
+        If Not String.IsNullOrEmpty(cSql) Then
+            Conectar()
+            CrearComando(cSql)
+            datat = EjecutarConsultaDataTable()
+            Desconectar()
+        Else
+            datat = New DataTable
+        End If
+
+        Return datat
+
+    End Function
 
 
 

@@ -1,4 +1,8 @@
 ﻿Imports System.Data
+''' <summary>
+''' FILTRO SOLO CONTRATOS QUE HAN SIDO DELEGADOS AL USUARIO ACTUAL
+''' </summary>
+''' <remarks></remarks>
 Partial Class Controles_DetContratosN
     Inherits CtrlUsrComun
 

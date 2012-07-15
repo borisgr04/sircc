@@ -34,7 +34,7 @@
                 DataSourceID="ObjUsuDel" GridLines="None"
                 CellPadding="4" DataKeyNames="Cod_dep" 
                 AutoGenerateColumns="False" 
-                EmptyDataText="No se encontraron Registros en la Base de Datos" EnableModelValidation="True">
+                EmptyDataText="Digite la Identificación del Usuario y Presiones el Botón Buscar" EnableModelValidation="True">
                 <Columns>
                     <asp:TemplateField HeaderText="Seleccionar">
                         <ItemTemplate>

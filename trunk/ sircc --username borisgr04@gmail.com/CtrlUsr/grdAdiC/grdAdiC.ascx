@@ -95,7 +95,8 @@
         </ajaxToolkit:FilteredTextBoxExtender>
         </TD><TD class="style4">
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-            ControlToValidate="TxtPla" ErrorMessage="Campo requerido"></asp:RequiredFieldValidator>
+            ControlToValidate="TxtPla" ErrorMessage="Campo requerido" 
+            ValidationGroup="rad"></asp:RequiredFieldValidator>
         </TD><TD style="HEIGHT: 11px" colSpan=2>
         &nbsp;</TD></TR>
     <tr>
@@ -110,7 +111,8 @@
         </td>
         <td class="style5">
             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                ControlToValidate="TxtVal" ErrorMessage="Campo requerido"></asp:RequiredFieldValidator>
+                ControlToValidate="TxtVal" ErrorMessage="Campo requerido" 
+                ValidationGroup="rad"></asp:RequiredFieldValidator>
         </td>
         <td colspan="2">
             &nbsp;</td>
@@ -127,7 +129,8 @@
         <td class="style5">
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                 ControlToValidate="TxtFec" 
-                ErrorMessage="Es Obligatorio la Fecha de Suscripción"></asp:RequiredFieldValidator>
+                ErrorMessage="Es Obligatorio la Fecha de Suscripción" 
+                ValidationGroup="rad"></asp:RequiredFieldValidator>
         </td>
         <td colspan="2">
             &nbsp;</td>
@@ -146,7 +149,8 @@
     </tr>
     <tr>
         <td colspan="5" style="HEIGHT: 10px; TEXT-ALIGN: center">
-            <asp:Button ID="BtnRadicar" runat="server" Text="Radicar" />
+            <asp:Button ID="BtnRadicar" runat="server" Text="Radicar" 
+                ValidationGroup="rad" />
             <ajaxToolkit:ConfirmButtonExtender ID="BtnRadicar_ConfirmButtonExtender" 
                 runat="server" 
                 ConfirmText="Confirme Fecha de Suscripción, Plazo y Valor. ¿Confirme si desea radicar la Adición?" 

@@ -532,7 +532,7 @@ Public Class GMinuta
         ' Create an instance of MSWord  and make it visible. 
         wrdApp = New MSWord.Application()
         OpenedWord = True
-        Dim imgLogo As String ' = 'Entidad.Ruta_Logo
+        Dim imgLogo As String = "" ' = 'Entidad.Ruta_Logo
         wrdApp.Visible = True
         Dim oTemplate As Object = pathTemporal
         wrdDoc = wrdApp.Documents.Open(oTemplate, oMissing, oMissing, oMissing, oMissing, oMissing, _
