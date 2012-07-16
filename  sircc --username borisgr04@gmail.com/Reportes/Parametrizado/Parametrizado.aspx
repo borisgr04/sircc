@@ -3,7 +3,7 @@
 <%@ Register src="../../CtrlUsr/Terceros/ConsultaTerS.ascx" tagname="ConsultaTerS" tagprefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
-<script type='text/javascript'>
+    <script type='text/javascript'>
     function cancelClick() {
         var label = $get('ctl00_SampleContent_LbRpt');
         //label.innerHTML = 'You hit cancel in the Confirm dialog on ' + (new Date()).localeFormat("T") + '.';
@@ -54,10 +54,15 @@
         </td>
         </tr>
         <tr>
-            <td colspan="4" style="text-align: center">
+            <td style="text-align: center">
             
                 <asp:Button ID="Generar_Reporte" runat="server" Text="Generar Reporte" /></td>
         </tr>
+       <tr>
+           <td style="text-align: center">
+               <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
+           </td>
+       </tr>
     </table>
 <table cellpadding="2">
         <tr>
@@ -367,6 +372,74 @@
             </td>
             <td style="width: 161px; height: 9px">
             </td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 177px; height: 9px">
+                <asp:CheckBox ID="ChkCDP" runat="server" Font-Bold="False" 
+                    Text="Disponibilidad Presupuestal(CDP)" />
+            </td>
+            <td style="width: 126px; height: 9px">
+                Vigencia CDP</td>
+            <td style="width: 150px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 177px; height: 9px">
+                <asp:TextBox ID="TxtNroCdp" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+                <cc1:FilteredTextBoxExtender ID="TxtNroCdp_FilteredTextBoxExtender" FilterType="Numbers" 
+                    runat="server" Enabled="True" TargetControlID="TxtNroCdp">
+                </cc1:FilteredTextBoxExtender>
+            </td>
+            <td style="width: 126px; height: 9px">
+                <asp:TextBox ID="TxtVigCDP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+                <cc1:FilteredTextBoxExtender ID="TxtVigCDP_FilteredTextBoxExtender" FilterType="Numbers" 
+                    runat="server" Enabled="True" TargetControlID="TxtVigCDP">
+                </cc1:FilteredTextBoxExtender>
+            </td>
+            <td style="width: 150px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 177px; height: 9px">
+                <asp:CheckBox ID="ChkRP" runat="server" Font-Bold="False" 
+                    Text="Registro Presupuestal (RP)" />
+            </td>
+            <td style="width: 126px; height: 9px">
+                Vigencia CDP</td>
+            <td style="width: 150px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 177px; height: 9px">
+                <asp:TextBox ID="TxtNroRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+                <cc1:FilteredTextBoxExtender ID="TxtNroRP_FilteredTextBoxExtender" 
+                    runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtNroRP">
+                </cc1:FilteredTextBoxExtender>
+            </td>
+            <td style="width: 126px; height: 9px">
+                <asp:TextBox ID="TxtVigRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+                <cc1:FilteredTextBoxExtender ID="TxtVigRP_FilteredTextBoxExtender" 
+                    runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtVigRP">
+                </cc1:FilteredTextBoxExtender>
+            </td>
+            <td style="width: 150px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
         </tr>

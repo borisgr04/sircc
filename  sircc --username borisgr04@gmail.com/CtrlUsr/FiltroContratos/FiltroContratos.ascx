@@ -39,8 +39,9 @@
 <table cellpadding="2">
         <tr>
             <td class="Titulos" colspan="4">
+            <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
                 </td>
-            <td class="Titulos">
+            <td class="Titulos"> 
                 &nbsp;</td>
         </tr>
         <tr>
@@ -347,6 +348,77 @@
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
         </tr>
+        <!--Se agrega busqueda por Cdp y Rp, dia 15 de Julio 2012 !-->
+        <tr>
+            <td style="width: 177px; height: 9px">
+                <asp:CheckBox ID="ChkCDP" runat="server" Font-Bold="False" 
+                    Text="Disponibilidad Presupuestal(CDP)" />
+            </td>
+            <td style="width: 126px; height: 9px">
+                Vigencia CDP</td>
+            <td style="width: 150px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 177px; height: 9px">
+                <asp:TextBox ID="TxtNroCdp" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+                <cc1:FilteredTextBoxExtender ID="TxtNroCdp_FilteredTextBoxExtender" FilterType="Numbers" 
+                    runat="server" Enabled="True" TargetControlID="TxtNroCdp">
+                </cc1:FilteredTextBoxExtender>
+            </td>
+            <td style="width: 126px; height: 9px">
+                <asp:TextBox ID="TxtVigCDP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+                <cc1:FilteredTextBoxExtender ID="TxtVigCDP_FilteredTextBoxExtender" FilterType="Numbers" 
+                    runat="server" Enabled="True" TargetControlID="TxtVigCDP">
+                </cc1:FilteredTextBoxExtender>
+            </td>
+            <td style="width: 150px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 177px; height: 9px">
+                <asp:CheckBox ID="ChkRP" runat="server" Font-Bold="False" 
+                    Text="Registro Presupuestal (RP)" />
+            </td>
+            <td style="width: 126px; height: 9px">
+                Vigencia CDP</td>
+            <td style="width: 150px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 177px; height: 9px">
+                <asp:TextBox ID="TxtNroRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+                <cc1:FilteredTextBoxExtender ID="TxtNroRP_FilteredTextBoxExtender" 
+                    runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtNroRP">
+                </cc1:FilteredTextBoxExtender>
+            </td>
+            <td style="width: 126px; height: 9px">
+                <asp:TextBox ID="TxtVigRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+                <cc1:FilteredTextBoxExtender ID="TxtVigRP_FilteredTextBoxExtender" 
+                    runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtVigRP">
+                </cc1:FilteredTextBoxExtender>
+            </td>
+            <td style="width: 150px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+            <td style="width: 161px; height: 9px">
+                &nbsp;</td>
+        </tr>
+        
+
         <tr>
             <td style="width: 177px; height: 10px">
                 <asp:CheckBox ID="ChkObj" runat="server" Text="Objeto" Font-Bold="False" /></td>

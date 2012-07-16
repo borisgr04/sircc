@@ -2,13 +2,22 @@
 Partial Class Reportes_Parametrizado_Default
     Inherits PaginaComun
 
+    Dim Generar As Boolean = False
     Protected Sub Generar_Reporte_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Generar_Reporte.Click
         'Me.txtTitulo.Text = Sql()
-        If Me.rdGroup.SelectedValue = "Pol_Con" Then
-            Response.Redirect("ReportPPol.aspx?sql=" + Server.UrlEncode(Sql()) & "&tit=" + Server.UrlEncode("") & "&Rpte=" + Server.UrlEncode(Me.rdGroup.SelectedValue))
-        Else
-            Response.Redirect("ReportP.aspx?sql=" + Server.UrlEncode(Sql()) & "&tit=" + Server.UrlEncode("") & "&Rpte=" + Server.UrlEncode(Me.rdGroup.SelectedValue))
+
+        MsgResult.Text = ""
+        MsgBoxLimpiar(MsgResult)
+        Generar = False
+        Dim cSql As String = Sql()
+        If Generar Then
+            If Me.rdGroup.SelectedValue = "Pol_Con" Then
+                Response.Redirect("ReportPPol.aspx?sql=" + Server.UrlEncode(cSql) & "&tit=" + Server.UrlEncode("") & "&Rpte=" + Server.UrlEncode(Me.rdGroup.SelectedValue))
+            Else
+                Response.Redirect("ReportP.aspx?sql=" + Server.UrlEncode(cSql) & "&tit=" + Server.UrlEncode("") & "&Rpte=" + Server.UrlEncode(Me.rdGroup.SelectedValue))
+            End If
         End If
+        
 
     End Sub
 
@@ -16,6 +25,7 @@ Partial Class Reportes_Parametrizado_Default
         Dim strsql As String
         Dim obj As New Contratos()
         Dim cFiltro As String = ""
+        Generar = True
 
         If (ChkNum.Checked = True) Then
             If (Me.TxtNCon.Text.Length <> 10) Then
@@ -97,10 +107,29 @@ Partial Class Reportes_Parametrizado_Default
 
         If (ChkVig.Checked = True) Then
             Util.AddFiltro(cFiltro, "vig_con='" + TxtVig.Text + "'")
-            '        Else
-            '           Dim v As String = Request.Cookies("contratacion")("vigencia")
-            '          Util.AddFiltro(cFiltro, "vig_con='" + v.ToString + "'")
         End If
+
+        If (ChkCDP.Checked = True) Then
+            If Not (String.IsNullOrEmpty(TxtNroCdp.Text)) And Not (String.IsNullOrEmpty(TxtVigCDP.Text)) Then
+                Util.AddFiltro(cFiltro, "NUMERO IN (select Cod_Con from cdp_contratos where nro_cdp In (" + Util.FormatCVS(TxtNroCdp.Text) + ") AND to_char(fec_cdp,'yyyy')=" + TxtVigCDP.Text + ")")
+            Else
+                MsgResult.Text = "Cuando Desee Filtrar por CDP, debe digitar el numero de Cdp y La Vigencia del CDP"
+                MsgBoxAlert(MsgResult, True)
+                Generar = False
+            End If
+        End If
+
+        If (ChkRP.Checked = True) Then
+            If Not (String.IsNullOrEmpty(TxtNroRP.Text)) And Not (String.IsNullOrEmpty(TxtVigRP.Text)) Then
+                Util.AddFiltro(cFiltro, "NUMERO IN (select Cod_Con from rp_contratos where nro_rp In (" + Util.FormatCVS(TxtNroRP.Text) + ") AND to_char(fec_rp,'yyyy')=" + TxtVigRP.Text + ")")
+            Else
+                MsgResult.Text = "Cuando Desee Filtrar por RP, debe digitar el numero de RP y La Vigencia del RP"
+                MsgBoxAlert(MsgResult, True)
+                Generar = False
+            End If
+        End If
+
+
         If cFiltro <> String.Empty Then
             cFiltro = "Where " + cFiltro
         End If
