@@ -3,36 +3,27 @@
 <%@ Register src="CtrlUsr/Inicial/Inicio.ascx" tagname="Inicio" tagprefix="uc1" %>
 <%@ Register src="CtrlUsr/AyudaIzq/ctrAyudIzql.ascx" tagname="ctrAyudIzql" tagprefix="uc2" %>
 
-<%@ Register src="CtrlUsr/ConsorciosUT/ConsorciosUT.ascx" tagname="ConsorciosUT" tagprefix="uc3" %>
 
-<%@ Register src="CtrlUsr/AdmTercero/UpdAdmTerceros.ascx" tagname="UpdAdmTerceros" tagprefix="uc4" %>
+<%@ Register src="CtrlUsr/alert_Inf/Alert_Inf.ascx" tagname="Alert_Inf" tagprefix="uc3" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
-    <%--<telerik:RadScriptManager ID="ScriptManager1" runat="server" 
-        EnableScriptGlobalization="True" EnableTheming="True">
-    </telerik:RadScriptManager>--%>
+    
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" 
     EnablePageMethods="true" EnableScriptGlobalization="True" EnableScriptLocalization="True">
     </ajaxToolkit:ToolkitScriptManager>
     <div class="demoarea" style="text-align: left">
-       <asp:Image ID="ImgControl" runat="server" 
+       <%--<asp:Image ID="ImgControl" runat="server" 
             AlternateText="No tiene imagenes asociadas" 
-            ImageUrl="~/ashx/logo.ashx" />
-         
+            ImageUrl="~/ashx/logo.ashx" />--%>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-        
+            
+            <uc3:Alert_Inf ID="Alert_Inf1" runat="server" />
             
         </ContentTemplate>
         </asp:UpdatePanel>
         
-        
-        
-        
-        <h3>
-        &nbsp;&nbsp;</h3>
-    
-     
          <table style="width: 100%">
              <tr>
                  <td rowspan="6">
@@ -73,18 +64,7 @@
                      &nbsp;</td>
              </tr>
          </table>
-     
-    
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-                     
+                   
 </div>    
 
 </asp:Content>

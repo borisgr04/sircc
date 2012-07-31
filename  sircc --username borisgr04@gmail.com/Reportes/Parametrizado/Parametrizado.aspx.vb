@@ -4,8 +4,6 @@ Partial Class Reportes_Parametrizado_Default
 
     Dim Generar As Boolean = False
     Protected Sub Generar_Reporte_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Generar_Reporte.Click
-        'Me.txtTitulo.Text = Sql()
-
         MsgResult.Text = ""
         MsgBoxLimpiar(MsgResult)
         Generar = False
@@ -18,7 +16,6 @@ Partial Class Reportes_Parametrizado_Default
             End If
         End If
         
-
     End Sub
 
     Protected Function Sql() As String

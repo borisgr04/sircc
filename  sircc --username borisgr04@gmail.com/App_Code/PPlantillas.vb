@@ -413,4 +413,43 @@ Public Class PPlantillas
             Return True
         End If
     End Function
+
+    Public Function GetFormatoTabla(ByVal nomTabla As String, ByVal idPlantilla As String) As DataTable
+        Me.Conectar()
+        Me.querystring = "SELECT * FROM PPLANTILLAS_FORMATO_TABLAS WHERE IDE_PLA=:IDE_PLA AND NTABLA=:NTABLA"
+        CrearComando(querystring)
+        AsignarParametroCadena(":IDE_PLA", idPlantilla)
+        AsignarParametroCadena(":NTABLA", nomTabla)
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
+    Public Function GetFormatoTabla(ByVal nomTabla As String, ByVal idPlantilla As String, ByVal NomCampo As String) As DataTable
+        Me.Conectar()
+        Me.querystring = "SELECT * FROM PPLANTILLAS_FORMATO_TABLAS WHERE IDE_PLA=:IDE_PLA AND NTABLA=:NTABLA AND NOM_CAM =:NOM_CAM"
+        CrearComando(querystring)
+        AsignarParametroCadena(":IDE_PLA", idPlantilla)
+        AsignarParametroCadena(":NTABLA", nomTabla)
+        AsignarParametroCadena(":NOM_CAM", NomCampo)
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
+  
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetPorIde(ByVal IDE_PLA As String) As DataTable
+        Me.Conectar()
+        Me.querystring = "SELECT * FROM PPLANTILLAS WHERE IDE_PLA = :IDE_PLA"
+        CrearComando(querystring)
+        AsignarParametroCadena(":IDE_PLA", IDE_PLA)
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
+
+    
 End Class
