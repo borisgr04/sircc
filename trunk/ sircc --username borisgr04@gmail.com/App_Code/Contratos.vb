@@ -5,6 +5,8 @@ Imports System.Data.Common
 'Clase para manejar la Tabla Contratos
 'Fecha Creaciòn: 19 dic 2010
 'Autor: Boris Gonzalez Rivera
+
+' Se agrega Opcion de Busqueda por Ide
 '
 <System.ComponentModel.DataObject()> _
 Public Class Contratos
@@ -13,6 +15,44 @@ Public Class Contratos
     Dim Tip_Con As String
     Dim NroCon As String
 
+
+    ''' <summary>
+    ''' Certificado por Contratista
+    ''' </summary>
+    ''' <param name="Ide_Con"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetCertificado(ByVal Ide_Con As String) As DataTable
+        Me.Conectar()
+        'And Dep_pCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo )
+        querystring = "SELECT * FROM vLstContratos Where Ide_Con=:Ide_Con  Order by Numero"
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":Ide_Con", Ide_Con)
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
+    ''' <summary>
+    ''' Consulta de contratos por llave primaria,
+    '''  filtrando por dependencia delegada asociada.
+    ''' </summary>
+    ''' <param name="Ide_Con"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByIde_Con(ByVal Ide_Con As String) As DataTable
+        Me.NroCon = Cod_Con
+        Me.Conectar()
+        'And Dep_pCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo )
+        querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where Ide_Con=:Ide_Con "
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":Ide_Con", Ide_Con)
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
 
     Enum FiltroContratos
         Todos
@@ -37,6 +77,7 @@ Public Class Contratos
             Return NroCon
         End Get
     End Property
+
     ''' <summary>
     ''' Retorna el nombre de la Aplicacíón
     ''' Autor: BGR Fecha. 10 de Enero de 2011
@@ -151,7 +192,7 @@ Public Class Contratos
             Me.AsignarParametroCadena(":EST_CON", "00") 'Radicado
             Me.AsignarParametroCadena(":tip_con", tip)
             'Me.AsignarParametroCadena(":val_con", val_con.ToString.Replace(",", "."))
-            AsignarParametroDecimal(":val_con", val_con)
+            Me.AsignarParametroDecimal(":val_con", val_con)
             Me.AsignarParametroCadena(":cod_con", cod_con) 'será quitado
             Me.AsignarParametroCadena(":cod_sec", cod_sec)
             Me.AsignarParametroCadena(":tip_for", tip_for)

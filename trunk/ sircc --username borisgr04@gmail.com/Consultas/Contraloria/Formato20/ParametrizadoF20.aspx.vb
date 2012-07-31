@@ -105,7 +105,7 @@ Partial Class Reportes_ParametrizadoF20_Default
             '          Util.AddFiltro(cFiltro, "vig_con='" + v.ToString + "'")
         End If
         If cFiltro <> String.Empty Then
-            cFiltro = "Where " + cFiltro
+            cFiltro = " Where " + cFiltro
         End If
         'strSql = "SELECT *  FROM VCONTRATOS_RUBROS2  " + cFiltro + " Order by Numero"
         'strSql = "SELECT *  FROM VCONTRATOSC2  " + cFiltro + " Order by Numero"

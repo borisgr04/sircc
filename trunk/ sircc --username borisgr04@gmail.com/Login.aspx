@@ -6,7 +6,35 @@
 <head runat="server">
    <title>Inicio Sesión</title>
  <link rel="Stylesheet" href="login.css" type="text/css" media="all" />
-         
+
+<style type="text/css">
+ /*background: #f4f4f4;	border: solid 1px #7eb3f6;*/
+input.blueinput, textarea.blueinput {
+	
+	padding: 2px;
+}
+
+input.blueinput:focus, textarea.blueinput:focus {
+	border:1px solid #019201;
+	background-color: #DAFEDA;
+}
+
+input:focus, input.sffocus{background-color:#DEEFFF;} 
+</style> 
+<script type ="text/javascript">
+    sfFocus = function () {
+        var sfEls = document.getElementsByTagName("INPUT");
+        for (var i = 0; i < sfEls.length; i++) {
+            sfEls[i].onfocus = function () {
+                this.className += " sffocus";
+            }
+            sfEls[i].onblur = function () {
+                this.className = this.className.replace(new RegExp(" sffocus\\b"), "");
+            }
+        } 
+    }
+    if (window.attachEvent) window.attachEvent("onload", sfFocus); 
+</script>
 </head>
 <body>
     <form id="form1" runat="server">

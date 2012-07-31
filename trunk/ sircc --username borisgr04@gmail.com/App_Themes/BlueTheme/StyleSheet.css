@@ -1986,3 +1986,17 @@ list-style-type:none;
     height:2px;
     }
     
+    
+    
+    /* Resaltar input  */
+input.blueinput, textarea.blueinput {
+	
+	padding: 2px;
+}
+
+input.blueinput:focus, textarea.blueinput:focus {
+	border:1px solid #019201;
+	background-color: #DAFEDA;
+}
+
+input:focus, input.sffocus{background-color:#DEEFFF;} 

@@ -207,7 +207,12 @@ Public Class PaginaComun
         grd.RenderControl(htw)
         Response.Write(sw.ToString())
     End Sub
-
+    Public Sub ExportDataListBody(ByVal dl As DataList)
+        Dim sw As New StringWriter()
+        Dim htw As New HtmlTextWriter(sw)
+        dl.RenderControl(htw)
+        Response.Write(sw.ToString())
+    End Sub
     Public Sub ExportGridViewIni(Optional ByVal Archivo As String = "Export")
         Dim attachment As String = String.Format("attachment; filename={0}.xls", Archivo)
         Response.ClearContent()
