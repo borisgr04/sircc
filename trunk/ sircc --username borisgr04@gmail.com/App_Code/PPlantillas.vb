@@ -15,7 +15,6 @@ Public Class PPlantillas
 
     Private Const CONTENT_PDF As String = "application/pdf" ' PDF
     Private Const CONTENT_ZIP As String = "application/x-zip-compressed" ' ZIP
-
     Private Const CONTENT_DOC As String = "application/msword" ' DOC
     Private Const Ext_Doc As String = "doc" ' DOC
 
@@ -33,7 +32,7 @@ Public Class PPlantillas
         ComenzarTransaccion()
         Try
             If UCase(Ext_Pla) = UCase(Ext_Doc) Then
-                querystring = "INSERT INTO PPLANTILLAS (PLANTILLA,TIP_PLA, NOM_PLA,  EXT, EST_PLA, COD_TPROC,CLAVE) VALUES ( :PLANTILLA,:TIP_PLA, :NOM_PLA, :EXT, :EST_PLA, :COD_TPROC,:CLAVE) "
+                querystring = "INSERT INTO PPLANTILLAS (PLANTILLA,TIP_PLA, NOM_PLA,  EXT, EST_PLA, COD_STIP,CLAVE) VALUES ( :PLANTILLA,:TIP_PLA, :NOM_PLA, :EXT, :EST_PLA, :COD_TPROC,:CLAVE) "
                 CrearComando(querystring)
                 AsignarParametroBLOB(":PLANTILLA", dContent)
                 AsignarParametroCad(":TIP_PLA", TIP_PLA)
@@ -58,6 +57,27 @@ Public Class PPlantillas
         End Try
         Return Msg
     End Function
+
+    Public Function Delete(ByVal Ide_pla As String) As String
+        Dim tbCon As New DataTable
+        Conectar()
+        ComenzarTransaccion()
+        Try
+            querystring = "DELETE FROM PPLANTILLAS WHERE Ide_pla=:Ide_pla"
+            CrearComando(querystring)
+            AsignarParametroCad(":Ide_pla", Ide_pla)
+            num_reg = EjecutarComando()
+            ConfirmarTransaccion()
+            Msg = MsgOk + "Registro Eliminados " + num_reg.ToString
+            Me.lErrorG = False
+        Catch ex As Exception
+            CancelarTransaccion()
+            Msg = ex.Message
+            Me.lErrorG = True
+        End Try
+        Return Msg
+    End Function
+
     Public Function Update(ByVal Ide_pla As String, ByVal dContent As [Byte]()) As String
         Dim tbCon As New DataTable
         Conectar()
@@ -185,6 +205,70 @@ Public Class PPlantillas
         Catch ex As Exception
             Msg = ex.Message
             Me.lErrorG = True
+        End Try
+        Return Msg
+
+    End Function
+
+    Public Function Update(ByVal Ide_Pla As String, ByVal TIP_PLA As String, ByVal Nom_Pla As String, ByVal fup As FileUpload, ByVal Ext_Pla As String, ByVal Cod_TPro As String, ByVal Est_Pla As String) As String
+        Dim tbCon As New DataTable
+        Me.lErrorG = True
+        Conectar()
+
+        Try
+            ComenzarTransaccion()
+            'Solo Actualizacion de Datos
+            If Not fup.HasFile Then
+                querystring = "UPDATE PPLANTILLAS SET  TIP_PLA=:TIP_PLA, NOM_PLA=:NOM_PLA,  EXT=:EXT, EST_PLA=:EST_PLA, COD_STIP=:COD_TPRO WHERE IDE_PLA=:IDE_PLA"
+                CrearComando(querystring)
+                AsignarParametroCad(":TIP_PLA", TIP_PLA)
+                AsignarParametroCad(":NOM_PLA", Nom_Pla)
+                AsignarParametroCad(":EXT", "doc")
+                AsignarParametroCad(":EST_PLA", Est_Pla)
+                AsignarParametroCad(":COD_TPRO", Cod_TPro)
+                AsignarParametroCad(":IDE_PLA", Ide_Pla)
+                num_reg = EjecutarComando()
+                Msg = MsgOk + " - " + num_reg.ToString + " No se actualizó la Plantilla"
+                Me.lErrorG = False
+                ConfirmarTransaccion()
+                Return Msg
+            Else
+                Dim success As Boolean = False
+                Dim dStream As Stream = fup.PostedFile.InputStream
+                Dim dLength As Integer = fup.PostedFile.ContentLength
+                Dim dContentType As String = fup.PostedFile.ContentType
+                Dim dFileName As String = fup.PostedFile.FileName
+                Dim Ext As String = Extraer(dFileName, ".")
+                If (dContentType = CONTENT_DOC) And Ext = Ext_Doc Then
+                    'Cargar Imagen
+                    Dim dContent As [Byte]() = New Byte(dLength - 1) {}
+                    Dim intStatus As Integer
+                    intStatus = dStream.Read(dContent, 0, dLength)
+                    querystring = "UPDATE PPLANTILLAS SET PLANTILLA=:PLANTILLA, TIP_PLA=:TIP_PLA, NOM_PLA=:NOM_PLA,  EXT=:EXT, EST_PLA=:EST_PLA, COD_STIP=:COD_TPRO WHERE IDE_PLA=:IDE_PLA"
+                    CrearComando(querystring)
+                    AsignarParametroBLOB(":PLANTILLA", dContent)
+                    AsignarParametroCad(":TIP_PLA", TIP_PLA)
+                    AsignarParametroCad(":NOM_PLA", Nom_Pla)
+                    AsignarParametroCad(":EXT", "doc")
+                    AsignarParametroCad(":EST_PLA", Est_Pla)
+                    AsignarParametroCad(":COD_TPRO", Cod_TPro)
+                    AsignarParametroCad(":IDE_PLA", Ide_Pla)
+
+                    num_reg = EjecutarComando()
+
+                    Msg += String.Format("<br/> <b>Extensión:</b> {0} <b>Tipo de Contenido:</b> {1}", Ext_Doc, dContentType)
+                Else
+                    Msg = "Sólo se permiten Archivos <b>(*.DOC) </b>"
+                End If
+                ConfirmarTransaccion()
+                lErrorG = False
+            End If
+        Catch ex As Exception
+            CancelarTransaccion()
+            Msg = ex.Message
+            Me.lErrorG = True
+        Finally
+            Desconectar()
         End Try
         Return Msg
 
