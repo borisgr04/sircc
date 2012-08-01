@@ -155,5 +155,19 @@ Public Class Util
         Return [String].Compare(li1.Text, li2.Text)
     End Function
 
+    ' agregado Shirly, proviene de Signus, administrador del tributo
+    Public Shared Function Byte2ImagePath(ByVal bytes() As Byte) As String
+        If bytes Is Nothing Then Return Nothing
+        Dim ms As New MemoryStream(bytes)
+        Dim bm As Drawing.Bitmap = Nothing
+        Dim oPath As String = Path.ChangeExtension(Path.GetTempFileName(), ".JPG")
+        Try
+            bm = New Drawing.Bitmap(ms)
+            SaveJPG(bm, oPath)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine(ex.Message)
+        End Try
+        Return oPath
+    End Function
 
 End Class

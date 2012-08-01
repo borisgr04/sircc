@@ -43,7 +43,8 @@
                 OnRowCommand="GridView1_RowCommand" DataKeyNames="Ide_Pla" 
                 AutoGenerateColumns="False" 
                 OnSelectedIndexChanged="GridView1_SelectedIndexChanged" 
-                EmptyDataText="No se encontraron Registros en la Base de Datos">
+                EmptyDataText="No se encontraron Registros en la Base de Datos" 
+                AllowPaging="True" EnableModelValidation="True">
 <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
 <Columns>
     <asp:BoundField DataField="Ide_Pla" HeaderText="Id" SortExpression="Ide_Pla" />
@@ -52,8 +53,8 @@
     <asp:BoundField DataField="Nom_Pla" HeaderText="Nombre " 
         SortExpression="Nom_Pla" />
     <asp:BoundField DataField="ext" HeaderText="Extensión" SortExpression="Ext" />
-    <asp:BoundField DataField="Nom_Tproc" HeaderText="Modalidad" 
-        SortExpression="Nom_Tproc" />
+    <asp:BoundField DataField="Nom_STip" HeaderText="Clase" 
+        SortExpression="Nom_STip" />
 <asp:ButtonField CommandName="Editar" ImageUrl="~/images/Operaciones/Edit2.png" Text="Editar" ButtonType="Image"></asp:ButtonField>
 <asp:ButtonField CommandName="Eliminar" ImageUrl="~/images/Operaciones/delete2.png" Text="Eliminar" ButtonType="Image"></asp:ButtonField>
 <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" ButtonType="Image"></asp:CommandField>
@@ -116,19 +117,19 @@
                         </td>
                         <td colspan="3">
                             <asp:DropDownList ID="CboTipPla" runat="server">
-                                <asp:ListItem>MINUTA INICIAL</asp:ListItem>
-                                <asp:ListItem>OTROSI ADICION</asp:ListItem>
-                                <asp:ListItem>OTROSI MODIFICATORIO</asp:ListItem>
+                                <asp:ListItem Value="01">MINUTA INICIAL</asp:ListItem>
+                                <asp:ListItem Value="02">MODIFICATORIO</asp:ListItem>
+                                <asp:ListItem Value="03">CERTIFICACIONES</asp:ListItem>
                             </asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            <asp:Label ID="Label17" runat="server" Text="Modalidad de Contratación"></asp:Label>
+                            <asp:Label ID="Label17" runat="server" Text="Clase de Contratación"></asp:Label>
                         </td>
                         <td colspan="3">
-                            <asp:DropDownList ID="CboTproc" runat="server" CssClass="txt" 
-                                DataSourceID="ObjTipoProc" DataTextField="Nom_TProc" DataValueField="Cod_TProc" 
+                            <asp:DropDownList ID="CboSTip" runat="server" CssClass="txt" 
+                                DataSourceID="ObjSubTipos" DataTextField="Nom_STip" DataValueField="Cod_STip" 
                                 ToolTip="Proceso PreContractual">
                             </asp:DropDownList>
                         </td>
@@ -187,39 +188,6 @@
                       
                     </tr>
                     <tr>
-                        <td style="width: 140px">
-                            <asp:Label ID="Label18" runat="server" Text="Contraseña" 
-                                ToolTip="Contraseña de Bloqueo del Documento "></asp:Label>
-                        </td>
-                        <td colspan="2">
-                            <asp:TextBox ID="TxtCon" runat="server" TextMode="Password"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="TxtCon" 
-                                ErrorMessage="Se requiere un contraseña por seguridad" 
-                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
-                        </td>
-                        <td>
-                            <asp:CompareValidator ID="CompareValidator1" runat="server" 
-                                ControlToCompare="TxtCon" ControlToValidate="TxtCon2" 
-                                ErrorMessage="Las Contraseñas deben coincidir" ValidationGroup="Guardar">*</asp:CompareValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">
-                            <asp:Label ID="Label19" runat="server" Text="Confirmar Contraseña" 
-                                ToolTip="Contraseña de Bloqueo del Documento "></asp:Label>
-                        </td>
-                        <td colspan="2">
-                            <asp:TextBox ID="TxtCon2" runat="server" TextMode="Password"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
-                                ControlToValidate="TxtCon2" 
-                                ErrorMessage="Se requiere un contraseña por seguridad" 
-                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
-                        </td>
-                        <td>
-                            &nbsp;</td>
-                    </tr>
-                    <tr>
                         <td colspan="4" style="text-align: center">
                             &nbsp;</td>
                     </tr>
@@ -247,9 +215,29 @@
                     </tr>
                 </table>
             </asp:Panel>&nbsp;&nbsp; 
-            <asp:ObjectDataSource ID="ObjTipoProc" runat="server" 
+            <asp:ObjectDataSource ID="ObjSubTipos" runat="server" 
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
-                TypeName="TiposProc"></asp:ObjectDataSource>
+                TypeName="SubTipos" InsertMethod="Insert" UpdateMethod="Update">
+                <InsertParameters>
+                    <asp:Parameter Name="Cod_Stip" Type="String" />
+                    <asp:Parameter Name="Nom_Stip" Type="String" />
+                    <asp:Parameter Name="Cod_Tip" Type="String" />
+                    <asp:Parameter Name="Cla_Con_Dep" Type="String" />
+                    <asp:Parameter Name="Crt_F20_1A" Type="String" />
+                    <asp:Parameter Name="Cla_Con_Dp" Type="String" />
+                    <asp:Parameter Name="estado" Type="String" />
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="Cod_Stip_O" Type="String" />
+                    <asp:Parameter Name="Cod_Stip" Type="String" />
+                    <asp:Parameter Name="Nom_Stip" Type="String" />
+                    <asp:Parameter Name="Cod_Tip" Type="String" />
+                    <asp:Parameter Name="Cla_Con_Dep" Type="String" />
+                    <asp:Parameter Name="Crt_F20_1A" Type="String" />
+                    <asp:Parameter Name="Cla_Con_Dp" Type="String" />
+                    <asp:Parameter Name="Estado" Type="String" />
+                </UpdateParameters>
+            </asp:ObjectDataSource>
 </contenttemplate>
     </asp:UpdatePanel>
       <asp:UpdateProgress ID="UpdPrg" runat="server" AssociatedUpdatePanelID="UpdatePanel1">

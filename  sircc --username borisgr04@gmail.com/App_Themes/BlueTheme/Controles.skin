@@ -43,6 +43,11 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 <asp:Image SkinId="ImgFoot" runat="server" ImageUrl="~/Images/BlueTheme/img_foot.png" />                        
 <asp:Image SkinId="ImgProgress" runat="server" ImageUrl="~/Images/BlueTheme/loading.gif" />      
 
+<asp:Image SkinId="ImgAAlerta" runat="server" ImageUrl="~/Images/2012/Alarm-Warning-icon.png" />   
+<asp:Image SkinId="ImgAError" runat="server" ImageUrl="~/Images/2012/Alarm-Error-icon.png" />   
+<asp:Image SkinId="ImgAOk" runat="server" ImageUrl="~/Images/2012/Alarm-Tick-icon.png" />   
+<asp:Image SkinId="ImgAInfo" runat="server" ImageUrl="~/Images/2012/Alarm-Info-icon.png" />   
+
 
 <%-------- --%>
 <asp:Label SkinId="MsgResult" runat="server" Height="100%" ></asp:Label>      

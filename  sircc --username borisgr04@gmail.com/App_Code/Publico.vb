@@ -189,6 +189,10 @@ Public Class Publico
         End Get
     End Property
 
- 
+    Shared ReadOnly Property Ide_Cert As String
+        Get
+            Return ConfigurationManager.AppSettings("Ide_Cert")
+        End Get
+    End Property
 
 End Class

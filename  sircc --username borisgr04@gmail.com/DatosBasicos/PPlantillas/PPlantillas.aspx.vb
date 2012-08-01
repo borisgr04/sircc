@@ -2,7 +2,7 @@
 Partial Class DatosBasicos_PPlantillas_PPlantillas
     Inherits PaginaComun
 
-    Dim Obj As New PPlantillas
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Me.Opcion = Me.Tit.Text
         Me.SetTitulo()
@@ -18,7 +18,7 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
     End Sub
 
     Protected Sub GridView1_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs)
-
+        Dim Obj As New PPlantillas
         Me.Oper = e.CommandName
         'MultiView1.ActiveViewIndex = -1
 
@@ -34,47 +34,67 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
                 'Me.SetFocus(Me.TxtCodNew)
 
             Case "Editar"
-                'Me.SubT.Text = "Editando..."
-                'Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-                'Me.GridView1.SelectedIndex = index
+                Me.SubT.Text = "Editando..."
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.GridView1.SelectedIndex = index
 
-                'Dim tb As DataTable = Obj.GetbyPK(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString)
-                'If tb.Rows.Count > 0 Then
-                '    Me.TxtCod.Text = tb.Rows(0)("Cod_Est").ToString
-                '    Me.TxtNom.Text = tb.Rows(0)("Nom_est").ToString
-                '    ' Me.TxtColor.Text = tb.Rows(0)("Color").ToString
-                '    Habilitar(True)
-                '    Me.ModalPopupTer.Show()
-                'End If
+                Pk1 = GridView1.DataKeys(index).Values(0).ToString()
+                Dim tb As DataTable = Obj.GetbyPK(Pk1)
+                If tb.Rows.Count > 0 Then
+                    Try
+                        Habilitar(True)
+                        Me.TxtCod.Text = tb.Rows(0)("IDE_PLA")
+                        Me.TxtNom.Text = tb.Rows(0)("NOM_PLA")
+                        Me.CboExt.Text = tb.Rows(0)("Ext")
+                        Me.CboEst.Text = tb.Rows(0)("Est_Pla")
+                        If Not (tb.Rows(0)("Cod_Stip") Is DBNull.Value) Then
+                            Me.CboSTip.Text = tb.Rows(0)("Cod_Stip")
+                        End If
+                        Pk1 = tb.Rows(0)("IDE_PLA").ToString
+                        Habilitar(True)
+                    Catch ex As Exception
+                        MsgResult.Text = ex.Message
+                        MsgBox(MsgResult, True)
+                    End Try
+
+                End If
+                Me.ModalPopupTer.Show()
                 'Me.MsgResult.Text = "Editando: Código [" + "]"
             Case "Eliminar"
-                'Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-                'Me.GridView1.SelectedIndex = index
-                'Pk1 = GridView1.DataKeys(index).Values(0).ToString()
-                'Dim tb As DataTable = Obj.GetbyPK(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString)
-                'If tb.Rows.Count > 0 Then
-                '    Me.TxtCod.Text = tb.Rows(0)("Cod_Est").ToString
-                '    Me.TxtNom.Text = tb.Rows(0)("Nom_est").ToString
-                '    ' Me.TxtColor.Text = tb.Rows(0)("Color").ToString
-                '    Me.ModalPopupTer.Show()
-                '    Habilitar(False)
-                'End If
-                'Me.ModalPopupTer.Show()
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.GridView1.SelectedIndex = index
+                Pk1 = GridView1.DataKeys(index).Values(0).ToString()
+                Habilitar(False)
+                Dim tb As DataTable = Obj.GetbyPK(Pk1)
+                Try
+                    Me.TxtCod.Text = tb.Rows(0)("IDE_PLA")
+                    Me.TxtNom.Text = tb.Rows(0)("NOM_PLA")
+                    If Not (tb.Rows(0)("Cod_Stip") Is DBNull.Value) Then
+                        Me.CboSTip.Text = tb.Rows(0)("Cod_Stip")
+                    End If
+
+                    Me.CboExt.Text = tb.Rows(0)("Ext")
+                    Me.CboEst.Text = tb.Rows(0)("Est_Pla")
+                    ' Me.TxtColor.Text = tb.Rows(0)("Color").ToString
+
+                    Pk1 = tb.Rows(0)("IDE_PLA").ToString
+
+                Catch ex As Exception
+                    MsgResult.Text = ex.Message
+                    MsgBox(MsgResult, True)
+                End Try
+                Me.ModalPopupTer.Show()
         End Select
 
     End Sub
 
 
     Protected Sub Habilitar(ByVal b As Boolean)
-        'Me.TxtValSig.Enabled = b
-        'Me.CboTproc.Enabled = b
-        'Me.CboTact.Enabled = b
-        'Me.TxtColor.Enabled = b
-        'Me.CboFilVig.Enabled = b
+        
         TxtCod.Enabled = False
         CboTipPla.Enabled = b
         CboEst.Enabled = b
-        CboTproc.Enabled = b
+        CboSTip.Enabled = b
 
         TxtNom.Enabled = b
 
@@ -87,49 +107,22 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
     End Sub
     Private Sub FillCustomerInGrid()
         Me.GridView1.DataBind()
-        'Dim cl As String = Me.CboImpto.SelectedValue
-        'If Left(Me.CboImpto.SelectedValue, 2) <> Me.CmbClase.SelectedValue Then
-        ' Me.CboImpto.SelectedIndex = 0
-        ' cl = ""
-        'End If
-        'Dim dtCustomer As DataTable = Obj.GetByImpuesto(cl)
-        'If (dtCustomer.Rows.Count > 0) Then
-        ' GridView1.DataSource = dtCustomer
-        'GridView1.DataBind()
-        'Else
-        'dtCustomer.Rows.Add(dtCustomer.NewRow())
-        'GridView1.DataSource = dtCustomer
-        'GridView1.DataBind()
-        'Dim TotalColumns As Integer = GridView1.Rows(0).Cells.Count
-        'GridView1.Rows(0).Cells.Clear()
-        'GridView1.Rows(0).Cells.Add(New TableCell())
-        ' GridView1.Rows(0).Cells(0).ColumnSpan = TotalColumns
-        'GridView1.Rows(0).Cells(0).Text = "No se encontraron Registro"
-        'End If
+     
     End Sub
 
-    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
+    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) 'Handles BtnGuardar.Click
+        Dim Obj As New PPlantillas
         Select Case Me.Oper
             Case "Nuevo"
-                MsgResult.Text = Obj.Insert(CboTipPla.SelectedValue, TxtNom.Text, FileUpload1, CboExt.SelectedValue, CboTproc.SelectedValue, CboEst.SelectedValue, TxtCod.Text)
-                'Case "Editar"
-                '    If FileUpload1.HasFile Then
-                '        Dim tb As DataTable = Obj.GetbyPK(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString)
-                '        If tb.Rows(0).Item("Imagen").ToString = "" Then
-                '            SubirAchivo(FileUpload1.PostedFile)
-                '        Else
-                '            EliminarImagen(tb.Rows(0).Item("Imagen").ToString)
-                '            SubirAchivo(FileUpload1.PostedFile)
-                '        End If
-                '    Else
-                '        ' Me.MsgResult.Text = Obj.Update(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString, Me.TxtCod.Text, Me.TxtNom.Text, "", Me.TxtColor.Text)
-                '    End If
+                MsgResult.Text = Obj.Insert(CboTipPla.SelectedValue, TxtNom.Text, FileUpload1, CboExt.SelectedValue, CboSTip.SelectedValue, CboEst.SelectedValue, "")
+            Case "Editar"
+                Me.MsgResult.Text = Obj.Update(Pk1, CboTipPla.Text, TxtNom.Text, FileUpload1, CboExt.Text, CboSTip.Text, CboEst.Text)
         End Select
         Me.MsgBox(MsgResult, Obj.lErrorG)
         FillCustomerInGrid()
         If Obj.lErrorG = False Then
             Me.Limpiar()
+            Me.Oper = ""
         End If
     End Sub
 
@@ -144,14 +137,10 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
     End Sub
 
     Protected Sub BtnEliminar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Dim tb As DataTable = Obj.GetbyPK(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString)
-        'If tb.Rows(0).Item("Imagen").ToString = "" Then
-        '    'Me.MsgResult.Text = Obj.Delete(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString)
-        '    Me.MsgBox(MsgResult, Obj.lErrorG)
-        '    FillCustomerInGrid()
-        'Else
-        '    EliminarImagen(tb.Rows(0).Item("Imagen").ToString)
-        'End If
+        Dim Obj As New PPlantillas
+        MsgResult.Text = Obj.Delete(Pk1)
+        Me.MsgBox(MsgResult, Obj.lErrorG)
+        FillCustomerInGrid()
     End Sub
 
     Protected Sub GridView1_RowDataBound1(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs)
@@ -199,25 +188,17 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
 
     Protected Sub BtnNuevo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnNuevo.Click
         Me.Oper = "Nuevo"
+        Habilitar(True)
         MsgBoxLimpiar(MsgResult)
         Me.ModalPopupTer.Show()
     End Sub
-    'Sub EliminarImagen(ByVal Archivo As String)
-    '    Try
-    '        Dim FileToDelete As String
-    '        FileToDelete = Server.MapPath(Archivo)
-    '        If System.IO.File.Exists(FileToDelete) = True Then
-    '            System.IO.File.Delete(FileToDelete)
-    '            Select Case Me.Oper
-    '                Case "Eliminar"
-    '                    Me.MsgResult.Text = Obj.Delete(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString)
-    '                    Me.MsgBox(MsgResult, Obj.lErrorG)
-    '                    FillCustomerInGrid()
-    '            End Select
-    '        End If
-    '    Catch ex As Exception
-    '        Me.MsgResult.Text = "Error al Borrar La Imagen"
-    '        MsgBox(Me.MsgResult, True)
-    '    End Try
-    'End Sub
+   
+
+    Protected Sub CboTipPla_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboTipPla.SelectedIndexChanged
+        If CboTipPla.Text = "03" Then
+            CboSTip.Enabled = False
+        Else
+            CboSTip.Enabled = True
+        End If
+    End Sub
 End Class

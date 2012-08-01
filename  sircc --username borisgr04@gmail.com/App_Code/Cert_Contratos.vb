@@ -191,7 +191,7 @@ Public Class Cert_Contratos
             Dim dtConsulta As New DataTable
             'Llenar la tabla de configuracion
             dtConsulta = oPlantillaC.GetRecords("VCERTIFICACIONES")
-            dtPlantilla = oPlantilla.GetPorIde(32)
+            dtPlantilla = oPlantilla.GetPorIde(Publico.Ide_Cert)
             'Se obtiene la plantila
             'Generar el Documento Word
             If dtConsulta.Rows.Count > 0 Then
@@ -221,7 +221,7 @@ Public Class Cert_Contratos
                     Else
                         oWord.DocProtegido = False
                     End If
-                    oWord.IdPlantilla = 3
+                    oWord.IdPlantilla = Publico.Ide_Cert
                     oWord.ListaNomTablas = ListaNomTablas
                     oWord.ListaTablas = ListaTablas
                     Documento = oWord.GenerarDocumento(DocPlantilla, dtConsulta, dtDatos)
