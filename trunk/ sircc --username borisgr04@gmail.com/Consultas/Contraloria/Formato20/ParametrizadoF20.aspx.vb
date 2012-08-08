@@ -11,9 +11,114 @@ Partial Class Reportes_ParametrizadoF20_Default
     Protected Sub BtnExport_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExport.Click
         Me.HdSql.Value = SqlExcel()
         GridView1.DataBind()
-        '   GridView1.Visible = True
+        GridView1.Visible = True
         ExportGridView(GridView1, "Formato_20_1a")
+        'ExportarCSV2()
     End Sub
+
+    Sub exportar_csv()
+        'Dim context As HttpContext = HttpContext.Current
+        'context.Response.Clear()
+
+        'context.Response.ContentType = "text/csv"
+        'context.Response.AppendHeader("Content-Disposition", "attachment; filename=GridView1.csv")
+
+        'For i As Integer = 0 To GridView1.Columns.Count - 1
+        '    context.Response.Write(GridView1.Columns(i).HeaderText + ",")
+        'Next
+        'context.Response.Write(Environment.NewLine)
+        Dim str As String = ""
+        For m As Integer = 0 To GridView1.Rows.Count - 1
+            For n As Integer = 0 To GridView1.Columns.Count - 1
+                str = (GridView1.Rows(m).Cells(n).Text + ",")
+            Next
+        Next
+
+        str = (Environment.NewLine)
+
+        'Context.Response.[End]()
+        Dim attachment As String = String.Format("attachment; filename={0}.xls", "Boris")
+        Response.ClearContent()
+        Response.AddHeader("content-disposition", attachment)
+        Response.ContentType = "text/csv"
+        Response.Write("BORIS,ARTURO")
+        Response.End()
+    End Sub
+
+    'Protected Sub ExportarCSV()
+    '    'Response.Clear()
+    '    Response.ClearContent()
+    '    Response.Buffer = True
+    '    Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.csv")
+    '    Response.Charset = ""
+    '    Response.ContentType = "text/csv"
+    '    Me.HdSql.Value = SqlExcel()
+
+    '    Dim obj As New Reportes
+    '    Dim dt As DataTable = obj.GetSql(SqlExcel())
+
+    '    GridView1.AllowPaging = False
+    '    GridView1.DataBind()
+    '    Response.Write(GridView1.Columns.Count)
+    '    Dim sb As New StringBuilder()
+    '    Dim k As Integer = 0
+    '    While k < GridView1.Columns.Count
+    '        sb.Append(GridView1.Columns(k).HeaderText + ","c)
+    '        System.Math.Max(System.Threading.Interlocked.Increment(k), k - 1)
+    '    End While
+    '    sb.Append(vbCr & vbLf)
+    '    Dim i As Integer = 0
+    '    While i < GridView1.Rows.Count
+    '        Dim k2 As Integer = 0
+    '        While k2 < GridView1.Columns.Count
+    '            sb.Append(GridView1.Rows(i).Cells(k2).Text + ","c)
+    '            System.Math.Max(System.Threading.Interlocked.Increment(k2), k2 - 1)
+    '        End While
+    '        sb.Append(vbCr & vbLf)
+    '        System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
+    '    End While
+    '    Response.Output.Write(sb.ToString())
+    '    Response.Flush()
+    '    Response.End()
+    'End Sub
+
+    Protected Sub ExportarCSV2()
+        'Response.Clear()
+        Response.ClearContent()
+        Response.Buffer = True
+        Response.AddHeader("content-disposition", "attachment;filename=Formato20_1a.csv")
+        Response.Charset = ""
+        Response.ContentType = "text/csv"
+        'Me.HdSql.Value = SqlExcel()
+
+        Me.HdSql.Value = SqlExcel()
+        GridView1.DataBind()
+
+        Dim obj As New Reportes
+        Dim dt As DataTable = obj.GetSql(Me.HdSql.Value)
+
+        Dim sb As New StringBuilder()
+        Dim k As Integer = 0
+        While k < dt.Columns.Count
+            sb.Append(dt.Columns(k).ColumnName + ","c)
+            System.Math.Max(System.Threading.Interlocked.Increment(k), k - 1)
+        End While
+        sb.Append(vbCr & vbLf)
+        Dim i As Integer = 0
+        While i < dt.Rows.Count
+            Dim k2 As Integer = 0
+            While k2 < dt.Columns.Count
+                sb.Append(dt.Rows(i)(k2).ToString + ","c)
+                System.Math.Max(System.Threading.Interlocked.Increment(k2), k2 - 1)
+            End While
+            sb.Append(vbCr & vbLf)
+            System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
+        End While
+        Response.Output.Write(sb.ToString())
+        Response.Flush()
+        Response.End()
+    End Sub
+
 
     Protected Function genFiltro() As String
 
@@ -132,11 +237,29 @@ Partial Class Reportes_ParametrizadoF20_Default
     Protected Function SqlExcel() As String
         Dim cFiltro As String = genFiltro()
         Dim strSql As String
-        strSql = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,ID_INTERVENTOR IDENTIFICADOR_INTERVENTOR, NOM_INTERVENTOR NOMBRE_COMPLETO_INTERVENTOR,TIP_VIN_INT TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From ( "
-        strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
-        strSql += ")"
+        If CboVersion.SelectedValue = "1" Then
+            strSql = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,ID_INTERVENTOR IDENTIFICADOR_INTERVENTOR, NOM_INTERVENTOR NOMBRE_COMPLETO_INTERVENTOR,TIP_VIN_INT TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From ( "
+            strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
+            strSql += ")"
+        Else
+            strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos,obj_con objeto, val_con valor_contrato,ide_con identificacion_contratista, contratista nombre_contratista,       fec_sus_con fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion,pla_eje_con numero_unidades_ejecuciÓn,'DIAS' unidad_de_ejecuciÓn,P_ANTICIPO,VAL_ADI val_adicion, plazo_adicion_dias Pror_Nro_Unid,'DIAS' Prorr_Unidad_Ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion,       NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion From ( "
+            strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
+            strSql += ")"
+        End If
         Return strSql
     End Function
+
+    Protected Function SqlExcelF20_1b() As String
+        Dim cFiltro As String = genFiltro()
+        Dim strSql As String
+        strSql = "select c.Ide_Ter Nit_CSUT,t.nom_ter Nom_CSUT,Id_Miembros Nit_Integrante,Nom_Miembro Nom_Integrante from vconsorciosutxc c inner join vterceros t on t.IDE_TER=c.ide_ter where cod_con In ( Select Numero FROM vcontratos_Sinc_p c  " + cFiltro + " )"
+        'strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos,obj_con objeto, val_con valor_contrato,ide_con identificacion_contratista, contratista nombre_contratista,       fec_sus_con fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion,pla_eje_con numero_unidades_ejecuciÓn,'DIAS' unidad_de_ejecuciÓn,P_ANTICIPO,VAL_ADI val_adicion, plazo_adicion_dias Pror_Nro_Unid,'DIAS' Prorr_Unidad_Ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion,       NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion From ( "
+        'strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
+        'strSql += ")"
+
+        Return strSql
+    End Function
+
 
     Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
@@ -204,4 +327,53 @@ Partial Class Reportes_ParametrizadoF20_Default
 
     
     
+    Protected Sub BtnExportCSV_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExportCSV.Click
+        ExportarCSV2()
+    End Sub
+
+    Protected Sub BtnExport2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExport2.Click
+        'ExportarCSV_20b()
+        Me.HdSql.Value = SqlExcelF20_1b()
+        GridView1.DataBind()
+        GridView1.Visible = True
+        ExportGridView(GridView1, "Formato_20_1b")
+    End Sub
+
+    Protected Sub ExportarCSV_20b()
+        'Response.Clear()
+        Response.ClearContent()
+        Response.Buffer = True
+        Response.AddHeader("content-disposition", "attachment;filename=Formato20_1a.csv")
+        Response.Charset = ""
+        Response.ContentType = "text/csv"
+        'Me.HdSql.Value = SqlExcel()
+
+        Me.HdSql.Value = SqlExcelF20_1b()
+        GridView1.DataBind()
+
+        Dim obj As New Reportes
+        Dim dt As DataTable = obj.GetSql(Me.HdSql.Value)
+
+        Dim sb As New StringBuilder()
+        Dim k As Integer = 0
+        While k < dt.Columns.Count
+            sb.Append(dt.Columns(k).ColumnName + ","c)
+            System.Math.Max(System.Threading.Interlocked.Increment(k), k - 1)
+        End While
+        sb.Append(vbCr & vbLf)
+        Dim i As Integer = 0
+        While i < dt.Rows.Count
+            Dim k2 As Integer = 0
+            While k2 < dt.Columns.Count
+                sb.Append(dt.Rows(i)(k2).ToString + ","c)
+                System.Math.Max(System.Threading.Interlocked.Increment(k2), k2 - 1)
+            End While
+            sb.Append(vbCr & vbLf)
+            System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
+        End While
+        Response.Output.Write(sb.ToString())
+        Response.Flush()
+        Response.End()
+    End Sub
+
 End Class

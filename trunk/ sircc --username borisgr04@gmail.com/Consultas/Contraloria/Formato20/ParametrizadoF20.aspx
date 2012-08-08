@@ -55,7 +55,12 @@
         </tr>
         <tr>
             <td colspan="4" style="text-align: center">
-                <asp:Button ID="Generar_Reporte" runat="server" Text="Generar Reporte" />&nbsp;<asp:Button ID="BtnExport" runat="server" Text="Exportar a Excel" />
+                <asp:Button ID="Generar_Reporte" runat="server" Text="Generar Reporte" 
+                    Visible="False" />&nbsp;<asp:Button ID="BtnExport" runat="server" 
+                    Text="Exportar a Excel 20_1a" />
+                <asp:Button ID="BtnExport2" runat="server" Text="Exportar a Excel 20_1b" />
+                <asp:Button ID="BtnExportCSV" runat="server" Text="Exportar a CSV" 
+                    Visible="False" />
             </td>
         </tr>
     </table>
@@ -70,6 +75,10 @@
             <td style="width: 177px">
                 <asp:CheckBox ID="ChkVig" runat="server" Text="Vigencia" Font-Bold="False" /></td>
             <td style="width: 126px">
+                <asp:DropDownList ID="CboVersion" runat="server">
+                    <asp:ListItem Value="1">Version 1</asp:ListItem>
+                    <asp:ListItem Value="2">Versión 2</asp:ListItem>
+                </asp:DropDownList>
             </td>
             <td style="width: 150px">
             </td>
@@ -425,6 +434,8 @@
     </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="BtnExport" />
+            <asp:PostBackTrigger ControlID="BtnExportCSV" />
+            <asp:PostBackTrigger ControlID="BtnExport2" />
         </Triggers>
     </asp:UpdatePanel>
     
