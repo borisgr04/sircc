@@ -242,7 +242,8 @@ Partial Class Reportes_ParametrizadoF20_Default
             strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
             strSql += ")"
         Else
-            strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos,obj_con objeto, val_con valor_contrato,ide_con identificacion_contratista, contratista nombre_contratista,       fec_sus_con fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion,pla_eje_con numero_unidades_ejecuciÓn,'DIAS' unidad_de_ejecuciÓn,P_ANTICIPO,VAL_ADI val_adicion, plazo_adicion_dias Pror_Nro_Unid,'DIAS' Prorr_Unidad_Ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion,       NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion From ( "
+            'strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos,obj_con objeto, val_con valor_contrato,ide_con identificacion_contratista, contratista nombre_contratista,       fec_sus_con fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion,pla_eje_con numero_unidades_ejecuciÓn,'DIAS' unidad_de_ejecuciÓn,P_ANTICIPO,VAL_ADI val_adicion, plazo_adicion_dias Pror_Nro_Unid,'DIAS' Prorr_Unidad_Ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion,       NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion From ( "
+            strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos, obj_con objeto, to_char(val_con) valor_contrato,to_char(ide_con) identificacion_contratista, contratista nombre_contratista,NVL (TO_CHAR (fec_sus_con, 'yyyy/mm/dd'), 'ND') fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion, pla_eje_con numero_unidades_ejecuciÓn,     'DIAS' unidad_de_ejecuciÓn, p_anticipo, to_char(val_adi) val_adicion,    pla_adicion_dias pror_nro_unid, 'DIAS' prorr_unidad_ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion, NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion from ("
             strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
             strSql += ")"
         End If
@@ -253,10 +254,6 @@ Partial Class Reportes_ParametrizadoF20_Default
         Dim cFiltro As String = genFiltro()
         Dim strSql As String
         strSql = "select c.Ide_Ter Nit_CSUT,t.nom_ter Nom_CSUT,Id_Miembros Nit_Integrante,Nom_Miembro Nom_Integrante from vconsorciosutxc c inner join vterceros t on t.IDE_TER=c.ide_ter where cod_con In ( Select Numero FROM vcontratos_Sinc_p c  " + cFiltro + " )"
-        'strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos,obj_con objeto, val_con valor_contrato,ide_con identificacion_contratista, contratista nombre_contratista,       fec_sus_con fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion,pla_eje_con numero_unidades_ejecuciÓn,'DIAS' unidad_de_ejecuciÓn,P_ANTICIPO,VAL_ADI val_adicion, plazo_adicion_dias Pror_Nro_Unid,'DIAS' Prorr_Unidad_Ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion,       NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion From ( "
-        'strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
-        'strSql += ")"
-
         Return strSql
     End Function
 
@@ -324,9 +321,6 @@ Partial Class Reportes_ParametrizadoF20_Default
 
     End Sub
 
-
-    
-    
     Protected Sub BtnExportCSV_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExportCSV.Click
         ExportarCSV2()
     End Sub

@@ -20,6 +20,8 @@ Partial Class Contratos_RadicacionM_Default
         Else
             Me.Radicar()
         End If
+
+
     End Sub
 
     Protected Sub Radicar()
@@ -188,15 +190,16 @@ Partial Class Contratos_RadicacionM_Default
             'Tabla de CDP
             MostrarUId("02")
             Me.CboTip.Enabled = True
-            Me.TxtVal.Attributes.Add("onkeypress", "javascript:Solo_Numeros();")
-            Me.TxtValProp.Attributes.Add("onkeypress", "javascript:Solo_Numeros();")
+
+            'Me.TxtVal.Attributes.Add("onkeypress", "javascript:Solo_Numeros();")
+            'Me.TxtValProp.Attributes.Add("onkeypress", "javascript:Solo_Numeros();")
 
             'Me.TxtVal.Attributes.Add("onfocusout", "javascript:ValProp();")
-            Me.TxtVal.Attributes.Add("onblur", "javascript:CValProp();")
+            'Me.TxtVal.Attributes.Add("onblur", "javascript:CValProp();")
 
             'Me.TxtObj.Attributes.Add("onkeypress", "javascript:mayusculas(this);")
             'Me.TxtObj.Attributes.Add("onblur", "javascript:mayusculas(this);")
-            Me.TxtValProp.Attributes.Add("onblur", "javascript:CValOtros();")
+            'Me.TxtValProp.Attributes.Add("onblur", "javascript:CValOtros();")
 
         End If
     End Sub
@@ -253,7 +256,7 @@ Partial Class Contratos_RadicacionM_Default
                 MsgBox(Me.MsgResult, True)
                 Me.IBtnGuardar.Enabled = False
             End Try
-        
+
 
             TxtVal.Text = dt.Rows(0)("val_con").ToString.Replace(",", ".")
             CboSec.SelectedValue = dt.Rows(0)("cod_sec").ToString
@@ -344,9 +347,9 @@ Partial Class Contratos_RadicacionM_Default
         Oper = "nuevo"
         BtnGuardar_ConfirmButtonExtender.ConfirmText = "Confirme FECHA DE SUSCRIPCIÓN. ¿Desea Radicar el Contrato/Convenio?"
     End Sub
-    
 
-    
+
+
     Private Function valor_dec(ByVal v As String) As Decimal
         Return v.Replace(".", ",")
     End Function
@@ -376,7 +379,7 @@ Partial Class Contratos_RadicacionM_Default
         MsgResult.Visible = True
 
     End Sub
-    
+
     Protected Sub iBtnCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles IBtnCancelar.Click
         Me.Editar(False)
         Me.LimpiarTxt()
@@ -430,18 +433,6 @@ Partial Class Contratos_RadicacionM_Default
     Protected Sub BtnBCon_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnBCon.Click
         VerModalPopup("CON")
     End Sub
-    'Protected Sub CTerceros1_OnSelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles CTerceros1.SelClicked
-    '    'Me.ModalPopup.Hide()
-    '    'If CTerceros1.Tipo = "CON" Then
-    '    '    Me.TxtIde.Text = CTerceros1.Nit
-    '    '    BuscarContratista()
-    '    'ElseIf CTerceros1.Tipo = "RLC" Then
-    '    '    Me.TxtIdeRlc.Text = CTerceros1.Nit
-    '    '    BuscarRlc()
-    '    'End If
-    'End Sub
-
-    'OnSelClicked="CTerceros1_OnSelClicked"
 
     Protected Sub TxtIdeRlc_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtIdeRlc.TextChanged
         BuscarRlc()
@@ -467,68 +458,62 @@ Partial Class Contratos_RadicacionM_Default
             TxtIdeRlc.Text = AdmTercero1.Nit
             BuscarRlc()
         End If
-        
+
         ModalPopup.Hide()
     End Sub
 
 
     Protected Sub Page_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreRender
-        Dim strjscript As String = "function CValOtros(){"
-        strjscript = strjscript & "Vdoc=document.getElementById ('" + Me.TxtVal.ClientID + "').value;"
-        strjscript = strjscript & "ValProp=document.getElementById ('" + Me.TxtValProp.ClientID + "').value;"
+        'Dim strjscript As String = "function CValOtros(){"
+        'strjscript = strjscript & "Vdoc=document.getElementById ('" + Me.TxtVal.ClientID + "').value;"
+        'strjscript = strjscript & "ValProp=document.getElementById ('" + Me.TxtValProp.ClientID + "').value;"
 
-        strjscript = strjscript & "Vdoc = (parseFloat(Vdoc)).toFixed(2);"
-        'strjscript = strjscript & "alert('Valor Doc'+Vdoc); "
+        'strjscript = strjscript & "Vdoc = (parseFloat(Vdoc)).toFixed(2);"
+        ''strjscript = strjscript & "alert('Valor Doc'+Vdoc); "
 
-        strjscript = strjscript & "ValProp = (parseFloat(ValProp)).toFixed(2);"
-        'strjscript = strjscript & "alert('Valor Prop'+ValProp); "
+        'strjscript = strjscript & "ValProp = (parseFloat(ValProp)).toFixed(2);"
+        ''strjscript = strjscript & "alert('Valor Prop'+ValProp); "
 
-        strjscript = strjscript & "if ( (Vdoc - ValProp) <0) {"
-        'strjscript = strjscript & "if ( Vdoc < ValProp) {"
-        strjscript = strjscript & "  ValProp=Vdoc;"
-        strjscript = strjscript & "  alert('El Valor del Aporte Propio debe ser menor o igual al valor Total del Contrato');"
-        strjscript = strjscript & "  ValProp=Vdoc;"
-        strjscript = strjscript & "}"
-        strjscript = strjscript & "  VOtros=Vdoc - ValProp;"
-        strjscript = strjscript & " document.getElementById('" + Me.TxtValProp.ClientID + "').value=(parseFloat(ValProp)).toFixed(2);"
-        strjscript = strjscript & " document.getElementById('" + Me.TxtValOtros.ClientID + "').value=(parseFloat(VOtros)).toFixed(2);"
-        strjscript = strjscript & " document.getElementById('" + Me.TxtVal.ClientID + "').value=(parseFloat(Vdoc)).toFixed(2);"
-        strjscript = strjscript & "}"
-        ScriptManager.RegisterClientScriptBlock(Me, GetType(Page), "CValOtros", strjscript, True)
+        'strjscript = strjscript & "if ( (Vdoc - ValProp) <0) {"
+        ''strjscript = strjscript & "if ( Vdoc < ValProp) {"
+        'strjscript = strjscript & "  ValProp=Vdoc;"
+        'strjscript = strjscript & "  alert('El Valor del Aporte Propio debe ser menor o igual al valor Total del Contrato');"
+        'strjscript = strjscript & "  ValProp=Vdoc;"
+        'strjscript = strjscript & "}"
+        'strjscript = strjscript & "  VOtros=Vdoc - ValProp;"
+        'strjscript = strjscript & " document.getElementById('" + Me.TxtValProp.ClientID + "').value=(parseFloat(ValProp)).toFixed(2);"
+        'strjscript = strjscript & " document.getElementById('" + Me.TxtValOtros.ClientID + "').value=(parseFloat(VOtros)).toFixed(2);"
+        'strjscript = strjscript & " document.getElementById('" + Me.TxtVal.ClientID + "').value=(parseFloat(Vdoc)).toFixed(2);"
+        'strjscript = strjscript & "}"
+        'ScriptManager.RegisterClientScriptBlock(Me, GetType(Page), "CValOtros", strjscript, True)
 
 
-        strjscript = "function CValProp() { "
-        strjscript = strjscript & " Vdoc=document.getElementById ('" + Me.TxtVal.ClientID + "').value;"
-        strjscript = strjscript & " Vdoc = (parseFloat(Vdoc)).toFixed(2);"
-        strjscript = strjscript & " ValProp=Vdoc;"
-        strjscript = strjscript & " VOtros=Vdoc - ValProp;"
-        strjscript = strjscript & " document.getElementById('" + Me.TxtValProp.ClientID + "').value=(parseFloat(ValProp)).toFixed(2);"
-        strjscript = strjscript & " document.getElementById('" + Me.TxtValOtros.ClientID + "').value=(parseFloat(VOtros)).toFixed(2);"
-        strjscript = strjscript & " document.getElementById('" + Me.TxtVal.ClientID + "').value=(parseFloat(Vdoc)).toFixed(2);"
-        strjscript = strjscript & "}"
-        ScriptManager.RegisterClientScriptBlock(Me, GetType(Page), "CValProp", strjscript, True)
+        'strjscript = "function CValProp() { "
+        'strjscript = strjscript & " Vdoc=document.getElementById ('" + Me.TxtVal.ClientID + "').value;"
+        'strjscript = strjscript & " Vdoc = (parseFloat(Vdoc)).toFixed(2);"
+        'strjscript = strjscript & " ValProp=Vdoc;"
+        'strjscript = strjscript & " VOtros=Vdoc - ValProp;"
+        'strjscript = strjscript & " document.getElementById('" + Me.TxtValProp.ClientID + "').value=(parseFloat(ValProp)).toFixed(2);"
+        'strjscript = strjscript & " document.getElementById('" + Me.TxtValOtros.ClientID + "').value=(parseFloat(VOtros)).toFixed(2);"
+        'strjscript = strjscript & " document.getElementById('" + Me.TxtVal.ClientID + "').value=(parseFloat(Vdoc)).toFixed(2);"
+        'strjscript = strjscript & "}"
+        'ScriptManager.RegisterClientScriptBlock(Me, GetType(Page), "CValProp", strjscript, True)
     End Sub
 
     Protected Sub TxtVal_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtVal.TextChanged
-        LbValTot.Text = FormatCurrency(TxtVal.Text.Replace(".", ","))
+
     End Sub
 
     Protected Sub TxtValProp_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtValProp.TextChanged
-        LbValProp.Text = FormatCurrency(TxtValProp.Text.Replace(".", ","))
-        Dim AportesOtros As Decimal = (CDec(TxtVal.Text.Replace(".", ",")) - CDec(TxtValProp.Text.Replace(".", ",")))
-        TxtValOtros.Text = AportesOtros.ToString.Replace(",", ".")
+
+        'Dim AportesOtros As Decimal = (CDec(TxtVal.Text.Replace(".", ",")) - CDec(TxtValProp.Text.Replace(".", ",")))
+        Dim AportesOtros As Decimal = CDec(TxtVal.Text) - CDec(TxtValProp.Text)
+        TxtValOtros.Text = AportesOtros
         If AportesOtros < 0 Then
             TxtValOtros.ForeColor = Drawing.Color.Red
-            LbValOtros.Text = "Valor Incoherente, por favor corrija"
-            LbValOtros.ForeColor = Drawing.Color.Red
             TxtVal.Focus()
         Else
-            MsgBoxLimpiar(LbValOtros)
-            LbValOtros.ForeColor = Drawing.Color.Black
             TxtValOtros.ForeColor = Drawing.Color.Black
-            LbValOtros.Text = FormatCurrency(TxtValOtros.Text.Replace(".", ","))
-
-
         End If
     End Sub
 
@@ -548,11 +533,24 @@ Partial Class Contratos_RadicacionM_Default
     End Sub
 
     Protected Sub iBtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnGuardar.Click
-        Guardar()
+        If Membership.GetUser.UserName = "admin" Then
+            MsgResult.Text = "Este usuario no esta autorizado para crear o modificar contratos"
+            MsgBoxAlert(MsgResult, True)
+        End If
+        If Page.IsValid Then
+            Guardar()
+        End If
+
     End Sub
 
     Protected Sub LnkMiembros_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkMiembros.Click
         Response.Redirect("MiembrosCSUT.aspx?Cod_Con=" + TxtCodCon.Text)
+    End Sub
+
+
+    Protected Sub RadToolBar1_ButtonClick(ByVal sender As Object, ByVal e As Telerik.Web.UI.RadToolBarEventArgs) Handles RadToolBar1.ButtonClick
+        MsgResult.Text += "Text: " + e.Item.Text + "<br/>"
+        RadToolBar1.Items(0).Enabled = False
     End Sub
 End Class
 

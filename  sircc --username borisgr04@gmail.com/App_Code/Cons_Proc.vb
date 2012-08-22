@@ -55,8 +55,6 @@ Public Class Cons_Proc
             Me.AsignarParametroCadena(":Cod_Tpro", Cod_Tpro)
             Me.AsignarParametroCadena(":vigencia", vigencia)
             Me.AsignarParametroCadena(":Siguiente", Siguiente)
-
-
             Me.num_reg = Me.EjecutarComando()
             Me.ConfirmarTransaccion()
             Me.Msg = Me.MsgOk + " Filas Afectadas [" + Me.num_reg.ToString + "]"
