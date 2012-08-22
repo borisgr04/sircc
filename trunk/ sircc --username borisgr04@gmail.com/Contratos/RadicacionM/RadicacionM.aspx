@@ -30,60 +30,6 @@ function Solo_Numeros(){
 }
 
 
-
-//function CValOtros() {
-//    Vdoc = document.getElementById('ctl00_SampleContent_TxtVal').value;
-//    ValProp = document.getElementById('ctl00_SampleContent_TxtValProp').value;
-//    Vdoc = (parseFloat(Vdoc)).toFixed(2);
-//    ValProp = (parseFloat(ValProp)).toFixed(2);
-//    if (Vdoc < ValProp) {
-//        ValProp = Vdoc; alert('El Valor del Aporte Propio debe ser menor o igual al valor Total del Contrato');
-//        ValProp = Vdoc;
-//    }
-//    VOtros = Vdoc - ValProp;
-//    document.getElementById('ctl00_SampleContent_TxtValProp').value = (parseFloat(ValProp)).toFixed(2);
-//    document.getElementById('ctl00_SampleContent_TxtValOtros').value = (parseFloat(VOtros)).toFixed(2);
-//    document.getElementById('ctl00_SampleContent_TxtVal').value = (parseFloat(Vdoc)).toFixed(2);
-
-//}
-
-
-//function ValProp() { 
-//var Vdoc=0.0;
-////var ValProp=0.0;
-////var svdoc ="";
-////svdoc=document.aspnetForm.<%=Me.txtVal.ClientID%>.value;
-////alert(svdoc);
-////Vdoc=(parseFloat(svdoc)).toFixed(2); 
-////ValProp=Vdoc;
-////document.aspnetForm.<%=Me.txtVal.ClientID%>.value=Vdoc;
-////document.aspnetForm.<%=Me.txtValProp.ClientID%>.value=ValProp;
-////VOtros = Vdoc - ValProp;
-////document.aspnetForm.<%=Me.txtValOtros.ClientID%>.value=(parseFloat(VOtros)).toFixed(2);
-
-//}
-//function ValOtros()
-//{ 
-//    Vdoc=document.getElementById ('<%=Me.txtVal.ClientID%>').value;
-//    Vdoc=(parseFloat(Vdoc)).toFixed(2)
-//    ValProp=document.getElementById ('<%=Me.txtValProp.ClientID%>').value;
-//    ValProp=(parseFloat(ValProp)).toFixed(2);
-//    //Vdoc=(parseFloat(document.aspnetForm.<%=Me.txtVal.ClientID%>.value)).toFixed(2); 
-//    //ValProp =parseFloat(document.aspnetForm.<%=Me.txtValProp.ClientID%>.value).toFixed(2);
-//    //alert(Vdoc);
-//    //alert(ValProp);
-//    if (Vdoc  < ValProp)
-//    {
-//    ValProp=Vdoc;
-//    alert("El Valor del Aporte Propio debe ser menor o igual al valor Total del Contrato");
-//    }
-//    VOtros=Vdoc - ValProp;
-//    //Formatea La SAlida de  los Texto
-//    document.aspnetForm.<%=Me.txtValProp.ClientID%>.value=(parseFloat(ValProp)).toFixed(2);
-//    document.aspnetForm.<%=Me.txtVal.ClientID%>.value=(parseFloat(Vdoc)).toFixed(2);
-//    document.aspnetForm.<%=Me.txtValOtros.ClientID%>.value=(parseFloat(VOtros)).toFixed(2);
-//}
-
 function mayusculas(input){ 
       var x = input.value;   
       input.value = x.toUpperCase();
@@ -139,6 +85,24 @@ function mayusculas(input){
         <tr>
             <td class="Titulos" colspan="6" style="height: 13px">
                 <asp:Label ID="Label18" runat="server" CssClass="Titulo" Text="RADICACIÓN"></asp:Label>
+                <telerik:RadToolBar ID="RadToolBar1" Runat="server" Skin="Windows7" 
+                    ValidationGroup="X" Visible="False">
+                    <Items>
+                        <telerik:RadToolBarButton runat="server" 
+                            ImageUrl="~/images/mnProcesos/open-icon.png" Text="Open">
+                        </telerik:RadToolBarButton>
+                        <telerik:RadToolBarButton runat="server" CommandName="nuevo" 
+                            ImageUrl="~/images/Operaciones/New.png" Text="Nuevo" ValidationGroup="X">
+                        </telerik:RadToolBarButton>
+                        <telerik:RadToolBarButton runat="server" IsSeparator="True" Text="sep">
+                        </telerik:RadToolBarButton>
+                        <telerik:RadToolBarButton runat="server" CommandName="guardar" 
+                            ImageUrl="~/images/Operaciones/save.png" Text="Guardar">
+                        </telerik:RadToolBarButton>
+                        <telerik:RadToolBarButton runat="server" CommandName="cancelar" Text="Cancelar">
+                        </telerik:RadToolBarButton>
+                    </Items>
+                </telerik:RadToolBar>
             </td>
         </tr>
         <tr>
@@ -366,8 +330,9 @@ function mayusculas(input){
         </tr>
         <tr>
             <td class="STitulos" colspan="3" valign="top">
-                Dependencia a cargo del Proceso Contractual<asp:Label ID="Label17" 
-                    runat="server" ForeColor="Red" Text="*" Width="13px"></asp:Label>
+                Dependencia a cargo del Proceso Contractual<asp:RequiredFieldValidator 
+                    ID="RequiredFieldValidator21" runat="server" ControlToValidate="CboDepP" 
+                    ErrorMessage="Es necesario especificar la Dependencia Delegada">*</asp:RequiredFieldValidator>
                 &nbsp;</td>
             <td class="STitulos" colspan="3">
                 &nbsp;</td>
@@ -401,37 +366,28 @@ function mayusculas(input){
                     </tr>
                     <tr>
                         <td>
-                            <asp:TextBox ID="TxtVal" runat="server" AutoPostBack="True"></asp:TextBox>
+                            <telerik:RadNumericTextBox ID="TxtVal" Runat="server" AutoPostBack="True" 
+                                Culture="es-CO" Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
                         </td>
                         <td>
-                            <asp:TextBox ID="TxtValProp" runat="server" AutoPostBack="True"></asp:TextBox>
+                            <telerik:RadNumericTextBox ID="TxtValProp" Runat="server" AutoPostBack="True" 
+                                Culture="es-CO" Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
                         </td>
                         <td>
-                            <asp:TextBox ID="TxtValOtros" runat="server"></asp:TextBox>
+                            <telerik:RadNumericTextBox ID="TxtValOtros" Runat="server" Culture="es-CO" 
+                                Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
+                            <asp:CompareValidator ID="CompareValidator1" runat="server" 
+                                ControlToCompare="TxtValProp" ControlToValidate="TxtVal" 
+                                ErrorMessage="El Valor es Incorrecto" Operator="GreaterThanEqual" 
+                                Type="Currency"></asp:CompareValidator>
                         </td>
                         <td>
                             <asp:CheckBox ID="ChkAnticipo" runat="server" Text="Pacto Anticipo" 
                                 Width="100%" />
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>
-                            <asp:Label ID="LbValTot" runat="server" Text="Valor Total"></asp:Label>
-                            </span>
-                        </td>
-                        <td>
-                            <span>
-                            <asp:Label ID="LbValProp" runat="server" Text="Valor Aportes Propios"></asp:Label>
-                            </span>
-                        </td>
-                        <td>
-                            <span>
-                            <asp:Label ID="LbValOtros" runat="server" Text="Valor Otros"></asp:Label>
-                            </span>
-                        </td>
-                        <td>
-                            &nbsp;</td>
                     </tr>
                 </table>
             </td>

@@ -154,6 +154,15 @@ Partial Class Controles_DetContrato
             ViewState("Grupo") = value
         End Set
     End Property
+
+    Public Property ValoraBuscar() As String
+        Get
+            Return TxtCodCon.Text
+        End Get
+        Set(ByVal value As String)
+            TxtCodCon.Text = value
+        End Set
+    End Property
 #End Region
 
 #Region "Métodos del control"
@@ -192,8 +201,8 @@ Partial Class Controles_DetContrato
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
-            Me.TxtCodCon.Text = ""
-            Me.Cod_Con = Me.TxtCodCon.Text
+            Me.TxtCodCon.Text = Me.Cod_Con
+            'Me.Cod_Con = Me.TxtCodCon.Text
             Me.dtContratos = New DataTable()
         End If
     End Sub

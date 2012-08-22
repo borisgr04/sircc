@@ -50,4 +50,9 @@ Partial Class Consultas_Contratos_Default
                 'e.Row.Font.Bold = True
         End Select
     End Sub
+
+    Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Me.DetContratoN1.valorabuscar = Request("Numero")
+        Me.DetContratoN1.Buscar()
+    End Sub
 End Class
