@@ -180,6 +180,11 @@ Partial Class Contratos_RadicacionM_Default
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Thread.CurrentThread.CurrentCulture = New Globalization.CultureInfo("es-CO")
+
+        Dim info As System.Globalization.CultureInfo = System.Globalization.CultureInfo.CreateSpecificCulture("es-CO")
+        System.Threading.Thread.CurrentThread.CurrentUICulture = info
+        System.Threading.Thread.CurrentThread.CurrentCulture = info
+
         If Not Page.IsPostBack Then
             If Not String.IsNullOrEmpty(Request("Cod_Con")) Then
                 Me.TxtCodCon.Text = Request("Cod_Con")
@@ -501,20 +506,39 @@ Partial Class Contratos_RadicacionM_Default
     End Sub
 
     Protected Sub TxtVal_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtVal.TextChanged
-
+        If String.IsNullOrEmpty(TxtVal.Text) Then
+            TxtVal.Text = 0
+        End If
+        TxtValProp.Text = TxtVal.Text
     End Sub
 
     Protected Sub TxtValProp_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtValProp.TextChanged
 
-        'Dim AportesOtros As Decimal = (CDec(TxtVal.Text.Replace(".", ",")) - CDec(TxtValProp.Text.Replace(".", ",")))
-        Dim AportesOtros As Decimal = CDec(TxtVal.Text) - CDec(TxtValProp.Text)
-        TxtValOtros.Text = AportesOtros
-        If AportesOtros < 0 Then
-            TxtValOtros.ForeColor = Drawing.Color.Red
-            TxtVal.Focus()
-        Else
-            TxtValOtros.ForeColor = Drawing.Color.Black
+        If String.IsNullOrEmpty(TxtVal.Text) Then
+            TxtVal.Text = 0
         End If
+        If String.IsNullOrEmpty(TxtValProp.Text) Then
+            TxtValProp.Text = 0
+        End If
+        Try
+            Dim AportesOtros As Decimal = CDec(TxtVal.Text) - CDec(TxtValProp.Text)
+            If AportesOtros < 0 Then
+                LbMsg.Text = "Digito Valor inconsistente en Aportes Propios " + FormatCurrency(TxtValProp.Text)
+                TxtValProp.Text = TxtVal.Text
+                LbMsg.ForeColor = Drawing.Color.Red
+                LbMsg.Visible = True
+            Else
+                LbMsg.ForeColor = Drawing.Color.Black
+                LbMsg.Visible = False
+                TxtValOtros.Text = AportesOtros
+            End If
+        Catch ex As Exception
+            MsgResult.Text = ex.Message
+            MsgBox(MsgResult, True)
+            LbMsg.Visible = True
+
+        End Try
+
     End Sub
 
     Protected Sub IBtnEditar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnEditar.Click
@@ -552,5 +576,12 @@ Partial Class Contratos_RadicacionM_Default
         MsgResult.Text += "Text: " + e.Item.Text + "<br/>"
         RadToolBar1.Items(0).Enabled = False
     End Sub
+
+    Public Sub UserMsgBox(ByVal F As Object, ByVal sMsg As String)
+
+
+    End Sub
+
+  
 End Class
 

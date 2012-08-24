@@ -17,6 +17,9 @@
             <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                 ControlToValidate="TextBox1" ErrorMessage="*"></asp:RequiredFieldValidator>
+            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                ControlToValidate="TextBox3" ErrorMessage="*"></asp:RequiredFieldValidator>
             <asp:Button ID="Button1" runat="server" Text="Exportar" />
             <br />
             <br />
@@ -47,7 +50,7 @@
             <asp:TextBox ID="TextBox2" runat="server" Height="282px" TextMode="MultiLine" 
                 Width="748px" Visible="False">select  Num_Egreso,Nit,Ben_Cheque,Nro_CtaBancaria,Cod_BAnco,VAl_Total,Val_Neto,Cta_BAnco,Cod_Banco_Nit,Tipo_Cta_BAnco,sec_operacion,
 (Select Num_Orden From pct2012.morden where Num_Orden=sec_operacion) orden
-  from pct2012.degreso de where Num_Egreso=</asp:TextBox>
+  from pct2012.degreso de where Num_Egreso BetWeen </asp:TextBox>
 </div>
     </div>
     </form>

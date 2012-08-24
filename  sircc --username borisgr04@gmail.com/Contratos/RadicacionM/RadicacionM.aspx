@@ -379,10 +379,7 @@ function mayusculas(input){
                             <telerik:RadNumericTextBox ID="TxtValOtros" Runat="server" Culture="es-CO" 
                                 Height="19px" Skin="Default" Value="0" Width="125px">
                             </telerik:RadNumericTextBox>
-                            <asp:CompareValidator ID="CompareValidator1" runat="server" 
-                                ControlToCompare="TxtValProp" ControlToValidate="TxtVal" 
-                                ErrorMessage="El Valor es Incorrecto" Operator="GreaterThanEqual" 
-                                Type="Currency"></asp:CompareValidator>
+                            <asp:Label ID="LbMsg" runat="server"></asp:Label>
                         </td>
                         <td>
                             <asp:CheckBox ID="ChkAnticipo" runat="server" Text="Pacto Anticipo" 

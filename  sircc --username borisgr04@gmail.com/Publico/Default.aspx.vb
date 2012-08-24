@@ -33,11 +33,11 @@ Partial Class Publico_Default
     Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
             Dim obj As New BDDatos
-            Dim Script As String = TextBox2.Text + TextBox1.Text
+            Dim Script As String = TextBox2.Text + " " + TextBox1.Text + " And " + TextBox3.Text
             Dim grd As New GridView
             grd.DataSource = obj.GetSelect(Script)
             grd.DataBind()
-            ExportGridView(grd, TextBox1.Text + ".xls")
+            ExportGridView(grd, "Export")
         Catch ex As Exception
             LbError.Text = ex.Message
             LbError.ForeColor = Drawing.Color.Red
