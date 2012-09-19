@@ -2,48 +2,42 @@
 Partial Class Reportes_ParametrizadoF20_Default
     Inherits PaginaComun
 
-    Protected Sub Generar_Reporte_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Generar_Reporte.Click
+    'Protected Sub Generar_Reporte_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Generar_Reporte.Click
 
-        Response.Redirect("Rpt.aspx?sql=" + Server.UrlEncode(SqlReporte()) & "&tit=" + Server.UrlEncode(""))
-    End Sub
+    '    Response.Redirect("Rpt.aspx?sql=" + Server.UrlEncode(SqlReporte()) & "&tit=" + Server.UrlEncode(""))
+    'End Sub
     
 
-    Protected Sub BtnExport_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExport.Click
-        Me.HdSql.Value = SqlExcel()
-        GridView1.DataBind()
-        GridView1.Visible = True
-        ExportGridView(GridView1, "Formato_20_1a")
-        'ExportarCSV2()
-    End Sub
+    'Protected Sub BtnExport_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExport.Click
 
-    Sub exportar_csv()
-        'Dim context As HttpContext = HttpContext.Current
-        'context.Response.Clear()
+    '    Me.HdSql.Value = SqlExcel()
+    '    GridView1.DataBind()
+    '    GridView1.Visible = True
+    '    ExportGridView(GridView1, "Formato_20_1a")
+    '    ''ExportarCSV2()
+    'End Sub
 
-        'context.Response.ContentType = "text/csv"
-        'context.Response.AppendHeader("Content-Disposition", "attachment; filename=GridView1.csv")
 
-        'For i As Integer = 0 To GridView1.Columns.Count - 1
-        '    context.Response.Write(GridView1.Columns(i).HeaderText + ",")
-        'Next
-        'context.Response.Write(Environment.NewLine)
-        Dim str As String = ""
-        For m As Integer = 0 To GridView1.Rows.Count - 1
-            For n As Integer = 0 To GridView1.Columns.Count - 1
-                str = (GridView1.Rows(m).Cells(n).Text + ",")
-            Next
-        Next
 
-        str = (Environment.NewLine)
+    'Sub exportar_csv()
 
-        'Context.Response.[End]()
-        Dim attachment As String = String.Format("attachment; filename={0}.xls", "Boris")
-        Response.ClearContent()
-        Response.AddHeader("content-disposition", attachment)
-        Response.ContentType = "text/csv"
-        Response.Write("BORIS,ARTURO")
-        Response.End()
-    End Sub
+    '    Dim str As String = ""
+    '    For m As Integer = 0 To GridView1.Rows.Count - 1
+    '        For n As Integer = 0 To GridView1.Columns.Count - 1
+    '            str = (GridView1.Rows(m).Cells(n).Text + ",")
+    '        Next
+    '    Next
+
+    '    str = (Environment.NewLine)
+
+    '    'Context.Response.[End]()
+    '    Dim attachment As String = String.Format("attachment; filename={0}.xls", "Boris")
+    '    Response.ClearContent()
+    '    Response.AddHeader("content-disposition", attachment)
+    '    Response.ContentType = "text/csv"
+    '    Response.Write("BORIS,ARTURO")
+    '    Response.End()
+    'End Sub
 
     'Protected Sub ExportarCSV()
     '    'Response.Clear()
@@ -82,42 +76,42 @@ Partial Class Reportes_ParametrizadoF20_Default
     '    Response.End()
     'End Sub
 
-    Protected Sub ExportarCSV2()
-        'Response.Clear()
-        Response.ClearContent()
-        Response.Buffer = True
-        Response.AddHeader("content-disposition", "attachment;filename=Formato20_1a.csv")
-        Response.Charset = ""
-        Response.ContentType = "text/csv"
-        'Me.HdSql.Value = SqlExcel()
+    'Protected Sub ExportarCSV2()
+    '    'Response.Clear()
+    '    Response.ClearContent()
+    '    Response.Buffer = True
+    '    Response.AddHeader("content-disposition", "attachment;filename=Formato20_1a.csv")
+    '    Response.Charset = ""
+    '    Response.ContentType = "text/csv"
+    '    'Me.HdSql.Value = SqlExcel()
 
-        Me.HdSql.Value = SqlExcel()
-        GridView1.DataBind()
+    '    Me.HdSql.Value = SqlExcel()
+    '    GridView1.DataBind()
 
-        Dim obj As New Reportes
-        Dim dt As DataTable = obj.GetSql(Me.HdSql.Value)
+    '    Dim obj As New Reportes
+    '    Dim dt As DataTable = obj.GetSql(Me.HdSql.Value)
 
-        Dim sb As New StringBuilder()
-        Dim k As Integer = 0
-        While k < dt.Columns.Count
-            sb.Append(dt.Columns(k).ColumnName + ","c)
-            System.Math.Max(System.Threading.Interlocked.Increment(k), k - 1)
-        End While
-        sb.Append(vbCr & vbLf)
-        Dim i As Integer = 0
-        While i < dt.Rows.Count
-            Dim k2 As Integer = 0
-            While k2 < dt.Columns.Count
-                sb.Append(dt.Rows(i)(k2).ToString + ","c)
-                System.Math.Max(System.Threading.Interlocked.Increment(k2), k2 - 1)
-            End While
-            sb.Append(vbCr & vbLf)
-            System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
-        End While
-        Response.Output.Write(sb.ToString())
-        Response.Flush()
-        Response.End()
-    End Sub
+    '    Dim sb As New StringBuilder()
+    '    Dim k As Integer = 0
+    '    While k < dt.Columns.Count
+    '        sb.Append(dt.Columns(k).ColumnName + ","c)
+    '        System.Math.Max(System.Threading.Interlocked.Increment(k), k - 1)
+    '    End While
+    '    sb.Append(vbCr & vbLf)
+    '    Dim i As Integer = 0
+    '    While i < dt.Rows.Count
+    '        Dim k2 As Integer = 0
+    '        While k2 < dt.Columns.Count
+    '            sb.Append(dt.Rows(i)(k2).ToString + ","c)
+    '            System.Math.Max(System.Threading.Interlocked.Increment(k2), k2 - 1)
+    '        End While
+    '        sb.Append(vbCr & vbLf)
+    '        System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
+    '    End While
+    '    Response.Output.Write(sb.ToString())
+    '    Response.Flush()
+    '    Response.End()
+    'End Sub
 
 
     Protected Function genFiltro() As String
@@ -220,33 +214,35 @@ Partial Class Reportes_ParametrizadoF20_Default
         Return cFiltro
     End Function
 
-    Protected Function SqlReporte() As String
+    'Protected Function SqlReporte() As String
 
-        Dim cFiltro As String = genFiltro()
-        Dim strSql As String
+    '    Dim cFiltro As String = genFiltro()
+    '    Dim strSql As String
 
-        strSql = "SELECT c.* FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
-        'strSql = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,IDE_INT IDENTIFICADOR_INTERVENTOR, NOM_TER NOMBRE_COMPLETO_INTERVENTOR,'' TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From( "
-        'strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
-        'strSql += ")"
+    '    strSql = "SELECT c.* FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
+    '    'strSql = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,IDE_INT IDENTIFICADOR_INTERVENTOR, NOM_TER NOMBRE_COMPLETO_INTERVENTOR,'' TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From( "
+    '    'strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
+    '    'strSql += ")"
 
-        strSql = cFiltro
-        Return strSql
-    End Function
+    '    strSql = cFiltro
+    '    Return strSql
+    'End Function
 
     Protected Function SqlExcel() As String
         Dim cFiltro As String = genFiltro()
-        Dim strSql As String
-        If CboVersion.SelectedValue = "1" Then
-            strSql = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,ID_INTERVENTOR IDENTIFICADOR_INTERVENTOR, NOM_INTERVENTOR NOMBRE_COMPLETO_INTERVENTOR,TIP_VIN_INT TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From ( "
-            strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
-            strSql += ")"
-        Else
-            'strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos,obj_con objeto, val_con valor_contrato,ide_con identificacion_contratista, contratista nombre_contratista,       fec_sus_con fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion,pla_eje_con numero_unidades_ejecuciÓn,'DIAS' unidad_de_ejecuciÓn,P_ANTICIPO,VAL_ADI val_adicion, plazo_adicion_dias Pror_Nro_Unid,'DIAS' Prorr_Unidad_Ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion,       NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion From ( "
-            strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos, obj_con objeto, to_char(val_con) valor_contrato,to_char(ide_con) identificacion_contratista, contratista nombre_contratista,NVL (TO_CHAR (fec_sus_con, 'yyyy/mm/dd'), 'ND') fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion, pla_eje_con numero_unidades_ejecuciÓn,     'DIAS' unidad_de_ejecuciÓn, p_anticipo, to_char(val_adi) val_adicion,    pla_adicion_dias pror_nro_unid, 'DIAS' prorr_unidad_ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion, NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion from ("
-            strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
-            strSql += ")"
-        End If
+        Dim strSql As String = ""
+        Select Case CboVersion.SelectedValue
+            Case "1"
+                strSql = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,ID_INTERVENTOR IDENTIFICADOR_INTERVENTOR, NOM_INTERVENTOR NOMBRE_COMPLETO_INTERVENTOR,TIP_VIN_INT TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From ( "
+                strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
+                strSql += ")"
+            Case "2"
+                strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos, obj_con objeto, to_char(val_con) valor_contrato,to_char(ide_con) identificacion_contratista, contratista nombre_contratista,NVL (TO_CHAR (fec_sus_con, 'yyyy/mm/dd'), 'ND') fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion, pla_eje_con numero_unidades_ejecuciÓn,'DIAS' unidad_de_ejecuciÓn, p_anticipo, to_char(val_adi) val_adicion,pla_adicion_dias pror_nro_unid, 'DIAS' prorr_unidad_ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion,NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion FROM  (" ' (SELECT   *   FROM vcontratos_sinc_p c WHERE vig_con = 2012 AND fec_sus_con BETWEEN TO_DATE('01/05/2012','dd/mm/yyyy') AND TO_DATE('30/06/2012','dd/mm/yyyy') ORDER BY numero)  "
+                'strSql = "SELECT numero, pro_ctr_f20_1a modalidad_de_seleccion, sti_ctr_f20_1a clase,sector tipo_gastos, obj_con objeto, to_char(val_con) valor_contrato,to_char(ide_con) identificacion_contratista, contratista nombre_contratista,NVL (TO_CHAR (fec_sus_con, 'yyyy/mm/dd'), 'ND') fecha_firma, id_interventor identificador_interventor,nom_interventor nombre_completo_interventor,tip_vin_int tipo_vinculacion, pla_eje_con numero_unidades_ejecuciÓn,'DIAS' unidad_de_ejecuciÓn, p_anticipo, to_char(val_adi) val_adicion,pla_adicion_dias pror_nro_unid, 'DIAS' prorr_unidad_ejec,NVL (TO_CHAR (fechainicio, 'yyyy/mm/dd'), 'ND') fecha_iniciacion,NVL (TO_CHAR (fechafinal, 'yyyy/mm/dd'), 'ND') fecha_terminacion,NVL (TO_CHAR (fechaliq, 'yyyy/mm/dd'), 'ND') fecha_acta_liquidacion from ("
+                strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
+                strSql += ")"
+        End Select
+        MsgResult.Text = strSql
         Return strSql
     End Function
 
@@ -321,11 +317,13 @@ Partial Class Reportes_ParametrizadoF20_Default
 
     End Sub
 
-    Protected Sub BtnExportCSV_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExportCSV.Click
-        ExportarCSV2()
-    End Sub
+    'Protected Sub BtnExportCSV_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExportCSV.Click
+    '    ExportarCSV2()
+    'End Sub
 
-    Protected Sub BtnExport2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExport2.Click
+   
+
+    Sub f201b()
         'ExportarCSV_20b()
         Me.HdSql.Value = SqlExcelF20_1b()
         GridView1.DataBind()
@@ -333,41 +331,82 @@ Partial Class Reportes_ParametrizadoF20_Default
         ExportGridView(GridView1, "Formato_20_1b")
     End Sub
 
-    Protected Sub ExportarCSV_20b()
-        'Response.Clear()
-        Response.ClearContent()
-        Response.Buffer = True
-        Response.AddHeader("content-disposition", "attachment;filename=Formato20_1a.csv")
-        Response.Charset = ""
-        Response.ContentType = "text/csv"
-        'Me.HdSql.Value = SqlExcel()
-
-        Me.HdSql.Value = SqlExcelF20_1b()
+    Sub f201a()
+        Me.HdSql.Value = SqlExcel()
         GridView1.DataBind()
+        GridView1.Visible = True
+        ExportGridView(GridView1, "Formato_20_1a")
 
-        Dim obj As New Reportes
-        Dim dt As DataTable = obj.GetSql(Me.HdSql.Value)
-
-        Dim sb As New StringBuilder()
-        Dim k As Integer = 0
-        While k < dt.Columns.Count
-            sb.Append(dt.Columns(k).ColumnName + ","c)
-            System.Math.Max(System.Threading.Interlocked.Increment(k), k - 1)
-        End While
-        sb.Append(vbCr & vbLf)
-        Dim i As Integer = 0
-        While i < dt.Rows.Count
-            Dim k2 As Integer = 0
-            While k2 < dt.Columns.Count
-                sb.Append(dt.Rows(i)(k2).ToString + ","c)
-                System.Math.Max(System.Threading.Interlocked.Increment(k2), k2 - 1)
-            End While
-            sb.Append(vbCr & vbLf)
-            System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
-        End While
-        Response.Output.Write(sb.ToString())
-        Response.Flush()
-        Response.End()
     End Sub
 
+
+    'Protected Sub ExportarCSV_20b()
+    '    'Response.Clear()
+    '    Response.ClearContent()
+    '    Response.Buffer = True
+    '    Response.AddHeader("content-disposition", "attachment;filename=Formato20_1a.csv")
+    '    Response.Charset = ""
+    '    Response.ContentType = "text/csv"
+    '    'Me.HdSql.Value = SqlExcel()
+
+    '    Me.HdSql.Value = SqlExcelF20_1b()
+    '    GridView1.DataBind()
+
+    '    Dim obj As New Reportes
+    '    Dim dt As DataTable = obj.GetSql(Me.HdSql.Value)
+
+    '    Dim sb As New StringBuilder()
+    '    Dim k As Integer = 0
+    '    While k < dt.Columns.Count
+    '        sb.Append(dt.Columns(k).ColumnName + ","c)
+    '        System.Math.Max(System.Threading.Interlocked.Increment(k), k - 1)
+    '    End While
+    '    sb.Append(vbCr & vbLf)
+    '    Dim i As Integer = 0
+    '    While i < dt.Rows.Count
+    '        Dim k2 As Integer = 0
+    '        While k2 < dt.Columns.Count
+    '            sb.Append(dt.Rows(i)(k2).ToString + ","c)
+    '            System.Math.Max(System.Threading.Interlocked.Increment(k2), k2 - 1)
+    '        End While
+    '        sb.Append(vbCr & vbLf)
+    '        System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
+    '    End While
+    '    Response.Output.Write(sb.ToString())
+    '    Response.Flush()
+    '    Response.End()
+    'End Sub
+
+    'Protected Sub BtnExport4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExportFUT.Click
+    '    Dim strSql As String = ""
+    '    If TxtVig.Text = "2012" Then
+    '        strSql = " Select * From vFUT2012_01 "
+    '        strSql += " WHERE numero LIKE '2012%' "
+    '        If (ChkFecSus.Checked = True) Then
+    '            strSql += " AND FEC_SUS_CON BETWEEN BETWEEN TO_DATE('" + CDate(TxtFecSus1.Text).ToShortDateString + "','dd/mm/yyyy') AND to_date('" + CDate(TxtFecSus2.Text).ToShortDateString + "','dd/mm/yyyy')"
+    '        End If
+    '        strSql += " And substr(trim(cod_rub),-2) In (Select Recursos from rec_reg WHERE VIGENCIA=2012 AND TIP_REC='REG')"
+    '        'strSql += " AND valorxrp > 0"
+    '        'strSql += " AND valregalias2012 (nro_rp, cod_rub)>0   "
+    '        strSql += " ORDER BY numero"
+    '        Me.HdSql.Value = strSql
+    '        GridView1.DataBind()
+    '        GridView1.Visible = True
+    '        ExportGridView(GridView1, "Formato_FUT_Regalias")
+    '        'MsgResult.Text = strSql
+
+    '    Else
+    '        MsgResult.Text = "No Implementado"
+    '    End If
+
+
+    'End Sub
+
+    Protected Sub BtnF201a_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnF201a.Click
+        f201a()
+    End Sub
+
+    Protected Sub IBtnF201b_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnF201b.Click
+        f201b()
+    End Sub
 End Class

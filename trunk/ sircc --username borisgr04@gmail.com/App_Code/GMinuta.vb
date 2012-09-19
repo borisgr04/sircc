@@ -756,59 +756,6 @@ Public Class GMinuta
 
     End Sub
 
-    'Sub OpenPlantilla()
-    '    Dim Plantilla As Byte() = {}
-    '    If ws.GetPlantillabyPK1(Num_Pla, Plantilla) = False Then
-    '        MessageBox.Show("Antes de editar debe crear una plantilla", Nom_Aplicacion, MessageBoxButtons.OK, MessageBoxIcon.Warning)
-    '        Exit Sub
-    '    End If
-    '    pathTemporal = Util.FolderEspecial & "\" + Num_Pla + ".doc"
-    '    Try
-    '        CrearArchivo(pathTemporal, Plantilla)
-    '        wrdAppEvent1 = New MSWord.Application()
-    '        wrdAppEvent1.Visible = True
-    '        ', [ReadOnly]:=True
-    '        wrdDoc = wrdAppEvent1.Documents.Open(pathTemporal)
-    '        wrdDoc.Unprotect(Me.Clave_Protect)
-    '        'wrdDoc.PrintPreview()
-    '    Catch ex As Exception
-    '        MessageBox.Show(ex.Message, Nom_Aplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '    End Try
-    'End Sub
-    'Sub OpenMinutaPPal()
-    '    Dim Minuta As Byte() = {}
-    '    If ws.GetPlantillaPpal(Minuta) = False Then
-    '        MessageBox.Show("Debe cargar la plantilla base para iniciar a crear. Consule con el Administrador del Sistema", Nom_Aplicacion, MessageBoxButtons.OK, MessageBoxIcon.Warning)
-    '        Exit Sub
-    '    End If
-    '    pathTemporal = Util.FolderEspecial & "\plantillaPPal.doc"
-    '    Try
-    '        CrearArchivo(pathTemporal, Minuta)
-    '        wrdAppEvent1 = New MSWord.Application()
-    '        wrdAppEvent1.Visible = True
-    '        ', [ReadOnly]:=True
-    '        wrdDoc = wrdAppEvent1.Documents.Open(pathTemporal)
-    '        'wrdDoc.PrintPreview()
-    '    Catch ex As Exception
-    '        MessageBox.Show(ex.Message, Nom_Aplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '    End Try
-    'End Sub
-    'Private Sub DocumentBeforeClose1(ByVal doc As MSWord.Document, ByRef Cancel As Boolean) Handles wrdAppEvent1.DocumentBeforeClose
-    '    Dim r As DialogResult
-    '    r = MessageBox.Show("Desea Guardar los Cambios al Documento", Nom_Aplicacion, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-    '    If r = DialogResult.Yes Then
-    '        MessageBox.Show("Se Guardaron los cambios con Éxito...", Nom_Aplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information)
-    '        'Se bloque nuevamente
-    '        wrdDoc.Protect(MSWord.WdProtectionType.wdAllowOnlyReading, oMissing, Me.Clave_Protect, oMissing, oMissing)
-    '        ''Guarda los Cambios en el Archivo
-    '        wrdDoc.Save()
-    '        wrdDoc.Close()
-    '        Dim oFileStream As FileStream = New FileStream(pathTemporal, FileMode.Open)
-    '        Dim bR As New BinaryReader(oFileStream)
-    '        ws.UpdatePlantilla(Num_Pla, bR.ReadBytes(oFileStream.Length))
-    '    Else
-    '        wrdDoc.Close()
-    '    End If
     'End Sub
 
     'Private Sub DocumentBeforeClose(ByVal doc As MSWord.Document, ByRef Cancel As Boolean) Handles wrdAppEvent.DocumentBeforeClose
@@ -828,7 +775,6 @@ Public Class GMinuta
     '        wrdDoc.Close()
     '    End If
     'End Sub
-
     'Private Sub DocumentBeforeSave(ByVal doc As MSWord.Document, ByRef SaveASUI As Boolean, ByRef Cancel As Boolean) Handles wrdAppEvent.DocumentBeforeSave
     'MessageBox.Show("DocumentBeforeSave ( You are closing " & Convert.ToString(doc.Name) & " )")
     'End Sub
@@ -910,7 +856,8 @@ Public Class GMinuta
 
     Shared ReadOnly Property FolderEspecial As String
         Get
-            Return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+            ' Return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+            Return Publico.RUTA_DOC_TMP ' Path.GetTempPath
         End Get
     End Property
 End Class

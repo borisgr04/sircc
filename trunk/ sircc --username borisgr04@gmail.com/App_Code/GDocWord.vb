@@ -1,4 +1,7 @@
-﻿Imports Microsoft.VisualBasic
+﻿'Require SaveAsPDFandXPS y Office 2007
+'
+
+Imports Microsoft.VisualBasic
 Imports System.Data
 Imports MSWord = Microsoft.Office.Interop.Word
 Imports Microsoft.Office.Core
@@ -93,8 +96,7 @@ Public Class GDocWord
     Private Function AbrirDocumentoWord(ByRef oWord As MSWord.Application) As MSWord._Document
         Dim oDoc As MSWord._Document
         oMissing = System.Reflection.Missing.Value
-        oDoc = oWord.Documents.Open(PathPlantilla, oMissing, oMissing, oMissing, oMissing, oMissing, _
-         oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing)
+        oDoc = oWord.Documents.Open(PathPlantilla, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing)
         Return oDoc
     End Function
 
@@ -295,6 +297,7 @@ Public Class GDocWord
     End Sub
 
     Private Function CreaPlantillaTemporal(ByVal DocByte As [Byte]()) As String
+
         PathPlantilla = Path.ChangeExtension(Path.GetTempFileName(), ".doc")
         PathNuevoDocumento = Path.ChangeExtension(Path.GetTempFileName(), ".doc")
         PathNuevoDocumentoPDF = Path.ChangeExtension(Path.GetTempFileName(), ".pdf")
@@ -316,16 +319,65 @@ Public Class GDocWord
         Dim oWrdDoc As MSWord._Document
         Dim iniciada As Boolean
         iniciada = False
+        Dim objent As New EntidadMin
+        objent.CargarDatos()
+        Dim imgLogo As String = objent.Ruta_Logo
         Try
             oWrdApp = AbrirAplicacionWord()
             oWrdApp.Visible = True
             iniciada = True
             oWrdDoc = AbrirDocumentoWord(oWrdApp)
             ProtegerDocumento(oWrdDoc, False)
+
+            Dim NFilas As Integer = 1, NColumnas As Integer = 2
+            Dim Nom_Pla As String
+            Dim Nom_Campo As String
+            Dim Tip_Dato As String
+            Dim Genera_Tabla As String
+            Dim Nom_Mark As String
+            Dim j As Integer = 1
+
+            ''PIE Y ENCABEZADO DE DOCUMENTO
+            '' CONTROL DE ENCABEZADO
+            Dim logoCustom As MSWord.InlineShape = Nothing
+            Dim vista As New List(Of MSWord.WdSeekView)
+            vista.Add(MSWord.WdSeekView.wdSeekCurrentPageFooter)
+            vista.Add(MSWord.WdSeekView.wdSeekCurrentPageHeader)
+            For Each s In vista
+                oWrdApp.ActiveWindow.ActivePane.View.SeekView = s 'MSWord.WdSeekView.wdSeekCurrentPageHeader
+                Dim inicio As String = IIf(s = MSWord.WdSeekView.wdSeekCurrentPageFooter, "P_", "E_")
+                For k As Integer = 0 To dtConfiguracion.Rows.Count - 1
+                    Nom_Pla = dtConfiguracion.Rows(k)("Nom_Pla").ToString.Trim
+                    Nom_Campo = dtConfiguracion.Rows(k)("Nom_Cam").ToString
+                    Tip_Dato = dtConfiguracion.Rows(k)("Tip_Dat").ToString
+                    Genera_Tabla = dtConfiguracion.Rows(k)("GTabla").ToString
+                    j = 1
+                    Nom_Mark = inicio + Nom_Pla + "_" + j.ToString.Trim
+                    Do While oWrdDoc.Bookmarks.Exists(Nom_Mark)
+                        oWrdDoc.Bookmarks.Item(Nom_Mark).Range.Text = UCase(dtDatosImprimir.Rows(0)(Nom_Campo).ToString)
+                        j = j + 1
+                        Nom_Mark = inicio + Nom_Pla + "_" + j.ToString.Trim
+                    Loop
+                Next
+                'BUSCAR LOGO
+                j = 1
+                Nom_Mark = inicio + "LOGO_" + j.ToString.Trim
+                Do While oWrdDoc.Bookmarks.Exists(Nom_Mark)
+                    logoCustom = oWrdDoc.Bookmarks.Item(Nom_Mark).Range.InlineShapes.AddPicture(imgLogo)
+                    logoCustom.Width = 50
+                    logoCustom.Height = 50
+                    j = j + 1
+                    Nom_Mark = inicio + "LOGO_" + j.ToString.Trim
+                Loop
+            Next
+
+            oWrdApp.ActiveWindow.ActivePane.View.SeekView = MSWord.WdSeekView.wdSeekMainDocument
+            '' CONTROL DE CONTENIDO
             For i As Integer = 0 To dtConfiguracion.Rows.Count - 1
+                Dim Es_Marcador As String
                 Msg = Msg + " i= " & i.ToString & " " & dtConfiguracion.Rows(i)("NOM_CAM").ToString
-                Dim Tip_Dato As String = dtConfiguracion.Rows(i)("TIP_DAT").ToString
-                Dim Es_Marcador As String = dtConfiguracion.Rows(i)("MARCADOR").ToString
+                Tip_Dato = dtConfiguracion.Rows(i)("TIP_DAT").ToString
+                Es_Marcador = dtConfiguracion.Rows(i)("MARCADOR").ToString
 
                 Select Case Es_Marcador
                     Case "NO"
@@ -348,6 +400,8 @@ Public Class GDocWord
                         End Select
                 End Select
             Next
+
+
             ProtegerDocumento(oWrdDoc, True)
             oWrdDoc.SaveAs(PathNuevoDocumento)
             oWrdDoc.SaveAs(PathNuevoDocumentoPDF, MSWord.WdExportFormat.wdExportFormatPDF)
@@ -362,7 +416,7 @@ Public Class GDocWord
             lErrorG = False
         Catch ex As Exception
             lErrorG = True
-            Msg = Msg + ex.Message
+            Msg = ex.Message + "<br/>" + ex.StackTrace + ex.Source + "</br>"
             If iniciada Then
                 CerrarAplicacionWord(oWrdApp)
             End If
@@ -680,7 +734,9 @@ Public Class GDocWord
         Dim nom_Pla As String = dtConfiguracion.Rows(i)("NOM_PLA").ToString.Trim
         Dim Nom_Campo As String = dtConfiguracion.Rows(i)("NOM_CAM").ToString
         Dim Tip_Dato As String = dtConfiguracion.Rows(i)("TIP_DAT").ToString
-
+        'If nom_Pla = "VIGENCIA_CERT" Then
+        '    Throw New Exception("VIGENCIA_CERT")
+        'End If
         If (dtDatosImprimir.Columns.Contains(Nom_Campo)) Then
 
             Remplazar(oWrdApp, "{" + nom_Pla + "}")

@@ -41,6 +41,7 @@ Public Class Util
             System.IO.File.Delete(szFileName)
         End If
         'Despues de eliminar la imagen existe se crea otra con el Drawing.Image nuevo
+        'Throw New Exception(szFileName)
         image.Save(szFileName)
     End Sub
     Public Shared Function Bytes2Image(ByVal bytes() As Byte) As Drawing.Bitmap

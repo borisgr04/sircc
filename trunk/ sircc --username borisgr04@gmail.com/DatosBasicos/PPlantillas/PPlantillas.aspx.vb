@@ -101,6 +101,14 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
         Me.BtnGuardar.Enabled = b
         Me.BtnEliminar.Enabled = Not b
     End Sub
+
+    Protected Sub GridView1_RowCommand1(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GridView1.RowCommand
+        If e.CommandName = "download" Then
+            Dim index As Integer = CInt(e.CommandArgument)
+            GridView1.SelectedIndex = index
+            Redireccionar_Pagina(String.Format("ashx/verPPlantilla.ashx?Ide_Pla={0}", GridView1.SelectedValue))
+        End If
+    End Sub
     Protected Sub GridView1_RowEditing(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewEditEventArgs) Handles GridView1.RowEditing
         GridView1.EditIndex = e.NewEditIndex
         FillCustomerInGrid()
@@ -132,7 +140,7 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
         CboTipPla.SelectedIndex = 0
     End Sub
 
-    Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+    Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
         MsgBoxLimpiar(MsgResult)
     End Sub
 

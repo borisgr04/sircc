@@ -23,13 +23,34 @@ Partial Class CtrlUsr_SelCampos_SelCamposC
     Private Function ObtenerSelect() As List(Of SelSelect)
         Dim lstSelect As New List(Of SelSelect)
         LbCampos.Text = ""
-        For i As Integer = 0 To ListBox2.Items.Count - 1
-            Dim auxSelect As New SelSelect
-            auxSelect.strSelect = "Select " + ListBox2.Items(i).Value + " As " + ListBox2.Items(i).Text + ", Count(*) Cantidad From " + HdVista.Value + " {filtro}  Group by " + ListBox2.Items(i).Value
-            auxSelect.Titulo = " CONSOLIDADO DE " + ListBox2.Items(i).Text
-            auxSelect.strSelectCount = "Select 'Total' As Total, Count(*) Cantidad From " + HdVista.Value + " {filtro}  "
-            lstSelect.Add(auxSelect)
-        Next
+        If Chk.Checked = True Then
+            For i As Integer = 0 To ListBox2.Items.Count - 1
+                Dim auxSelect As New SelSelect
+                auxSelect.strSelect = "Select " + ListBox2.Items(i).Value + " As " + ListBox2.Items(i).Text + ", Count(*) Cantidad From " + HdVista.Value + " {filtro}  Group by " + ListBox2.Items(i).Value
+                auxSelect.Titulo = " CONSOLIDADO DE " + ListBox2.Items(i).Text
+                auxSelect.strSelectCount = "Select 'Total' As Total, Count(*) Cantidad From " + HdVista.Value + " {filtro}  "
+                lstSelect.Add(auxSelect)
+            Next
+        Else
+            Dim Campos As String = ""
+            Dim sCampos As String = ""
+            Dim tCampos As String = ""
+            For i As Integer = 0 To ListBox2.Items.Count - 1
+                Campos += IIf(String.IsNullOrEmpty(Campos), "", ",") + ListBox2.Items(i).Value + " As " + ListBox2.Items(i).Text
+                sCampos += IIf(String.IsNullOrEmpty(sCampos), "", ",") + ListBox2.Items(i).Value
+                tCampos += IIf(String.IsNullOrEmpty(tCampos), "", ",") + ListBox2.Items(i).Text
+
+            Next
+            If ListBox2.Items.Count > 0 Then
+                Dim auxSelect As New SelSelect
+                'auxSelect.strSelect = "Select " + Campos + ", Count(*) Cantidad ,Sum(Val_Apo_Gob) Valor_Aportes From " + HdVista.Value + " {filtro}  Group by " + sCampos
+                auxSelect.strSelect = "Select " + Campos + ", Count(*) Cantidad ,SUM(Val_Con) Valor_Inicial,SUM(Val_Apo_Gob) Aportes_Propios,SUM(Val_Otros) Aportes_Otros,Sum(Val_Adi) Valor_Adicionado,Sum(Val_Adi+val_con) Valor_Total  From " + HdVista.Value + " {filtro}  Group by " + sCampos
+                auxSelect.Titulo = " CONSOLIDADO POR ( " + tCampos + " )"
+                'auxSelect.strSelectCount = "Select 'Total' As Total, Count(*) Cantidad,Sum(Val_Apo_Gob) Total_Aportes  From " + HdVista.Value + " {filtro}  "
+                auxSelect.strSelectCount = "Select 'Total' As Total, Count(*) Cantidad,SUM(Val_Con) Valor_Inicial,SUM(Val_Apo_Gob) Aportes_Propios,SUM(Val_Otros) Aportes_Otros,Sum(Val_Adi) Valor_Adicionado,Sum(Val_Adi+val_con) Valor_Total   From " + HdVista.Value + " {filtro}  "
+                lstSelect.Add(auxSelect)
+            End If
+        End If
         Return lstSelect
     End Function
 

@@ -19,6 +19,7 @@
         <asp:Button ID="BtnOrdenas" runat="server" Text="Ordenar" Visible="False" />
     </td>
     <td>
+        <asp:CheckBox ID="Chk" runat="server" Text="Individuales" />
     </td>
     <td><asp:Label ID="Label2" runat="server" Text="Columnas Seleccionadas" Font-Bold="true"></asp:Label>
     </td>
@@ -93,5 +94,5 @@
     <br />
         
         <asp:Label ID="LbCampos" runat="server"></asp:Label>
-<asp:Button ID="Button1" runat="server" Text="Button" />
+<asp:Button ID="Button1" runat="server" Text="Button" Visible="False" />
 
