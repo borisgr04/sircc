@@ -12,13 +12,14 @@ Public Class verDoc : Implements IHttpHandler
         
         Dim nro_cert As String = context.Request.QueryString("nro_cert")
         Dim vig_cert As String = context.Request.QueryString("vig_cert")
+        Dim cod_serie As String = context.Request.QueryString("CVXX")
         Dim ftmt As String = context.Request.QueryString("fmt")
         Dim oCert As New Cert_Contratos
         
         If oCert.Cargar(nro_cert, vig_cert) Then
             context.Response.Clear()
             'Response.ContentType = mimeType
-            context.Response.AddHeader("content-disposition", "attachment; filename=" + vig_cert + "-" + nro_cert + ".pdf")
+            context.Response.AddHeader("content-disposition", "attachment; filename=" + cod_serie+ ".pdf")
             context.Response.BinaryWrite(oCert.Doc_PDF)
             context.Response.End()
             'Dim SalPDF As Byte() = {}

@@ -3,33 +3,6 @@
 <%@ Register src="../../../CtrlUsr/Terceros/ConsultaTerS.ascx" tagname="ConsultaTerS" tagprefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
-<script type='text/javascript'>
-    function cancelClick() {
-        var label = $get('ctl00_SampleContent_LbRpt');
-        //label.innerHTML = 'You hit cancel in the Confirm dialog on ' + (new Date()).localeFormat("T") + '.';
-    }
-    // Add click handlers for buttons to show and hide modal popup on pageLoad
-    function pageLoad() {
-        //$addHandler($get("showModalPopupClientButton"), 'click', showModalPopupViaClient);
-        $addHandler($get("hideModalPopupViaClientButton"), 'click', hideModalPopupViaClient);
-    }
-
-
-    function showModalPopupViaClient(ev) {
-        ev.preventDefault();
-        var modalPopupBehavior = $find('programmaticModalPopupBehavior');
-        modalPopupBehavior.show();
-    }
-
-    function hideModalPopupViaClient(ev) {
-        ev.preventDefault();
-        var modalPopupBehavior = $find('programmaticModalPopupBehavior');
-        modalPopupBehavior.hide();
-    }
-
-  
-
-    </script>
 <div class="demoarea">
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" 
             EnableScriptGlobalization="True">
@@ -49,18 +22,63 @@
                 <asp:TextBox ID="txtTitulo" runat="server" Width="600px" TextMode="MultiLine"></asp:TextBox></td>
         </tr>--%>
         <tr>
-        <td colspan="4">
-        <asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" > REPORTE FORMATO 20 - CONTRALORIA  </asp:Label>
-        </td>
+            <td colspan="7">
+                <asp:Label ID="Tit" runat="server" CssClass="Titulo"> REPORTE FORMATO 20 - CONTRALORIA  </asp:Label>
+            </td>
         </tr>
         <tr>
-            <td colspan="4" style="text-align: center">
-                <asp:Button ID="Generar_Reporte" runat="server" Text="Generar Reporte" 
-                    Visible="False" />&nbsp;<asp:Button ID="BtnExport" runat="server" 
-                    Text="Exportar a Excel 20_1a" />
-                <asp:Button ID="BtnExport2" runat="server" Text="Exportar a Excel 20_1b" />
-                <asp:Button ID="BtnExportCSV" runat="server" Text="Exportar a CSV" 
-                    Visible="False" />
+            <td colspan="3">
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td style="width: 48px">
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 512px; text-align: right;" >
+                <asp:DropDownList ID="CboVersion" runat="server">
+                    <asp:ListItem Value="1">Formato 20 - Version 1</asp:ListItem>
+                    <asp:ListItem Value="2">Formato 20 - Versión 2 (Agosto 2012)</asp:ListItem>
+                </asp:DropDownList>
+            </td>
+            <td >
+                <asp:ImageButton ID="BtnF201a" runat="server" SkinID="IBtnExcel" />
+            </td>
+            <td >
+                <asp:ImageButton ID="IBtnF201b" runat="server" SkinID="IBtnExcel" />
+            </td>
+            <td >
+                &nbsp;</td>
+            <td >
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 512px;">
+                &nbsp;</td>
+            <td >
+                20 1a</td>
+            <td >
+                20 1b</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="7" style="text-align: center">
+                &nbsp;<asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
             </td>
         </tr>
     </table>
@@ -74,18 +92,11 @@
         <tr>
             <td style="width: 177px">
                 <asp:CheckBox ID="ChkVig" runat="server" Text="Vigencia" Font-Bold="False" /></td>
-            <td style="width: 126px">
-                <asp:DropDownList ID="CboVersion" runat="server">
-                    <asp:ListItem Value="1">Version 1</asp:ListItem>
-                    <asp:ListItem Value="2">Versión 2</asp:ListItem>
-                </asp:DropDownList>
+            <td colspan="2">
+                &nbsp;</td>
+            <td colspan="2">
+                <asp:Label ID="msgSug" runat="server"></asp:Label>
             </td>
-            <td style="width: 150px">
-            </td>
-            <td style="width: 161px">
-            </td>
-            <td style="width: 161px">
-                </td>
         </tr>
         <tr>
             <td style="width: 177px">
@@ -433,9 +444,8 @@
 
     </ContentTemplate>
         <Triggers>
-            <asp:PostBackTrigger ControlID="BtnExport" />
-            <asp:PostBackTrigger ControlID="BtnExportCSV" />
-            <asp:PostBackTrigger ControlID="BtnExport2" />
+            <asp:PostBackTrigger ControlID="Btnf201a" />
+            <asp:PostBackTrigger ControlID="IBtnf201b" />
         </Triggers>
     </asp:UpdatePanel>
     

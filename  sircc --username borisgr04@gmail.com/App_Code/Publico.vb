@@ -158,6 +158,17 @@ Public Class Publico
         End Get
     End Property
 
+    ''' <summary>
+    ''' Directorio Fisico de Documentos Temporales, Tomarlo como base de ruta de acceso Autor:BGR Fecha:14 Abril 2011
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Shared ReadOnly Property RUTA_DOC_TMP As String
+        Get
+            Return ConfigurationManager.AppSettings("RUTA_DOC_TMP")
+        End Get
+    End Property
 
     ''' <summary>
     ''' Directorio Fisico de Documentos, Tomarlo como base de ruta de acceso Autor:BGR Fecha:14 Abril 2011

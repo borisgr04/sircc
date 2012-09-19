@@ -95,7 +95,7 @@ Public Class EntidadMin
         Me.Lema = UCase(dtEnt.Rows(0)("Municipio"))
         Me.Logo = DirectCast(dtEnt.Rows(0)("Logo_Rpt"), Byte())
 
-        Me.Ruta_Logo = GMinuta.FolderEspecial + "\Logo.jpg"
+        Me.Ruta_Logo = GMinuta.FolderEspecial + "Logo.jpg"
         Dim img As Bitmap = Util.Bytes2Image(Logo)
         If Not img.Size.IsEmpty Then
             Util.SaveJPG(img, Ruta_Logo)

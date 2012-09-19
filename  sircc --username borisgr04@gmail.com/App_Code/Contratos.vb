@@ -26,12 +26,24 @@ Public Class Contratos
     Public Overloads Function GetCertificado(ByVal Ide_Con As String) As DataTable
         Me.Conectar()
         'And Dep_pCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo )
-        querystring = "SELECT * FROM vLstContratos Where Ide_Con=:Ide_Con  Order by Numero"
+        querystring = "SELECT * FROM vLstContratosl Where Ide_Con=:Ide_Con  Order by Numero"
         Me.CrearComando(querystring)
         AsignarParametroCadena(":Ide_Con", Ide_Con)
         Dim dataTb As DataTable = EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataTb
+    End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetObjeto(ByVal Cod_Con As String) As String
+        Me.Conectar()
+        'And Dep_pCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo )
+        querystring = "SELECT Obj_Con FROM Contratos Where Cod_Con=:Cod_Con  "
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":Cod_Con", Cod_Con)
+        Dim c As Object = EjecutarEscalar()
+        Me.Desconectar()
+        Return c.ToString
     End Function
 
     ''' <summary>

@@ -25,6 +25,22 @@ Public Class PPlantillas
         Me.VistaDB = "VPPLANTILLASDB"
 
     End Sub
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetRecords(ByVal busc As String) As DataTable
+        busc = IIf(busc <> "", "%" + UCase(busc) + "%", "")
+        Dim queryString As String = "SELECT * FROM  vpplantillasdb  Where (Upper(tipo_plantilla) like :busc) OR (upper(NOM_PLA) like :busc) OR (upper(Clase) like :busc) OR (upper(IdE_pLA) like :busc) Order by IdE_pLA"
+        Me.Conectar()
+        Me.CrearComando(queryString)
+        Me.AsignarParametroCadena(":busc", busc)
+        Me.AsignarParametroCadena(":busc", busc)
+        Me.AsignarParametroCadena(":busc", busc)
+        Me.AsignarParametroCadena(":busc", busc)
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
+
+    End Function
     
     Public Function Insert(ByVal TIP_PLA As String, ByVal Nom_Pla As String, ByVal dContent As [Byte](), ByVal Ext_Pla As String, ByVal Cod_TPro As String, ByVal Est_Pla As String, ByVal CLAVE As String) As String
         Dim tbCon As New DataTable

@@ -68,40 +68,53 @@ Partial Class Reportes_Dinamico_RptDinamico
     End Sub
 
     Sub Finalizar2()
-        If hasDatos Then
-            ExportGridViewIni("InformeContratacion")
+        'If hasDatos Then
+        If (Not String.IsNullOrEmpty(SelCampos1.Campos)) Or (SelCamposC1.ListaSelect.Count > 0) Then
 
-            Dim filtro As String = FiltroContratos1.strFiltro
-            If Not String.IsNullOrEmpty(SelCampos1.Campos) Then ' Si esocgio campos
-                ExportGridViewWrite("<b>REPORTE DETALLADO</b>")
-                Dim Sql As String = "Select " + SelCampos1.Campos + " From  " + SelCampos1.Vista + " " + filtro
-                dt = obj.GetSelect(Sql)
-                GridView1.DataSource = dt
-                GridView1.DataBind()
-                ExportGridViewBody(GridView1)
-            End If
-            Dim lselect As New List(Of SelSelect)
-            lselect = SelCamposC1.ListaSelect
-            filtro = FiltroContratos1.strFiltroSinOrder
-            For Each itemSelSelect In lselect
-                ExportGridViewWrite("<br/>")
-                'SE IMPRIME TITULO
-                ExportGridViewWrite("<b>" + itemSelSelect.Titulo + "</b>")
-                'Consultar Lsitado Agrupado
-                dt = obj.GetSelect(itemSelSelect.strSelect.Replace("{filtro}", filtro))
-                GridView1.DataSource = dt
-                GridView1.DataBind()
-                'Imprimirlo
-                ExportGridViewBody(GridView1)
-                'Consultar Total
-                dt = obj.GetSelect(itemSelSelect.strSelectCount.Replace("{filtro}", filtro))
-                GridView1.DataSource = dt
-                GridView1.DataBind()
-                'Imprimirlo
-                ExportGridViewBody(GridView1)
-                'Nueva Linea
-            Next
-            ExportGridViewFin()
+            Try
+
+                ExportGridViewIni("InformeContratacion")
+                Dim filtro As String = FiltroContratos1.strFiltro
+                If Not String.IsNullOrEmpty(SelCampos1.Campos) Then ' Si esocgio campos
+                    ExportGridViewWrite("<b>REPORTE DETALLADO</b>")
+                    Dim Sql As String = "Select " + SelCampos1.Campos + " From  " + SelCampos1.Vista + " " + filtro
+                    'Throw New Exception(Sql)
+                    dt = obj.GetSelect(Sql)
+                    GridView1.DataSource = dt
+                    GridView1.DataBind()
+                    ExportGridViewBody(GridView1)
+                End If
+                Dim lselect As New List(Of SelSelect)
+                lselect = SelCamposC1.ListaSelect
+                filtro = FiltroContratos1.strFiltroSinOrder
+                'Throw New Exception(SelCamposC1.ListaSelect.Count)
+                For Each itemSelSelect In lselect
+                    ExportGridViewWrite("<br/>")
+                    'SE IMPRIME TITULO
+                    ExportGridViewWrite("<b>" + itemSelSelect.Titulo + "</b>")
+                    'Consultar Lsitado Agrupado
+                    dt = obj.GetSelect(itemSelSelect.strSelect.Replace("{filtro}", filtro))
+                    GridView1.DataSource = dt
+                    GridView1.DataBind()
+                    'Imprimirlo
+                    ExportGridViewBody(GridView1)
+                    'Consultar Total
+                    dt = obj.GetSelect(itemSelSelect.strSelectCount.Replace("{filtro}", filtro))
+                    GridView1.DataSource = dt
+                    GridView1.DataBind()
+                    'Imprimirlo
+
+                    ExportGridViewBody(GridView1)
+                    'Nueva Linea
+                Next
+
+            Catch ex As Exception
+                Label1.Text = ex.Message
+                MsgBoxAlert(Label1, True)
+            Finally
+                ExportGridViewFin()
+
+            End Try
 
         Else
             Label1.Text = "No Hay Datos a Exportar"

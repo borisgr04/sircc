@@ -5,8 +5,6 @@
     <script type='text/javascript'>
     // Add click handlers for buttons to show and hide modal popup on pageLoad
     function pageLoad() {
-        //$addHandler($get("showModalPopupClientButton"), 'click', showModalPopupViaClient);
-        //$addHandler($get("hideModalPopupViaClientButton"), 'click', hideModalPopupViaClient);        
         $addHandler($get("BtnCerrar"), 'click', CerrarModalTercero);
         $addHandler($get("BtnCancelar"), 'click', CerrarModalTercero);
     }
@@ -31,7 +29,13 @@
     <br />
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>
-&nbsp;<asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" 
+        <asp:Label ID="Label1" runat="server" 
+                Text="Buscar (Tipo, Nombre o Clase)"></asp:Label>
+            &nbsp;
+            <asp:TextBox ID="TxtBuscar" runat="server" Height="21px" Width="371px"></asp:TextBox>
+            <asp:ImageButton ID="IBtnBuscar" runat="server" SkinID="IBtnBuscar" />
+            <br />
+            &nbsp;<asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" 
                 Text="Cargue de Plantillas  *.Doc"></asp:Label><BR />&nbsp;<asp:ImageButton ID="BtnNuevo" runat="server" Height="32px" SkinID="IBtnNuevo" 
                 Width="32px" />
             <br />
@@ -48,13 +52,17 @@
 <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
 <Columns>
     <asp:BoundField DataField="Ide_Pla" HeaderText="Id" SortExpression="Ide_Pla" />
-    <asp:BoundField DataField="Tip_Pla" HeaderText="Tipo" 
-        SortExpression="Tip_Pla" />
+    <asp:BoundField DataField="TIPO_PLANTILLA" HeaderText="Tipo" 
+        SortExpression="TIPO_PLANTILLA" />
     <asp:BoundField DataField="Nom_Pla" HeaderText="Nombre " 
         SortExpression="Nom_Pla" />
     <asp:BoundField DataField="ext" HeaderText="Extensión" SortExpression="Ext" />
-    <asp:BoundField DataField="Nom_STip" HeaderText="Clase" 
-        SortExpression="Nom_STip" />
+    <asp:BoundField DataField="Clase" HeaderText="Clase" 
+        SortExpression="Clase" />
+    <asp:BoundField DataField="est_pla" HeaderText="Estado" 
+        SortExpression="est_pla" />
+    <asp:ButtonField ButtonType="Image" CommandName="download" 
+        ImageUrl="~/images/2012/Files-Download-File-icon.png" Text="Descagar" />
 <asp:ButtonField CommandName="Editar" ImageUrl="~/images/Operaciones/Edit2.png" Text="Editar" ButtonType="Image"></asp:ButtonField>
 <asp:ButtonField CommandName="Eliminar" ImageUrl="~/images/Operaciones/delete2.png" Text="Eliminar" ButtonType="Image"></asp:ButtonField>
 <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" ButtonType="Image"></asp:CommandField>
@@ -78,8 +86,12 @@
 <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>
 </asp:GridView> 
             <asp:ObjectDataSource id="ObjPPlantillas" runat="server" TypeName="PPlantillas" 
-                SelectMethod="GetRecordsDB" 
+                SelectMethod="GetRecords" 
                 OldValuesParameterFormatString="original_{0}">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="TxtBuscar" Name="busc" PropertyName="Text" 
+                        Type="String" />
+                </SelectParameters>
             </asp:ObjectDataSource>
             <br />
 </contenttemplate>
@@ -218,25 +230,6 @@
             <asp:ObjectDataSource ID="ObjSubTipos" runat="server" 
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="SubTipos" InsertMethod="Insert" UpdateMethod="Update">
-                <InsertParameters>
-                    <asp:Parameter Name="Cod_Stip" Type="String" />
-                    <asp:Parameter Name="Nom_Stip" Type="String" />
-                    <asp:Parameter Name="Cod_Tip" Type="String" />
-                    <asp:Parameter Name="Cla_Con_Dep" Type="String" />
-                    <asp:Parameter Name="Crt_F20_1A" Type="String" />
-                    <asp:Parameter Name="Cla_Con_Dp" Type="String" />
-                    <asp:Parameter Name="estado" Type="String" />
-                </InsertParameters>
-                <UpdateParameters>
-                    <asp:Parameter Name="Cod_Stip_O" Type="String" />
-                    <asp:Parameter Name="Cod_Stip" Type="String" />
-                    <asp:Parameter Name="Nom_Stip" Type="String" />
-                    <asp:Parameter Name="Cod_Tip" Type="String" />
-                    <asp:Parameter Name="Cla_Con_Dep" Type="String" />
-                    <asp:Parameter Name="Crt_F20_1A" Type="String" />
-                    <asp:Parameter Name="Cla_Con_Dp" Type="String" />
-                    <asp:Parameter Name="Estado" Type="String" />
-                </UpdateParameters>
             </asp:ObjectDataSource>
 </contenttemplate>
     </asp:UpdatePanel>

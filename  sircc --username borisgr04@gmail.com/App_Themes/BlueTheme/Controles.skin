@@ -34,7 +34,10 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 
 <asp:ImageButton SkinId="IBtnMinuta" runat="server"  Height="32px" Width="32px"
                         ImageUrl="~/images/imagev2/Contract-icon.png"  />
-                        
+
+<asp:ImageButton SkinId="IBtnExcel" runat="server"  Height="32px" Width="32px"
+                        ImageUrl="~/Images/2012/document-excel-icon.png"  />
+                                                
 <%---'Imagens                                                 --%>
 <asp:Image SkinId="ImgSel" runat="server" ImageUrl="~/images/BlueTheme/Select.png" />                        
 <asp:Image SkinId="ImgOK" runat="server" ImageUrl="~/images/BlueTheme/Ok.gif" />                        
