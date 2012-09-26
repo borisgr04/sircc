@@ -88,6 +88,7 @@ Public Class Util
         Next
         Return r
     End Function
+    
 
     Public Shared Function ValidarDigitoVerificacion(ByVal unNit As String) As String
         Dim miTemp As String
