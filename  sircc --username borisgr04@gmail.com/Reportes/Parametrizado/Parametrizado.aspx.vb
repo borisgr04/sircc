@@ -15,7 +15,6 @@ Partial Class Reportes_Parametrizado_Default
                 Response.Redirect("ReportP.aspx?sql=" + Server.UrlEncode(cSql) & "&tit=" + Server.UrlEncode("") & "&Rpte=" + Server.UrlEncode(Me.rdGroup.SelectedValue))
             End If
         End If
-        
     End Sub
 
     Protected Function Sql() As String
@@ -23,7 +22,6 @@ Partial Class Reportes_Parametrizado_Default
         Dim obj As New Contratos()
         Dim cFiltro As String = ""
         Generar = True
-
         If (ChkNum.Checked = True) Then
             If (Me.TxtNCon.Text.Length <> 10) Then
                 chkTip.Checked = True
