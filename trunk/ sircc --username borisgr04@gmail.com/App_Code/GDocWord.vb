@@ -314,8 +314,8 @@ Public Class GDocWord
 
     Public Function GenerarDocumento(ByVal PlantillaByte As [Byte](), ByVal dtConfiguracion As DataTable, ByVal dtDatosImprimir As DataTable) As Byte()
         CreaPlantillaTemporal(PlantillaByte)
-        Dim b() As Byte
-        Dim oWrdApp As MSWord.Application
+        Dim b() As Byte = {}
+        Dim oWrdApp As MSWord.Application = New Object()
         Dim oWrdDoc As MSWord._Document
         Dim iniciada As Boolean
         iniciada = False
@@ -425,8 +425,8 @@ Public Class GDocWord
     End Function
 
     Public Function CombinarCorrespondencia(ByVal PlantillaByte As [Byte](), ByVal dtConfiguracion As DataTable, ByVal dtDatosImprimir As DataTable) As Byte()
-        Dim b() As Byte
-        Dim oWrdApp As MSWord.Application
+        Dim b() As Byte = {}
+        Dim oWrdApp As MSWord.Application = New Object()
         Dim oWrdDoc As MSWord._Document
         Dim iniciada As Boolean
         Dim wrdSelection As MSWord.Selection
@@ -510,7 +510,7 @@ Public Class GDocWord
     End Function
 
     Public Function GetNuevoDocumento(ByVal Path As String) As Byte()
-        Dim b() As Byte
+        Dim b() As Byte = {}
         Try
             Dim oFileStream As FileStream = New FileStream(Path, FileMode.Open)
             Dim bR As New BinaryReader(oFileStream)
