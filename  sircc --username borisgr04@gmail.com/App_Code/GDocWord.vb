@@ -315,7 +315,7 @@ Public Class GDocWord
     Public Function GenerarDocumento(ByVal PlantillaByte As [Byte](), ByVal dtConfiguracion As DataTable, ByVal dtDatosImprimir As DataTable) As Byte()
         CreaPlantillaTemporal(PlantillaByte)
         Dim b() As Byte = {}
-        Dim oWrdApp As MSWord.Application = New Object()
+        Dim oWrdApp As MSWord.Application
         Dim oWrdDoc As MSWord._Document
         Dim iniciada As Boolean
         iniciada = False
@@ -426,7 +426,7 @@ Public Class GDocWord
 
     Public Function CombinarCorrespondencia(ByVal PlantillaByte As [Byte](), ByVal dtConfiguracion As DataTable, ByVal dtDatosImprimir As DataTable) As Byte()
         Dim b() As Byte = {}
-        Dim oWrdApp As MSWord.Application = New Object()
+        Dim oWrdApp As MSWord.Application
         Dim oWrdDoc As MSWord._Document
         Dim iniciada As Boolean
         Dim wrdSelection As MSWord.Selection
