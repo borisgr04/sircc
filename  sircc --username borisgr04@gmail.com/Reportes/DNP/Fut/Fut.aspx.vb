@@ -59,7 +59,7 @@ Partial Class Reportes_DNP_FUT
             strSql = " Select * From vFUT2012_01 "
             strSql += " WHERE numero LIKE '2012%' "
             If (ChkFecSus.Checked = True) Then
-                strSql += " AND FEC_SUS_CON BETWEEN TO_DATE('" + CDate(TxtFecSus1.Text).ToShortDateString + "','dd/mm/yyyy') AND inifecharef(to_date('" + CDate(TxtFecSus2.Text).ToShortDateString + "','dd/mm/yyyy'))"
+                strSql += " AND FEC_SUS_CON BETWEEN TO_DATE('" + CDate(TxtFecSus1.Text).ToShortDateString + "','dd/mm/yyyy') AND to_date('" + CDate(TxtFecSus2.Text).ToShortDateString + "','dd/mm/yyyy')"
             End If
             If Not String.IsNullOrEmpty(cFiltro) Then
                 strSql += " And Numero In ( Select Numero FROM vcontratos_Sinc_p c  " + cFiltro + " )"

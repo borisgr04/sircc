@@ -161,6 +161,11 @@ Public Class BDDatos
         Me.EjecutarComando()
     End Sub
 
+    Public Sub InifechaRef(ByVal fecha As Date)
+        Me.CrearComando("Begin inifecharef(to_date('" + fecha.ToShortDateString + "','dd/mm/yyyy')); End;")
+        Me.EjecutarComando()
+    End Sub
+
     ''' <summary>
     ''' Retorna los todos los registros de la tabla de la Base de datos, segun el filtro especificado
     ''' </summary>

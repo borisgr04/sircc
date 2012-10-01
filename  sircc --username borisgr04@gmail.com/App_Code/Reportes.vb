@@ -1206,11 +1206,29 @@ Public Class Reportes
         Else
             datat = New DataTable
         End If
-
         Return datat
-
     End Function
 
+    ''' <summary>
+    ''' Genera Tabla a partir de la 
+    ''' </summary>
+    ''' <param name="cSql"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetSql(ByVal cSql As String, ByVal fechaRef As Date) As System.Data.DataTable
+        Dim datat As DataTable
 
+        If Not String.IsNullOrEmpty(cSql) Then
+            Conectar()
+            InifechaRef(fechaRef)
+            CrearComando(cSql)
+            datat = EjecutarConsultaDataTable()
+            Desconectar()
+        Else
+            datat = New DataTable
+        End If
+        Return datat
+    End Function
 
 End Class
