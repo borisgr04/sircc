@@ -225,6 +225,8 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="HdSql" Name="cSql" PropertyName="Value" 
                 Type="String" />
+            <asp:ControlParameter ControlID="TxtFecSus2" Name="fechaRef" 
+                PropertyName="Text" Type="DateTime" />
         </SelectParameters>
     </asp:ObjectDataSource>
             </td>
