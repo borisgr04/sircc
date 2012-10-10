@@ -20,12 +20,10 @@ Partial Class Contratos_GesContratos_Default
         End Get
     End Property
 
-
-    Protected Sub BtnAceptar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnAceptar.Click
-
+    Sub Guardar()
         If Me.Oper = "Nuevo" Then
             Dim obj As New EstContratos()
-            MsgResult.Text = obj.Insert(DetContrato1.Cod_Con, DetContrato1.Estado, CboEstSig.SelectedValue, CDate(txtFecDoc.Text), "", txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text)
+            MsgResult.Text = obj.Insert(DetContrato1.Cod_Con, DetContrato1.Estado, CboEstSig.SelectedValue, CDate(txtFecDoc.Text), "", txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text, Publico.PuntoPorComa(TxtPorFis.Text))
             Me.MsgBox(MsgResult, obj.lErrorG)
             If obj.lErrorG = False Then
                 Limpiar()
@@ -35,7 +33,7 @@ Partial Class Contratos_GesContratos_Default
         ElseIf Me.Oper = "Editar" Then
             Dim obj As New EstContratos()
 
-            MsgResult.Text = obj.Update(Pk1, CDate(txtFecDoc.Text), txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text)
+            MsgResult.Text = obj.Update(Pk1, CDate(txtFecDoc.Text), txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text, Publico.PuntoPorComa(TxtPorFis.Text))
             Me.MsgBox(MsgResult, obj.lErrorG)
             If obj.lErrorG = False Then
                 Limpiar()
@@ -101,10 +99,11 @@ Partial Class Contratos_GesContratos_Default
                 txtObs.Text = dt.Rows(0)("OBSERVACION").ToString
                 TxtNVisitas.Text = dt.Rows(0)("NVisitas").ToString
                 TxtValPago.Text = dt.Rows(0)("Valor_Pago").ToString.Replace(Publico.Punto_DecOracle, ".")
+                TxtPorFis.Text = dt.Rows(0)("por_eje_fis").ToString.Replace(Publico.Punto_DecOracle, ".")
                 Me.Pk1 = dt.Rows(0)("ID").ToString
                 Habilitar(True)
                 BtnNuevo.Enabled = False
-                BtnAceptar.Enabled = True
+                BtnGuardar.Enabled = True
             Else
                 MsgResult.Text = "No se encuentra el registro"
                 MsgBoxAlert(MsgResult, True)
@@ -148,8 +147,10 @@ Partial Class Contratos_GesContratos_Default
     Sub Limpiar()
         Me.TxtNVisitas.Text = 0
         Me.TxtValPago.Text = 0
+        TxtPorFis.Text = 0
         Me.txtFecDoc.Text = Today.ToShortDateString
         Me.txtObs.Text = "."
+
         'MsgBoxLimpiar(MsgResult)
         LbEst.Text = ""
     End Sub
@@ -158,43 +159,89 @@ Partial Class Contratos_GesContratos_Default
         If Not Page.IsPostBack Then
             Limpiar()
             Habilitar(False)
-
         End If
 
     End Sub
 
     Protected Sub BtnNuevo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnNuevo.Click
+       
+        Nuevo()
+    End Sub
+
+    'Sub Nuevo()
+    '    Limpiar()
+    '    MsgResult.Text = " Agregando Nueva Acta"
+    '    MsgBoxInfo(MsgResult, False)
+    '    Habilitar(True)
+    '    LbEst.Visible = False
+    '    BtnNuevo.Enabled = False
+    '    BtnAceptar.Enabled = True
+    '    BtnCancelar.Enabled = True
+    '    Me.Oper = "Nuevo"
+    '    Me.CboEstSig.Visible = True
+    'End Sub
+
+    Sub Habilitar(ByVal v As Boolean)
+        txtFecDoc.Enabled = v
+        TxtNVisitas.Enabled = v
+        txtObs.Enabled = v
+        TxtPorFis.Enabled = v
+        TxtValPago.Enabled = v
+        CboEstSig.Enabled = v
+
+        BtnNuevo.Enabled = v
+        BtnGuardar.Enabled = v
+        BtnCancelar.Enabled = v
+
+        If Not v Then
+            BtnGuardar.CssClass = "disabledImageButton"
+            BtnCancelar.CssClass = "disabledImageButton"
+        Else
+            BtnGuardar.CssClass = ""
+            BtnCancelar.CssClass = ""
+
+        End If
+
+    End Sub
+
+    Protected Sub BtnCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnCancelar.Click
+
+        Cancelar()
+    End Sub
+
+    Sub Cancelar()
+        Me.Oper = ""
+        Me.Limpiar()
+        Me.MsgBoxLimpiar(MsgResult)
+        Me.Habilitar(False)
+        Me.BtnNuevo.Enabled = True
+    End Sub
+
+
+
+
+    Sub Nuevo()
         Limpiar()
         MsgResult.Text = " Agregando Nueva Acta"
         MsgBoxInfo(MsgResult, False)
         Habilitar(True)
         LbEst.Visible = False
         BtnNuevo.Enabled = False
-        BtnAceptar.Enabled = True
+        BtnGuardar.Enabled = True
         BtnCancelar.Enabled = True
         Me.Oper = "Nuevo"
         Me.CboEstSig.Visible = True
-
     End Sub
 
-    Sub Habilitar(ByVal v As Boolean)
-        txtFecDoc.Enabled = v
-        TxtNVisitas.Enabled = v
-        txtObs.Enabled = v
-        TxtValPago.Enabled = v
-        CboEstSig.Enabled = v
-        BtnAceptar.Enabled = v
-        BtnCancelar.Enabled = v
-        BtnNuevo.Enabled = v
-
+    Protected Sub BtnNuevo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnNuevo.Click
+        Nuevo()
     End Sub
 
-    Protected Sub BtnCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnCancelar.Click
-        Me.Oper = ""
-        Me.Limpiar()
-        Me.MsgBoxLimpiar(MsgResult)
-        Me.Habilitar(False)
-        Me.BtnNuevo.Enabled = True
+    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardar.Click
+        Guardar()
+    End Sub
 
+    Protected Sub BtnCancelar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnCancelar.Click
+        Cancelar()
     End Sub
 End Class
