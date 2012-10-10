@@ -84,24 +84,35 @@ Partial Class Seguridad_Roles_Admin
 
     Protected Sub GridView1_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GridView1.RowCommand
 
-        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-        Me.GridView1.SelectedIndex = index
-        Dim User As String = GridView1.SelectedValue
         Select Case e.CommandName
             Case "activar"
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.GridView1.SelectedIndex = index
+                Dim User As String = GridView1.SelectedValue
+
                 Membership.GetUser(User).IsApproved = Not Membership.GetUser(User).IsApproved
                 Me.MsgResult.Text = "Cambio estado de usuario " + User
                 MsgBox(MsgResult, False)
             Case "desbloquear"
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.GridView1.SelectedIndex = index
+                Dim User As String = GridView1.SelectedValue
+
                 Dim r As Boolean = Usuarios.Desbloquear(User)
                 Me.MsgResult.Text = "Desbloqueo a usuario " + User
                 MsgBox(MsgResult, r)
             Case "AdminDesktop"
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.GridView1.SelectedIndex = index
+                Dim User As String = GridView1.SelectedValue
+
                 Dim objter As New Terceros
                 MsgResult.Text = objter.AdminDesktop(User)
                 MsgBox(MsgResult, objter.lErrorG)
         End Select
         Me.GridView1.DataBind()
+
+
     End Sub
 
     
