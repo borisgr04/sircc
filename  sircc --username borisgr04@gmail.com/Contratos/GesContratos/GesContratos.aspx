@@ -3,6 +3,15 @@
 <%@ Register src="../../CtrlUsr/DetContratos/DetContratoD.ascx" tagname="DetContrato" tagprefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
+<style>
+.disabledImageButton
+{
+     filter: alpha(opacity=30);
+     opacity: .30;
+     background-color:#111;
+}
+</style>
+
     <div class="demoarea">
     <br />
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" 
@@ -19,23 +28,23 @@
                 <br />
                     <asp:Panel ID="Panel1" runat="server" Visible="false">
                     
-    <table id="TABLE1" >
+    <table  >
         <tr>
-            <td colspan="4" 
+            <td colspan="6" 
                 style="text-align: left; empty-cells: show; vertical-align: top;">
                 
             </td>
         </tr>
         <tr>
-            <td colspan="4" style="height: 21px">
+            <td colspan="6" style="height: 21px">
                 <asp:Label ID="MsgResult" runat="server" Height="30px" Visible="False"
                     Width="90%"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td style="width: 100px; height: 21px">
+            <td >
                 Fecha Documento</td>
-            <td colspan="3" style="height: 21px">
+            <td colspan="5" >
                 <asp:TextBox ID="txtFecDoc" runat="server"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="txtFecDoc_CalendarExtender" runat="server" 
                     Enabled="True" TargetControlID="txtFecDoc">
@@ -43,73 +52,114 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 100px; height: 21px">
+            <td >
                 Documento</td>
-            <td style="width: 118px; height: 21px" colspan="2">
+            <td colspan="3" >
                 <asp:DropDownList ID="CboEstSig" runat="server" DataTextField="NOM_EST"
                     DataValueField="EST_FIN" DataSourceID="ObjRutaEst">
                 </asp:DropDownList>
                 <asp:Label ID="LbEst" runat="server"></asp:Label>
             </td>
-            <td style="width: 122px; height: 21px">
+            <td >
             </td>
         </tr>
         <tr>
-            <td style="width: 100px; height: 21px">
+            <td >
                 Observación</td>
-            <td colspan="3" style="height: 21px">
+            <td colspan="3" >
                 <asp:TextBox ID="txtObs" runat="server" TextMode="MultiLine" Width="421px">.</asp:TextBox>
                 
             </td>
         </tr>
         <tr>
-            <td style="width: 100px; height: 21px">
+            <td >
                 N° de Visitas</td>
-            <td style="width: 118px; height: 21px" colspan="2">
+            <td colspan="3" >
                 <asp:TextBox ID="TxtNVisitas" runat="server"></asp:TextBox>
                 <ajaxToolkit:FilteredTextBoxExtender ID="TxtNVisitas_FilteredTextBoxExtender" 
                     runat="server" Enabled="True" FilterType="Numbers" 
                     TargetControlID="TxtNVisitas">
                 </ajaxToolkit:FilteredTextBoxExtender>
-            </td>
-            <td style="width: 122px; height: 21px">
+                &nbsp; En el Periodo del Acta</td>
+            <td >
+                &nbsp;</td>
+            <td >
             </td>
         </tr>
         <tr>
-            <td style="width: 100px; height: 21px">
-                Valor Pago</td>
-            <td style="width: 118px; height: 21px">
+            <td >
+                Valor Autorizado Pago</td>
+            <td colspan="3" >
                 <asp:TextBox ID="TxtValPago" runat="server">0</asp:TextBox>
                 <ajaxToolkit:FilteredTextBoxExtender ID="TxtValPago_FilteredTextBoxExtender" FilterType="Custom, Numbers"
                                                 ValidChars="."
                     runat="server" Enabled="True" TargetControlID="TxtValPago">
                 </ajaxToolkit:FilteredTextBoxExtender>
+                &nbsp; En el Acta</td>
+            <td >
+                &nbsp;</td>
+            <td >
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td >
+                % de Ejecución Fisico</td>
+            <td colspan="3" >
+                <asp:TextBox ID="TxtPorFis" runat="server">0</asp:TextBox>
+                <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" FilterType="Custom, Numbers"
+                                                ValidChars="."
+                    runat="server" Enabled="True" TargetControlID="TxtPorFis">
+                </ajaxToolkit:FilteredTextBoxExtender>
+                &nbsp;</td>
+            <td >
+                &nbsp;</td>
+            <td >
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td style="text-align: center">
+                <asp:ImageButton ID="BtnNuevo" runat="server" SkinID="IBtnNuevo" />
             </td>
-            <td style="width: 118px; height: 21px">
+            <td style="text-align: center">
+                <asp:ImageButton ID="BtnGuardar" runat="server" Enabled="False" 
+                    SkinID="IBtnGuardar" />
+            </td>
+            <td style="text-align: center">
+                <asp:ImageButton ID="BtnCancelar" runat="server" Enabled="False" 
+                    SkinID="IBtnCancelar" />
+            </td>
+            <td>
                 &nbsp;</td>
-            <td style="width: 122px; height: 21px">
+            <td>
                 &nbsp;</td>
         </tr>
         <tr>
-            <td colspan="4" style="height: 21px; text-align: center">
-                <asp:Button ID="BtnNuevo" runat="server" Text="Nuevo" />
-                &nbsp;&nbsp;&nbsp; <asp:Button ID="BtnAceptar" runat="server" Text="Guardar" 
-                    Enabled="False" />
-                  &nbsp;&nbsp;&nbsp;
-                  <ajaxToolkit:ConfirmButtonExtender ID="BtnAceptar_ConfirmButtonExtender" 
-                     runat="server" 
-                     ConfirmText="Desea Guardar los Datos? Asegurese que la Información es la Correcta" 
-                     Enabled="True" TargetControlID="BtnAceptar">
-                 </ajaxToolkit:ConfirmButtonExtender>
-                <asp:Button ID="BtnCancelar" runat="server" Enabled="False" Text="Cancelar" />
+            <td>
+                &nbsp;</td>
+            <td style="text-align: center">
+                Nuevo</td>
+            <td style="text-align: center">
+                Guardar</td>
+            <td style="text-align: center">
+                Cancelar</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="6" >
+                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
             </td>
         </tr>
         <tr>
-            <td colspan="4" style="height: 21px; text-align: center">
+            <td colspan="6" style="height: 21px; text-align: center">
                 &nbsp;</td>
         </tr>
         <tr>
-            <td colspan="4" style="height: 21px; text-align: center">
+            <td colspan="6" style="height: 21px; text-align: center">
                 <asp:ObjectDataSource ID="ObjRutaEst" runat="server" 
                     OldValuesParameterFormatString="original_{0}" SelectMethod="GetByEstIni" 
                     TypeName="Est_Ruta">
@@ -147,7 +197,11 @@
                         <asp:BoundField DataField="FECHA" DataFormatString="{0:d}" HeaderText="FECHA" SortExpression="FECHA" />
                         <asp:BoundField DataField="USUARIO" HeaderText="USUARIO" SortExpression="USUARIO" />
                         <asp:BoundField DataField="OBSERVACION" HeaderText="OBSERVACION" Visible="False" />
-                        <asp:BoundField DataField="VALOR_PAGO" HeaderText="VALOR_PAGO" Visible="True" 
+                        <asp:BoundField DataField="OBSERVACION" HeaderText="OBSERVACION" Visible="False" />
+                        <asp:BoundField DataField="nvisitas" HeaderText="N° VISITAS" Visible="True" 
+                            DataFormatString="{0:c}" >
+                            </asp:BoundField>
+                        <asp:BoundField DataField="por_eje_fis" HeaderText="% EJECUCIÓN FISICO" Visible="True" 
                             DataFormatString="{0:c}" >
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:BoundField>

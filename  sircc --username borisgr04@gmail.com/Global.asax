@@ -5,11 +5,11 @@
     Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
         
         Dim m As DBMenu = New DBMenu
-        'Dim mc As MembershipUserCollection = Membership.FindUsersByName("admin")
-        'If mc.Count = 0 Then
-            'Membership.CreateUser("admin", "sircc2011.")
-            'Mail.EnviarAuto("Creación de Usuario Inicial" + Now.ToLongTimeString, "admin")
-        'End If
+        Dim mc As MembershipUserCollection = Membership.FindUsersByName("admin")
+        If mc.Count = 0 Then
+            Membership.CreateUser("admin", "sircc2011.")
+            Mail.EnviarAuto("Creación de Usuario Inicial:" + Now.ToLongTimeString, "admin")
+        End If
         m.GenerarRoles()
         
     End Sub
