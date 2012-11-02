@@ -235,7 +235,7 @@ Partial Class Contratos_RadicacionM_Default
         If Me.TxtCodCon.Text.Length <> 8 Then
             Me.TxtCodCon.Text = obj.GetCodigo(Me.CboTip.SelectedValue, Me.TxtCodCon.Text, Vigencia_Cookie)
         End If
-        dt = obj.GetByPkD(Me.TxtCodCon.Text)
+        dt = obj.GetByPk(Me.TxtCodCon.Text)
 
         If dt.Rows.Count > 0 Then
             Me.TxtObj.Text = dt.Rows(0)("obj_con").ToString
@@ -583,5 +583,8 @@ Partial Class Contratos_RadicacionM_Default
     End Sub
 
   
+    Protected Sub IbtnAbrir_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAbrir.Click
+
+    End Sub
 End Class
 

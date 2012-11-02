@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Cesiones.aspx.vb" Inherits="Contratos_Cesiones_Default" %>
 
-<%@ Register src="../../CtrlUsr/DetContratos/DetContrato.ascx" tagname="DetContrato" tagprefix="uc1" %>
+<%@ Register src="../../CtrlUsr/DetContratos/DetContratoL.ascx" tagname="DetContrato" tagprefix="uc1" %>
 
 <%@ Register src="../../CtrlUsr/AdmTercero/AdmTercero.ascx" tagname="admtercero" tagprefix="uc3" %>
 
