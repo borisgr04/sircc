@@ -29,6 +29,8 @@
     
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
     <ContentTemplate>
+        <asp:Label ID="Label11" runat="server" CssClass="Titulo" 
+            Text="LEGALIZACIÓN DE CONTRATOS"></asp:Label>
     <uc1:DetContrato ID="DetContrato1" runat="server" AceptarClicked="DetContrato1_AceptarClicked" />
         <br /><br />
         <asp:Label ID="MsgResult" runat="server"></asp:Label>
