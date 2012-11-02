@@ -489,9 +489,9 @@ Public Class Contratos
         Me.Conectar()
         querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con And Dep_pCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo ) "
         Me.CrearComando(querystring)
+
         AsignarParametroCadena(":cod_con", Cod_Con)
         Me.AsignarParametroCadena(":ide_ter_abo", Me.usuario)
-
         Dim dataTb As DataTable = EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataTb
@@ -517,6 +517,18 @@ Public Class Contratos
             Return GetByPk(Cod_Con)
         End If
 
+    End Function
+
+    ''' <summary>
+    ''' Consulta de contratos por llave primaria, filtrando por dependencia necesidad asociada.
+    ''' 2 / NOVIEMBRE DE 2012
+    ''' </summary>
+    ''' <param name="Cod_Con"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByPkDelegada(ByVal Cod_Con As String) As DataTable
+            Return GetByPkD(Cod_Con)
     End Function
 
     ''' <summary>
