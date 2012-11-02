@@ -67,9 +67,9 @@ Public Class Contratos
     End Function
 
     Enum FiltroContratos
-        Todos
-        DepNec
-        DepDel
+        Todos = 0
+        DepNec = 1
+        DepDel = 2
     End Enum
 
     Dim FiltroC As FiltroContratos
@@ -529,7 +529,7 @@ Public Class Contratos
     Public Overloads Function GetByPkN(ByVal Cod_Con As String) As DataTable
         Me.NroCon = Cod_Con
         Me.Conectar()
-        querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con And Dep_pCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo ) "
+        querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con And Dep_Con In (SELECT cod_dep FROM vdepter WHERE ide_ter_abo=:ide_ter_abo ) "
         Me.CrearComando(querystring)
         AsignarParametroCadena(":cod_con", Cod_Con)
         Me.AsignarParametroCadena(":ide_ter_abo", Me.usuario)

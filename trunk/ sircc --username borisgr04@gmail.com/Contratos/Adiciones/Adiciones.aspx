@@ -10,6 +10,9 @@
             EnableScriptGlobalization="True">
         </ajaxToolkit:ToolkitScriptManager>
 
+                <asp:Label ID="Label1" runat="server" CssClass="Titulo" 
+                    Text="MODIFICATORIOS / ADICIONES"></asp:Label>
+
     <asp:UpdatePanel ID="UpdAdi" runat="server">
     <ContentTemplate>
     <uc1:DetContrato ID="DetContrato1" runat="server" OnAceptarClicked="DetContrato1_OnAceptarClicked" />
