@@ -108,14 +108,27 @@ Public Class UsuDel
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetDepDel(ByVal IDE_TER As String) As DataTable
+        Dim c As New Contratos
+        Dim FiltroC As Contratos.FiltroContratos
+        FiltroC = c.GetFiltro_Contrato()
+
+        Dim tabladep As String = "vdepdel"
+        If FiltroC = Contratos.FiltroContratos.DepDel Then
+            tabladep = "vdepdel"
+        ElseIf FiltroC = Contratos.FiltroContratos.DepNec Then
+            tabladep = "vdependencia2"
+        End If
+
         Conectar()
-        querystring = "SELECT dd.cod_dep, nom_dep, norma_del, (CASE WHEN (Nvl(da.estado,'IN') = 'IN') THEN '0' ELSE '1' END )  EST,  Nvl(asig_proc,'NO') asig_proc,Nvl(coordinador,'NO') coordinador,nvl(id_hdep,0) id_hdep,Nvl(da.estado,'IN') estado FROM vdepdel dd left join hdep_abogados da ON dd.cod_dep=da.cod_dep and da.ide_ter=:IDE_TER and da.estado='AC' Order by Cod_dep"
+        querystring = "SELECT dd.cod_dep, nom_dep, norma_del, (CASE WHEN (Nvl(da.estado,'IN') = 'IN') THEN '0' ELSE '1' END )  EST,  Nvl(asig_proc,'NO') asig_proc,Nvl(coordinador,'NO') coordinador,nvl(id_hdep,0) id_hdep,Nvl(da.estado,'IN') estado FROM " + tabladep + " dd left join hdep_abogados da ON dd.cod_dep=da.cod_dep and da.ide_ter=:IDE_TER and da.estado='AC' Order by Nom_Dep"
         CrearComando(querystring)
         AsignarParametroCadena(":IDE_TER", IDE_TER)
         Dim datatb As DataTable = EjecutarConsultaDataTable()
         Desconectar()
         Return datatb
     End Function
+
+
 
     ''' <summary>
     ''' Consulta de las dependencias y resalta las asignadas al usuario especifico
