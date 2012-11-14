@@ -56,7 +56,7 @@
                 Documento</td>
             <td colspan="3" >
                 <asp:DropDownList ID="CboEstSig" runat="server" DataTextField="NOM_EST"
-                    DataValueField="EST_FIN" DataSourceID="ObjRutaEst">
+                    DataValueField="EST_FIN" DataSourceID="ObjRutaEst" AutoPostBack="True">
                 </asp:DropDownList>
                 <asp:Label ID="LbEst" runat="server"></asp:Label>
             </td>

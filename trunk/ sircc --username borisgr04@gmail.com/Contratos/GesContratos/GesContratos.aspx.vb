@@ -151,7 +151,9 @@ Partial Class Contratos_GesContratos_Default
         Me.txtFecDoc.Text = Today.ToShortDateString
         Me.txtObs.Text = "."
 
-        'MsgBoxLimpiar(MsgResult)
+        MsgBoxLimpiar(MsgResult)
+
+
         LbEst.Text = ""
     End Sub
 
@@ -159,6 +161,7 @@ Partial Class Contratos_GesContratos_Default
         If Not Page.IsPostBack Then
             Limpiar()
             Habilitar(False)
+            Habilitar2(False)
         End If
 
     End Sub
@@ -199,8 +202,12 @@ Partial Class Contratos_GesContratos_Default
         Else
             BtnGuardar.CssClass = ""
             BtnCancelar.CssClass = ""
-
         End If
+
+        If CboEstSig.SelectedValue = "01" Then
+            Habilitar2(False)
+        End If
+
 
     End Sub
 
@@ -216,9 +223,6 @@ Partial Class Contratos_GesContratos_Default
         Me.Habilitar(False)
         Me.BtnNuevo.Enabled = True
     End Sub
-
-
-
 
     Sub Nuevo()
         Limpiar()
@@ -244,4 +248,23 @@ Partial Class Contratos_GesContratos_Default
     Protected Sub BtnCancelar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnCancelar.Click
         Cancelar()
     End Sub
+
+    Protected Sub CboEstSig_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboEstSig.SelectedIndexChanged
+
+        If CboEstSig.SelectedValue = "01" Then
+            Habilitar2(False)
+        Else
+            Habilitar2(True)
+        End If
+
+    End Sub
+
+
+    Public Sub Habilitar2(ByVal valor As Boolean)
+        Me.TxtValPago.Enabled = valor
+        Me.TxtNVisitas.Enabled = valor
+        Me.TxtPorFis.Enabled = valor
+    End Sub
+
+
 End Class

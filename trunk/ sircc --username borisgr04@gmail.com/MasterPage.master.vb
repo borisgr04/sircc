@@ -64,7 +64,7 @@ Partial Class MasterPage
         Context.User = Nothing
         Session.Abandon()
         Session.Clear()
-        Response.Redirect(Publico.DirectorioVirtual + "/publico/logout.aspx")
+        Response.Redirect("~/publico/logout.aspx")
     End Sub
 
     'Protected Sub BtnCerrar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnCerrar.Click

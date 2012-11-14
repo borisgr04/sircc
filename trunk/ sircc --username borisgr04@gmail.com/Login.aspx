@@ -70,7 +70,7 @@ input:focus, input.sffocus{background-color:#DEEFFF;}
           <td>
          Contraseña:
           </td>
-          <td> <asp:TextBox ID="TxtClave" runat="server" Width="135" TextMode="Password" autocomplete="off"></asp:TextBox>
+          <td> <asp:TextBox ID="TxtClave" runat="server" Width="135" TextMode="Password" AutoCompleteType="None"></asp:TextBox>
                       <asp:RequiredFieldValidator id="RequiredFieldValidator2" runat="server" ControlToValidate="TxtClave" ErrorMessage="La Contraseña es requerida" Display="Dynamic">*
                         </asp:RequiredFieldValidator></td>
 

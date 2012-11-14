@@ -787,29 +787,29 @@ Partial Class Procesos_GProcesoN_Default
 
     End Sub
 
-    'Protected Sub BtnGen_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGen.Click
-    '    'Dim pcont As New GProcesos
-    '    'Dim dt As DataTable
-    '    'dt = pcont.GetByPk(TxtNProc.Text, CboGrupos.SelectedValue)
-    '    'Dim est As String = dt.Rows(0).Item("Estado").ToString
-    '    'MsgBoxLimpiar(MsgResult)
-    '    'MsgBoxLimpiar(LbMinuta)
-    '    'If est = "TR" Then
-    '    '    Me.MsgResult.Text = "El proceso no se encuentra validado para generar MINUTA"
-    '    '    LbMinuta.Text = Me.MsgResult.Text
-    '    '    MsgBoxAlert(MsgResult, True)
-    '    '    MsgBoxAlert(LbMinuta, True)
-    '    'Else
-    '    '    Dim GM As New GMinuta
-    '    '    GM.operacion = GMinuta.eoperacion.Generar
-    '    '    GM.Num_Proc = Me.TxtNprocA.Text
-    '    '    GM.Grupo = Me.CboGrupos.SelectedValue
-    '    '    GM.Ide_Pla = Me.CboPlantilla.SelectedValue
-    '    '    GM.GenerarMinuta()
-    '    '    Me.TxtLog.Text = GM.Ultimo_Msg.Replace("<br>", vbCrLf)
-    '    '    GrdMin.DataBind()
-    '    'End If
-    'End Sub
+    Protected Sub BtnGen_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGen.Click
+        Dim pcont As New GProcesos
+        Dim dt As DataTable
+        dt = pcont.GetByPk(TxtNProc.Text, CboGrupos.SelectedValue)
+        Dim est As String = dt.Rows(0).Item("Estado").ToString
+        MsgBoxLimpiar(MsgResult)
+        MsgBoxLimpiar(LbMinuta)
+        If est = "TR" Then
+            Me.MsgResult.Text = "El proceso no se encuentra validado para generar MINUTA"
+            LbMinuta.Text = Me.MsgResult.Text
+            MsgBoxAlert(MsgResult, True)
+            MsgBoxAlert(LbMinuta, True)
+        Else
+            Dim GM As New GMinuta
+            GM.operacion = GMinuta.eoperacion.Generar
+            GM.Num_Proc = Me.TxtNprocA.Text
+            GM.Grupo = Me.CboGrupos.SelectedValue
+            GM.Ide_Pla = Me.CboPlantilla.SelectedValue
+            GM.GenerarMinuta()
+            Me.TxtLog.Text = GM.Ultimo_Msg.Replace("<br>", vbCrLf)
+            GrdMin.DataBind()
+        End If
+    End Sub
     Protected Sub GrdMin_Ppol_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GrdMin.RowCommand
         Select Case e.CommandName
             Case "Inhabilitar"

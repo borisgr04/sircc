@@ -90,7 +90,7 @@ Partial Class Reportes_Certificados_Certificados
     End Sub
 
     Protected Sub grdCert_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdCert.SelectedIndexChanged
-        Redireccionar_Pagina(String.Format("ashx/verCert.ashx?nro_cert={0}&vig_cert={1}&CVXX={2}", grdCert.SelectedRow.Cells(1).Text, grdCert.SelectedRow.Cells(0).Text, grdCert.SelectedRow.Cells(2).Text))
+        Redireccionar_Pagina(String.Format("/ashx/verCert.ashx?nro_cert={0}&vig_cert={1}&CVXX={2}", grdCert.SelectedRow.Cells(1).Text, grdCert.SelectedRow.Cells(0).Text, grdCert.SelectedRow.Cells(2).Text))
     End Sub
 
     Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click

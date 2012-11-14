@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="PConsProc.aspx.vb" Inherits="DatosBasicos_PCons_Proc_Default" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="PConsProc.aspx.vb" EnableEventValidation="false"  Inherits="DatosBasicos_PCons_Proc_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 
@@ -153,7 +153,7 @@
 </asp:GridView> 
             <asp:GridView ID="GridView2" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" CellPadding="4" 
-                DataKeyNames="Vigencia,Dep_Del,Tip_Proc" DataSourceID="ObjTipos" 
+                DataKeyNames="Vigencia,Dep_Del,Tip_Proc" 
                 EmptyDataText="No se encontraron Registros en la Base de Datos" 
                 EnableModelValidation="True" ForeColor="#333333" GridLines="None" 
                 OnRowCommand="GridView1_RowCommand" OnRowDataBound="GridView1_RowDataBound1" 
