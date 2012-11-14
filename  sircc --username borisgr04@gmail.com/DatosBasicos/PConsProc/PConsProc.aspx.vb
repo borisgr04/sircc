@@ -166,4 +166,7 @@ Partial Class DatosBasicos_PCons_Proc_Default
     Protected Sub CboFilVig0_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboFilVig0.SelectedIndexChanged
         Me.GridView1.DataBind()
     End Sub
+    Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
+
+    End Sub
 End Class

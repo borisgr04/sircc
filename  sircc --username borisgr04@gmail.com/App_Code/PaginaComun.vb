@@ -327,8 +327,11 @@ Public Class PaginaComun
 
     End Sub
 
-    Public Sub Redireccionar_Pagina(ByVal Url As String)
+    Public Sub Redireccionar_Pagina2(ByVal Url As String)
         Response.Redirect(Me.RUTA_VIRTUAL() + Url)
+    End Sub
+    Public Sub Redireccionar_Pagina(ByVal Url As String)
+        Response.Redirect("~" + Url)
     End Sub
 
     Function GUID() As String
@@ -366,7 +369,13 @@ Public Class PaginaComun
 
     End Property
 
-   
+    'Public Shared Function Path() As String
+    '    Return Server.MapPath("~")
+    'End Function
+
+
+
+
 End Class
 
 

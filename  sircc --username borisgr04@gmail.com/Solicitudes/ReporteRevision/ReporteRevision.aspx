@@ -23,15 +23,14 @@
                                         <br />
                                         <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
           
-                    <TABLE>
+                    <table >
                         <tbody>
                                <tr>
                                 <td colspan="6">
                                     <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
                                         SkinID="ValidationSummary1" ValidationGroup="V" />
                                    </td>
-                                <td>
-                                    &nbsp;</td>
+                                
                             </tr>
                             <tr>
                                 <td style="width: 95px">
@@ -46,8 +45,7 @@
                                     &nbsp;</td>
                                 <td style="WIDTH: 99px">
                                     &nbsp;</td>
-                                <td style="WIDTH: 99px">
-                                    &nbsp;</td>
+                                
                             </tr>
                             <tr>
                                 <td style="width: 95px">

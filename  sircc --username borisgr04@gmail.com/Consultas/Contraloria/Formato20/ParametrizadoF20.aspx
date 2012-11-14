@@ -41,8 +41,8 @@
         <tr>
             <td style="width: 512px; text-align: right;" >
                 <asp:DropDownList ID="CboVersion" runat="server">
-                    <asp:ListItem Value="1">Formato 20 - Version 1</asp:ListItem>
                     <asp:ListItem Value="2">Formato 20 - Versión 2 (Agosto 2012)</asp:ListItem>
+                    <asp:ListItem Value="1">Formato 20 - Version 1</asp:ListItem>
                 </asp:DropDownList>
             </td>
             <td >

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Adiciones.aspx.vb" Inherits="Contratos_Adiciones_Default" %>
 
-<%@ Register src="../../CtrlUsr/DetContratos/DetContratoD.ascx" tagname="DetContrato" tagprefix="uc1" %>
+<%@ Register src="../../CtrlUsr/DetContratos/DetContratoL.ascx" tagname="DetContrato" tagprefix="uc1" %>
 <%@ Register src="../../CtrlUsr/grdAdiC/grdAdiC.ascx" tagname="grdAdiC" tagprefix="uc2" %>
 <%@ Register Src="../../CtrlUsr/Progreso/Progress.ascx" TagName="Progress" TagPrefix="ucProg" %>
 
