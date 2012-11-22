@@ -8,7 +8,7 @@ Public Class EstContratos
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetRecords(ByVal cod_con As String) As DataTable
         Me.Conectar()
-        querystring = "SELECT ESTADO_INICIAL, ESTADO_FINAL, FECHA, DOCUMENTO, USUARIO, NRO_CONTRATO, EXT , 0 DIAS_EJEC, OBSERVACION,ID,VALOR_PAGO,por_eje_fis,Ult FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
+        querystring = "SELECT ESTADO_INICIAL, ESTADO_FINAL, FECHA, DOCUMENTO, USUARIO, NRO_CONTRATO, EXT , 0 DIAS_EJEC, OBSERVACION,ID,VALOR_PAGO,POR_EJE_FIS,Ult FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
         Me.CrearComando(querystring)
         AsignarParametroCadena(":cod_con", cod_con)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()

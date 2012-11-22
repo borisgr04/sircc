@@ -188,21 +188,18 @@
                         <asp:CommandField ButtonType="Image" 
                             SelectImageUrl="~/images/BlueTheme/Select.png" SelectText=""
                             ShowSelectButton="True" />
-                        <asp:BoundField DataField="ESTADO_INICIAL" HeaderText="DOCUMENTO ANTERIOR" 
-                            SortExpression="ESTADO_INICIAL" Visible="False" />
-                        <asp:BoundField DataField="ESTADO_FINAL" HeaderText="DOCUMENTO " 
-                            SortExpression="ESTADO_FINAL" />
-                        <asp:BoundField DataField="Nro_Doc" HeaderText="N° DOCUMENTO" 
-                            SortExpression="Nro_Doc" />
+                        <asp:BoundField DataField="ESTADO_INICIAL" HeaderText="DOCUMENTO ANTERIOR" SortExpression="ESTADO_INICIAL" Visible="False" />
+                        <asp:BoundField DataField="ESTADO_FINAL" HeaderText="DOCUMENTO " SortExpression="ESTADO_FINAL" />
+                        <asp:BoundField DataField="NRO_DOC" HeaderText="N° DOCUMENTO" SortExpression="Nro_Doc" />
                         <asp:BoundField DataField="FECHA" DataFormatString="{0:d}" HeaderText="FECHA" SortExpression="FECHA" />
                         <asp:BoundField DataField="USUARIO" HeaderText="USUARIO" SortExpression="USUARIO" />
                         <asp:BoundField DataField="OBSERVACION" HeaderText="OBSERVACION" Visible="False" />
                         <asp:BoundField DataField="OBSERVACION" HeaderText="OBSERVACION" Visible="False" />
-                        <asp:BoundField DataField="nvisitas" HeaderText="N° VISITAS" Visible="True" 
-                            DataFormatString="{0:c}" >
-                            </asp:BoundField>
-                        <asp:BoundField DataField="por_eje_fis" HeaderText="% EJECUCIÓN FISICO" Visible="True" 
-                            DataFormatString="{0:c}" >
+                        <asp:BoundField DataField="NVISITAS" HeaderText="N° VISITAS" Visible="True" />
+                        <asp:BoundField DataField="por_eje_fis" HeaderText="% EJECUCIÓN FISICO" Visible="True"  >
+                        <ItemStyle HorizontalAlign="Right" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="VALOR_PAGO" HeaderText="VALOR AUTORIZADO A PAGAR" Visible="True" DataFormatString="{0:c}" >
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:BoundField>
                         <asp:ButtonField ButtonType="Image" CommandName="Editar" HeaderText="EDITAR" 
