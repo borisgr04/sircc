@@ -51,6 +51,7 @@ Partial Class Contratos_GesContratos_Default
             Limpiar()
             Habilitar(False)
             BtnNuevo.Enabled = True
+            lbTotalPorPagar.Text = FormatCurrency(DetContrato1.Valor_Total_Prop)
         Else
             Panel1.Visible = False
             Limpiar()
@@ -162,6 +163,7 @@ Partial Class Contratos_GesContratos_Default
             Limpiar()
             Habilitar(False)
             Habilitar2(False)
+
         End If
 
     End Sub
