@@ -40,8 +40,8 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 41px">
-                            <asp:ImageButton ID="IBtnNuevo" runat="server" Height="32px" 
-                                ImageUrl="~/images/Operaciones/New1.png" Width="32px" />
+                            <asp:ImageButton ID="IBtnNuevo" runat="server" Height="32px" Width="32px" 
+                                SkinID="IBtnNuevo" />
                         </td>
                         <td style="width: 115px">
                             <asp:TextBox ID="TxtNprocA" runat="server" AutoPostBack="True"></asp:TextBox>
@@ -55,25 +55,25 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                                 ImageUrl="~/images/mnProcesos/open-icon32.png" Width="32px" />
                         </td>
                         <td style="width: 33px" class="style4">
-                            <asp:ImageButton ID="IBtnEditar" runat="server" Height="32px" 
-                                ImageUrl="~/images/Operaciones/Edit2.png" Width="32px" />
+                            <asp:ImageButton ID="IBtnEditar" runat="server" Height="32px" Width="32px" 
+                                SkinID="IBtnEditar" />
                         </td>
-                        <td style="width: 43px">
+                        <td style="width: 43px; text-align: center;">
                             <asp:ImageButton ID="IBtnGuardar" runat="server" Height="32px" 
-                                SkinID="IBtnGuardar" Width="32px" ValidationGroup="GUARDAR" />
+                                SkinID="IBtnGuardar" Width="32px" ValidationGroup="GUARDAR" 
+                                style="text-align: center" />
                             <cc1:ConfirmButtonExtender ID="IBtnGuardar_ConfirmButtonExtender" 
                                 runat="server" ConfirmText="Confirme si desea Guardar los Cambios?" 
                                 Enabled="True" TargetControlID="IBtnGuardar">
                             </cc1:ConfirmButtonExtender>
                         </td>
-                        <td style="width: 44px" class="style1">
-                            <asp:ImageButton ID="IBtnCancelar" runat="server" Height="32px" 
-                                ImageUrl="~/images/mnProcesos/undo.png" Width="32px" />
+                        <td style="width: 44px; text-align: center;" class="style1">
+                            <asp:ImageButton ID="IBtnCancelar" runat="server" Height="32px" Width="32px" 
+                                SkinID="IBtnCancelar" />
                         </td>
                         <td style="width: 87px; text-align: center">
-                            <asp:ImageButton ID="BtnReabrir" runat="server" Height="32px" 
-                                ImageUrl="~/images/Operaciones/actualizar.png" Width="32px" 
-                                Enabled="False" />
+                            <asp:ImageButton ID="BtnReabrir" runat="server" Height="32px" Width="32px" 
+                                Enabled="False" SkinID="IBtnReabrir" />
                         </td>
                         <td>
                             <asp:ImageButton ID="BtnAsig0" runat="server" SkinID="IBtnAsig" />
