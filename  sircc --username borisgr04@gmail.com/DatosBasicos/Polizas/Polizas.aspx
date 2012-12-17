@@ -32,7 +32,7 @@
         <contenttemplate>
 &nbsp;<asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" Text="Polizas"></asp:Label><BR />
             <asp:Label id="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;<asp:GridView 
-                id="GridView1" runat="server" Width="500px" ForeColor="#333333" 
+                id="GridView1" runat="server" Width="709px" ForeColor="#333333" 
                 AllowSorting="True" OnRowDataBound="GridView1_RowDataBound1" 
                 DataSourceID="ObjTipos" GridLines="None" CellPadding="4" ShowFooter="True" 
                 OnRowCommand="GridView1_RowCommand" DataKeyNames="Cod_Pol" 
@@ -55,6 +55,8 @@
 <asp:Label id="Lbcimp" runat="server" Text='<%# Bind("Nom_Pol") %>' __designer:wfdid="w21"></asp:Label> 
 </ItemTemplate>
 </asp:TemplateField>
+    <asp:BoundField DataField="Descripcion" HeaderText="Descripción Minuta" 
+        SortExpression="Descripcion" />
 <asp:TemplateField HeaderText="Estado" SortExpression="Est_Pol"><ItemTemplate>
 <asp:Label id="LbEst" runat="server" Text='<%# Bind("Est_Pol") %>' __designer:wfdid="w22"></asp:Label> 
 </ItemTemplate>
@@ -88,7 +90,7 @@
                 EnableModelValidation="True" ForeColor="#333333" GridLines="None" 
                 OnRowCommand="GridView1_RowCommand" OnRowDataBound="GridView1_RowDataBound1" 
                 OnSelectedIndexChanged="GridView1_SelectedIndexChanged" ShowFooter="True" 
-                Width="500px">
+                Width="500px" Visible="False">
                 <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                 <Columns>
                     <asp:TemplateField HeaderText="Código" SortExpression="Cod_pol">
@@ -103,6 +105,8 @@
                                 Text='<%# Bind("Nom_Pol") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:BoundField DataField="Descripcion" HeaderText="Descripción" 
+                        SortExpression="Descripcion" />
                     <asp:TemplateField HeaderText="Estado" SortExpression="Est_Pol">
                         <ItemTemplate>
                             <asp:Label ID="LbEst0" runat="server" __designer:wfdid="w22" 
@@ -142,7 +146,7 @@
         runat="server"><contenttemplate>
 <!-- Mensaje de Salida--><BR /><asp:Button style="DISPLAY: none" id="hiddenTargetControlForModalPopup2" runat="server"></asp:Button> <ajaxToolkit:ModalPopupExtender id="ModalPopupTer" runat="server" PopupDragHandleControlID="programmaticPopupDragHandle2" PopupControlID="programmaticPopup2" DropShadow="True" BackgroundCssClass="modalBackground" BehaviorID="programmaticModalPopupBehavior2" RepositionMode="RepositionOnWindowScroll" TargetControlID="hiddenTargetControlForModalPopup2">
             </ajaxToolkit:ModalPopupExtender>&nbsp;&nbsp; 
-            <asp:Panel id="programmaticPopup2" runat="server" Width="433px" Height="306px" 
+            <asp:Panel id="programmaticPopup2" runat="server" Width="523px" Height="368px" 
                 CssClass="ModalPanel2"><asp:Panel id="programmaticPopupDragHandle2" 
                     runat="Server" Width="659px" Height="30px" CssClass="BarTitleModal2">
                     <DIV style="padding: 5px; VERTICAL-ALIGN: middle; width: 419px;"><DIV style="FLOAT: left">
@@ -169,23 +173,42 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                         ControlToValidate="txtNomNew" ErrorMessage="Digite Codigo Impuesto">*</asp:RequiredFieldValidator>
                     </TD></TR>
+        <TR><TD style="WIDTH: 98px; HEIGHT: 23px">
+                    <asp:Label ID="Label6" runat="server" Text="Descripción" Width="126px"></asp:Label>
+                    </TD><TD style="WIDTH: 100px; HEIGHT: 23px">
+                        <asp:TextBox ID="txtDesc" runat="server" Height="79px" TextMode="MultiLine" 
+                            Width="221px"></asp:TextBox>
+                    </TD><TD style="WIDTH: 100px; HEIGHT: 23px">&nbsp;</TD></TR>
         <TR><TD style="WIDTH: 98px; HEIGHT: 18px">
-                    <asp:Label ID="Label5" runat="server" Text="Estado"></asp:Label>
-                    </TD><TD style="WIDTH: 100px; HEIGHT: 18px">
-                        <asp:DropDownList ID="CboEst" runat="server">
-                            <asp:ListItem Value="AC">Activo</asp:ListItem>
-                            <asp:ListItem Value="IN">Inactivo</asp:ListItem>
-                        </asp:DropDownList>
-                    </TD><TD style="WIDTH: 100px; HEIGHT: 18px">&nbsp;</TD></TR>
-        <TR><TD style="WIDTH: 98px; HEIGHT: 19px">
-                &nbsp;</TD><TD style="WIDTH: 100px; HEIGHT: 19px">&nbsp;</TD>
-            <TD style="WIDTH: 100px; HEIGHT: 19px">
-                &nbsp;</TD></TR><TR><TD style="WIDTH: 98px"></TD><TD style="WIDTH: 100px"></TD>
-            <TD style="WIDTH: 100px"></TD></TR>
-        <TR><TD style="WIDTH: 98px"></TD>
-            <TD style="WIDTH: 100px"></TD><TD style="WIDTH: 100px"></TD></TR><TR>
-            <TD style="WIDTH: 98px"></TD><TD style="WIDTH: 100px"></TD><TD style="WIDTH: 100px"></TD></TR>
-        <TR><TD style="TEXT-ALIGN: center" colSpan=3><asp:Button id="BtnGuardar" onclick="BtnGuardar_Click" runat="server" Text="Guardar"></asp:Button>&nbsp;<asp:Button id="BtnEliminar" onclick="BtnEliminar_Click" runat="server" Text="Eliminar"></asp:Button>&nbsp; <INPUT id="BtnCancelar" type=button value="Cancelar" /> </TD></TR></TBODY></TABLE>&nbsp;</asp:Panel>&nbsp;&nbsp; 
+                <asp:Label ID="Label5" runat="server" Text="Estado"></asp:Label>
+            </TD><TD style="WIDTH: 100px; HEIGHT: 18px">
+                <asp:DropDownList ID="CboEst" runat="server">
+                    <asp:ListItem Value="AC">Activo</asp:ListItem>
+                    <asp:ListItem Value="IN">Inactivo</asp:ListItem>
+                </asp:DropDownList>
+            </TD>
+            <TD style="WIDTH: 100px; HEIGHT: 18px">
+                &nbsp;</TD></TR><TR><TD style="WIDTH: 98px; height: 19px;">&nbsp;</TD>
+                            <TD style="WIDTH: 100px; height: 19px;">&nbsp;</TD>
+            <TD style="WIDTH: 100px; height: 19px;">&nbsp;</TD></TR>
+        <TR><TD style="width: 98px;"> </TD>
+            <td style="WIDTH: 100px">
+            </td>
+            <td style="WIDTH: 100px">
+            </td>
+                        </TR>
+                        <tr>
+                            <td colspan="3" style="TEXT-ALIGN: center">
+                                <asp:Button ID="BtnGuardar" runat="server" onclick="BtnGuardar_Click" 
+                                    Text="Guardar" />
+                                &nbsp;<asp:Button ID="BtnEliminar" runat="server" onclick="BtnEliminar_Click" 
+                                    Text="Eliminar" />
+                                &nbsp;
+                                <INPUT id="BtnCancelar" 
+                type=button value="Cancelar" />
+                            </td>
+                        </tr>
+                    </TBODY></TABLE>&nbsp;</asp:Panel>&nbsp;&nbsp; 
 </contenttemplate>
     </asp:UpdatePanel>
 

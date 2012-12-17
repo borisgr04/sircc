@@ -43,6 +43,7 @@ Partial Class Dependencias_Dependencias
                     Me.TxtNorma.Text = tb.Rows(0)("norma_del").ToString
                     Me.CboEst.Text = tb.Rows(0)("Estado").ToString
                     Me.TxtEmail.Text = tb.Rows(0)("Email").ToString
+                    Me.TxtCargo.Text = tb.Rows(0)("cargo_enc").ToString
                     Me.Pk1 = tb.Rows(0)("COD_DEP").ToString
                     Habilitar(True)
 
@@ -68,6 +69,7 @@ Partial Class Dependencias_Dependencias
                     Me.TxtNorma.Text = tb.Rows(0)("norma_del").ToString
                     Me.CboEst.Text = tb.Rows(0)("Estado").ToString
                     Me.TxtEmail.Text = tb.Rows(0)("Email").ToString
+                    Me.TxtCargo.Text = tb.Rows(0)("cargo_enc").ToString
                     Me.Pk1 = tb.Rows(0)("COD_DEP").ToString
                     Habilitar(False)
 
@@ -125,12 +127,12 @@ Partial Class Dependencias_Dependencias
 
     End Sub
 
-    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnGuardar.Click 'Handles BtnGuardar.Click
         Select Case Me.Oper
             Case "Nuevo"
-                Me.MsgResult.Text = Obj.Insert(Me.TxtCod.Text, Me.TxtNom.Text, Me.CboDel.SelectedValue, Me.TxtAbr.Text, Me.TxtIde.Text, Me.TxtNorma.Text, Me.TxtEmail.Text, CboEst.SelectedValue)
+                Me.MsgResult.Text = Obj.Insert(Me.TxtCod.Text, Me.TxtNom.Text, Me.CboDel.SelectedValue, Me.TxtAbr.Text, Me.TxtIde.Text, Me.TxtNorma.Text, Me.TxtEmail.Text, Me.TxtCargo.Text, CboEst.SelectedValue)
             Case "Editar"
-                Me.MsgResult.Text = Obj.Update(Me.Pk1, Me.TxtCod.Text, Me.TxtNom.Text, Me.CboDel.SelectedValue, Me.TxtAbr.Text, Me.TxtIde.Text, Me.TxtNorma.Text, Me.TxtEmail.Text, CboEst.SelectedValue)
+                Me.MsgResult.Text = Obj.Update(Me.Pk1, Me.TxtCod.Text, Me.TxtNom.Text, Me.CboDel.SelectedValue, Me.TxtAbr.Text, Me.TxtIde.Text, Me.TxtNorma.Text, Me.TxtEmail.Text, Me.TxtCargo.Text, CboEst.SelectedValue)
         End Select
         FillCustomerInGrid()
         Me.MsgBox(MsgResult, Obj.lErrorG)

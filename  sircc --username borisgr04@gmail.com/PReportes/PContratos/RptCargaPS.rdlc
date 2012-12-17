@@ -603,7 +603,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>0.98425in</Size>
+                <Size>2.8415in</Size>
                 <CellContents>
                   <Textbox Name="ENCARGADO">
                     <CanGrow>true</CanGrow>
@@ -643,7 +643,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>0.98425in</Size>
+                <Size>2.8415in</Size>
                 <CellContents>
                   <Textbox Name="Textbox7">
                     <CanGrow>true</CanGrow>
@@ -682,8 +682,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsCargaPS</DataSetName>
+        <Top>0.97896cm</Top>
         <Height>2.4cm</Height>
-        <Width>9.99998cm</Width>
+        <Width>14.71739cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1232,7 +1233,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>0.98425in</Size>
+                <Size>2.8415in</Size>
                 <CellContents>
                   <Textbox Name="ENCARGADO2">
                     <CanGrow>true</CanGrow>
@@ -1272,7 +1273,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>0.98425in</Size>
+                <Size>2.8415in</Size>
                 <CellContents>
                   <Textbox Name="Textbox19">
                     <CanGrow>true</CanGrow>
@@ -1311,9 +1312,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsCargaPS</DataSetName>
-        <Top>4.03875cm</Top>
+        <Top>4.81514cm</Top>
         <Height>2.4cm</Height>
-        <Width>9.99998cm</Width>
+        <Width>14.71739cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1366,7 +1367,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>MODALIDAD</Value>
+                            <Value>MODALIDAD DE CONTRATACIÓN</Value>
                             <Style>
                               <FontFamily>Tahoma</FontFamily>
                               <FontSize>11pt</FontSize>
@@ -1863,7 +1864,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>0.98425in</Size>
+                <Size>2.8415in</Size>
                 <CellContents>
                   <Textbox Name="ENCARGADO3">
                     <CanGrow>true</CanGrow>
@@ -1903,7 +1904,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>0.98425in</Size>
+                <Size>2.8415in</Size>
                 <CellContents>
                   <Textbox Name="Textbox29">
                     <CanGrow>true</CanGrow>
@@ -1942,10 +1943,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsCargaPS</DataSetName>
-        <Top>7.26667cm</Top>
-        <Left>0.00002cm</Left>
+        <Top>8.77479cm</Top>
         <Height>2.4cm</Height>
-        <Width>9.99998cm</Width>
+        <Width>14.71739cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -1953,6 +1953,98 @@
           </Border>
         </Style>
       </Tablix>
+      <Textbox Name="Textbox38">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ENCARGADO - MODALIDAD DE CONTRATACIÓN</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox38</rd:DefaultName>
+        <Height>0.68792cm</Height>
+        <Width>9.99998cm</Width>
+        <ZIndex>3</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox39">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ENCARGADO - DEPENDENCIA QUE GENERACIDAD</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox38</rd:DefaultName>
+        <Top>3.95083cm</Top>
+        <Height>0.68792cm</Height>
+        <Width>9.7174cm</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox40">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>MODADIDAD DE CONTRATACIÓN-  DEPENDENCIA QUE GENERACIDAD</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox38</rd:DefaultName>
+        <Top>7.61999cm</Top>
+        <Height>0.68792cm</Height>
+        <Width>12.78657cm</Width>
+        <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>4.64583in</Height>
     <Style />

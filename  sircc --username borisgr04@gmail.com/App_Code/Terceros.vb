@@ -205,6 +205,29 @@ Public Class Terceros
         Return dataTb
 
     End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetRecordsJQ(ByVal busc As String) As DataTable
+
+        Me.Conectar()
+
+        'busc = Left(busc, busc.IndexOf("-"))
+
+        If busc <> "" Then
+            busc = "%" + UCase(busc) + "%"
+            querystring = "SELECT * FROM VTERCEROS WHERE (IDE_TER like :busc) OR (upper(NOM_TER) like :busc) "
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":busc", busc)
+            Me.AsignarParametroCadena(":busc", busc)
+        Else
+            querystring = "SELECT * FROM VTERCEROS WHERE 1<>1"
+            Me.CrearComando(querystring)
+        End If
+
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+
+    End Function
 
     Public Function Insert(ByVal ide As String, ByVal ape1 As String, ByVal ape2 As String, ByVal nom1 As String, ByVal nom2 As String, ByVal dir As String, ByVal tel As String, ByVal ema As String, ByVal tip_ide As String, ByVal dv_ter As String, ByVal exp_ide As String, ByVal raz_soc As String, ByVal tipo As String) As String
         Try

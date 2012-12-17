@@ -142,10 +142,10 @@ Partial Class Controles_DetPSolicitudesAll
     End Sub
 #End Region
 
+
     Protected Sub btnBuscar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBuscar.Click
 
-        Buscar()
-        OnClick(sender)
+     
     End Sub
     Protected Sub DtPCon_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles DtPCon.DataBound
 
@@ -174,5 +174,10 @@ Partial Class Controles_DetPSolicitudesAll
         'UpdCSol.Update()
         Me.ModalPopupSolicitudes.Hide()
         'OnClick(sender)
+    End Sub
+
+    Protected Sub btnBuscar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnBuscar.Click
+        Buscar()
+        OnClick(sender)
     End Sub
 End Class

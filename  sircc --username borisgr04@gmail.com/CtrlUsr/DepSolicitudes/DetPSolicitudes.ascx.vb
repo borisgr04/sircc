@@ -115,10 +115,6 @@ Partial Class Controles_DetPSolicitudes
     End Sub
 #End Region
 
-    Protected Sub btnBuscar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBuscar.Click
-        Buscar()
-        OnClick(sender)
-    End Sub
     Protected Sub DtPCon_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles DtPCon.DataBound
 
     End Sub
@@ -131,7 +127,7 @@ Partial Class Controles_DetPSolicitudes
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
-            Me.Numsol = Me.TxtCodCon.Text
+            Me.NumSol = Me.TxtCodCon.Text
         End If
     End Sub
 
@@ -146,4 +142,8 @@ Partial Class Controles_DetPSolicitudes
         'OnClick(sender)
     End Sub
 
+    Protected Sub IBtnAbrir_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAbrir.Click
+        Buscar()
+        OnClick(sender)
+    End Sub
 End Class

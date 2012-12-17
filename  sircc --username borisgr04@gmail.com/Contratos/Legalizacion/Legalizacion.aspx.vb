@@ -42,4 +42,8 @@ Partial Class Contratos_Legalizacion_Default
             Me.Accordion1.Visible = False
         End If
     End Sub
+
+    Protected Sub LnkIrAGestión_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkIrAGestión.Click
+        ' Redireccionar_Pagina2("Contratos/GesContratos/GesContratos.aspx?Cod_Con=" + Me.DetContrato1.Cod_Con) ' 
+    End Sub
 End Class

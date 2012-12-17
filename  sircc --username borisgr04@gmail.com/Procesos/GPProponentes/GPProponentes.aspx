@@ -20,9 +20,23 @@
         <contenttemplate> 
           <uc1:DetGProcesos ID="DetGProcesos1" runat="server" 
                  />
-                  <asp:LinkButton ID="LnkAdjudicacion" runat="server">Adjudicación</asp:LinkButton>
             &nbsp;
-            <asp:LinkButton ID="LnkDatosC" runat="server">Datos del Contrato</asp:LinkButton>
+            <table>
+                <tr>
+                    <td style="text-align: center">
+                        <asp:ImageButton ID="IBtnAdjudicar" runat="server" SkinID="IBtnAdj" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:ImageButton ID="IBtnDatosContrato" runat="server" SkinID="IBtnCont" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Adjudicar</td>
+                    <td>
+                        Datos del Contrato</td>
+                </tr>
+            </table>
                   <br />
             <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
         <br />
@@ -68,7 +82,7 @@
                         <td>
                             &nbsp;</td>
                         <td style="width: 475px; text-align: right;">
-                            <asp:ImageButton ID="ImageButton1" runat="server" Height="32px" 
+                            <asp:ImageButton ID="IBtnAddProp" runat="server" Height="32px" 
                                 ImageUrl="~/images/Operaciones/Proponente.png" ToolTip="Agregar Proponente" 
                                 ValidationGroup="AgregarProponente" Width="32px" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -90,6 +104,7 @@
              
             <%--<asp:UpdatePanel runat="server" ID="UpdatePanel2">
                 <ContentTemplate>--%>
+                
                     <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
                         <asp:View ID="View1" runat="server">
                            <asp:GridView ID="GridView1" runat="server" AllowSorting="True" 
@@ -119,6 +134,8 @@
 
                         </asp:View>
                         <asp:View ID="View2" runat="server">
+                        <div style="height:300px; overflow:auot">
+                        
                             <table class="style1">
                                 <tr>
                                     <td style="text-align: right">
@@ -127,6 +144,8 @@
                                 </tr>
                             </table>
                             <uc2:CrGPProponentes ID="CrProponentes1" runat="server" />
+
+                            </div>
                         </asp:View>
                         <asp:View ID="View3" runat="server">
                         

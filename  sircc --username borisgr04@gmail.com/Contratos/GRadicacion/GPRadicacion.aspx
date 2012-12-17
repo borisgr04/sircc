@@ -73,7 +73,7 @@
                     </td>
                     <td style="height: 21px">
                         <asp:ImageButton ID="BtnRadicar" runat="server" Height="32px" 
-                            ImageUrl="~/images/Operaciones/sello.png" />
+                            SkinID="IBtnRadCont" />
                     </td>
                     <td style="height: 21px; width: 220px;">
                         <asp:ImageButton ID="IBtnMinuta" runat="server" SkinID="IBtnMinuta" />
@@ -111,20 +111,21 @@
                 </tr>
                 <tr>
                     <td colspan="6">
+                    <div style="height:400px; overflow:auto">
                         <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" 
                             CellPadding="4" DataSourceID="ObjPcont" EnableModelValidation="True" 
-                            ForeColor="#333333" GridLines="None" HeaderText="Proceso Contractual" 
+                            ForeColor="#333333" GridLines="None" HeaderText="Datos del Proceso Contractual" 
                             Height="50px" Width="653px">
                             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
                             <EditRowStyle BackColor="#999999" />
                             <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
                             <Fields>
-                                <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="Código">
+                                <asp:BoundField DataField="Vig_Con" HeaderText="Vigencia" />
+                                <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="Proceso N°">
                                 <ItemStyle Font-Size="Medium" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Vig_Con" HeaderText="Vigencia" />
-                                <asp:BoundField DataField="Contratista" HeaderText="Contratista" />
+                                <asp:BoundField DataField="Contratista" HeaderText="Adjudicado a:" />
                                 <asp:BoundField DataField="Obj_Con" HeaderText="Objeto del Contrato" />
                                 <asp:BoundField DataField="PLAZOEJECUCION" HeaderText="Plazo de Ejecución" />
                                 <asp:BoundField DataField="Dep_Nec" HeaderText="Dependencia de la Necesidad" />
@@ -145,6 +146,7 @@
                             <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                         </asp:DetailsView>
+                     </div>
                     </td>
                     <td valign="top" style="width: 220px">
                         &nbsp;</td>

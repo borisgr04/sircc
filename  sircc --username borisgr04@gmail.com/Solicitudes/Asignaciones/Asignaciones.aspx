@@ -63,16 +63,28 @@
                                 <td style="width: 24px">
                                     <asp:Button ID="BtnBuscar" runat="server" CausesValidation="False" Text="..." />
                                 </td>
-                                <td style="width: 100px">
-                                    <asp:TextBox ID="TxtNomTer" runat="server" Height="18px" ReadOnly="true" Width="168px"
+                                <td colspan="2">
+                                    <asp:TextBox ID="TxtNomTer" runat="server" Height="18px" ReadOnly="true" Width="260px"
                                         Enabled="False"></asp:TextBox>
                                 </td>
-                                <td style="width: 99px">
-                                    <asp:Button ID="BtnAsignar" runat="server" Text="Asignar" ValidationGroup="ASIGNAR" />
-                                </td>
-                                <td style="width: 99px">
+                                <td style="width: 99px; text-align: center;">
                                     &nbsp;
+                                    <asp:ImageButton ID="IBtnAsignar" runat="server" SkinID="IBtnAsig" />
                                 </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 165px">
+                                    &nbsp;</td>
+                                <td style="width: 100px">
+                                    &nbsp;</td>
+                                <td style="width: 24px">
+                                    &nbsp;</td>
+                                <td style="width: 100px">
+                                    &nbsp;</td>
+                                <td style="width: 167px; text-align: center;">
+                                    &nbsp;</td>
+                                <td style="width: 99px; text-align: center;">
+                                    Asignar</td>
                             </tr>
                             <tr>
                                 <td colspan="6">

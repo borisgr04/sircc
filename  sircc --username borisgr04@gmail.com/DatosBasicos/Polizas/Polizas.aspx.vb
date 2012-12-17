@@ -22,8 +22,8 @@ Partial Class DatosBasicos_Polizas_Default
 
         Select Case Me.Oper
             Case "Exportar"
-                GridView2.DataSource = Obj.GetRecordsDB
-                GridView2.DataBind()
+                'GridView2.DataSource = Obj.GetRecordsDB()
+                'GridView2.DataBind()
                 ExportGridView(GridView2, "POLIZAS - SIRCC")
             Case "Nuevo"
                 Me.SubT.Text = "Nuevo..."
@@ -45,6 +45,7 @@ Partial Class DatosBasicos_Polizas_Default
                     Me.TxtCodNew.Text = tb.Rows(0)("Cod_Pol").ToString
                     Me.txtNomNew.Text = tb.Rows(0)("Nom_Pol").ToString
                     Me.CboEst.Text = tb.Rows(0)("Est_Pol").ToString
+                    txtDesc.Text = tb.Rows(0)("descripcion").ToString
                     Me.Pk1 = tb.Rows(0)("Cod_Pol").ToString
                     Habilitar(True)
                     Me.ModalPopupTer.Show()
@@ -63,6 +64,7 @@ Partial Class DatosBasicos_Polizas_Default
                     Me.TxtCodNew.Text = tb.Rows(0)("Cod_Pol").ToString
                     Me.txtNomNew.Text = tb.Rows(0)("Nom_Pol").ToString
                     Me.CboEst.Text = tb.Rows(0)("Est_Pol").ToString
+                    txtDesc.Text = tb.Rows(0)("descripcion").ToString
                     Me.Pk1 = tb.Rows(0)("Cod_Pol").ToString
                     Me.ModalPopupTer.Show()
                     Habilitar(False)
@@ -112,13 +114,13 @@ Partial Class DatosBasicos_Polizas_Default
         'End If
     End Sub
 
-    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
+    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) ' Handles BtnGuardar.Click
+        Dim Obj As New Polizas
         Select Case Me.Oper
             Case "Nuevo"
-                Me.MsgResult.Text = Obj.Insert(Me.TxtCodNew.Text, txtNomNew.Text, CboEst.SelectedValue)
+                Me.MsgResult.Text = Obj.Insert(Me.TxtCodNew.Text, txtNomNew.Text, txtDesc.Text, CboEst.SelectedValue)
             Case "Editar"
-                Me.MsgResult.Text = Obj.Update(Pk1, Me.TxtCodNew.Text, txtNomNew.Text, CboEst.SelectedValue)
+                Me.MsgResult.Text = Obj.Update(Pk1, Me.TxtCodNew.Text, txtNomNew.Text, txtDesc.Text, CboEst.SelectedValue)
         End Select
 
         Me.MsgBox(MsgResult, Obj.lErrorG)
@@ -127,7 +129,7 @@ Partial Class DatosBasicos_Polizas_Default
             Me.Limpiar()
         End If
 
-
+        Me.ModalPopupTer.Hide()
 
     End Sub
 

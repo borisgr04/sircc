@@ -89,11 +89,19 @@ Partial Class Procesos_GAdjudicacion_Default
         End If
     End Sub
 
-    Protected Sub LnkProponentes_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkProponentes.Click
+    Protected Sub IBtnProp_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnProp.Click
+        IrAProponentes()
+    End Sub
+
+    Sub IrDatosC()
+        Redireccionar_Pagina("/Procesos/GProcesosN/GProcesosN.aspx?Num_Proc=" + Me.DetPContrato1.CodigoPContrato + "&Grupo=" + Me.DetPContrato1.Grupo)
+    End Sub
+
+    Sub IrAProponentes()
         Redireccionar_Pagina("/Procesos/GPProponentes/GPProponentes.aspx?Num_Proc=" + Me.DetPContrato1.CodigoPContrato + "&Grupo=" + Me.DetPContrato1.Grupo)
     End Sub
 
-    Protected Sub LnkDatosC_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkDatosC.Click
-        Redireccionar_Pagina("/Procesos/GProcesosN/GProcesosN.aspx?Num_Proc=" + Me.DetPContrato1.CodigoPContrato + "&Grupo=" + Me.DetPContrato1.Grupo)
+    Protected Sub IBtnDatosContrato_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnDatosContrato.Click
+        IrDatosC()
     End Sub
 End Class

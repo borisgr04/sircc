@@ -1,83 +1,123 @@
 <%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Admin.aspx.vb" Inherits="Seguridad_Roles_Admin" title="Permisos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
+<script src="../../Scripts/jquery-1.4.2.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-ui-1.8rc3.custom.min.js" type="text/javascript"></script>
+    <link href="../../Styles/Estyle.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/jquery.fcbkcomplete.min.js" type="text/javascript"></script>
+    <link href="../../Styles/fcbkcomplete.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+            $("#<%= txtUserName.ClientID  %>").autocomplete({
+                delay: 1,
+                minLength: 1,
+                source: function (request, response) {
+                    PageMethods.ObtieneNombres(request.term,
+                            function (data) {
+                                var nombres = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                                response(nombres);
+                            },
+                            fnLlamadaError);
+                }
+
+            });
+        });
+
+        function fnLlamadaError(excepcion) { alert('Ha ocurrido un error al traer los nombres: ' + excepcion.get_message()); }
+    </script>
+    
     <div class="demoarea">
-        <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+        <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="true">
         </ajaxToolkit:ToolkitScriptManager>
-        <p>
-            &nbsp;<table style="width: 389px; height: 106px">
+            <br />
+       <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>--%>
+            <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
+                <asp:View ID="View1" runat="server">
+               
+            <table style="width: 774px; height: 106px">
                 <tr>
-                    <td style="width: 100px; height: 44px">
+                    <td colspan="4">
+                        <asp:Label ID="Label1" runat="server" 
+                            Text="Administrador de Usuarios y Permisos" CssClass="Titulo"></asp:Label></td>
+                    <td>
                         &nbsp;</td>
-                    <td style="width: 125px; height: 44px">
-                        <asp:Label ID="Label1" runat="server" Text="Administrador de Roles"></asp:Label></td>
-                    <td style="width: 100px; height: 44px">
-                    </td>
-                    <td style="width: 100px; height: 44px">
-                    </td>
-                    <td style="width: 100px; height: 44px">
-                    </td>
-                    <td style="width: 100px; height: 44px">
-                    </td>
-                    <td style="width: 100px; height: 44px">
-                    </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
-        <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult" ></asp:Label></td>
-                    <td colspan="1">
-                    </td>
-                    <td colspan="1" style="width: 100px">
-                    </td>
-                    <td colspan="1" style="width: 100px">
-                        <asp:HyperLink ID="HyperLink2" runat="server" 
-                            NavigateUrl="~/Seguridad/Usuarios/RegUsuarios.aspx">Nuevo Usuario</asp:HyperLink>
-                    </td>
-                    <td colspan="1" style="width: 100px">
-                        <asp:HyperLink ID="HyperLink1" runat="server" 
-                            NavigateUrl="~/Seguridad/Roles/EnLinea.aspx">Ver Usuarios en Linea</asp:HyperLink>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 100px">
-                        &nbsp;UserName:</td>
-                    <td style="width: 125px">
-        <asp:TextBox ID="TxtUserName" runat="server" AutoPostBack="True"></asp:TextBox>
-                    </td>
-                    <td style="width: 100px">
-                        Módulo</td>
-                    <td style="width: 100px">
-            <asp:DropDownList ID="CboMod" runat="server" DataTextField="Nom_Mod" 
-                DataValueField="Cod_Mod" DataSourceID="ObjModulos" AutoPostBack="True">
-            </asp:DropDownList>
-                    </td>
-                    <td style="width: 100px">
-                        <asp:Button ID="LookupBtn" runat="server" Text="Buscar" Width="63px" />
-                    </td>
-                    <td style="width: 100px">
-                    <asp:Button ID="btnAct" runat="server" Text="Actualizar" Visible="False" />
-                    </td>
-                    <td style="width: 100px">
+                    <td colspan="4">
                         <asp:Button ID="BtnCargarRoles" runat="server" Text="Cargar Roles" />
                     </td>
-                </tr>
-                <tr>
-                    <td style="width: 100px">
-                        &nbsp;</td>
-                    <td style="width: 125px">
-                        &nbsp;</td>
-                    <td style="width: 100px">
-                        &nbsp;</td>
-                    <td style="width: 100px">
-                        &nbsp;</td>
-                    <td style="width: 100px">
-                        &nbsp;</td>
-                    <td style="width: 100px">
-                        &nbsp;</td>
-                    <td style="width: 100px">
+                    <td>
                         &nbsp;</td>
                 </tr>
                 <tr>
-                    <td colspan="7">
+                    <td>
+                        Digite
+                        &nbsp;UserName y Nombre y Apellidos para Consultar</td>
+                    <td colspan="1" style="width: 100px">
+                        &nbsp;</td>
+                    <td colspan="1" style="width: 129px">
+                        &nbsp;</td>
+                    <td colspan="1" style="width: 148px">
+                        &nbsp;</td>
+                    <td style="width: 100px">
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+        <asp:TextBox ID="TxtUserName" runat="server" AutoPostBack="True" Width="500px"></asp:TextBox>
+    <%--<ajaxToolkit:AutoCompleteExtender 
+    ID="AutoCompleteExtender1" 
+    TargetControlID="TxtUserName" MinimumPrefixLength="2"  DelimiterCharacters=";, :"
+    runat="server" ServiceMethod="GetTerceros" UseContextKey="True" />
+    --%>                </td>
+                    <td style="width: 100px; text-align: center;">
+                        <asp:ImageButton ID="ImageButton1" runat="server" SkinID="IBtnBuscar" />
+                    </td>
+                    <td style="width: 129px; text-align: center;">
+                        <asp:HyperLink ID="HyperLink2" runat="server" 
+                            NavigateUrl="~/Seguridad/Usuarios/RegUsuarios.aspx" SkinID="HlnNuevo">Nuevo Usuario</asp:HyperLink>
+                    </td>
+                    <td style="width: 148px; text-align: center;">
+                        <asp:HyperLink ID="HyperLink1" runat="server" 
+                            NavigateUrl="~/Seguridad/Roles/EnLinea.aspx" SkinID="HlnUsers">Ver Usuarios en Linea</asp:HyperLink>
+                    </td>
+                    <td style="width: 100px; text-align: center;">
+                        <asp:ImageButton ID="IBtnRoles" runat="server" SkinID="IBtnRoles" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                    <td style="width: 100px; text-align: center;">
+                        Consulta</td>
+                    <td style="width: 129px; text-align: center;">
+                        Nuevo Usuario</td>
+                    <td style="width: 148px; text-align: center;">
+                        Usuario En Linea</td>
+                    <td style="width: 100px; text-align: center;">
+                        Sincronizar Roles/Opciones</td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <asp:Label ID="msgResult2" runat="server" SkinID="MsgResult"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <asp:ObjectDataSource ID="ObjModulos" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetRecords" TypeName="Modulos"></asp:ObjectDataSource>
+                        <asp:HiddenField ID="HdFiltro" runat="server" />
+                        <asp:ObjectDataSource ID="ObjUser" runat="server" SelectMethod="GetRecords" TypeName="Usuarios">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="TxtUserName" Name="busc" PropertyName="Text" />
+                            </SelectParameters>
+                        </asp:ObjectDataSource>
+                    </td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+            </table>
+        
                         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True"
                             AutoGenerateColumns="False" DataSourceID="ObjUser" Width="799px" 
                             DataKeyNames="username" EnableModelValidation="True">
@@ -110,22 +150,53 @@
                                 <asp:ButtonField CommandName="AdminDesktop" Text="AdminDesktop" />
                             </Columns>
                         </asp:GridView>
-                        <asp:ObjectDataSource ID="ObjUser" runat="server" SelectMethod="GetRecords" TypeName="Usuarios">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="TxtUserName" Name="busc" PropertyName="Text" />
-                            </SelectParameters>
-                        </asp:ObjectDataSource>
-                        &nbsp;<asp:ObjectDataSource ID="ObjModulos" runat="server" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="GetRecords" TypeName="Modulos"></asp:ObjectDataSource>
-                &nbsp;<asp:HiddenField ID="HdFiltro" runat="server" />
-                    </td>
-                </tr>
-            </table>
-        </p>
-        
-  
-       <p> &nbsp; &nbsp; &nbsp;
-    
+
+                         </asp:View>
+                <asp:View ID="View2" runat="server">
+                        <asp:Label ID="Label2" runat="server" 
+                            Text="Autorización de Opciones a Usuario" CssClass="Titulo"></asp:Label>&nbsp;<br />
+                        Usuario:<asp:Label ID="LbUsuarios" runat="server" Font-Bold="True"></asp:Label>
+                        <table >
+                        <tr>
+                            <td>
+                        Módulo</td>
+                            <td>
+            <asp:DropDownList ID="CboMod" runat="server" DataTextField="Nom_Mod" 
+                DataValueField="Cod_Mod" DataSourceID="ObjModulos" AutoPostBack="True">
+            </asp:DropDownList>
+                            </td>
+                            <td>
+                                &nbsp;</td>
+                            <td>
+                                <asp:ImageButton ID="IBtnGuardar" runat="server" SkinID="IBtnGuardar" />
+                            </td>
+                            <td>
+                                <asp:ImageButton ID="BtnCancelar" runat="server" SkinID="IBtnCancelar" />
+                            </td>
+                            <td>
+                                &nbsp;</td>
+                            <td>
+                                &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;</td>
+                            <td>
+                                &nbsp;</td>
+                            <td>
+                                &nbsp;</td>
+                            <td>
+                                Guardar</td>
+                            <td>
+                                Volver</td>
+                            <td>
+                                &nbsp;</td>
+                            <td>
+                                &nbsp;</td>
+                        </tr>
+           </table>
+                        &nbsp;<asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
+                        <div style="height:300px; overflow:auto">
         <table style="width: 693px; height: 331px">
             <tr>
                 <td valign="top" colspan="3">
@@ -139,20 +210,13 @@
                     </asp:TreeView>
                 </td>
             </tr>
-              </table>
-       </p>
-    <p>
-        <br />
-        &nbsp;
-                                        </p>
-   
-
-    <div class="roleList">
-        &nbsp;</div>
-    
-    <div>
-        &nbsp;
+       </table>
+ </asp:View>
+                </asp:MultiView>
     </div>
+      <%--</ContentTemplate>
+        </asp:UpdatePanel>--%>
+        
     
     </div>
 

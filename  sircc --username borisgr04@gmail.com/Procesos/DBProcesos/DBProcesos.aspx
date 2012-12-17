@@ -133,8 +133,9 @@ padding-right: 20px;
                     <asp:ImageButton ID="IBtnCancelar" runat="server" Height="32px" 
                         ImageUrl="~/images/mnProcesos/undo.png" Width="32px" />
                 </td>
-                <td style="width: 79px">
-                    &nbsp;</td>
+                <td style="width: 79px; text-align: center;">
+                    <asp:ImageButton ID="IBtnDatosC" runat="server" SkinID="IBtnCont" />
+                </td>
                 <td style="width: 79px">
                     &nbsp;</td>
                 <td class="style31">
@@ -173,8 +174,7 @@ padding-right: 20px;
                 <td style="width: 79px">
                     Cancelar</td>
                 <td style="width: 79px">
-                    <asp:LinkButton ID="LnkDatos" runat="server">Datos del Contrato</asp:LinkButton>
-                </td>
+                    Datos Contratos</td>
                 <td style="width: 79px">
                     &nbsp;</td>
                 <td class="style31">

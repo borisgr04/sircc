@@ -64,7 +64,10 @@
                      &nbsp;</td>
              </tr>
          </table>
-                   
+<%--                <iframe src="http://docs.google.com/gview?url=http://sircc.gobcesar.gov.co/ashx/verCert.ashx?nro_cert=1&vig_cert=2012&CVXX=201208103216080700001&embedded=true"
+style="width:500px; height:400px;" frameborder="0"></iframe>   
+<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2F190.254.21.92%3A8020%2Fashx%2FverCert.ashx%3Fnro_cert%3D1%26vig_cert%3D2012%26CVXX%3D201208103216080700001&embedded=true" width="600" height="780" style="border: none;"></iframe>
+--%>
 </div>    
 
 </asp:Content>

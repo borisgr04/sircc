@@ -4,31 +4,44 @@
 
     Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
         
+        Try
+            
+        
         Dim m As DBMenu = New DBMenu
         Dim mc As MembershipUserCollection = Membership.FindUsersByName("admin")
         If mc.Count = 0 Then
             Membership.CreateUser("admin", "sircc2011.")
             Mail.EnviarAuto("Creación de Usuario Inicial:" + Now.ToLongTimeString, "admin")
         End If
-        m.GenerarRoles()
+            m.GenerarRoles()
+            
+        Catch ex As Exception
+
+        End Try
         
     End Sub
     
     Private Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs) 
         
+        Try
+            
         
-        
-        Dim objErr As Exception = Server.GetLastError().GetBaseException()
-        Dim Err As String = "Errores Capturados eN el Evento Application_Error " & _
+            Dim objErr As Exception = Server.GetLastError().GetBaseException()
+            Dim Err As String = "Errores Capturados eN el Evento Application_Error " & _
                             System.Environment.NewLine & _
                             "Url de Error : " & Request.Url.ToString() & _
                             System.Environment.NewLine & _
                             "Mensaje de Error: " & objErr.Message.ToString() & _
                             System.Environment.NewLine & _
                             "Seguimiento de la Pila:" & objErr.StackTrace.ToString()
-        Mail.EnviarAuto("Error:[" + Membership.GetUser.UserName + "]" + Now.ToLongTimeString, ConstruirMensaje)
+            Mail.EnviarAuto("Error:[" + Membership.GetUser.UserName + "]" + Now.ToLongTimeString, ConstruirMensaje)
         
-        EventLog.WriteEntry("SIRCC2011", Err, EventLogEntryType.Error)
+            EventLog.WriteEntry("SIRCC2011", Err, EventLogEntryType.Error)
+            
+        Catch ex As Exception
+
+        End Try
+        
         'Session("LastError") = err
        
         ''Server.ClearError()

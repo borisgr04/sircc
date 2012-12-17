@@ -76,7 +76,8 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                                 Enabled="False" />
                         </td>
                         <td>
-                            &nbsp;</td>
+                            <asp:ImageButton ID="BtnAsig0" runat="server" SkinID="IBtnAsig" />
+                        </td>
                     </tr>
                     <tr>
                         <td style="width: 41px">
@@ -96,7 +97,7 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                         <td style="width: 87px; text-align: center">
                             Reabrir Solicitud</td>
                         <td>
-                            &nbsp;</td>
+                            Asignar</td>
                     </tr>
                     <tr>
                         <td style="width: 41px">

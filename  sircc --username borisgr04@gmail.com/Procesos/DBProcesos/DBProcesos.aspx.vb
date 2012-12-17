@@ -29,15 +29,6 @@ Partial Class Procesos_DBProceso_Default
         'Me.MsgResult.Text = Me.valor_dec(Me.TxtValTot.Text)
         Dim chk As New CheckBox, txt As New TextBox
         Dim j As String = 0, mun(25) As String
-        'Municipios
-        'For i = 0 To DataList1.Items.Count - 1
-        '    chk = DataList1.Items(i).FindControl("chknommun")
-        '    txt = DataList1.Items(i).FindControl("txtcodmun")
-        '    If chk.Checked = True Then
-        '        mun(j) = txt.Text
-        '        j = j + 1
-        '    End If
-        'Next
         Select Case Me.Oper
             Case "nuevo"
                 'Me.MsgResult.Text = obj.Insert(Me.CboTproc.SelectedValue, Me.TxtNProc.Text, Me.TxtObj.Text, "", Me.TxtNPla.Text, Me.cboDep.SelectedValue, Me.CboDepP.SelectedValue, Me.Vigencia.ToString, Me.CboTip.SelectedValue, Me.cboStip.SelectedValue, Publico.PuntoPorComa(Me.TxtValTot.Text), Publico.PuntoPorComa(Me.TxtValProp.Text), Me.CboSec.SelectedValue, Me.CboFor.SelectedValue, Me.TxtNPla.Text, Util.invN1_0(ChkUM.Checked), Util.invN1_0(ChkEC.Checked), "0", Me.TxtLugEje.Text, Me.CboTPlazo.SelectedValue)
@@ -51,7 +42,7 @@ Partial Class Procesos_DBProceso_Default
             Me.IBtnNuevo.Enabled = True
             Me.IBtnGuardar.Enabled = False
             Me.IBtnAbrir.Enabled = True
-            
+            IBtnDatosC.Enabled = (CInt(TxtNumGrupos.Text) > 0)
         End If
     End Sub
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -184,6 +175,11 @@ Partial Class Procesos_DBProceso_Default
             
             
             Me.TxtNumGrupos.Text = dt.Rows(0)("NUMGRUPOS").ToString
+
+
+            IBtnDatosC.Enabled = (dt.Rows(0)("NUMGRUPOS") > 0)
+
+
             'Me.grdOblig1.Enabled = Valor
             'Me.grdCDP1.Enabled = Valor
             Me.Habilitar(False)
@@ -232,21 +228,20 @@ Partial Class Procesos_DBProceso_Default
         Dim dt As DataTable
         dt = pcont.GetByPk(TxtNProc.Text)
         Dim est As String = dt.Rows(0).Item("Estado").ToString
-        If est = "TR" Then
-            Editar()
-            Me.BtnDefinitivo.Visible = True
-            Me.BtnTramite.Visible = False
-            Me.LblDef.Visible = True
-            Me.LblTra.Visible = False
-        Else 'If est = "DF" Then
-            Me.BtnDefinitivo.Visible = False
-            Me.BtnTramite.Visible = True
-            Me.LblDef.Visible = False
-            Me.LblTra.Visible = True
-            Me.MsgResult.Text = "El proceso ya esta válidado y listo para Generar la Minuta y Radicar el Contrato, para modificarlo debe revertir la válidación"
-            MsgBoxAlert(MsgResult, True)
-
-        End If
+        'If est = "TR" Then
+        Editar()
+        'Me.BtnDefinitivo.Visible = True
+        'Me.BtnTramite.Visible = False
+        'Me.LblDef.Visible = True
+        'Me.LblTra.Visible = False
+        'Else 'If est = "DF" Then
+        'Me.BtnDefinitivo.Visible = False
+        'Me.BtnTramite.Visible = True
+        'Me.LblDef.Visible = False
+        'Me.LblTra.Visible = True
+        'Me.MsgResult.Text = "El proceso ya esta válidado y listo para Generar la Minuta y Radicar el Contrato, para modificarlo debe revertir la válidación"
+        'MsgBoxAlert(MsgResult, True)
+        'End If
     End Sub
 
     Protected Sub IBtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnGuardar.Click
@@ -292,7 +287,8 @@ Partial Class Procesos_DBProceso_Default
         Me.ModalPopupConP.Show()
     End Sub
 
-    Protected Sub LnkDatos_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkDatos.Click
+
+    Protected Sub IBtnDatosC_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnDatosC.Click
         Redireccionar_Pagina("/Procesos/GProcesosN/GProcesosN.aspx?Num_Proc=" + Me.TxtNProc.Text)
     End Sub
 End Class

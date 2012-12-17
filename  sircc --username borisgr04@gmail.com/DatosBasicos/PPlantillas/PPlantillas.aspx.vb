@@ -106,7 +106,7 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
         If e.CommandName = "download" Then
             Dim index As Integer = CInt(e.CommandArgument)
             GridView1.SelectedIndex = index
-            Redireccionar_Pagina(String.Format("ashx/verPPlantilla.ashx?Ide_Pla={0}", GridView1.SelectedValue))
+            Redireccionar_Pagina(String.Format("/ashx/verPPlantilla.ashx?Ide_Pla={0}", GridView1.SelectedValue))
         End If
     End Sub
     Protected Sub GridView1_RowEditing(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewEditEventArgs) Handles GridView1.RowEditing

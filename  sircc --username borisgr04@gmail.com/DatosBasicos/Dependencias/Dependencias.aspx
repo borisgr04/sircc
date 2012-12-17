@@ -158,7 +158,8 @@
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+                            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                                SkinID="ValidationSummary1" />
                         </td>
                     </tr>
                     <tr>
@@ -219,8 +220,16 @@
                         <td style="WIDTH: 24px">
                             <asp:Button ID="BtnBuscar" runat="server" CausesValidation="False" Text="..." />
                         </td>
-                        <td style="WIDTH: 100px">
-                            <asp:TextBox ID="TxtNomTer" ReadOnly="true" runat="server" Height="18px" Width="168px"></asp:TextBox>
+                        <td colspan="2">
+                            <asp:TextBox ID="TxtNomTer" ReadOnly="true" runat="server" Height="18px" 
+                                Width="254px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="WIDTH: 98px">
+                            Cargo</td>
+                        <td colspan="3">
+                            <asp:TextBox ID="TxtCargo" runat="server" Width="255px"></asp:TextBox>
                         </td>
                         <td style="WIDTH: 100px">
                             &nbsp;</td>

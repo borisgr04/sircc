@@ -2,9 +2,9 @@
 Partial Class Solicitudes_Asignaciones_Default
     Inherits PaginaComun
 
-    Protected Sub BtnAsignar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnAsignar.Click
+    Sub Asignar()
         Dim obj As New PSolicitudes
-        Me.MsgResult.Text = obj.Asignar_Usuario_Encargado(Me.DetPsolicitudesAll1.CodigoPContrato, Me.TxtIde.Text)
+        Me.MsgResult.Text = obj.Asignar_Usuario_Encargado(Me.DetPSolicitudesAll1.CodigoPContrato, Me.TxtIde.Text)
         Me.MsgBox(Me.MsgResult, obj.lErrorG)
         Me.DetPSolicitudesAll1.Buscar()
         Me.GridView1.DataBind()
@@ -26,7 +26,8 @@ Partial Class Solicitudes_Asignaciones_Default
     End Sub
 
     Sub Habilitar(ByVal V As Boolean)
-        Me.BtnAsignar.Enabled = V
+
+        Me.IBtnAsignar.Enabled = V
         Me.BtnBuscar.Enabled = V
         Me.TxtIde.Enabled = V
     End Sub
@@ -82,5 +83,9 @@ Partial Class Solicitudes_Asignaciones_Default
     Protected Overloads Sub MsgBoxAlert(ByVal msg As Label, ByVal lError As Boolean)
         Activar_Timer(Timer1, lError)
         MyBase.MsgBoxAlert(msg, lError)
+    End Sub
+
+    Protected Sub ImageButton1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAsignar.Click
+        Asignar()
     End Sub
 End Class

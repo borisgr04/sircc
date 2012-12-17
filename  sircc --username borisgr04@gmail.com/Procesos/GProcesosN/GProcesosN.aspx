@@ -188,11 +188,12 @@ padding-right: 20px;
         {
             width: 77px;
         }
+        
         .style46
         {
-            width: 602px;
+            width: 32px;
         }
-
+        
     </style>
     <div class="demoarea">
         <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" 
@@ -281,7 +282,7 @@ padding-right: 20px;
         <asp:UpdatePanel ID="UpdBarra" runat="server">
         <ContentTemplate>
             <table style="width: 100%">
-                <tr>
+                <tr >
                     <td style="width: 41px">
                         <asp:ImageButton ID="IBtnNuevo" runat="server" Height="32px" 
                             ImageUrl="~/images/Operaciones/New1.png" Visible="False" Width="32px" />
@@ -313,8 +314,8 @@ padding-right: 20px;
                             SkinID="IBtnBuscar" ValidationGroup="NoValida" Width="32px" />
                     </td>
                     <td style="width: 53px">
-                        <asp:ImageButton ID="IbtnEditar" runat="server" Height="32px" 
-                            ImageUrl="~/images/Operaciones/Edit2.png" Width="32px" />
+                        <asp:ImageButton ID="IbtnEditar" runat="server" Height="32px" Width="32px" 
+                            SkinID="IBtnEditar" />
                     </td>
                     <td style="width: 61px">
                         <asp:ImageButton ID="IBtnGuardar" runat="server" Height="32px" 
@@ -325,23 +326,30 @@ padding-right: 20px;
                             ImageUrl="~/images/mnProcesos/undo.png" Width="32px" />
                     </td>
                     <td class="style31">
+                        <asp:ImageButton ID="IBtnProp" runat="server" SkinID="IBtnProp" />
+                    </td>
+                    <td class="style32">
+                        <asp:ImageButton ID="IBtnAdj" runat="server" SkinID="IBtnAdj" />
+                    </td>
+                    <td class="style32">
+                        <asp:ImageButton ID="IBtnItemO" runat="server" SkinID="IBtnListItemObj" />
+                    </td>
+                    <td style="text-align: center" class="style46">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="text-align: center">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
+                    <td style="text-align: center">
                         <asp:ImageButton ID="BtnDefinitivo" runat="server" Height="32px" 
                             ImageUrl="~/images/Operaciones/Definitivo.png" 
                             ToolTip=", Validar los Datos y pasa el proceso a definitivo para generar minuta y radicar" 
                             Visible="False" Width="32px" />
                     </td>
-                    <td class="style32">
+                    <td>
                         <asp:ImageButton ID="BtnTramite" runat="server" Height="32px" 
                             ImageUrl="~/images/Operaciones/tramite.png" 
                             ToolTip="Revertir Validación y permite modificar datos al proceso." 
                             Visible="False" Width="32px" />
                     </td>
-                    <td>
-                        &nbsp;</td>
-                    <td>
-                        &nbsp;</td>
-                    <td>
-                        &nbsp;</td>
                     <td>
                         &nbsp;</td>
                     <td>
@@ -365,23 +373,25 @@ padding-right: 20px;
                     <td style="width: 79px">
                         Cancelar</td>
                     <td class="style31">
+                        Proponentes</td>
+                    <td class="style32">
+                        Adjudicación</td>
+                    <td class="style32">
+                        Items Objeto</td>
+                    <td class="style46" style="text-align: center">
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                    <td>
                         <asp:Label ID="LblDef" runat="server" Text="Validar" 
                             ToolTip="Validar los Datos y pasa el proceso a definitivo para generar minuta y radicar" 
                             Visible="False"></asp:Label>
                     </td>
-                    <td class="style32">
-                        <asp:Label ID="LblTra" runat="server" Text="Revertir " 
+                    <td>
+                        &nbsp;<asp:Label ID="LblTra" runat="server" Text="Revertir " 
                             ToolTip="Revertir Validación y permite modificar datos al proceso." 
                             Visible="False"></asp:Label>
                     </td>
-                    <td>
-                        <asp:LinkButton ID="LnkProponentes" runat="server">Proponentes</asp:LinkButton>
-                    </td>
-                    <td>
-                        <asp:LinkButton ID="LnkAdj" runat="server">Adjudicación</asp:LinkButton>
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
                     <td>
                         &nbsp;</td>
                     <td>
@@ -404,7 +414,7 @@ padding-right: 20px;
                         &nbsp;</td>
                     <td style="width: 79px">
                         &nbsp;</td>
-                    <td colspan="5">
+                    <td colspan="7">
                         &nbsp;</td>
                     <td>
                         &nbsp;</td>
@@ -431,13 +441,16 @@ padding-right: 20px;
                 <Content>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-        <table style="width: 100%">
-                    <tr>
+        <fieldset >
+          <legend>Datos Básicos</legend>
+          <div style="height:400px; overflow:auto"> 
+          <table style="width: 100%">
+                    <tr >
                         <td colspan="4"><a name="#DG"></a>
                             <asp:Label ID="Label3" runat="server" CssClass="SubTitulo"   Text="" Width="100%"></asp:Label>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="STitulos">
                         <td class="style3">
                             <asp:Label ID="Label20" runat="server" CssClass="Caption" Text="N° de Proceso"></asp:Label>
                         </td>
@@ -447,14 +460,7 @@ padding-right: 20px;
                     <tr>
                         <td class="style3">
                             <asp:TextBox ID="TxtNProc" runat="server" Width="202px"></asp:TextBox>
-                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" 
-                                Enabled="True" TargetControlID="TxtNProc" WatermarkCssClass="watermarked" 
-                                WatermarkText="DD-PPPP-CCCC-VVVV ">
-                            </cc1:TextBoxWatermarkExtender>
-                            <cc1:TextBoxWatermarkExtender ID="TxtNProc_TextBoxWatermarkExtender" 
-                                runat="server" Enabled="True" TargetControlID="TxtNProc" 
-                                WatermarkCssClass="watermarked" WatermarkText="Automático Número de Proceso">
-                            </cc1:TextBoxWatermarkExtender>
+                        
                         </td>
                         <td>
                             &nbsp;</td>
@@ -465,7 +471,7 @@ padding-right: 20px;
                         &nbsp;<asp:Label ID="LbEstado" runat="server" style="font-weight: 700"></asp:Label>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="STitulos">
                         <td>
                             <asp:Label ID="Label21" runat="server" CssClass="Caption" 
                                 Text="Modalidad de Contratación"></asp:Label>
@@ -500,7 +506,7 @@ padding-right: 20px;
                             </ajaxToolkit:FilteredTextBoxExtender>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="STitulos">
                         <td class="style3">
                             <asp:Label ID="Label23" runat="server" CssClass="Caption" 
                                 Text="Dependencia a Cargo del Proceso"></asp:Label>
@@ -526,7 +532,7 @@ padding-right: 20px;
                             </asp:DropDownList>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="STitulos">
                         <td class="style3">
                             <asp:Label ID="Label27" runat="server" CssClass="Caption" 
                                 Text="Tipo de Contratación"></asp:Label>
@@ -554,7 +560,7 @@ padding-right: 20px;
                             </asp:DropDownList>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="STitulos">
                         <td class="style3">
                             <asp:Label ID="Label25" runat="server" CssClass="Caption" 
                                 Text="Objeto a Contratar"></asp:Label>
@@ -569,48 +575,57 @@ padding-right: 20px;
                         </td>
                     </tr>
                 </table>
-                <br />
+    
                 <hr />
-                <table style="width: 100%">
-                <tr style="vertical-align:middle">
+                
+            <table style="width: 100%">
+                <tr class="STitulos" >
                         <td>
                             <asp:Label ID="Label19" runat="server" Text="Valor Total"></asp:Label>
                         </td>
                         <td >
-                          
-                        </td>
-                        <td colspan="2" >
                           <asp:Label ID="Label30" runat="server" Text="Valor aportes Propios"></asp:Label>
                         </td>
                         <td colspan="2" >
-                            
+                          <asp:Label ID="Label12" runat="server" Text="Valor aportes Otros"></asp:Label>
+                        </td>
+                        <td colspan="2" >
+                            <asp:Label ID="Label9" runat="server" Text="Valor Sin IVA"></asp:Label>
                         </td>
                         <td>
-                            <asp:Label ID="Label12" runat="server" Text="Valor aportes Otros"></asp:Label>
+                            <asp:Label ID="Label15" runat="server" Text="Valor del IVA"></asp:Label>
                         </td>
-                        <td >
-                              
+                        <td>
+                          
                         </td>
+                     
                     </tr>
-                    <tr>
+                <tr>
                         <td>
-                            <%--<telerik:RadNumericTextBox ID="TxtValTot" runat="server" Skin="Forest">
-                            </telerik:RadNumericTextBox>--%>
-                            <asp:TextBox ID="TxtValTot" runat="server" AutoPostBack="true"></asp:TextBox>
+                              <telerik:RadNumericTextBox ID="TxtValTot" Runat="server" AutoPostBack="True" 
+                                Culture="es-CO" Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
+                            <%--<asp:TextBox ID="TxtValTot" runat="server" AutoPostBack="true"></asp:TextBox>
                             <ajaxToolkit:FilteredTextBoxExtender 
                             ID="FilteredTextBoxExtender1" 
                             runat="server" TargetControlID="TxtValTot" FilterType="Custom, Numbers" ValidChars=".">
                             </ajaxToolkit:FilteredTextBoxExtender>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" 
                                 ControlToValidate="TxtValTot" 
-                                ErrorMessage="Debe deligenciar el Valor del Contrato" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                ErrorMessage="Debe diligenciar el Valor del Contrato" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>--%>
                         </td>
                         <td >
-                          <asp:Label ID="LbValTot"
-                                runat="server" Text="Label"></asp:Label>    
+                        <telerik:RadNumericTextBox ID="TxtValProp" Runat="server" AutoPostBack="True" 
+                                Culture="es-CO" Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
+                          <%--<asp:Label ID="LbValTot"
+                                runat="server" Text="Label"></asp:Label>    --%>
                         </td>
                         <td colspan="2">
-                         <asp:TextBox ID="TxtValProp" runat="server" Width="119px" AutoPostBack="true" ></asp:TextBox>
+                          <telerik:RadNumericTextBox ID="TxtValOtros" Runat="server" AutoPostBack="True" 
+                                Culture="es-CO" Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
+                         <%--<asp:TextBox ID="TxtValProp" runat="server" Width="119px" AutoPostBack="true" ></asp:TextBox>
                             <ajaxToolkit:FilteredTextBoxExtender 
                             ID="FilteredTextBoxExtender2" 
                             runat="server" TargetControlID="TxtValProp" FilterType="Custom, Numbers" ValidChars=".">
@@ -618,40 +633,30 @@ padding-right: 20px;
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" 
                                 ControlToValidate="TxtValProp" 
                                 ErrorMessage="Debe diligenciar el Valor de los Aportes Propios" 
-                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>--%>
                         </td>
                          
                         <td colspan="2">
-                         <asp:Label ID="LbValProp"
-                                runat="server" Text="Label"></asp:Label>  
-                        </td>
-                        <td>
-                           <asp:TextBox ID="TxtValOtros" runat="server" ReadOnly="True" Enabled="false"></asp:TextBox>
-                        </td>
-                        <td >
-                <asp:Label ID="LbValOtros"
-                                runat="server" Text="Label"></asp:Label> 
-                        </td>
-                    </tr>
-                    <tr>
-                    <td>
-                            <asp:Label ID="Label9" runat="server" Text="Valor Sin IVA"></asp:Label>
-                        </td>
-                        <td colspan="5">
-                            <asp:TextBox ID="TxtValSinIva" runat="server" Text="0"></asp:TextBox>
+                        <telerik:RadNumericTextBox ID="TxtValSinIva" Runat="server" AutoPostBack="True" 
+                                Culture="es-CO" Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
+                       <%-- <asp:TextBox ID="TxtValSinIva" runat="server" Text="0"></asp:TextBox>
                             <ajaxToolkit:FilteredTextBoxExtender 
                             ID="FilteredTextBoxExtender9" 
                             runat="server" TargetControlID="TxtValSinIva" FilterType="Custom, Numbers" ValidChars=".">
                             </ajaxToolkit:FilteredTextBoxExtender>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
                                 ControlToValidate="TxtValSinIva" 
-                                ErrorMessage="Debe deligenciar el Valor del Contrato sin IVA" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                ErrorMessage="Debe deligenciar el Valor del Contrato sin IVA" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>--%>
+                         <%--<asp:Label ID="LbValProp"
+                                runat="server" Text="Label"></asp:Label>  --%>
                         </td>
+
                         <td>
-                            <asp:Label ID="Label15" runat="server" Text="Valor del IVA"></asp:Label>
-                        </td>
-                        <td style="width: 172px">
-                            <asp:TextBox ID="TxtValIva" runat="server" Width="119px" Text="0" ReadOnly="true"></asp:TextBox>
+                        <telerik:RadNumericTextBox ID="TxtValIva" Runat="server" AutoPostBack="True" 
+                                Culture="es-CO" Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
+                        <%--<asp:TextBox ID="TxtValIva" runat="server" Width="119px" Text="0" ReadOnly="true"></asp:TextBox>
                             <ajaxToolkit:FilteredTextBoxExtender 
                             ID="FilteredTextBoxExtender10" 
                             runat="server" TargetControlID="TxtValIva" FilterType="Custom, Numbers" ValidChars=".">
@@ -659,16 +664,20 @@ padding-right: 20px;
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
                                 ControlToValidate="TxtValIva" 
                                 ErrorMessage="Debe diligenciar el Valor de los Aportes Propios" 
-                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>--%>
+                           <%--<asp:TextBox ID="TxtValOtros" runat="server" ReadOnly="True" Enabled="false"></asp:TextBox>--%>
+                           
                         </td>
+              
                     </tr>
-                    <tr>
-                        <td style="width: 171px">
-                            <asp:Label ID="Label13" runat="server" Text="Plazo"></asp:Label>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" 
-                                ControlToValidate="TxtPlazo" ErrorMessage="Debe diligenciar el Plazode ejecucion del Contrato" 
-                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                <tr class="STitulos">
+                    <td colspan="8">
+                       PLAZO DE EJECUCIÓN
                         </td>
+                     
+                       
+                    </tr>
+                <tr>
                         <td class="style41">
                             <b>
                             <asp:TextBox ID="TxtPlazo" runat="server" Width="108px"></asp:TextBox>
@@ -717,13 +726,55 @@ padding-right: 20px;
                         <td style="width: 172px">
                               <asp:CheckBox ID="ChkAgotarPpto" runat="server" Text="Hasta Agotar Ppto" 
                                 Width="157px" />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" 
+                                ControlToValidate="TxtPlazo" ErrorMessage="Debe diligenciar el Plazo de ejecucion del Contrato" 
+                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                        </td>
+                        <td >
+                            
                         </td>
                     </tr>
-                    <tr>
-                        <td style="width: 171px">
+                
+                <tr class="STitulos">
+                    <td colspan="8">
+                       LUGAR DE EJECUCIÓN
+                        </td>
+                        
+                        
+                    </tr>
+                
+                <tr>
+                        <td colspan="7">
+                            <asp:TextBox ID="TxtLugEje" runat="server" Width="93%"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" 
+                                ControlToValidate="TxtLugEje" 
+                                ErrorMessage="Debe diliganciar el Lugar de Ejecución" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                        </td>
+                        <td >
+                            
+                        </td>
+               </tr>
+                
+                <tr class="STitulos">
+                        <td colspan="3">
                             <asp:Label ID="Label14" runat="server" Text="Forma Contractual "></asp:Label>
                         </td>
-                        <td class="style41">
+                      
+                        <td style="width: 171px" colspan="3">
+                            <asp:Label ID="Label16" runat="server" Text="Sector Destino"></asp:Label>
+                        </td>
+                      
+                        <td style="width: 171px">
+                            
+                            &nbsp;</td>
+                        
+                        <td style="width: 172px">
+                             
+                        </td>
+                    </tr>
+                 
+                 <tr>
+                        <td colspan="3">
                             <asp:DropDownList ID="CboFor" runat="server" CssClass="txt" 
                                 ToolTip="Forma Contractual">
                                 <asp:ListItem>CON FORMALIDAD</asp:ListItem>
@@ -731,78 +782,70 @@ padding-right: 20px;
                                 <asp:ListItem Selected="True" Value="-----o-----">-------o--------</asp:ListItem>
                             </asp:DropDownList>
                         </td>
-                        <td style="width: 171px" colspan="2">
-                            <asp:Label ID="Label16" runat="server" Text="Sector Destino"></asp:Label>
-                        </td>
-                        <td colspan="2">
+                       
+                        <td colspan="3">
                             <asp:DropDownList ID="CboSec" runat="server" CssClass="txt" 
                                 DataSourceID="ObjectDataSource1" DataTextField="Nom_Sec" 
                                 DataValueField="Cod_Sec" Width="117px">
                             </asp:DropDownList>
                         </td>
+                      
                         <td style="width: 171px">
                             
-                            &nbsp;</td>
+                            <asp:CheckBox ID="ChkUM" runat="server" Text="Urgencia Manifiesta" 
+                                Width="157px" /></td>
                         
                         <td style="width: 172px">
-                            <asp:CheckBox ID="ChkUM" runat="server" Text="Urgencia Manifiesta" 
-                                Width="157px" /> 
+                            
                         </td>
+                    
                     </tr>
-                    <tr>
-                        <td style="width: 171px">
-                            <asp:Label ID="Label17" runat="server" Text="Lugar de Ejecución"></asp:Label>
-                        </td>
-                        <td colspan="7">
-                            <asp:TextBox ID="TxtLugEje" runat="server" Width="93%"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" 
-                                ControlToValidate="TxtLugEje" 
-                                ErrorMessage="Debe diliganciar el Lugar de Ejecución" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                    <td style="width: 171px">
+                   
+                <tr class="STitulos">
+                    <td colspan="4">
                             <asp:Label ID="Label18" runat="server" Text="Interventor/Supervisor"></asp:Label>
                         </td>
-                        <td colspan="2">
-                            <asp:DropDownList ID="CboInterventoria" runat="server" DataSourceID="ObjDep" 
-                                DataTextField="nom_dep" DataValueField="cod_dep" Width="250px">
-                            </asp:DropDownList></td>
-                        </td>
-                        <td colspan="2">
+                        
+                        <td colspan="3">
                             <asp:Label ID="Label24" runat="server" Text="Revisado Por"></asp:Label>
                         </td>
-                        <td colspan="3">
-                           <asp:DropDownList ID="CboRevPor" runat="server" DataSourceID="ObjCord" 
+                        <td colspan="2">
+                         
+                        </td>
+                        
+                    </tr>
+
+                 <tr>
+                    <td colspan="4">
+                                <asp:DropDownList ID="CboInterventoria" runat="server" DataSourceID="ObjDep" 
+                                DataTextField="nom_dep" DataValueField="cod_dep" Width="250px">
+                            </asp:DropDownList></td>
+                 
+                    <td colspan="3">
+                              <asp:DropDownList ID="CboRevPor" runat="server" DataSourceID="ObjCord" 
                                 DataTextField="Nom_Ter" DataValueField="Ide_Ter" Width="250px">
                            </asp:DropDownList>
                             <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
                                 InsertMethod="Insert" OldValuesParameterFormatString="original_{0}" 
                                 SelectMethod="GetRecords" TypeName="Sector" UpdateMethod="Update">
-                                <UpdateParameters>
-                                    <asp:Parameter Name="Cod_Sec_O" Type="String" />
-                                    <asp:Parameter Name="Cod_Sec" Type="String" />
-                                    <asp:Parameter Name="Nom_Sec" Type="String" />
-                                    <asp:Parameter Name="estado" Type="String" />
-                                </UpdateParameters>
-                                <InsertParameters>
-                                    <asp:Parameter Name="Cod_Sec" Type="String" />
-                                    <asp:Parameter Name="Nom_Sec" Type="String" />
-                                    <asp:Parameter Name="estado" Type="String" />
-                                </InsertParameters>
+                               
+                             
                             </asp:ObjectDataSource>
                         </td>
+                        <td colspan="2">
+                          
+                        </td>
+                     
+                    </tr>
+                 <tr>
+                        <td colspan="8">
+                        Regionales
                         </td>
                     </tr>
                     <tr>
                         <td colspan="8">
-                        Municipios Beneficiados
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="8">
-                        <div id="DIV1" language="javascript" style="z-index: 101; overflow: auto; width: 237px;
-                    height: 187px; background-color: transparent; border-bottom-style: outset" title="MUNICPIOS">
+                        <div id="DIV1" style="z-index: 101; overflow: auto; width: 237px;
+                    height: 187px; background-color: transparent; " >
                     <asp:DataList ID="DataList1" runat="server" CellPadding="4" CellSpacing="5" CssClass="txt"
                         DataKeyField="COD_MUN" DataSourceID="ObjConMun" ForeColor="#333333" GridLines="Vertical"
                         Height="40px" RepeatColumns="1" Width="202px">
@@ -821,6 +864,8 @@ padding-right: 20px;
                         </td>
                     </tr>
                     </table> 
+        </div>
+                    </fieldset>
                     <asp:ObjectDataSource ID="ObjDep" runat="server" 
             OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
             TypeName="Dependencias"></asp:ObjectDataSource>

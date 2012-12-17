@@ -133,7 +133,7 @@ Public Class Dependencias
      Public Function GetbyPK(ByVal cod_dep As String) As DataTable
 
         Me.Conectar()
-        Dim queryString As String = "select * from Vdependencia2 where cod_dep=:cod_dep "
+        Dim queryString As String = "select * from Vdependencia2DB where cod_dep=:cod_dep "
         Me.CrearComando(queryString)
         Me.AsignarParametroCadena(":cod_dep", cod_dep)
         Dim dt As DataTable = Me.EjecutarConsultaDataTable()
@@ -158,10 +158,10 @@ Public Class Dependencias
     ''' <returns></returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
- Public Function Insert(ByVal cod_dep As String, ByVal nom_dep As String, ByVal dep_del As String, ByVal dep_abr As String, ByVal ide_ter As String, ByVal norma_del As String, ByVal Email As String, ByVal Estado As String) As String
+    Public Function Insert(ByVal cod_dep As String, ByVal nom_dep As String, ByVal dep_del As String, ByVal dep_abr As String, ByVal ide_ter As String, ByVal norma_del As String, ByVal Email As String, ByVal cargo_enc As String, ByVal Estado As String) As String
         Me.Conectar()
         Try
-            Dim queryString As String = "Insert Into dependencia (cod_dep, nom_dep, dep_del, dep_abr,ide_ter,norma_del, Email, Estado)Values(:cod_dep, :nom_dep, :dep_del, :dep_abr,:ide_ter,:norma_del, :Email, :Estado)"
+            Dim queryString As String = "Insert Into dependencia (cod_dep, nom_dep, dep_del, dep_abr,ide_ter,norma_del, Email,cargo_enc, Estado)Values(:cod_dep, :nom_dep, :dep_del, :dep_abr,:ide_ter,:norma_del, :Email,cargo_enc, :Estado)"
             Me.CrearComando(queryString)
             Me.AsignarParametroCadena(":cod_dep", cod_dep)
             Me.AsignarParametroCadena(":nom_dep", nom_dep)
@@ -170,12 +170,17 @@ Public Class Dependencias
             Me.AsignarParametroCadena(":ide_ter", ide_ter)
             Me.AsignarParametroCadena(":norma_del", norma_del)
             Me.AsignarParametroCadena(":Email", Email)
+            Me.AsignarParametroCadena(":cargo_enc", cargo_enc)
             Me.AsignarParametroCadena(":Estado", Estado)
+
 
             Me.num_reg = EjecutarComando()
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
+            Me.lErrorG = False
+
         Catch ex As Exception
             Me.Msg = "Error: " + ex.Message
+            Me.lErrorG = True
         Finally
             Me.Desconectar()
         End Try
@@ -200,13 +205,13 @@ Public Class Dependencias
     ''' <returns></returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
-    Public Function Update(ByVal pk1_cod_dep As String, ByVal cod_dep As String, ByVal nom_dep As String, ByVal dep_del As String, ByVal dep_abr As String, ByVal ide_ter As String, ByVal norma_del As String, ByVal Email As String, ByVal Estado As String, Optional ByVal connect As Boolean = True) As String
+    Public Function Update(ByVal pk1_cod_dep As String, ByVal cod_dep As String, ByVal nom_dep As String, ByVal dep_del As String, ByVal dep_abr As String, ByVal ide_ter As String, ByVal norma_del As String, ByVal Email As String, ByVal cargo_enc As String, ByVal Estado As String, Optional ByVal connect As Boolean = True) As String
         If connect Then
             Me.Conectar()
         End If
 
         Try
-            Dim queryString As String = "Update dependencia Set cod_dep=:cod_dep, nom_dep=:nom_dep, dep_del=:dep_del, dep_abr=:dep_abr, ide_ter=:ide_ter,norma_del=:norma_del, Email=:Email, Estado=:Estado Where cod_dep=:pk1_cod_dep"
+            Dim queryString As String = "Update dependencia Set cargo_enc=:cargo_enc,cod_dep=:cod_dep, nom_dep=:nom_dep, dep_del=:dep_del, dep_abr=:dep_abr, ide_ter=:ide_ter,norma_del=:norma_del, Email=:Email, Estado=:Estado Where cod_dep=:pk1_cod_dep"
             Me.CrearComando(queryString)
             Me.AsignarParametroCadena(":cod_dep", cod_dep)
             Me.AsignarParametroCadena(":nom_dep", nom_dep)
@@ -216,11 +221,14 @@ Public Class Dependencias
             Me.AsignarParametroCadena(":norma_del", norma_del)
             Me.AsignarParametroCadena(":Email", Email)
             Me.AsignarParametroCadena(":Estado", Estado)
+            Me.AsignarParametroCadena(":cargo_enc", cargo_enc)
             Me.AsignarParametroCadena(":pk1_cod_dep", pk1_cod_dep)
             Me.num_reg = EjecutarComando()
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "] - "
+            Me.lErrorG = False
         Catch ex As Exception
             Me.Msg = "Error: " + ex.Message
+            Me.lErrorG = True
         Finally
             If connect Then
                 Me.Desconectar()

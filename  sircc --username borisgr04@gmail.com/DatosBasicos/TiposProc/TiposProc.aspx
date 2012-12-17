@@ -31,8 +31,8 @@
     <br />
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>
-&nbsp;<asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" 
-                Text="Tipos de Procesos"></asp:Label><BR /><asp:Label id="MsgResult" 
+&nbsp;<asp:Label id="Tit" runat="server" Width="486px" CssClass="Titulo" 
+                Text="Tipos de Procesos/Modalidades de Contratación"></asp:Label><BR /><asp:Label id="MsgResult" 
                 runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;<asp:GridView 
                 ID="GridView1" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Cod_Tproc" 
