@@ -35,17 +35,17 @@
                                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             </asp:GridView>
                             <table>
-                            <TR><TD class="STitulos" colspan="5">&nbsp;</TD>
-                                </TR>
-                            <TR><TD class="STitulos" colspan="5">
+                            <tr><td  colspan="5">&nbsp;</td>
+                                </tr>
+                            <tr><td colspan="5">
                                 <asp:Label ID="Label1" runat="server" CssClass="SubTitulo" 
                                     Text="Registre Nuevo Amparo"></asp:Label>
-                                </TD>
-                                </TR>
-                            <TR><TD style="WIDTH: 174px" class="STitulos" colspan="2">Tipo de Amparo</TD>
-            <TD 
-                        class="STitulos" colSpan=3>Aseguradora</TD></TR>
-        <TR><TD style="WIDTH: 174px; HEIGHT: 10px" vAlign=top colspan="2"><asp:DropDownList id="CboPol" 
+                                </td>
+                                </tr>
+                            <tr><td style="WIDTH: 174px" class="STitulos" colspan="2">Tipo de Amparo</td>
+            <td 
+                        class="STitulos" colspan=3>Aseguradora</TD></TR>
+        <tr><td style="WIDTH: 174px; HEIGHT: 10px" vAlign="top" colspan="2"><asp:DropDownList id="CboPol" 
                 runat="server" DataValueField="COD_POL" DataTextField="NOM_POL" 
                 DataSourceID="ObjPol" CssClass="txt">
                             </asp:DropDownList></TD>

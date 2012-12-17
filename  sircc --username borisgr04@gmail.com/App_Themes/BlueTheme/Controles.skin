@@ -23,7 +23,7 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 <asp:ImageButton SkinId="IBtnAbrir" runat="server" Height="32px" 
                         ImageUrl="~/images/mnProcesos/open-icon32.png" Width="32px" />                        
 <asp:ImageButton SkinId="IBtnNuevo" runat="server" Height="32px" 
-                        ImageUrl="~/images/Operaciones/New1.png" Width="32px" />                        
+                        ImageUrl="~/images/2012/Nuevo.png" Width="32px" />                        
 <asp:ImageButton SkinId="IBtnSelect2" runat="server" Height="32px" 
                         ImageUrl="~/images/Operaciones/Select.png" Width="32px" />               
 
@@ -91,4 +91,6 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
                         
 <asp:ImageButton SkinId="IBtnRadCont" runat="server" Height="32px" 
                         ImageUrl="~/images/2012/Radcont.png" Width="32px" />                       
-                        
+
+<asp:ImageButton SkinId="IBtnReabrir" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/ReAbrir.png" Width="32px" />                                   

@@ -64,7 +64,7 @@ Public Class DContratos
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
             Me.lErrorG = False
         Catch ex As Exception
-            Me.Msg = "Error:" + ex.Message + ex.StackTrace
+            Me.Msg = "Error:" + ex.Message
             Me.CancelarTransaccion()
             Me.lErrorG = True
         Finally

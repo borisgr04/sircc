@@ -35,9 +35,9 @@
                                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             </asp:GridView>
                             <table>
-                            <TR><TD class="STitulos" colspan="5">&nbsp;</TD>
+                            <TR><TD colspan="5">&nbsp;</TD>
                                 </TR>
-                            <TR><TD class="STitulos" colspan="5">
+                            <TR><TD colspan="5">
                                 <asp:Label ID="Label1" runat="server" CssClass="SubTitulo" 
                                     Text="Registre Nuevo Amparo"></asp:Label>
                                 </TD>
