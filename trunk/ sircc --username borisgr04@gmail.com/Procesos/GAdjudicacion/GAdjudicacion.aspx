@@ -15,9 +15,22 @@
         runat="server" >
         <contenttemplate> 
     <uc1:DetGProcesos ID="DetPContrato1" runat="server" />
-            <asp:LinkButton ID="LnkProponentes" runat="server">Proponentes</asp:LinkButton>
-            &nbsp;&nbsp;&nbsp;
-            <asp:LinkButton ID="LnkDatosC" runat="server">Datos del Contrato</asp:LinkButton>
+            &nbsp;&nbsp;&nbsp;&nbsp;<table >
+                <tr>
+                    <td style="text-align: center">
+                        <asp:ImageButton ID="IBtnProp" runat="server" SkinID="IBtnProp" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:ImageButton ID="IBtnDatosContrato" runat="server" SkinID="IBtnCont" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Proponentes</td>
+                    <td>
+                        Datos del Contrato</td>
+                </tr>
+            </table>
             <br />
      <asp:Panel ID="PanelvConP" runat="server" BackColor="White" Width="900px" Height="500px">
             <asp:Panel ID="Panel1" runat="server" CssClass="BarTitleModal2" BorderColor="White" 

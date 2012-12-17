@@ -35,11 +35,19 @@ Public Class Usuarios
 
         Me.Conectar()
         'querystring = "SELECT * FROM ORA_VW_ASPNET_MEMUSERS WHERE (username like '%" + Busc + "%') "
-        querystring = "SELECT * FROM ORA_VW_ASPNET_MEMUSERS m left Join vterceros t On t.IDE_TER=m.USERNAME WHERE (username like '%" + Busc + "%')OR( Upper(Nom_Ter) like '%" + UCase(Busc) + "%') "
+        If Not String.IsNullOrEmpty(Busc) Then
+            querystring = "SELECT * FROM ORA_VW_ASPNET_MEMUSERS m left Join vterceros t On t.IDE_TER=m.USERNAME WHERE (username like '%" + Busc + "%')OR( Upper(Nom_Ter) like '%" + UCase(Busc) + "%') "
+
+        Else
+            querystring = "SELECT * FROM ORA_VW_ASPNET_MEMUSERS m left Join vterceros t On t.IDE_TER=m.USERNAME WHERE 1=0 "
+        End If
+
         Me.CrearComando(querystring)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataTb
+
+        
 
     End Function
     'Membership.GetUser("").UnlockUser()
@@ -196,7 +204,8 @@ Public Class Usuarios
                     Msg = Msg + "Error: UserRejected en el Proveedor"
             End Select
         Catch ex As MembershipCreateUserException
-            Msg = Msg + "Error MB " + ex.Message
+            Msg = Msg + "Error : " + ex.Message
+            lErrorG = True
         End Try
         'End If
         Return Msg

@@ -32,7 +32,7 @@
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>
 &nbsp;<asp:Label id="Tit" runat="server" Width="376px" CssClass="Titulo" 
-                Text="Vigencias"></asp:Label><BR /><asp:Label id="MsgResult" 
+                Text="Consecutivos x Vigencia"></asp:Label><BR /><asp:Label id="MsgResult" 
                 runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;<asp:GridView 
                 ID="GridView1" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Year_Vig,Cod_Tip" 
@@ -158,7 +158,7 @@
                 <asp:Label id="Label6" runat="server" Text="Tipo de Contrato"></asp:Label></TD>
             <TD style="WIDTH: 100px; HEIGHT: 23px">
                     <asp:DropDownList ID="CboTip" runat="server" DataSourceID="ObjCTipos" 
-                        DataTextField="Nom_Tip" DataValueField="Cod_Tip" Width="106px">
+                        DataTextField="Nom_Tip" DataValueField="Cod_Tip" Width="100%">
                         <asp:ListItem Value="ABIERTA">ABIERTA</asp:ListItem>
                         <asp:ListItem Value="CERRADA">CERRADA</asp:ListItem>
                     </asp:DropDownList>

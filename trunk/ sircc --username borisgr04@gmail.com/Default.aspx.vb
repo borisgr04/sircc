@@ -10,8 +10,10 @@ Partial Class _Default
         Dim t As New Terceros
 
         If t.GetIsAsig_Proc() Then
-            Redireccionar_Pagina("Consultas/AvisosAct/AvisosAct.aspx")
+            Redireccionar_Pagina("/Consultas/AvisosAct/AvisosAct.aspx")
         End If
+
+        'Profile
 
 
         

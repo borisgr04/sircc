@@ -43,8 +43,7 @@ td
                     <td colspan="1" style="width: 509px; height: 14px">
                         <asp:TextBox ID="TxtCodCon" runat="server" AutoPostBack="True"></asp:TextBox>
                         <asp:Button ID="BtnBuscarSol" runat="server" Text="..." />
-&nbsp;<asp:Button ID="btnBuscar" runat="server" CausesValidation="False" 
-                            OnClick="btnBuscar_Click" Text="Abrir" />
+&nbsp;<asp:ImageButton ID="IBtnAbrir" runat="server" SkinID="IBtnAbrir" />
                     </td>
                 </tr>
                 <tr>

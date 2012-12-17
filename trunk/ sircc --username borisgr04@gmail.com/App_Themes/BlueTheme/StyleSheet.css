@@ -222,9 +222,12 @@
 /*********************** JAX*****************/
 body, div, p, h1, h2, h3, h4, ul, li, table
 {
-	margin:0;
-	padding:0;
-	border:none;
+	border-style: none;
+    border-color: inherit;
+    border-width: medium;
+    margin: 0;
+    padding: 0;
+    
 }
 
 /*background: #B4B4B4 url(images/body_bg.gif) repeat left top;*/
@@ -447,6 +450,7 @@ background:#FFF url(images/demotop.png) no-repeat left top;
 
 .demoarea {
 	padding:20px;
+	background-color:White;
 	
 }
 

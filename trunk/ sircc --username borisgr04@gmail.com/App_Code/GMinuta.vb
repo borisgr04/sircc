@@ -338,23 +338,50 @@ Public Class GMinuta
                                 wrdRng.Text = ""
                             Else
                                 oTable = wrdDoc.Tables.Add(wrdRng, nf + nf_adicional, nc - 2, oMissing, oMissing)
+                                'SE AGREGA FORMATO DE TABLAS
+                                Dim oPlantilla As New PPlantillas
+                                Dim dtConcepto As DataTable
+                                Dim dtConsulta As New DataTable
+                                dtConsulta = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla)
+
                                 'oTable.Range.ParagraphFormat.SpaceAfter = 6
                                 Dim f As Integer, c As Integer
                                 ''Colocar Titulos
-                                If dt.Rows(k)("Mostrar_Titulos").ToString = "SI" Then
-                                    For c = 1 To nc - 2
+                                For c = 1 To nc - 2
+                                    If dt.Rows(k)("Mostrar_Titulos").ToString = "SI" Then
                                         oTable.Cell(1, c).Range.Text = UCase(dtt.Columns(c + 1).ColumnName)
                                         oTable.Cell(1, c).Range.Font.Bold = True
-                                    
-                                    Next c
-                                End If
+                                        oTable.Cell(1, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphCenter
+                                    End If
+                                    dtConcepto = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla, dtt.Columns(c + 1).ColumnName)
+                                    If dtConcepto.Rows.Count > 0 Then
+                                        oTable.Columns(c).SetWidth(CInt(dtConcepto.Rows(0)("ANCHO").ToString), MSWord.WdRulerStyle.wdAdjustNone)
+                                        oTable.Columns(c).Cells.VerticalAlignment = MSWord.WdCellVerticalAlignment.wdCellAlignVerticalCenter
+                                    End If
+                                Next c
                                 'Mostrar Datos
                                 For f = 0 To nf - 1
                                     For c = 1 To nc - 2
-                                        oTable.Cell(f + 1 + nf_adicional, c).Range.Text = dtt.Rows(f)(c + 1).ToString
+                                        dtConcepto = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla, dtt.Columns(c + 1).ColumnName)
+                                        Dim tipoDato As String = "C"
+                                        If dtConsulta.Rows.Count > 0 And dtConcepto.Rows.Count > 0 Then
+                                            tipoDato = dtConcepto.Rows(0)("TIP_DAT").ToString
+                                        End If
+                                        Dim valor As String
+                                        valor = dtt.Rows(f)(c + 1).ToString
+                                        valor = MostrarCampo(valor, tipoDato)
+                                        If tipoDato = "M" Then
+                                            oTable.Cell(f + 1 + nf_adicional, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphRight
+                                        Else
+                                            oTable.Cell(f + 1 + nf_adicional, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphJustifyMed
+                                            'wrdApp.Selection.ParagraphFormat.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphJustify
+                                        End If
+                                        oTable.Cell(f + 1 + nf_adicional, c).Range.Text = valor
+                                        ''SE AGREGO EL FORMATO DE TABLAS MAS O MENOS COMO SHIRLEY
+
                                         'Aquí la aplicación- inicializarla con la activa
                                         oTable.Cell(f + 1 + nf_adicional, c).Select()
-                                        wrdApp.Selection.ParagraphFormat.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphJustify
+
                                         wrdApp.Selection.MoveDown()
                                         wrdApp.ActiveDocument.Select()
                                         wrdApp.Selection.MoveDown()

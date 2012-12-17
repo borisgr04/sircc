@@ -166,7 +166,8 @@ Inherits="DatosBasicos_Terceros_Terceros" title="Untitled Page" EnableEventValid
        <br />
          <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate> 
-            &nbsp;<asp:Label id="Tit" runat="server" CssClass="Titulo" Text="TERCEROS"></asp:Label>&nbsp; <BR /><asp:Label id="MsgResult" runat="server"></asp:Label>&nbsp; <BR />
+            &nbsp;<asp:Label id="Tit" runat="server" CssClass="Titulo" Text="TERCEROS"></asp:Label>&nbsp; <BR />
+            <asp:Label id="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>&nbsp; <BR />
             <asp:ValidationSummary id="ValidationSummary1" runat="server" Width="543px" 
                 Height="80px" ValidationGroup="Guardar" SkinID="ValidationSummary1"></asp:ValidationSummary> <asp:Label id="SubT" runat="server" CssClass="SubTitulo" Text="Nuevo"></asp:Label><BR /><asp:MultiView id="MultiView1" runat="server" ActiveViewIndex="1"><asp:View id="View1" runat="server">
 
@@ -185,14 +186,14 @@ Inherits="DatosBasicos_Terceros_Terceros" title="Untitled Page" EnableEventValid
         </TD>
         <td colspan="2" valign="middle"><asp:TextBox ID="TxtNit" runat="server" Width="152px"></asp:TextBox>
         </td>
-        <TD style="WIDTH: 56px">
+        <TD style="WIDTH: 38px">
             <asp:TextBox ID="TxtDver" runat="server" 
         Enabled="False" Rows="1" Width="20px" ReadOnly="True"></asp:TextBox></TD></TR>
     <tr>
         <td style="WIDTH: 108px">
             Lugar de Expedición</td>
         <td colspan=10>
-            <asp:TextBox ID="TxtLugExp" runat="server" Width="513px"></asp:TextBox>
+            <asp:TextBox ID="TxtLugExp" runat="server" Width="95%"></asp:TextBox>
         </td>
     </tr>
     <TR><TD style="WIDTH: 108px">Primer 
@@ -203,7 +204,7 @@ Inherits="DatosBasicos_Terceros_Terceros" title="Untitled Page" EnableEventValid
         <td style="WIDTH: 46px" colspan="2">
             Segundo Apellido</td>
         <td colspan="3">
-            <asp:TextBox ID="TxtApe2" runat="server" Width="190px"></asp:TextBox>
+            <asp:TextBox ID="TxtApe2" runat="server"></asp:TextBox>
         </td>
     </TR>
     <tr>
@@ -215,40 +216,33 @@ Inherits="DatosBasicos_Terceros_Terceros" title="Untitled Page" EnableEventValid
         <td style="WIDTH: 46px" colspan="2">
             Segundo Nombre</td>
         <td colspan="3">
-            <asp:TextBox ID="TxtNom2" runat="server" Width="190px"></asp:TextBox>
+            <asp:TextBox ID="TxtNom2" runat="server"></asp:TextBox>
         </td>
     </tr>
     <TR><TD style="WIDTH: 108px">Razón 
         Social</TD>
         <TD colspan="10">
-            <asp:TextBox ID="TxtNom" runat="server" Width="516px" 
+            <asp:TextBox ID="TxtNom" runat="server" Width="95%" 
         ValidationGroup="EditNew"></asp:TextBox>
         </TD>
         </TR>
     <tr>
         <td style="WIDTH: 108px">
-            Municipios</td>
-        <td style="WIDTH: 60px" colspan="5">
-            <asp:DropDownList ID="CbMun" runat="server" DataSourceID="ObjMUN" 
-                DataTextField="NOM_MUN" DataValueField="COD_MUN" Width="214px">
-            </asp:DropDownList>
-        </td>
-        <td style="WIDTH: 46px" colspan="2">
             Dirección</td>
-        <td colspan="3">
-            <asp:TextBox ID="TxtDir" runat="server" Width="190px"></asp:TextBox>
+        <td colspan="10">
+            <asp:TextBox ID="TxtDir" runat="server" Width="90%"></asp:TextBox>
         </td>
     </tr>
     <tr>
         <td style="WIDTH: 108px">
             E-Mail</td>
         <td style="WIDTH: 60px" colspan="5">
-            <asp:TextBox ID="TxtEma" runat="server" ValidationGroup="Guardar" Width="145px"></asp:TextBox>
+            <asp:TextBox ID="TxtEma" runat="server" ValidationGroup="Guardar" Width="201px"></asp:TextBox>
         </td>
         <td style="WIDTH: 46px" colspan="2">
             Teléfono</td>
         <td colspan="3">
-            <asp:TextBox ID="TxtTel" runat="server" Width="189px"></asp:TextBox>
+            <asp:TextBox ID="TxtTel" runat="server"></asp:TextBox>
         </td>
     </tr>
     <tr>
@@ -263,7 +257,7 @@ Inherits="DatosBasicos_Terceros_Terceros" title="Untitled Page" EnableEventValid
         <td style="WIDTH: 46px" colspan="2">
             Usuario</td>
         <td colspan="3">
-            <asp:TextBox ID="TxtUsu" runat="server" Width="191px" Enabled="False"></asp:TextBox>
+            <asp:TextBox ID="TxtUsu" runat="server" Enabled="False"></asp:TextBox>
         </td>
     </tr>
     <TR><TD style="WIDTH: 108px">Tipo 
@@ -289,7 +283,7 @@ Inherits="DatosBasicos_Terceros_Terceros" title="Untitled Page" EnableEventValid
         Observación</TD>
         <td colspan="10">
             <asp:TextBox ID="TxtObs" runat="server" Height="65px" MaxLength="200" 
-                TextMode="MultiLine" Width="513px"></asp:TextBox>
+                TextMode="MultiLine" Width="90%"></asp:TextBox>
         </td>
     </TR>
     <tr>
@@ -314,7 +308,7 @@ Inherits="DatosBasicos_Terceros_Terceros" title="Untitled Page" EnableEventValid
             <div ID="Cancelar">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
         </td>
-        <td colspan="1" style="TEXT-ALIGN: center; width: 56px;">
+        <td colspan="1" style="TEXT-ALIGN: center; width: 38px;">
             </td>
     </tr>
     <tr>
@@ -330,15 +324,18 @@ Inherits="DatosBasicos_Terceros_Terceros" title="Untitled Page" EnableEventValid
             Cancelar</td>
         <td colspan="1" style="WIDTH: 192px; TEXT-ALIGN: center">
             &nbsp;</td>
-        <td colspan="1" style="TEXT-ALIGN: center; width: 56px;">
+        <td colspan="1" style="TEXT-ALIGN: center; width: 38px;">
             &nbsp;</td>
     </tr>
     <tr>
         <td colspan="9" style="text-align: right;">
             &nbsp;</td>
         <td colspan="1" style="WIDTH: 192px; TEXT-ALIGN: left">
-            &nbsp;</td>
-        <td colspan="1" style="TEXT-ALIGN: center; width: 56px;">
+            <asp:DropDownList ID="CbMun" runat="server" DataSourceID="ObjMUN" 
+                DataTextField="NOM_MUN" DataValueField="COD_MUN" Visible="False" Width="214px">
+            </asp:DropDownList>
+        </td>
+        <td colspan="1" style="TEXT-ALIGN: center; width: 38px;">
             &nbsp;</td>
     </tr>
     </TBODY></TABLE>
@@ -478,6 +475,8 @@ Inherits="DatosBasicos_Terceros_Terceros" title="Untitled Page" EnableEventValid
                                 <asp:Label ID="LbNor0" runat="server" Text='<%# Bind("TEL_ter") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:BoundField DataField="Dir_Ter" HeaderText="Dirección" />
+                        <asp:BoundField DataField="Ema_Ter" HeaderText="Correo" />
                         <asp:TemplateField HeaderText="Observación" SortExpression="TER_OBS">
                             <ItemTemplate>
                                 <asp:Label ID="LbObs0" runat="server" Text='<%# Bind("dir_ter") %>'></asp:Label>

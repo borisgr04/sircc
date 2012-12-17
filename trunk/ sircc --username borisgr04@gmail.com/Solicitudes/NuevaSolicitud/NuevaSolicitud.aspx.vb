@@ -27,10 +27,10 @@ Partial Class Procesos_NuevaSolicitud_Default
             sw = True
           
         End If
-        If Me.CboTproc.SelectedIndex = 0 Then
+        If Me.CboTproc.SelectedValue = "TP00" Then
             sval = IIf(sval <> "", sval + "<br/>", "") + "Seleccione la Modalidad de Contratación"
             sw = True
-            
+
         End If
         If sw = True Then
             MsgResult.Text = sval
@@ -294,9 +294,17 @@ Partial Class Procesos_NuevaSolicitud_Default
     End Sub
 
     Protected Sub LnkAsig_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkAsig.Click
+        Asignar()
+    End Sub
+    Sub Asignar()
         querystringSeguro = Me.SetRequest()
         querystringSeguro("Cod_Sol") = TxtNProc.Text
         Redireccionar_Pagina("/Solicitudes/Asignaciones/Asignaciones.aspx?data=" + HttpUtility.UrlEncode(querystringSeguro.ToString()))
 
+    End Sub
+  
+
+    Protected Sub BtnAsig0_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnAsig0.Click
+        Asignar()
     End Sub
 End Class

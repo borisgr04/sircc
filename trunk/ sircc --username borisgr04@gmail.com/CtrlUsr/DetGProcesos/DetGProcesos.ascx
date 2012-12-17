@@ -25,6 +25,7 @@ td
         width: 87px;
     }
 </style>
+<div style="height:200px; overflow:auto">  
             <table style="width: 610px">
                 <tr>
                     <td style="width: 509px; height: 14px; text-align: center">
@@ -46,7 +47,7 @@ td
                     <td class="style2">
                         <asp:DropDownList ID="CboGrupos" runat="server" AutoPostBack="True" 
                             DataSourceID="ObjGrupos" DataTextField="Grupos" DataValueField="Grupo" 
-                            Width="79px">
+                            Width="148px">
                         </asp:DropDownList>
                     </td>
                     <td style="width: 509px; height: 14px">
@@ -107,7 +108,7 @@ td
             </table>
         
 
-
+        </div>
 
                 
 

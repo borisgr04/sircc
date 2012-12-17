@@ -32,8 +32,8 @@
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>
 &nbsp;<asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" 
-                Text="Vigencias"></asp:Label><BR /><asp:Label id="MsgResult" 
-                runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;<asp:GridView 
+                Text="Vigencias"></asp:Label><br /><asp:Label id="MsgResult" 
+                runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<br />&nbsp;<asp:GridView 
                 ID="GridView1" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Year_Vig" 
                 DataSourceID="ObjTipos" 
@@ -46,11 +46,11 @@
                 <Columns>
                     <asp:TemplateField HeaderText="Vigencia">
                         <FooterTemplate>
-                            <asp:LinkButton ID="lnkNuevo" runat="server" __designer:wfdid="w10" 
+                            <asp:LinkButton ID="lnkNuevo" runat="server" 
                                 CausesValidation="False" CommandName="Nuevo" Text="Nuevo Registro"></asp:LinkButton>
                         </FooterTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="LbCod" runat="server" __designer:wfdid="w9" 
+                            <asp:Label ID="LbCod" runat="server" 
                                 Text='<%# Bind("Year_Vig") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -62,19 +62,19 @@
                         HeaderText="Porcentaje de Adiciones" />
                     <asp:TemplateField HeaderText="Estado">
                         <FooterTemplate>
-                            <asp:ImageButton ID="lnkExportar" runat="server" __designer:wfdid="w10" 
+                            <asp:ImageButton ID="lnkExportar" runat="server" 
                                 CausesValidation="False" CommandName="Exportar" Height="32" 
                                 ImageUrl="~/images/Operaciones/excel.png" Text="Exportar Datos a Excel" 
                                 ToolTip="Exportar Datos a Excel" Width="32" />
                         </FooterTemplate>
                     <ItemTemplate>
-                            <asp:Label ID="LbCodAux" runat="server" __designer:wfdid="w23" 
+                            <asp:Label ID="LbCodAux" runat="server" 
                                 Text='<%# Bind("Est_Vig") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Radicación Automatica">
                         <ItemTemplate>
-                            <asp:Label ID="LbCodContra" runat="server" __designer:wfdid="w23" 
+                            <asp:Label ID="LbCodContra" runat="server" 
                                 Text='<%# Bind("Rad_Aut") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>

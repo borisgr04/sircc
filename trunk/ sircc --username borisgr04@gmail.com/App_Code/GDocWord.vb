@@ -324,7 +324,7 @@ Public Class GDocWord
         Dim imgLogo As String = objent.Ruta_Logo
         Try
             oWrdApp = AbrirAplicacionWord()
-            oWrdApp.Visible = True
+            oWrdApp.Visible = False
             iniciada = True
             oWrdDoc = AbrirDocumentoWord(oWrdApp)
             ProtegerDocumento(oWrdDoc, False)
@@ -731,11 +731,11 @@ Public Class GDocWord
 
     Private Sub EsOtroCaso(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
         Dim i As Integer = posicion
-        Dim nom_Pla As String = dtConfiguracion.Rows(i)("NOM_PLA").ToString.Trim
+        Dim nom_Pla As String = dtConfiguracion.Rows(i)("NOM_PLA").ToString.Trim.ToUpper()
         Dim Nom_Campo As String = dtConfiguracion.Rows(i)("NOM_CAM").ToString
         Dim Tip_Dato As String = dtConfiguracion.Rows(i)("TIP_DAT").ToString
-        'If nom_Pla = "VIGENCIA_CERT" Then
-        '    Throw New Exception("VIGENCIA_CERT")
+        'If nom_Pla = "NOM_TPROC" Then
+        '    Throw New Exception("NOM_TPROC")
         'End If
         If (dtDatosImprimir.Columns.Contains(Nom_Campo)) Then
 
@@ -798,7 +798,7 @@ Public Class GDocWord
                 Case "n"
                     Ret = FormatNumber(Valor, 0)
                 Case "C"
-                    Ret = Trim(UCase(Valor))
+                    Ret = Trim(Valor)
                 Case "D"
                     Dim fecha As Date
                     fecha = CDate(Valor)

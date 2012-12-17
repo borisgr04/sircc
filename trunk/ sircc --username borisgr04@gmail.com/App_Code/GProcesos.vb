@@ -105,7 +105,7 @@ Public Class GProcesos
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetPConMun(ByVal COD_CON As String, ByVal GRUPO As String) As DataTable
         Me.Conectar()
-        querystring = "SELECT MUNICIPIOS.COD_MUN , MUNICIPIOS.NOM_MUN,(SELECT CASE WHEN count(*)=0 THEN '0' ELSE '1' END AS EST FROM PCONMUN WHERE  NRO_PCON=:COD_CON and cod_mun=MUNICIPIOS.cod_mun and Grupo=:GRUPO) EST  FROM MUNICIPIOS "
+        querystring = "SELECT MUNICIPIOS.COD_MUN , MUNICIPIOS.NOM_MUN,(SELECT CASE WHEN count(*)=0 THEN '0' ELSE '1' END AS EST FROM PCONMUN WHERE  NRO_PCON=:COD_CON and cod_mun=MUNICIPIOS.cod_mun and Grupo=:GRUPO) EST  FROM MUNICIPIOS ORDER BY COD_MUN "
         CrearComando(querystring)
         AsignarParametroCadena(":COD_CON", COD_CON)
         AsignarParametroCadena(":GRUPO", GRUPO)

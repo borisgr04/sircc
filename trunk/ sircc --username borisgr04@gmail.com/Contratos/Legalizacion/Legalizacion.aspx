@@ -25,6 +25,8 @@
             EnableScriptGlobalization="True">
         </ajaxToolkit:ToolkitScriptManager>
     
+    <asp:LinkButton ID="LnkIrAGestión" runat="server" Visible="False">Ir a Gestión</asp:LinkButton>
+    
 <div class="demoarea">
     
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">

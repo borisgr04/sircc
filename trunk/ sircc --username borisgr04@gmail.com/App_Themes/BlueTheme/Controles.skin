@@ -15,11 +15,11 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 --%>
 <%---'ImabeButton                                                 --%>
 <asp:ImageButton SkinId="IBtnGuardar" runat="server" Height="32px" 
-                        ImageUrl="~/images/mnProcesos/save.png" Width="32px" />
+                        ImageUrl="~/images/2012/save.png" Width="32px" />
 <asp:ImageButton SkinId="IBtnCancelar" runat="server" Height="32px" 
-                        ImageUrl="~/images/mnProcesos/undo.png" Width="32px" />
+                        ImageUrl="~/images/2012/cancel.png" Width="32px" />
 <asp:ImageButton SkinId="IBtnEditar" runat="server" Height="32px" 
-                        ImageUrl="~/images/Operaciones/Edit2.png" Width="32px" />                        
+                        ImageUrl="~/images/2012/Edit.png" Width="32px" />                        
 <asp:ImageButton SkinId="IBtnAbrir" runat="server" Height="32px" 
                         ImageUrl="~/images/mnProcesos/open-icon32.png" Width="32px" />                        
 <asp:ImageButton SkinId="IBtnNuevo" runat="server" Height="32px" 
@@ -28,7 +28,7 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
                         ImageUrl="~/images/Operaciones/Select.png" Width="32px" />               
 
 <asp:ImageButton SkinId="IBtnBuscar" runat="server" AccessKey="b" AlternateText="Buscar" Height="32px" Width="32px"
-                ImageUrl="~/images/Operaciones/search2.png"  />
+                ImageUrl="~/images/2012/buscar.png"  />
 <asp:ImageButton SkinId="IBtnAdd" runat="server"  
                         ImageUrl="~/images/mnProcesos/add.gif"  />
 
@@ -54,6 +54,41 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 
 <%-------- --%>
 <asp:Label SkinId="MsgResult" runat="server" Height="100%" ></asp:Label>      
-<asp:ValidationSummary runat="server" SkinID="ValidationSummary1" CssClass="alerta" />                  
+<asp:ValidationSummary runat="server" SkinID="ValidationSummary1" CssClass="alerta" />    
+
+
+<asp:HyperLink SkinId="HlnNuevo" runat="server" ImageUrl="~/images/Operaciones/New1.png"
+                           >Nuevo </asp:HyperLink>              
                                         
+<asp:HyperLink SkinId="HlnUsers" runat="server" ImageUrl="~/images/2012/Users.png"
+                           >Users OnLine</asp:HyperLink>              
+
+<asp:ImageButton SkinId="IBtnPanelUser" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Panel.png" Width="32px" />               
                                         
+<asp:ImageButton SkinId="IBtnRoles" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/SincronizarRoles.png" Width="32px" />               
+<asp:ImageButton SkinId="IBtnRoles2" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Autorizaciones.png" Width="32px" />               
+
+                        
+<asp:ImageButton SkinId="IBtnAsig" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/asignar.png" Width="32px" />               
+
+<asp:ImageButton SkinId="IBtnCont" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/datoscont.png" Width="32px" />
+
+<asp:ImageButton SkinId="IBtnProp" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/proponents.png" Width="32px" />
+<asp:ImageButton SkinId="IBtnAdj" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Adjudicar.png" Width="32px" />
+
+<asp:ImageButton SkinId="IBtnEliminar" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/eliminar.png" Width="32px" />     
+
+<asp:ImageButton SkinId="IBtnListItemObj" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/ListItemObj.png" Width="32px" />   
+                        
+<asp:ImageButton SkinId="IBtnRadCont" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Radcont.png" Width="32px" />                       
+                        

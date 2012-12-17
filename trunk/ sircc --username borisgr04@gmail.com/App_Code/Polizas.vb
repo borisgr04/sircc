@@ -34,15 +34,16 @@ Public Class Polizas
     End Function
 
     <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
-    Public Function Insert(ByVal Cod_Pol As String, ByVal Nom_Pol As String, ByVal Est_Pol As String) As String
+    Public Function Insert(ByVal Cod_Pol As String, ByVal Nom_Pol As String, ByVal Descripcion As String, ByVal Est_Pol As String) As String
         Me.Conectar()
         Try
             Me.ComenzarTransaccion()
-            querystring = "INSERT INTO Polizas(Cod_Pol, Nom_Pol, Est_Pol)VALUES(:Cod_Pol, :Nom_Pol, :Est_Pol) "
+            querystring = "INSERT INTO Polizas(Cod_Pol, Nom_Pol, Est_Pol,Descripcion)VALUES(:Cod_Pol, :Nom_Pol, :Est_Pol,:Descripcion) "
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Pol", Cod_Pol)
             Me.AsignarParametroCadena(":Nom_Pol", Nom_Pol)
             Me.AsignarParametroCadena(":Est_Pol", Est_Pol)
+            Me.AsignarParametroCadena(":Descripcion", Descripcion)
 
             Me.num_reg = Me.EjecutarComando()
             Me.ConfirmarTransaccion()
@@ -59,15 +60,16 @@ Public Class Polizas
     End Function
 
     <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
-    Public Function Update(ByVal Cod_Pol_O As String, ByVal Cod_Pol As String, ByVal Nom_Pol As String, ByVal Est_Pol As String) As String
+    Public Function Update(ByVal Cod_Pol_O As String, ByVal Cod_Pol As String, ByVal Nom_Pol As String, ByVal Descripcion As String, ByVal Est_Pol As String) As String
         Me.Conectar()
         Try
             Me.ComenzarTransaccion()
-            querystring = "UPDATE Polizas SET Cod_Pol=:Cod_Pol, Nom_Pol=:Nom_Pol, Est_Pol=:Est_Pol WHERE Cod_Pol=:Cod_Pol_O"
+            querystring = "UPDATE Polizas SET Descripcion=:Descripcion,Cod_Pol=:Cod_Pol, Nom_Pol=:Nom_Pol, Est_Pol=:Est_Pol WHERE Cod_Pol=:Cod_Pol_O"
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Pol", Cod_Pol)
             Me.AsignarParametroCadena(":Nom_Pol", Nom_Pol)
             Me.AsignarParametroCadena(":Est_Pol", Est_Pol)
+            Me.AsignarParametroCadena(":Descripcion", Descripcion)
             Me.AsignarParametroCadena(":Cod_Pol_O", Cod_Pol_O)
 
             Me.num_reg = Me.EjecutarComando()

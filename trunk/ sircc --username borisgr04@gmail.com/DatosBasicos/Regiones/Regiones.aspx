@@ -34,7 +34,7 @@
 &nbsp;<asp:Label id="Tit" runat="server" Width="398px" CssClass="Titulo" 
                 Text="REGIONES (MUNICIPIOS / CORREGIMIENTOS)" Height="17px"></asp:Label><BR />
             <asp:Label id="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;<asp:Label 
-                ID="Label5" runat="server" Text="Label"></asp:Label>
+                ID="Label5" runat="server"></asp:Label>
             <asp:GridView 
                 id="GridView1" runat="server" Width="500px" ForeColor="#333333" 
                 AllowSorting="True" OnRowDataBound="GridView1_RowDataBound1" 

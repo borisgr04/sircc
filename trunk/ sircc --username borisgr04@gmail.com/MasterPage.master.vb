@@ -36,6 +36,8 @@ Partial Class MasterPage
             Me.LbVig.Text = Request.Cookies(Publico.Cookie)("Vigencia")
             Me.CmbVigencia.SelectedValue = Request.Cookies(Publico.Cookie)("Vigencia")
             Context.Request.Browser.Adapters.Clear()
+
+
         End If
     End Sub
     Sub Actualizar_Cookie(ByVal Modulo As String, ByVal NModulo As String)

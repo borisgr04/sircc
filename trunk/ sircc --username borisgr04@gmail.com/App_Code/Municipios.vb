@@ -53,13 +53,14 @@ Public Class Municipios
     Public Function Delete(ByVal MUN_COD As String) As String
         Me.Conectar()
         Try
-            CrearComando("DELETE Municipios WHERE COD_MUN='" + MUN_COD + "'")
+            CrearComando("DELETE FROM Municipios WHERE COD_MUN='" + MUN_COD + "'")
             num_reg = EjecutarComando()
-            Me.Msg = MsgOk + " # Registros Eliminados:" + num_reg
+            Me.Msg = MsgOk + " # Registros Eliminados:" + num_reg.ToString
+
             Me.lErrorG = False
         Catch ex As Exception
             Me.lErrorG = True
-            Me.Msg = "Error de App:" + ex.Message
+            Me.Msg = "Error :" '+ ex.Message
         Finally
             Me.Desconectar()
         End Try

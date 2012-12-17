@@ -48,8 +48,8 @@ Partial Class DatosBasicos_NroConVig_Default
                 Dim tb As DataTable = Obj.GetByPK(GridView1.DataKeys(index).Values(0).ToString(), GridView1.DataKeys(index).Values(1).ToString())
                 If tb.Rows.Count > 0 Then
                     Me.TxtCodNew.Text = tb.Rows(0)("Year_Vig").ToString
-                    Me.TxtNumI.Text = tb.Rows(0)("Nro_Act_Con").ToString
-                    Me.TxtNumAct.Text = tb.Rows(0)("Nro_Ini_Con").ToString
+                    Me.TxtNumI.Text = tb.Rows(0)("Nro_Ini_Con").ToString
+                    Me.TxtNumAct.Text = tb.Rows(0)("Nro_Act_Con").ToString
                     Me.CboTip.SelectedValue = tb.Rows(0)("Cod_Tip").ToString
                     Me.TxtPor.Text = tb.Rows(0)("Por_Adi_Vig").ToString
                     Me.Pk1 = tb.Rows(0)("Year_Vig").ToString
@@ -69,9 +69,9 @@ Partial Class DatosBasicos_NroConVig_Default
                 Dim tb As DataTable = Obj.GetByPK(GridView1.DataKeys(index).Values(0).ToString(), GridView1.DataKeys(index).Values(1).ToString())
                 If tb.Rows.Count > 0 Then
                     Me.TxtCodNew.Text = tb.Rows(0)("Year_Vig").ToString
-                    Me.TxtNumI.Text = tb.Rows(0)("Cod_Tip").ToString
-                    Me.TxtNumAct.Text = tb.Rows(0)("Nro_Ini_Con").ToString
-                    Me.CboTip.Text = tb.Rows(0)("Nro_Act_Con").ToString
+                    Me.TxtNumI.Text = tb.Rows(0)("Nro_Ini_Con").ToString
+                    Me.TxtNumAct.Text = tb.Rows(0)("Nro_Act_Con").ToString
+                    Me.CboTip.SelectedValue = tb.Rows(0)("Cod_Tip").ToString
                     Me.TxtPor.Text = tb.Rows(0)("Por_Adi_Vig").ToString
                     Me.Pk1 = tb.Rows(0)("Year_Vig").ToString
                     Me.PK = tb.Rows(0)("Cod_Tip").ToString

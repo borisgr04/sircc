@@ -9,13 +9,13 @@ Partial Class Procesos_Proponentes_GPProponente
         If Me.DetGProcesos1.Encontrado = True And Me.DetGProcesos1.Tramite = False Then
             MsgResult.Text = "El Proceso ha finalizado su TRAMITE y no puede ser modificado"
             MsgBoxAlert(MsgResult, True)
-            Me.ImageButton1.Enabled = False
+            Me.IBtnAddProp.Enabled = False
             Me.GridView1.Enabled = False
         ElseIf Me.DetGProcesos1.Encontrado = False Then
             MsgResult.Text = "No se encontró el Proceso"
             MsgBoxAlert(MsgResult, True)
         Else
-            Me.ImageButton1.Enabled = True
+            Me.IBtnAddProp.Enabled = True
             Me.GridView1.Enabled = True
         End If
     End Sub
@@ -60,7 +60,7 @@ Partial Class Procesos_Proponentes_GPProponente
                     Me.TxtNomProp.Text = dt.Rows(0).Item("Razon_Social").ToString
                     LimpiarMiembros()
                     Me.MultiView1.ActiveViewIndex = 2
-                    Me.ImageButton1.Enabled = False
+                    Me.IBtnAddProp.Enabled = False
                 End If
             Case "Eliminar"
                 Pk1 = GridView1.DataKeys(index).Values(0).ToString()
@@ -70,7 +70,7 @@ Partial Class Procesos_Proponentes_GPProponente
         End Select
     End Sub
 
-    Protected Sub ImageButton1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ImageButton1.Click
+    Protected Sub ImageButton1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAddProp.Click
         If Me.DetGProcesos1.Encontrado Then
             Me.Oper = "Nuevo"
             CrProponentes1.Num_Proc = Me.DetGProcesos1.CodigoPContrato
@@ -111,7 +111,7 @@ Partial Class Procesos_Proponentes_GPProponente
         Me.MultiView1.ActiveViewIndex = 0
         Me.MsgMiembros.Text = ""
         Me.MsgMiembros.CssClass = ""
-        Me.ImageButton1.Enabled = True
+        Me.IBtnAddProp.Enabled = True
     End Sub
 
     Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardar.Click
@@ -178,16 +178,19 @@ Partial Class Procesos_Proponentes_GPProponente
         End If
     End Sub
 
-    Protected Sub LnkProponentes_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
-    End Sub
-
-    Protected Sub LnkDatosC_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkDatosC.Click
+    Protected Sub DatosC()
         Redireccionar_Pagina("/Procesos/GProcesosN/GProcesosN.aspx?Num_Proc=" + Me.DetGProcesos1.CodigoPContrato + "&Grupo=" + Me.DetGProcesos1.Grupo)
     End Sub
 
-    Protected Sub LnkAdjudicacion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkAdjudicacion.Click
-        'Redireccionar_Pagina("/Procesos/GPProponentes/GPProponentes.aspx?Num_Proc=" + Me.DetGProcesos1.CodigoPContrato + "&Grupo=" + Me.DetGProcesos1.Grupo)
+    Protected Sub IBtnAdjudicar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAdjudicar.Click
+        IrAdjudicar()
+    End Sub
+
+    Sub IrAdjudicar()
         Redireccionar_Pagina("/Procesos/GAdjudicacion/GAdjudicacion.aspx?Num_Proc=" + Me.DetGProcesos1.CodigoPContrato + "&Grupo=" + Me.DetGProcesos1.Grupo)
+    End Sub
+
+    Protected Sub IBtnDatosContrato_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnDatosContrato.Click
+        DatosC()
     End Sub
 End Class

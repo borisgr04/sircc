@@ -52,7 +52,10 @@ Partial Class Consultas_Contratos_Default
     End Sub
 
     Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Me.DetContratoN1.valorabuscar = Request("Numero")
-        Me.DetContratoN1.Buscar()
+        If Not IsPostBack Then
+            Me.DetContratoN1.ValoraBuscar = Request("Numero")
+            Me.DetContratoN1.Buscar()
+        End If
+        
     End Sub
 End Class

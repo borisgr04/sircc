@@ -33,7 +33,7 @@
         <contenttemplate>
 &nbsp;<asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" 
                 Text="Tipos de Contratos" SkinID="MsgResult"></asp:Label><BR />
-<asp:Label id="MsgResult" runat="server" Width="100%" Height="100%" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;<asp:GridView 
+<asp:Label id="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;<asp:GridView 
                 id="GridView1" runat="server" Width="500px" ForeColor="#333333" 
                 AllowSorting="True" OnRowDataBound="GridView1_RowDataBound1" 
                 DataSourceID="ObjTipos" GridLines="None" CellPadding="4" ShowFooter="True" 

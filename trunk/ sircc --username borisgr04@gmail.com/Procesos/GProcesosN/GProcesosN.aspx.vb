@@ -44,7 +44,7 @@ Partial Class Procesos_GProcesoN_Default
     Private WriteOnly Property ValTot As Decimal
         Set(ByVal value As Decimal)
             Me.TxtValTot.Text = value
-            LbValTot.Text = FormatCurrency(TxtValTot.Text.Replace(".", ","))
+            'LbValTot.Text = FormatCurrency(TxtValTot.Text.Replace(".", ","))
         End Set
     End Property
 
@@ -378,8 +378,7 @@ Partial Class Procesos_GProcesoN_Default
             Me.TxtObsProy.Text = dt.Rows(0)("Obs_Proyectos").ToString
             Me.TxtObsPol.Text = dt.Rows(0)("Obs_Polizas").ToString
 
-
-
+            
             'Me.grdOblig1.Enabled = Valor
             Me.grdCDPGP1.LlenarGrid()
             Me.grdObligGP1.LlenarGrid()
@@ -397,6 +396,14 @@ Partial Class Procesos_GProcesoN_Default
             Me.MsgResult.CssClass = ""
             UpdateTodaAcordeon()
             Grv_Ppol.DataBind()
+
+            If dt.Rows(0)("ESTADO").ToString = "RA" Then
+                Me.IbtnEditar.Enabled = False
+                MsgResult.Text = " El Contrato ya esta Radicado "
+                MsgBoxInfo(MsgResult, True)
+
+            End If
+
         Else
             MsgResult.Text = " No se encontro el Proceso " + Me.TxtNprocA.Text + " a cargo del Usuario " + Usuarios.UserName
             MsgBoxAlert(MsgResult, True)
@@ -422,23 +429,24 @@ Partial Class Procesos_GProcesoN_Default
         Dim pcont As New GProcesos
         Dim dt As DataTable
         dt = pcont.GetByPk(TxtNProc.Text, CboGrupos.SelectedValue)
-        Dim est As String = dt.Rows(0).Item("Estado").ToString
-        If est = "TR" Then
-            Editar()
-            Me.BtnDefinitivo.Visible = True
-            Me.BtnTramite.Visible = False
-            Me.LblDef.Visible = True
-            Me.LblTra.Visible = False
-        Else 'If est = "DF" Then
-            Me.BtnDefinitivo.Visible = False
-            Me.BtnTramite.Visible = True
-            Me.LblDef.Visible = False
-            Me.LblTra.Visible = True
-            Me.MsgResult.Text = "El proceso ya esta válidado y listo para Generar la Minuta y Radicar el Contrato, para modificarlo debe revertir la válidación"
-            MsgBoxAlert(MsgResult, True)
+        If dt.Rows.Count > 0 Then
+            Dim est As String = dt.Rows(0).Item("Estado").ToString
+            If est = "TR" Then
+                Editar()
+                Me.BtnDefinitivo.Visible = True
+                Me.BtnTramite.Visible = False
+                Me.LblDef.Visible = True
+                Me.LblTra.Visible = False
+            Else 'If est = "DF" Then
+                Me.BtnDefinitivo.Visible = False
+                Me.BtnTramite.Visible = True
+                Me.LblDef.Visible = False
+                Me.LblTra.Visible = True
+                Me.MsgResult.Text = "El proceso ya esta válidado y listo para Generar la Minuta y Radicar el Contrato, para modificarlo debe revertir la válidación"
+                MsgBoxAlert(MsgResult, True)
 
+            End If
         End If
-
     End Sub
 
     Protected Sub IBtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnGuardar.Click
@@ -744,36 +752,32 @@ Partial Class Procesos_GProcesoN_Default
     End Sub
 
     Protected Sub TxtValTot_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtValTot.TextChanged
-        LbValTot.Text = FormatCurrency(TxtValTot.Text.Replace(".", ","))
+        'LbValTot.Text = FormatCurrency(TxtValTot.Text.Replace(".", ","))
+        If String.IsNullOrEmpty(TxtValTot.Text) Then
+            TxtValTot.Text = 0
+        End If
+        TxtValProp.Text = TxtValTot.Text
+        TxtValOtros.Text = 0
 
     End Sub
 
     Protected Sub TxtValProp_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtValProp.TextChanged
-        LbValProp.Text = FormatCurrency(TxtValProp.Text.Replace(".", ","))
+        'LbValProp.Text = FormatCurrency(TxtValProp.Text.Replace(".", ","))
         Dim AportesOtros As Decimal = (CDec(TxtValTot.Text.Replace(".", ",")) - CDec(TxtValProp.Text.Replace(".", ",")))
         TxtValOtros.Text = AportesOtros.ToString.Replace(",", ".")
+        TxtValOtros.ForeColor = Drawing.Color.Black
         If AportesOtros < 0 Then
             TxtValOtros.ForeColor = Drawing.Color.Red
-            LbValOtros.Text = "Valor Incoherente, por favor corrija"
-            LbValOtros.ForeColor = Drawing.Color.Red
+            'LbValOtros.Text = "Valor Incoherente, por favor corrija"
+            'LbValOtros.ForeColor = Drawing.Color.Red
             TxtValTot.Focus()
         Else
-            MsgBoxLimpiar(LbValOtros)
-            LbValOtros.ForeColor = Drawing.Color.Black
+            'MsgBoxLimpiar(LbValOtros)
+            'LbValOtros.ForeColor = Drawing.Color.Black
             TxtValOtros.ForeColor = Drawing.Color.Black
-            LbValOtros.Text = FormatCurrency(TxtValOtros.Text.Replace(".", ","))
-
-
+            'LbValOtros.Text = FormatCurrency(TxtValOtros.Text.Replace(".", ","))
         End If
 
-    End Sub
-
-    Protected Sub LnkProponentes_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkProponentes.Click
-        Redireccionar_Pagina("/Procesos/GPProponentes/GPProponentes.aspx?Num_Proc=" + Me.TxtNProc.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
-    End Sub
-
-    Protected Sub LnkAdj_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkAdj.Click
-        Redireccionar_Pagina("/Procesos/GAdjudicacion/GAdjudicacion.aspx?Num_Proc=" + Me.TxtNProc.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
     End Sub
 
     Protected Sub GrdMin_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GrdMin.SelectedIndexChanged
@@ -829,5 +833,17 @@ Partial Class Procesos_GProcesoN_Default
         Else
             Me.TxtLog.visible = False
         End If
+    End Sub
+
+    Protected Sub IBtnProp_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnProp.Click
+        Redireccionar_Pagina("/Procesos/GPProponentes/GPProponentes.aspx?Num_Proc=" + Me.TxtNProc.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
+    End Sub
+
+    Protected Sub IBtnAdj_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAdj.Click
+        Redireccionar_Pagina("/Procesos/GAdjudicacion/GAdjudicacion.aspx?Num_Proc=" + Me.TxtNProc.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
+    End Sub
+
+    Protected Sub IBtnItemO_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnItemO.Click
+        Redireccionar_Pagina("/Procesos/GProcesosN/ItemObjeto.aspx?Num_Proc=" + Me.TxtNProc.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
     End Sub
 End Class
