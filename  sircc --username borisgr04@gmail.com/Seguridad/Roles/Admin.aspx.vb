@@ -185,6 +185,7 @@ Partial Class Seguridad_Roles_Admin
         End If
 
     End Sub
+
 End Class
 
 

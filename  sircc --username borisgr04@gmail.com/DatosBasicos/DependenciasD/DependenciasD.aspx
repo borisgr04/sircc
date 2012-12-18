@@ -241,7 +241,7 @@
                                 Width="150px" />
                         </td>
                         <td style="WIDTH: 100px">
-                            <asp:CheckBox ID="ChkCord" runat="server" Text="Coordinador" />
+                            <asp:CheckBox ID="ChkCord" runat="server" Text="Revisa Procesos" />
                         </td>
                     </tr>
                     <tr>

@@ -28,14 +28,14 @@ Partial Class Seguridad_RegUsuarios
 
     End Sub
 
-    Sub Validar_Usuario(ByVal sender As Object, ByVal value As ServerValidateEventArgs)
-        Dim t As New Terceros
-        value.IsValid = (t.GetByIde(Me.TxtUsername.Text).Rows.Count() > 0)
-        If value.IsValid = True Then
-            value.IsValid = Usuarios.IsUser(Me.TxtUsername.Text)
-        End If
-        BtnGuardar.Enabled = value.IsValid
-    End Sub
+    'Sub Validar_Usuario(ByVal sender As Object, ByVal value As ServerValidateEventArgs)
+    '    Dim t As New Terceros
+    '    value.IsValid = (t.GetByIde(Me.TxtUsername.Text).Rows.Count() > 0)
+    '    If value.IsValid = True Then
+    '        value.IsValid = Usuarios.IsUser(Me.TxtUsername.Text)
+    '    End If
+    '    BtnGuardar.Enabled = value.IsValid
+    'End Sub
 
     
     Protected Sub ImageButton1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs)
@@ -49,11 +49,11 @@ Partial Class Seguridad_RegUsuarios
         Dim dt As DataTable = Obj.GetByIde(Me.TxtUsername.Text)
         If dt.Rows.Count > 0 Then
             Me.TxtRazSoc.Text = dt.Rows(0)("Nom_Ter").ToString
-            BtnGuardar.Enabled = True
+            'BtnGuardar.Enabled = True
         Else
             Me.msgResult.Text = "El usuario debe estar registrado como Tercero"
             MsgBox(Me.msgResult, True)
-            BtnGuardar.Enabled = False
+            'BtnGuardar.Enabled = False
 
         End If
 

@@ -44,8 +44,7 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <asp:Button ID="BtnCargarRoles" runat="server" Text="Cargar Roles" />
-                    </td>
+                        &nbsp;</td>
                     <td>
                         &nbsp;</td>
                 </tr>
