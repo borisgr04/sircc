@@ -20,7 +20,14 @@ Partial Class Procesos_GProcesosN_ItemObjeto
 
             Me.DetPContrato1.CodigoPContrato = Request("Num_Proc")
             Me.DetPContrato1.Grupo = Request("Grupo")
+
+            hdNumProc.Value = Request("Num_Proc")
+            hdgrupo.Value = Request("Grupo")
+
+
             Me.DetPContrato1.Buscar(Request("Grupo"))
+            Me.DetPContrato1.Enabled = False
+            'Me.DetPContrato1.e
         End If
     End Sub
     Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)

@@ -21,11 +21,11 @@ Public Class PObjetos_Items
         Me.Vista = "vpobjetos_items"
     End Sub
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Overloads Function GetRecords(ByVal Vigencia As String) As DataTable
+    Public Overloads Function GetRecords(ByVal Num_GProc As String, ByVal Grupo As String) As DataTable
         Me.Conectar()
-        querystring = "SELECT * FROM " + Me.Vista + " Where Vigencia=:VIGENCIA"
+        querystring = "SELECT * FROM " + Me.Vista + " Where num_proc='" + Num_GProc + "' And grupo=" + Grupo
         Me.CrearComando(querystring)
-        Me.AsignarParametroCadena(":VIGENCIA", Vigencia)
+        'Throw New Exception(querystring)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataTb
@@ -34,12 +34,12 @@ Public Class PObjetos_Items
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetbyPk(ByVal Pk1 As String, ByVal Pk2 As String, ByVal Pk3 As String) As Boolean
         Me.Conectar()
-        querystring = "SELECT * FROM " + Me.Vista + " Where num_gproc='" + Pk1 + "' And grupo=" + Pk2 + " And Id_item =" + Pk3
+        querystring = "SELECT * FROM " + Me.Vista + " Where num_proc='" + Pk1 + "' And grupo=" + Pk2 + " And Id_item =" + Pk3
         Me.CrearComando(querystring)
         Dim dataTb As DataTable = EjecutarConsultaDataTable()
         Me.Desconectar()
         If dataTb.Rows.Count > 0 Then
-            Me.num_gproc = dataTb.Rows(0)("num_gproc")
+            Me.num_gproc = dataTb.Rows(0)("num_proc")
             Me.grupo = dataTb.Rows(0)("grupo")
             Me.Id_Item = dataTb.Rows(0)("Id_Item")
             Me.Desc_Item = dataTb.Rows(0)("Desc_Item")

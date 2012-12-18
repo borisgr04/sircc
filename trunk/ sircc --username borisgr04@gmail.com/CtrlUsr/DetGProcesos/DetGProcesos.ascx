@@ -81,8 +81,8 @@ td
                                      </asp:BoundField>
                                 <asp:BoundField DataField="OBJ_CON" HeaderText="Objeto" 
                                     SortExpression="OBJ_CON" />
-                                <asp:BoundField DataField="PLA_EJE_CON" HeaderText="Plazo de Ejecución" 
-                                    SortExpression="PLA_EJE_CON" />
+                                <asp:BoundField DataField="PLAZOC_EJECUCION" HeaderText="Plazo de Ejecución" 
+                                    SortExpression="PLAZOC_EJECUCION" />
                                 <asp:BoundField DataField="VAL_CON" DataFormatString="{0:c}" 
                                     HeaderText="Valor " SortExpression="VAL_CON" />
                                 <asp:BoundField DataField="Dep_Nec" 
@@ -128,17 +128,7 @@ td
                                 <asp:ControlParameter ControlID="TxtCodCon" Name="Num_PCon" PropertyName="Text" 
                                     Type="String" />
                             </SelectParameters>
-                            <InsertParameters>
-                                <asp:Parameter Name="COD_TPRO" Type="String" />
-                                <asp:Parameter Name="OBJ_CON" Type="String" />
-                                <asp:Parameter Name="DEP_CON" Type="String" />
-                                <asp:Parameter Name="DEP_PCON" Type="String" />
-                                <asp:Parameter Name="VIG_CON" Type="Decimal" />
-                                <asp:Parameter Name="TIP_CON" Type="String" />
-                                <asp:Parameter Name="STIP_CON" Type="String" />
-                                <asp:Parameter Name="FEC_RECIBIDO" Type="DateTime" />
-                                <asp:Parameter Name="NUM_SOL" Type="String" />
-                            </InsertParameters>
+                           
                         </asp:ObjectDataSource>
                     
         

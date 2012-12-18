@@ -10,8 +10,20 @@
     </ajaxToolkit:ToolkitScriptManager>
     
     <uc1:DetGProcesos ID="DetPContrato1" runat="server" />
-    
+    <asp:HiddenField ID="hdNumProc" runat="server" />
+    <asp:HiddenField ID="hdgrupo" runat="server" />
     &nbsp; &nbsp;
+    <table >
+        <tr>
+            <td>
+                <asp:ImageButton ID="IBtnDatosC" runat="server" SkinID="IBtnCont" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Datos Contrato</td>
+        </tr>
+    </table>
     <br />
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>
@@ -26,7 +38,7 @@
                 ShowFooter="True" DataKeyNames="Id_Item" 
                 AutoGenerateColumns="False" 
                 EmptyDataText="No se encontraron Registros en la Base de Datos" 
-                EnableModelValidation="True" SkinID="gridView">
+                EnableModelValidation="True" SkinID="gridView" Width="900px">
 <Columns>
     <asp:TemplateField HeaderText="Item" SortExpression="Id_Item">
         <ItemTemplate>
@@ -71,6 +83,12 @@
             <br />
             <asp:ObjectDataSource id="ObjPObjetos_Items" runat="server" TypeName="PObjetos_Items" 
                 SelectMethod="GetRecords" OldValuesParameterFormatString="original_{0}">
+                <SelectParameters>
+                    <asp:QueryStringParameter Name="Num_GProc" QueryStringField="Num_Proc" 
+                        Type="String" />
+                    <asp:QueryStringParameter DefaultValue="" Name="Grupo" QueryStringField="grupo" 
+                        Type="String" />
+                </SelectParameters>
             </asp:ObjectDataSource>
 </contenttemplate>
         

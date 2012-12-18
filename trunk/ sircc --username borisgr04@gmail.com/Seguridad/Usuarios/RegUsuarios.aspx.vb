@@ -51,7 +51,7 @@ Partial Class Seguridad_RegUsuarios
             Me.TxtRazSoc.Text = dt.Rows(0)("Nom_Ter").ToString
             BtnGuardar.Enabled = True
         Else
-            Me.msgResult.Text = "El usuario debe estar registrado cómo Tercero"
+            Me.msgResult.Text = "El usuario debe estar registrado como Tercero"
             MsgBox(Me.msgResult, True)
             BtnGuardar.Enabled = False
 
@@ -65,7 +65,9 @@ Partial Class Seguridad_RegUsuarios
         Response.Redirect("../Roles/Admin.aspx?Username=" + TxtUsername.Text)
     End Sub
 
-    Protected Sub ImageButton2_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs)
+  
+
+    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardar.Click
         guardar()
     End Sub
 End Class
