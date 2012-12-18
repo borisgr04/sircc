@@ -182,7 +182,10 @@ Partial Class Seguridad_Roles_Admin
     <WebMethod()> _
    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
     Public Shared Function Mostrar(ByVal values As String) As String
-        Return values.Replace(".", ";")
+
+
+        Return values.Replace(";", "*")
+
     End Function
 
 
@@ -194,7 +197,10 @@ Partial Class Seguridad_Roles_Admin
 
 
     Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Title = cmbAerolineas.SelectedValue
+        TxtUserName.Text = cmbAerolineas.Items.Count
+
+
+
     End Sub
 End Class
 

@@ -1,4 +1,4 @@
-<%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Copy of Admin.aspx.vb" Inherits="Seguridad_Roles_Admin" title="Permisos" %>
+<%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Admin.aspx.vb" Inherits="Seguridad_Roles_Admin" title="Permisos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 <script src="../../Scripts/jquery-1.4.2.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery-ui-1.8rc3.custom.min.js" type="text/javascript"></script>
@@ -217,8 +217,13 @@
            var values = "";
            var opcion_seleccionada = $("#<%= cmbAerolineas.ClientID  %> option:selected").text();
            $("#<%= cmbAerolineas.ClientID  %> option:selected").each(function () {
-               alert($(this).val());
-               values =values+";"+ $(this).val();
+               //alert($(this).val());
+               if (values == "") {
+                   values = $(this).val();
+               } else {
+                   values = values + ";" + $(this).val();
+               }
+               
            });
 
            $.ajax({
@@ -229,7 +234,10 @@
                dataType: "json",
                success: function (result) {
                    //$("#lblResultado").text(result.d);
+
                    alert(result.d);
+                   __doPostBack("<%= Button1.ClientID %>", "");
+
                }
            });
        });

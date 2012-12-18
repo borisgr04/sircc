@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
         </ajaxToolkit:ToolkitScriptManager>
+        
+    <asp:Label id="Tit" runat="server" Width="388px" Text="DELEGACIONES X USUARIO" 
+                CssClass="Titulo"></asp:Label>
     <div>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
