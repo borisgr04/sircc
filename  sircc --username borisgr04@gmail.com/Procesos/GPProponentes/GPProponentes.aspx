@@ -134,7 +134,7 @@
 
                         </asp:View>
                         <asp:View ID="View2" runat="server">
-                        <div style="height:300px; overflow:auot">
+                        <div >
                         
                             <table class="style1">
                                 <tr>

@@ -23,6 +23,17 @@ Partial Class Controles_DetGProcesos
             Return ViewState("dtPcon")
         End Get
     End Property
+
+    Public Property Enabled() As Boolean
+        Set(ByVal value As Boolean)
+            Me.TxtCodCon.Enabled = value
+            Me.CboGrupos.Enabled = value
+            Me.IbtnBuscar.Enabled = value
+        End Set
+        Get
+            Return Me.TxtCodCon.Enabled
+        End Get
+    End Property
     Public ReadOnly Property Estado() As String
         Get
             Return ""
@@ -141,7 +152,7 @@ Partial Class Controles_DetGProcesos
         Me.CodigoPContrato = Me.TxtCodCon.Text
         Me.Grupo = numgrupo
         Dim oP As New GProcesos
-        Me.dtContratos = oP.GetByPk(Me.CodigoPContrato, Me.Grupo)
+        Me.dtContratos = oP.GetByPkCtr(Me.CodigoPContrato, Me.Grupo)
         Me.DtPCon.DataSource = Me.dtContratos
         Me.DtPCon.DataBind()
         Me.Encontrado = IIf(DtPCon.Rows.Count > 0, True, False)
