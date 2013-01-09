@@ -355,6 +355,15 @@ Public Class Usuarios
     '    'Return msg
     'End Function
 
+    Public Function BorrarUsuario(ByVal UserName As String) As String
+        If Membership.DeleteUser(UserName) Then
+            lErrorG = True
+            Return "Se Eliminó el Usuario del Sistema"
+        Else
+            lErrorG = False
+            Return "No se puede Eliminó el Usuario del Sistema"
+        End If
+    End Function
 End Class
 
 

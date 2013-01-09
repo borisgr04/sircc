@@ -33,11 +33,24 @@ Public Class Rubros_GProcesos
         Me.Desconectar()
         Return dataTb
     End Function
-    Public Function Insert(ByVal Cod_Rub As String, ByVal Num_Pro As String, ByVal Valor As String, ByVal Nro_RP As String, ByVal Grupo As String) As String
+    Public Function Insert(ByVal Cod_Rub As String, ByVal Num_Pro As String, ByVal Valor As String, ByVal Nro_RP As String, ByVal Grupo As String, ByVal Nuevo As Boolean, ByVal Des_Rub As String) As String
 
         Me.Conectar()
+
+
+
         Try
             Me.ComenzarTransaccion()
+            If Nuevo And (Publico.InsRubro = "S") Then
+                Dim v As New Vigencias
+
+                querystring = "INSERT INTO rubros(Cod_Rub, Des_Rub,Vigencia)VALUES(:Cod_Rub, :Des_Rub,VigActiva) "
+                Me.CrearComando(querystring)
+                Me.AsignarParametroCadena(":Cod_Rub", Cod_Rub)
+                Me.AsignarParametroCadena(":Des_Rub", Des_Rub)
+
+                Me.num_reg = Me.EjecutarComando()
+            End If
             querystring = "INSERT INTO Rubros_GProcesos(Cod_Rub, Num_Pro, Valor, Nro_Cdp, Grupo)VALUES(:Cod_Rub, :Num_Pro, :Valor, :Nro_Cdp, :Grupo) "
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Rub", Cod_Rub)
@@ -45,7 +58,7 @@ Public Class Rubros_GProcesos
             Me.AsignarParametroCadena(":Valor", Valor)
             Me.AsignarParametroCadena(":Nro_Cdp", Nro_RP)
             Me.AsignarParametroCadena(":Grupo", Grupo)
-            Throw New Exception(vComando.CommandText)
+            'Throw New Exception(vComando.CommandText)
             Me.num_reg = Me.EjecutarComando()
             Me.ConfirmarTransaccion()
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
@@ -63,7 +76,7 @@ Public Class Rubros_GProcesos
         Conectar()
         Try
             Me.ComenzarTransaccion()
-            querystring = "DELETE FROM Rubros_Pcontratos WHERE Num_Pro=:Num_Pro AND Cod_Rub=:Cod_Rub AND Grupo=:Grupo"
+            querystring = "DELETE FROM Rubros_GProcesos WHERE Num_Pro=:Num_Pro AND Cod_Rub=:Cod_Rub AND Grupo=:Grupo"
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Rub", Cod_Rub)
             Me.AsignarParametroCadena(":Num_Pro", Num_Pro)

@@ -6,7 +6,14 @@ Partial Class Procesos_GProcesoN_Default
     Inherits PaginaComun
     Dim obj As GProcesos = New GProcesos
 
-
+    Private Property operRubro() As Boolean
+        Set(ByVal value As Boolean)
+            ViewState("operRubro") = value
+        End Set
+        Get
+            Return ViewState("operRubro")
+        End Get
+    End Property
     Private Property ID_FP() As String
         Set(ByVal value As String)
             ViewState("ID_FP") = value
@@ -96,6 +103,7 @@ Partial Class Procesos_GProcesoN_Default
 
 
         If Not Page.IsPostBack Then
+            Me.HdUsuario.Value = Usuarios.UserName
             Me.TxtValTot.Attributes.Add("onkeyup", "javascript:AporOtros();")
             Me.TxtValProp.Attributes.Add("onkeyup", "javascript:AporOtros();")
             Me.TxtValOtros.Attributes.Add("onkeyup", "javascript:AporOtros();")
@@ -308,6 +316,8 @@ Partial Class Procesos_GProcesoN_Default
         UpdPolizas.Update()
         UpdCons.Update()
         UpdMin.Update()
+        UpdMinWord.Update()
+
 
     End Sub
     Sub Buscar(ByVal grupo As String)
@@ -423,6 +433,7 @@ Partial Class Procesos_GProcesoN_Default
 
     Protected Sub IBtnAbrir_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAbrir.Click
         Abrir()
+
     End Sub
 
     Protected Sub IbtnEditar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IbtnEditar.Click
@@ -512,6 +523,7 @@ Partial Class Procesos_GProcesoN_Default
     Protected Sub IbtnBucaRubro_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IbtnBucaRubro.Click
         Me.ModalPopupRubros.Show()
     End Sub
+    '' RUBROS
     Protected Sub ConRubros1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConRubros1.SelClicked
         Txt_CodRub.Text = ConRubros1.Cod_Rub
         Txt_DesRub.Text = ConRubros1.Des_Rub
@@ -524,10 +536,21 @@ Partial Class Procesos_GProcesoN_Default
         Dim dt As DataTable = t.GetbyPK(Me.Txt_CodRub.Text)
         If dt.Rows.Count > 0 Then
             Me.Txt_DesRub.Text = dt.Rows(0)("Des_Rub").ToString()
+            Me.Txt_DesRub.Enabled = False
+            Me.operRubro = False
         Else
             Me.Txt_DesRub.Text = ""
+            If isInsertarRubro() Then
+                Me.Txt_DesRub.Enabled = True
+                Me.operRubro = True
+            End If
+            
         End If
     End Sub
+
+    Function isInsertarRubro() As Boolean
+        Return (operRubro And (Publico.InsRubro = "S"))
+    End Function
 
     Protected Sub Txt_CodRub_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Txt_CodRub.TextChanged
         BuscarRubro()
@@ -538,13 +561,19 @@ Partial Class Procesos_GProcesoN_Default
             MsgRubro.Text = "No existen certificados de disponibilidad"
             MsgBoxAlert(MsgRubro, True)
             Exit Sub
-        Else
-            Dim ObjRub As New Rubros_GProcesos
-            Me.MsgRubro.Text = ObjRub.Insert(Me.Txt_CodRub.Text, Me.TxtNProc.Text, Publico.PuntoPorComa(Me.TxtValRub.Text), Me.CboCDP.SelectedValue, Me.CboGrupos.SelectedValue)
-            MsgBox(MsgRubro, ObjRub.lErrorG)
-            Me.GrRubros.DataBind()
-            LimpiarRubros()
         End If
+        If isInsertarRubro() And String.IsNullOrEmpty(Txt_DesRub.Text) Then
+            MsgRubro.Text = "Nombre del Rubro Obligatorio"
+            MsgBoxAlert(MsgRubro, True)
+            Exit Sub
+        End If
+
+        Dim ObjRub As New Rubros_GProcesos
+        Me.MsgRubro.Text = ObjRub.Insert(Me.Txt_CodRub.Text, Me.TxtNProc.Text, Publico.PuntoPorComa(Me.TxtValRub.Text), Me.CboCDP.SelectedValue, Me.CboGrupos.SelectedValue, operRubro, Txt_DesRub.Text)
+        MsgBox(MsgRubro, ObjRub.lErrorG)
+        Me.GrRubros.DataBind()
+        LimpiarRubros()
+
     End Sub
     Sub LimpiarRubros()
         Me.Txt_CodRub.Text = ""
@@ -824,6 +853,8 @@ Partial Class Procesos_GProcesoN_Default
                 MsgBox(LbMinuta, objMin.lErrorG)
                 GrdMin.DataBind()
                 UpdMin.Update()
+            Case "Inhabilitar"
+
         End Select
     End Sub
 
@@ -845,5 +876,13 @@ Partial Class Procesos_GProcesoN_Default
 
     Protected Sub IBtnItemO_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnItemO.Click
         Redireccionar_Pagina("/Procesos/GProcesosN/ItemObjeto.aspx?Num_Proc=" + Me.TxtNProc.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
+    End Sub
+
+    Protected Sub IBtnAnular_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAnular.Click
+        Dim objMin As New PGContratosM
+        LbMinutaW.Text = objMin.AnularAC(Me.TxtNprocA.Text, Me.CboGrupos.SelectedValue)
+        MsgBox(LbMinutaW, objMin.lErrorG)
+        GrdMin.DataBind()
+        UpdMin.Update()
     End Sub
 End Class

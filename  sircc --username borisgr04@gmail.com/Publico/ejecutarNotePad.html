@@ -1,0 +1,49 @@
+<html>
+<head>
+<SCRIPT type="text/javascript" LANGUAGE="JavaScript">
+  function executeCommands(inputparms)
+   {
+  // Initiate the Shell object and invoke its execute method.
+  
+  // Be aware that is is a possible security breach and depending on the settings of the
+  // users OS, may cause a "denied" error.
+
+    var oShell = new ActiveXObject("Shell.Application");
+
+    //var commandtoRun = "C:\\Windows\\notepad.exe";
+    var commandtoRun = "C:\\SirccD\\SirccD.exe";
+    
+    if (inputparms != "")
+     {
+         var commandParms = document.Form1.usuario.value + "," + document.Form1.proceso.value + "," + document.Form1.grupo.value + "," + document.Form1.id.value+"," + document.Form1.oper.value;
+         alert(commandParms);
+     }
+
+ // Invoke the execute method.  
+     oShell.ShellExecute(commandtoRun, commandParms, "", "open", "1");
+  }
+</SCRIPT>
+</head>
+<body>
+<FORM name="Form1">
+<CENTER>
+<BR><BR>
+<H1>Execute PC Commands From HTML </H1>
+<BR><BR> 
+File Name to Open: 
+<Input type="text" name="usuario"/>
+<Input type="text" name="proceso"/>
+<Input type="text" name="grupo"/>
+<Input type="text" name="id"/>
+<Input type="text" name="oper"/>
+<BR><BR>
+<input type="Button" name="Button1" 
+   value="Run Notepad.exe" onClick="executeCommands()" />
+<BR><BR>
+
+<input type="Button" name="Button2" 
+   value="Run Notepad.exe with Parameters" 
+      onClick="executeCommands(' + hasPARMS + ')" />
+</CENTER>
+</body>
+</html>

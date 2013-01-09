@@ -19,7 +19,8 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             
-            <uc3:Alert_Inf ID="Alert_Inf1" runat="server" />
+        
+         <uc3:Alert_Inf ID="Alert_Inf1" runat="server" />
             
         </ContentTemplate>
         </asp:UpdatePanel>

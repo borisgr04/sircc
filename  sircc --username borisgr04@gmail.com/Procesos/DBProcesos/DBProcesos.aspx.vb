@@ -291,4 +291,8 @@ Partial Class Procesos_DBProceso_Default
     Protected Sub IBtnDatosC_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnDatosC.Click
         Redireccionar_Pagina("/Procesos/GProcesosN/GProcesosN.aspx?Num_Proc=" + Me.TxtNProc.Text)
     End Sub
+
+    Protected Sub IBtnDocumentos_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnDocumentos.Click
+        Redireccionar_Pagina("/Procesos/DocProceso/DocProcesos.aspx?Num_Proc=" + Me.TxtNProc.Text)
+    End Sub
 End Class

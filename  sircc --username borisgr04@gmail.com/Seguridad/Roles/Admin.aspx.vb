@@ -25,6 +25,7 @@ Partial Class Seguridad_Roles_Admin
 
         Next
 
+
     End Sub
 
 
@@ -99,6 +100,13 @@ Partial Class Seguridad_Roles_Admin
     Protected Sub GridView1_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GridView1.RowCommand
 
         Select Case e.CommandName
+            Case "eliminar"
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.GridView1.SelectedIndex = index
+                Dim User As String = GridView1.SelectedValue
+                Dim u As New Usuarios
+                Me.MsgResult.Text = u.BorrarUsuario(User) + " - Usuario:" + User
+                MsgBox(MsgResult, u.lErrorG)
             Case "activar"
                 Dim index As Integer = Convert.ToInt32(e.CommandArgument)
                 Me.GridView1.SelectedIndex = index
