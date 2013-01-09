@@ -103,6 +103,8 @@ Public Class BDDatos
 
     End Function
 
+    
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetSession() As DataTable
         Dim queryString As String = "select username,status,count(*) Cantidad from v$session group by username,status"

@@ -152,10 +152,16 @@ Public Class WS_Sircc_GMinutas
         Msg = obj.Insert(Num_Proc, Grupo, Minuta)
         lErrorG = obj.lErrorG
     End Sub
-    <WebMethod(Description:="Registra Minuta a un ProcesoxGrupo ")> _
+    <WebMethod(Description:="Registra Documento a un Proceso ")> _
     Public Sub SetDocumento(ByVal Num_Proc As String, ByVal Minuta As Byte(), ByVal MinutaBase As Byte(), ByVal Tip_Doc As String, ByVal Editable As String, ByRef Msg As String, ByRef lErrorG As Boolean, ByVal Nombre As String)
         Dim obj As New DocPContratos
         Msg = obj.Insert(Num_Proc, Minuta, MinutaBase, Tip_Doc, Editable, Nombre)
+        lErrorG = obj.lErrorG
+    End Sub
+    <WebMethod(Description:="Registra Documento a un Proceso ")> _
+    Public Sub SetDocumento2(ByVal Num_Proc As String, ByVal Minuta As Byte(), ByVal MinutaBase As Byte(), ByVal Tip_Doc As String, ByVal Editable As String, ByRef Msg As String, ByRef lErrorG As Boolean, ByVal Nombre As String, ByVal Fec_Doc As Date)
+        Dim obj As New DocPContratos
+        Msg = obj.Insert(Num_Proc, Minuta, MinutaBase, Tip_Doc, Editable, Nombre, Fec_Doc)
         lErrorG = obj.lErrorG
     End Sub
 
@@ -171,6 +177,13 @@ Public Class WS_Sircc_GMinutas
         Dim obj As New PGContratosM
         Return obj.GetMinuta(Num_Proc, Grupo, ID)
     End Function
+
+    <WebMethod(Description:="Devuelve, Minutas en Bytes ")> _
+    Public Function GetOpenMinuta(ByVal Num_Proc As String, ByVal Grupo As String) As Byte()
+        Dim obj As New PGContratosM
+        Return obj.GetMinuta(Num_Proc, Grupo)
+    End Function
+
     <WebMethod(Description:="Devuelve, Doc en Bytes ")> _
     Public Function GetDocumentosPGID(ByVal Num_Proc As String, ByVal ID As Integer) As Byte()
         Dim obj As New DocPContratos
@@ -186,6 +199,12 @@ Public Class WS_Sircc_GMinutas
         Dim obj As New PGContratosM
         'Throw New Exception(Num_Proc + "," + Grupo + "," + ID.ToString)
         Return obj.GetDocBase(Num_Proc, Grupo, ID)
+    End Function
+    <WebMethod(Description:="Devuelve, Minutas Base del Registro Activo ")> _
+    Public Function GetMinBasePGAC(ByVal Num_Proc As String, ByVal Grupo As String) As DataTable
+        Dim obj As New PGContratosM
+        'Throw New Exception(Num_Proc + "," + Grupo + "," + ID.ToString)
+        Return obj.GetDocBaseAC(Num_Proc, Grupo)
     End Function
     <WebMethod(Description:="Devuelve, Minutas en Bytes ")> _
     Public Function GetPlantillaPpal(ByRef plantilla As Byte()) As Boolean
@@ -246,26 +265,52 @@ Public Class WS_Sircc_GMinutas
         Dim p As New PPlantillas
         Return p.Update(Ide_Pla, Plantilla)
     End Function
-    <WebMethod(Description:="Devuelve, Plantilla Disponibles para el Proceso y Grupo - Especificado  ")> _
+    <WebMethod(Description:="Actualiza Minuta Base de los Documentos")> _
     Public Function RegenerarDoc(ByVal Ide_Pla As String, ByVal ID As String, ByVal Plantilla As [Byte]()) As String
         Dim p As New DocPContratos
         Return p.Update(Ide_Pla, ID, Plantilla)
     End Function
-    <WebMethod(Description:="Devuelve, Plantilla Disponibles para el Proceso y Grupo - Especificado  ")> _
+    <WebMethod(Description:="Actualiza Minuta Final de los Documentos")> _
+    Public Function RegenerarDocF(ByVal Ide_Pla As String, ByVal ID As String, ByVal Plantilla As [Byte]()) As String
+        Dim p As New DocPContratos
+        Return p.UpdateDoc(Ide_Pla, ID, Plantilla)
+    End Function
+
+    'UpdatePBaseMinAC
+    <WebMethod(Description:="Actualiza Plantilla Base de Minuta ACTIVA  ")> _
+    Public Function UpdateMinPBaseMinAC(ByVal Num_Proc As String, ByVal Grupo As String, ByVal Plantilla As [Byte]()) As String
+        Dim p As New PGContratosM
+        Return p.UpdatePBaseMinAC(Num_Proc, Grupo, Plantilla)
+    End Function
+    <WebMethod(Description:="Actualiza la Minuta Cruzada ")> _
+    Public Function UpdateMinutaAC(ByVal Num_Proc As String, ByVal grupo As String, ByVal Plantilla As [Byte]()) As String
+        Dim p As New PGContratosM
+        Return p.UpdateMinutaAC(Num_Proc, grupo, Plantilla)
+    End Function
+
+    <WebMethod(Description:="Actualiza la Minuta Cruzada ")> _
+    Public Function RegenerarMinuta(ByVal Num_Proc As String, ByVal id As String, ByVal grupo As String, ByVal Plantilla As [Byte]()) As String
+        Dim p As New PGContratosM
+        Return p.Regenerar(Num_Proc, id, grupo, Plantilla)
+    End Function
+
+    <WebMethod(Description:="Devuelve, Actualiza Minuta  ")> _
     Public Function RegenerarMin(ByVal Ide_Pla As String, ByVal ID As String, ByVal Grupo As String, ByVal Plantilla As [Byte]()) As String
         Dim p As New PGContratosM
         Return p.Update(Ide_Pla, ID, Grupo, Plantilla)
     End Function
+    '<WebMethod(Description:="Devuelve, Actualiza Minuta del Documento del Proceso ")> _
+    'Public Function RegenerarMinuta(ByVal Ide_Pla As String, ByVal ID As String, ByVal grupo As String, ByVal Plantilla As [Byte]()) As String
+    '    Dim p As New PGContratosM
+    '    Return p.Regenerar(Ide_Pla, ID, grupo, Plantilla)
+    'End Function
+
     <WebMethod(Description:="Devuelve, Plantilla Disponibles para el Proceso y Grupo - Especificado  ")> _
     Public Function Regenerar(ByVal Ide_Pla As String, ByVal ID As String, ByVal Plantilla As [Byte]()) As String
         Dim p As New DocPContratos
         Return p.Regenerar(Ide_Pla, ID, Plantilla)
     End Function
-    <WebMethod(Description:="Devuelve, Plantilla Disponibles para el Proceso y Grupo - Especificado  ")> _
-    Public Function RegenerarMinuta(ByVal Ide_Pla As String, ByVal ID As String, ByVal grupo As String, ByVal Plantilla As [Byte]()) As String
-        Dim p As New PGContratosM
-        Return p.Regenerar(Ide_Pla, ID, grupo, Plantilla)
-    End Function
+
     <WebMethod(Description:="Devuelve, Solicitudes plantillas")> _
     Public Function GetPlantillas() As DataTable
         Dim p As New PPlantillas

@@ -136,6 +136,9 @@ padding-right: 20px;
                 <td style="width: 79px; text-align: center;">
                     <asp:ImageButton ID="IBtnDatosC" runat="server" SkinID="IBtnCont" />
                 </td>
+                <td style="width: 79px; text-align: center;">
+                    <asp:ImageButton ID="IBtnDocumentos" runat="server" SkinID="IBtnArchivoD" />
+                </td>
                 <td style="width: 79px">
                     &nbsp;</td>
                 <td class="style31">
@@ -173,8 +176,12 @@ padding-right: 20px;
                     Guardar</td>
                 <td style="width: 79px">
                     Cancelar</td>
-                <td style="width: 79px">
-                    Datos Contratos</td>
+                <td style="width: 79px; text-align: center;">
+                    Datos
+                    <br />
+                    Contratos</td>
+                <td style="width: 79px; text-align: center;">
+                    Documentos<br /> PreContractuales</td>
                 <td style="width: 79px">
                     &nbsp;</td>
                 <td class="style31">
@@ -210,7 +217,7 @@ padding-right: 20px;
                     &nbsp;</td>
                 <td style="width: 79px">
                     &nbsp;</td>
-                <td style="width: 79px">
+                <td style="width: 79px" colspan="2">
                     &nbsp;</td>
                 <td colspan="3">
                     &nbsp;</td>

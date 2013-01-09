@@ -186,6 +186,28 @@ Public Class PGContratosM
 
     End Function
 
+    Public Function AnularAC(ByVal NUM_PROC As String, ByVal GRUPO As Integer) As String
+        Try
+            Conectar()
+            ComenzarTransaccion()
+            querystring = "Update PGContratosM Set Estado='AN' Where NUM_PROC=:NUM_PROC And GRUPO=:GRUPO And ESTADO='AC'"
+            CrearComando(querystring)
+            AsignarParametroCadena(":NUM_PROC", NUM_PROC)
+            AsignarParametroEntero(":GRUPO", GRUPO)
+            num_reg = EjecutarComando()
+            ConfirmarTransaccion()
+            Msg = MsgOk + num_reg.ToString
+            lErrorG = False
+        Catch ex As Exception
+            CancelarTransaccion()
+            lErrorG = True
+            Msg = ex.Message
+        Finally
+            Desconectar()
+        End Try
+        Return Msg
+
+    End Function
 
     ''' <summary>
     ''' RETORNA PLANTILLA BASE
@@ -203,6 +225,25 @@ Public Class PGContratosM
         Me.CrearComando(querystring)
         AsignarParametroCadena(":NUM_PROC", NUM_PROC)
         AsignarParametroEntero(":ID", ID)
+        AsignarParametroEntero(":GRUPO", GRUPO)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
+    ''' <summary>
+    ''' Retorna Minuta base Activa
+    ''' </summary>
+    ''' <param name="NUM_PROC"></param>
+    ''' <param name="GRUPO"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetDocBaseAC(ByVal NUM_PROC As String, ByVal GRUPO As String) As DataTable
+        Me.Conectar()
+        querystring = "SELECT * FROM PGContratosM Where NUM_PROC=:NUM_PROC And GRUPO=:GRUPO And ESTADO='AC'"
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":NUM_PROC", NUM_PROC)
         AsignarParametroEntero(":GRUPO", GRUPO)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()
@@ -242,6 +283,36 @@ Public Class PGContratosM
         Return Msg
     End Function
     ''' <summary>
+    ''' Actualiza Plantilla Base de la Minuta Activa
+    ''' </summary>
+    ''' <param name="NUM_PROC"></param>
+    ''' <param name="GRUPO"></param>
+    ''' <param name="dContent"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpdatePBaseMinAC(ByVal NUM_PROC As String, ByVal GRUPO As String, ByVal dContent As [Byte]()) As String
+        Dim tbCon As New DataTable
+        Conectar()
+        ComenzarTransaccion()
+        Try
+            querystring = "UPDATE PGContratosM SET MinutaBase=:PLANTILLA WHERE NUM_PROC=:NUM_PROC And GRUPO=:GRUPO And ESTADO='AC'"
+            CrearComando(querystring)
+            AsignarParametroBLOB(":PLANTILLA", dContent)
+            AsignarParametroCadena(":NUM_PROC", NUM_PROC)
+            AsignarParametroEntero(":GRUPO", GRUPO)
+            num_reg = EjecutarComando()
+            ConfirmarTransaccion()
+            Msg = MsgOk + " " + num_reg.ToString + " - Fila." + "Tamaño del Archivo: " & FormatNumber(dContent.Length / 1024).ToString & " kb - "
+            Me.lErrorG = False
+        Catch ex As Exception
+            CancelarTransaccion()
+            Msg = ex.Message
+            Me.lErrorG = True
+        End Try
+        Return Msg
+    End Function
+
+    ''' <summary>
     ''' ACTUALIZA MINUTA FINAL DE LA MINUTA
     ''' </summary>
     ''' <param name="NUM_PROC"></param>
@@ -260,7 +331,7 @@ Public Class PGContratosM
             AsignarParametroBLOB(":PLANTILLA", dContent)
             AsignarParametroCadena(":NUM_PROC", NUM_PROC)
             AsignarParametroEntero(":ID", ID)
-            AsignarParametroEntero(":GRUPO", GRUPO)
+            AsignarParametroEntero(":GRUPO", grupo)
             num_reg = EjecutarComando()
             'Throw New Exception(Me.vComando.CommandText)
             ConfirmarTransaccion()
@@ -273,5 +344,30 @@ Public Class PGContratosM
         End Try
         Return Msg
     End Function
+
+    Public Function UpdateMinutaAC(ByVal NUM_PROC As String, ByVal grupo As String, ByVal dContent As [Byte]()) As String
+        Dim tbCon As New DataTable
+        Conectar()
+        ComenzarTransaccion()
+        Try
+            querystring = "UPDATE PGContratosM SET Minuta=:PLANTILLA WHERE NUM_PROC=:NUM_PROC And GRUPO=:GRUPO And ESTADO='AC'"
+            CrearComando(querystring)
+            AsignarParametroBLOB(":PLANTILLA", dContent)
+            AsignarParametroCadena(":NUM_PROC", NUM_PROC)
+            AsignarParametroEntero(":GRUPO", grupo)
+            num_reg = EjecutarComando()
+            'Throw New Exception(Me.vComando.CommandText)
+            ConfirmarTransaccion()
+            Msg = MsgOk + "Tamaño del Archivo: " & FormatNumber(dContent.Length / 1024).ToString & " kb - "
+            Me.lErrorG = False
+        Catch ex As Exception
+            CancelarTransaccion()
+            Msg = ex.Message
+            Me.lErrorG = True
+        End Try
+        Return Msg
+    End Function
+
+
 End Class
 

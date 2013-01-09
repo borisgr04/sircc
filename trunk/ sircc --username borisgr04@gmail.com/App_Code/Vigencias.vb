@@ -160,7 +160,11 @@ Public Class Vigencias
         End Try
         Return Msg
     End Function
-
+    ''' <summary>
+    ''' Sin Conexion
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetActiva_s() As String
 

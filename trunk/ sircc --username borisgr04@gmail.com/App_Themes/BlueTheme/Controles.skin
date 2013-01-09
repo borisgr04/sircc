@@ -32,8 +32,7 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 <asp:ImageButton SkinId="IBtnAdd" runat="server"  
                         ImageUrl="~/images/mnProcesos/add.gif"  />
 
-<asp:ImageButton SkinId="IBtnMinuta" runat="server"  Height="32px" Width="32px"
-                        ImageUrl="~/images/imagev2/Contract-icon.png"  />
+
 
 <asp:ImageButton SkinId="IBtnExcel" runat="server"  Height="32px" Width="32px"
                         ImageUrl="~/Images/2012/document-excel-icon.png"  />
@@ -93,4 +92,23 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
                         ImageUrl="~/images/2012/Radcont.png" Width="32px" />                       
 
 <asp:ImageButton SkinId="IBtnReabrir" runat="server" Height="32px" 
-                        ImageUrl="~/images/2012/ReAbrir.png" Width="32px" />                                   
+                        ImageUrl="~/images/2012/ReAbrir.png" Width="32px" />   
+                        
+<asp:ImageButton SkinId="IBtnEditMin" runat="server" Height="32px" tooltip="Edita los Datos de la Minuta/Documento Generado."
+                        ImageUrl="~/images/2012/EditarM.png" Width="32px" />                                   
+
+<asp:ImageButton SkinId="IBtnEditBase" runat="server" Height="32px" tooltip="Edita la Plantilla para el Presente Documento. NO Afecta otros Documentos del Sistema"
+                        ImageUrl="~/images/2012/EditarB.png" Width="32px" />                                   
+
+<asp:ImageButton SkinId="IBtnAnularM" runat="server" Height="32px"  tooltip="Anula Minuta/Documento Actual o Activo"
+                        ImageUrl="~/images/2012/AnularMinuta.png" Width="32px" /> 
+
+<asp:ImageButton SkinId="IBtnMinuta" runat="server"  Height="32px" Width="32px" tooltip="Genera Nuevo Documento/Minuta"
+                        ImageUrl="~/images/2012/gminuta.png"  />
+
+<asp:ImageButton SkinId="IBtnSincronizar" runat="server"  Height="32px" Width="32px" tooltip="Actualiza los Datos del Sistema con los Datos del Documento/Minuta"
+                        ImageUrl="~/images/2012/sincronizar.png"  />
+
+<asp:ImageButton SkinId="IBtnArchivoD" runat="server"  Height="32px" Width="32px" 
+                        ImageUrl="~/images/2012/archivo.png"  />
+                        

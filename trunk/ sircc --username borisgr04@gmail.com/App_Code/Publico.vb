@@ -99,6 +99,20 @@ Public Class Publico
     End Property
 
     ''' <summary>
+    ''' Retorna el nombre base de la cookie de la aplicacion
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Shared ReadOnly Property InsRubro As String
+        Get
+            Return ConfigurationManager.AppSettings("InsRubro")
+        End Get
+    End Property
+
+    '
+
+    ''' <summary>
     ''' Especifica el tiempo que se mostrará el Mensaje antes de que lo desaparezca el Timmer de Updatepanel
     ''' </summary>
     ''' <value></value>

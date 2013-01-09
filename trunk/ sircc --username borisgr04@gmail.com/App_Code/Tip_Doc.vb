@@ -13,6 +13,23 @@ Public Class Tip_Doc
 
     End Sub
 
+    ''' <summary>
+    '''  Retorna los todos los registros de la tabla de la Base de datos, segun el filtro especificado
+    ''' </summary>
+    ''' <param name="Filtro"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetRecordsComplete(ByVal Filtro As String) As DataTable
+        Dim queryString As String = "SELECT Cod_Tip||'-'||Des_Tip As Des_Tip FROM Tip_Doc Where Upper(Des_Tip) Like '%" + Filtro.ToUpper + "%'"
+        Me.Conectar()
+        Me.CrearComando(queryString)
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
+
+    End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overrides Function GetRecords() As DataTable
         Dim queryString As String = "SELECT * FROM " + Vista

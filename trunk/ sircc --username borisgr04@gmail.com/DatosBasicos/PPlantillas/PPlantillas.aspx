@@ -47,7 +47,6 @@
                 OnRowCommand="GridView1_RowCommand" DataKeyNames="Ide_Pla" 
                 AutoGenerateColumns="False" 
                 OnSelectedIndexChanged="GridView1_SelectedIndexChanged" 
-                EmptyDataText="No se encontraron Registros en la Base de Datos" 
                 AllowPaging="True" EnableModelValidation="True">
 <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
 <Columns>
@@ -67,11 +66,6 @@
 <asp:ButtonField CommandName="Eliminar" ImageUrl="~/images/Operaciones/delete2.png" Text="Eliminar" ButtonType="Image"></asp:ButtonField>
 <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" ButtonType="Image"></asp:CommandField>
 </Columns>
-
-                <EmptyDataTemplate>
-                    <asp:LinkButton ID="lnkNuevo" runat="server" __designer:wfdid="w10" 
-                        CausesValidation="False" CommandName="Nuevo" Text="Nuevo Registro"></asp:LinkButton>
-                </EmptyDataTemplate>
 
 <FooterStyle BackColor="White" Font-Bold="True" ForeColor="#5D7B9D"></FooterStyle>
 
@@ -128,7 +122,8 @@
                             <asp:Label ID="Label15" runat="server" Text="Tipo"></asp:Label>
                         </td>
                         <td colspan="3">
-                            <asp:DropDownList ID="CboTipPla" runat="server">
+                            <asp:DropDownList ID="CboTipPla" runat="server" DataSourceID="ObjTipPlantillas" 
+                                DataTextField="nom_tippla" DataValueField="id_tippla">
                                 <asp:ListItem Value="01">MINUTA INICIAL</asp:ListItem>
                                 <asp:ListItem Value="02">MODIFICATORIO</asp:ListItem>
                                 <asp:ListItem Value="03">CERTIFICACIONES</asp:ListItem>
@@ -138,7 +133,7 @@
                     <tr>
                         <td style="width: 140px">
                             <asp:Label ID="Label17" runat="server" Text="Clase de Contratación"></asp:Label>
-                        </td>
+                            (Solo para Minutas)</td>
                         <td colspan="3">
                             <asp:DropDownList ID="CboSTip" runat="server" CssClass="txt" 
                                 DataSourceID="ObjSubTipos" DataTextField="Nom_STip" DataValueField="Cod_STip" 
@@ -231,6 +226,9 @@
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="SubTipos" InsertMethod="Insert" UpdateMethod="Update">
             </asp:ObjectDataSource>
+            <asp:ObjectDataSource ID="ObjTipPlantillas" runat="server" 
+                OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
+                TypeName="TipPlantillas"></asp:ObjectDataSource>
 </contenttemplate>
     </asp:UpdatePanel>
       <asp:UpdateProgress ID="UpdPrg" runat="server" AssociatedUpdatePanelID="UpdatePanel1">

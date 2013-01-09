@@ -21,7 +21,8 @@ Public Class Con_PContratos
     Public Overloads Function GetByPkC(ByVal Num_PCon As String) As DataTable
         Me.Num_PCon = Num_PCon
         Me.Conectar()
-        querystring = "SELECT * FROM VPCONTRATOSC where Pro_Sel_Nro=:NUm_Pcon"
+        'falta VPCONTRATOS
+        querystring = "SELECT * FROM VPCONTRATOS where Pro_Sel_Nro=:NUm_Pcon"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":NUm_Pcon", Num_PCon)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
