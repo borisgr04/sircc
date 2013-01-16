@@ -419,10 +419,10 @@ Se amplio el ancho de 800 px a 1000 px
 	height: 50px;
 	
 }
-/*background: url(images/rightcoltop.gif) no-repeat right top;*/
+
 #master_contentplaceholder
 {
-	padding: 30px 20px 40px 20px;
+	padding: 10px 10px 20px 10px;
 	border-left: 1px solid #0F2543;
 	border-left: 0px solid #0F2543;
 	border-right: 1px solid #0F2543;
@@ -449,9 +449,10 @@ background:#FFF url(images/demotop.png) no-repeat left top;
 
 
 .demoarea {
-	padding:20px;
+	padding:5px;
 	background-color:White;
-	
+	border:1px;
+	border-color:Blue;
 }
 
 .demoareaIzq {
@@ -1920,7 +1921,8 @@ width: 100%;
 /*
 Div Flotante de Ayuda a la Izquierda
 Agregada el 17 de Agosto*/
-#Div_Flot_Izq {
+#Div_Flot_Izq 
+{
 	float:right;
 	width: 200px;
 }
@@ -1931,7 +1933,6 @@ Agregada el 17 de Agosto*/
     border: thin solid #9999ff;
     vertical-align: middle;
     position: relative;
-    
     text-align: center;
     padding: 5px;
     color:#000000;
@@ -1939,9 +1940,21 @@ Agregada el 17 de Agosto*/
     left: 0px;
     text-align:justify;
     margin-left:40px;
-    margin-right:40px;
+    margin-right:10px;
 }
-
+ /*border: thin solid #9999ff;
+    vertical-align: middle;
+    position: absolute;
+    background-color:White;
+    text-align: center;
+    padding: 5px;
+    color:#000000;
+    top: 170px;
+    left: 1090px;
+    text-align:justify;
+    margin-left:40px;
+    margin-right:10px;
+*/
 #pic_dfi {
 	float:left;
 	width: 50px;
@@ -2006,3 +2019,79 @@ input.blueinput:focus, textarea.blueinput:focus {
 }
 
 input:focus, input.sffocus{background-color:#DEEFFF;} 
+
+.disabledImageButton
+{
+     filter: alpha(opacity=30);
+     opacity: .30;
+     background-color:#111;
+}
+
+/* mGrid */
+.mGrid {   
+    width: 100%;   
+    background-color: #fff;   
+    margin: 5px 0 10px 0;   
+    border: solid 1px #525252;   
+    border-collapse:collapse; 
+    font-family:Tahoma, Arial;
+    color:#717171;
+    font-size:12px; 
+    
+}  
+.mGrid td {   
+    padding: 2px;   
+    border: solid 1px #c1c1c1;   
+    color: #717171;   
+}  
+.mGrid th {   
+    padding: 4px 2px;   
+    color: #fff;  
+    background-color:#2787B4;   
+    border-left: solid 1px #2A497B;   
+    font-size: 1em;   
+}  
+
+.mGrid .alt 
+    { 
+     filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#F3F1F1', EndColorStr='#ffffff'); 
+     background:#F3F1F1;
+     padding:10px;
+          
+     } 
+     
+  
+.mGrid .alt:hover { background:#b4d8f8; color:#606060;padding:10px;}
+.mGrid .rows{background:#ffffff; padding:10px;}
+.mGrid .rows:hover{background:#b4d8f8; color:#606060;}
+.mGrid .pgr  
+    {
+      background-color:#2787B4;
+     } 
+.mGrid .pgr table { margin: 5px 0; }  
+.mGrid .pgr td 
+{
+     
+    border-width: 0;   
+    padding: 0 6px;   
+    border-left: solid 1px #666;   
+    font-weight: bold;   
+    color: #034172;   
+    line-height: 12px;   
+ }     
+.mGrid .pgr a { color: #666; text-decoration: none; }  
+.mGrid .pgr a:hover { color: #A4B9D2; text-decoration: none; }
+   
+/* Fin mGrid */
+
+/* Panel de Interventorias*/
+  .datosc
+    { 
+        font-weight:bold
+    }
+.datosck
+{
+     font-weight:bold;
+    font-style:italic;
+}
+/**/

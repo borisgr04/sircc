@@ -357,7 +357,7 @@
                             </asp:ObjectDataSource>
                         </td>
                         <td style="width: 53px; text-align: center;">
-                            <asp:ImageButton ID="IBtnAbrir" runat="server" Height="32px" ImageUrl="~/images/mnProcesos/open-icon32.png"
+                            <asp:ImageButton ID="IBtnAbrir" runat="server" Height="32px" SkinID="IBtnAbrir" 
                                 Width="32px" />
                         </td>
                         <td style="width: 53px; text-align: center;">
@@ -373,7 +373,7 @@
                                 ValidationGroup="Guardar" Width="32px" />
                         </td>
                         <td style="width: 79px; text-align: center;">
-                            <asp:ImageButton ID="IBtnCancelar" runat="server" Height="32px" ImageUrl="~/images/mnProcesos/undo.png"
+                            <asp:ImageButton ID="IBtnCancelar" SkinID="IBtnCancelar" runat="server" Height="32px" 
                                 Width="32px" />
                         </td>
                         <td class="style31" style="text-align: center">

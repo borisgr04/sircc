@@ -146,7 +146,7 @@ Partial Class Seguridad_Roles_Admin
     <WebMethod()> _
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
     Public Shared Function ObtieneNombres(ByVal prefixText As String) As String() 'As List(Of Terc)
-        Dim obj As New Terceros
+        Dim obj As New Usuarios
         Dim lerrorg As Boolean = False
         Dim datat As New DataTable
         datat = obj.GetRecords(prefixText)
@@ -161,7 +161,7 @@ Partial Class Seguridad_Roles_Admin
                 'Dim Sal As New Terc
                 'Sal.Nit = datat.Rows(i).Item("Ide_Ter").ToString()
                 'Sal.Nom = datat.Rows(i).Item("Nom_Ter").ToString()
-                Sal = datat.Rows(i).Item("Nom_Ter").ToString()
+                Sal = datat.Rows(i).Item("Nom_Ter").ToString().Trim()
                 items.Add(Sal)
             Next i
         Else

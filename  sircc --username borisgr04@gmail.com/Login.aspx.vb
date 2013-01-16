@@ -19,6 +19,7 @@ Partial Class Login
             aCookie.Values("Vigencia") = UCase(Me.CmbVigencia.SelectedValue)
             aCookie.Values("Modulo") = UCase(Me.CboMod.SelectedValue)
             aCookie.Values("NModulo") = UCase(Me.CboMod.SelectedItem.Text)
+            Session("username") = Me.TxtUsername.Text
             Response.Cookies.Add(aCookie)
             'Profile.Modulo = 
             FormsAuthentication.RedirectFromLoginPage(Me.TxtUsername.Text, False)
