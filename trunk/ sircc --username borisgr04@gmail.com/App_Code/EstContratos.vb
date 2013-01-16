@@ -8,7 +8,7 @@ Public Class EstContratos
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetRecords(ByVal cod_con As String) As DataTable
         Me.Conectar()
-        querystring = "SELECT ESTADO_INICIAL, ESTADO_FINAL, FECHA, DOCUMENTO, USUARIO, NRO_CONTRATO, EXT , 0 DIAS_EJEC, OBSERVACION,ID,VALOR_PAGO,POR_EJE_FIS,Ult FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
+        querystring = "SELECT ESTADO_INICIAL, ESTADO_FINAL, FECHA, DOCUMENTO, USUARIO, NRO_CONTRATO, EXT , 0 DIAS_EJEC, OBSERVACION,ID,VALOR_PAGO,POR_EJE_FIS,Ult,ESTADO FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
         Me.CrearComando(querystring)
         AsignarParametroCadena(":cod_con", cod_con)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
@@ -53,9 +53,7 @@ Public Class EstContratos
             End If
         End If
 
-
         Try
-
             querystring = "INSERT INTO EstContratos (cod_con,est_ini,est_fin,fec_ent,usuario,fec_reg,obs_est,val_pago,nvisitas,por_eje_fis) "
             ' querystring += " Values(:cod_con,:est_ini,:est_fin,to_date(:fec_ent,'dd/mm/yyyy'),user,sysdate,:obs_est,to_number(:val_pago),to_number(:nvisitas))"
             querystring += " Values(:cod_con,:est_ini,:est_fin,to_date(:fec_ent,'dd/mm/yyyy'),user,sysdate,:obs_est,:val_pago,to_number(:nvisitas),:por_eje_fis)"
@@ -70,19 +68,10 @@ Public Class EstContratos
             AsignarParametroCadena(":nvisitas", nvisitas)
             AsignarParametroDecimal(":por_eje_fis", por_eje_fis)
 
-
-            'Throw New Exception(Me._Comando.CommandText)
             num_reg = EjecutarComando()
 
             querystring = "UPDATE Contratos Set est_con='" & est_fin & "' Where cod_con='" & cod_con & "'"
             CrearComando(querystring)
-
-            'If tfil <> "" Then
-            '    doc_act = cod_con + "e" + est_fin + fec_ent.ToShortDateString.Replace("/", "-") + "." + tfil
-            'Else
-            '    doc_act = "Ninguno"
-            'End If
-
 
             num_reg = EjecutarComando()
 
@@ -102,6 +91,8 @@ Public Class EstContratos
         Return Msg
 
     End Function
+
+    
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetEstByIde(ByVal cod As String) As System.Data.DataTable
         Dim datat As New DataTable
@@ -112,7 +103,21 @@ Public Class EstContratos
         Return datat
     End Function
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Private Function GetEstByIdep(ByVal cod As String) As System.Data.DataTable
+    Public Function GetActasBorrador(ByVal cod As String) As Integer
+        Conectar()
+        Dim i As Integer = GetEnBorrador(cod)
+        Desconectar()
+        Return i
+    End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Protected Function GetEnBorrador(ByVal cod As String) As Integer
+        querystring = "select Count(*) from estcontratos where cod_con =:cod_con and estado='BO' "
+        CrearComando(querystring)
+        AsignarParametroCadena(":cod_con", cod)
+        Return CInt(EjecutarEscalar())
+    End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Protected Function GetEstByIdep(ByVal cod As String) As System.Data.DataTable
         Dim datat As New DataTable
         querystring = "select * from estcontratos where cod_con =:cod_con and estado<>'AN' Order By Id Desc"
         CrearComando(querystring)
@@ -124,7 +129,7 @@ Public Class EstContratos
     Public Function GetbyCod_Con(ByVal cod_con As String) As System.Data.DataTable
         Conectar()
         Dim datat As New DataTable
-        querystring = "SELECT ESTADO_INICIAL, ESTADO_FINAL, FECHA, DOCUMENTO, USUARIO, NRO_CONTRATO, EXT , 0 DIAS_EJEC, OBSERVACION,ID,VALOR_PAGO,Ult,NRO_DOC,por_eje_fis,NVISITAS FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
+        querystring = "SELECT ESTADO_INICIAL, ESTADO_FINAL, FECHA, DOCUMENTO, USUARIO, NRO_CONTRATO, EXT , 0 DIAS_EJEC, OBSERVACION,ID,VALOR_PAGO,Ult,NRO_DOC,por_eje_fis,NVISITAS,ESTADO FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
         CrearComando(querystring)
         AsignarParametroCadena(":cod_con", cod_con)
         datat = EjecutarConsultaDataTable()

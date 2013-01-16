@@ -46,11 +46,12 @@ Partial Class MasterPage
         Response.Cookies(Publico.Cookie)("Vigencia") = Request.Cookies(Publico.Cookie)("Vigencia")
     End Sub
     Sub Cargar_Menu()
-        'mn.cargarMenu(Me.MnuPpal, Request.Cookies(Publico.Cookie)("Modulo"))
-        mn.cargarMenu(RMnPpal, Request.Cookies(Publico.Cookie)("Modulo"))
-        LbModulo.Text = Request.Cookies(Publico.Cookie)("NModulo")
+        Cargar_Menu(Request.Cookies(Publico.Cookie)("Modulo"))
     End Sub
-
+    Sub Cargar_Menu(ByVal Modulo As String)
+        mn.cargarMenu(RMnPpal, Modulo)
+        Request.Cookies(Publico.Cookie)("NModulo") = Modulo
+    End Sub
     
     Protected Sub LoginStatus1_LoggingOut(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.LoginCancelEventArgs) Handles LoginStatus1.LoggingOut
         FormsAuthentication.SignOut()
@@ -86,8 +87,6 @@ Partial Class MasterPage
         Dim p() As String = b.CommandArgument.Split(",")
         Actualizar_Cookie(p(0), p(1))
         Cargar_Menu()
-        'mn.cargarMenu(Me.MnuPpal, p(0))
-        'mn.cargarMenu(Me.RMnPpal, p(0))
         LbModulo.Text = p(1)
     End Sub
 
@@ -97,6 +96,13 @@ Partial Class MasterPage
         'Response.Cookies(Publico.Cookie)("NModulo") = Request.Cookies(Publico.Cookie)("NModulo")
         'LbVig.Text = Request.Cookies(Publico.Cookie)("Vigencia")
         'Cargar_Menu()
+    End Sub
+
+    Protected Sub lstMenu_ItemCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.ListViewCommandEventArgs) Handles lstMenu.ItemCommand
+        Dim p() As String = e.CommandArgument.Split(",")
+        Actualizar_Cookie(p(0), p(1))
+        Cargar_Menu(p(0))
+
     End Sub
 End Class
 

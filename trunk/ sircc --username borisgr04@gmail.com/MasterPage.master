@@ -69,22 +69,22 @@
             <div id="barra-modulo-activo">
                 <asp:Label ID="LbModulo" runat="server" Text="" Font-Size="Large"></asp:Label></div>
             <div id="barra-modulos">
-                <asp:Repeater ID="RptModulos" runat="server" DataSourceID="ObjModulos">
-                    <HeaderTemplate>
-                        <ul id="navlist" class="ul_rp">
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                        <li class="li_rp">
-                            <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"Cod_Mod")+","+DataBinder.Eval(Container.DataItem, "Nom_Mod")%>'
+                    <asp:ListView ID="lstMenu" runat="server" DataSourceID="ObjModulos"
+                        DataKeyNames="Cod_Mod,Nom_Mod">
+                        <LayoutTemplate>
+                            <ul id="itemPlaceholderContainer" runat="server">
+                                <li id="itemPlaceholder" runat="server" />
+                            </ul>
+                        </LayoutTemplate>
+                        <ItemTemplate>
+                            <li class="li_rp">
+                            <asp:LinkButton ID="LnkMenu" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"Cod_Mod")+","+DataBinder.Eval(Container.DataItem, "Nom_Mod")%>'
                                 OnClick="Change_Menu" ToolTip='<%# DataBinder.Eval(Container.DataItem,"Des_Mod")%>'
                                 CausesValidation="False">
                                      <%# DataBinder.Eval(Container.DataItem, "Nom_Mod") %></asp:LinkButton>
                         </li>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </ul>
-                    </FooterTemplate>
-                </asp:Repeater>
+                        </ItemTemplate>
+                    </asp:ListView>
             </div>
         </div>
         <div id="barra_menu">

@@ -731,14 +731,14 @@ Public Class GDocWord
 
     Private Sub EsOtroCaso(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
         Dim i As Integer = posicion
+
+
+
         Dim nom_Pla As String = dtConfiguracion.Rows(i)("NOM_PLA").ToString.Trim.ToUpper()
         Dim Nom_Campo As String = dtConfiguracion.Rows(i)("NOM_CAM").ToString
         Dim Tip_Dato As String = dtConfiguracion.Rows(i)("TIP_DAT").ToString
-        'If nom_Pla = "NOM_TPROC" Then
-        '    Throw New Exception("NOM_TPROC")
-        'End If
+        
         If (dtDatosImprimir.Columns.Contains(Nom_Campo)) Then
-
             Remplazar(oWrdApp, "{" + nom_Pla + "}")
             Dim strRemp As String = FormatearCampo(dtDatosImprimir.Rows(0)(Nom_Campo).ToString, Tip_Dato)
             If strRemp.Length <= 255 Then
@@ -746,7 +746,6 @@ Public Class GDocWord
                 oWrdApp.Selection.Find.Replacement.Text = strRemp
                 oWrdApp.Selection.Find.Execute(Replace:=replaceAll)
             End If
-
         End If
     End Sub
 
