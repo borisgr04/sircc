@@ -51,6 +51,8 @@
             </table>
             <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"
                 SelectMethod="GetRecords" TypeName="Vigencias"></asp:ObjectDataSource>
+            <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
+            <br />
             <asp:ListView ID="LstSupervisiones" runat="server" DataKeyNames="Numero" DataSourceID="ObjPanelS"
                 EnableModelValidation="True" OnSelectedIndexChanging="LstSupervisiones_SelectedIndexChanged">
                 <ItemTemplate>
@@ -155,14 +157,14 @@
             <div style="padding-right: 10px; padding-left: 10px; padding-bottom: 10px; vertical-align: middle;
                 padding-top: 5px; overflow: auto; height: 370px">
                 <asp:Panel ID="PnLabelNuevo" runat="server" Visible="false">
-                <center>
-                    <table>
-                        <tr>
-                            <td>
-                                <asp:Label ID="LbNuevo" SkinID="MsgResult" runat="server" Text=""></asp:Label><br />
-                            </td>
-                        </tr>
-                    </table>
+                    <center>
+                        <table>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="LbNuevo" SkinID="MsgResult" runat="server" Text=""></asp:Label><br />
+                                </td>
+                            </tr>
+                        </table>
                     </center>
                 </asp:Panel>
                 <asp:Panel ID="PnlNuevoDoc" runat="server">
@@ -198,19 +200,19 @@
                     <br />
                 </asp:Panel>
                 <asp:Panel ID="PnDocs" runat="server">
-                    <asp:GridView ID="grdEstContratos" runat="server" AutoGenerateColumns="False" DataKeyNames="ID"
-                        DataSourceID="ObjEstContratos" ShowFooter="True" SkinID="gridView" EnableModelValidation="True"
-                        EmptyDataText="No tiene Actas Registradas" GridLines="Both" >
+                    <asp:GridView ID="grdEstContratos" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,EST_FIN"
+                        DataSourceID="ObjEstContratos" ShowFooter="True" EnableModelValidation="True"
+                        EmptyDataText="No tiene Actas Registradas" GridLines="None">
                         <Columns>
                             <asp:BoundField DataField="ESTADO_INICIAL" HeaderText="DOCUMENTO ANTERIOR" SortExpression="ESTADO_INICIAL"
                                 Visible="False" />
                             <asp:BoundField DataField="ESTADO_FINAL" HeaderText="DOCUMENTO " SortExpression="ESTADO_FINAL" />
-                            <asp:BoundField DataField="NRO_DOC" HeaderText="N° DOCUMENTO" SortExpression="Nro_Doc" >
-                            <ItemStyle HorizontalAlign="Center" />
+                            <asp:BoundField DataField="NRO_DOC" HeaderText="N° DOCUMENTO" SortExpression="Nro_Doc">
+                                <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
                             <asp:BoundField DataField="FECHA" DataFormatString="{0:d}" HeaderText="FECHA" SortExpression="FECHA" />
-                            <asp:BoundField DataField="NVISITAS" HeaderText="N° VISITAS" Visible="True" >
-                            <ItemStyle HorizontalAlign="Right" />
+                            <asp:BoundField DataField="NVISITAS" HeaderText="N° VISITAS" Visible="True">
+                                <ItemStyle HorizontalAlign="Right" />
                             </asp:BoundField>
                             <asp:BoundField DataField="por_eje_fis" HeaderText="% EJECUCIÓN FISICO" Visible="True">
                                 <ItemStyle HorizontalAlign="Right" />
@@ -222,18 +224,28 @@
                             <asp:BoundField DataField="USUARIO" HeaderText="USUARIO" SortExpression="USUARIO" />
                             <asp:BoundField DataField="ESTADO" HeaderText="ESTADO" Visible="True" />
                             <asp:ButtonField ButtonType="Image" CommandName="Editar" HeaderText="EDITAR" ImageUrl="~/images/Operaciones/Edit2.png"
-                                Text="Editar" >
+                                Text="Editar">
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:ButtonField>
                             <asp:TemplateField ShowHeader="False" HeaderText="ANULAR">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="IBtnAnular" runat="server" SkinID="IBtnAnularM" CommandName="Anular" CommandArgument='<%#Convert.ToInt32(DataBinder.Eval(Container, "DataItemIndex")) %>'  />
+                                    <asp:ImageButton ID="IBtnAnular" runat="server" SkinID="IBtnAnularM" CommandName="Anular"
+                                        CommandArgument='<%#Convert.ToInt32(DataBinder.Eval(Container, "DataItemIndex")) %>'
+                                        Visible='<%#IIF((DataBinder.Eval(Container.DataItem, "Ult")="OK"),True,False)%>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ShowHeader="False" HeaderText="ANULAR">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="false" CommandName="Anular"
+                                        Visible='<%#IIF((DataBinder.Eval(Container.DataItem, "Ult")="OK"),True,False)%>'
+                                        Text="Anular" CommandArgument='<%#Convert.ToInt32(DataBinder.Eval(Container, "DataItemIndex")) %>'></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                     <asp:ObjectDataSource ID="ObjEstContratos" runat="server" OldValuesParameterFormatString="original_{0}"
-                        SelectMethod="GetbyCod_Con" TypeName="EstContratos" InsertMethod="Insert" UpdateMethod="Update">
+                        SelectMethod="GetPorCodCon" TypeName="ActasSupervision" InsertMethod="Insert"
+                        UpdateMethod="Update">
                         <SelectParameters>
                             <asp:ControlParameter ControlID="LstSupervisiones" Name="Cod_Con" PropertyName="SelectedValue"
                                 Type="String" />
@@ -244,7 +256,7 @@
             </div>
         </asp:Panel>
         <asp:ObjectDataSource ID="ObjRutaEst" runat="server" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="GetByCodCon" TypeName="Est_Ruta">
+            SelectMethod="GetbyCodCon" TypeName="Est_Ruta">
             <SelectParameters>
                 <asp:ControlParameter ControlID="LstSupervisiones" Name="Cod_Con" PropertyName="SelectedValue"
                     Type="String" />

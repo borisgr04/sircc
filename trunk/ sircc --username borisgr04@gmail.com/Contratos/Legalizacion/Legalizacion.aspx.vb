@@ -46,4 +46,10 @@ Partial Class Contratos_Legalizacion_Default
     Protected Sub LnkIrAGestión_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LnkIrAGestión.Click
         ' Redireccionar_Pagina2("Contratos/GesContratos/GesContratos.aspx?Cod_Con=" + Me.DetContrato1.Cod_Con) ' 
     End Sub
+
+    Protected Sub ToolkitScriptManager1_AsyncPostBackError(ByVal sender As Object, ByVal e As System.Web.UI.AsyncPostBackErrorEventArgs) Handles ToolkitScriptManager1.AsyncPostBackError
+        If (Not IsNothing(e.Exception)) And (Not IsNothing(e.Exception.InnerException)) Then
+            ToolkitScriptManager1.AsyncPostBackErrorMessage = e.Exception.InnerException.Message + "Ajax"
+        End If
+    End Sub
 End Class

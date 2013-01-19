@@ -112,7 +112,7 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 <asp:ImageButton SkinId="IBtnArchivoD" runat="server"  Height="32px" Width="32px" 
                         ImageUrl="~/images/2012/archivo.png"  />
                         
-<asp:ImageButton SkinId="BtnAprobar" runat="server" Height="32px" ImageUrl="~/images/Operaciones/Definitivo.png"
+<asp:ImageButton SkinId="BtnAprobar" runat="server" Height="32px" ImageUrl="~/images/2012/Validar.png"
                                  Width="32px" />
-<asp:ImageButton SkinId="BtnDesaprobar" runat="server" Height="32px" ImageUrl="~/images/Operaciones/tramite.png"
+<asp:ImageButton SkinId="BtnDesaprobar" runat="server" Height="32px" ImageUrl="~/images/2012/Revertir.png"
                                  Width="32px" />

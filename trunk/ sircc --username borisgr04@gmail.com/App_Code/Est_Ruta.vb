@@ -38,7 +38,7 @@ Public Class Est_Ruta
                 End If
                 Me.CrearComando(querystring)
             Else
-                querystring = "SELECT EST_INI, EST_FIN, NOM_EST FROM RUTAESTADOS WHERE (EST_INI In SELECT Est_Con FROM Contratos WHERE Cod_Con = :Cod_Con)"
+                querystring = "SELECT EST_INI, EST_FIN, NOM_EST FROM RUTAESTADOS WHERE EST_INI In (SELECT Est_Con FROM Contratos WHERE Cod_Con = :Cod_Con)"
                 Me.CrearComando(querystring)
                 AsignarParametroCadena(":Cod_Con", Cod_Con)
             End If

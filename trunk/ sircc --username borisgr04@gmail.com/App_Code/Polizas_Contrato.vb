@@ -124,11 +124,11 @@ Public Class Polizas_Contrato
     End Function
     
 
-    Public Function Insert(ByVal cod_con As String, ByVal cod_pol As String, ByVal cod_ase As String, ByVal nro_pol As String, ByVal val_pol As Long, ByVal fec_pol As Date, ByVal tip_pol As String) As String
+    Public Function Insert(ByVal cod_con As String, ByVal cod_pol As String, ByVal cod_ase As String, ByVal nro_pol As String, ByVal val_pol As Long, ByVal fec_pol As Date, ByVal tip_pol As String, ByVal FEC_INI As Date) As String
         Conectar()
         Try
             ComenzarTransaccion()
-            querystring = "INSERT INTO Polizas_Contrato(COD_CON,COD_POL,COD_ASE,VAL_POL,FEC_POL,NRO_POL,TIP_POL)VALUES(:COD_CON,TO_NUMBER(:COD_POL),TO_NUMBER(:COD_ASE),TO_NUMBER(:VAL_POL),TO_DATE(:FEC_POL,'dd/mm/yyyy'),:NRO_POL,:TIP_POL) "
+            querystring = "INSERT INTO Polizas_Contrato(COD_CON,COD_POL,COD_ASE,VAL_POL,FEC_POL,NRO_POL,TIP_POL,FEC_INI)VALUES(:COD_CON,TO_NUMBER(:COD_POL),TO_NUMBER(:COD_ASE),TO_NUMBER(:VAL_POL),TO_DATE(:FEC_POL,'dd/mm/yyyy'),:NRO_POL,:TIP_POL,TO_DATE(:FEC_INI,'dd/mm/yyyy')) "
             Me.CrearComando(querystring)
             AsignarParametroCadena(":COD_CON", cod_con)
             AsignarParametroCadena(":COD_POL", cod_pol)
@@ -137,7 +137,8 @@ Public Class Polizas_Contrato
             AsignarParametroCadena(":VAL_POL", val_pol)
             AsignarParametroCadena(":NRO_POL", nro_pol)
             AsignarParametroCadena(":TIP_POL", tip_pol)
-            'Throw New Exception(vComando.CommandText)
+            AsignarParametroCadena(":FEC_INI", FEC_INI)
+
             EjecutarComando()
             Msg = "Se Asignó Poliza a Contrato Nº" + cod_con
             ConfirmarTransaccion()

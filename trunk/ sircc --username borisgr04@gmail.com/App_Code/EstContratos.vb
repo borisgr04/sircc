@@ -116,6 +116,7 @@ Public Class EstContratos
         AsignarParametroCadena(":cod_con", cod)
         Return CInt(EjecutarEscalar())
     End Function
+   
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Protected Function GetEstByIdep(ByVal cod As String) As System.Data.DataTable
         Dim datat As New DataTable

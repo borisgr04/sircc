@@ -46,4 +46,5 @@ Public Class PanelSupervision
         Return dataTb
 
     End Function
+
 End Class

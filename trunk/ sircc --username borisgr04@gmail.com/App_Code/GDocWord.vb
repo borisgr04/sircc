@@ -43,6 +43,11 @@ Public Class GDocWord
             Return DocumentoWord
         End Get
     End Property
+    Public ReadOnly Property Documento_Base() As Byte()
+        Get
+            Return DocumentoBase
+        End Get
+    End Property
 #End Region
     Public lErrorG As Boolean = False
     Public Msg As String
@@ -53,17 +58,18 @@ Public Class GDocWord
     Public ClavePlantilla As String
     Public IdPlantilla As String
     'Variables de la Clase
-    Private NomTabla As String
-    Private ColTabla As Integer = 0
-    Private Tagrupada As String = "N"
-    Private Tgrupo As String = ""
-    Private oMissing As [Object] = System.Reflection.Missing.Value
-    Private PathPlantilla As String
-    Private PathNuevoDocumento As String
-    Private PathNuevoDocumentoPDF As String
-    Private PathCorrespondencia As String
-    Private DocumentoPdf As Byte()
-    Private DocumentoWord As Byte()
+    Protected NomTabla As String
+    Protected ColTabla As Integer = 0
+    Protected Tagrupada As String = "N"
+    Protected Tgrupo As String = ""
+    Protected oMissing As [Object] = System.Reflection.Missing.Value
+    Protected PathPlantilla As String
+    Protected PathNuevoDocumento As String
+    Protected PathNuevoDocumentoPDF As String
+    Protected PathCorrespondencia As String
+    Protected DocumentoPdf As Byte()
+    Protected DocumentoWord As Byte()
+    Protected DocumentoBase As Byte()
 
     Public Function CopiarDocumento(ByVal oPathPlantilla As String, ByVal oPathNuevoDocumento As String) As Boolean
         Dim ok As Boolean
@@ -77,13 +83,13 @@ Public Class GDocWord
         Return ok
     End Function
 
-    Private Function AbrirAplicacionWord() As MSWord.Application
+    Protected Function AbrirAplicacionWord() As MSWord.Application
         Dim oWord As MSWord.Application
         oWord = New MSWord.Application()
         Return oWord
     End Function
 
-    Private Sub CerrarAplicacionWord(ByRef oWord As MSWord.Application)
+    Protected Sub CerrarAplicacionWord(ByRef oWord As MSWord.Application)
         Try
             oWord.Application.Quit()
             oWord = Nothing
@@ -93,14 +99,14 @@ Public Class GDocWord
 
     End Sub
 
-    Private Function AbrirDocumentoWord(ByRef oWord As MSWord.Application) As MSWord._Document
+    Protected Function AbrirDocumentoWord(ByRef oWord As MSWord.Application) As MSWord._Document
         Dim oDoc As MSWord._Document
         oMissing = System.Reflection.Missing.Value
         oDoc = oWord.Documents.Open(PathPlantilla, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing)
         Return oDoc
     End Function
 
-    Private Sub ProtegerDocumento(ByRef oDoc As MSWord._Document, ByVal proteger As Boolean)
+    Protected Sub ProtegerDocumento(ByRef oDoc As MSWord._Document, ByVal proteger As Boolean)
         If DocProtegido Then
             If proteger Then
                 oDoc.Protect(Type:=MSWord.WdProtectionType.wdAllowOnlyReading, Password:=ClavePlantilla)
@@ -110,14 +116,14 @@ Public Class GDocWord
         End If
     End Sub
 
-    Private Sub Remplazar(ByRef oWord As MSWord.Application, ByVal oBuscar As String)
+    Protected Sub Remplazar(ByRef oWord As MSWord.Application, ByVal oBuscar As String)
         Dim replaceAll As Object = MSWord.WdReplace.wdReplaceAll
         oWord.Selection.Find.ClearFormatting()
         oWord.Selection.Find.Text = oBuscar
         oWord.Selection.Find.Replacement.ClearFormatting()
     End Sub
 
-    Private Sub CrearTabla(ByRef oWord As MSWord.Application, ByRef oDoc As MSWord._Document, ByVal dtValoresTabla As DataTable, ByVal MostrarHeader As Boolean, ByVal MostrarBorde As Boolean)
+    Protected Overridable Sub CrearTabla(ByRef oWord As MSWord.Application, ByRef oDoc As MSWord._Document, ByVal dtValoresTabla As DataTable, ByVal MostrarHeader As Boolean, ByVal MostrarBorde As Boolean)
         Dim oTable As MSWord.Table
         Dim wrdRng As MSWord.Range = oWord.Selection.Range()
         Dim Cols As Integer
@@ -145,14 +151,14 @@ Public Class GDocWord
 
         oTable = oDoc.Tables.Add(wrdRng, Fila + nuevaFila + (dtFiltro.Rows.Count * 2), Cols, oMissing, oMissing)
 
-        Dim oPlantilla As New Pplantillas
+        Dim oPlantilla As New PPlantillas
         Dim dtConcepto As DataTable
         Dim dtConsulta As New DataTable
         dtConsulta = oPlantilla.GetFormatoTabla(NomTabla, IdPlantilla)
 
         For c = 1 To Cols
             If MostrarHeader Then
-                oTable.Cell(1, c).Range.Text = UCase(dtValoresTabla.Columns(c - 1).ColumnName)
+                oTable.Cell(1, c).Range.Text = dtValoresTabla.Columns(c - 1).ColumnName
                 oTable.Cell(1, c).Range.Font.Bold = True
                 oTable.Cell(1, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphCenter
             End If
@@ -197,6 +203,7 @@ Public Class GDocWord
                         oTable.Cell(f + 1 + nuevaFila, c).Range.Text = valor
                     End If
                 Else
+                    oTable.Cell(f + 1 + nuevaFila, c).Range.Font.Bold = False
                     oTable.Cell(f + 1 + nuevaFila, c).Range.Text = valor
                 End If
             Next
@@ -205,7 +212,7 @@ Public Class GDocWord
     End Sub
 
 
-    Private Sub CrearTablaV(ByRef oWord As MSWord.Application, ByRef oDoc As MSWord._Document, ByVal dtValoresTabla As DataTable, ByVal MostrarHeader As Boolean, ByVal MostrarBorde As Boolean)
+    Protected Sub CrearTablaV(ByRef oWord As MSWord.Application, ByRef oDoc As MSWord._Document, ByVal dtValoresTabla As DataTable, ByVal MostrarHeader As Boolean, ByVal MostrarBorde As Boolean)
 
         Dim wrdRng As MSWord.Range = oWord.Selection.Range()
         Dim Cols As Integer
@@ -240,7 +247,7 @@ Public Class GDocWord
             Dim dtConcepto As DataTable
             Dim dtConsulta As New DataTable
             dtConsulta = oPlantilla.GetFormatoTabla(NomTabla, IdPlantilla)
-            
+
             'Llenar Tabla
             Dim tipoDato As String
             'Cargar Formato de Tabla
@@ -296,7 +303,7 @@ Public Class GDocWord
 
     End Sub
 
-    Private Function CreaPlantillaTemporal(ByVal DocByte As [Byte]()) As String
+    Protected Function CreaPlantillaTemporal(ByVal DocByte As [Byte]()) As String
 
         PathPlantilla = Path.ChangeExtension(Path.GetTempFileName(), ".doc")
         PathNuevoDocumento = Path.ChangeExtension(Path.GetTempFileName(), ".doc")
@@ -523,7 +530,7 @@ Public Class GDocWord
         Return b
     End Function
 
-    Private Function CrearBDCorrespondencia(ByRef oWrdDoc As MSWord._Document, ByRef oWrdApp As MSWord.Application, ByVal dtConfiguracion As DataTable, ByVal dtDatosImprimir As DataTable) As String
+    Protected Function CrearBDCorrespondencia(ByRef oWrdDoc As MSWord._Document, ByRef oWrdApp As MSWord.Application, ByVal dtConfiguracion As DataTable, ByVal dtDatosImprimir As DataTable) As String
 
         Dim k As Integer
         Dim Campos As String
@@ -570,13 +577,13 @@ Public Class GDocWord
         Return PathTemporal
     End Function
 
-    Private Sub FillRow(ByVal Doc As MSWord._Document, ByVal Row As Integer, ByVal Lista As List(Of String))
+    Protected Sub FillRow(ByVal Doc As MSWord._Document, ByVal Row As Integer, ByVal Lista As List(Of String))
         ' Inserta el dato en una Celda Especifica.
         For i As Integer = 0 To Lista.Count - 1
             Doc.Tables.Item(1).Cell(Row, i + 1).Range.InsertAfter(Lista(i))
         Next
     End Sub
-    Private Sub EsTabla(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
+    Protected Sub EsTabla(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
         Dim i As Integer
         i = posicion
 
@@ -633,8 +640,8 @@ Public Class GDocWord
         End If
 
     End Sub
-   
-    Private Sub EsTablaV(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
+
+    Protected Sub EsTablaV(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
         Dim i As Integer
         i = posicion
 
@@ -693,7 +700,7 @@ Public Class GDocWord
 
     End Sub
 
-    Private Sub EsImagen(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
+    Protected Sub EsImagen(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
         Dim i As Integer = posicion
         Dim nom_Pla As String = dtConfiguracion.Rows(i)("NOM_PLA").ToString.Trim
         Dim Nom_Campo As String = dtConfiguracion.Rows(i)("NOM_CAM").ToString
@@ -729,7 +736,7 @@ Public Class GDocWord
 
     End Sub
 
-    Private Sub EsOtroCaso(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
+    Protected Sub EsOtroCaso(ByRef oWrdApp As MSWord.Application, ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
         Dim i As Integer = posicion
 
 
@@ -737,7 +744,7 @@ Public Class GDocWord
         Dim nom_Pla As String = dtConfiguracion.Rows(i)("NOM_PLA").ToString.Trim.ToUpper()
         Dim Nom_Campo As String = dtConfiguracion.Rows(i)("NOM_CAM").ToString
         Dim Tip_Dato As String = dtConfiguracion.Rows(i)("TIP_DAT").ToString
-        
+
         If (dtDatosImprimir.Columns.Contains(Nom_Campo)) Then
             Remplazar(oWrdApp, "{" + nom_Pla + "}")
             Dim strRemp As String = FormatearCampo(dtDatosImprimir.Rows(0)(Nom_Campo).ToString, Tip_Dato)
@@ -749,7 +756,7 @@ Public Class GDocWord
         End If
     End Sub
 
-    Private Sub EsMarcadorImagen(ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
+    Protected Sub EsMarcadorImagen(ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
         Dim j As Integer = 1
         Dim Nom_Mark As String
         Dim i As Integer = posicion
@@ -768,7 +775,7 @@ Public Class GDocWord
         Loop
     End Sub
 
-    Private Sub EsMarcadorOtroCaso(ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
+    Protected Sub EsMarcadorOtroCaso(ByRef oWrdDoc As MSWord._Document, ByRef dtDatosImprimir As DataTable, ByRef dtConfiguracion As DataTable, ByVal posicion As Integer)
         Dim i As Integer = posicion
         Dim nom_Pla As String = dtConfiguracion.Rows(i)("NOM_PLA").ToString.Trim
         Dim Nom_Campo As String = dtConfiguracion.Rows(i)("NOM_CAM").ToString
@@ -785,7 +792,7 @@ Public Class GDocWord
         Loop
     End Sub
 
-    Private Function FormatearCampo(ByVal Valor As String, ByVal Tipo As String) As String
+    Protected Function FormatearCampo(ByVal Valor As String, ByVal Tipo As String) As String
         Dim Ret As String = Valor
         Msg = Msg + " formateando "
         If Not String.IsNullOrEmpty(Valor) Then

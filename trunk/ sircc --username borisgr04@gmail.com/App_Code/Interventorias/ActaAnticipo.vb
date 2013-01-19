@@ -5,8 +5,20 @@ Imports System.Data
 
 
 Public Class ActaAnticipo
+    Inherits ActasSupervision
 
-    Inherits EstContratos
+    Sub New()
+        'Estado Final que genera el Documento
+        Me.Est_Fin = "08"
+
+        ''Para Manejo de Tbla de Item de Anticipo
+        Me.Tabla = "INTANT_CONT"
+        Me.Vista = "VINTANT_CONT" ' where estado="AC"
+        Me.VistaDB = "VINTANT_CONTDB" ' sin filtro
+
+
+    End Sub
+
     <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
     Public Overloads Function Insert(ByVal cod_con As String, ByVal est_ini As String, ByVal est_fin As String, ByVal fec_ent As Date, ByVal obs As String, ByVal val_pago As Decimal) As String
 
@@ -39,7 +51,7 @@ Public Class ActaAnticipo
             Return Msg
             Exit Function
         End If
-        
+
         ' VALIDACION DE FECHA DE SUSCRIPCION
         tbCon = Me.GetEstByIdep(cod_con)
         If tbCon.Rows.Count > 0 Then
@@ -100,19 +112,29 @@ Public Class ActaAnticipo
     Public Overloads Function Update(ByVal ID As String, ByVal fec_ent As Date, ByVal Obs As String, ByVal val_pago As Decimal) As String
         Return Me.Update(ID, fec_ent, Obs, val_pago, 0, 0)
     End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetIdbyCod_con(ByVal cod_con As String) As String
+        Dim id_cont1 As String
+        Me.Conectar()
+        querystring = "SELECT MAX(ID) as ID FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":cod_con", cod_con)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        id_cont1 = dataTb.Rows(0)("ID")
+        Me.Desconectar()
+        Return id_cont1
+    End Function
+
+#Region "Región de Items Plan del Anticipo"
+
     Dim mID_CONT As Long
     Dim mCOD_INVAN As String
     Dim mVAL_INVAN As Long
     Dim mVPORCENT As Decimal
     Dim mEST_INVAN_CONT As String
 
-    Sub New()
-        Me.Tabla = "INTANT_CONT"
-        Me.Vista = "VINTANT_CONT" ' where estado="AC"
-        Me.VistaDB = "VINTANT_CONTDB" ' sin filtro
-
-
-    End Sub
+  
     Public Property ID_CONT As Long
         Get
             Return mID_CONT
@@ -299,18 +321,6 @@ Public Class ActaAnticipo
     End Function
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Overloads Function GetIdbyCod_con(ByVal cod_con As String) As String
-        Dim id_cont1 As String
-        Me.Conectar()
-        querystring = "SELECT MAX(ID) as ID FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
-        Me.CrearComando(querystring)
-        AsignarParametroCadena(":cod_con", cod_con)
-        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
-        id_cont1 = dataTb.Rows(0)("ID")
-        Me.Desconectar()
-        Return id_cont1
-    End Function
-    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetSUMbyPkI(ByVal ID As String) As Long
         Me.Conectar()
         querystring = "SELECT Nvl(SUM(VAL_INVAN),0) as SVAL_INVAN FROM " + Me.Vista + " Where ID_CONT=" + ID + " and EST_INVAN_CONT='AC'"
@@ -335,18 +345,11 @@ Public Class ActaAnticipo
         Try
             querystring = "UPDATE INTANT_CONT SET VPORCENT=:VPORCENT "
             querystring += "WHERE ID_CONT=:PK1 AND COD_INVAN=:PK2"
-
             Me.CrearComando(querystring)
-
-
-
             Me.AsignarParametroEntero(":PK1", PK1)
             Me.AsignarParametroEntero(":PK2", PK2)
             Me.AsignarParametroDecimal(":VPORCENT", VPORCENT1)
-
-
             Me.num_reg = Me.EjecutarComando()
-
             Me.Msg = Me.MsgOk
             lErrorG = False
         Catch ex As Exception
@@ -359,88 +362,10 @@ Public Class ActaAnticipo
         Return Msg
     End Function
 
-    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Function GetValFecha(ByVal cod_con As String, ByVal fec_ent As Date) As Boolean
 
-        Dim tbcon As DataTable
-        Dim fecentant As Date
-        Dim ERRORv As Boolean
-        tbcon = Me.GetEstByIde1(cod_con)
-        If tbcon.Rows.Count > 0 Then
-            fecentant = CDate(tbcon.Rows(0)("fec_ent").ToString)
-            If fecentant > fec_ent Then
-                Me.Msg = "La Fecha del Acta debe ser mayor a la Fecha del Acta Anterior :" + fecentant.ToShortDateString
+#End Region
 
-                ERRORv = True
-
-            Else
-                ERRORv = False
-
-            End If
-
-        End If
-        Return ERRORv
-    End Function
-
-    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Function GetEstByIde1(ByVal cod As String) As System.Data.DataTable
-        Me.Conectar()
-        Dim datat As New DataTable
-        querystring = "select * from estcontratos where cod_con =:cod_con and estado<>'AN' Order By Id Desc"
-        CrearComando(querystring)
-        AsignarParametroCadena(":cod_con", cod)
-        datat = EjecutarConsultaDataTable()
-        Me.Desconectar()
-
-        Return datat
-    End Function
-    <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
-    Public Function ValActaEstado(ByVal ID As String) As String
-        Me.Conectar()
-        Try
-
-            querystring = "UPDATE EstContratos SET estado='AC' WHERE ID=:ID"
-            CrearComando(querystring)
-            AsignarParametroCadena(":ID", ID)
-            EjecutarComando()
-
-
-            num_reg = EjecutarComando()
-            Msg = "Se Validó el registro del Acta  ID [" + ID + "]"
-
-            Msg = MsgOk + "<br>" + Msg
-            lErrorG = False
-        Catch ex As Exception
-
-            Msg = ex.Message
-            lErrorG = True
-        Finally
-            Desconectar()
-        End Try
-        Return Msg
-
-    End Function
-    <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
-    Public Function RevActaEstado(ByVal ID As String) As String
-        Me.Conectar()
-        Try
-            querystring = "UPDATE EstContratos SET estado='BO' WHERE ID=:ID"
-            CrearComando(querystring)
-            AsignarParametroCadena(":ID", ID)
-            EjecutarComando()
-            num_reg = EjecutarComando()
-            Msg = "Se Validó el registro del Acta  ID [" + ID + "]"
-            Msg = MsgOk + "<br>" + Msg
-            lErrorG = False
-        Catch ex As Exception
-            Msg = ex.Message
-            lErrorG = True
-        Finally
-            Desconectar()
-        End Try
-        Return Msg
-
-    End Function
+    
 End Class
 
 
