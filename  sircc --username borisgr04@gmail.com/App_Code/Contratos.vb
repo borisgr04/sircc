@@ -530,7 +530,6 @@ Public Class Contratos
     Public Overloads Function GetByPkDelegada(ByVal Cod_Con As String) As DataTable
             Return GetByPkD(Cod_Con)
     End Function
-
     ''' <summary>
     ''' Consulta de contratos por llave primaria, filtrando por dependencia necesidad asociada.
     ''' </summary>
@@ -542,6 +541,7 @@ Public Class Contratos
         Me.NroCon = Cod_Con
         Me.Conectar()
         querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con And Dep_Con In (SELECT cod_dep FROM vdepter WHERE ide_ter_abo=:ide_ter_abo ) "
+
         Me.CrearComando(querystring)
         AsignarParametroCadena(":cod_con", Cod_Con)
         Me.AsignarParametroCadena(":ide_ter_abo", Me.usuario)
@@ -577,9 +577,8 @@ Public Class Contratos
     ''' <remarks></remarks>
     Function GetByIde(ByVal Cod_Con As String) As DataTable
         'VCONTRATOSC_A2
-        querystring = "SELECT * FROM VContratosC2 Where numero =:cod_con"
-        querystring = "SELECT * FROM VCONTRATOSC_A2 Where numero =:cod_con"
         querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con"
+
         Me.CrearComando(querystring)
         AsignarParametroCadena(":cod_con", Cod_Con)
         Return EjecutarConsultaDataTable()
@@ -589,6 +588,7 @@ Public Class Contratos
         Me.NroCon = Cod_Con
         Me.Conectar()
         querystring = "SELECT * FROM VCONTRATOSC_A2 Where numero =:cod_con and Encargado=:Encargado"
+
         Me.CrearComando(querystring)
         AsignarParametroCadena(":cod_con", Cod_Con)
         AsignarParametroCadena(":Encargado", Me.usuario)

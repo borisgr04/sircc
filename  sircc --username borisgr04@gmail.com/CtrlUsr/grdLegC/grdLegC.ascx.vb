@@ -49,17 +49,6 @@ Partial Class CtrlUsr_grdLegC_grdLegC
         Return dt
     End Function
 
-    'Private Function Create_Table() As DataTable
-    '    Dim dt As DataTable = New DataTable
-    '    Dim column As DataColumn = New DataColumn
-    '    dt.Columns.Add("Nro_Cdp", Type.GetType("System.Int32"))
-    '    dt.Columns.Add("Fec_Cdp", Type.GetType("System.DateTime"))
-    '    dt.Columns.Add("Val_Cdp", Type.GetType("System.Decimal"))
-    '    dt.AcceptChanges()
-    '    Me.Tabla_Vacia = True
-    '    Return dt
-    'End Function
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
             Me.Limpiar()
@@ -91,45 +80,21 @@ Partial Class CtrlUsr_grdLegC_grdLegC
 
     End Sub
 
-    Protected Sub RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grd.RowCommand
-        'If e.CommandName.Equals("AddNew") Then
-        '    Dim txtNewIde_Int As TextBox = DirectCast(grd.FooterRow.FindControl("txtNewIde_Int"), TextBox)
-        '    Dim TxtnewObs_Int As TextBox = DirectCast(grd.FooterRow.FindControl("txtNewObs_Int"), TextBox)
-        '    Dim cboNewEst_Int As DropDownList = DirectCast(grd.FooterRow.FindControl("CboNewEst_Int"), DropDownList)
-        '    Dim CboNewTip_Int As DropDownList = DirectCast(grd.FooterRow.FindControl("CboNewTip_Int"), DropDownList)
-        '    Me.MsgResult.Text = obj.Insert(Me.Cod_Con, txtNewIde_Int.Text, cboNewEst_Int.SelectedValue, TxtnewObs_Int.Text, CboNewTip_Int.SelectedValue)
-        '    LlenarGrid()
-        'End If
-    End Sub
 
     Protected Sub RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grd.RowDataBound
 
     End Sub
 
-    Protected Sub RowDeleting(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewDeleteEventArgs) Handles grd.RowDeleting
-
-        'Dim Ide_Int As String = Me.grd.DataKeys(e.RowIndex).Values(0).ToString()
-
-        'Me.MsgResult.Text = obj.Delete(Me.Cod_Con, Ide_Int)
-        'If obj.lErrorG = True Then
-        '    Me.MsgResult.Font.Bold = True
-        'Else
-        '    Me.MsgResult.Font.Bold = False
-        'End If
-        'grd.EditIndex = -1
-
-        'LlenarGrid()
-    End Sub
-
     Protected Sub RowUpdating(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewUpdateEventArgs) Handles grd.RowUpdating
         Dim obj As New DContratos
         Dim txtEditFec_Apr_Pol As TextBox = DirectCast(grd.Rows(e.RowIndex).FindControl("txtEditFec_Apr_Pol"), TextBox)
+        Dim txtEditRes_Apr_Pol As TextBox = DirectCast(grd.Rows(e.RowIndex).FindControl("txtEditRes_Apr_Pol"), TextBox)
         Dim CboEditLegalizado As DropDownList = DirectCast(grd.Rows(e.RowIndex).FindControl("CboEditLegalizado"), DropDownList)
         Dim lbEditTipo As Label = DirectCast(grd.Rows(e.RowIndex).FindControl("lbEditTipo"), Label)
         Dim CboExPol As DropDownList = DirectCast(grd.Rows(e.RowIndex).FindControl("CboExPol"), DropDownList)
         Dim Docu As String = Me.grd.DataKeys(e.RowIndex).Values(0).ToString()
         If IsDate(txtEditFec_Apr_Pol.Text) Then
-            Me.MsgResult.Text = obj.Update(Docu, CDate(txtEditFec_Apr_Pol.Text), CboEditLegalizado.SelectedValue, lbEditTipo.Text, Me.Proceso, Me.Grupo, CboExPol.SelectedValue)
+            Me.MsgResult.Text = obj.Update(Docu, CDate(txtEditFec_Apr_Pol.Text), CboEditLegalizado.SelectedValue, lbEditTipo.Text, Me.Proceso, Me.Grupo, CboExPol.SelectedValue, txtEditRes_Apr_Pol.Text)
             MsgBox(MsgResult, obj.lErrorG)
             Me.grd.EditIndex = -1
             LlenarGrid()

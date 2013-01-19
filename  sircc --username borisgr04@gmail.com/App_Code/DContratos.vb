@@ -41,7 +41,7 @@ Public Class DContratos
         Me.Desconectar()
         Return dataTb
     End Function
-    Public Function Update(ByVal Documento As String, ByVal Fec_Apr_Pol As Date, ByVal Legalizado As String, ByVal Tipo As String, ByVal Proceso As String, ByVal grupo As String, ByVal Exenpol As String) As String
+    Public Function Update(ByVal Documento As String, ByVal Fec_Apr_Pol As Date, ByVal Legalizado As String, ByVal Tipo As String, ByVal Proceso As String, ByVal grupo As String, ByVal Exenpol As String, ByVal Res_Apr_Pol As String) As String
         Me.Conectar()
         Try
             Me.ComenzarTransaccion()
@@ -50,11 +50,12 @@ Public Class DContratos
                 If CInt(Me.NumPol) > 0 Then
                     Throw New Exception("No se han diligenciado todas la Polizas requeridas para la legalizacion del contrato")
                 End If
-                querystring = " UPDATE CONTRATOS SET Fec_Apr_Pol=To_Date(:Fec_Apr_Pol,'dd/mm/yyyy'), Legalizado=:Legalizado, ExenPol=:ExenPol WHERE Cod_Con=:Documento"
+                querystring = " UPDATE CONTRATOS SET Res_Apr_Pol=:Res_Apr_Pol,Fec_Apr_Pol=To_Date(:Fec_Apr_Pol,'dd/mm/yyyy'), Legalizado=:Legalizado, ExenPol=:ExenPol WHERE Cod_Con=:Documento"
             ElseIf Tipo = "ADICIONES" Then
-                querystring = " UPDATE ADICIONES SET Fec_Apr_Pol=To_Date(:Fec_Apr_Pol,'dd/mm/yyyy'), Legalizado=:Legalizado, ExenPol=:ExenPol WHERE Nro_Adi=:Documento"
+                querystring = " UPDATE ADICIONES SET Res_Apr_Pol=:Res_Apr_Pol,Fec_Apr_Pol=To_Date(:Fec_Apr_Pol,'dd/mm/yyyy'), Legalizado=:Legalizado, ExenPol=:ExenPol WHERE Nro_Adi=:Documento"
             End If
             Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":Res_Apr_Pol", Res_Apr_Pol)
             Me.AsignarParametroCadena(":Fec_Apr_Pol", Fec_Apr_Pol)
             Me.AsignarParametroCadena(":Legalizado", Legalizado)
             Me.AsignarParametroCadena(":Documento", Documento)
@@ -68,7 +69,6 @@ Public Class DContratos
             Me.CancelarTransaccion()
             Me.lErrorG = True
         Finally
-            'Me.Msg = Me._Comando.CommandText
             Me.Desconectar()
         End Try
         Return Msg

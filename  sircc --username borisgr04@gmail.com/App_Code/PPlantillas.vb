@@ -531,7 +531,7 @@ Public Class PPlantillas
         CrearComando(querystring)
         AsignarParametroCadena(":IDE_PLA", idPlantilla)
         AsignarParametroCadena(":NTABLA", nomTabla)
-        AsignarParametroCadena(":NOM_CAM", NomCampo)
+        AsignarParametroCadena(":NOM_CAM", NomCampo.ToUpper)
         Dim dataTb As DataTable = EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataTb

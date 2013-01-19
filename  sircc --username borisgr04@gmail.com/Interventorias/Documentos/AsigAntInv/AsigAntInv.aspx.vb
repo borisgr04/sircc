@@ -99,7 +99,6 @@ Partial Class Contratos_GesContratos_Default
             hdCodCon.Value = Request("Cod_Con")
             Me.Oper = Request("Oper")
             Me.NoID = Request("NoID")
-            Me.DtPCon.DataBind()
             Me.grdInformes.Visible = False
             mostrarDatos()
             If Me.Oper = "Editar" Then
@@ -137,7 +136,7 @@ Partial Class Contratos_GesContratos_Default
             LbEst1.Visible = False
             ' BtnNuevo.Enabled = False
             IBtnGuardar.Enabled = True
-            lBtnCancelar.Enabled = True
+
             Me.Oper = "Nuevo"
             ' Me.CboEstSig.Visible = True
         End If
@@ -148,11 +147,11 @@ Partial Class Contratos_GesContratos_Default
         txtObs.Enabled = v
         TxtNoDocumento.Enabled = False
         TxtValPago.Enabled = v
-        lBtnCancelar.Enabled = v
+
         PnlPIA.Enabled = v
         IBtnGuardar.Enabled = v
         IBtnGuardar.CssClass = cssEnabled(v)
-        lBtnCancelar.CssClass = cssEnabled(v)
+
         
     End Sub
     Protected Sub llenar_GRid2(ByVal ConId As String)
@@ -174,9 +173,11 @@ Partial Class Contratos_GesContratos_Default
         Me.Habilitar(False)
         llenar_GRid2(Me.NoID)
         '' Me.BtnNuevo.Enabled = True
-        'Redireccionar_Pagina("/Interventorias/Documentos/Inicio/Gest_Inicio.aspx")
+        VolverPanel()
     End Sub
-
+    Sub VolverPanel()
+        Redireccionar_Pagina(RutasPag.GetInstance.GetRuta("00"))
+    End Sub
     
     Sub EnableValidar(ByVal v As Boolean)
         Me.IBtnValidar.Enabled = v
@@ -196,12 +197,16 @@ Partial Class Contratos_GesContratos_Default
         EnableValidar(False)
         Dim v As New ActaAnticipo
         Me.Panel1.Visible = False
-        Dim c As New Contratos
-        Dim dt As DataTable = c.GetByPkF(hdCodCon.Value)
+        Dim dt As DataTable = v.GetByPkS(hdCodCon.Value)
         If dt.Rows.Count > 0 Then
             Me.DtPCon.DataSource = dt
             Me.DtPCon.DataBind()
             Me.Panel1.Visible = True
+            Dim fs As New Date
+            Dim Docfs As String = ""
+            v.FechaSugerida(hdCodCon.Value, fs, Docfs)
+            LbFS.Text = fs
+            LbDocFS.text = Docfs
             Me.Habilitar(True)
             If (Me.Oper = "Nuevo") Then
                 If dt.Rows(0)("Est_Con").ToString <> "09" Then
@@ -219,7 +224,7 @@ Partial Class Contratos_GesContratos_Default
   
     Public Sub Editar(ByVal Index As String)
         Me.Oper = "Editar"
-        Dim Obj As EstContratos = New EstContratos()
+        Dim Obj As ActaAnticipo = New ActaAnticipo()
         Dim dt As DataTable = Obj.GetbyPk(Index)
         If dt.Rows.Count > 0 Then
             MsgResult.Text = "Editando Registro"
@@ -236,13 +241,16 @@ Partial Class Contratos_GesContratos_Default
                 Habilitar(True)
                 EnableRevertir(False)
                 EnableValidar(True)
-                
             Else
                 Habilitar(False)
-                
-                EnableRevertir(True)
                 EnableValidar(False)
-                MsgResult.Text = "El Documento esta Activo, debe Desaprobarlo para Editarlo..."
+                If Obj.GetEsUlt(Me.NoID) Then
+                    EnableRevertir(True)
+                    MsgResult.Text = "El Documento esta Activo, debe Desaprobarlo para Editarlo..."
+                Else
+                    EnableRevertir(False)
+                    MsgResult.Text = "El Documento No es Ultimo Documento Activo. No Puede Revertirse "
+                End If
                 MsgBoxAlert(MsgResult, False)
             End If
         Else
@@ -299,8 +307,6 @@ Partial Class Contratos_GesContratos_Default
                         MsgResult2.Text = ex.Message
                         MsgBox(MsgResult2, True)
                     End Try
-
-
                 End If
 
 
@@ -473,29 +479,16 @@ Partial Class Contratos_GesContratos_Default
 
     End Sub
 
-    Protected Sub lBtnCancelar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles lBtnCancelar.Click
-        Cancelar()
-    End Sub
 
     Protected Sub lBtnGenerar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles lBtnGenerar.Click
         Dim npa As New genPlanAnticipos
-        MsgResult.Text = npa.GenActa(hdCodCon.Value)
-        MsgBoxError(MsgResult, npa.lErrorG)
-        If Not npa.lErrorG Then
-            Response.AddHeader("content-disposition", "attachment; filename=" + hdCodCon.Value + "_" + Me.NoID + ".pdf")
-            Response.BinaryWrite(npa.Doc_PDF)
-        End If
-
-        
-
+        MsgBoxLimpiar(MsgResult)
+        MsgResult.Text = npa.GenActa(hdCodCon.Value, CboPlantilla.SelectedValue, Me.TxtNoDocumento.Text)
+        MsgBox(MsgResult, npa.lErrorG)
     End Sub
 
     Protected Sub lBtnAtras_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles lBtnAtras.Click
-        Redireccionar_Pagina("/Interventorias/PanelSupervision/PanelSupervision.aspx")
-    End Sub
-
-    Protected Sub DtPCon_PageIndexChanging(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DetailsViewPageEventArgs) Handles DtPCon.PageIndexChanging
-
+        VolverPanel()
     End Sub
 
     Protected Sub IBtnValidar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnValidar.Click
@@ -538,5 +531,11 @@ Partial Class Contratos_GesContratos_Default
         Me.grdInformes.Visible = True
         Me.MsgBox(MsgResult, Obj.lErrorG)
         mostrarDatos()
+    End Sub
+
+    Protected Sub IBtnVerDoc_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnVerDoc.Click
+        If Not String.IsNullOrEmpty(TxtNoDocumento.Text) Then
+            Redireccionar_Pagina("/ashx/VerActas.ashx?Ide_Acta=" + TxtNoDocumento.Text)
+        End If
     End Sub
 End Class

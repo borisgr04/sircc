@@ -22,6 +22,14 @@
                                             </ajaxToolkit:CalendarExtender>
                                         </EditItemTemplate>
                                     </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="N° RESOLUCIÓN ">
+                                        <ItemTemplate>
+                                            <asp:Label ID="LbRes_Apr_Pol" runat="server" Text='<%# Bind("RES_APR_POL") %>'></asp:Label>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                        <asp:TextBox ID="txtEditRes_Apr_Pol" runat="server"  Text='<%# Bind("RES_APR_POL") %>'></asp:TextBox>
+                                        </EditItemTemplate>
+                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="LEGALIZADO">
                                         <ItemTemplate>
                                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("LEGALIZADO") %>'></asp:Label>
@@ -55,6 +63,8 @@
                                         </asp:dropdownlist>
                                         </EditItemTemplate>
                                      </asp:TemplateField>
+
+
                                         
                                      <asp:TemplateField ShowHeader="False">
                                          <EditItemTemplate>

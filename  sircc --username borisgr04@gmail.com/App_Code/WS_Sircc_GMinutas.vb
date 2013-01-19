@@ -38,8 +38,7 @@ Public Class WS_Sircc_GMinutas
         Dim p As New PPlantillas
         Return p.GetPlantillasDoc()
     End Function
-    '
-
+    
     <WebMethod(Description:="Devuelve, Tabla con Campos a Cruzar en las Plantilla ")> _
     Public Function GetCamposPla(ByVal Vista As String) As DataTable
         Dim p As New PPlantillas_Campos
@@ -337,11 +336,68 @@ Public Class WS_Sircc_GMinutas
         Return obj.GetPlantillabyPK(id_pla, plantilla)
     End Function
 
-    <WebMethod(Description:="Devuelve, de forma encriptado con TSHAK")> _
-    Public Function Encript(ByVal Variable As String, ByVal Valor As String) As String
-        Dim querystringSeguro As New TSHAK.Components.SecureQueryString(New Byte() {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 8})
-        querystringSeguro(Variable) = Valor
-        Return HttpUtility.UrlEncode(querystringSeguro.ToString())
+    '<WebMethod(Description:="Devuelve, de forma encriptado con TSHAK")> _
+    'Public Function Encript(ByVal Variable As String, ByVal Valor As String) As String
+    '    Dim querystringSeguro As New TSHAK.Components.SecureQueryString(New Byte() {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 8})
+    '    querystringSeguro(Variable) = Valor
+    '    Return HttpUtility.UrlEncode(querystringSeguro.ToString())
+    'End Function
+
+    <WebMethod(Description:="Devuelve, Datos de Formato a Nivel de Campo")> _
+    Public Function GetFormatoTablaCampos(ByVal nomTabla As String, ByVal idPlantilla As String, ByVal NomCampo As String) As DataTable
+        Dim oPlantilla As New PPlantillas
+        Return oPlantilla.GetFormatoTabla(nomTabla, idPlantilla, NomCampo)
+    End Function
+
+    <WebMethod(Description:="Devuelve, Formato a Nivel de Tabla")> _
+    Public Function GetFormatoTabla(ByVal nomTabla As String, ByVal idPlantilla As String) As DataTable
+        Dim oPlantilla As New PPlantillas
+        Return oPlantilla.GetFormatoTabla(nomTabla, idPlantilla)
     End Function
 #End Region
+
+#Region "Plan Inversion Anticpo"
+    <WebMethod(Description:="Devuelve, Datos ppales del Plan de Inversion del Anticipo")> _
+    Public Overloads Function GetDatosPpales(ByVal Cod_Con As String) As DataTable
+        Dim gpa As New genPlanAnticipos
+        Return gpa.GetDatosPpalesP(Cod_Con)
+    End Function
+    <WebMethod(Description:="Devuelve, Datos de Polizas")> _
+    Public Overloads Function GetPolizas(ByVal Cod_Con As String) As DataTable
+        Dim gpa As New genPlanAnticipos
+        Return gpa.GetPolizasP(Cod_Con)
+    End Function
+    <WebMethod(Description:="Devuelve, Datos de Rp")> _
+    Public Overloads Function GetRp(ByVal Cod_Con As String) As DataTable
+        Dim gpa As New genPlanAnticipos
+        Return gpa.GetRpP(Cod_Con)
+    End Function
+    <WebMethod(Description:="Devuelve, Datos de CDP")> _
+    Public Overloads Function GetCdp(ByVal Cod_Con As String) As DataTable
+        Dim gpa As New genPlanAnticipos
+        Return gpa.GetCdpP(Cod_Con)
+    End Function
+    <WebMethod(Description:="Devuelve, Datos de Rubros")> _
+    Public Overloads Function GetRubros(ByVal Cod_Con As String) As DataTable
+        Dim gpa As New genPlanAnticipos
+        Return gpa.GetCdpP(Cod_Con)
+    End Function
+    <WebMethod(Description:="Devuelve, Plan de Inversion del Anticipo")> _
+    Public Overloads Function GetPlanAnticipo(ByVal Noid1 As String) As DataTable
+        Dim gpa As New genPlanAnticipos
+        Return gpa.GetPlanAnticipoP(Noid1)
+    End Function
+    <WebMethod(Description:="Devuelve, Id del Contrato")> _
+    Public Overloads Function GetIdbyCod_con(ByVal cod_con As String) As String
+        Dim gpa As New genPlanAnticipos
+        Return gpa.GetIdbyCod_con(cod_con)
+    End Function
+
+    <WebMethod(Description:="Devuelve, Plantlla por ID ")> _
+    Public Function GetPorIde(ByVal Id As String) As DataTable
+        Dim p As New PPlantillas
+        Return p.GetPorIde(Id)
+    End Function
+#End Region
+
 End Class
