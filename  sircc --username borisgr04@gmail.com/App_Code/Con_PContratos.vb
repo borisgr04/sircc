@@ -128,11 +128,17 @@ Public Class Con_PContratos
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetMisProcbyEstado(ByVal Nom_Est As String) As DataTable
-        Dim queryString As String = "SELECT * FROM " + Vista + " Where Nom_Est=:Nom_Est And usuencargado=:usuencargado"
         Me.Conectar()
-        Me.CrearComando(queryString)
-        Me.AsignarParametroCadena(":usuencargado", Me.usuario)
-        Me.AsignarParametroCadena(":Nom_Est", Nom_Est)
+        If String.IsNullOrEmpty(Nom_Est) Then
+            Dim queryString As String = "SELECT * FROM " + Vista + " Where usuencargado=:usuencargado"
+            Me.CrearComando(queryString)
+            Me.AsignarParametroCadena(":usuencargado", Me.usuario)
+        Else
+            Dim queryString As String = "SELECT * FROM " + Vista + " Where Nom_Est=:Nom_Est And usuencargado=:usuencargado"
+            Me.CrearComando(queryString)
+            Me.AsignarParametroCadena(":usuencargado", Me.usuario)
+            Me.AsignarParametroCadena(":Nom_Est", Nom_Est)
+        End If
         Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataSet

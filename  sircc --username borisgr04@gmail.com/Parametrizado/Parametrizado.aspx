@@ -38,7 +38,7 @@
     <ContentTemplate>
     
     
-<table style="background-color: lavender; width: 99%;" cellpadding="5" 
+<table style="width: 99%;" cellpadding="5" 
         cellspacing="5" rules="none">
         <tr>
             <td class="Titulos" colspan="4" style="text-align: center">

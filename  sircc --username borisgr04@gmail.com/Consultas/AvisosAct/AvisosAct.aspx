@@ -219,6 +219,9 @@
         HeaderText="Datos del Proceso" ImageUrl="~/images/Operaciones/Edit.png">
     <ItemStyle HorizontalAlign="Center" />
     </asp:ButtonField>
+    <asp:ButtonField ButtonType="Image" CommandName="documentos" 
+        HeaderText="Documentos" ImageUrl="~/images/2012/archivo.png" 
+        Text="Documentos Precontractuales" />
     <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="N° de Proceso" 
         SortExpression="Pro_Sel_Nro" />
     <asp:BoundField DataField="Nom_TProc" HeaderText="Tipo de Procesos" 

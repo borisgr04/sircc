@@ -10,7 +10,7 @@
             EnableScriptGlobalization="True">
         </ajaxToolkit:ToolkitScriptManager>
         <asp:Label ID="Label10" runat="server" CssClass="Titulo" 
-            Text="Recibir Solicitudes"></asp:Label>
+            Text="Solicitudes de Contratos a Cargo"></asp:Label>
 
         <br />
     <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
@@ -18,8 +18,7 @@
     <table style="width: 100%">
         <tr>
             <td colspan="8">
-                <asp:Label ID="Label1" runat="server" Text="Seleccione Solicitud" 
-                    Font-Bold="True" Font-Size="Small"></asp:Label>
+                
             </td>
         </tr>
                

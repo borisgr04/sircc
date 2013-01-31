@@ -2,10 +2,10 @@ Imports Microsoft.VisualBasic
 Imports System.ComponentModel
 Imports System.Data
 Imports System.Data.Common
+'Se Agrega Campo Dep_Sup Para Manejar la Dependencia que realiza la Supervisión del Contrato.
 'Clase para manejar la Tabla Contratos
 'Fecha Creaciòn: 19 dic 2010
 'Autor: Boris Gonzalez Rivera
-
 ' Se agrega Opcion de Busqueda por Ide
 '
 <System.ComponentModel.DataObject()> _
@@ -126,7 +126,7 @@ Public Class Contratos
     ''' <returns></returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Function Insert(ByVal vigencia As Integer, ByVal ide As String, ByVal obj As String, ByVal pro As String, ByVal fsus As Date, ByVal pla As Integer, ByVal dep As String, ByVal stip As String, ByVal tip As String, ByVal val_con As Decimal, ByVal Mun() As String, ByVal nm As Integer, ByVal cod_sec As String, ByVal tip_for As String, ByVal cc As String, ByVal tip_proc As String, ByVal pla_pre As String, ByVal ide_rep As String, ByVal Urg_man As Boolean, ByVal Est_Conv As Boolean, ByVal Pro_Sel_Nro As String, ByVal dep_pcon As String, ByVal val_apo_gob As Decimal, ByVal ANTICIPO As Boolean, ByVal NEMPLEOS As Integer, ByVal PER_APO As Boolean, ByVal AGOTAR_PPTO As Boolean, ByVal PLAZO2_EJE_CON As String, ByVal TIPO_PLAZO As String, ByVal TIPO_PLAZO2 As String) As String
+    Public Function Insert(ByVal vigencia As Integer, ByVal ide As String, ByVal obj As String, ByVal pro As String, ByVal fsus As Date, ByVal pla As Integer, ByVal dep As String, ByVal stip As String, ByVal tip As String, ByVal val_con As Decimal, ByVal Mun() As String, ByVal nm As Integer, ByVal cod_sec As String, ByVal tip_for As String, ByVal cc As String, ByVal tip_proc As String, ByVal pla_pre As String, ByVal ide_rep As String, ByVal Urg_man As Boolean, ByVal Est_Conv As Boolean, ByVal Pro_Sel_Nro As String, ByVal dep_pcon As String, ByVal val_apo_gob As Decimal, ByVal ANTICIPO As Boolean, ByVal NEMPLEOS As Integer, ByVal PER_APO As Boolean, ByVal AGOTAR_PPTO As Boolean, ByVal PLAZO2_EJE_CON As String, ByVal TIPO_PLAZO As String, ByVal TIPO_PLAZO2 As String, Dep_Sup As String) As String
         Dim ncon As New Vigencias()
         Dim año As Integer = vigencia
         Dim nro As Integer = 0
@@ -138,7 +138,7 @@ Public Class Contratos
         nro = nro + 1
         Me.NroCon = Right(año.ToString, Contratos.Dig_Vigencia) + tip.ToString + Right("0000" + nro.ToString, 4)
         Dim cod_con As String = Me.NroCon
-        Msg = InsertP(nro, cod_con, vigencia, ide, obj, pro, fsus, pla, dep, stip, tip, val_con, Mun, nm, cod_sec, tip_for, cc, tip_proc, pla_pre, ide_rep, Urg_man, Est_Conv, Pro_Sel_Nro, dep_pcon, val_apo_gob, ANTICIPO, NEMPLEOS, PER_APO, AGOTAR_PPTO, PLAZO2_EJE_CON, TIPO_PLAZO, TIPO_PLAZO2)
+        Msg = InsertP(nro, cod_con, vigencia, ide, obj, pro, fsus, pla, dep, stip, tip, val_con, Mun, nm, cod_sec, tip_for, cc, tip_proc, pla_pre, ide_rep, Urg_man, Est_Conv, Pro_Sel_Nro, dep_pcon, val_apo_gob, ANTICIPO, NEMPLEOS, PER_APO, AGOTAR_PPTO, PLAZO2_EJE_CON, TIPO_PLAZO, TIPO_PLAZO2, Dep_Sup)
         Me.Desconectar()
         Return Msg
     End Function
@@ -151,7 +151,7 @@ Public Class Contratos
     ' Modificacion para arreglar la inserción de decimales
     ' SE AGREGA TIPOS DE PLAZO Y PLAZO EJE 2, 23 DE ABRIL D 2012
 
-    Private Function InsertP(ByVal nro As Integer, ByVal cod_con As String, ByVal vigencia As Integer, ByVal ide As String, ByVal obj As String, ByVal pro As String, ByVal fsus As Date, ByVal pla As Integer, ByVal dep As String, ByVal stip As String, ByVal tip As String, ByVal val_con As Decimal, ByVal Mun() As String, ByVal nm As Integer, ByVal cod_sec As String, ByVal tip_for As String, ByVal cc As String, ByVal tip_proc As String, ByVal pla_pre As String, ByVal ide_rep As String, ByVal Urg_man As Boolean, ByVal Est_Conv As Boolean, ByVal Pro_Sel_Nro As String, ByVal dep_pcon As String, ByVal val_apo_gob As Decimal, ByVal ANTICIPO As String, ByVal NEMPLEOS As Integer, ByVal PER_APO As String, ByVal AGOTAR_PPTO As Boolean, ByVal PLAZO2_EJE_CON As String, ByVal TIPO_PLAZO As String, ByVal TIPO_PLAZO2 As String) As String
+    Private Function InsertP(ByVal nro As Integer, ByVal cod_con As String, ByVal vigencia As Integer, ByVal ide As String, ByVal obj As String, ByVal pro As String, ByVal fsus As Date, ByVal pla As Integer, ByVal dep As String, ByVal stip As String, ByVal tip As String, ByVal val_con As Decimal, ByVal Mun() As String, ByVal nm As Integer, ByVal cod_sec As String, ByVal tip_for As String, ByVal cc As String, ByVal tip_proc As String, ByVal pla_pre As String, ByVal ide_rep As String, ByVal Urg_man As Boolean, ByVal Est_Conv As Boolean, ByVal Pro_Sel_Nro As String, ByVal dep_pcon As String, ByVal val_apo_gob As Decimal, ByVal ANTICIPO As String, ByVal NEMPLEOS As Integer, ByVal PER_APO As String, ByVal AGOTAR_PPTO As Boolean, ByVal PLAZO2_EJE_CON As String, ByVal TIPO_PLAZO As String, ByVal TIPO_PLAZO2 As String, Dep_Sup As String) As String
         Me.Vigencia = vigencia
         Me.Tip_Con = tip
         Dim gac As String = ""
@@ -188,7 +188,7 @@ Public Class Contratos
             gac = IIf(gac <> "", gac, " ")
             pla_pre = IIf(pla_pre <> "", pla_pre, " ")
 
-            querystring = "INSERT INTO Contratos (nro_con,ide_con,obj_con,pro_con,FEC_SUS_CON,PLA_EJE_CON,DEP_CON,VIG_CON,STIP_CON,EST_CON,tip_con,val_con,cod_con,cod_sec,tip_for,COD_TPRO,OTR_CNS,IDE_REP,NRO_PLA_CON, Urg_Man, Est_Conv,pro_sel_nro,dep_pcon,val_apo_gob,ANTICIPO,NEMPLEOS,PER_APO,AGOTAR_PPTO,TIPO_PLAZO,TIPO_PLAZO2,PLAZO2_EJE_CON) VALUES(:nro_con,:ide_con,:obj_con,:pro_con,:FEC_SUS_CON,:PLA_EJE_CON,:DEP_CON,:VIG_CON,:STIP_CON,:EST_CON,:tip_con,to_number(:val_con),:cod_con,:cod_sec,:tip_for,:COD_TPRO,:OTR_CNS,:IDE_REP,:NRO_PLA_CON,:Urg_Man,:Est_Conv,:pro_sel_nro,:dep_pcon,to_number(:val_apo_gob),:ANTICIPO,:NEMPLEOS,:PER_APO,:AGOTAR_PPTO,:TIPO_PLAZO,:TIPO_PLAZO2,:PLAZO2_EJE_CON)"
+            querystring = "INSERT INTO Contratos (nro_con,ide_con,obj_con,pro_con,FEC_SUS_CON,PLA_EJE_CON,DEP_CON,VIG_CON,STIP_CON,EST_CON,tip_con,val_con,cod_con,cod_sec,tip_for,COD_TPRO,OTR_CNS,IDE_REP,NRO_PLA_CON, Urg_Man, Est_Conv,pro_sel_nro,dep_pcon,val_apo_gob,ANTICIPO,NEMPLEOS,PER_APO,AGOTAR_PPTO,TIPO_PLAZO,TIPO_PLAZO2,PLAZO2_EJE_CON,DEP_SUP) VALUES(:nro_con,:ide_con,:obj_con,:pro_con,:FEC_SUS_CON,:PLA_EJE_CON,:DEP_CON,:VIG_CON,:STIP_CON,:EST_CON,:tip_con,to_number(:val_con),:cod_con,:cod_sec,:tip_for,:COD_TPRO,:OTR_CNS,:IDE_REP,:NRO_PLA_CON,:Urg_Man,:Est_Conv,:pro_sel_nro,:dep_pcon,to_number(:val_apo_gob),:ANTICIPO,:NEMPLEOS,:PER_APO,:AGOTAR_PPTO,:TIPO_PLAZO,:TIPO_PLAZO2,:PLAZO2_EJE_CON,:DEP_SUP)"
             'querystring = "INSERT INTO Contratos (nro_con,ide_con,obj_con,pro_con,FEC_SUS_CON,PLA_EJE_CON,DEP_CON,VIG_CON,STIP_CON,EST_CON,tip_con,val_con,cod_con,cod_sec,tip_for,COD_TPRO,OTR_CNS,IDE_REP,NRO_PLA_CON, Urg_Man, Est_Conv,pro_sel_nro,dep_pcon,val_apo_gob,ANTICIPO,NEMPLEOS,PER_APO,AGOTAR_PPTO) VALUES(:nro_con,:ide_con,:obj_con,:pro_con,:FEC_SUS_CON,:PLA_EJE_CON,:DEP_CON,:VIG_CON,:STIP_CON,:EST_CON,:tip_con,to_number(:val_con),:cod_con,:cod_sec,:tip_for,:COD_TPRO,:OTR_CNS,:IDE_REP,:NRO_PLA_CON,:Urg_Man,:Est_Conv,:pro_sel_nro,:dep_pcon,to_number(:val_apo_gob),:ANTICIPO,:NEMPLEOS,:PER_APO,:AGOTAR_PPTO)"
             Me.CrearComando(querystring)
 
@@ -227,6 +227,9 @@ Public Class Contratos
             Me.AsignarParametroCadena(":TIPO_PLAZO", TIPO_PLAZO) ' EL DIA 23 de Abril de 2012, Boris Gonzalez
             Me.AsignarParametroCadena(":TIPO_PLAZO2", TIPO_PLAZO2) ' EL DIA 23 de Abril de 2012, Boris Gonzalez
             Me.AsignarParametroCadena(":PLAZO2_EJE_CON", PLAZO2_EJE_CON) ' EL DIA 23 de Abril de 2012, Boris Gonzalez
+            'Agregado por Boris el 27 de Enero de 2012
+            Me.AsignarParametroCadena(":DEP_SUP", Dep_Sup) ' EL DIA 23 de Abril de 2012, Boris Gonzalez
+
             '
             'ANTICIPO,NEMPLEOS,PER_APO
             'Throw New Exception(Me.vComando.CommandText)
@@ -384,7 +387,7 @@ Public Class Contratos
     ''' Fecha Creación:10 de Oct de 2010
     '''  BORIS EL 21 DE MAYO DEL 2011
     ''' MODIFICADO EL 23 ABRIL DEL 2012 X BORIS
-    Public Function UpdateP(ByVal cod_con As String, ByVal ide As String, ByVal obj As String, ByVal pro As String, ByVal fsus As Date, ByVal pla As Integer, ByVal dep As String, ByVal stip As String, ByVal tip As String, ByVal val_con As Decimal, ByVal Mun() As String, ByVal nm As Integer, ByVal cod_sec As String, ByVal tip_for As String, ByVal cc As String, ByVal tip_proc As String, ByVal pla_pre As String, ByVal ide_rep As String, ByVal Urg_man As Boolean, ByVal Est_Conv As Boolean, ByVal Pro_Sel_Nro As String, ByVal dep_pcon As String, ByVal val_apo_gob As Decimal, ByVal ANTICIPO As Boolean, ByVal NEMPLEOS As Integer, ByVal PER_APO As Boolean, ByVal Agotar_Ppto As Boolean, ByVal PLAZO2_EJE_CON As String, ByVal TIPO_PLAZO As String, ByVal TIPO_PLAZO2 As String) As String
+    Public Function UpdateP(ByVal cod_con As String, ByVal ide As String, ByVal obj As String, ByVal pro As String, ByVal fsus As Date, ByVal pla As Integer, ByVal dep As String, ByVal stip As String, ByVal tip As String, ByVal val_con As Decimal, ByVal Mun() As String, ByVal nm As Integer, ByVal cod_sec As String, ByVal tip_for As String, ByVal cc As String, ByVal tip_proc As String, ByVal pla_pre As String, ByVal ide_rep As String, ByVal Urg_man As Boolean, ByVal Est_Conv As Boolean, ByVal Pro_Sel_Nro As String, ByVal dep_pcon As String, ByVal val_apo_gob As Decimal, ByVal ANTICIPO As Boolean, ByVal NEMPLEOS As Integer, ByVal PER_APO As Boolean, ByVal Agotar_Ppto As Boolean, ByVal PLAZO2_EJE_CON As String, ByVal TIPO_PLAZO As String, ByVal TIPO_PLAZO2 As String, Dep_Sup As String) As String
         Dim gac As String = ""
 
         Me.NroCon = cod_con
@@ -407,7 +410,7 @@ Public Class Contratos
             'EST_CON,VIGENCIA NRO TIP CON COD CON
 
 
-            querystring = "UPDATE Contratos set ide_con=:ide_con ,obj_con=:obj_con,pro_con=:pro_con,PLA_EJE_CON=:PLA_EJE_CON,DEP_CON=:DEP_CON,STIP_CON=:STIP_CON,val_con=:val_con,cod_sec=:cod_sec,tip_for=:tip_for,COD_TPRO=:COD_TPRO,OTR_CNS=:OTR_CNS,IDE_REP=:IDE_REP,NRO_PLA_CON=:NRO_PLA_CON, Urg_Man=:Urg_Man, Est_Conv=:Est_Conv,pro_sel_nro=:pro_sel_nro,dep_pcon=:dep_pcon,val_apo_gob=:val_apo_gob,ANTICIPO=:ANTICIPO,NEMPLEOS=:NEMPLEOS,PER_APO=:PER_APO,AGOTAR_PPTO=:AGOTAR_PPTO,TIPO_PLAZO=:TIPO_PLAZO,TIPO_PLAZO2=:TIPO_PLAZO2, PLAZO2_EJE_CON=:PLAZO2_EJE_CON  WHERE COD_CON=:cod_con_pk "
+            querystring = "UPDATE Contratos set ide_con=:ide_con ,obj_con=:obj_con,pro_con=:pro_con,PLA_EJE_CON=:PLA_EJE_CON,DEP_CON=:DEP_CON,STIP_CON=:STIP_CON,val_con=:val_con,cod_sec=:cod_sec,tip_for=:tip_for,COD_TPRO=:COD_TPRO,OTR_CNS=:OTR_CNS,IDE_REP=:IDE_REP,NRO_PLA_CON=:NRO_PLA_CON, Urg_Man=:Urg_Man, Est_Conv=:Est_Conv,pro_sel_nro=:pro_sel_nro,dep_pcon=:dep_pcon,val_apo_gob=:val_apo_gob,ANTICIPO=:ANTICIPO,NEMPLEOS=:NEMPLEOS,PER_APO=:PER_APO,AGOTAR_PPTO=:AGOTAR_PPTO,TIPO_PLAZO=:TIPO_PLAZO,TIPO_PLAZO2=:TIPO_PLAZO2, PLAZO2_EJE_CON=:PLAZO2_EJE_CON,Dep_Sup=:Dep_Sup  WHERE COD_CON=:cod_con_pk "
             Me.CrearComando(querystring)
 
             Me.AsignarParametroCadena(":ide_con", ide)
@@ -447,7 +450,8 @@ Public Class Contratos
             Me.AsignarParametroCadena(":TIPO_PLAZO2", TIPO_PLAZO2) ' EL DIA 23 de Abril de 2011, Boris Gonzalez
             Me.AsignarParametroCadena(":PLAZO2_EJE_CON", PLAZO2_EJE_CON) ' EL DIA 23 de Abril de 2011, Boris Gonzalez
 
-
+            'Enero 27 de 2012,
+            Me.AsignarParametroCadena(":Dep_Sup", Dep_Sup) ' EL DIA 23 de Abril de 2011, Boris Gonzalez
 
             'AGREGAR EL CONTRATO A LA BD
             'Throw New Exception(Me._Comando.CommandText)

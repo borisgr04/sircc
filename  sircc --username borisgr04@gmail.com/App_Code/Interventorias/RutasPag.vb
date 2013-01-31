@@ -19,6 +19,7 @@ Public Class RutasPag
         rutasPag.Add("00", "/Interventorias/PanelSupervision/PanelSupervision.aspx")
         rutasPag.Add("01", "/Interventorias/Documentos/ActaInicio/ActaInicio.aspx")
         rutasPag.Add("08", "/Interventorias/Documentos/AsigAntInv/AsigAntInv.aspx")
+        rutasPag.Add("02", "/Interventorias/Documentos/InfParciales/InfParciales.aspx")
     End Sub
 
     Function GetRuta(ByVal Destino As String) As String

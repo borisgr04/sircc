@@ -40,4 +40,9 @@ Partial Public Class PaginaComun
     Protected Function cssEnabled(ByVal v As Boolean) As String
         Return IIf(Not v, "disabledImageButton", "")
     End Function
+
+    Sub EnabledIBtn(Ibtn As ImageButton, v As Boolean)
+        Ibtn.Enabled = v
+        Ibtn.CssClass = cssEnabled(v)
+    End Sub
 End Class

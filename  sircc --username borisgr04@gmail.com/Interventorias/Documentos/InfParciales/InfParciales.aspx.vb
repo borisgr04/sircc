@@ -1,5 +1,5 @@
 ﻿Imports System.Data
-Partial Class Interventorias_Documentos_ActaInicio
+Partial Class Interventorias_Documentos_InfParciales
     Inherits PaginaComun
 
     Sub Guardar()
@@ -52,7 +52,7 @@ Partial Class Interventorias_Documentos_ActaInicio
         End If
 
     End Sub
-    
+
     Sub Nuevo()
         If Me.Oper = "Nuevo" Then
             MsgResult.Text = " Agregando Nueva Acta"
@@ -78,7 +78,7 @@ Partial Class Interventorias_Documentos_ActaInicio
 
 
     End Sub
-    
+
 
 
     Sub EnableValidar(ByVal v As Boolean)
@@ -97,7 +97,7 @@ Partial Class Interventorias_Documentos_ActaInicio
     Protected Sub mostrarDatos()
         EnableRevertir(False)
         EnableValidar(False)
-        Dim v As New ActaInicio
+        Dim v As New ActasParciales
         Me.Panel1.Visible = False
         Dim dt As DataTable = v.GetByPkS(hdCodCon.Value)
         If dt.Rows.Count > 0 Then
@@ -107,7 +107,7 @@ Partial Class Interventorias_Documentos_ActaInicio
             Dim Docfs As String = ""
             v.FechaSugerida(hdCodCon.Value, fs, Docfs)
             LbFS.Text = fs
-            LbDocFS.text = Docfs
+            LbDocFS.Text = Docfs
             Me.DtPCon.DataSource = dt
             Me.DtPCon.DataBind()
             Me.Panel1.Visible = True
@@ -118,6 +118,8 @@ Partial Class Interventorias_Documentos_ActaInicio
                     MsgBoxAlert(Me.MsgResult, True)
                     Me.Panel1.Visible = True
                     Habilitar(False)
+                Else
+                    Habilitar(True)
                 End If
             ElseIf (Me.Oper = "Editar") Then
                 Editar(Me.NoID)
@@ -129,7 +131,7 @@ Partial Class Interventorias_Documentos_ActaInicio
     Public Sub Editar(ByVal Index As String)
         Try
             Me.Oper = "Editar"
-            Dim Obj As New ActaInicio
+            Dim Obj As New ActasParciales
             Dim dt As DataTable = Obj.GetbyPk(Index)
             If dt.Rows.Count > 0 Then
 
@@ -191,7 +193,7 @@ Partial Class Interventorias_Documentos_ActaInicio
     End Sub
 
     Protected Sub IBtnValidar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnValidar.Click
-        Dim Obj As New ActaInicio
+        Dim Obj As New ActasParciales
         Dim valfecha As Boolean
         valfecha = Obj.GetValFecha(Me.CodCon, Me.txtFecDoc.Text)
         If valfecha = True Then
@@ -211,7 +213,7 @@ Partial Class Interventorias_Documentos_ActaInicio
     End Sub
 
     Protected Sub IBtnRevertir_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnRevertir.Click
-        Dim Obj As New ActaInicio
+        Dim Obj As New ActasParciales
         MsgResult.Text = Obj.RevActaEstado(TxtNoDocumento.Text) 'Revierte a Borrador
         Habilitar(False)
         Me.MsgBox(MsgResult, Obj.lErrorG)
@@ -233,7 +235,7 @@ Partial Class Interventorias_Documentos_ActaInicio
             If IsDate(txtFecDoc.Text) Then
                 Dim fi As Date = txtFecDoc.Text
                 Dim ff As Date
-                Dim c As New ActaInicio
+                Dim c As New ActasParciales
                 Dim dt As DataTable = c.GetByPkS(hdCodCon.Value)
                 Dim tp1 As String = dt.Rows(0)("Tipo_Plazo")
                 Dim pe1 As Integer = dt.Rows(0)("Plazo1_Eje_Con")

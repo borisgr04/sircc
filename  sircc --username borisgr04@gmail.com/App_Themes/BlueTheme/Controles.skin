@@ -116,3 +116,6 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
                                  Width="32px" />
 <asp:ImageButton SkinId="BtnDesaprobar" runat="server" Height="32px" ImageUrl="~/images/2012/Revertir.png"
                                  Width="32px" />
+
+<asp:ImageButton SkinId="IBtnReload" runat="server"  ImageUrl="~/images/2012/Reload.png"
+                                 />

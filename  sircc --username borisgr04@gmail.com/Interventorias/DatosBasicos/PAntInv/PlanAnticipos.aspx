@@ -25,9 +25,8 @@
         
          <BR />
          <BR />
-&nbsp;<asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" 
-         
-                Text="PLAN DE INVERSIÓN Y ANTICIPOS"></asp:Label><BR /><asp:Label id="MsgResult" 
+&nbsp;<asp:Label id="Tit" runat="server" CssClass="Titulo" 
+                Text="ITEMS PLAN DE INVERSIÓN Y ANTICIPOS"></asp:Label><BR /><asp:Label id="MsgResult" 
                 runat="server" SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<BR />&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             <br />
@@ -42,25 +41,25 @@
                 <Columns>
                     <asp:TemplateField HeaderText="Código" SortExpression="COD_INVAN">
                         <FooterTemplate>
-                            <asp:LinkButton ID="lnkNuevo" runat="server" __designer:wfdid="w10" 
+                            <asp:LinkButton ID="lnkNuevo" runat="server" 
                                 CausesValidation="False" CommandName="Nuevo" Text="Nuevo Registro"></asp:LinkButton>
                         </FooterTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="LbCod" runat="server" __designer:wfdid="w9" 
+                            <asp:Label ID="LbCod" runat="server" 
                                 Text='<%# Bind("COD_INVAN") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Nombre del Tipo" SortExpression="NOM_INVAN"><FooterTemplate>
-                        <asp:ImageButton id="lnkExportar" runat="server" Text="Exportar Datos a Excel" __designer:wfdid="w10" CausesValidation="False" CommandName="Exportar" ImageUrl="~/images/Operaciones/excel.png" Height="32" Width="32" ToolTip="Exportar Datos a Excel"></asp:ImageButton> 
+                        <asp:ImageButton id="lnkExportar" runat="server" Text="Exportar Datos a Excel"  CausesValidation="False" CommandName="Exportar" ImageUrl="~/images/Operaciones/excel.png" Height="32" Width="32" ToolTip="Exportar Datos a Excel"></asp:ImageButton> 
                         </FooterTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Lbcimp" runat="server" __designer:wfdid="w21" 
+                            <asp:Label ID="Lbcimp" runat="server" 
                                 Text='<%# Bind("NOM_INVAN") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Estado" SortExpression="EST_INVAN">
                         <ItemTemplate>
-                            <asp:Label ID="LbEst" runat="server" __designer:wfdid="w22" 
+                            <asp:Label ID="LbEst" runat="server" 
                                 Text='<%# Bind("EST_INVAN") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -73,7 +72,7 @@
                         SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" />
                 </Columns>
                 <EmptyDataTemplate>
-                    <asp:LinkButton ID="lnkNuevo" runat="server" __designer:wfdid="w10" 
+                    <asp:LinkButton ID="lnkNuevo" runat="server" 
                         CausesValidation="False" CommandName="Nuevo" Text="Nuevo Registro"></asp:LinkButton>
                 </EmptyDataTemplate>
                 <FooterStyle BackColor="White" Font-Bold="True" ForeColor="#5D7B9D" />
@@ -107,7 +106,7 @@
                  runat="Server" Width="655px" Height="30px" CssClass="BarTitleModal2" >
                  <div style="PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; VERTICAL-ALIGN: middle; PADDING-TOP: 5px">
                  <div style="FLOAT: left">
-                           PLAN DE INVERSIÓN Y ANTICIPOS</DIV><DIV style="FLOAT: right">
+                           ITEMS PLAN DE INVERSIÓN DE&nbsp; ANTICIPOS</DIV><DIV style="FLOAT: right">
                             <input id="BtnCerrar" type="button" value="X" /></DIV></DIV></asp:Panel>
                             <asp:Panel id="area" runat="Server" ScrollBars="Auto">
                             

@@ -1,5 +1,5 @@
 ﻿Imports System.Data
-Partial Class Interventorias_Documentos_ActaInicio
+Partial Class Interventorias_InfContratista_InfContratista
     Inherits PaginaComun
 
     Sub Guardar()
@@ -52,7 +52,7 @@ Partial Class Interventorias_Documentos_ActaInicio
         End If
 
     End Sub
-    
+
     Sub Nuevo()
         If Me.Oper = "Nuevo" Then
             MsgResult.Text = " Agregando Nueva Acta"
@@ -78,7 +78,7 @@ Partial Class Interventorias_Documentos_ActaInicio
 
 
     End Sub
-    
+
 
 
     Sub EnableValidar(ByVal v As Boolean)
@@ -107,7 +107,7 @@ Partial Class Interventorias_Documentos_ActaInicio
             Dim Docfs As String = ""
             v.FechaSugerida(hdCodCon.Value, fs, Docfs)
             LbFS.Text = fs
-            LbDocFS.text = Docfs
+            LbDocFS.Text = Docfs
             Me.DtPCon.DataSource = dt
             Me.DtPCon.DataBind()
             Me.Panel1.Visible = True

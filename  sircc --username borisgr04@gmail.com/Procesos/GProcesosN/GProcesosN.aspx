@@ -13,208 +13,77 @@
 <%@ Register Src="../../CtrlUsr/Rubros/ConRubros.ascx" TagName="ConRubros" TagPrefix="uc6" %>
 <%@ Register Src="../../CtrlUsr/Progreso/Progress.ascx" TagName="Progress" TagPrefix="uc3" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" runat="Server">
-    <%--    <style>
-        #navlist li
-        {
-            display: inline;
-            list-style-type: none;
-            padding-right: 20px;
-        }
-        
-        .style1
-        {
-            width: 65px;
-        }
-        
-        .style3
-        {
-            width: 291px;
-        }
-        
-        .style4
-        {
-            width: 110px;
-        }
-        .style5
-        {
-            width: 6px;
-            height: 34px;
-        }
-        .style6
-        {
-            width: 271px;
-        }
-        .style7
-        {
-            width: 608px;
-        }
-        
-        .style9
-        {
-            width: 110px;
-            height: 24px;
-            text-align: left;
-        }
-        .style10
-        {
-            width: 6px;
-            height: 24px;
-        }
-        .style11
-        {
-            width: 26px;
-            height: 24px;
-        }
-        .style12
-        {
-            height: 24px;
-        }
-        .style13
-        {
-            width: 110px;
-            height: 34px;
-            text-align: left;
-        }
-        .style14
-        {
-            width: 26px;
-            height: 34px;
-        }
-        .style15
-        {
-            height: 34px;
-        }
-        
-        .style16
-        {
-        }
-        
-        .style17
-        {
-            width: 38px;
-        }
-        .style18
-        {
-            width: 20px;
-        }
-        
-        .style19
-        {
-            width: 71px;
-        }
-        
-        .style20
-        {
-            width: 147px;
-        }
-        
-        .style21
-        {
-        }
-        .style22
-        {
-            width: 114px;
-        }
-        .style23
-        {
-            width: 116px;
-        }
-        .style24
-        {
-            width: 252px;
-        }
-        
-        .style25
-        {
-            width: 129px;
-            height: 27px;
-        }
-        .style27
-        {
-            width: 116px;
-            height: 27px;
-        }
-        .style28
-        {
-            width: 252px;
-            height: 27px;
-        }
-        .style29
-        {
-            height: 27px;
-        }
-        
-        .style30
-        {
-            width: 114px;
-            height: 27px;
-        }
-        
-        .style31
-        {
-            width: 77px;
-            text-align: center;
-        }
-        .style32
-        {
-            width: 80px;
-            text-align: center;
-        }
-        
-        .style34
-        {
-        }
-        
-        .style41
-        {
-            width: 126px;
-        }
-        
-        .style42
-        {
-            width: 105px;
-        }
-        .style43
-        {
-            width: 322px;
-        }
-        
-        .style44
-        {
-            width: 41px;
-        }
-        .style45
-        {
-            width: 77px;
-        }
-        
-        .style46
-        {
-            width: 32px;
-        }
-    </style>--%>
     <div class="demoarea">
         <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="True">
         </ajaxToolkit:ToolkitScriptManager>
+        <script src="../../js/SirccD.js" type="text/javascript"></script>
         <script type="text/javascript">
                    
-            function AporOtros(){
-            var val1=document.aspnetForm.<%=Me.TxtValTot.ClientID%>.value;
-            var Val2=document.aspnetForm.<%=Me.TxtValProp.ClientID%>.value;
-            if (val1==''&& Val2==''){
-            document.aspnetForm.<%=Me.TxtValOtros.ClientID%>.value=0;
+            function Conver(val){
+            return parseFloat(val).toFixed(2);
             }
-            else if (val1==''&& Val2!=''){
-            document.aspnetForm.<%=Me.TxtValOtros.ClientID%>.value=(-parseFloat(Val2)).toFixed(2);
+            
+            function AportesTotalesT (sender, EventArgs)
+            {
+             var txtTotal =$find( '<%=Me.TxtValTot.ClientID%>');
+             var txtAportes = $find( '<%=Me.TxtValProp.ClientID%>');
+             var txtOtros = $find( '<%=Me.TxtValOtros.ClientID%>');
+             var TxtValSinIva = $find( '<%=Me.TxtValSinIva.ClientID%>');
+             var TxtValIVA = $find( '<%=Me.TxtValIVA.ClientID%>');
+
+             var valTotal = txtTotal.get_value ();
+
+             if(valTotal==0){
+             txtTotal.set_value(0);
+             valTotal=0;
+             }
+             txtAportes.set_value (valTotal);
+             txtOtros.set_value (0);
+             TxtValSinIva.set_value (valTotal);
+             TxtValIVA.set_value(0);
             }
-            else if (val1!=''&& Val2==''){
-            document.aspnetForm.<%=Me.TxtValOtros.ClientID%>.value=(parseFloat(val1)).toFixed(2);
+
+            function AportesProp (sender, EventArgs)
+            {
+             var txtTotal =$find( '<%=Me.TxtValTot.ClientID%>');
+             var txtAportes = $find( '<%=Me.TxtValProp.ClientID%>');
+             var txtOtros = $find( '<%=Me.TxtValOtros.ClientID%>');
+             var valTotal = txtTotal.get_value ();
+             var valAportes = txtAportes.get_value ();
+             var valOtros = valTotal-valAportes;
+             if(valOtros<0){
+                alert("El Valor de los Aportes no puede ser mayor que el Valor total");
+                txtAportes.set_value(valTotal);
+                txtOtros.set_value (0);
+                txtAportes.focus();
+             }
+             else{
+                txtOtros.set_value (valOtros);
+             }
             }
-            else {
-            document.aspnetForm.<%=Me.TxtValOtros.ClientID%>.value=(parseFloat(val1)-parseFloat(Val2)).toFixed(2);
+
+            function ValIva (sender, EventArgs)
+            {
+             
+             var txtTotal =$find( '<%=Me.TxtValTot.ClientID%>');
+             var TxtValSinIva = $find( '<%=Me.TxtValSinIva.ClientID%>');
+             var TxtValIVA = $find( '<%=Me.TxtValIVA.ClientID%>');
+             
+             
+             var valTotal = txtTotal.get_value ();
+             var ValSinIva = TxtValSinIva.get_value ();
+             var ValIVA = valTotal-ValSinIva;
+             if(ValIVA<0){
+                alert("El Valor sin Iva debe ser menor o igual al Valor Total");
+                TxtValSinIva.set_value(valTotal);
+                TxtValIVA.set_value (0);
+                TxtValIVA.focus();
+             }
+             else{
+                TxtValIVA.set_value (ValIVA);
+             }
             }
-                              
-            }
+
             function ValIVA(){
             var val1=document.aspnetForm.<%=Me.TxtValTot.ClientID%>.value;
             var Val2=document.aspnetForm.<%=Me.TxtValSinIva.ClientID%>.value;
@@ -245,26 +114,20 @@
             }
             
             function ValPago(){
-            
-            var val1=document.aspnetForm.<%=Me.TxtValPago.ClientID%>.value;
-            
-            document.aspnetForm.<%=Me.TxtValPago.ClientID%>.value=(parseFloat(val1)).toFixed(2);
-                                    
+             var val1=document.aspnetForm.<%=Me.TxtValPago.ClientID%>.value;
+             document.aspnetForm.<%=Me.TxtValPago.ClientID%>.value=(parseFloat(val1)).toFixed(2);
+                                   
             }
             function ValTotal(){
-            
-            var val1=document.aspnetForm.<%=Me.TxtValTot.ClientID%>.value;
-            
-            document.aspnetForm.<%=Me.TxtValTot.ClientID%>.value=(parseFloat(val1)).toFixed(2);
-            document.aspnetForm.<%=Me.TxtValProp.ClientID%>.value=(parseFloat(val1)).toFixed(2);   
-            document.aspnetForm.<%=Me.TxtValSinIva.ClientID%>.value=(parseFloat(val1)).toFixed(2);
-            document.aspnetForm.<%=Me.TxtValIva.ClientID%>.value=(parseFloat(0)).toFixed(2);                    
+                var val1=document.aspnetForm.<%=Me.TxtValTot.ClientID%>.value;
+                document.aspnetForm.<%=Me.TxtValTot.ClientID%>.value=(parseFloat(val1)).toFixed(2);
+                document.aspnetForm.<%=Me.TxtValProp.ClientID%>.value=(parseFloat(val1)).toFixed(2);   
+                document.aspnetForm.<%=Me.TxtValSinIva.ClientID%>.value=(parseFloat(val1)).toFixed(2);
+                document.aspnetForm.<%=Me.TxtValIva.ClientID%>.value=(parseFloat(0)).toFixed(2);                    
             }
             function ValAporGob(){
-            
-            var val2=document.aspnetForm.<%=Me.TxtValProp.ClientID%>.value;
-            
-            document.aspnetForm.<%=Me.TxtValProp.ClientID%>.value=(parseFloat(val2)).toFixed(2);
+                var val2=document.aspnetForm.<%=Me.TxtValProp.ClientID%>.value;
+                document.aspnetForm.<%=Me.TxtValProp.ClientID%>.value=(parseFloat(val2)).toFixed(2);
             
                                     
             }
@@ -277,59 +140,17 @@
                     var grupo=document.aspnetForm.<%=Me.CboGrupos.ClientID%>.value;
                     var plantilla=document.aspnetForm.<%=Me.CboPlantillaW.ClientID%>.value; 
                     var usuario=document.aspnetForm.<%=Me.HdUsuario.ClientID%>.value; 
-                    var oShell = new ActiveXObject("Shell.Application");
-                    var commandtoRun = "C:\\SirccD\\SirccD.exe";
                     var commandParms = usuario +";"+oper+ ";" + proceso + ";" + grupo + ";" + plantilla;
-                    oShell.ShellExecute(commandtoRun, commandParms, "", "open", "1");
+                    var url=document.aspnetForm.<%=Me.HdUrl.ClientID%>.value; 
+                    AbrirSirccD(commandParms,url);
                 }
                 else {
-                 alert('El Navegador no es Compatible con la Operación. Por Favor abrá manualmente SIRCCD, y Seleccione el Numero del Proceso');
+                 alert('El Navegador no es Compatible con la Operación.Por favor abrá manualmente SIRCCD, y Seleccione el Numero del Proceso');
                 }
             }
 
-//            function GenerarMinW(){
-//                var proceso=document.aspnetForm.<%=Me.txtNprocA.ClientID%>.value;
-//                var grupo=document.aspnetForm.<%=Me.CboGrupos.ClientID%>.value;
-//                var plantilla=document.aspnetForm.<%=Me.CboPlantillaW.ClientID%>.value; 
-//                var oShell = new ActiveXObject("Shell.Application");
-//                var commandtoRun = "C:\\SirccD\\SirccD.exe";
-//                var commandParms = "USUARIO" +";"+"gm"+ ";" + proceso + ";" + grupo + ";" + plantilla;
-//                oShell.ShellExecute(commandtoRun, commandParms, "", "open", "1");
-//            }
-
-//            function EditarPlantilla(){
-//                var proceso=document.aspnetForm.<%=Me.txtNprocA.ClientID%>.value;
-//                var grupo=document.aspnetForm.<%=Me.CboGrupos.ClientID%>.value;
-//                var plantilla=document.aspnetForm.<%=Me.CboPlantillaW.ClientID%>.value; 
-//                var oShell = new ActiveXObject("Shell.Application");
-//                var commandtoRun = "C:\\SirccD\\SirccD.exe";
-//                var commandParms = "USUARIO" +";"+"ep"+ ";" + proceso + ";" + grupo + ";" + plantilla;
-//                oShell.ShellExecute(commandtoRun, commandParms, "", "open", "1");
-//            }
-
-//            function EditarMinuta(){
-//                var proceso=document.aspnetForm.<%=Me.txtNprocA.ClientID%>.value;
-//                var grupo=document.aspnetForm.<%=Me.CboGrupos.ClientID%>.value;
-//                var plantilla=document.aspnetForm.<%=Me.CboPlantillaW.ClientID%>.value; 
-//                var oShell = new ActiveXObject("Shell.Application");
-//                var commandtoRun = "C:\\SirccD\\SirccD.exe";
-//                var commandParms = "USUARIO" +";"+"em"+ ";" + proceso + ";" + grupo + ";" + plantilla;
-//                oShell.ShellExecute(commandtoRun, commandParms, "", "open", "1");
-//            }
-
-//            function RegenerarMinuta(){
-//                var proceso=document.aspnetForm.<%=Me.txtNprocA.ClientID%>.value;
-//                var grupo=document.aspnetForm.<%=Me.CboGrupos.ClientID%>.value;
-//                var plantilla=document.aspnetForm.<%=Me.CboPlantillaW.ClientID%>.value; 
-//                var oShell = new ActiveXObject("Shell.Application");
-//                var commandtoRun = "C:\\SirccD\\SirccD.exe";
-//                var commandParms = "USUARIO" +";"+"rg"+ ";" + proceso + ";" + grupo + ";" + plantilla;
-//                oShell.ShellExecute(commandtoRun, commandParms, "", "open", "1");
-//            }
-
-            
-            
         </script>
+        <asp:HiddenField ID="hdUrl" runat="server" />
         <asp:Label ID="Label10" runat="server" CssClass="Titulo" Text="REGISTRO DE DATOS DEL CONTRATO"></asp:Label>
         <br />
         <br />
@@ -357,8 +178,7 @@
                             </asp:ObjectDataSource>
                         </td>
                         <td style="width: 53px; text-align: center;">
-                            <asp:ImageButton ID="IBtnAbrir" runat="server" Height="32px" SkinID="IBtnAbrir" 
-                                Width="32px" />
+                            <asp:ImageButton ID="IBtnAbrir" runat="server" Height="32px" SkinID="IBtnAbrir" Width="32px" />
                         </td>
                         <td style="width: 53px; text-align: center;">
                             <asp:ImageButton ID="IbtnBucar" runat="server" Height="32px" SkinID="IBtnBuscar"
@@ -373,7 +193,7 @@
                                 ValidationGroup="Guardar" Width="32px" />
                         </td>
                         <td style="width: 79px; text-align: center;">
-                            <asp:ImageButton ID="IBtnCancelar" SkinID="IBtnCancelar" runat="server" Height="32px" 
+                            <asp:ImageButton ID="IBtnCancelar" SkinID="IBtnCancelar" runat="server" Height="32px"
                                 Width="32px" />
                         </td>
                         <td class="style31" style="text-align: center">
@@ -382,15 +202,15 @@
                         <td class="style32" style="text-align: center">
                             <asp:ImageButton ID="IBtnAdj" runat="server" SkinID="IBtnAdj" />
                         </td>
-                        <td class="style32">
+                        <td class="style6" style="width: 33px">
                             <asp:ImageButton ID="IBtnItemO" runat="server" SkinID="IBtnListItemObj" />
                         </td>
                         <td style="text-align: center" class="style46">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;
                         </td>
                         <td style="text-align: center">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
                         <td style="text-align: center">
                             <asp:ImageButton ID="BtnDefinitivo" runat="server" Height="32px" ImageUrl="~/images/Operaciones/Definitivo.png"
@@ -440,7 +260,7 @@
                         <td class="style32">
                             Adjudicación
                         </td>
-                        <td class="style32">
+                        <td class="style6" style="width: 33px">
                             Items Objeto
                         </td>
                         <td class="style46" style="text-align: center">
@@ -517,11 +337,11 @@
                         <a href="" class="accordionLink">1. Datos Básicos </a>
                     </Header>
                     <Content>
+                    <div style="height: 400px; overflow: auto">
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                             <ContentTemplate>
                                 <fieldset>
                                     <legend>Datos Básicos</legend>
-                                    <div style="height: 400px; overflow: auto">
                                         <table style="width: 100%">
                                             <tr>
                                                 <td colspan="4">
@@ -530,7 +350,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="STitulos">
-                                                <td class="style3">
+                                                <td>
                                                     <asp:Label ID="Label20" runat="server" CssClass="Caption" Text="N° de Proceso"></asp:Label>
                                                 </td>
                                                 <td colspan="3">
@@ -576,16 +396,13 @@
                                                 </td>
                                                 <td>
                                                     <asp:TextBox ID="TxtNPla" runat="server" Width="200px" Visible="false"></asp:TextBox>
-                                                    <cc1:TextBoxWatermarkExtender ID="TxtNPla_TextBoxWatermarkExtender" runat="server"
-                                                        Enabled="True" TargetControlID="TxtNPla" WatermarkCssClass="watermarked" WatermarkText="Numero de Planeación">
-                                                    </cc1:TextBoxWatermarkExtender>
                                                     <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server"
                                                         TargetControlID="TxtNPla" FilterType="Numbers">
                                                     </ajaxToolkit:FilteredTextBoxExtender>
                                                 </td>
                                             </tr>
                                             <tr class="STitulos">
-                                                <td class="style3">
+                                                <td>
                                                     <asp:Label ID="Label23" runat="server" CssClass="Caption" Text="Dependencia a Cargo del Proceso"></asp:Label>
                                                 </td>
                                                 <td colspan="2">
@@ -596,7 +413,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="style3">
+                                                <td>
                                                     <asp:DropDownList ID="cboDep" runat="server" DataSourceID="ObjDep" DataTextField="nom_dep"
                                                         DataValueField="cod_dep" Width="250px">
                                                     </asp:DropDownList>
@@ -637,7 +454,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="STitulos">
-                                                <td class="style3">
+                                                <td>
                                                     <asp:Label ID="Label25" runat="server" CssClass="Caption" Text="Objeto a Contratar"></asp:Label>
                                                 </td>
                                                 <td colspan="3">
@@ -674,68 +491,34 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <telerik:RadNumericTextBox ID="TxtValTot" runat="server" AutoPostBack="True" Culture="es-CO"
-                                                        Height="19px" Skin="Default" Value="0" Width="125px">
+                                                    <telerik:RadNumericTextBox ID="TxtValTot" runat="server" Culture="es-CO" Height="19px"
+                                                        Skin="Default" Value="0" Width="125px">
+                                                        <ClientEvents OnValueChanged="AportesTotalesT" />
                                                     </telerik:RadNumericTextBox>
-                                                    <%--<asp:TextBox ID="TxtValTot" runat="server" AutoPostBack="true"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender 
-                            ID="FilteredTextBoxExtender1" 
-                            runat="server" TargetControlID="TxtValTot" FilterType="Custom, Numbers" ValidChars=".">
-                            </ajaxToolkit:FilteredTextBoxExtender>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" 
-                                ControlToValidate="TxtValTot" 
-                                ErrorMessage="Debe diligenciar el Valor del Contrato" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>--%>
                                                 </td>
                                                 <td>
-                                                    <telerik:RadNumericTextBox ID="TxtValProp" runat="server" AutoPostBack="True" Culture="es-CO"
-                                                        Height="19px" Skin="Default" Value="0" Width="125px">
+                                                    <telerik:RadNumericTextBox ID="TxtValProp" runat="server" Culture="es-CO" Height="19px"
+                                                        Skin="Default" Value="0" Width="125px">
+                                                        <ClientEvents OnValueChanged="AportesProp" />
                                                     </telerik:RadNumericTextBox>
-                                                    <%--<asp:Label ID="LbValTot"
-                                runat="server" Text="Label"></asp:Label>    --%>
+                                                    
                                                 </td>
                                                 <td colspan="2">
-                                                    <telerik:RadNumericTextBox ID="TxtValOtros" runat="server" AutoPostBack="True" Culture="es-CO"
-                                                        Height="19px" Skin="Default" Value="0" Width="125px">
+                                                    <telerik:RadNumericTextBox ID="TxtValOtros" runat="server" Culture="es-CO" Height="19px"
+                                                        Skin="Default" Value="0" Width="125px" Enabled="false">
+                                                        
                                                     </telerik:RadNumericTextBox>
-                                                    <%--<asp:TextBox ID="TxtValProp" runat="server" Width="119px" AutoPostBack="true" ></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender 
-                            ID="FilteredTextBoxExtender2" 
-                            runat="server" TargetControlID="TxtValProp" FilterType="Custom, Numbers" ValidChars=".">
-                            </ajaxToolkit:FilteredTextBoxExtender>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" 
-                                ControlToValidate="TxtValProp" 
-                                ErrorMessage="Debe diligenciar el Valor de los Aportes Propios" 
-                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>--%>
                                                 </td>
                                                 <td colspan="2">
-                                                    <telerik:RadNumericTextBox ID="TxtValSinIva" runat="server" AutoPostBack="True" Culture="es-CO"
-                                                        Height="19px" Skin="Default" Value="0" Width="125px">
+                                                    <telerik:RadNumericTextBox ID="TxtValSinIva" runat="server" Culture="es-CO" Height="19px"
+                                                        Skin="Default" Value="0" Width="125px" >
+                                                        <ClientEvents OnValueChanged="ValIva" />
                                                     </telerik:RadNumericTextBox>
-                                                    <%-- <asp:TextBox ID="TxtValSinIva" runat="server" Text="0"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender 
-                            ID="FilteredTextBoxExtender9" 
-                            runat="server" TargetControlID="TxtValSinIva" FilterType="Custom, Numbers" ValidChars=".">
-                            </ajaxToolkit:FilteredTextBoxExtender>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
-                                ControlToValidate="TxtValSinIva" 
-                                ErrorMessage="Debe deligenciar el Valor del Contrato sin IVA" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>--%>
-                                                    <%--<asp:Label ID="LbValProp"
-                                runat="server" Text="Label"></asp:Label>  --%>
                                                 </td>
                                                 <td>
-                                                    <telerik:RadNumericTextBox ID="TxtValIva" runat="server" AutoPostBack="True" Culture="es-CO"
-                                                        Height="19px" Skin="Default" Value="0" Width="125px">
+                                                    <telerik:RadNumericTextBox ID="TxtValIva" Enabled="false" runat="server" Culture="es-CO" Height="19px"
+                                                        Skin="Default" Value="0" Width="125px">
                                                     </telerik:RadNumericTextBox>
-                                                    <%--<asp:TextBox ID="TxtValIva" runat="server" Width="119px" Text="0" ReadOnly="true"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender 
-                            ID="FilteredTextBoxExtender10" 
-                            runat="server" TargetControlID="TxtValIva" FilterType="Custom, Numbers" ValidChars=".">
-                            </ajaxToolkit:FilteredTextBoxExtender>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
-                                ControlToValidate="TxtValIva" 
-                                ErrorMessage="Debe diligenciar el Valor de los Aportes Propios" 
-                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>--%>
-                                                    <%--<asp:TextBox ID="TxtValOtros" runat="server" ReadOnly="True" Enabled="false"></asp:TextBox>--%>
                                                 </td>
                                             </tr>
                                             <tr class="STitulos">
@@ -793,13 +576,12 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="7">
-                                                    <asp:TextBox ID="TxtLugEje" runat="server" Width="93%"></asp:TextBox>
+                                                <td colspan="8">
+                                                    <asp:TextBox ID="TxtLugEje" runat="server" Width="100%" TextMode="MultiLine"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="TxtLugEje"
                                                         ErrorMessage="Debe diliganciar el Lugar de Ejecución" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
                                                 </td>
-                                                <td>
-                                                </td>
+                                                
                                             </tr>
                                             <tr class="STitulos">
                                                 <td colspan="3">
@@ -887,7 +669,7 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                    </div>
+                                    
                                 </fieldset>
                                 <asp:ObjectDataSource ID="ObjDep" runat="server" OldValuesParameterFormatString="original_{0}"
                                     SelectMethod="GetRecords" TypeName="Dependencias"></asp:ObjectDataSource>
@@ -910,6 +692,7 @@
                                 <asp:AsyncPostBackTrigger ControlID="txtValTot" EventName="TextChanged" />
                             </Triggers>
                         </asp:UpdatePanel>
+                     </div>
                         <asp:UpdateProgress ID="UpdateProgressGral" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
                             <ProgressTemplate>
                                 <uc3:Progress ID="Progress2" runat="server" />
@@ -1597,8 +1380,8 @@
                     <Content>
                         <asp:UpdatePanel ID="UpdMinWord" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                            <asp:HiddenField ID="HdUsuario" runat="server" />
-                            <asp:Label ID="LbMinutaW" runat="server" Text="" Width="80%" Height="100%"></asp:Label>
+                                <asp:HiddenField ID="HdUsuario" runat="server" />
+                                <asp:Label ID="LbMinutaW" runat="server" Text="" Width="80%" Height="100%"></asp:Label>
                                 <table>
                                     <tr>
                                         <td>
@@ -1615,13 +1398,13 @@
                                             <asp:ImageButton ID="IBtnGMin" runat="server" SkinID="IBtnMinuta" OnClientClick="javascript:OpenSirccD('mgm');" />
                                         </td>
                                         <td>
-                                            <asp:ImageButton ID="IBtnEditarP" runat="server" SkinID="IBtnEditBase" OnClientClick="javascript:OpenSirccD('mep');"/>
+                                            <asp:ImageButton ID="IBtnEditarP" runat="server" SkinID="IBtnEditBase" OnClientClick="javascript:OpenSirccD('mep');" />
                                         </td>
                                         <td>
                                             <asp:ImageButton ID="IBtnEditarM" runat="server" SkinID="IBtnEditMin" OnClientClick="javascript:OpenSirccD('mem');" />
                                         </td>
                                         <td>
-                                            <asp:ImageButton ID="IBtnRegenerar" runat="server" SkinID="IBtnSincronizar" OnClientClick="javascript:OpenSirccD('mrg');"/>
+                                            <asp:ImageButton ID="IBtnRegenerar" runat="server" SkinID="IBtnSincronizar" OnClientClick="javascript:OpenSirccD('mrg');" />
                                         </td>
                                         <td>
                                             <asp:ImageButton ID="IBtnAnular" runat="server" SkinID="IBtnAnularM" />
@@ -1659,7 +1442,6 @@
                                             Type="String" />
                                     </SelectParameters>
                                 </asp:ObjectDataSource>
-                                
                             </ContentTemplate>
                         </asp:UpdatePanel>
                         <asp:UpdateProgress ID="UpdPMinWord" runat="server" AssociatedUpdatePanelID="UpdMinWord">
@@ -1705,8 +1487,7 @@
         <asp:ObjectDataSource ID="ObjTipoProc" runat="server" OldValuesParameterFormatString="original_{0}"
             SelectMethod="GetRecords" TypeName="TiposProc"></asp:ObjectDataSource>
         <asp:ObjectDataSource ID="Polizas" runat="server" InsertMethod="Insert" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="GetRecords" TypeName="Polizas" UpdateMethod="Update">
-        </asp:ObjectDataSource>
+            SelectMethod="GetRecords" TypeName="Polizas" UpdateMethod="Update"></asp:ObjectDataSource>
         <asp:ObjectDataSource ID="calculopol" runat="server" OldValuesParameterFormatString="original_{0}"
             SelectMethod="GetRecords" TypeName="CalculoPol"></asp:ObjectDataSource>
         <asp:ObjectDataSource ID="Cal_Vig_Pol" runat="server" OldValuesParameterFormatString="original_{0}"

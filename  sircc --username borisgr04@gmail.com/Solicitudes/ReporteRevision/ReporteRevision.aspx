@@ -22,7 +22,7 @@
                                         Text="EMITIR CONCEPTO DE REVISIÓN"></asp:Label>
                                         <br />
                                         <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
-          
+                                        <br />
                     <table >
                         <tbody>
                                <tr>

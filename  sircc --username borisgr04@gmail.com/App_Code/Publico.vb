@@ -219,5 +219,9 @@ Public Class Publico
             Return ConfigurationManager.AppSettings("Ide_Cert")
         End Get
     End Property
-
+    Shared ReadOnly Property rutaExe As String
+        Get
+            Return "~/exe/setup.msi"
+        End Get
+    End Property
 End Class

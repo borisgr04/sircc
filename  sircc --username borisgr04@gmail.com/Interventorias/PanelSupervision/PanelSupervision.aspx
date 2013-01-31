@@ -184,7 +184,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:DropDownList ID="CboEstSig" runat="server" AutoPostBack="True" DataSourceID="ObjRutaEst"
+                                    <asp:DropDownList ID="CboEstSig" runat="server" DataSourceID="ObjRutaEst"
                                         DataTextField="NOM_EST" DataValueField="EST_FIN">
                                     </asp:DropDownList>
                                 </td>

@@ -61,10 +61,32 @@ Public Class PActividades
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetbyNum_Proc(ByVal Num_Proc As String) As DataTable
         Me.Conectar()
-        querystring = "SELECT * FROM " + Me.Vista + " Where Cod_Tpro =(Select Cod_Tpro From PContratos Where Pro_Sel_Nro=:Num_Proc)"
+        querystring = "SELECT * FROM " + Me.Vista + " Where Cod_Tpro =(Select Cod_Tpro From PContratos Where Pro_Sel_Nro=:Num_Proc) And Vigencia=:Vigencia"
         'querystring += " AND cod_act NOT IN (Select Cod_Act FROM vpcronogramas WHERE num_proc = :Num_Proc AND NOT (est_act = '0004')) "
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":Num_Proc", Num_Proc)
+        Me.AsignarParametroCadena(":Vigencia", Right(Num_Proc, 4))
+        'Me.AsignarParametroCadena(":Num_Proc", Num_Proc)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+
+    End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetbyNum_Proc(ByVal Num_Proc As String, ByVal Oper As String) As DataTable
+        Me.Conectar()
+        If Oper <> "nuevo" Then
+            querystring = "SELECT * FROM " + Me.Vista + " Where Cod_Tpro =(Select Cod_Tpro From PContratos Where Pro_Sel_Nro=:Num_Proc) And Vigencia=:Vigencia"
+            Me.CrearComando(querystring)
+        Else
+            querystring = "SELECT * FROM " + Me.Vista + " Where Cod_Tpro =(Select Cod_Tpro From PContratos Where Pro_Sel_Nro=:Num_Proc) And Vigencia=:Vigencia"
+            querystring += " AND cod_act NOT IN (Select Cod_Act FROM vpcronogramas WHERE num_proc = :Num_Proc AND NOT (est_act = '0004')) "
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":Num_Proc", Num_Proc)
+        End If
+        Me.AsignarParametroCadena(":Num_Proc", Num_Proc)
+        Me.AsignarParametroCadena(":Vigencia", Right(Num_Proc, 4))
         'Me.AsignarParametroCadena(":Num_Proc", Num_Proc)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()

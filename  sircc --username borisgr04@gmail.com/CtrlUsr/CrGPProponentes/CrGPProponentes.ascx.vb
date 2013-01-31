@@ -86,7 +86,7 @@ Partial Class CtrlUsr_CrProponentes_CrProponentes
             CvFecha.ValueToCompare = Today
             Me.Oper = "Nuevo"
             Limpiar()
-            Me.TxtNit.Attributes.Add("onfocusout", "javascript:ColocarNit();")
+            'Me.TxtNit.Attributes.Add("onfocusout", "javascript:ColocarNit();")
             Me.TxtApe1.Attributes.Add("onfocusout", "javascript:ColocarNombre();")
             Me.TxtApe2.Attributes.Add("onfocusout", "javascript:ColocarNombre();")
             Me.TxtNom1.Attributes.Add("onfocusout", "javascript:ColocarNombre();")

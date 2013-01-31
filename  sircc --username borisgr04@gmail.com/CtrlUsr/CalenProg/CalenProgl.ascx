@@ -172,10 +172,7 @@ a.info:hover div.infodiv
                             <OtherMonthDayStyle ForeColor="#999999" />
                             <NextPrevStyle Font-Size="8pt" ForeColor="#000000" Font-Bold="true"  />
                 <itemtemplate>
-                    <%-- SelectionMode="Day" href='../../DatosBasicos/Calendario/eventDetail.aspx?id=<%# Container.DataItem("Id") %>'--%>
                     <a  class="info">  
-                    <%--<asp:Image ID="Image1" runat=server ImageUrl='<%# Container.DataItem("Imagen") %>'  height="16" width="16" align="absmiddle" border="0"/>--%>
-                    <%-- CssClass="BarTitleModal2" Font-Strikeout='<%#IIf(Container.DataItem("Realizado")="S","True","False")%>'--%>
                     <asp:Panel ID="Panel1" runat="server" CssClass="ItemCalendar" height="100%"  >
                     <div style="text-align:justify; padding:2px 2px 2px 2px ">
                     <table>
@@ -219,8 +216,6 @@ a.info:hover div.infodiv
                     <div class="infodiv">
                     <b>Ubicación:</b><%#CStr( Container.DataItem("ID"))%><br /><b>ID Actividad:</b><%# Container.DataItem("Ubicacion")%><br /><b>Observación:</b><%# Container.DataItem("Notas")%><br /><b>Notas:</b><%# Container.DataItem("Obs_Seg")%><br /><b>Dependencia Necesidad:</b><%# Container.DataItem("nom_tproc")%><br /><b>Modalidad Contratación:</b><%# Container.DataItem("dep_nec")%><br /><b>Objeto:</b><%# Container.DataItem("dep_del")%><br /><b>Dependencia Delegada:</b><%# Container.DataItem("Obj_Con")%><br /><b>Encargado:</b> <%# Container.DataItem("Encargado")%>
                         <br />
-                        <%--<b>Fecha Asignación:</b> <%# CDate(Container.DataItem("fechaasig")).ToShortDateString%>--%>
-                        <%--<br /><b>Observación:</b><%# Container.DataItem("Obs")%><br /><b>Realizado:</b> <%# Container.DataItem("Realizado")%>--%>
                     </div>
                     </a>        
                         
@@ -257,12 +252,12 @@ a.info:hover div.infodiv
 </asp:UpdatePanel>
 <!----Modal-->
 
-        <asp:Panel ID="PanelvRegistro" runat="server" BackColor="White" Width="550px" >
+        <asp:Panel ID="PanelvRegistro" runat="server" BackColor="White" Width="580px" >
             <asp:Panel ID="Panel4" runat="server" CssClass="BarTitleModal2" BorderColor="White" 
                 Height="27px" Width="99%">
                 <table style="width:100%;">
                     <tr>
-                        <td style="width: 1159px">
+                        <td style="width: 400px">
                             <asp:Label ID="LbTitModal" runat="server" ForeColor="White" Text=" Registro de Actividades" 
                                 Font-Bold="True"></asp:Label>
                         </td>
@@ -274,7 +269,7 @@ a.info:hover div.infodiv
                     </tr>
                 </table>
             </asp:Panel>
-            <asp:Panel ID="PnAreaT" ScrollBars="Both" runat="server" Height="473px" >
+            <asp:Panel ID="PnAreaT" ScrollBars="Both" runat="server" Height="550px" >
                     <uc1:GActividades ID="GActividades1" runat="server" />
             </asp:Panel>
         </asp:Panel>

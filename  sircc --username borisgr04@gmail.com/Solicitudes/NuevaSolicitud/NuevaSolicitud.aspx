@@ -15,12 +15,9 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
         </ajaxToolkit:ToolkitScriptManager>
                 <script type="text/javascript">
             function Presupuesto(){
-            
             var val2=document.aspnetForm.<%=Me.TxtPpto.ClientID%>.value;
-            
             document.aspnetForm.<%=Me.TxtPpto.ClientID%>.value=(parseFloat(val2)).toFixed(2);
-            
-                                    
+                                   
             }
             
      </script>
@@ -308,13 +305,9 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                     </tr>
                     <tr>
                         <td style="width: 234px">
-                            <asp:TextBox ID="TxtPpto" runat="server"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender 
-                            runat="server" 
-                            ID="FT1" 
-                            FilterType="Numbers,Custom" 
-                            TargetControlID="TxtPpto" ValidChars=".">
-                            </ajaxToolkit:FilteredTextBoxExtender>
+                            <telerik:RadNumericTextBox ID="TxtPpto" runat="server" Culture="es-CO" Height="19px"
+                                                        Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
                         </td>
                         <td style="width: 92px">
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
