@@ -103,21 +103,15 @@ Partial Class Procesos_GProcesoN_Default
 
 
         If Not Page.IsPostBack Then
+            hdUrl.Value = ResolveClientUrl(Publico.rutaExe)
             Me.HdUsuario.Value = Usuarios.UserName
-            Me.TxtValTot.Attributes.Add("onkeyup", "javascript:AporOtros();")
-            Me.TxtValProp.Attributes.Add("onkeyup", "javascript:AporOtros();")
-            Me.TxtValOtros.Attributes.Add("onkeyup", "javascript:AporOtros();")
+            
             Me.TxtValRub.Attributes.Add("onblur", "javascript:ValRub();")
             Me.TxtValPago.Attributes.Add("onblur", "javascript:ValPago();")
 
-            Me.TxtValTot.Attributes.Add("onblur", "javascript:ValTotal();")
-            Me.TxtValProp.Attributes.Add("onblur", "javascript:ValAporGob();")
-            Me.TxtValSinIva.Attributes.Add("onblur", "javascript:ValIVA();")
             Cancelar()
             Me.TxtNprocA.Text = Request("Num_Proc")
-            'Me.CboGrupos.DataBind()
-            'Me.CboGrupos.SelectedValue = Request("Grupo")
-            ''Buscar("1")
+            
             Abrir()
         End If
 
@@ -149,10 +143,10 @@ Partial Class Procesos_GProcesoN_Default
         Me.TxtPlazo.Enabled = Valor
         TxtPlazo2.Enabled = Valor
         CboTPlazo3.Enabled = Valor
-        TxtValIva.Enabled = Valor
+        'TxtValIva.Enabled = Valor
         TxtValSinIva.Enabled = Valor
         'Me.TxtPro.Enabled = Valor
-        Me.TxtValOtros.Enabled = Valor
+        'Me.TxtValOtros.Enabled = Valor
         Me.TxtValProp.Enabled = Valor
         Me.TxtValTot.Enabled = Valor
         Me.cboDep.Enabled = False
@@ -534,6 +528,7 @@ Partial Class Procesos_GProcesoN_Default
     Sub BuscarRubro()
         Dim t As New Rubros
         Dim dt As DataTable = t.GetbyPK(Me.Txt_CodRub.Text)
+        Me.operRubro = True
         If dt.Rows.Count > 0 Then
             Me.Txt_DesRub.Text = dt.Rows(0)("Des_Rub").ToString()
             Me.Txt_DesRub.Enabled = False
@@ -571,8 +566,12 @@ Partial Class Procesos_GProcesoN_Default
         Dim ObjRub As New Rubros_GProcesos
         Me.MsgRubro.Text = ObjRub.Insert(Me.Txt_CodRub.Text, Me.TxtNProc.Text, Publico.PuntoPorComa(Me.TxtValRub.Text), Me.CboCDP.SelectedValue, Me.CboGrupos.SelectedValue, operRubro, Txt_DesRub.Text)
         MsgBox(MsgRubro, ObjRub.lErrorG)
-        Me.GrRubros.DataBind()
-        LimpiarRubros()
+
+        If Not ObjRub.lErrorG Then
+            LimpiarRubros()
+            Me.GrRubros.DataBind()
+        End If
+
 
     End Sub
     Sub LimpiarRubros()

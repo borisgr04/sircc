@@ -30,9 +30,8 @@
 
 
 <asp:UpdatePanel ID="UpdateAct" runat="server" UpdateMode="Always" ChildrenAsTriggers="true">
-                 <ContentTemplate>
-                 
-            <table class="style1" width="100%">
+  <ContentTemplate>
+         <table class="style1" width="100%">
          <tr>
              <td class="style3">
                  &nbsp;</td>
@@ -40,9 +39,15 @@
                  <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
                      ShowMessageBox="True" ShowSummary="False" ValidationGroup="MODALACT" />
                  <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
+                 <br />
              </td>
              <td>
                  &nbsp;</td>
+         </tr>
+         <tr>
+         <td colspan="13">
+         &nbsp;
+         </td>
          </tr>
          <tr>
              <td class="style3">
@@ -375,6 +380,7 @@
                 </tr>
      </table>    
      <asp:HiddenField ID="HdNumProc" runat="server" />
+                     <asp:HiddenField ID="HdOper" runat="server" />
                      <asp:HiddenField ID="HdEsFinal" runat="server" />
                      <asp:HiddenField ID="HdEsFinalPA" runat="server" />
                      <asp:HiddenField ID="HdNotificar" runat="server" />
@@ -398,6 +404,8 @@
         TypeName="PActividades">
         <SelectParameters>
             <asp:ControlParameter ControlID="HdNumProc" Name="Num_Proc" 
+                PropertyName="Value" Type="String" />
+            <asp:ControlParameter ControlID="HdOper" Name="Oper" 
                 PropertyName="Value" Type="String" />
         </SelectParameters>
     </asp:ObjectDataSource>

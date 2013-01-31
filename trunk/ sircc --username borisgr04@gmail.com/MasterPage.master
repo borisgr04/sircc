@@ -64,12 +64,18 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="contenedor-general">
-        <div id="header">
+    
+    <table class="main" cellspacing="0" cellpadding="0" width="100%;heigth:600px"  >
+        <tr >
+            <td class="laterali" > &nbsp;</td>
+            <td>
+             <div id="contenedor-general">
+            
+            <div id="header">
             <div id="barra-modulo-activo">
                 <asp:Label ID="LbModulo" runat="server" Text="" Font-Size="Large"></asp:Label></div>
             <div id="barra-modulos">
-                    <asp:ListView ID="lstMenu" runat="server" DataSourceID="ObjModulos"
+            <asp:ListView ID="lstMenu" runat="server" DataSourceID="ObjModulos"
                         DataKeyNames="Cod_Mod,Nom_Mod">
                         <LayoutTemplate>
                             <ul id="itemPlaceholderContainer" runat="server">
@@ -85,6 +91,8 @@
                         </li>
                         </ItemTemplate>
                     </asp:ListView>
+                    
+                    
             </div>
         </div>
         <div id="barra_menu">
@@ -103,6 +111,8 @@
                 <StaticHoverStyle BackColor="#B1C3D9" Font-Bold="True" ForeColor="White" />
             </asp:Menu>
         </div>
+        
+
         <div id="barra-infologin">
             &nbsp;&nbsp;<asp:LoginName ID="LoginName1" runat="server" FormatString="Bienvenido @ {0}" />
             <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutPageUrl="~/Publico/Logout.aspx"
@@ -163,17 +173,19 @@
                     Teléfono de Soporte:
                     <%--<%= ConfigurationManager.AppSettings("TelAdmin")%>--%>
                     <asp:Label ID="LbConex" runat="server" Text="Label"></asp:Label>
-                    
+                      <%--<asp:HyperLink ID="HyperLink1"  NavigateUrl="~/exe/setup.msi" runat="server">Descargar SirccD.exe</asp:HyperLink>--%>
                     </div>
                 </div>   
             </div>
 
             
         </div>
-      
         
-    </div>
-    
+                </div>
+            </td> 
+    <td class="laterald" >&nbsp;</td>
+    </tr>
+  </table>
         <asp:ObjectDataSource ID="ObjModulos" runat="server" OldValuesParameterFormatString="original_{0}"
             SelectMethod="GetRecords" TypeName="Modulos"></asp:ObjectDataSource>
         <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"

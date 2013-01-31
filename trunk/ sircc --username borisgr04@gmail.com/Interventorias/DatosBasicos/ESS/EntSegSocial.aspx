@@ -132,8 +132,7 @@
                     </tr>
                     <tr>
                         <td style="width: 184px">
-                            <asp:Label ID="Label3" runat="server" Text="Nombre del Informes"></asp:Label>
-                        </td>
+                            Nombre</td>
                         <td>
                             <asp:TextBox ID="TxtInf" runat="server" Width="300px"></asp:TextBox>
                         </td>
@@ -149,7 +148,6 @@
                                             <asp:DropDownList ID="cboTipoEnt" runat="server" DataSourceID="ObjTipo_Ent" 
                                                 DataTextField="NOM_TIP" DataValueField="COD_TIP">
                                                 <asp:ListItem Value="AC">Activa</asp:ListItem>
-                                                <asp:ListItem Value="EN">Entregado</asp:ListItem>
                                                 <asp:ListItem Value="IN">Inactivo</asp:ListItem>
                                             </asp:DropDownList>
                                         </td>
@@ -177,26 +175,16 @@
                         <td>
                             <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" />
                             <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar" />
-                            <INPUT id="BtnCancelar" type=button value="Cancelar" />
+                            <INPUT id="BtnCancelar" type="button" value="Cancelar" />
                         </td>
                         <td>
                             &nbsp;</td>
                     </tr>
                 </TABLE>
-                                <asp:ObjectDataSource ID="ObjTipo_Ent" runat="server" InsertMethod="Insert" 
+                                <asp:ObjectDataSource ID="ObjTipo_Ent" runat="server" 
                                     OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
-                                    TypeName="Tipos_Entidades" UpdateMethod="Update">
-                                    <InsertParameters>
-                                        <asp:Parameter Name="Cod_Tip" Type="String" />
-                                        <asp:Parameter Name="Nom_Tip" Type="String" />
-                                        <asp:Parameter Name="Est_Tip" Type="String" />
-                                    </InsertParameters>
-                                    <UpdateParameters>
-                                        <asp:Parameter Name="Cod_Tip_O" Type="String" />
-                                        <asp:Parameter Name="Cod_Tip" Type="String" />
-                                        <asp:Parameter Name="Nom_Tip" Type="String" />
-                                        <asp:Parameter Name="Est_Tip" Type="String" />
-                                    </UpdateParameters>
+                                    TypeName="Tipos_Entidades" >
+                                    
                                 </asp:ObjectDataSource>
                 <br />
                 </asp:Panel>

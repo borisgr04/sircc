@@ -284,10 +284,10 @@ Inherits="Solicitudes_ModSolicitud_Default"  %>
                     </tr>
                     <tr>
                         <td style="width: 234px">
-                            <asp:TextBox ID="TxtPpto" runat="server"></asp:TextBox>
-                            <cc1:FilteredTextBoxExtender ID="FT1" runat="server" 
-                                FilterType="Numbers,Custom" TargetControlID="TxtPpto" ValidChars=".">
-                            </cc1:FilteredTextBoxExtender>
+                            <telerik:RadNumericTextBox ID="TxtPpto" runat="server" Culture="es-CO" Height="19px"
+                                                        Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
+
                         </td>
                         <td style="width: 92px">
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 

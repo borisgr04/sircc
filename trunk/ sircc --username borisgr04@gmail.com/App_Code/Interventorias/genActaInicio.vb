@@ -9,6 +9,7 @@ Public Class genActaInicio
         'Try
         'En listanomtabla va el nombre de las tablas que se llena en pplantillas_campos
         Dim ide_con As String = Cod_Con
+        Me.Ide_Acta = Ide_Acta
         Dim dtDatos As New DataTable
         Dim dtPlantilla As New DataTable
         Dim ListaNomTablas As New List(Of String)

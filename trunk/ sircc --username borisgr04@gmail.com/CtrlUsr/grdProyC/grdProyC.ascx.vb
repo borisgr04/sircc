@@ -123,4 +123,8 @@ Partial Class CtrlUsr_grdOblig_grdProyC
         grd.EditIndex = -1
         LlenarGrid()
     End Sub
+
+    'Protected Sub IBtnBuscar_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IBtnBuscar.Click
+    '    modalProy.Show()
+    'End Sub
 End Class

@@ -6,6 +6,15 @@ Imports System.Collections.Generic
 Partial Class CtrlUsr_CalenProg_GActividades
     Inherits CtrlUsrComun
 
+    Shadows Property Oper() As String
+        Get
+            Return HdOper.value
+        End Get
+        Set(ByVal value As String)
+            HdOper.Value = value
+        End Set
+    End Property
+
     Protected dsHolidays As DataTable
     Dim obj As New PCronogramas
     Dim oCal As New Calendario

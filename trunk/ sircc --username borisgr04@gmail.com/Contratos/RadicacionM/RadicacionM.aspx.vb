@@ -42,7 +42,7 @@ Partial Class Contratos_RadicacionM_Default
         Dim vigencia As Integer = Me.Vigencia_Cookie
         If Me.tipo_rad = True Then
             ' si se genera numero de radicaicon automatico
-            MsgResult.Text = obj.Insert(vigencia, TxtIde.Text, TxtObj.Text, TxtPro.Text, CDate(TxtFsus.Text), Val(TxtPla.Text), CboDep.Text, cboStip.Text, CboTip.Text, Me.valor_dec(TxtVal.Text), mun, j - 1, CboSec.Text, CboFor.Text, TxtCsor.Text, CboTproc.Text, Me.TxtPlapre.Text, Me.TxtIdeRlc.Text, Me.ChkUM.Checked, Me.ChkEC.Checked, Me.TxtNProc.Text, Me.CboDepP.SelectedValue, Me.valor_dec(TxtValProp.Text), Me.ChkAnticipo.Checked, CInt(Me.TxtNEmpleos.Text), Me.ChkApo.Checked, Me.ChkAgotarPpto.Checked, Me.TxtPlazo2.Text, CboTPlazo.Text, CboTPlazo3.Text)
+            MsgResult.Text = obj.Insert(vigencia, TxtIde.Text, TxtObj.Text, TxtPro.Text, CDate(TxtFsus.Text), Val(TxtPla.Text), CboDep.Text, cboStip.Text, CboTip.Text, Me.valor_dec(TxtVal.Text), mun, j - 1, CboSec.Text, CboFor.Text, TxtCsor.Text, CboTproc.Text, Me.TxtPlapre.Text, Me.TxtIdeRlc.Text, Me.ChkUM.Checked, Me.ChkEC.Checked, Me.TxtNProc.Text, Me.CboDepP.SelectedValue, Me.valor_dec(TxtValProp.Text), Me.ChkAnticipo.Checked, CInt(Me.TxtNEmpleos.Text), Me.ChkApo.Checked, Me.ChkAgotarPpto.Checked, Me.TxtPlazo2.Text, CboTPlazo.Text, CboTPlazo3.Text, CboDepSup.SelectedValue)
         Else
             If String.IsNullOrEmpty(TxtCodCon.Text) Then
                 MsgResult.Visible = True
@@ -95,6 +95,7 @@ Partial Class Contratos_RadicacionM_Default
 
         Me.CboTip.Enabled = True
         CboDep.SelectedIndex = 0
+        CboDepSup.SelectedIndex = 0
         Try
             CboDepP.SelectedIndex = 0
         Catch ex As ArgumentOutOfRangeException
@@ -153,6 +154,7 @@ Partial Class Contratos_RadicacionM_Default
         CboFor.Enabled = V
         CboTproc.Enabled = V
         Me.CboDep.Enabled = V
+        CboDepSup.Enabled = V
         Me.CboDepP.Enabled = V
         Me.TxtCsor.Enabled = V
         TxtPlazo2.Enabled = V
@@ -180,7 +182,6 @@ Partial Class Contratos_RadicacionM_Default
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Thread.CurrentThread.CurrentCulture = New Globalization.CultureInfo("es-CO")
-
         Dim info As System.Globalization.CultureInfo = System.Globalization.CultureInfo.CreateSpecificCulture("es-CO")
         System.Threading.Thread.CurrentThread.CurrentUICulture = info
         System.Threading.Thread.CurrentThread.CurrentCulture = info
@@ -251,6 +252,7 @@ Partial Class Contratos_RadicacionM_Default
             TxtPro.Text = dt.Rows(0)("pro_con").ToString
             TxtFsus.Text = CDate(dt.Rows(0)("fec_sus_con")).ToShortDateString
             CboDep.SelectedValue = dt.Rows(0)("dep_con").ToString
+            CboDepSup.SelectedValue = dt.Rows(0)("dep_sup").ToString
             Try
                 CboDepP.SelectedValue = dt.Rows(0)("dep_pcon").ToString
                 'TxtObj.Text = "asignar combop." + dt.Rows(0)("dep_pcon").ToString
@@ -373,7 +375,7 @@ Partial Class Contratos_RadicacionM_Default
                 j = j + 1
             End If
         Next
-        MsgResult.Text = obj.UpdateP(Me.TxtCodCon.Text, TxtIde.Text, TxtObj.Text, TxtPro.Text, CDate(TxtFsus.Text), Val(TxtPla.Text), CboDep.Text, cboStip.Text, CboTip.Text, Me.valor_dec(TxtVal.Text), mun, j - 1, CboSec.Text, CboFor.Text, TxtCsor.Text, CboTproc.Text, Me.TxtPlapre.Text, Me.TxtIdeRlc.Text, Me.ChkUM.Checked, Me.ChkEC.Checked, Me.TxtNProc.Text, Me.CboDepP.SelectedValue, Me.valor_dec(Me.TxtValProp.Text), ChkAnticipo.Checked, Me.TxtNEmpleos.Text, Me.ChkApo.Checked, Me.ChkAgotarPpto.Checked, Me.TxtPlazo2.Text, CboTPlazo.Text, CboTPlazo3.Text)
+        MsgResult.Text = obj.UpdateP(Me.TxtCodCon.Text, TxtIde.Text, TxtObj.Text, TxtPro.Text, CDate(TxtFsus.Text), Val(TxtPla.Text), CboDep.Text, cboStip.Text, CboTip.Text, Me.valor_dec(TxtVal.Text), mun, j - 1, CboSec.Text, CboFor.Text, TxtCsor.Text, CboTproc.Text, Me.TxtPlapre.Text, Me.TxtIdeRlc.Text, Me.ChkUM.Checked, Me.ChkEC.Checked, Me.TxtNProc.Text, Me.CboDepP.SelectedValue, Me.valor_dec(Me.TxtValProp.Text), ChkAnticipo.Checked, Me.TxtNEmpleos.Text, Me.ChkApo.Checked, Me.ChkAgotarPpto.Checked, Me.TxtPlazo2.Text, CboTPlazo.Text, CboTPlazo3.Text, CboDepSup.SelectedValue)
         If obj.lErrorG = False Then
             Me.TxtUId.Text = obj.Cod_Con.ToString
             Oper = ""
@@ -571,12 +573,7 @@ Partial Class Contratos_RadicacionM_Default
         Response.Redirect("MiembrosCSUT.aspx?Cod_Con=" + TxtCodCon.Text)
     End Sub
 
-
-    Protected Sub RadToolBar1_ButtonClick(ByVal sender As Object, ByVal e As Telerik.Web.UI.RadToolBarEventArgs) Handles RadToolBar1.ButtonClick
-        MsgResult.Text += "Text: " + e.Item.Text + "<br/>"
-        RadToolBar1.Items(0).Enabled = False
-    End Sub
-
+    
     Public Sub UserMsgBox(ByVal F As Object, ByVal sMsg As String)
 
 

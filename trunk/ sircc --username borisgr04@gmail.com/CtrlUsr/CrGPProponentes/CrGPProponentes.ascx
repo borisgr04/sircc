@@ -34,8 +34,7 @@
     .style15
     {
         width: 4px;
-        text-align: center;
-    }
+        }
     .style16
     {
         width: 83px;

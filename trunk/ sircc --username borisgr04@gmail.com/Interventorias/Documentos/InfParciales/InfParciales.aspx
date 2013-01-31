@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
-    CodeFile="ActaInicio.aspx.vb" Inherits="Interventorias_Documentos_ActaInicio" %>
+    CodeFile="InfParciales.aspx.vb" Inherits="Interventorias_Documentos_InfParciales" %>
 
 <%@ Register src="../../CtrlUsr/DetContratosI/DetContratoI.ascx" tagname="DetContratoI" tagprefix="uc1" %>
 
@@ -169,7 +169,7 @@
                                 Documento
                             </td>
                             <td colspan="5">
-                                <asp:Label ID="LbEst1" runat="server" CssClass="Titulo"> ACTA DE INICIO</asp:Label>
+                                <asp:Label ID="LbEst1" runat="server" CssClass="Titulo"> INFORME/ACTA PARCIAL </asp:Label>
                                 &nbsp;&nbsp;&nbsp;
                             </td>
                         </tr>
@@ -197,24 +197,16 @@
                         </tr>
                         <tr>
                             <td>
+                                Valor Autorizado a Pagar</td>
+                            <td colspan="5">
+                                &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
                                 Plazo de Ejecución
                             </td>
                             <td colspan="5">
                                 <asp:Label ID="LbPlazoEje" runat="server"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Fecha de Finalización
-                            </td>
-                            <td colspan="5">
-                                <asp:TextBox ID="TxtFecFin" runat="server"></asp:TextBox>
-                                <ajaxToolkit:CalendarExtender ID="CalTxtFecFin" runat="server" Enabled="True"
-                                    TargetControlID="TxtFecFin">
-                                </ajaxToolkit:CalendarExtender>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TxtFecFin"
-                                    ErrorMessage="Seleccione la Fecha del Documento" ValidationGroup="ppal">*</asp:RequiredFieldValidator>
-                                <asp:CheckBox ID="ChkCalcular" runat="server" Text="Calcular Fecha" />
                             </td>
                         </tr>
                         <tr>

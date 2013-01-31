@@ -21,7 +21,7 @@ Public Class Tip_Doc
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetRecordsComplete(ByVal Filtro As String) As DataTable
-        Dim queryString As String = "SELECT Cod_Tip||'-'||Des_Tip As Des_Tip FROM Tip_Doc Where Upper(Des_Tip) Like '%" + Filtro.ToUpper + "%'"
+        Dim queryString As String = "SELECT Cod_Tip||'-'||Des_Tip As Des_Tip FROM vTip_Doc Where Proceso='SI' And Origen='E' And Upper(Des_Tip) Like '%" + Filtro.ToUpper + "%' And Est_Tip='AC'"
         Me.Conectar()
         Me.CrearComando(queryString)
         Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()

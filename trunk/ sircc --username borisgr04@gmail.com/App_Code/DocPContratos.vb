@@ -245,4 +245,21 @@ Public Class DocPContratos
         Me.Desconectar()
         Return dataTb
     End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetPlantillas(ByVal Tip_Doc As String) As DataTable
+        Me.Conectar()
+        If (Tip_Doc = "00") Or (String.IsNullOrEmpty(Tip_Doc)) Then
+            querystring = "Select * From PPlantillas Where Tip_Pla='02' " 'And Cod_Stip='00'
+            Me.CrearComando(querystring)
+        Else
+            querystring = "Select * From PPlantillas Where Tip_Pla='02' And (Cod_Stip=:Tip_Doc or Cod_Stip='00')"
+            Me.CrearComando(querystring)
+            AsignarParametroCadena(":Tip_Doc", Left(Tip_Doc, 2))
+        End If
+
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
 End Class

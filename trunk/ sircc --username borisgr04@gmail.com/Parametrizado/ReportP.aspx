@@ -28,8 +28,8 @@ namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 
       
         
-        <asp:TextBox ID="TxtSql" runat="server" ReadOnly="True" TextMode="MultiLine" Width="945px"></asp:TextBox>&nbsp;
-        <asp:Button ID="Button2" runat="server" Text="Actualizar Reporte" /><br />
+        <asp:TextBox ID="TxtSql" runat="server" ReadOnly="True" TextMode="MultiLine" Width="945px" Visible="false"></asp:TextBox>&nbsp;
+        <asp:Button ID="Button2" runat="server" Text="Actualizar Reporte" Visible="false" /><br />
     
 </div>
 </asp:Content>

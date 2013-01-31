@@ -4,6 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" runat="Server">
     <script src="../../Scripts/jquery-1.4.2.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery-ui-1.8rc3.custom.min.js" type="text/javascript"></script>
+    <script src="../../js/SirccD.js" type="text/javascript"></script>
     <link href="../../Styles/Estyle.css" rel="stylesheet" type="text/css" />
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="true"
         EnableScriptGlobalization="True">
@@ -20,24 +21,23 @@
             }
             function OpenSirccD(oper){
                 if (navigator.userAgent.indexOf('MSIE') !=-1) {
-
                     var proceso=document.aspnetForm.<%=Me.TxtNProceso.ClientID%>.value;
                     var usuario=document.aspnetForm.<%=Me.HdUsuario.ClientID%>.value; 
                     var des_doc=document.aspnetForm.<%=Me.TxtDoc.ClientID%>.value; 
-                    
-                    var tip_doc=String(des_doc).substring(0,2);
                     var tip_doc=String(des_doc).substring(0,2);
                     var fec_doc=document.aspnetForm.<%=Me.TxtFec.ClientID%>.value; 
                     var nom=document.aspnetForm.<%=Me.TxtNom.ClientID%>.value; 
+                    var ide_pla=0;
                     if (oper=="pnd"){
-                    document.aspnetForm.<%=Me.TxtId.ClientID%>.value="";
+                        document.aspnetForm.<%=Me.TxtId.ClientID%>.value="";
+                        ide_pla=document.aspnetForm.<%=Me.CboPlantilla.ClientID%>.value; 
                     }
                     var id_doc=document.aspnetForm.<%=Me.TxtId.ClientID%>.value; 
                     if(des_doc =="" )
                     {
-                    alert("Seleccione el Tipo de Documento");
-                    document.aspnetForm.<%=Me.TxtDoc.ClientID%>.focus();
-                    return;
+                        alert("Seleccione el Tipo de Documento");
+                        document.aspnetForm.<%=Me.TxtDoc.ClientID%>.focus();
+                        return;
                     }
                     if( nom == "" ){
                        
@@ -47,34 +47,19 @@
                         var iLen = String(des_doc).length;
                         nom= String(des_doc).substring(3, iLen);
                         document.aspnetForm.<%=Me.TxtNom.ClientID%>.value=nom;
-                        
                     }
                      if( fec_doc == ""){
                         var f=new Date();
-                        if (!confirm('No digito fecha, quiere que el Sistema asigne la fecha automaticamente?')){
+                        if (!confirm('No digito fecha')); 
                         return;
                         }
-                        fec_doc=f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() ;
-                        document.aspnetForm.<%=Me.TxtFec.ClientID%>.value=fec_doc;
-                        
-                    }
-                    
-                    var oShell = new ActiveXObject("Shell.Application");
-                    var commandtoRun = "C:\\SirccD\\SirccD.exe";
-                    if(id_doc==null && oper!="pnd"){
-                        alert('Debe haber seleccionado un Documento existente, para esta operación');
-                        return ;
-                    }
-                    
-                    var commandParms = usuario +";"+oper+ ";" + proceso + ";" + tip_doc+";"+id_doc+";"+fec_doc+";"+nom ;
-                    //alert(commandParms ); 
-                    oShell.ShellExecute(commandtoRun, commandParms, "", "open", "1");
-                    
-                    alert("Presione aceptar después que se halla generado el Documento, para actualizar la página");
-                    
-                    location.reload();
-                    
-                    
+                        if(id_doc==null && oper!="pnd"){
+                                alert('Debe haber seleccionado un Documento existente, para esta operación');
+                                return ;
+                        }
+                        var commandParms = usuario +";"+oper+ ";" + proceso + ";" + tip_doc+";"+id_doc+";"+fec_doc+";"+nom+";"+ide_pla ;
+                        var url=document.aspnetForm.<%=Me.HdUrl.ClientID%>.value; 
+                        AbrirSirccD(commandParms,url);
                 }
                 else{
                    alert('El Navegador no es Compatible con la Operación. Por Favor abrá manualmente SIRCCD, y Seleccione el Numero del Proceso');
@@ -85,7 +70,7 @@
             $(function () {
                 $("#<%= TxtDoc.ClientID  %>").autocomplete({
                     delay: 1,
-                    minLength: 1,
+                    minLength: 3,
                     source: function (request, response) {
                         PageMethods.ObtieneNombres(request.term,
                             function (data) {
@@ -94,12 +79,13 @@
                             },
                             fnLlamadaError);
                     }
-
+                    
                 });
             });
 
             function fnLlamadaError(excepcion) { alert('Ha ocurrido un error al traer los nombres: ' + excepcion.get_message()); }
     </script>
+    <asp:HiddenField ID="hdUrl" runat="server" />
     <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
         <ContentTemplate>
             <asp:HiddenField ID="HdUsuario" runat="server" />
@@ -166,8 +152,19 @@
                         </td>
                     </tr>
                     <tr>
+                        <td colspan="2" style="height: 21px">
+                            Plantilla</td>
+                        <td colspan="7" style="height: 21px">
+                                    <asp:DropDownList ID="CboPlantilla" runat="server" 
+                                DataSourceID="ObjPlantillas" DataTextField="Nom_Pla" DataValueField="Ide_Pla">
+                                    </asp:DropDownList>
+                                    <asp:ImageButton ID="IBtnReload" runat="server" SkinID="IBtnReload" />
+                           
+                        </td>
+                    </tr>
+                    <tr>
                         <td style="height: 18px" colspan="2">
-                            Descripcion
+                            Descripción
                         </td>
                         <td colspan="7" style="height: 18px">
                             <asp:TextBox ID="TxtNom" runat="server" Width="100%"></asp:TextBox>
@@ -195,10 +192,11 @@
                             &nbsp;
                         </td>
                     </tr>
-                    <asp:Label runat="server" Text="&nbsp;" ID="uploadResult" />
+                    
                     <tr>
                         <td style="width: 32px; height: 21px">
                             &nbsp;
+                            <asp:Label runat="server" Text="&nbsp;" ID="uploadResult" />
                         </td>
                         <td style="width: 60px; height: 21px; text-align: center;">
                             <asp:ImageButton ID="IBtnGenDoc" runat="server" OnClientClick="javascript:OpenSirccD('pnd')"
@@ -226,8 +224,9 @@
                             <asp:ImageButton ID="IBtnGuardar" runat="server" Enabled="False" SkinID="IBtnGuardar"
                                 OnClientClick="javascript:ValId();" ToolTip="Actualiza Descripción y Fecha" />
                         </td>
-                        <td style="width: 13px; height: 21px">
+                        <td style="width: 76px; height: 21px; text-align: center;">
                             &nbsp;
+                            <asp:ImageButton ID="IBtnCancelar" runat="server" SkinID="IBtnCancelar" />
                         </td>
                     </tr>
                     <tr>
@@ -257,11 +256,10 @@
                             &nbsp;
                         </td>
                         <td style="width: 76px; height: 21px; text-align: center;">
-                            Guardar<br />
-                            Datos
+                            Guardar
                         </td>
-                        <td style="width: 13px; height: 21px; text-align: center;">
-                            &nbsp;
+                        <td style="width: 76px; height: 21px; text-align: center;">
+                            Cancelar
                         </td>
                     </tr>
                     <tr>
@@ -287,7 +285,15 @@
                         </td>
                     </tr>
                 </table>
-            </fieldset></td>
+            </fieldset>
+            <asp:ObjectDataSource ID="ObjPlantillas" runat="server" OldValuesParameterFormatString="original_{0}" 
+                                SelectMethod="GetPlantillas" TypeName="DocPContratos">
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="TxtDoc" Name="Tip_Doc" PropertyName="Text" 
+                                        Type="String" />
+                                </SelectParameters>
+                            </asp:ObjectDataSource>
+            </td>
             
             <td style="vertical-align:top; "">
             <fieldset style="height:400px; padding:20px;overflow:auto; ">
@@ -311,7 +317,6 @@
             </td>
             </tr>
             </table>
-
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

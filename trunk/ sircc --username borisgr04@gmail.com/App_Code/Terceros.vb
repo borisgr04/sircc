@@ -184,6 +184,26 @@ Public Class Terceros
         Return dataTb
 
     End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetTercerosxIde_DepAbo(ByVal ide_ter As String, ByVal cod_dep As String) As DataTable
+
+        Me.Conectar()
+
+        Dim queryString As String
+
+
+        queryString = "select * from vHDEP_SOLOABOGADOS WHERE IDE_TER like :ide_ter and cod_dep=:cod_dep "
+        Me.CrearComando(queryString)
+        Me.AsignarParametroCadena(":ide_ter", ide_ter)
+        Me.AsignarParametroCadena(":cod_dep", cod_dep)
+
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+
+    End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetRecords(ByVal busc As String) As DataTable
 

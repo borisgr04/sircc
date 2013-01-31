@@ -261,14 +261,7 @@ padding-right: 20px;
                     <tr>
                         <td class="style3">
                             <asp:TextBox ID="TxtNProc" runat="server" Width="202px"></asp:TextBox>
-                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" 
-                                Enabled="True" TargetControlID="TxtNProc" WatermarkCssClass="watermarked" 
-                                WatermarkText="DD-PPPP-CCCC-VVVV ">
-                            </cc1:TextBoxWatermarkExtender>
-                            <cc1:TextBoxWatermarkExtender ID="TxtNProc_TextBoxWatermarkExtender" 
-                                runat="server" Enabled="True" TargetControlID="TxtNProc" 
-                                WatermarkCssClass="watermarked" WatermarkText="Automático Número de Proceso">
-                            </cc1:TextBoxWatermarkExtender>
+                            
                         </td>
                         <td>
                             &nbsp;</td>

@@ -4,8 +4,8 @@
     {
 
         background-image:none;
-        background-repeat:repeat-x;
-     
+        background-repeat:repeat-y;
+        
       
     }
     
@@ -14,26 +14,23 @@
 
     #contenedor-general
 	    {
-	
-	 
-	    margin: 2em auto 0 auto;
+	    margin: 0 auto 0 auto;
 	    width:1024px;
 	    height:auto;
 	    background-color:#FFFFFF;
-	    -moz-box-shadow:5px 4px 20px #06B1B7;
-        -webkit-box-shadow: 5px 4px 20px #06B1B7;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(color=#06B1B7,direction=125,strength=5)";	
 	    }
-
+/*
+-moz-box-shadow:5px 4px 20px #06B1B7;
+        -webkit-box-shadow: 5px 4px 20px #06B1B7;
+-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(color=#06B1B7,direction=125,strength=5)";	*/
     #header
-	 
-	      {
-	 
+	       {
+	           
+	         top:0px;
 	          width:1024px;
 	          height:105px;
 	          background-image:url(imagenes/header1.jpg);
 	          background-repeat:no-repeat;	 
-	
 	      }
 
      #contenido
@@ -98,12 +95,11 @@
         
     #barra-modulos
         {    
-        
-            width: 253px;
+            width: 350px;
             height: 27px;
             position:relative;
-            top: 50px;
-            left: 770px;
+            top: 20px;
+            left: 600px;
             margin-top: 0px;
            
         }
@@ -230,14 +226,12 @@ body, div, p, h1, h2, h3, h4, ul, li, table
     
 }
 
-/*background: #B4B4B4 url(images/body_bg.gif) repeat left top;*/
+/*background: #B4B4B4 url(images/body_bg.gif) repeat left top;
+    background-image:url('imagenes/gradiente.jpg') ;
+*/
 body
 {
-	
-    
-    background-image:url('imagenes/gradiente.jpg') ;
-    background-repeat:repeat-x repeat-y;
-
+	background-repeat:repeat-x repeat-y;
 	font-family: Tahoma, Arial, sans-serif;
 	font-size:70%;
 }
@@ -259,23 +253,31 @@ body
     color:White;
     font-weight:bolder;
 }
-/*
-#master_headerbarra
-{
-    color: #666666;
-	background:#FFF url(images/demotop.png) no-repeat left top;
-	padding: 30px 20px 0px 20px;
-	border-left: 1px solid #0F2543;
-	border-right: 1px solid #0F2543;
-	background-color: #EFEFEF;
-	line-height: 1.5em;
-}
 
-input,select
-{
-	font-family: Tahoma, Arial, sans-serif;
-	font-size:95%;
+.laterali
+    {
+        background-image: url(images/bg1222.jpg);
+        background-position:right top; 
+        background-repeat:repeat-y;
+        width: 50%;
     }
+    .laterald2
+    {
+        background-image: url(images/bg1223.jpg);
+        height: 40px;
+        background-color: transparent;
+        color: White;
+        font-weight: bolder;
+        width: 50%;
+    }
+    .laterald
+    {
+        background-image: url(images/bg1223.jpg);
+        background-position:right left; 
+        background-repeat:repeat-y; 
+        width: 50%;
+    }
+
 
 /* Master Page Layout 
 Modificado : 12 de nov del 2009
@@ -408,7 +410,6 @@ Se amplio el ancho de 800 px a 1000 px
 #master_contentheader
 {
 	height: 0px;
-	background: url(images/rightcoltop.gif) no-repeat right top;
 	background: url(images/web20.png)
 	
 }
@@ -453,6 +454,8 @@ background:#FFF url(images/demotop.png) no-repeat left top;
 	background-color:White;
 	border:1px;
 	border-color:Blue;
+	height:400px;
+	overflow:auto;
 }
 
 .demoareaIzq {
