@@ -448,14 +448,15 @@ Se amplio el ancho de 800 px a 1000 px
 background:#FFF url(images/demotop.png) no-repeat left top;
  */
 
-
+/*height:400px;
+	overflow:auto;*/
 .demoarea {
 	padding:5px;
 	background-color:White;
 	border:1px;
 	border-color:Blue;
-	height:400px;
-	overflow:auto;
+	min-height:400px;
+	
 }
 
 .demoareaIzq {
