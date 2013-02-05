@@ -2,22 +2,13 @@
 Imports System.Web.Script.Services
 Imports System.Data
 
-Partial Class Interventorias_PanelSupervision_PanelSupervision
+Partial Class Interventorias_PanelDependencias_PanelDependencias
     Inherits PaginaComun
 
 
     Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             Me.hdUserName.Value = Membership.GetUser().UserName
-
-        End If
-    End Sub
-    Protected Sub grdEstContratos_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdEstContratos.RowDataBound
-        If e.Row.RowType = DataControlRowType.DataRow Then
-            'ASIGNA(EVENTOS)
-            e.Row.Attributes.Add("OnMouseOver", "Resaltar_On(this);")
-            e.Row.Attributes.Add("OnMouseOut", "Resaltar_Off(this);")
-
         End If
     End Sub
 
@@ -45,6 +36,12 @@ Partial Class Interventorias_PanelSupervision_PanelSupervision
 
 
     Protected Sub LstSupervisiones_ItemCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.ListViewCommandEventArgs) Handles LstSupervisiones.ItemCommand
+        Select Case e.CommandName
+            Case "Detalle"
+                Redireccionar_Pagina("/Interventorias/DetContratos/Contratos.aspx?Numero=" + e.CommandArgument.ToString())
+            Case "Designar"
+                Redireccionar_Pagina("/Interventorias/Designaciones/Designaciones.aspx?Numero=" + e.CommandArgument.ToString())
+        End Select
         Dim CboEstSig As DropDownList = DirectCast(e.Item.FindControl("CboEstSig"), DropDownList)
     End Sub
 
@@ -54,48 +51,12 @@ Partial Class Interventorias_PanelSupervision_PanelSupervision
     End Sub
 
     Protected Sub LstSupervisiones_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles LstSupervisiones.SelectedIndexChanged
-        mpe.Show()
-        Dim objE As New EstContratos
-        If objE.GetActasBorrador(Me.LstSupervisiones.SelectedValue) = 0 Then
-            PnlNuevoDoc.Visible = True
-            PnLabelNuevo.Visible = False
-        Else
-            PnlNuevoDoc.Visible = False
-            PnLabelNuevo.Visible = True
-            LbNuevo.Text = "Existe un Documento en Borrador, debe Editarlo para Terminar su diligenciamiento o Anularlo para elaborar otro."
-            MsgBoxInfo(LbNuevo, True)
-        End If
+        
     End Sub
 
-    Protected Sub IBtnDoc_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnDoc.Click
-        Nuevo(LstSupervisiones.SelectedValue, CboEstSig.SelectedValue)
-    End Sub
-
-    Protected Sub IBtnVolver_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnVolver.Click
-
-    End Sub
-
-
-    Protected Sub grdEstContratos_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdEstContratos.RowCommand
-        Me.Oper = e.CommandName
-        If Me.Oper = "Anular" Then
-            Dim Obj As EstContratos = New EstContratos()
-            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-            Me.grdEstContratos.SelectedIndex = index
-            Me.MsgResult.Visible = True
-            Me.MsgResult.Text = Obj.Anular(Me.grdEstContratos.SelectedValue)
-            Me.MsgBox(MsgResult, Obj.lErrorG)
-            LstSupervisiones.DataBind()
-            CboEstSig.DataBind()
-            grdEstContratos.DataBind()
-        ElseIf Me.Oper = "Editar" Then
-            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-            Me.grdEstContratos.SelectedIndex = index
-            Me.NoID = Me.grdEstContratos.DataKeys(index).Values("ID").ToString()
-            Dim dest As String = Me.grdEstContratos.DataKeys(index).Values("EST_FIN").ToString()
-
-            Dim Ruta As String = RutasPag.GetInstance.GetRuta(dest)
-            Redireccionar_Pagina(Ruta + "?Cod_Con=" + LstSupervisiones.SelectedValue + "&Oper=Editar&NoID=" + Me.NoID)
-        End If
+    Protected Sub RadTabStrip1_TabClick(ByVal sender As Object, ByVal e As Telerik.Web.UI.RadTabStripEventArgs) Handles RadTabStrip1.TabClick
+        Me.HfOper.Value = RadTabStrip1.SelectedTab.Text
+        Label5.Text = HfOper.Value
+        LstSupervisiones.DataBind()
     End Sub
 End Class

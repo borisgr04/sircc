@@ -42,6 +42,15 @@ Public Class PaginaComun
         End Set
     End Property
 
+    Property Pk2() As String
+        Get
+            Return ViewState("Pk2")
+        End Get
+        Set(ByVal value As String)
+            ViewState("Pk2") = value
+        End Set
+    End Property
+
     ReadOnly Property Vigencia() As Integer
         Get
             Return OVig.GetActiva()
