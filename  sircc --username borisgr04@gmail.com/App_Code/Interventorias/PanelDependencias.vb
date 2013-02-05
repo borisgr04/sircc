@@ -61,4 +61,16 @@ Public Class PanelDependencias
         Me.Desconectar()
         Return dataTb
     End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetContratosDep(ByVal filtro As String, ByVal oper As String) As DataTable
+        Select Case oper
+            Case "Todos"
+                Return GetContratosT(filtro)
+            Case "Asignados"
+                Return GetContratosDes(filtro)
+            Case "Sin Asignar"
+                Return GetContratosSDes(filtro)
+        End Select
+    End Function
 End Class
