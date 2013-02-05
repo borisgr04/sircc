@@ -20,7 +20,7 @@ Partial Class Consultas_Contratos_Default
         End Get
     End Property
     Protected Sub DetContratoN1_AceptarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles DetContratoN1.AceptarClicked
-        Me.ConDocContratos1.CodigoContrato = Me.DetContratoN1.Cod_Con
+        'Me.ConDocContratos1.CodigoContrato = Me.DetContratoN1.Cod_Con
     End Sub
     Protected Sub grdEstContratos_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdEstContratos.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then

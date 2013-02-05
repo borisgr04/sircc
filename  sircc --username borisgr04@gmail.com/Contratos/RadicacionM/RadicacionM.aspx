@@ -142,8 +142,7 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 238px; ">
-                                        <asp:Label ID="TipoRad" runat="server" CssClass="SubTitulo" Width="100%"></asp:Label>
-                                    </td>
+                                        &nbsp;</td>
                                     <td style="width: 200px; ">
                                         &nbsp;
                                     </td>
@@ -171,7 +170,9 @@
                                 </tr>
                                 <tr>
                                     <td style="height: 10px" colspan="9">
-                                        &nbsp;</td>
+                                        <asp:Label ID="TipoRad" runat="server" CssClass="SubTitulo" Visible="False" 
+                                            Width="100%"></asp:Label>
+                                    </td>
                                 </tr>
                             </table>
                     <div  <%--style="overflow:auto; height:400px"--%>>
@@ -301,7 +302,8 @@
                     <tr>
                         <td colspan="6" valign="top">
                             <asp:DropDownList ID="CboDep" runat="server" CssClass="txt" DataSourceID="ObjDep"
-                                DataTextField="NOM_DEP" DataValueField="COD_DEP">
+                                DataTextField="NOM_DEP" DataValueField="COD_DEP" 
+                                ToolTip="Dependeica que tiene la necesidad o requerimiento de Contratación">
                                 <asp:ListItem>-------------o-----------------</asp:ListItem>
                             </asp:DropDownList>
                         </td>
@@ -319,7 +321,8 @@
                     <tr>
                         <td colspan="6" valign="top">
                             <asp:DropDownList ID="CboDepP" runat="server" CssClass="txt" DataSourceID="ObjDepDel"
-                                DataTextField="NOM_DEP" DataValueField="COD_DEP">
+                                DataTextField="NOM_DEP" DataValueField="COD_DEP" 
+                                ToolTip="Dependencia encargada del proceso de Contratación y Minuta">
                                 <asp:ListItem>-------------o-----------------</asp:ListItem>
                             </asp:DropDownList>
                         </td>
@@ -332,7 +335,8 @@
                     <tr>
                         <td colspan="6" valign="top">
                             <asp:DropDownList ID="CboDepSup" runat="server" CssClass="txt" DataSourceID="ObjDep"
-                                DataTextField="NOM_DEP" DataValueField="COD_DEP">
+                                DataTextField="NOM_DEP" DataValueField="COD_DEP" 
+                                ToolTip="Dependencia que realizará el Proceso de Seguimiento, Interventoria/Supervisión al Contrato">
                                 <asp:ListItem>-------------o-----------------</asp:ListItem>
                             </asp:DropDownList>
                         </td>

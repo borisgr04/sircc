@@ -252,7 +252,7 @@ Partial Class Contratos_RadicacionM_Default
             TxtPro.Text = dt.Rows(0)("pro_con").ToString
             TxtFsus.Text = CDate(dt.Rows(0)("fec_sus_con")).ToShortDateString
             CboDep.SelectedValue = dt.Rows(0)("dep_con").ToString
-            CboDepSup.SelectedValue = dt.Rows(0)("dep_sup").ToString
+            CboDepSup.SelectedValue = dt.Rows(0)("Dep_Sup").ToString
             Try
                 CboDepP.SelectedValue = dt.Rows(0)("dep_pcon").ToString
                 'TxtObj.Text = "asignar combop." + dt.Rows(0)("dep_pcon").ToString

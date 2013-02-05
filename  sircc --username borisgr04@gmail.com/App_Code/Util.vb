@@ -172,4 +172,32 @@ Public Class Util
         Return oPath
     End Function
 
+    Public Shared Function Icono(tipo As String) As String
+        Dim ic As String = ""
+        Select Case tipo
+            Case "image/jpeg", "image/png", "image/bmp"
+                ic = "~/images/iconos/imagen.png"
+                Exit Select
+            Case "application/pdf"
+                ic = "~/images/iconos/pdf.png"
+                Exit Select
+            Case "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/msword"
+                ic = "~/images/iconos/word.png"
+                Exit Select
+            Case "application/octet-stream"
+                ic = "~/images/iconos/rar.png"
+                Exit Select
+            Case "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                ic = "~/images/iconos/excel.png"
+                Exit Select
+            Case "application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                ic = "~/images/iconos/ppoint.png"
+                Exit Select
+            Case Else
+                ic = "~/images/iconos/Otro.png"
+                Exit Select
+        End Select
+        Return ic
+    End Function
+
 End Class
