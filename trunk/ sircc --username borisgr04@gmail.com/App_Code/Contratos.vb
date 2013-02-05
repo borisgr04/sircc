@@ -2,6 +2,10 @@ Imports Microsoft.VisualBasic
 Imports System.ComponentModel
 Imports System.Data
 Imports System.Data.Common
+'FEcha 02 de Febrero de 2012,
+'Boris
+' Se cambia Dep_Sup x Interventoria (El Campo requerido ya existia
+
 'Se Agrega Campo Dep_Sup Para Manejar la Dependencia que realiza la Supervisión del Contrato.
 'Clase para manejar la Tabla Contratos
 'Fecha Creaciòn: 19 dic 2010
@@ -188,7 +192,7 @@ Public Class Contratos
             gac = IIf(gac <> "", gac, " ")
             pla_pre = IIf(pla_pre <> "", pla_pre, " ")
 
-            querystring = "INSERT INTO Contratos (nro_con,ide_con,obj_con,pro_con,FEC_SUS_CON,PLA_EJE_CON,DEP_CON,VIG_CON,STIP_CON,EST_CON,tip_con,val_con,cod_con,cod_sec,tip_for,COD_TPRO,OTR_CNS,IDE_REP,NRO_PLA_CON, Urg_Man, Est_Conv,pro_sel_nro,dep_pcon,val_apo_gob,ANTICIPO,NEMPLEOS,PER_APO,AGOTAR_PPTO,TIPO_PLAZO,TIPO_PLAZO2,PLAZO2_EJE_CON,DEP_SUP) VALUES(:nro_con,:ide_con,:obj_con,:pro_con,:FEC_SUS_CON,:PLA_EJE_CON,:DEP_CON,:VIG_CON,:STIP_CON,:EST_CON,:tip_con,to_number(:val_con),:cod_con,:cod_sec,:tip_for,:COD_TPRO,:OTR_CNS,:IDE_REP,:NRO_PLA_CON,:Urg_Man,:Est_Conv,:pro_sel_nro,:dep_pcon,to_number(:val_apo_gob),:ANTICIPO,:NEMPLEOS,:PER_APO,:AGOTAR_PPTO,:TIPO_PLAZO,:TIPO_PLAZO2,:PLAZO2_EJE_CON,:DEP_SUP)"
+            querystring = "INSERT INTO Contratos (nro_con,ide_con,obj_con,pro_con,FEC_SUS_CON,PLA_EJE_CON,DEP_CON,VIG_CON,STIP_CON,EST_CON,tip_con,val_con,cod_con,cod_sec,tip_for,COD_TPRO,OTR_CNS,IDE_REP,NRO_PLA_CON, Urg_Man, Est_Conv,pro_sel_nro,dep_pcon,val_apo_gob,ANTICIPO,NEMPLEOS,PER_APO,AGOTAR_PPTO,TIPO_PLAZO,TIPO_PLAZO2,PLAZO2_EJE_CON,interventoria) VALUES(:nro_con,:ide_con,:obj_con,:pro_con,:FEC_SUS_CON,:PLA_EJE_CON,:DEP_CON,:VIG_CON,:STIP_CON,:EST_CON,:tip_con,to_number(:val_con),:cod_con,:cod_sec,:tip_for,:COD_TPRO,:OTR_CNS,:IDE_REP,:NRO_PLA_CON,:Urg_Man,:Est_Conv,:pro_sel_nro,:dep_pcon,to_number(:val_apo_gob),:ANTICIPO,:NEMPLEOS,:PER_APO,:AGOTAR_PPTO,:TIPO_PLAZO,:TIPO_PLAZO2,:PLAZO2_EJE_CON,:interventoria)"
             'querystring = "INSERT INTO Contratos (nro_con,ide_con,obj_con,pro_con,FEC_SUS_CON,PLA_EJE_CON,DEP_CON,VIG_CON,STIP_CON,EST_CON,tip_con,val_con,cod_con,cod_sec,tip_for,COD_TPRO,OTR_CNS,IDE_REP,NRO_PLA_CON, Urg_Man, Est_Conv,pro_sel_nro,dep_pcon,val_apo_gob,ANTICIPO,NEMPLEOS,PER_APO,AGOTAR_PPTO) VALUES(:nro_con,:ide_con,:obj_con,:pro_con,:FEC_SUS_CON,:PLA_EJE_CON,:DEP_CON,:VIG_CON,:STIP_CON,:EST_CON,:tip_con,to_number(:val_con),:cod_con,:cod_sec,:tip_for,:COD_TPRO,:OTR_CNS,:IDE_REP,:NRO_PLA_CON,:Urg_Man,:Est_Conv,:pro_sel_nro,:dep_pcon,to_number(:val_apo_gob),:ANTICIPO,:NEMPLEOS,:PER_APO,:AGOTAR_PPTO)"
             Me.CrearComando(querystring)
 
@@ -228,7 +232,7 @@ Public Class Contratos
             Me.AsignarParametroCadena(":TIPO_PLAZO2", TIPO_PLAZO2) ' EL DIA 23 de Abril de 2012, Boris Gonzalez
             Me.AsignarParametroCadena(":PLAZO2_EJE_CON", PLAZO2_EJE_CON) ' EL DIA 23 de Abril de 2012, Boris Gonzalez
             'Agregado por Boris el 27 de Enero de 2012
-            Me.AsignarParametroCadena(":DEP_SUP", Dep_Sup) ' EL DIA 23 de Abril de 2012, Boris Gonzalez
+            Me.AsignarParametroCadena(":interventoria", Dep_Sup) ' EL DIA 23 de Abril de 2012, Boris Gonzalez
 
             '
             'ANTICIPO,NEMPLEOS,PER_APO
@@ -410,7 +414,7 @@ Public Class Contratos
             'EST_CON,VIGENCIA NRO TIP CON COD CON
 
 
-            querystring = "UPDATE Contratos set ide_con=:ide_con ,obj_con=:obj_con,pro_con=:pro_con,PLA_EJE_CON=:PLA_EJE_CON,DEP_CON=:DEP_CON,STIP_CON=:STIP_CON,val_con=:val_con,cod_sec=:cod_sec,tip_for=:tip_for,COD_TPRO=:COD_TPRO,OTR_CNS=:OTR_CNS,IDE_REP=:IDE_REP,NRO_PLA_CON=:NRO_PLA_CON, Urg_Man=:Urg_Man, Est_Conv=:Est_Conv,pro_sel_nro=:pro_sel_nro,dep_pcon=:dep_pcon,val_apo_gob=:val_apo_gob,ANTICIPO=:ANTICIPO,NEMPLEOS=:NEMPLEOS,PER_APO=:PER_APO,AGOTAR_PPTO=:AGOTAR_PPTO,TIPO_PLAZO=:TIPO_PLAZO,TIPO_PLAZO2=:TIPO_PLAZO2, PLAZO2_EJE_CON=:PLAZO2_EJE_CON,Dep_Sup=:Dep_Sup  WHERE COD_CON=:cod_con_pk "
+            querystring = "UPDATE Contratos set ide_con=:ide_con ,obj_con=:obj_con,pro_con=:pro_con,PLA_EJE_CON=:PLA_EJE_CON,DEP_CON=:DEP_CON,STIP_CON=:STIP_CON,val_con=:val_con,cod_sec=:cod_sec,tip_for=:tip_for,COD_TPRO=:COD_TPRO,OTR_CNS=:OTR_CNS,IDE_REP=:IDE_REP,NRO_PLA_CON=:NRO_PLA_CON, Urg_Man=:Urg_Man, Est_Conv=:Est_Conv,pro_sel_nro=:pro_sel_nro,dep_pcon=:dep_pcon,val_apo_gob=:val_apo_gob,ANTICIPO=:ANTICIPO,NEMPLEOS=:NEMPLEOS,PER_APO=:PER_APO,AGOTAR_PPTO=:AGOTAR_PPTO,TIPO_PLAZO=:TIPO_PLAZO,TIPO_PLAZO2=:TIPO_PLAZO2, PLAZO2_EJE_CON=:PLAZO2_EJE_CON,interventoria=:interventoria  WHERE COD_CON=:cod_con_pk "
             Me.CrearComando(querystring)
 
             Me.AsignarParametroCadena(":ide_con", ide)
@@ -451,7 +455,7 @@ Public Class Contratos
             Me.AsignarParametroCadena(":PLAZO2_EJE_CON", PLAZO2_EJE_CON) ' EL DIA 23 de Abril de 2011, Boris Gonzalez
 
             'Enero 27 de 2012,
-            Me.AsignarParametroCadena(":Dep_Sup", Dep_Sup) ' EL DIA 23 de Abril de 2011, Boris Gonzalez
+            Me.AsignarParametroCadena(":interventoria", Dep_Sup) ' EL DIA 23 de Abril de 2011, Boris Gonzalez
 
             'AGREGAR EL CONTRATO A LA BD
             'Throw New Exception(Me._Comando.CommandText)

@@ -9,7 +9,6 @@
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="true"
         EnableScriptGlobalization="True">
     </ajaxToolkit:ToolkitScriptManager>
-    <uc2:ctrAyudIzql ID="ctrAyudIzql1" runat="server" Mensaje=" Para Diligenciar las Actas de los Contratos siga las indicaciones: <br/> 1. Busque el Contrato requerido por Número, Contratista u Objeto. 2. <br/> Seleccionelo haciendo Click en el Boton de la Izquierda.<br/> 3.Seleccione el Documento a Diligenciar " />
     <div class="demoarea">
         <asp:Label CssClass="Titulo" ID="Label5" runat="server" Text='SUPERVISIONES/INTERVENTORIAS A CARGO' />
         <asp:HiddenField ID="hdUserName" runat="server" />

@@ -187,7 +187,7 @@
                 <ajaxToolkit:AccordionPane ID="AccordionPaneConDoc" runat="server">
                 <Header><a href="" class="accordionLink">10. DOCUMENTOS DEL CONTRATO</a></Header>
                 <Content>
-                <uc3:ConDocContratos ID="ConDocContratos1" runat="server" />
+                <%--<uc3:ConDocContratos ID="ConDocContratos1" runat="server" />--%>
                 </Content>
             </ajaxToolkit:AccordionPane>
             <ajaxToolkit:AccordionPane ID="AccordionPane10" runat="server">

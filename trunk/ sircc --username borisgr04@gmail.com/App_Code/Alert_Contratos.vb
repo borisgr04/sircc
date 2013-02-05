@@ -17,7 +17,7 @@ Public Class Alert_Contratos
                 Me.CrearComando(querystring)
                 Me.AsignarParametroCadena(":dias", dias)
                 Me.AsignarParametroCadena(":vigencia", Vigencia)
-                dataTb = Me.EjecutarConsultaDataTable()
+                'dataTb = Me.EjecutarConsultaDataTable()
             Case "CxL"
                 querystring = "SELECT * FROM vAlertContratos Where estado In ('TERMINADO') And (FECHAFINAL + 120) <= (sysdate+ :dias ) and vig_con = :vigencia "
                 Me.CrearComando(querystring)
