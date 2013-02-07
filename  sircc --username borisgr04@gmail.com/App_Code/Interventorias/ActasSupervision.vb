@@ -53,12 +53,70 @@ Public Class ActasSupervision
         End Set
     End Property
 
-    <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
     Function GetContratosByIde(ByVal Cod_Con As String) As DataTable
         querystring = "SELECT * FROM Contratos Where Cod_Con =:cod_con"
         Me.CrearComando(querystring)
         AsignarParametroCadena(":cod_con", Cod_Con)
         Return EjecutarConsultaDataTable()
+    End Function
+
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
+    Function GetValPagoAutorizado(ByVal Cod_Con As String) As Decimal
+        Me.Conectar()
+        Dim Val_Aut As Decimal = GetPValPagoAutorizado(Cod_Con)
+        Me.Desconectar()
+        Return Val_Aut
+    End Function
+
+    Function GetPValPagoAutorizado(ByVal Cod_Con As String) As Decimal
+        querystring = "select Sum(Val_Pago) Val_Pago from estcontratos Where Cod_Con=:Cod_Con  And Estado='AC'"
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":Cod_Con", Cod_Con)
+        Dim dt As DataTable = EjecutarConsultaDataTable()
+        If dt.Rows.Count > 0 Then
+            Return dt.Rows(0)("Val_Pago")
+        Else
+            Return 0
+        End If
+    End Function
+
+    Function GetPNVisitas(ByVal Cod_Con As String) As Integer
+        querystring = "select Nvl(Sum(NVis_Per),0) NVis_Per from estcontratos Where Cod_Con=:Cod_Con  And Estado='AC'"
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":Cod_Con", Cod_Con)
+        Dim dt As DataTable = EjecutarConsultaDataTable()
+        If dt.Rows.Count > 0 Then
+            Return dt.Rows(0)("NVis_Per")
+        Else
+            Return 0
+        End If
+    End Function
+
+    Function GetPPor_Eje_Fis(ByVal Cod_Con As String) As Decimal
+        querystring = "select Nvl(Sum(Por_Eje_Fis_Per),0) Por_Eje_Fis_Per from estcontratos Where Cod_Con=:Cod_Con  And Estado='AC'"
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":Cod_Con", Cod_Con)
+        Dim dt As DataTable = EjecutarConsultaDataTable()
+        If dt.Rows.Count > 0 Then
+            Return dt.Rows(0)("Por_Eje_Fis_Per")
+        Else
+            Return 0
+        End If
+    End Function
+    Function GetPor_Eje_Fis(ByVal Cod_Con As String) As Decimal
+        Me.Conectar()
+        Dim Por_Eje_Fis As Integer = GetPPor_Eje_Fis(Cod_Con)
+        Me.Desconectar()
+        Return Por_Eje_Fis
+    End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
+    Function GetNVisitas(ByVal Cod_Con As String) As Integer
+        Me.Conectar()
+        Dim NVisitas As Integer = GetPNVisitas(Cod_Con)
+        Me.Desconectar()
+        Return NVisitas
     End Function
 
     Sub FechaSugerida(ByVal Cod_Con As String, ByRef Fecha As Date, ByRef Clase As String)

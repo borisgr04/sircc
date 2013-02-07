@@ -119,7 +119,7 @@
                             <asp:NumericPagerField />
                         </Fields>
                     </asp:DataPager>
-                    <div style="height: 250px; overflow: auto">
+                    <div <%--style="height: 250px; overflow: auto"--%>>
                         <table border="0" class="mGrid">
                             <asp:PlaceHolder runat="server" ID="groupPlaceHolder" />
                         </table>
