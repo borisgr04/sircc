@@ -18,7 +18,7 @@ Public Class PanelDependencias
         Me.Conectar()
 
         querystring = "Select Numero,Contratista,Obj_Con,tipo, nom_stip,Fec_Sus_Con, Plazo_texto,Valor_Total_Doc,Estado,Val_Adi, Acta_Actual,Val_Con,Est_Con From vContratos_sinc_p"
-        querystring += " Where  (Upper(Obj_Con) like :filtro OR Numero Like :filtro OR Contratista Like :filtro) and Interventoria In (select cod_dep from dependencia where ide_ter=:Usuario)"
+        querystring += " Where  (Upper(Obj_Con) like :filtro OR Numero Like :filtro OR Contratista Like :filtro) and Dep_Sup In (select cod_dep from dependencia where ide_ter=:Usuario)"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":Usuario", Me.usuario)
         Me.AsignarParametroCadena(":filtro", "%" + UCase(filtro) + "%")
@@ -34,7 +34,7 @@ Public Class PanelDependencias
         Me.Conectar()
 
         querystring = "Select Numero,Contratista,Obj_Con,tipo, nom_stip,Fec_Sus_Con, Plazo_texto,Valor_Total_Doc,Estado,Val_Adi, Acta_Actual,Val_Con,Est_Con From vContratos_sinc_p"
-        querystring += " Where  (Upper(Obj_Con) like :filtro OR Numero Like :filtro OR Contratista Like :filtro) and Interventoria In (select cod_dep from dependencia where ide_ter=:Usuario) and Numero in (select cod_con from interventores_contrato)"
+        querystring += " Where  (Upper(Obj_Con) like :filtro OR Numero Like :filtro OR Contratista Like :filtro) and Dep_Sup In (select cod_dep from dependencia where ide_ter=:Usuario) and Numero in (select cod_con from interventores_contrato)"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":Usuario", Me.usuario)
         Me.AsignarParametroCadena(":filtro", "%" + UCase(filtro) + "%")
@@ -50,7 +50,7 @@ Public Class PanelDependencias
         Me.Conectar()
 
         querystring = "Select Numero,Contratista,Obj_Con,tipo, nom_stip,Fec_Sus_Con, Plazo_texto,Valor_Total_Doc,Estado,Val_Adi, Acta_Actual,Val_Con,Est_Con From vContratos_sinc_p"
-        querystring += " Where  (Upper(Obj_Con) like :filtro OR Numero Like :filtro OR Contratista Like :filtro) and Interventoria In (select cod_dep from dependencia where ide_ter=:Usuario) and Numero not in (select cod_con from interventores_contrato)"
+        querystring += " Where  (Upper(Obj_Con) like :filtro OR Numero Like :filtro OR Contratista Like :filtro) and Dep_Sup In (select cod_dep from dependencia where ide_ter=:Usuario) and Numero not in (select cod_con from interventores_contrato)"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":Usuario", Me.usuario)
         Me.AsignarParametroCadena(":filtro", "%" + UCase(filtro) + "%")

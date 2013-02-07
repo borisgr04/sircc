@@ -2,31 +2,13 @@
     CodeFile="InfContratista.aspx.vb" Inherits="Interventorias_InfContratista_InfContratista" %>
 <%@ Register src="../CtrlUsr/DetContratosI/DetContratoI.ascx" tagname="DetContratoI" tagprefix="uc2" %>
 
+<%@ Register assembly="Telerik.Web.UI" namespace="Telerik.Web.UI" tagprefix="telerik" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="ajaxToolkit" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" runat="Server">
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="True">
     </ajaxToolkit:ToolkitScriptManager>
-<%--    <script type="text/javascript">
-        function Validar() {
-            var txtFec_Ini = document.getElementById('<%=Me.txtFecIni.ClientID%>');
-            var txtFec_Fin = document.getElementById('<%=Me.txtFecFin.ClientID%>');
-            var txtFec_Inf = document.getElementById('<%=Me.txtFecInf.ClientID%>');
 
-            var Fec_Ini = txtFec_Ini.value;
-            var Fec_Fin = txtFec_Fin.value;
-            var Fec_Inf = txtFec_Inf.value;
-
-            if (Fec_Fin < Fec_Ini) {
-                alert("Fecha Final debe Ser Superior a la Fecha Inicial del Periodo del Informe");
-                return false;
-            }
-
-            if (Fec_Fin <= Fec_Inf) {
-                alert("Fecha del Informe debe ser Superior a igual a la Fecha Final del Periodo del Informe");
-                return false;
-            }
-            return true;
-        }
-     </script>--%>
 
 <script type='text/javascript'>
     function eliminar() {
