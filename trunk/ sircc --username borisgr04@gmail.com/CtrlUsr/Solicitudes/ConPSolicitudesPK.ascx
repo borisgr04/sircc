@@ -34,7 +34,9 @@
                  />
             </td>
             <td>
-                &nbsp;</td>
+                Vigencia
+                <asp:Label ID="LbVigencia" runat="server"></asp:Label>
+            </td>
         </tr>
     </table>
     <br />
@@ -76,9 +78,15 @@
     </asp:GridView>
     <asp:ObjectDataSource ID="ObjPContratos" runat="server" 
         OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllSol" 
-        TypeName="PSolicitudes" >
+        TypeName="PSolicitudes" InsertMethod="InsertHREV" >
+        <InsertParameters>
+            <asp:Parameter Name="COD_SOL" Type="String" />
+            <asp:Parameter Name="FECHA_RECIBIDO" Type="DateTime" />
+        </InsertParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="TxtFill" Name="Cod_Sol" PropertyName="Text" 
+                Type="String" />
+            <asp:ControlParameter ControlID="LbVigencia" Name="Vig_Sol" PropertyName="Text" 
                 Type="String" />
             <asp:Parameter Name="connect" Type="Boolean" />
         </SelectParameters>

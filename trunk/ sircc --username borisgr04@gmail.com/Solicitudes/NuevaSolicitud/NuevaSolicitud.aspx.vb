@@ -38,13 +38,19 @@ Partial Class Procesos_NuevaSolicitud_Default
             Exit Sub
         End If
         obj = New PSolicitudes
+
         Select Case Me.Oper
             Case "nuevo"
                 Me.MsgResult.Text = obj.Insert(Me.cboDep.SelectedValue, Me.CboDepP.SelectedValue, Me.Vigencia, Me.CboTip.SelectedValue, Me.cboStip.SelectedValue, Me.CboTproc.SelectedValue, Me.TxtObj.Text, Me.TxtFechaRecibido.Text, Me.TxtNPla.Text, Publico.PuntoPorComa(Me.TxtPpto.Text))
             Case "editar"
                 Me.MsgResult.Text = obj.Update(Me.Pk1, Me.cboDep.SelectedValue, Me.CboDepP.SelectedValue, Me.Vigencia, Me.CboTip.SelectedValue, Me.cboStip.SelectedValue, Me.CboTproc.SelectedValue, Me.TxtObj.Text, Me.TxtFechaRecibido.Text, Me.TxtNPla.Text, Publico.PuntoPorComa(Me.TxtPpto.Text))
         End Select
+        Me.LbEstado.Text = Me.Oper + " " + obj.Num_PSol
         If Not obj.lErrorG Then ' Si no hubo error deshabilito todo
+            If Me.Oper = "nuevo" Then
+                LimpiarDespGuardar()
+            End If
+
             Me.TxtNprocA.Text = obj.Num_PSol
             Me.Habilitar(False)
             Me.IBtnCancelar.Enabled = False
@@ -117,6 +123,27 @@ Partial Class Procesos_NuevaSolicitud_Default
         Me.LbEstado.Text = "PENDIENTE"
 
     End Sub
+    Private Sub LimpiarDespGuardar()
+        Me.TxtNPla.Text = ""
+        Me.TxtNProc.Text = ""
+        Me.TxtObj.Text = ""
+        'TxtNprocA.Text = ""
+        Me.TxtFechaRecibido.Text = Today.ToString("dd/MM/yyyy")
+        Me.cboDep.SelectedIndex = -1
+        Me.CboDepP.SelectedIndex = -1
+
+        Me.cboStip.SelectedIndex = -1
+        Me.CboTip.SelectedIndex = -1
+        Me.CboTproc.SelectedIndex = -1
+
+        Me.TxtPpto.Text = 0
+
+        ' Me.MsgResult.CssClass = ""
+        'Me.MsgResult.Text = ""
+        'Me.LbEncargado.Text = "SIN ASIGNAR"
+        'Me.LbEstado.Text = "PENDIENTE"
+
+    End Sub
 
     Protected Sub IBtnCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles IBtnCancelar.Click
         Cancelar()
@@ -145,6 +172,7 @@ Partial Class Procesos_NuevaSolicitud_Default
         Me.IBtnCancelar.Enabled = True
         Me.IBtnNuevo.Enabled = False
         Me.Oper = "editar"
+
     End Sub
     Public Sub Abrir()
         Me.TxtNprocA.Text = UCase(Me.TxtNprocA.Text)
@@ -229,10 +257,10 @@ Partial Class Procesos_NuevaSolicitud_Default
         Abrir()
     End Sub
 
-    Protected Sub BtnBuscar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnBuscar.Click
+  
+    Sub buscar()
         Me.ModalPopupSolicitudes.Show()
     End Sub
-
     
     Protected Sub ConPSolicitudesPK1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConPSolicitudesPK1.SelClicked
         Me.TxtNprocA.Text = Me.ConPSolicitudesPK1.Cod_Sol
@@ -307,4 +335,10 @@ Partial Class Procesos_NuevaSolicitud_Default
     Protected Sub BtnAsig0_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnAsig0.Click
         Asignar()
     End Sub
+
+
+    Protected Sub IBtnBuscar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnBuscar.Click
+        buscar()
+    End Sub
+
 End Class

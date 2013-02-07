@@ -34,4 +34,8 @@ Partial Class CtrlUsr_ConPSolicitudesPk
     Protected Sub BtnBuscar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnBuscar.Click
 
     End Sub
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Me.LbVigencia.Text = Me.Vigencia_Cookie
+    End Sub
 End Class

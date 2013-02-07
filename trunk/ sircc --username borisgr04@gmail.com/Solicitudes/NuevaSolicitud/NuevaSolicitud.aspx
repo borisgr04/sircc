@@ -14,11 +14,11 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
             EnableScriptGlobalization="True">
         </ajaxToolkit:ToolkitScriptManager>
                 <script type="text/javascript">
-            function Presupuesto(){
-            var val2=document.aspnetForm.<%=Me.TxtPpto.ClientID%>.value;
-            document.aspnetForm.<%=Me.TxtPpto.ClientID%>.value=(parseFloat(val2)).toFixed(2);
-                                   
-            }
+//            function Presupuesto(){
+//            var val2=document.aspnetForm.<%=Me.TxtPpto.ClientID%>.value;
+//            document.aspnetForm.<%=Me.TxtPpto.ClientID%>.value=(parseFloat(val2)).toFixed(2);
+//                                   
+//            }
             
      </script>
         <div>
@@ -37,15 +37,15 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 41px">
-                            <asp:ImageButton ID="IBtnNuevo" runat="server" Height="32px" Width="32px" 
-                                SkinID="IBtnNuevo" />
-                        </td>
-                        <td style="width: 115px">
                             <asp:TextBox ID="TxtNprocA" runat="server" AutoPostBack="True"></asp:TextBox>
+                        </td>
+                        <td style="width: 49px" class="style1">
+                            <asp:ImageButton ID="IBtnBuscar" runat="server" SkinID="IBtnBuscar" />
                             
                         </td>
                         <td style="width: 53px">
-                            <asp:Button ID="BtnBuscar" runat="server" Text="..." />
+                            <asp:ImageButton ID="IBtnNuevo" runat="server" Height="32px" SkinID="IBtnNuevo" 
+                                Width="32px" />
                         </td>
                         <td style="width: 47px">
                             <asp:ImageButton ID="IBtnAbrir" runat="server" Height="32px" 
@@ -78,11 +78,11 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                     </tr>
                     <tr>
                         <td style="width: 41px">
-                            Nuevo</td>
-                        <td style="width: 115px">
                             &nbsp;</td>
+                        <td style="width: 49px" class="style1">
+                            Buscar</td>
                         <td style="width: 53px">
-                            &nbsp;</td>
+                            Nuevo</td>
                         <td style="width: 47px">
                             Abrir</td>
                         <td style="width: 33px" class="style4">
@@ -99,7 +99,7 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                     <tr>
                         <td style="width: 41px">
                             &nbsp;</td>
-                        <td style="width: 115px">
+                        <td style="width: 49px" class="style1">
                             &nbsp;</td>
                         <td style="width: 53px">
                             &nbsp;</td>
@@ -125,68 +125,150 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
 
                 <table border="0px" cellpadding="2px" cellspacing="2px" style="width: 90%; ">
                     <tr>
-                        <td colspan="6">
-                            <asp:Label ID="Label12" runat="server" CssClass="SubTitulo" 
-                                Text="DATOS BASICOS DE LA SOLICITUD"></asp:Label>
+                        <td colspan="4">
+                            <asp:Label ID="Label12" runat="server" 
+                                Text="DATOS BASICOS DE LA SOLICITUD" CssClass="SubTitulo"></asp:Label>
                         </td>
                         <td>
-                            &nbsp;</td>
+                            <b>
+                            <asp:Label ID="Label11" runat="server" CssClass="Caption" Text="Estado: "></asp:Label>
+                            </b>
+                            <asp:Label ID="LbEstado" runat="server" style="font-weight: 700"></asp:Label>
+                        </td>
                     </tr>
                     <tr>
-                        <td style="width: 234px">
-                            <b>
-                            <asp:Label ID="Label2" runat="server" Text="Dependencia a Cargo de la Solicitud" 
-                                CssClass="Caption"></asp:Label>
-                            </b>
-                        </td>
-                        <td style="width: 92px">
-                            &nbsp;</td>
-                        <td colspan="4">
+                        <td style="width: 234px; height: 23px;">
                             <b>
                             <asp:Label ID="Label5" runat="server" Text="Número de la Solicitud" 
                                 CssClass="Caption"></asp:Label>
                             </b>
                         </td>
-                        <td>
+                        <td style="width: 132px; height: 23px;">
                             <b>
-                            <asp:Label ID="Label11" runat="server" CssClass="Caption" Text="Estado"></asp:Label>
+                            <asp:Label ID="Label6" runat="server" CssClass="Caption" 
+                                Text="Planeación Precontractual/Estudio Previo"></asp:Label>
                             </b></td>
+                        <td colspan="2" style="height: 23px">
+                            <b>
+                            <asp:Label ID="Label15" runat="server" CssClass="Caption" 
+                                Text="Fecha de Recibido"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="TxtFechaRecibido" 
+                                ErrorMessage="Debe digitar la fecha de recibido" ValidationGroup="GUARDAR">*</asp:RequiredFieldValidator>
+                            </b>
+                        </td>
+                        <td style="height: 23px">
+                            &nbsp;</td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <asp:DropDownList ID="CboDepP" runat="server" DataSourceID="ObjDepDel" 
-                                DataTextField="nom_dep" DataValueField="cod_dep" Width="85%">
-                            </asp:DropDownList>
-                        </td>
-                        <td colspan="4">
-                            <asp:TextBox ID="TxtNProc" runat="server" Width="180px" BackColor="#000066" 
-                                Font-Size="12pt" ForeColor="White" ReadOnly="True"></asp:TextBox>
+                        <td style="width: 234px; height: 23px;">
+                            <asp:TextBox ID="TxtNProc" runat="server" BackColor="#ACC4F9" Font-Size="12pt" 
+                                ForeColor="White" ReadOnly="True" Width="180px"></asp:TextBox>
                             <cc1:TextBoxWatermarkExtender ID="TxtNProc_TextBoxWatermarkExtender" 
                                 runat="server" Enabled="True" TargetControlID="TxtNProc" 
                                 WatermarkCssClass="watermarked" WatermarkText="Automático ">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
-                        <td>
+                        <td style="width: 132px; height: 23px;">
+                            <asp:TextBox ID="TxtNPla" runat="server"></asp:TextBox>
+                            <cc1:TextBoxWatermarkExtender ID="TxtNPla_TextBoxWatermarkExtender" 
+                                runat="server" Enabled="True" TargetControlID="TxtNPla" 
+                                WatermarkCssClass="watermarked" WatermarkText="Numero de Planeación">
+                            </cc1:TextBoxWatermarkExtender>
+                        </td>
+                        <td colspan="2" style="height: 23px">
                         
-                            <asp:Label ID="LbEstado" runat="server" style="font-weight: 700"></asp:Label>
+                            <asp:TextBox ID="TxtFechaRecibido" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
+                            <cc1:CalendarExtender ID="CalFechaRecibido" runat="server" Format="dd/MM/yyyy" 
+                                TargetControlID="TxtFechaRecibido">
+                            </cc1:CalendarExtender>
                             
                         </td>
+                        <td style="height: 23px">
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 234px; height: 23px;">
+                            <b>
+                            <asp:Label ID="Label8" runat="server" CssClass="Caption" 
+                                Text="Tipo de Documento Contractual"></asp:Label>
+                            </b>
+                        </td>
+                        <td style="width: 132px; height: 23px;">
+                            <b>
+                            <asp:Label ID="Label9" runat="server" CssClass="Caption" 
+                                Text="Tipo de Contratación"></asp:Label>
+                            </b>
+                        </td>
+                        <td colspan="2" style="height: 23px">
+                            <b>
+                            <asp:Label ID="Label21" runat="server" CssClass="Caption" 
+                                Text="Valor Presupuesto Oficial"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="TxtPpto" ErrorMessage="Debe diligenciar el Presupuesto" 
+                                ValidationGroup="GUARDAR">*</asp:RequiredFieldValidator>
+                            </b>
+                        </td>
+                        <td style="height: 23px">
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 234px; height: 23px;">
+                            <asp:DropDownList ID="CboTip" runat="server" AutoPostBack="True" CssClass="txt" 
+                                DataSourceID="ObjTiposCont" DataTextField="Nom_Tip" DataValueField="Cod_Tip">
+                            </asp:DropDownList>
+                        </td>
+                        <td style="width: 132px; height: 23px;">
+                            <asp:DropDownList ID="cboStip" runat="server" AutoPostBack="True" 
+                                CssClass="txt" DataSourceID="ObjSubTipos" DataTextField="nom_stip" 
+                                DataValueField="cod_stip">
+                            </asp:DropDownList>
+                        </td>
+                        <td colspan="2" style="height: 23px">
+                            <telerik:RadNumericTextBox ID="TxtPpto" runat="server" Culture="es-CO" 
+                                Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
+                        </td>
+                        <td style="height: 23px">
+                            &nbsp;</td>
                     </tr>
                     <tr>
                         <td style="width: 234px">
                             <b>
-                            <asp:Label ID="Label4" runat="server" 
-                                Text="Dependencia que Genera la Necesidad" CssClass="Caption"></asp:Label>
+                            <asp:Label ID="Label7" runat="server" CssClass="Caption" 
+                                Text="Modalidad de Contratación"></asp:Label>
                             </b>
                         </td>
-                        <td style="width: 92px">
+                        <td style="width: 132px">
                             &nbsp;</td>
-                        <td colspan="4">
+                        <td colspan="2">
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:DropDownList ID="CboTproc" runat="server" CssClass="txt" 
+                                DataSourceID="ObjTipoProc" DataTextField="Nom_TProc" DataValueField="Cod_TProc" 
+                                ToolTip="Proceso PreContractual">
+                            </asp:DropDownList>
+                        </td>
+                        <td colspan="2">
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 234px">
                             <b>
-                            <asp:Label ID="Label6" runat="server" 
-                                Text="Planeación Precontractual/Estudio Previo" CssClass="Caption"></asp:Label>
+                            <asp:Label ID="Label4" runat="server" CssClass="Caption" 
+                                Text="Dependencia que Genera la Necesidad"></asp:Label>
                             </b>
                         </td>
+                        <td style="width: 132px">
+                            &nbsp;</td>
+                        <td colspan="2">
+                            &nbsp;</td>
                         <td>
                             &nbsp;</td>
                     </tr>
@@ -196,108 +278,6 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                                 DataTextField="nom_dep" DataValueField="cod_dep" Width="85%">
                             </asp:DropDownList>
                         </td>
-                        <td colspan="4">
-                            <asp:TextBox ID="TxtNPla" runat="server"></asp:TextBox>
-                            <cc1:TextBoxWatermarkExtender ID="TxtNPla_TextBoxWatermarkExtender" 
-                                runat="server" Enabled="True" TargetControlID="TxtNPla" 
-                                WatermarkCssClass="watermarked" WatermarkText="Numero de Planeación">
-                            </cc1:TextBoxWatermarkExtender>
-                        </td>
-                        <td>
-                            &nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td style="width: 234px">
-                            <b>
-                            <asp:Label ID="Label7" runat="server" Text="Modalidad de Contratación" 
-                                CssClass="Caption"></asp:Label>
-                            </b>
-                        </td>
-                        <td style="width: 92px">
-                            &nbsp;</td>
-                        <td colspan="3">
-                            &nbsp;</td>
-                        <td>
-                            &nbsp;</td>
-                        <td>
-                            &nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" style="height: 25px">
-                            <asp:DropDownList ID="CboTproc" runat="server" CssClass="txt" 
-                                DataSourceID="ObjTipoProc" DataTextField="Nom_TProc" DataValueField="Cod_TProc" 
-                                ToolTip="Proceso PreContractual">
-                            </asp:DropDownList>
-                        </td>
-                        <td style="height: 25px">
-                            </td>
-                        <td style="height: 25px">
-                            </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 234px">
-                            <b>
-                            <asp:Label ID="Label8" runat="server" Text="Tipo de Documento Contractual" 
-                                CssClass="Caption"></asp:Label>
-                            </b>
-                        </td>
-                        <td colspan="2">
-                            <b>
-                            <asp:Label ID="Label9" runat="server" Text="Tipo de Contratación" 
-                                CssClass="Caption"></asp:Label>
-                            </b>
-                        </td>
-                        <td colspan="2" style="width: 119px">
-                            <b>
-                            <asp:Label ID="Label15" runat="server" CssClass="Caption" 
-                                Text="Fecha de Recibido"></asp:Label>
-                            </b>
-                        </td>
-                        <td>
-                            &nbsp;</td>
-                        <td>
-                            &nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td style="width: 234px">
-                            <asp:DropDownList ID="CboTip" runat="server" AutoPostBack="True" CssClass="txt" 
-                                DataSourceID="ObjTiposCont" DataTextField="Nom_Tip" DataValueField="Cod_Tip">
-                            </asp:DropDownList>
-                        </td>
-                        <td style="width: 92px">
-                            <asp:DropDownList ID="cboStip" runat="server" CssClass="txt" 
-                                DataSourceID="ObjSubTipos" DataTextField="nom_stip" 
-                                DataValueField="cod_stip" AutoPostBack="True">
-                            </asp:DropDownList>
-                        </td>
-                        <td colspan="2" style="width: 64px" class="style1">
-                        
-                            <asp:TextBox ID="TxtFechaRecibido" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
-                            <ajaxToolkit:CalendarExtender 
-                            ID="CalFechaRecibido" 
-                            runat="server" 
-                            TargetControlID="TxtFechaRecibido" 
-                            Format="dd/MM/yyyy"> 
-                            </ajaxToolkit:CalendarExtender>
-                        </td>
-                        <td colspan="2">
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="TxtFechaRecibido" 
-                                ErrorMessage="Debe digitar la fecha de recibido" ValidationGroup="GUARDAR">*</asp:RequiredFieldValidator>
-                        </td>
-                        <td>
-                            &nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td style="width: 234px">
-                            <b>
-                            <asp:Label ID="Label21" runat="server" CssClass="Caption" Text="Valor Presupuesto Oficial"></asp:Label>
-                            </b>
-                        </td>
-                        <td style="width: 92px">
-                            &nbsp;</td>
-                        <td class="style1" colspan="2" style="width: 64px">
-                            &nbsp;</td>
                         <td colspan="2">
                             &nbsp;</td>
                         <td>
@@ -305,53 +285,81 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                     </tr>
                     <tr>
                         <td style="width: 234px">
-                            <telerik:RadNumericTextBox ID="TxtPpto" runat="server" Culture="es-CO" Height="19px"
-                                                        Skin="Default" Value="0" Width="125px">
-                            </telerik:RadNumericTextBox>
+                            <b>
+                            <asp:Label ID="Label2" runat="server" CssClass="Caption" 
+                                Text="Dependencia a Cargo de la Solicitud"></asp:Label>
+                            </b>
                         </td>
-                        <td style="width: 92px">
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="TxtPpto" ErrorMessage="Debe diligenciar el Presupuesto" 
+                        <td style="width: 132px">
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:DropDownList ID="CboDepP" runat="server" DataSourceID="ObjDepDel" 
+                                DataTextField="nom_dep" DataValueField="cod_dep" Width="85%">
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="height: 25px">
+                            <b>
+                            <asp:Label ID="Label22" runat="server" CssClass="Caption" 
+                                Text="Objeto a Contratar"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ControlToValidate="TxtObj" ErrorMessage="Debe digitar el Objeto a Contratar" 
                                 ValidationGroup="GUARDAR">*</asp:RequiredFieldValidator>
+                            </b>
                         </td>
-                        <td class="style1" colspan="2" style="width: 64px">
-                            &nbsp;</td>
-                        <td colspan="2">
-                            &nbsp;</td>
-                        <td>
-                            &nbsp;</td>
+                        <td style="height: 25px">
+                            </td>
+                        <td style="height: 25px">
+                            </td>
                     </tr>
+                    <tr>
+                        <td style="height: 23px;" colspan="5">
+                            <asp:TextBox ID="TxtObj" runat="server" CssClass="txt" Height="68px" 
+                                TextMode="MultiLine" Width="100%"></asp:TextBox>
+                        </td>
+                    </tr>
+                   
+                    
+                    
                 </table>
                 <table style="width: 90%">
                     <tr>
                         <td style="font-weight: 700" colspan="3">
                             <b>
-                            <asp:Label ID="Label13" runat="server" CssClass="Caption" 
-                                Text="Objeto a Contratar"></asp:Label>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="TxtObj" ErrorMessage="Debe digitar el Objeto a Contratar" 
-                                ValidationGroup="GUARDAR">*</asp:RequiredFieldValidator>
-                            </b></td>
+                            <asp:Label ID="Label14" runat="server" CssClass="Caption" 
+                                Text="Funcionario Encargado:"></asp:Label>
+                            &nbsp;</b></td>
                         <td colspan="3">
                             &nbsp;</td>
                     </tr>
                     <tr>
-                        <td colspan="6">
-                            <asp:TextBox ID="TxtObj" runat="server" CssClass="txt" Height="68px" 
-                                TextMode="MultiLine" Width="100%"></asp:TextBox>
-                        </td>
+                        <td colspan="6" style="height: 21px">
+                            <b>
+                            <asp:Label ID="LbEncargado" runat="server" style="font-weight: 700"></asp:Label>
+                            &nbsp;
+                            </b></td>
                     </tr>
-                    <tr>
-                        <td colspan="6">
-                            &nbsp;</td>
-                    </tr>
+                    
                     <tr>
                         <td>
                             <b>
-                            <asp:Label ID="Label14" runat="server" CssClass="Caption" 
-                                Text="Funcionario Encargado"></asp:Label>
-                            &nbsp;</b><asp:LinkButton ID="LnkAsig" runat="server">Ir a Asignaciones</asp:LinkButton>
-                        </td>
+                            &nbsp;<asp:LinkButton ID="LnkAsig" runat="server">Ir a Asignaciones</asp:LinkButton>
+                            </b></td>
                         <td>
                             &nbsp;</td>
                         <td colspan="2">
@@ -363,8 +371,7 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label ID="LbEncargado" runat="server" style="font-weight: 700"></asp:Label>
-                        </td>
+                            &nbsp;</td>
                         <td>
                             &nbsp;</td>
                         <td colspan="2">

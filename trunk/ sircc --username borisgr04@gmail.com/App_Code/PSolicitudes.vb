@@ -216,18 +216,20 @@ Public Class PSolicitudes
     ''' <returns></returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Overloads Function GetAllSol(ByVal Cod_Sol As String, Optional ByVal connect As Boolean = True) As DataTable
+    Public Overloads Function GetAllSol(ByVal Cod_Sol As String, ByVal Vig_Sol As String, Optional ByVal connect As Boolean = True) As DataTable
         'Me.Desconectar()
         Me.Num_PSol = Num_PSol
         'If connect Then
         Me.Conectar()
         'End If
         If Cod_Sol <> "" Then
-            querystring = "select * from vpsolicitudes WHERE (UPPER(COD_SOL) LIKE UPPER(:Cod_Sol) or UPPER(Obj_Sol) like UPPER(:Obj_Sol)) And dep_pSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo )"
+            querystring = "select * from vpsolicitudes WHERE (UPPER(COD_SOL) LIKE UPPER(:Cod_Sol) or UPPER(Obj_Sol) like UPPER(:Obj_Sol)) And Vig_Sol=:Vig_Sol  And dep_pSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:ide_ter_abo) "
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Sol", "%" + Cod_Sol + "%")
             Me.AsignarParametroCadena(":Obj_Sol", "%" + (Cod_Sol) + "%")
             Me.AsignarParametroCadena(":ide_ter_abo", Me.usuario)
+            Me.AsignarParametroCadena(":Vig_Sol", Vig_Sol)
+
         Else
             querystring = "select * from vpsolicitudes WHERE 1=0 "
             Me.CrearComando(querystring)
@@ -519,15 +521,12 @@ Public Class PSolicitudes
                            ByVal COD_TPRO As String, ByVal OBJ_SOL As String, _
                            ByVal FECHA_RECIBIDO As Date, ByVal NUM_PLA As String, ByVal PPTO As Decimal) As String
 
-
-
         Me.Conectar()
-        Me.CrearNumProc(DEP_PSOL, VIG_SOL)
+
         Try
             Me.ComenzarTransaccion()
+            Me.CrearNumSol(DEP_PSOL, VIG_SOL)
             querystring = "Insert Into PSOLICITUDES (COD_SOL, DEP_SOL, DEP_PSOL, VIG_SOL, TIP_CON, STIP_CON, COD_TPRO, OBJ_SOL, NUM_PLA,FEC_RECIBIDO, VAL_CON) Values(:Cod_Sol, :DEP_SOL, :DEP_PSOL,  :VIG_SOL,  :TIP_CON, :STIP_CON, :COD_TPRO, :OBJ_SOL, :NUM_PLA,TO_DATE(:FEC_RECIBIDO,'dd/mm/yyyy'), :VAL_CON)"
-
-
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":COD_TPRO", COD_TPRO)
             Me.AsignarParametroCadena(":OBJ_SOL", OBJ_SOL)
@@ -541,6 +540,7 @@ Public Class PSolicitudes
             Me.AsignarParametroCadena(":Cod_Sol", Me.Num_PSol)
             Me.AsignarParametroDecimal(":VAL_CON", PPTO)
 
+            'ID_ABOG_ENC
             Me.num_reg = Me.EjecutarComando()
             InsertHREV(Me.Num_PSol, FECHA_RECIBIDO)
             Me.ConfirmarTransaccion()
@@ -553,9 +553,6 @@ Public Class PSolicitudes
         Finally
             Me.Desconectar()
         End Try
-
-
-
 
         Return Me.Msg
 
@@ -572,9 +569,7 @@ Public Class PSolicitudes
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
     Public Function InsertHREV(ByVal COD_SOL As String, ByVal FECHA_RECIBIDO As Date) As String
-        'Try 
-        'Me.ComenzarTransaccion()
-
+        
         querystring = "Insert Into HREVISADO (COD_SOL, FECHA_RECIBIDO) Values(:Cod_Sol, to_date(:FECHA_RECIBIDO, 'dd/mm/yyyy'))"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":FECHA_RECIBIDO", FECHA_RECIBIDO)
@@ -583,14 +578,7 @@ Public Class PSolicitudes
         Me.num_reg = Me.EjecutarComando()
         Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "] - " + Me.Num_PSol
         lErrorG = False
-        'Catch ex As Exception
-        'Me.Msg = "Error:" + ex.Message
-        'Me.CancelarTransaccion()
-        'lErrorG = True
-        'Finally
-        'Me.Desconectar()
-        'End Try
-
+        
         Return Me.Msg
     End Function
 
@@ -615,10 +603,19 @@ Public Class PSolicitudes
         Return Me.Msg
     End Function
 
-    Private Sub CrearNumProc(ByVal cod_dep As String, ByVal vig_con As String)
+    Private Sub CrearNumSol(ByVal cod_dep As String, ByVal vig_con As String)
         Dim dep As Dependencias = New Dependencias
         dep.Conexion = Me.Conexion
-        Me.Num_PSol = vig_con.ToString + "-" + dep.GetAbreviatura(cod_dep) + "-" + Me.GetCons(cod_dep).ToString.PadLeft(4, "0")
+        Dim Abr As String = dep.GetAbreviatura(cod_dep)
+        If Not String.IsNullOrEmpty(Abr) Then
+            Me.Num_PSol = vig_con.ToString + "-" + dep.GetAbreviatura(cod_dep) + "-" + Me.GetCons(cod_dep).ToString.PadLeft(4, "0")
+        Else
+            Me.Num_PSol = ""
+            lErrorG = True
+            Msg = "La Dependencia No tiene Abrevitura Asignada, Informe al Administrador del Sistema"
+            Throw New Exception(Msg)
+        End If
+
     End Sub
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
@@ -670,6 +667,7 @@ Public Class PSolicitudes
             Me.AsignarParametroCadena(":COD_SOL_PK", Me.Num_PSol)
             Me.AsignarParametroDecimal(":VAL_CON", PPTO)
 
+
             'Throw New Exception(Me._Comando.CommandText)
 
             Me.num_reg = Me.EjecutarComando()
@@ -709,14 +707,21 @@ Public Class PSolicitudes
         Try
             Me.ComenzarTransaccion()
             querystring = "Update PSOLICITUDES SET ID_ABOG_ENC=:ID_ABOG_ENC WHERE COD_SOL=:COD_SOL_PK"
-
             Me.CrearComando(querystring)
             Me.Num_PSol = COD_SOL_PK
-
             Me.AsignarParametroCadena(":ID_ABOG_ENC", ID_ABOG_ENC)
             Me.AsignarParametroCadena(":COD_SOL_PK", COD_SOL_PK)
-
             Me.num_reg = Me.EjecutarComando()
+
+            'Nuevo Insertado en 2013, Boris Gonzalez para prueba 'no aplico porque el modelo de datos
+            'querystring = "SELECT FECHA_RECIBIDO FROM HREVISADO WHERE COD_SOL=:COD_SOL_PK AND ID_HREV=(SELECT MAX(ID_HREV) from Hrevisado where COD_SOL=:COD_SOL_PK)"
+            'Me.CrearComando(querystring)
+            'Me.AsignarParametroCadena(":COD_SOL_PK", COD_SOL_PK)
+            'Me.AsignarParametroCadena(":COD_SOL_PK", COD_SOL_PK)
+            'Dim dataTb As DataTable = EjecutarConsultaDataTable()
+            'Me.num_reg = Me.EjecutarComando()
+            'InsertHREV(COD_SOL_PK, dataTb.Rows(0)("FECHA_RECIBIDO"))
+            'Fin de Insercion, se modifico el Triggers
             Me.ConfirmarTransaccion()
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
             Me.lErrorG = False
@@ -730,6 +735,20 @@ Public Class PSolicitudes
         Me.Desconectar()
 
 
+        Return Me.Msg
+
+    End Function
+
+
+    Private Function Asignar_Usuario_EncargadoP(ByVal COD_SOL_PK As String, ByVal ID_ABOG_ENC As String) As String
+
+        querystring = "Update PSOLICITUDES SET ID_ABOG_ENC=:ID_ABOG_ENC WHERE COD_SOL=:COD_SOL_PK"
+        Me.CrearComando(querystring)
+        Me.Num_PSol = COD_SOL_PK
+        Me.AsignarParametroCadena(":ID_ABOG_ENC", ID_ABOG_ENC)
+        Me.AsignarParametroCadena(":COD_SOL_PK", COD_SOL_PK)
+        Me.num_reg = Me.EjecutarComando()
+        Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
         Return Me.Msg
 
     End Function
@@ -757,7 +776,7 @@ Public Class PSolicitudes
             proc.Conexion = Me.Conexion
             Me.ComenzarTransaccion()
             'querystring = "Update HREVISADO SET Fecha_Revisado=to_date(:Fecha_Revision,'dd/mm/yyyy'), Obs_Revisado=Obs_Revisado||' '||:obs, Concepto_Revisado=:concepto, Recibido_Abog='S' WHERE (COD_SOL=:COD_SOL_PK AND ID_HREV=(SELECT MAX(ID_HREV) from Hrevisado where COD_SOL=:COD_SOL_PK1))"
-            querystring = "Update HREVISADO SET Fecha_Revisado=sysdate,Obs_Revisado=:OBS, HObs_Revisado=to_char(sysdate,'dd/mm/yyyy HH24:MI:SS')||' '||:OBS||'<br><hr>'||HObs_Revisado, Concepto_Revisado=:CONCEPTO, Recibido_Abog='S' WHERE COD_SOL=:COD_SOL_PK AND ID_HREV=:ID_HREV"
+            querystring = "Update HREVISADO SET Fecha_Revisado=sysdate,Obs_Revisado=:OBS, HObs_Revisado='Usuario:'||Nit_Abog_Recibe||' - ' ||to_char(sysdate,'dd/mm/yyyy HH24:MI:SS')||' '||:OBS||'<br><hr>'||HObs_Revisado, Concepto_Revisado=:CONCEPTO, Recibido_Abog='S' WHERE COD_SOL=:COD_SOL_PK AND ID_HREV=:ID_HREV"
 
             Me.CrearComando(querystring)
             Me.Num_PSol = COD_SOL_PK
@@ -846,7 +865,7 @@ Public Class PSolicitudes
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
             Me.lErrorG = False
         Catch ex As Exception
-            Me.Msg = "Error:" + ex.Message + ex.StackTrace.ToString
+            Me.Msg = "Error:" + ex.Message '+ ex.StackTrace.ToString
             Me.CancelarTransaccion()
             Me.lErrorG = True
         End Try

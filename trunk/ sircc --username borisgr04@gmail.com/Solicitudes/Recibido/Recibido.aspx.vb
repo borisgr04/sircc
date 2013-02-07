@@ -79,6 +79,7 @@ Partial Class Solicitudes_Recibido_Default
         Me.MsgBox(Me.MsgResult, obj.lErrorG)
         Me.GridView1.DataBind()
         Me.TxtObservaciones.Text = ""
+
     End Sub
     Sub habilitar(ByVal b As Boolean)
         Me.TxtObservaciones.Enabled = b
@@ -107,6 +108,8 @@ Partial Class Solicitudes_Recibido_Default
             Me.TxtDesde.Text = Now.AddMonths(-1).ToShortDateString
             Me.TxtHasta.Text = Now.ToShortDateString
             TxtNSol.Text = Request("Cod_Sol")
+            GridView1.DataSource = obj.GetByAbogxFec("N", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
+            GridView1.DataBind()
             DataBind()
         End If
     End Sub
@@ -114,4 +117,35 @@ Partial Class Solicitudes_Recibido_Default
     Protected Sub CboConcepto_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboConcepto.SelectedIndexChanged
 
     End Sub
+
+    Protected Sub RadTabStrip1_TabClick(ByVal sender As Object, ByVal e As Telerik.Web.UI.RadTabStripEventArgs) Handles RadTabStrip1.TabClick
+        Select Case RadTabStrip1.SelectedIndex
+            Case 0
+                GridView1.DataSource = obj.GetByAbogxFec("N", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
+            Case 1
+                GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
+            Case 2
+                GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "A")
+        End Select
+        Me.GridView1.DataBind()
+
+
+    End Sub
+
+    Protected Sub ImageButton1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ImageButton1.Click
+        Select Case RadTabStrip1.SelectedIndex
+            Case 0
+                GridView1.DataSource = obj.GetByAbogxFec("N", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
+            Case 1
+                GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
+            Case 2
+                GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "A")
+        End Select
+        Me.GridView1.DataBind()
+    End Sub
+
+    Private Function DateDiff(ByVal dateInterval As DateInterval, ByVal p2 As String, ByVal p3 As Date) As String
+        Throw New NotImplementedException
+    End Function
+
 End Class

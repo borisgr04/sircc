@@ -64,12 +64,12 @@ Partial Class Solicitudes_Revision_Default
     End Sub
 
     Protected Sub GridView1_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GridView1.RowCommand
-        MsgBoxLimpiar(MsgResult)
+        MsgBoxLimpiar(MsgResult2)
         Dim index As Integer = Convert.ToInt32(e.CommandArgument)
         Me.GridView1.SelectedIndex = index
         Dim nr As New NotificacionesEmail
-        MsgResult.Text = nr.Notificar_RevisionSol(GridView1.SelectedDataKey(0).ToString(), GridView1.SelectedDataKey(1).ToString())
-        MsgBox(MsgResult, nr.lErrorG)
+        MsgResult2.Text = nr.Notificar_RevisionSol(GridView1.SelectedDataKey(0).ToString(), GridView1.SelectedDataKey(1).ToString())
+        MsgBox(MsgResult2, nr.lErrorG)
     End Sub
 
     

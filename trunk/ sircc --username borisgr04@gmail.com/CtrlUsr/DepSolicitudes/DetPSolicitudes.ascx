@@ -5,55 +5,68 @@
 <%@ Register src="ConPSolicitudes.ascx" tagname="ConPSolicitudes" tagprefix="uc1" %>
 
 <style type="text/css">
-td
-{
-    height:10px;
-    empty-cells:show;
-    text-align:left;
-    vertical-align:top;
-        }
-
-.txt
-{
-    font-size: 9pt;
-}
-    .style1
-    {
-        width: 201px;
-    }
     .style5
     {
-        width: 500px;
+        width: 286px;
+    }
+    .style6
+    {
+        width: 154px;
+    }
+    .style7
+    {
+        width: 109px;
+    }
+    .style8
+    {
+        width: 65px;
     }
 </style>
+
 <asp:UpdatePanel ID="UpdDetPSol" runat="server" UpdateMode="Conditional">
 <ContentTemplate>
           
                        <table style="width: 610px">
                 <tr>
-                    <td style="width: 509px; height: 14px; text-align: center">
+                    <td class="style7" >
              
+                        N° Solicitud</td>
+                    <td class="style6" >
+                        <asp:TextBox ID="TxtCodCon" runat="server" AutoPostBack="True"></asp:TextBox>
                     </td>
-                    <td colspan="1" style="width: 509px; height: 14px">
+                    <td class="style8">
+                        <asp:ImageButton ID="IBtnBuscarSol" runat="server" SkinID="IBtnBuscar" />
+                    </td>
+                    <td >
+                        <asp:ImageButton ID="IBtnAbrir" runat="server" SkinID="IBtnAbrir" />
+                    </td>
+                    <td >
+                        &nbsp;</td>
+                    <td >
                         &nbsp;</td>
                 </tr>
+                           <tr>
+                               <td class="style7" >
+                                   &nbsp;</td>
+                               <td class="style6" >
+                                   &nbsp;</td>
+                               <td class="style8">
+                                   Buscar</td>
+                               <td >
+                                   Abrir</td>
+                               <td >
+                                   &nbsp;</td>
+                               <td >
+                                   &nbsp;</td>
+                           </tr>
                 <tr>
-                    <td style="width: 509px; height: 14px; text-align: center;">
-                        &nbsp; <strong>Nº SOLICITUD</strong></td>
-                    <td colspan="1" style="width: 509px; height: 14px">
-                        <asp:TextBox ID="TxtCodCon" runat="server" AutoPostBack="True"></asp:TextBox>
-                        <asp:Button ID="BtnBuscarSol" runat="server" Text="..." />
-&nbsp;<asp:ImageButton ID="IBtnAbrir" runat="server" SkinID="IBtnAbrir" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="height: 14px; text-align: center;">
+                    <td colspan="6" >
                         <asp:Label ID="MsgResult" runat="server" Height="30px" Visible="False" 
                             Width="90%"></asp:Label>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="6">
                         <asp:DetailsView ID="DtPCon" runat="server" AutoGenerateRows="False" 
                             CellPadding="4" DataKeyNames="Num_Sol" EnableModelValidation="True" 
                             Font-Size="X-Small" ForeColor="#333333" GridLines="None" Height="84px" 

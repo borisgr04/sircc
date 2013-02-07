@@ -98,4 +98,7 @@ Public Class CtrlUsrComun
         Return IIf(Valor = "SI", True, False)
     End Function
 
+    Public Sub Redireccionar_Pagina(ByVal Url As String)
+        Response.Redirect("~" + Url)
+    End Sub
 End Class
