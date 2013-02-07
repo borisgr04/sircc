@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 Partial Class Controles_DetPSolicitudesAll
-    Inherits System.Web.UI.UserControl
+    Inherits CtrlUsrComun
 
     Dim est As String
 
@@ -162,10 +162,10 @@ Partial Class Controles_DetPSolicitudesAll
             Me.NumSol = Me.TxtCod.Text
         End If
     End Sub
-
-    Protected Sub BtnBuscarSol_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnBuscarSol.Click
+    Sub BuscarProceso()
         Me.ModalPopupSolicitudes.Show()
     End Sub
+    
 
     Protected Sub ConPSolicitudesPK1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConPSolicitudesPK1.SelClicked
 
@@ -179,5 +179,13 @@ Partial Class Controles_DetPSolicitudesAll
     Protected Sub btnBuscar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnBuscar.Click
         Buscar()
         OnClick(sender)
+    End Sub
+
+    Protected Sub IBtnBuscar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnBuscar.Click
+        BuscarProceso()
+    End Sub
+
+    Protected Sub IBtnNuevaSol_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnNuevaSol.Click
+        Redireccionar_Pagina("/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx")
     End Sub
 End Class

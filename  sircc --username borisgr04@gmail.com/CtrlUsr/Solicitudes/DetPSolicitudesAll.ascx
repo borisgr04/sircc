@@ -1,60 +1,50 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="DetPSolicitudesAll.ascx.vb" Inherits="Controles_DetPSolicitudesAll" %>
-
-
 <%@ Register src="ConPSolicitudesPK.ascx" tagname="ConPSolicitudesPK" tagprefix="uc1" %>
 
-
-
-
-<style type="text/css">
-td
-{
-    height:10px;
-    empty-cells:show;
-    text-align:left;
-    vertical-align:top;
-        }
-
-.txt
-{
-    font-size: 9pt;
-}
-    .style1
-    {
-        width: 201px;
-    }
-    .style5
-    {
-        width: 208px;
-    }
-</style>
 <asp:UpdatePanel ID="UpdCSol" runat="server" UpdateMode="Conditional">
 <ContentTemplate>
             <table style="width: 610px">
                 <tr>
-                    <td style="width: 509px; height: 14px; text-align: center">
-                     
+                    <td class="style7">
+                      <asp:Label ID="NumSolicitud" runat="server" 
+                            Text="No Solicitud" style="font-weight: 700"></asp:Label>
                     </td>
-                    <td colspan="1" style="width: 509px; height: 14px">
-                        &nbsp;</td>
-                </tr>
-                <tr>
-                    <td style="width: 509px; height: 14px; text-align: center;">
-                        &nbsp; <strong>Nº SOLICITUD</strong></td>
-                    <td colspan="1" style="width: 509px; height: 14px">
+                    </td>
+                    <td class="style7">
                         <asp:TextBox ID="TxtCod" runat="server" AutoPostBack="True"></asp:TextBox>
-                        <asp:Button ID="BtnBuscarSol" runat="server" Text="..." />
-&nbsp;<asp:ImageButton ID="BtnBuscar" runat="server" SkinID="IBtnAbrir" />
+                    </td>
+                    <td class="style7">
+                        <asp:ImageButton ID="IBtnBuscar" runat="server" SkinID="IBtnBuscar" 
+                            Height="32px" Width="32px" />
+                    </td>
+                    <td class="style7">
+                        <asp:ImageButton ID="BtnBuscar" runat="server" SkinID="IBtnAbrir" 
+                            Height="32px" />
+                    </td>
+                    <td class="style7">
+                        <asp:ImageButton ID="IBtnNuevaSol" runat="server" SkinID="IBtnNuevo" />
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="height: 14px; text-align: center;">
+                    <td class="style7">
+                        &nbsp;</td>
+                    <td class="style7">
+                        &nbsp;</td>
+                    <td class="style7">
+                        Buscar</td>
+                    <td class="style7">
+                        Abrir</td>
+                    <td class="style7">
+                        Nueva Solicitud</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="height: 14px; text-align: center;">
                         <asp:Label ID="MsgResult" runat="server" Height="30px" Visible="False" 
                             Width="90%"></asp:Label>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="5">
                         <asp:DetailsView ID="DtPCon" runat="server" AutoGenerateRows="False" 
                             CellPadding="4" DataKeyNames="Num_Sol" EnableModelValidation="True" 
                             Font-Size="X-Small" ForeColor="#333333" GridLines="None" Height="84px" 
@@ -101,15 +91,12 @@ td
 
         <asp:Panel ID="PanelSolicitudes" runat="server" BackColor="White" Width="650px">
             <asp:Panel ID="Panel2" runat="server" BorderColor="White" CssClass="BarTitleModal2"
- 
                 Height="27px" Width="649px">
                 <table style="width:100%;">
                     <tr>
-                        <td class="style5">
-                            <asp:Label ID="Label1" runat="server" ForeColor="White" Text="Buscar Solicitud" 
+                        <td style="width: 823px">
+                         <asp:Label ID="Label1" runat="server" ForeColor="White" Width="100%" Text="Buscar Solicitud" 
                                 Font-Bold="True"></asp:Label>
-                        </td>
-                        <td style="width: 923px">
                             &nbsp;</td>
                         <td>
                             <asp:Button ID="BtnCerrar1" runat="server" Text="X" />

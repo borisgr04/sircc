@@ -131,10 +131,6 @@ Partial Class Controles_DetPSolicitudes
         End If
     End Sub
 
-    Protected Sub BtnBuscarSol_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnBuscarSol.Click
-        Me.ModalPopupSolicitudes.Show()
-    End Sub
-
     Protected Sub ConPSolicitudesPK1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConPSolicitudes1.SelClicked
         CodigoPContrato = Me.ConPSolicitudes1.Cod_Sol
         Me.ModalPopupSolicitudes.Hide()
@@ -145,5 +141,9 @@ Partial Class Controles_DetPSolicitudes
     Protected Sub IBtnAbrir_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAbrir.Click
         Buscar()
         OnClick(sender)
+    End Sub
+
+    Protected Sub IBtnBuscarSol_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnBuscarSol.Click
+        Me.ModalPopupSolicitudes.Show()
     End Sub
 End Class
