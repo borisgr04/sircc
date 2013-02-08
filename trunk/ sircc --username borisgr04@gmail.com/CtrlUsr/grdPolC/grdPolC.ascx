@@ -112,7 +112,7 @@
                         ControlToValidate="TxtNPol" ErrorMessage="N° Poliza es Requerido" 
                         ValidationGroup="pol">*</asp:RequiredFieldValidator>
                 </td>
-                <td style="width: 188px; height: 10px">
+                <td style="width: 188px; ">
                     <telerik:RadNumericTextBox ID="TxtValP" runat="server" Culture="es-CO" Type="Currency"
                         Width="125px">
                     </telerik:RadNumericTextBox>

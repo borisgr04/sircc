@@ -268,9 +268,14 @@ Partial Class Interventorias_Documentos_InfParciales
     Protected Sub IBtnVerDoc_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnVerDoc.Click
         If Not String.IsNullOrEmpty(TxtNoDocumento.Text) Then
             Redireccionar_Pagina("/ashx/VerActas.ashx?Ide_Acta=" + TxtNoDocumento.Text)
+
         End If
     End Sub
 
     
   
+    Protected Sub IbtnSegSoc_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IbtnSegSoc.Click
+        Dim ruta As String = RutasPag.GetInstance.GetRuta("99") ' Seguridad Social
+        Redireccionar_Pagina(ruta + "?Cod_Con=" + hdCodCon.Value + "&NoID=" + TxtNoDocumento.Text + "&Origen=02")
+    End Sub
 End Class

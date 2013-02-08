@@ -127,6 +127,9 @@
                             <td style="text-align: center" class="barraH">
                                 <asp:ImageButton ID="IBtnGuardar" runat="server" Height="32px" Width="32px" SkinID="IBtnGuardar" />
                             </td>
+                            <td class="barraH" style="text-align: center">
+                                <asp:ImageButton ID="IbtnSegSoc" runat="server" />
+                            </td>
                             <td style="text-align: center" class="barraH">
                                 <asp:ImageButton ID="IBtnValidar" runat="server" Height="32px" SkinID="BtnAprobar"
                                     Width="32px" />
@@ -162,6 +165,8 @@
                             <td style="text-align: center">
                                 Guardar
                             </td>
+                            <td style="text-align: center">
+                                SegSocial</td>
                             <td style="text-align: center">
                                 <asp:Label ID="LbValidar" runat="server" Text="Validar"></asp:Label>
                             </td>
@@ -367,6 +372,63 @@
                                 </telerik:RadNumericTextBox>
                             </td>
                         </tr>
+                        <tr class="STitulos">
+                            <td>
+                                Anticipo</td>
+                            <td>
+                                &nbsp;</td>
+                            <td class="style1">
+                                &nbsp;</td>
+                            <td class="style2">
+                                Saldo Amortización</td>
+                            <td class="style1">
+                                Saldo por Amortizar</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Amortizar</td>
+                            <td>
+                                &nbsp;</td>
+                            <td class="style1">
+                                <telerik:RadNumericTextBox ID="TxtValAmort" Runat="server" Culture="es-CO" 
+                                    DbValueFactor="1" LabelWidth="64px" MinValue="0" Skin="Default" Type="Currency" 
+                                    Value="0" Width="160px">
+                                    <NumberFormat ZeroPattern="$ n" />
+                                    <ClientEvents OnValueChanged="CalPagos" />
+                                </telerik:RadNumericTextBox>
+                            </td>
+                            <td class="style2">
+                                <telerik:RadNumericTextBox ID="TxtSalAmor" Runat="server" Culture="es-CO" 
+                                    DbValueFactor="1" LabelWidth="64px" MinValue="0" Skin="Default" Type="Currency" 
+                                    Value="0" Width="160px" Enabled="False">
+                                    <NumberFormat ZeroPattern="$ n" />
+                                    <ClientEvents OnValueChanged="CalPagos" />
+                                </telerik:RadNumericTextBox>
+                            </td>
+                            <td class="style1">
+                                <telerik:RadNumericTextBox ID="TxtSalxAmor" Runat="server" Culture="es-CO" 
+                                    DbValueFactor="1" LabelWidth="64px" MinValue="0" Skin="Default" Type="Currency" 
+                                    Value="0" Width="160px" Enabled="False">
+                                    <NumberFormat ZeroPattern="$ n" />
+                                    <ClientEvents OnValueChanged="CalPagos" />
+                                </telerik:RadNumericTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Total a Pagar</td>
+                            <td>
+                                &nbsp;</td>
+                            <td colspan="3">
+                                <telerik:RadNumericTextBox ID="TxtTotPag" Runat="server" Culture="es-CO" 
+                                    DbValueFactor="1" LabelWidth="64px" MinValue="0" Skin="Default" Type="Currency" 
+                                    Value="0" Width="160px">
+                                    <NumberFormat ZeroPattern="$ n" />
+                                    <ClientEvents OnValueChanged="CalPagos" />
+                                </telerik:RadNumericTextBox>
+                            </td>
+                        </tr>
+
                         <tr>
                             <td>
                                 Fecha del Informe/Acta</td>

@@ -185,11 +185,11 @@
                     CssClass="BarTitleModal2" Height="30px">
                     <div style="PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; VERTICAL-ALIGN: middle; PADDING-TOP: 5px">
                         <div style="FLOAT: left">
-                            Consulta</div>
+                            Consulta Terceros</div>
                         <div style="FLOAT: right">
                             <asp:Button ID="BtnCerrarT" runat="server" Text="X" />
 &nbsp;</div>
-                        o</div>
+                        </div>
                 </asp:Panel>
                  <asp:Panel ID="PnAreaT" ScrollBars="Both" runat="server" Height="473px">
                  <%--<uc1:ConsultaTer ID="ConsultaTer" runat="server" Ret="AR" Tipo="AR" />--%>
