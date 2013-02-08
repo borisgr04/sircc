@@ -118,7 +118,7 @@ Partial Class CtrlUsr_grdPolC_grdPolC
         Dim tp As String = Me.cboTipPol.SelectedValue 'IIf(Me.chkAmp.Checked = True, "A", "I")
         If IsDate(Me.TxtFlim.Text) Or IsDate(Me.TxtFlim2.Text) Then
             If CDate(Me.TxtFlim.Text) < CDate(Me.TxtFlim2.Text) Then
-                Me.MsgResult.Text = obj.Insert(Me.Cod_Con, Me.CboPol.Text, Me.CboAseg.Text, np, vp, CDate(Me.TxtFlim.Text), tp, CDate(Me.TxtFlim2.Text))
+                Me.MsgResult.Text = obj.Insert(Me.Cod_Con, Me.CboPol.Text, Me.CboAseg.Text, np, vp, CDate(Me.TxtFlim2.Text), tp, CDate(Me.TxtFlim.Text))
                 Me.LlenarGrid()
                 Me.MsgBox(Me.MsgResult, obj.lErrorG)
             Else
