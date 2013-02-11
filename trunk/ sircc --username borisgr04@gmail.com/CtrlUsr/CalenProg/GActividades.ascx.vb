@@ -199,10 +199,6 @@ Partial Class CtrlUsr_CalenProg_GActividades
         OnClick(sender)
     End Sub
 
-    Protected Sub BtnCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnCancelar.Click
-        Cancelar()
-        OnClick(sender)
-    End Sub
     Protected Sub Limpiar()
         'Me.CboAct.Text = 
         HdEsFinalPA.Value = "NO"
@@ -396,7 +392,7 @@ Partial Class CtrlUsr_CalenProg_GActividades
         Me.Id_Crono = Id_Crono
         Me.Num_Proc = Num_Proc
         Comando()
-      
+
     End Sub
     Public Sub Anular(ByVal Num_Proc As String, ByVal Id_Crono As String)
         Me.Oper = "anular"
@@ -498,7 +494,7 @@ Partial Class CtrlUsr_CalenProg_GActividades
             HdEsFinal.Value = tb.Rows(0)("IS_FINAL").ToString
             HdNotificar.Value = tb.Rows(0)("Notificar").ToString
             HdDTFecIni.Value = tb.Rows(0)("DateTimeI").ToString
-          
+
             Return True
         Else
             Return False
@@ -525,18 +521,7 @@ Partial Class CtrlUsr_CalenProg_GActividades
         End If
     End Sub
 
-    'Protected Overloads Sub MsgBox(ByRef msg As Label, ByVal lError As Boolean, Optional ByVal alto As Integer = 50, Optional ByVal ancho As Integer = 600)
-    '    'msg.Height = alto
-    '    'msg.Width = ancho
-    '    msg.Visible = True
-    '    'msg.CssClass = IIf(lError = True, "NotOk", "Ok")
-    '    msg.ForeColor = IIf(lError = True, Drawing.Color.Red, Drawing.Color.Blue)
 
-    'End Sub
-
-    Protected Sub BtnNuevo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnNuevo.Click
-        Nuevo()
-    End Sub
 
     Protected Sub CboAct_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboAct.SelectedIndexChanged
 
@@ -631,5 +616,24 @@ Partial Class CtrlUsr_CalenProg_GActividades
         End If
 
 
+    End Sub
+
+    Protected Sub IBtnNuevo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnNuevo.Click
+        Nuevo()
+    End Sub
+
+    Protected Sub IBtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardar.Click
+        Guardar()
+        OnClick(sender)
+    End Sub
+
+    Protected Sub IBtnAnular_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnEliminar.Click
+        Anular()
+        OnClick(sender)
+    End Sub
+
+    Protected Sub IBtnCancelar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnCancelar.Click
+        Cancelar()
+        OnClick(sender)
     End Sub
 End Class

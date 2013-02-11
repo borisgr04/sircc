@@ -255,33 +255,28 @@
                      Enabled="True" TargetControlID="TxtFecAviso">
                  </ajaxToolkit:CalendarExtender>
              </td>
-             <td colspan="4">
-                 &nbsp;</td>
-             <td colspan="2">
-                 &nbsp;</td>
-             <td>
-                 &nbsp;</td>
-             <td>
-                 &nbsp;</td>
-             <td>
-                 &nbsp;</td>
-         </tr>
-         <tr>
-             <td class="style3">
-                 &nbsp;</td>
-             <td>
-                 &nbsp;</td>
-             <td>
-                 <asp:Label ID="LbColor" runat="server" CssClass="Caption">Color</asp:Label>
+             <td >
+                 Color</td>
+            <td colspan="2">
+            <asp:TextBox ID="TxtColor" runat="server" AutoCompleteType="None" MaxLength="6" Width="40px"
+                     style="float:left"></asp:TextBox>
+            </td> 
+            <td>
+            <ajaxToolkit:ColorPickerExtender ID="ColorPickerExtender1" runat="server" 
+                     OnClientColorSelectionChanged="colorChanged" TargetControlID="TxtColor" />
+                     <span id="MostrarColor" 
+                     style="width:40px;height:18px;border:1px solid #000;margin:0 3px;float:left">
+                 </span>
+            </td>
+            <td colspan="1">
+                 
              </td>
-             <td colspan="10">
-                 <asp:TextBox ID="TxtColor" runat="server" AutoCompleteType="None" MaxLength="6" style="float:left"></asp:TextBox>
-                 <ajaxToolkit:ColorPickerExtender runat="server" 
-                ID="ColorPickerExtender1"
-                TargetControlID="TxtColor"
-                OnClientColorSelectionChanged="colorChanged" />
-                 <span id="MostrarColor" style="width:40px;height:18px;border:1px solid #000;margin:0 3px;float:left" ></span>
-             </td>
+             <td>
+                 &nbsp;</td>
+             <td>
+                 </td>
+             <td>
+                 &nbsp;</td>
          </tr>
                 <tr>
                     <td class="style3">
@@ -317,47 +312,58 @@
              <td>
                  &nbsp;</td>
          </tr>
-         <tr>
-             <td class="style3">
-                 &nbsp;</td>
-             <td>
-                 &nbsp;</td>
-             <td>
-                 &nbsp;</td>
-             <td colspan="2">
-                 &nbsp;</td>
-             <td colspan="2">
-                 <asp:Button ID="BtnNuevo" runat="server" Text="Nuevo" 
-                     ToolTip="Nueva Actividad" />
-             </td>
-             <td style="text-align: center">
-                 <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" 
-                     ValidationGroup="MODALACT" />
-                 <ajaxToolkit:ConfirmButtonExtender ID="BtnGuardar_ConfirmButtonExtender" 
-                     runat="server" 
-                     ConfirmText="Desea Guardar la Actividad? Asegurese que la Información es la Correcta" 
-                     Enabled="True" TargetControlID="BtnGuardar">
-                 </ajaxToolkit:ConfirmButtonExtender>
-             </td>
-             <td style="text-align: center">
-                 <asp:Button ID="BtnEliminar" runat="server" Text="Anular" />
-                 <ajaxToolkit:ConfirmButtonExtender ID="BtnEliminar_ConfirmButtonExtender" 
-                     runat="server" 
-                     ConfirmText="Desea Anular la Actividad, asegurese de digitar una observación" 
-                     Enabled="True" TargetControlID="BtnEliminar">
-                 </ajaxToolkit:ConfirmButtonExtender>
-             </td>
-             <td style="text-align: center">
-                 &nbsp;</td>
-             <td style="text-align: center">
-                 <asp:Button ID="BtnCancelar" runat="server" Text="Cerrar"  
-                     CausesValidation="False" ToolTip="Cierra la ventana actual" />
-             </td>
-             <td>
-                 &nbsp;</td>
-             <td>
-                 &nbsp;</td>
-         </tr>
+             <tr>
+                 <td class="style3">
+                     &nbsp;</td>
+                 <td>
+                     &nbsp;</td>
+                 <td>
+                     &nbsp;</td>
+                 <td colspan="2">
+                     &nbsp;</td>
+                 <td colspan="2" style="text-align: center">
+                     <asp:ImageButton ID="BtnNuevo" runat="server" SkinID="IBtnNuevo" />
+                 </td>
+                 <td style="text-align: center">
+                     <asp:ImageButton ID="BtnGuardar" runat="server" SkinID="IBtnGuardar" />
+                 </td>
+                 <td style="text-align: center">
+                     <asp:ImageButton ID="BtnEliminar" runat="server" SkinID="IBtnEliminar" />
+                 </td>
+                 <td style="text-align: center">
+                     &nbsp;</td>
+                 <td style="text-align: center">
+                     <asp:ImageButton ID="BtnCancelar" runat="server" SkinID="IBtnCancelar" />
+                 </td>
+                 <td>
+                     &nbsp;</td>
+                 <td>
+                     &nbsp;</td>
+             </tr>
+             <tr>
+                 <td class="style3">
+                     &nbsp;</td>
+                 <td>
+                     &nbsp;</td>
+                 <td>
+                     &nbsp;</td>
+                 <td colspan="2">
+                     &nbsp;</td>
+                 <td colspan="2" style="text-align: center">
+                     Nuevo</td>
+                 <td style="text-align: center">
+                     Guardar</td>
+                 <td style="text-align: center">
+                     Anular</td>
+                 <td style="text-align: center">
+                     &nbsp;</td>
+                 <td style="text-align: center">
+                     Volver</td>
+                 <td>
+                     &nbsp;</td>
+                 <td>
+                     &nbsp;</td>
+             </tr>
                 <tr>
                     <td class="style3">
                         &nbsp;</td>
@@ -367,11 +373,11 @@
                         &nbsp;</td>
                     <td colspan="4">
                         &nbsp;</td>
-                    <td>
+                    <td style="text-align: center">
                         &nbsp;</td>
-                    <td colspan="2">
+                    <td colspan="2" style="text-align: center">
                         &nbsp;</td>
-                    <td>
+                    <td style="text-align: center">
                         &nbsp;</td>
                     <td>
                         &nbsp;</td>
