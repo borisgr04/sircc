@@ -394,10 +394,6 @@
         </SelectParameters>
      
     </asp:ObjectDataSource>
-      
-        <div id="DIV5"  style="z-index: 101; overflow: auto; width: 100%;
-                    height: 187px; background-color: transparent; border-bottom-style: outset" 
-                            >
                 <asp:GridView 
                 id="grdProcACargo" runat="server" OnRowDataBound="GridView1_RowDataBound" 
                 DataSourceID="ObjConPContratosD" 
@@ -413,7 +409,7 @@
     </asp:ButtonField>
     <asp:ButtonField ButtonType="Image" CommandName="documentos" HeaderText="Documentos"
                                     ImageUrl="~/images/2012/archivo.png" Text="Documentos Precontractuales" />
-    <asp:ButtonField ButtonType="Image" CommandName="dbproc" 
+    <asp:ButtonField ButtonType="Image" Visible="false" CommandName="dbproc" 
         HeaderText="Datos del Proceso" ImageUrl="~/images/Operaciones/Edit.png">
     <ItemStyle HorizontalAlign="Center" />
     </asp:ButtonField>
