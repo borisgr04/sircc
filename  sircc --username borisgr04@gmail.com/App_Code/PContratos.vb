@@ -343,6 +343,10 @@ Public Class PContratos
         'Throw New Exception(_Comando.CommandText)
         Me.num_reg = Me.EjecutarComando()
 
+        querystring = "UPDATE PCONTRATOS SET NUMGRUPOS=1 WHERE PRO_SEL_NRO=:PRO_SEL_NRO"
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":PRO_SEL_NRO", Me.Num_PCon)
+        EjecutarComando()
 
     End Sub
     Private Sub CrearNumProc(ByVal cod_dep As String, ByVal cod_tpro As String, ByVal vig_con As String)

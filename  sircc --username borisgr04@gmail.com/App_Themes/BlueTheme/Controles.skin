@@ -28,8 +28,7 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
                         ImageUrl="~/images/2012/Nuevo.png" Width="32px" />                        
 <asp:ImageButton SkinId="IBtnSelect2" runat="server" Height="32px" 
                         ImageUrl="~/images/Operaciones/Select.png" Width="32px" />               
-<asp:ImageButton SkinId="IBtnDetalle" runat="server" Height="32px" 
-                        ImageUrl="~/images/2013/AbrirC.png" Width="32px" />
+
 <asp:ImageButton SkinId="IBtnBuscar" runat="server" AccessKey="b" AlternateText="Buscar" Height="32px" Width="32px"
                 ImageUrl="~/images/2012/buscar.png"  />
 <asp:ImageButton SkinId="IBtnAdd" runat="server"  
@@ -126,3 +125,13 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 <asp:ImageButton SkinId="IBtnSS" runat="server"  ImageUrl="~/images/2013/health2.png"
                                  />
 
+<asp:ImageButton SkinId="IBtnCalen" runat="server"  ImageUrl="~/images/2012/calendario.png"
+                                 />
+
+<asp:ImageButton SkinId="IBtnDescargarDoc" runat="server" AlternateText="Descargar" Height="32px" Width="32px"
+                ImageUrl="~/images/2013/Dowload_Doc.png"  />
+<asp:ImageButton SkinId="IBtnDescargarZip" runat="server" AlternateText="Descargar Todo" Height="32px" Width="32px"
+                ImageUrl="~/images/2013/Descargar_Zip.png"  />
+
+<asp:ImageButton SkinId="IBtnDetalle" runat="server" Height="32px" 
+                        ImageUrl="~/images/2013/AbrirC.png" Width="32px" />
