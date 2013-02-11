@@ -126,6 +126,8 @@ Partial Class Solicitudes_Recibido_Default
                 GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
             Case 2
                 GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "A")
+            Case 3
+                GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "R")
         End Select
         Me.GridView1.DataBind()
 
@@ -140,6 +142,8 @@ Partial Class Solicitudes_Recibido_Default
                 GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
             Case 2
                 GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "A")
+            Case 3
+                GridView1.DataSource = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "R")
         End Select
         Me.GridView1.DataBind()
     End Sub

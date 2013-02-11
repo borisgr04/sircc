@@ -139,6 +139,10 @@
                                      SortExpression="COD_SOL">
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
+                                 <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="N° Proceso" 
+                                     SortExpression="PRO_SEL_NRO">
+                                 <ItemStyle VerticalAlign="Top" />
+                                 </asp:BoundField>
                                  <asp:BoundField DataField="asignado_por" HeaderText="Asignado por" 
                                      SortExpression="asignado_por">
                                  <ItemStyle VerticalAlign="Top" />
