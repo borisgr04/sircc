@@ -12,14 +12,8 @@ Partial Class Consultas_AvisosActD_Default
     End Sub
 
     Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
-
-        'querystringSeguro = Me.SetRequest()
-        'querystringSeguro("Num_Proc") = GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString()
-        'querystringSeguro("ID") = GridView1.DataKeys(GridView1.SelectedIndex).Values(1).ToString()
         Dim Num_Proc = GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString()
-        'Title = GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString() + GridView1.DataKeys(GridView1.SelectedIndex).Values(1).ToString()
         Redireccionar_Pagina("/Consultas/AvisosActD/Con_Cronograma.aspx?Cod_PCon=" + Num_Proc)
-        'Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?Num_Proc=" + GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString())
     End Sub
 
     Protected Sub GridView2_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
@@ -31,13 +25,8 @@ Partial Class Consultas_AvisosActD_Default
     End Sub
 
     Protected Sub GridView2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView2.SelectedIndexChanged
-        'querystringSeguro = Me.SetRequest()
-        'querystringSeguro("Num_Proc") = GridView2.DataKeys(GridView2.SelectedIndex).Values(0).ToString()
-        'querystringSeguro("ID") = GridView2.DataKeys(GridView2.SelectedIndex).Values(1).ToString()
         Dim Num_Proc = GridView2.DataKeys(GridView2.SelectedIndex).Values(0).ToString()
-        'Title = GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString() + GridView1.DataKeys(GridView1.SelectedIndex).Values(1).ToString()
-        Redireccionar_Pagina("/Consultas/AvisosActSSSSSD/Con_Cronograma.aspx?Cod_PCon=" + Num_Proc)
-        'Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?Num_Proc=" + GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString())
+        Redireccionar_Pagina("/Consultas/AvisosActD/Con_Cronograma.aspx?Cod_PCon=" + Num_Proc)
     End Sub
 
 
