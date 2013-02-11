@@ -246,7 +246,7 @@ Partial Class CtrlUsr_CalenProg_GActividades
         Me.TxtObs.ReadOnly = b
 
         Me.BtnEliminar.Enabled = b
-        Me.BtnCancelar.Enabled = b
+        'Me.BtnCancelar.Enabled = b
         Me.BtnGuardar.Enabled = b
         Me.BtnNuevo.Enabled = b
 
