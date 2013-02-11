@@ -353,5 +353,8 @@ Partial Class CtrlUsr_CalenProg_CalenProgl
         Me.ModalPopupAct.Show()
     End Sub
 
+    Protected Sub IbtnNuevo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IbtnNuevo.Click
+        Nuevo()
+    End Sub
 End Class
 

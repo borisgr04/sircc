@@ -120,6 +120,8 @@ a.info:hover div.infodiv
 <asp:Panel ID="PnCronograma" runat="server">
     <asp:MultiView ID="MultiView1" runat="server">
         <asp:View ID="View1" runat="server">
+            <br />
+            <asp:ImageButton ID="IbtnNuevo" runat="server" SkinID="IBtnNuevo" />
             <asp:LinkButton ID="LnkNu" runat="server">Nueva Actividad</asp:LinkButton>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
         DataKeyNames="ID">
@@ -252,7 +254,8 @@ a.info:hover div.infodiv
 </asp:UpdatePanel>
 <!----Modal-->
 
-        <asp:Panel ID="PanelvRegistro" runat="server" BackColor="White" Width="580px" >
+        <asp:Panel ID="PanelvRegistro" runat="server" BackColor="White" 
+    Width="604px" Height="596px" >
             <asp:Panel ID="Panel4" runat="server" CssClass="BarTitleModal2" BorderColor="White" 
                 Height="27px" Width="99%">
                 <table style="width:100%;">
@@ -269,7 +272,7 @@ a.info:hover div.infodiv
                     </tr>
                 </table>
             </asp:Panel>
-            <asp:Panel ID="PnAreaT" ScrollBars="Both" runat="server" Height="550px" >
+            <asp:Panel ID="PnAreaT" ScrollBars="Both" runat="server" Height="575px" >
                     <uc1:GActividades ID="GActividades1" runat="server" />
             </asp:Panel>
         </asp:Panel>

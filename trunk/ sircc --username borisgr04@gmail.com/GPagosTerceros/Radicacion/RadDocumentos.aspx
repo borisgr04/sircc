@@ -35,8 +35,8 @@
         <tr>
             <td style="width: 147px">
                 <asp:RadioButtonList ID="rdFiltro" runat="server" AutoPostBack="True" 
-                    RepeatDirection="Horizontal">
-                    <asp:ListItem Selected="True" Value="N">x Recibir</asp:ListItem>
+                    RepeatDirection="Horizontal" Height="26px" Width="229px">
+                    <asp:ListItem Selected="True" Value="N">Por Recibir</asp:ListItem>
                     <asp:ListItem Value="S">Recibidas</asp:ListItem>
                 </asp:RadioButtonList>
             </td>

@@ -14,7 +14,7 @@ Inherits="Procesos_DBProceso_Default"  %>
 <%@ Register src="../../CtrlUsr/Rubros/ConRubros.ascx" tagname="ConRubros" tagprefix="uc6" %>
 <%@ Register src="../../CtrlUsr/Progreso/Progress.ascx" tagname="Progress" tagprefix="uc3" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
-    <style>
+    <style type="text/css">
     #navlist li
 {
 display: inline;
@@ -53,12 +53,14 @@ padding-right: 20px;
             width: 228px;
         }
 
+        .RadInput_Default{font:12px "segoe ui",arial,sans-serif}.RadInput{vertical-align:middle;width:160px}.RadInput_Default{font:12px "segoe ui",arial,sans-serif}.RadInput{vertical-align:middle;width:160px}.RadInput_Default{font:12px "segoe ui",arial,sans-serif}.RadInput{vertical-align:middle;width:160px}.RadInput_Default{font:12px "segoe ui",arial,sans-serif}.RadInput{vertical-align:middle;width:160px}
+
         </style>
     <div class="demoarea">
         <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" 
             EnableScriptGlobalization="True">
         </ajaxToolkit:ToolkitScriptManager>
-        <script type="text/javascript">
+     <%--   <script type="text/javascript">
                    
             function AporOtros(){
             
@@ -96,7 +98,49 @@ padding-right: 20px;
             }
             
      </script>
+--%>
 
+   <script type="text/javascript">
+            
+            function AportesTotalesT (sender, EventArgs)
+            {
+             var txtTotal =$find( '<%=Me.TxtValTot.ClientID%>');
+             var txtAportes = $find( '<%=Me.TxtValProp.ClientID%>');
+             var txtOtros = $find( '<%=Me.TxtValOtros.ClientID%>');
+    
+             var valTotal = txtTotal.get_value ();
+
+             if(valTotal==0){
+             txtTotal.set_value(0);
+             valTotal=0;
+             }
+             txtAportes.set_value (valTotal);
+             txtOtros.set_value (0);
+            }
+
+            function AportesProp (sender, EventArgs)
+            {
+             var txtTotal =$find( '<%=Me.TxtValTot.ClientID%>');
+             var txtAportes = $find( '<%=Me.TxtValProp.ClientID%>');
+             var txtOtros = $find( '<%=Me.TxtValOtros.ClientID%>');
+             var valTotal = txtTotal.get_value ();
+             var valAportes = txtAportes.get_value ();
+             var valOtros = valTotal-valAportes;
+             if(valOtros<0){
+                alert("El Valor de los Aportes no puede ser mayor que el Valor total");
+                txtAportes.set_value(valTotal);
+                txtOtros.set_value (0);
+                txtAportes.focus();
+             }
+             else{
+                txtOtros.set_value (valOtros);
+             }
+            }
+
+            
+
+            
+        </script>
         <asp:Label ID="Label10" runat="server" CssClass="Titulo" 
             Text="REGISTRO DE PROCESOS PRECONTRACTUALES"></asp:Label>
             <br />
@@ -139,8 +183,9 @@ padding-right: 20px;
                 <td style="width: 79px; text-align: center;">
                     <asp:ImageButton ID="IBtnDocumentos" runat="server" SkinID="IBtnArchivoD" />
                 </td>
-                <td style="width: 79px">
-                    &nbsp;</td>
+                <td style="width: 79px; text-align: center;">
+                    <asp:ImageButton ID="IBtnCronograma" runat="server" SkinID="IBtnCalen" />
+                </td>
                 <td class="style31">
                     <asp:ImageButton ID="BtnDefinitivo" runat="server" Height="32px" 
                         ImageUrl="~/images/Operaciones/Definitivo.png" ToolTip=", Validar los Datos y pasa el proceso a definitivo para generar minuta y radicar" 
@@ -182,8 +227,8 @@ padding-right: 20px;
                     Contratos</td>
                 <td style="width: 79px; text-align: center;">
                     Documentos<br /> PreContractuales</td>
-                <td style="width: 79px">
-                    &nbsp;</td>
+                <td style="width: 79px; text-align: center;">
+                    Cronograma</td>
                 <td class="style31">
                     <asp:Label ID="LblDef" runat="server" Text="Validar" Visible="False" 
                         ToolTip="Validar los Datos y pasa el proceso a definitivo para generar minuta y radicar"></asp:Label>
@@ -421,11 +466,12 @@ padding-right: 20px;
                             <asp:Label ID="Label1" runat="server" Text="Valor Total"></asp:Label>
                         </td>
                         <td colspan="4">
-                            <asp:TextBox ID="TxtValTot" runat="server"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender 
-                            ID="FilteredTextBoxExtender1" 
-                            runat="server" TargetControlID="TxtValTot" FilterType="Custom, Numbers" ValidChars=".">
-                            </ajaxToolkit:FilteredTextBoxExtender>
+                            <span>
+                            <telerik:RadNumericTextBox ID="TxtValTot" runat="server" Culture="es-CO" 
+                                Height="19px" Skin="Default" Value="0" Width="125px">
+                                <ClientEvents OnValueChanged="AportesTotalesT" />
+                            </telerik:RadNumericTextBox>
+                            </span>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" 
                                 ControlToValidate="TxtValTot" 
                                 ErrorMessage="Debe deligenciar el Valor del Contrato" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
@@ -434,11 +480,12 @@ padding-right: 20px;
                             <asp:Label ID="Label11" runat="server" Text="Valor aportes Propios"></asp:Label>
                         </td>
                         <td class="style33">
-                            <asp:TextBox ID="TxtValProp" runat="server" Height="19px" Width="119px"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender 
-                            ID="FilteredTextBoxExtender2" 
-                            runat="server" TargetControlID="TxtValProp" FilterType="Custom, Numbers" ValidChars=".">
-                            </ajaxToolkit:FilteredTextBoxExtender>
+                            <span>
+                            <telerik:RadNumericTextBox ID="TxtValProp" runat="server" Culture="es-CO" 
+                                Height="19px" Skin="Default" Value="0" Width="125px">
+                                <ClientEvents OnValueChanged="AportesProp" />
+                            </telerik:RadNumericTextBox>
+                            </span>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" 
                                 ControlToValidate="TxtValProp" 
                                 ErrorMessage="Debe diligenciar el Valor de los Aportes Propios" 
@@ -448,9 +495,11 @@ padding-right: 20px;
                             <asp:Label ID="Label12" runat="server" Text="Valor aportes Otros"></asp:Label>
                         </td>
                         <td>
-                            <b>
-                            <asp:TextBox ID="TxtValOtros" runat="server" ReadOnly="True"></asp:TextBox>
-                            </b>
+                            <span>
+                            <telerik:RadNumericTextBox ID="TxtValOtros" runat="server" Culture="es-CO" 
+                                Enabled="false" Height="19px" Skin="Default" Value="0" Width="125px">
+                            </telerik:RadNumericTextBox>
+                            </span>
                         </td>
                         <td>
                             &nbsp;</td>

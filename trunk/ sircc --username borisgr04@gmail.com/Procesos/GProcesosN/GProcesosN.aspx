@@ -337,7 +337,7 @@
                         <a href="" class="accordionLink">1. Datos Básicos </a>
                     </Header>
                     <Content>
-                    <div style="height: 400px; overflow: auto">
+                    <div <%--style="height: 400px; overflow: auto"--%>>
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                             <ContentTemplate>
                                 <fieldset>

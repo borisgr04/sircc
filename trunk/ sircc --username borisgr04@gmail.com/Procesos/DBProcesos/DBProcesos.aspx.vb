@@ -295,4 +295,11 @@ Partial Class Procesos_DBProceso_Default
     Protected Sub IBtnDocumentos_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnDocumentos.Click
         Redireccionar_Pagina("/Procesos/DocProceso/DocProcesos.aspx?Num_Proc=" + Me.TxtNProc.Text)
     End Sub
+
+    Protected Sub IBtnCronograma_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnCronograma.Click
+        querystringSeguro = Me.SetRequest()
+        querystringSeguro("Num_Proc") = Me.TxtNProc.Text
+        querystringSeguro("ID") = "1" 'GridView1.DataKeys(GridView1.SelectedIndex).Values(1).ToString()
+        Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?data=" + HttpUtility.UrlEncode(querystringSeguro.ToString()))
+    End Sub
 End Class
