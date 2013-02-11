@@ -192,7 +192,7 @@
                     <asp:TextBox ID="txtNomNew" runat="server" Width="229px"></asp:TextBox></TD>
             <TD style="WIDTH: 100px; HEIGHT: 23px">
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                        ControlToValidate="txtNomNew" ErrorMessage="Digite Codigo Impuesto">*</asp:RequiredFieldValidator></TD></TR>
+                        ControlToValidate="txtNomNew" ErrorMessage="Digite el nombre del subtipo">*</asp:RequiredFieldValidator></TD></TR>
         <TR><TD style="WIDTH: 162px; HEIGHT: 18px">
                     <asp:Label ID="Label5" runat="server" Text="Tipo"></asp:Label>
                     </TD><TD style="WIDTH: 513px; HEIGHT: 18px">
@@ -202,9 +202,7 @@
                         </asp:DropDownList>
                     </TD><TD style="WIDTH: 100px; HEIGHT: 18px">
                         
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
-                        ControlToValidate="txtNomNew" ErrorMessage="Digite Codigo Impuesto">*</asp:RequiredFieldValidator>
-                    </TD></TR>
+                    &nbsp;</TD></TR>
         <TR><TD style="WIDTH: 162px; HEIGHT: 19px">
                 <asp:Label ID="Label6" runat="server" Text="Codigo Auxiliar"></asp:Label>
             </TD><TD style="WIDTH: 513px; HEIGHT: 19px">
@@ -212,7 +210,7 @@
             </TD>
             <TD style="WIDTH: 100px; HEIGHT: 19px">
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
-                        ControlToValidate="txtNomNew" ErrorMessage="Digite Codigo Impuesto">*</asp:RequiredFieldValidator></TD></TR>
+                        ControlToValidate="Txt_Cod_Aux" ErrorMessage="Digite el código auxiliar">*</asp:RequiredFieldValidator></TD></TR>
         <TR><TD style="WIDTH: 162px">
                 <asp:Label ID="Label7" runat="server" Text="Codigo Formato Contraloria"></asp:Label>
             </TD>

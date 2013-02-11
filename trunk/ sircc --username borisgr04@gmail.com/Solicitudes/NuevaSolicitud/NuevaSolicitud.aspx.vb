@@ -68,6 +68,11 @@ Partial Class Procesos_NuevaSolicitud_Default
         If Not Page.IsPostBack Then
             Me.TxtPpto.Attributes.Add("onblur", "javascript:Presupuesto();")
             Cancelar()
+            If Not String.IsNullOrEmpty(Request("Cod_Sol")) Then
+                TxtNprocA.Text = Request("Cod_Sol")
+                Abrir()
+            End If
+            
         End If
 
     End Sub
