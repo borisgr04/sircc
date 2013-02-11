@@ -352,7 +352,7 @@ Public Class PaginaComun
     End Sub
     Private Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Deshabilitar_Atras()
-        Session("Vigencia") = Request.Cookies(Publico.Cookie)("Modulo")
+        Session("Vigencia") = Request.Cookies(Publico.Cookie)("Vigencia")
         Response.CacheControl = "Private"
         Me.Title = Titulo
     End Sub

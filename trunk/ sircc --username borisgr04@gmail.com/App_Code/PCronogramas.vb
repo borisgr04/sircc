@@ -172,6 +172,26 @@ Public Class PCronogramas
             Return Now
         End If
     End Function
+
+
+    Function ValidarFechaAct(ByVal Num_Proc As String, ByVal FechaI As Date) As Boolean
+        Me.Conectar()
+        querystring = "select FechaRecibido from pcontratos where pro_sel_nro=:NUM_PROC"
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":NUM_PROC", Num_Proc)
+        Dim dt As DataTable = EjecutarConsultaDataTable()
+        Desconectar()
+        If dt.Rows.Count > 0 Then
+            Dim fp As Date = dt.Rows(0)("FechaRecibido")
+            If fp > FechaI Then
+                Msg = "Las actividades del Cronograma deben ser superior a la fecha de registro del proceso " + fp.ToShortDateString
+                Return False
+            Else
+                Return True
+            End If
+        End If
+        Return False
+    End Function
     ''' <summary>
     ''' Insertar Actividad en Cronograma
     ''' </summary>
@@ -185,6 +205,8 @@ Public Class PCronogramas
         Me.Conectar()
         Me.ComenzarTransaccion()
         Try
+
+        
             querystring = "Insert Into PCronogramas(COD_ACT ,NOM_ACT, COD_TPRO,FECHAI,HORAI ,FECHAF,HORAF ,UBICACION,NOTAS,DIAS_AVISO,OCUPADO,NUM_PROC,COLOR,OBLIGATORIO,EST_PROC,FEC_AVISO,NOTIFICAR,MIN_I,MIN_F,MFECINI,MHORINI,MFECFIN,MHORFIN,Orden)"
             querystring += "Values(:COD_ACT ,:NOM_ACT ,:COD_TPRO,to_date(:FECHAI,'dd/mm/yyyy'),:HORAI ,to_date(:FECHAF,'dd/mm/yyyy'),:HORAF ,:UBICACION,:NOTAS,:DIAS_AVISO,:OCUPADO,:NUM_PROC,:COLOR,:OBLIGATORIO,:EST_PROC,to_date(:FEC_AVISO,'dd/mm/yyyy'),:NOTIFICAR,:MIN_I,:MIN_F,:MFECINI,:MHORINI,:MFECFIN,:MHORFIN,:ORDEN)"
             Me.CrearComando(querystring)
@@ -248,6 +270,7 @@ Public Class PCronogramas
         Me.Conectar()
         ComenzarTransaccion()
         Try
+
             querystring = "Update PCronogramas Set COD_ACT=:COD_ACT ,NOM_ACT=:NOM_ACT ,COD_TPRO=:COD_TPRO,FECHAI=to_date(:FECHAI,'dd/mm/yyyy'),HORAI=:HORAI  ,FECHAF=to_date(:FECHAF,'dd/mm/yyyy'),HORAF=:HORAF ,UBICACION=:UBICACION,NOTAS=:NOTAS,DIAS_AVISO=:DIAS_AVISO,OCUPADO=:OCUPADO,OBLIGATORIO=:OBLIGATORIO,EST_PROC=:EST_PROC, COLOR=:COLOR,FEC_AVISO=to_date(:FEC_AVISO,'dd/mm/yyyy'),NOTIFICAR=:NOTIFICAR,MIN_I=:MIN_I,MIN_F=:MIN_F,MFECINI=:MFECINI,MHORINI=:MHORINI,MFECFIN=:MFECFIN,MHORFIN=:MHORFIN  "
             querystring += " WHERE ID=:ID_O"
             Me.CrearComando(querystring)
@@ -440,7 +463,7 @@ Public Class PCronogramas
             Me.Msg = Me.MsgOk + " Filas Afectadas [" + Me.num_reg.ToString + "] - "
             lErrorG = False
         Catch ex As Exception
-            Me.Msg = "Error:" + ex.Message
+            Me.Msg = ex.Message
             lErrorG = True
             Me.CancelarTransaccion()
         Finally

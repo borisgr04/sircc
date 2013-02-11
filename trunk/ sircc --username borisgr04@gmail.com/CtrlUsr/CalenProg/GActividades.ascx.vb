@@ -158,6 +158,12 @@ Partial Class CtrlUsr_CalenProg_GActividades
             End If
         End If
 
+        If Not obj.ValidarFechaAct(Num_Proc, TxtFechaI.Text) Then
+            Me.MsgResult.Text = obj.Msg
+            MsgBoxAlert(Me.MsgResult, True)
+            Return False
+        End If
+
         Dim lstFechas As New List(Of Date)
         If String.IsNullOrEmpty(fechaini) Or String.IsNullOrEmpty(fechafin) Then
             Return False
