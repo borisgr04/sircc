@@ -284,11 +284,13 @@
         runat="server" UpdateMode="Conditional"><contenttemplate>
 <!-- Mensaje de Salida--><BR /><asp:Button style="DISPLAY: none" id="hiddenTargetControlForModalPopup2" runat="server"></asp:Button> <ajaxToolkit:ModalPopupExtender id="ModalPopupTer" runat="server" PopupDragHandleControlID="programmaticPopupDragHandle2" PopupControlID="programmaticPopup2" DropShadow="True" BackgroundCssClass="modalBackground" BehaviorID="programmaticModalPopupBehavior2" RepositionMode="RepositionOnWindowScroll" TargetControlID="hiddenTargetControlForModalPopup2">
             </ajaxToolkit:ModalPopupExtender>&nbsp;&nbsp; 
-            <asp:Panel id="programmaticPopup2" runat="server" Width="460px" Height="500px" 
-                CssClass="ModalPanel2"><asp:Panel id="programmaticPopupDragHandle2" runat="Server" Width="655px" Height="30px" CssClass="BarTitleModal2">
-                    <DIV style="padding: 5px; VERTICAL-ALIGN: middle; width: 455px;"><DIV style="FLOAT: left">
+            <asp:Panel id="programmaticPopup2" runat="server" Width="560px" Height="600px" 
+                CssClass="ModalPanel2" style="margin-left:40px;"><asp:Panel id="programmaticPopupDragHandle2" runat="Server" Width="655px" Height="30px" CssClass="BarTitleModal2">
+                    <DIV style="padding: 5px; VERTICAL-ALIGN: middle; width: 548px;"><DIV style="FLOAT: left">
                             Actividades</DIV><DIV style="FLOAT: right">
                             <INPUT id="BtnCerrar" type=button value="X" /></DIV></DIV></asp:Panel>
+                
+                <div style="padding:20px;">
                 &nbsp;<asp:Label ID="SubT" runat="server" CssClass="SubTitulo" Text="Nuevo"></asp:Label>
                 <table>
                     <tr>
@@ -304,7 +306,7 @@
                         <td style="width: 236px" colspan="3">
                             <asp:TextBox ID="TxtCodNew" runat="server"></asp:TextBox>
                         </td>
-                        <td>
+                        <td style="width: 122px">
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="TxtCodNew" ErrorMessage="Debe Digitar el Codigo" 
                                 ValidationGroup="Guardar" Display="None"></asp:RequiredFieldValidator>
@@ -318,7 +320,7 @@
                             <asp:TextBox ID="TxtNomNew" runat="server" Height="43px" TextMode="MultiLine" 
                                 Width="100%" ></asp:TextBox>
                         </td>
-                        <td>
+                        <td style="width: 122px">
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="TxtNomNew" ErrorMessage="Debe Digitar el Nombre" 
                                 ValidationGroup="Guardar" Display="None"></asp:RequiredFieldValidator>
@@ -354,7 +356,7 @@
                                 </InsertParameters>
                             </asp:ObjectDataSource>
                         </td>
-                        <td>
+                        <td style="width: 122px">
                             &nbsp;</td>
                     </tr>
                     <tr>
@@ -367,7 +369,7 @@
                                 Width="111px">
                             </asp:DropDownList>
                         </td>
-                        <td>
+                        <td style="width: 122px">
                             &nbsp;</td>
                     </tr>
                     <tr>
@@ -382,7 +384,7 @@
                                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                                 TypeName="PEstados"></asp:ObjectDataSource>
                         </td>
-                        <td>
+                        <td style="width: 122px">
                             &nbsp;</td>
                     </tr>
                     <tr>
@@ -391,7 +393,7 @@
                         <td colspan="3" style="width: 236px">
                             <asp:TextBox ID="TxtUbi" runat="server" TextMode="MultiLine" Width="100%"></asp:TextBox>
                         </td>
-                        <td>
+                        <td style="width: 122px">
                             &nbsp;</td>
                     </tr>
                     <tr>
@@ -407,7 +409,7 @@
                             ID="FilteredTextBoxExtender1">
                             </ajaxToolkit:FilteredTextBoxExtender>
                         </td>
-                        <td>
+                        <td style="width: 122px">
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="TxtOrden" ErrorMessage="Debe digitar el orden" 
                                 ValidationGroup="Guardar" Display="None"></asp:RequiredFieldValidator>
@@ -427,7 +429,7 @@
                             &nbsp;</td>
                         <td style="width: 236px">
                             &nbsp;</td>
-                        <td>
+                        <td style="width: 122px">
                             &nbsp;</td>
                     </tr>
                     <tr>
@@ -448,7 +450,7 @@
                                 <asp:ListItem>NO</asp:ListItem>
                             </asp:DropDownList>
                         </td>
-                        <td style="text-align: center">
+                        <td style="text-align: center; width: 122px;">
                             &nbsp;</td>
                     </tr>
                     <tr>
@@ -469,7 +471,7 @@
                                 <asp:ListItem>NO</asp:ListItem>
                             </asp:DropDownList>
                             &nbsp;</td>
-                        <td style="text-align: center">
+                        <td style="text-align: center; width: 122px;">
                             &nbsp;</td>
                     </tr>
                     <tr>
@@ -491,7 +493,7 @@
                                 <asp:ListItem>NO</asp:ListItem>
                             </asp:DropDownList>
                             &nbsp;</td>
-                        <td style="text-align: center">
+                        <td style="text-align: center; width: 122px;">
                             &nbsp;</td>
                     </tr>
                     <tr>
@@ -513,7 +515,7 @@
                                 <asp:ListItem>NO</asp:ListItem>
                             </asp:DropDownList>
                             &nbsp;</td>
-                        <td style="text-align: center">
+                        <td style="text-align: center; width: 122px;">
                             &nbsp;</td>
                     </tr>
                     <tr>
@@ -531,7 +533,8 @@
                         </td>
                     </tr>
                 </table>
-            </asp:Panel>&nbsp;&nbsp; 
+                </div>
+            </asp:Panel> 
 </contenttemplate>
     </asp:UpdatePanel>
   <asp:UpdateProgress ID="UpdPrgAsig" runat="server" AssociatedUpdatePanelID="UpdatePanel1">

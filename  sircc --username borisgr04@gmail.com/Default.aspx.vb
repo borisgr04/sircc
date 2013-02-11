@@ -9,13 +9,16 @@ Partial Class _Default
 
         Dim t As New Terceros
 
-        If t.GetIsAsig_Proc() Then
+        If t.GetIsCoordinador() Then
+            Redireccionar_Pagina("/Consultas/AvisosActD/AvisosActD.aspx")
+        ElseIf t.GetIsAsig_Proc() Then
             Redireccionar_Pagina("/Consultas/AvisosAct/AvisosAct2.aspx")
+
         End If
 
         'Profile
 
 
-        
+
     End Sub
 End Class

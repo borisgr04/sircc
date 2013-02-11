@@ -26,6 +26,20 @@ Public Class Terceros
         Return IIf(dataTb.Rows(0)("C") > 0, True, False)
     End Function
 
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetIsCoordinador(Optional ByVal User As String = "") As Boolean
+        If User = "" Then
+            User = Me.usuario
+        End If
+        Me.Conectar()
+        querystring = "SELECT Count(*) C FROM Hdep_Abogados Where Ide_Ter=:Ide_Ter And Estado='AC' And Coordinador='SI'"
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":Ide_Ter", User)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return IIf(dataTb.Rows(0)("C") > 0, True, False)
+    End Function
+
     '
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
