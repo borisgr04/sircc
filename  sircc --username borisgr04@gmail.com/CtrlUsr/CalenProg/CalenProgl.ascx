@@ -264,7 +264,7 @@ a.info:hover div.infodiv
                         <td style="width: 923px">
                             &nbsp;</td>
                         <td>
-                            <asp:Button ID="BtnCerrar" runat="server" Text="X" Enabled="false" />
+                            <asp:Button ID="BtnCerrar" runat="server" Text="X" Enabled="False" />
                         </td>
                     </tr>
                 </table>
