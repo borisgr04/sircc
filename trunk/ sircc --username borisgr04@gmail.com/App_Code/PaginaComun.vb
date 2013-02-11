@@ -86,15 +86,6 @@ Public Class PaginaComun
 
     End Sub
 
-    'Protected Sub MsgBox(ByRef msg As Label, ByVal lError As Boolean)
-
-    '    msg.Height = 50
-    '    msg.Width = 600
-    '    msg.Visible = True
-    '    msg.CssClass = IIf(lError = True, "NotOk", "Ok")
-
-    'End Sub
-
     Protected Overloads Sub MsgBox(ByRef msg As Label, ByVal lError As Boolean, Optional ByVal alto As Integer = 50, Optional ByVal ancho As Integer = 600)
         'msg.Height = alto
         'msg.Width = ancho
@@ -360,7 +351,8 @@ Public Class PaginaComun
 
     End Sub
     Private Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        Deshabilitar_Atras()
+        Session("Vigencia") = Request.Cookies(Publico.Cookie)("Modulo")
         Response.CacheControl = "Private"
         Me.Title = Titulo
     End Sub

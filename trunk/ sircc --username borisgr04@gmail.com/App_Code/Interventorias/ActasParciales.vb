@@ -108,8 +108,8 @@ Public Class ActasParciales
         ' VALIDACION DE FECHA DE SUSCRIPCION
         If IsValido() Then
             'Try
-            querystring = "INSERT INTO EstContratos (cod_con,est_ini,est_fin,fec_pini,fec_ent,val_pago,nvisitas,por_eje_fis,estado,obs_est,usuario,fec_reg,autorizapago,nvis_per,Por_Eje_Fis_Per,Saldo_Per,Fec_Act) "
-            querystring += " Values(:cod_con,:est_ini,:est_fin,to_date(:fec_pini,'dd/mm/yyyy'),to_date(:fec_ent,'dd/mm/yyyy'),:val_pago,:nvisitas,:por_eje_fis,:estado,:obs_est,user,sysdate,:autorizapago,:nvis_per,:Por_Eje_Fis_Per,:Saldo_Per,:Fec_Act)"
+            querystring = "INSERT INTO EstContratos (cod_con,est_ini,est_fin,fec_pini,fec_ent,val_pago,nvisitas,por_eje_fis,estado,obs_est,usuario,fec_reg,cla_doc,nvis_per,Por_Eje_Fis_Per,Saldo_Per,Fec_Act) "
+            querystring += " Values(:cod_con,:est_ini,:est_fin,to_date(:fec_pini,'dd/mm/yyyy'),to_date(:fec_ent,'dd/mm/yyyy'),:val_pago,:nvisitas,:por_eje_fis,:estado,:obs_est,user,sysdate,:cla_doc,:nvis_per,:Por_Eje_Fis_Per,:Saldo_Per,:Fec_Act)"
             CrearComando(querystring)
 
             AsignarParametroCadena(":cod_con", Cod_Con)
@@ -129,7 +129,7 @@ Public Class ActasParciales
             AsignarParametroCadena(":obs_est", Obs)
             AsignarParametroCadena(":estado", "BO") ' Se crea en Borrador
 
-            AsignarParametroCadena(":autorizapago", "S") ' Autoriza Pago
+            AsignarParametroCadena(":cla_doc", "AP") ' Autoriza Pago
 
             AsignarParametroEntero(":nvis_per", Me.NVis_Per)
             AsignarParametroDecimal(":Por_Eje_Fis_Per", Me.Por_Eje_Fis_Per)

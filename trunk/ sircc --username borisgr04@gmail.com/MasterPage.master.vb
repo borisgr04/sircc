@@ -70,17 +70,6 @@ Partial Class MasterPage
         Response.Redirect("~/publico/logout.aspx")
     End Sub
 
-    'Protected Sub BtnCerrar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnCerrar.Click
-    '    CerrarForm()
-    'End Sub
-
-    'Public Sub CerrarForm()
-    '    Response.Redirect("~/default.aspx")
-    'End Sub
-
-    'Protected Sub CboMod_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboMod.SelectedIndexChanged
-
-    'End Sub
 
     Protected Sub Change_Menu(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim b As LinkButton = DirectCast(sender, LinkButton)
@@ -91,11 +80,7 @@ Partial Class MasterPage
     End Sub
 
     Protected Sub CmbVigencia_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CmbVigencia.SelectedIndexChanged
-        'Response.Cookies(Publico.Cookie)("Vigencia") = CmbVigencia.SelectedValue
-        'Response.Cookies(Publico.Cookie)("Modulo") = Request.Cookies(Publico.Cookie)("Modulo")
-        'Response.Cookies(Publico.Cookie)("NModulo") = Request.Cookies(Publico.Cookie)("NModulo")
-        'LbVig.Text = Request.Cookies(Publico.Cookie)("Vigencia")
-        'Cargar_Menu()
+        
     End Sub
 
     Protected Sub lstMenu_ItemCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.ListViewCommandEventArgs) Handles lstMenu.ItemCommand
