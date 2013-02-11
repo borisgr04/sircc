@@ -368,8 +368,8 @@
                                                     &nbsp;
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="Label29" runat="server" CssClass="Caption" Text="Estado"></asp:Label>
-                                                    &nbsp;<asp:Label ID="LbEstado" runat="server" Style="font-weight: 700"></asp:Label>
+                                                    <asp:Label ID="Label29" runat="server" Visible="False" CssClass="Caption" Text="Estado"></asp:Label>
+                                                    &nbsp;<asp:Label ID="LbEstado" runat="server" Visible="False" Style="font-weight: 700"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr class="STitulos">
@@ -1271,24 +1271,13 @@
                         <asp:UpdatePanel ID="UpdMin" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <asp:Label ID="LbMinuta" runat="server" Text="" Width="80%" Height="100%"></asp:Label>
-                                <table style="width: 80%;">
-                                    <tr>
-                                        <td class="style44">
-                                            &nbsp;
-                                        </td>
-                                        <td class="style45">
-                                            &nbsp;
-                                        </td>
-                                        <td>
-                                            &nbsp;
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="style44">
+                                <table style="width: 80%; border:1px">
+                                    <tr >
+                                        <td >
                                             <asp:DropDownList ID="CboPlantilla" runat="server" Height="21px" Width="226px" DataSourceID="ObjPlantillas"
                                                 DataTextField="Nom_Pla" DataValueField="Ide_Pla">
                                             </asp:DropDownList>
-                                            <asp:ObjectDataSource ID="ObjPlantillas" runat="server" OldValuesParameterFormatString="original_{0}"
+                                            <asp:ObjectDataSource ID="ObjPlantillas" runat="server" 
                                                 SelectMethod="GetbyNumProc" TypeName="PPlantillas">
                                                 <SelectParameters>
                                                     <asp:ControlParameter ControlID="TxtNprocA" Name="Num_Proc" PropertyName="Text" Type="String" />
@@ -1297,8 +1286,8 @@
                                                 </SelectParameters>
                                             </asp:ObjectDataSource>
                                         </td>
-                                        <td class="style45" style="text-align: center">
-                                            <asp:ImageButton ID="BtnGen" runat="server" Height="32px" Width="32px" SkinID="IBtnMinuta" />
+                                        <td style="text-align: center">
+                                            <asp:ImageButton ID="BtnGen" runat="server" Height="32px" Width="32px" SkinID="IBtnMinuta" /> Generar Minuta
                                         </td>
                                         <td>
                                             &nbsp;
@@ -1308,7 +1297,7 @@
                                         <td>
                                         </td>
                                         <td>
-                                            Generar Minuta
+                                             &nbsp;
                                         </td>
                                     </tr>
                                 </table>
@@ -1334,8 +1323,7 @@
                                                         ShowSelectButton="True" ButtonType="Image" />
                                                     <asp:ButtonField ButtonType="Image" HeaderText="Anular" ImageUrl="~/images/2012/AnularMinuta.png"
                                                         CommandName="Inhabilitar" Text="Anular" />
-                                                    <asp:ButtonField ButtonType="Image" HeaderText="Editar Plantilla" ImageUrl="~/images/2012/editarB.png"
-                                                        CommandName="EditarB" Text="Anular" />
+                                                    
                                                 </Columns>
                                             </asp:GridView>
                                         </td>
