@@ -70,8 +70,8 @@ Public Class ActaAnticipo
         End If
 
         Try
-            querystring = "INSERT INTO EstContratos (cod_con,est_ini,est_fin,fec_ent,usuario,fec_reg,obs_est,val_pago,nvisitas,por_eje_fis,estado) "
-            querystring += " Values(:cod_con,:est_ini,:est_fin,to_date(:fec_ent,'dd/mm/yyyy'),user,sysdate,:obs_est,:val_pago,to_number(:nvisitas),:por_eje_fis,:estado)"
+            querystring = "INSERT INTO EstContratos (cod_con,est_ini,est_fin,fec_ent,usuario,fec_reg,obs_est,val_pago,nvisitas,por_eje_fis,estado,cla_doc) "
+            querystring += " Values(:cod_con,:est_ini,:est_fin,to_date(:fec_ent,'dd/mm/yyyy'),user,sysdate,:obs_est,:val_pago,to_number(:nvisitas),:por_eje_fis,:estado,:cla_doc)"
             CrearComando(querystring)
 
             AsignarParametroCadena(":cod_con", cod_con)
@@ -82,6 +82,7 @@ Public Class ActaAnticipo
             AsignarParametroDecimal(":val_pago", val_pago)
             AsignarParametroCadena(":nvisitas", 0)
             AsignarParametroCadena(":estado", "BO")
+            AsignarParametroCadena(":cla_doc", "GD") 'Clase de Documento
             AsignarParametroDecimal(":por_eje_fis", 0)
 
             num_reg = EjecutarComando()

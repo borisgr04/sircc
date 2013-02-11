@@ -128,7 +128,7 @@
                                 <asp:ImageButton ID="IBtnGuardar" runat="server" Height="32px" Width="32px" SkinID="IBtnGuardar" />
                             </td>
                             <td class="barraH" style="text-align: center">
-                                <asp:ImageButton ID="IbtnSegSoc" runat="server" />
+                                <asp:ImageButton ID="IbtnSegSoc" runat="server" SkinID="IBtnSS" />
                             </td>
                             <td style="text-align: center" class="barraH">
                                 <asp:ImageButton ID="IBtnValidar" runat="server" Height="32px" SkinID="BtnAprobar"

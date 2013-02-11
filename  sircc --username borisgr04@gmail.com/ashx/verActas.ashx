@@ -14,12 +14,19 @@ Public Class verActas: Implements IHttpHandler
         Dim Ide_Acta As String = context.Request.QueryString("Ide_Acta")
         Dim obj As New genDocActas
         obj.CargarDoc(Ide_Acta)
-        If obj.Doc_PDF.Length > 0 Then
+        If Not obj.Doc_PDF Is Nothing Then
+            If obj.Doc_PDF.Length > 0 Then
+                context.Response.Clear()
+                context.Response.AddHeader("content-disposition", "attachment; filename=" + Ide_Acta + ".pdf")
+                context.Response.BinaryWrite(obj.Doc_PDF)
+                context.Response.End()
+            End If
+        Else
             context.Response.Clear()
-            context.Response.AddHeader("content-disposition", "attachment; filename=" + Ide_Acta + ".pdf")
-            context.Response.BinaryWrite(obj.Doc_PDF)
+            context.Response.Write("No Encontro Documento en el Sistema para el Id "+Ide_Acta)
             context.Response.End()
         End If
+        
     End Sub
  
     Public ReadOnly Property IsReusable() As Boolean Implements IHttpHandler.IsReusable
