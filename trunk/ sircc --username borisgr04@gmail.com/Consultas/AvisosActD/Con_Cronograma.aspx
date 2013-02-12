@@ -8,7 +8,6 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <uc1:DetPContratoF ID="DetPContratoF1" runat="server" />
-            <br />
             <asp:Label ID="Label1" runat="server" CssClass="Titulo" 
                 Text="Cronograma del Proceso"></asp:Label>
                 <br />
@@ -18,6 +17,9 @@
             &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:HyperLink ID="HyperLink2" runat="server" 
                 NavigateUrl="~/Procesos/Programacion/RptCrono.aspx" Target="_blank">Ver Reporte</asp:HyperLink>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:HyperLink ID="HyperLink3" runat="server" 
+                NavigateUrl="~/Consultas/AvisosActD/AvisosActD.aspx" >Volver a Panel</asp:HyperLink>
             <hr />
             <br />
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
