@@ -64,7 +64,7 @@ Public Class Rubros_GProcesos
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
             Me.lErrorG = False
         Catch ex As Exception
-            Me.Msg = "Error:" + ex.Message
+            Me.Msg = "Error:" + ex.Message + ex.StackTrace
             Me.CancelarTransaccion()
             Me.lErrorG = True
         Finally

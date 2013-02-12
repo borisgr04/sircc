@@ -151,31 +151,31 @@ padding-right: 20px;
         <table style="width: 100%">
             <tr>
                 <td style="width: 41px">
-                    <asp:ImageButton ID="IBtnNuevo" runat="server" Height="32px" 
-                        ImageUrl="~/images/Operaciones/New1.png" Width="32px" Visible="False" />
+                    <asp:ImageButton ID="IBtnNuevo" runat="server" Height="32px" Width="32px" 
+                        Visible="False" SkinID="IBtnNuevo" />
                 </td>
                 <td style="width: 115px">
                     <asp:TextBox ID="TxtNprocA" runat="server" AutoPostBack="True"></asp:TextBox>
                 </td>
                 <td style="width: 53px">
-                    <asp:ImageButton ID="IBtnAbrir" runat="server" Height="32px" 
-                        ImageUrl="~/images/mnProcesos/open-icon32.png" Width="32px" />
+                    <asp:ImageButton ID="IBtnAbrir" runat="server" Height="32px" Width="32px" 
+                        SkinID="IBtnAbrir" />
                 </td>
                 <td style="width: 53px">
                     <asp:ImageButton ID="IbtnBucar" runat="server" Height="32px" 
                         SkinID="IBtnBuscar" ValidationGroup="NoValida" Width="32px" />
                 </td>
                 <td style="width: 53px">
-                    <asp:ImageButton ID="IbtnEditar" runat="server" Height="32px" 
-                        ImageUrl="~/images/Operaciones/Edit2.png" Width="32px" />
+                    <asp:ImageButton ID="IbtnEditar" runat="server" Height="32px" Width="32px" 
+                        SkinID="IBtnEditar" />
                 </td>
                 <td style="width: 61px">
                     <asp:ImageButton ID="IBtnGuardar" runat="server" Height="32px" Width="32px" 
                         SkinID="IBtnGuardar" ValidationGroup="Guardar" />
                 </td>
                 <td style="width: 79px">
-                    <asp:ImageButton ID="IBtnCancelar" runat="server" Height="32px" 
-                        ImageUrl="~/images/mnProcesos/undo.png" Width="32px" />
+                    <asp:ImageButton ID="IBtnCancelar" runat="server" Height="32px" Width="32px" 
+                        SkinID="IBtnCancelar" />
                 </td>
                 <td style="width: 79px; text-align: center;">
                     <asp:ImageButton ID="IBtnDatosC" runat="server" SkinID="IBtnCont" />

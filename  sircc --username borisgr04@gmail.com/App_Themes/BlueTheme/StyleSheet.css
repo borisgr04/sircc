@@ -2025,12 +2025,14 @@ input.blueinput:focus, textarea.blueinput:focus {
 
 input:focus, input.sffocus{background-color:#DEEFFF;} 
 
+/*
 .disabledImageButton
 {
-     filter: alpha(opacity=30);
-     opacity: .30;
-     background-color:#111;
+     filter: alpha(opacity=40);
+     opacity: 0.05;
+     background-color:Gray;
 }
+*/
 
 /* mGrid */
 .mGrid {   
