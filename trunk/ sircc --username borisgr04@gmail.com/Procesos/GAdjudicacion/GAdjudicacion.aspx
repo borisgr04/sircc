@@ -79,16 +79,16 @@
             <td style="width: 155px">
                 &nbsp;</td>
             <td style="width: 154px">
-                &nbsp;</td>
-            <td style="width: 215px">
                 <asp:Label ID="Label23" runat="server" Font-Bold="True" Font-Size="Small" 
                     Text="Fecha de Adjudicación"></asp:Label>
             </td>
-            <td>
-                <asp:ImageButton ID="IbAdjudicar" runat="server" Width="28px" Height="29px" 
+            <td style="width: 215px">
+                <asp:ImageButton ID="IbAdjudicar" runat="server" Height="29px" 
                     ImageUrl="~/images/mnProcesos/Text-Edit-icon128.png" ToolTip="Adjudicar" 
-                    ValidationGroup="Adjudicar" />
+                    ValidationGroup="Adjudicar" Width="28px" />
             </td>
+            <td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td style="width: 155px">
@@ -96,8 +96,6 @@
                     Font-Bold="True" Font-Size="Small"></asp:Label>
             </td>
             <td style="width: 154px">
-                &nbsp;</td>
-            <td style="width: 215px">
                 <asp:TextBox ID="TxtFecAdju" runat="server" Width="114px"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="TxtFecAdju_CalendarExtender" runat="server" 
                     Format="dd/MM/yyyy" TargetControlID="TxtFecAdju">
@@ -111,8 +109,10 @@
                     ErrorMessage="La fecha de la propuesta debe ser anterior o igual a la fecha actual" 
                     Operator="LessThanEqual" Type="Date" ValidationGroup="Adjudicar">*</asp:CompareValidator>
             </td>
-            <td>
+            <td style="width: 215px">
                 Adjudicar</td>
+            <td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td colspan="4">

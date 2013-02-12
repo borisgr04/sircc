@@ -63,7 +63,7 @@
                     </td>
                     <td>
                         <asp:DropDownList ID="CboFilTproc" runat="server" DataSourceID="TipProc" 
-                            DataTextField="Nom_Tproc" DataValueField="Cod_Tproc" Width="220px" 
+                            DataTextField="Nom_Tproc" DataValueField="Cod_Tproc" 
                             AutoPostBack="True">
                         </asp:DropDownList>
                     </td>
@@ -149,10 +149,6 @@
 <asp:ButtonField CommandName="Editar" ImageUrl="~/images/Operaciones/Edit2.png" Text="Editar" ButtonType="Image"></asp:ButtonField>
 <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" ButtonType="Image"></asp:CommandField>
 </Columns>
-
-                <EmptyDataTemplate>
-                    <asp:LinkButton ID="LinkButton2" runat="server" CommandName="Nuevo">Nuevo Registro</asp:LinkButton>
-                </EmptyDataTemplate>
 
 <FooterStyle BackColor="White" Font-Bold="True" ForeColor="#5D7B9D"></FooterStyle>
 
@@ -301,36 +297,22 @@
                     </tr>
                     <tr>
                         <td style="width: 124px">
-                            <asp:Label ID="Label9" runat="server" Text="Codigo"></asp:Label>
+                            <asp:Label ID="Label12" runat="server" Text="Vigencia"></asp:Label>
                         </td>
                         <td style="width: 236px" colspan="3">
-                            <asp:TextBox ID="TxtCodNew" runat="server"></asp:TextBox>
+                            <asp:DropDownList ID="CboVig" runat="server" AutoPostBack="True" 
+                                DataSourceID="Vigencias" DataTextField="year_vig" DataValueField="year_vig" 
+                                Width="111px">
+                            </asp:DropDownList>
                         </td>
                         <td style="width: 122px">
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="TxtCodNew" ErrorMessage="Debe Digitar el Codigo" 
-                                ValidationGroup="Guardar" Display="None"></asp:RequiredFieldValidator>
-                        </td>
+                            &nbsp;</td>
                     </tr>
                     <tr>
                         <td style="width: 124px">
-                            <asp:Label ID="Label10" runat="server" Text="Nombre"></asp:Label>
+                            <asp:Label ID="Label11" runat="server" Text="Modalidad"></asp:Label>
                         </td>
-                        <td style="width: 236px" colspan="3">
-                            <asp:TextBox ID="TxtNomNew" runat="server" Height="43px" TextMode="MultiLine" 
-                                Width="100%" ></asp:TextBox>
-                        </td>
-                        <td style="width: 122px">
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="TxtNomNew" ErrorMessage="Debe Digitar el Nombre" 
-                                ValidationGroup="Guardar" Display="None"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 124px">
-                            <asp:Label ID="Label11" runat="server" Text="Tipo de Proceso"></asp:Label>
-                        </td>
-                        <td style="width: 236px" colspan="3">
+                        <td colspan="3" style="width: 236px">
                             <asp:DropDownList ID="CboTproc" runat="server" DataSourceID="TipProc" 
                                 DataTextField="Nom_TProc" DataValueField="Cod_TProc" Width="232px">
                             </asp:DropDownList>
@@ -361,16 +343,30 @@
                     </tr>
                     <tr>
                         <td style="width: 124px">
-                            <asp:Label ID="Label12" runat="server" Text="Vigencia"></asp:Label>
+                            <asp:Label ID="Label9" runat="server" Text="Codigo"></asp:Label>
                         </td>
-                        <td style="width: 236px" colspan="3">
-                            <asp:DropDownList ID="CboVig" runat="server" AutoPostBack="True" 
-                                DataSourceID="Vigencias" DataTextField="year_vig" DataValueField="year_vig" 
-                                Width="111px">
-                            </asp:DropDownList>
+                        <td colspan="3" style="width: 236px">
+                            <asp:TextBox ID="TxtCodNew" runat="server"></asp:TextBox>
                         </td>
                         <td style="width: 122px">
-                            &nbsp;</td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="TxtCodNew" Display="None" 
+                                ErrorMessage="Debe Digitar el Codigo" ValidationGroup="Guardar"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 124px">
+                            <asp:Label ID="Label10" runat="server" Text="Nombre"></asp:Label>
+                        </td>
+                        <td style="width: 236px" colspan="3">
+                            <asp:TextBox ID="TxtNomNew" runat="server" Height="43px" TextMode="MultiLine" 
+                                Width="100%" ></asp:TextBox>
+                        </td>
+                        <td style="width: 122px">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="TxtNomNew" ErrorMessage="Debe Digitar el Nombre" 
+                                ValidationGroup="Guardar" Display="None"></asp:RequiredFieldValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td style="width: 124px">

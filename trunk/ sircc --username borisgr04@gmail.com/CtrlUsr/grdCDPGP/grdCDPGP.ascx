@@ -2,10 +2,10 @@
 <asp:Label ID="Label1" runat="server" 
     Text="CERTIFICADO DE DISPONIBILIDAD PRESUPUESTAL" CssClass="Titulo"></asp:Label>
 <asp:GridView ID="grd" runat="server" AutoGenerateColumns="False" 
- CellPadding="4" DataKeyNames="nro_cdp" 
+ CellPadding="4" DataKeyNames="nro_cdp"  
     ForeColor="#333333" GridLines="None" 
-                                ShowFooter="True" EnableModelValidation="True" 
-    Width="456px">
+    ShowFooter="True" EnableModelValidation="True" 
+    Width="600px">
                                 <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                                 <Columns>
                                   <asp:TemplateField HeaderText="N° CDP" SortExpression="Nro_Cdp">

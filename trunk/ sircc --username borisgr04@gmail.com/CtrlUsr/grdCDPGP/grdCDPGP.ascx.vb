@@ -86,8 +86,6 @@ Partial Class CtrlUsr_grdCDP_grdCDPGP
 
     Public Sub LlenarGrid()
         Dim dtCustomer As DataTable = Me.GetRecords()
-        grd.DataSource = dtCustomer
-        grd.DataBind()
         If dtCustomer.Rows.Count < 1 Then
             dtCustomer.Rows.Clear()
             dtCustomer.Rows.Add(dtCustomer.NewRow())
@@ -97,6 +95,9 @@ Partial Class CtrlUsr_grdCDP_grdCDPGP
             grd.Rows(0).Cells.Add(New TableCell())
             grd.Rows(0).Cells(0).ColumnSpan = 4
             grd.Rows(0).Cells(0).Text = "No hay registros"
+        Else
+            grd.DataSource = dtCustomer
+            grd.DataBind()
         End If
     End Sub
 
