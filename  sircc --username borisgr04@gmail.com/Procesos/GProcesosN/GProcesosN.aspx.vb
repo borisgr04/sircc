@@ -815,7 +815,6 @@ Partial Class Procesos_GProcesoN_Default
         Else
             LbMinuta.Text = "Debe presionar el botón abrir"
             MsgBoxAlert(LbMinuta, True)
-
         End If
 
     End Sub
@@ -861,7 +860,8 @@ Partial Class Procesos_GProcesoN_Default
                 MsgBox(LbMinuta, objMin.lErrorG)
                 GrdMin.DataBind()
                 UpdMin.Update()
-            Case "Inhabilitar"
+            Case "pdf"
+                Redireccionar_Pagina("/ashx/VerMinutaPDF.ashx?Num_Proc=" + Me.TxtNprocA.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
 
         End Select
     End Sub

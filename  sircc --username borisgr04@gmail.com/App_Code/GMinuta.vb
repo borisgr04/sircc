@@ -27,6 +27,7 @@ Public Class GMinuta
     Public Ultimo_Msg As String
     Dim pRutaDocGen As String
     Dim objent As New EntidadMin
+    Dim docPDF() As Byte
     Public Property RutaDocGen As String
         Set(ByVal value As String)
             pRutaDocGen = value
@@ -147,10 +148,10 @@ Public Class GMinuta
             'End If
             '---------------------------------------------------
             Dim MinutaBytes As Byte() = CruzarDatos()
-            Dim msg_ins_min As String = ""
-            Dim lerror_ins_min As Boolean = False
+            Dim Msg_Ins_Min As String = ""
+            Dim lError_Ins_Min As Boolean = False
             If Me.operacion = eoperacion.Generar Then
-                ws.SetMinutaPG1(Num_Proc, Grupo, Editable, MinutaBytes, DocByte, msg_ins_min, lerror_ins_min)
+                ws.SetMinutaPG1(Num_Proc, Grupo, Editable, MinutaBytes, DocByte, msg_ins_min, lerror_ins_min, Me.docPDF)
             Else
                 ws.RegenerarMinuta(Num_Proc, ID, Grupo, MinutaBytes)
             End If
@@ -160,20 +161,13 @@ Public Class GMinuta
                 progress = 100
                 lErrorG = False
                 Ultimo_Msg += "Se Generó la Minuta Correctamente"
-                'bg.ReportProgress(progress)
-                'MessageBox.Show(Ultimo_Msg, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                'Throw New Exception(Ultimo_Msg)
             Else
                 lErrorG = lerror_ins_min
-                'bg.ReportProgress(progress)
-                Throw New Exception(msg_ins_min)
+                Throw New Exception(Msg_Ins_Min)
             End If
 
         Catch ex As Exception
-            'Me.Cancelado = True
-            Ultimo_Msg = ex.Message
-            'MessageBox.Show(ex.Message, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            'Throw New Exception(Ultimo_Msg)
+            Ultimo_Msg = ex.Message '+ ex.StackTrace
             lErrorG = True
         Finally
         End Try
@@ -203,25 +197,11 @@ Public Class GMinuta
         Ultimo_Msg += "Se Abre la Plantilla" + Enter
         progress += 1
         'bg.ReportProgress(progress)
-        'If bg.CancellationPending = True Then
-        '    Ultimo_Msg = "Se Cancela la Generación de la Minuta"
-        '    Dim r As Byte() = {}
-        '    Me.Cancelado = True
-        '    lErrorG = False
-        '    Return r
-        'End If
-        '-----------------------------------------------------------
+        '---------------------------------------------------
         wrdDoc.Unprotect(Me.Clave_Protect)
         Ultimo_Msg += "Se desportege la Plantilla" + Enter
         progress += 1
-        'bg.ReportProgress(progress)
-        'If bg.CancellationPending = True Then
-        '    Ultimo_Msg = "Se Cancela la Generación de la Minuta"
-        '    Dim r As Byte() = {}
-        '    Me.Cancelado = True
-        '    lErrorG = False
-        '    Return r
-        'End If
+    
         'Dim wrdTable As MSWord.Table
         Dim logoCustom As MSWord.InlineShape = Nothing
         wrdApp.ActiveWindow.ActivePane.View.SeekView = MSWord.WdSeekView.wdSeekCurrentPageHeader
@@ -263,20 +243,6 @@ Public Class GMinuta
             Loop
             '----------------------------------------------ojo logo
 
-            'Pie de Pagina
-            'wrdTable = section.Footers(MSWord.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range.Tables.Add(section.Headers(MSWord.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range, 3, 1, oMissing, oMissing)
-            'wrdTable.Cell(1, 2).Range.InsertAfter(Entidad.Lema)
-            'wrdTable.Cell(1, 2).Range.InsertAfter(Entidad.Direccion + " " + Entidad.Telefono)
-
-            'SETTING FOCUES BACK TO DOCUMENT
-
-            'If bg.CancellationPending = True Then
-            '    Ultimo_Msg = "Se Canceló la Generación de Minuta"
-            '    Dim r As Byte() = {}
-            '    Me.Cancelado = True
-            '    lErrorG = False
-            '    Return r
-            'End If
         Next Section
         progress += 3
         Ultimo_Msg += "Se Combinó el Encabezado del Documento e Inserto Logo" + Enter
@@ -419,30 +385,18 @@ Public Class GMinuta
             '----------------------------.-------------------------------------------------------
             progress += p_cuota
             Ultimo_Msg += "......Se combinó Campo [" + dt.Rows(k)("Nom_Pla").ToString.Trim + "]" + Enter
-            'bg.ReportProgress(progress)
-            'If bg.CancellationPending = True Then
-            '    Ultimo_Msg = "Se canceló la Generación de la Minuta"
-            '    Dim r As Byte() = {}
-            '    Me.Cancelado = True
-            '    lErrorG = False
-            '    Return r
-            'End If
+  
         Next k
         wrdDoc.Protect(Type:=MSWord.WdProtectionType.wdAllowOnlyReading, Password:=Me.Clave_Protect) ' Se bloquea el documento
-        'wrdDoc.Protect(MSWord.WdProtectionType.wdAllowOnlyReading, oMissing, Me.Clave_Protect, oMissing, oMissing) 'Se bloque nuevamente
         '-------------------------------------------------------------------------------------
         progress += 1
         Ultimo_Msg += "Se protege el documento...." + Enter
-        'bg.ReportProgress(progress)
         '----------------------------------------------------------------
         'SE GUARDA DOCUMENTO
         wrdDoc.Save() ' Guarda los cambios en el documento actual
-
-
-
         Ultimo_Msg += "Guarda Cambios en documento temporal...." + Enter
         'ACTIVAR PARA EXPORTAR A PDF
-        'wrdDoc.SaveAs(FileName:=pathTemporalPDF, FileFormat:=MSWord.WdExportFormat.wdExportFormatPDF) ' Exporta el documento a PDF
+        wrdDoc.SaveAs(FileName:=pathTemporalPDF, FileFormat:=MSWord.WdExportFormat.wdExportFormatPDF) ' Exporta el documento a PDF
         'Ultimo_Msg += "Se convirtio a PDF...." + Enter
 
         wrdDoc.Close()
@@ -451,367 +405,28 @@ Public Class GMinuta
         Ultimo_Msg += "Se genera documento temporal...." + Enter
         'bg.ReportProgress(progress)
         wrdApp.Quit()
-        ' se convierte a bytes
+        ' SE CONVIERTE A BYTE
         Dim oFileStream As FileStream = New FileStream(pathTemporal, FileMode.Open)
         Dim bR As New BinaryReader(oFileStream)
         Dim b() As Byte = bR.ReadBytes(oFileStream.Length)
         oFileStream.Close()
 
         'ACTIVAR PARA EXPORTAR A PDF
-        'Dim oFileStreamPDF As FileStream = New FileStream(pathTemporalPDF, FileMode.Open)
-        'Dim bRPDF As New BinaryReader(oFileStreamPDF)
-        'Dim BytePDF() As Byte = bRPDF.ReadBytes(oFileStreamPDF.Length)
-        'oFileStreamPDF.Close()
-
+        Dim oFileStreamPDF As FileStream = New FileStream(pathTemporalPDF, FileMode.Open)
+        Dim bRPDF As New BinaryReader(oFileStreamPDF)
+        docPDF = bRPDF.ReadBytes(oFileStreamPDF.Length)
+        oFileStreamPDF.Close()
+        
         File.Delete(pathTemporal)
+        File.Delete(pathTemporalPDF)
         Ultimo_Msg += "Se borrá archivo temporal...." + Enter
         Return b
     End Function
 
-    Public Function GenerarMinutaG(ByRef bg As BackgroundWorker) As Boolean
-        Dim dt As DataTable
-        Dim DocByte As Byte()
-        If Me.operacion = eoperacion.Generar Then
-
-            If ws.GetExitMin(Num_Proc, Grupo) Then
-                lErrorG = True
-                Me.Cancelado = True
-                Ultimo_Msg = "Se Canceló la Generación de Minuta"
-                bg.ReportProgress(progress)
-                bg.CancelAsync()
-                Return lErrorG
-            End If
-            If String.IsNullOrEmpty(Ide_Pla) Then
-                lErrorG = True
-                Me.Cancelado = True
-                Ultimo_Msg = "No especificó Plantilla"
-                bg.ReportProgress(progress)
-                bg.CancelAsync()
-                Return lErrorG
-            End If
-            dt = ws.GetPPlanbyPK(Ide_Pla)
-            If IsDBNull(dt.Rows(0)("PLANTILLA")) Then
-                lErrorG = True
-                Me.Cancelado = True
-                Ultimo_Msg = "No se encontro la plantilla, debe crearla antes de generar el Documento"
-                bg.ReportProgress(progress)
-                bg.CancelAsync()
-                Return lErrorG
-            End If
-            DocByte = DirectCast(dt.Rows(0)("PLANTILLA"), Byte())
-            Editable = dt.Rows(0)("EDITABLE").ToString
-            Dim oFileStream As FileStream = Nothing
-            pathTemporal = GMinuta.FolderEspecial & "\" + dt.Rows(0)("NOM_PLA") + "." + dt.Rows(0)("EXT")
-        Else
-            dt = ws.GetMinBasePGID(Me.Num_Proc, Me.Grupo, Me.ID)
-            DocByte = DirectCast(dt.Rows(0)("MinutaBase"), Byte())
-            pathTemporal = GMinuta.FolderEspecial & "\" + dt.Rows(0)("NUM_PROC").ToString + "_" + dt.Rows(0)("GRUPO").ToString + ".doc"
-        End If
-        Try
-            CrearArchivo(pathTemporal, DocByte)
-            '---------------------------------------------------
-            progress = 10
-            bg.ReportProgress(progress)
-            If bg.CancellationPending = True Then
-                Ultimo_Msg = "Se Canceló la Generación de Minuta"
-                Me.Cancelado = True
-                lErrorG = False
-                Return False
-            End If
-            '---------------------------------------------------
-            Dim MinutaBytes As Byte() = CruzarDatosG(bg)
-            Dim msg_ins_min As String = ""
-            Dim lerror_ins_min As Boolean = False
-            If Me.operacion = eoperacion.Generar Then
-                ws.SetMinutaPG1(Num_Proc, Grupo, Editable, MinutaBytes, DocByte, msg_ins_min, lerror_ins_min)
-            Else
-                ws.RegenerarMinuta(Num_Proc, ID, Grupo, MinutaBytes)
-            End If
-            Ultimo_Msg = "Se Guarda Minuta en Base de Datos...."
-            progress += 32
-            If lerror_ins_min = False Then
-                progress = 100
-                lErrorG = False
-                Ultimo_Msg = "Se Generó la Minuta Correctamente"
-                bg.ReportProgress(progress)
-                'MessageBox.Show(Ultimo_Msg, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Throw New Exception(Ultimo_Msg)
-            Else
-                lErrorG = lerror_ins_min
-                bg.ReportProgress(progress)
-                Throw New Exception(msg_ins_min)
-            End If
-        Catch ex As Exception
-            Me.Cancelado = True
-            Ultimo_Msg = ex.Message
-            'MessageBox.Show(ex.Message, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Throw New Exception(Ultimo_Msg)
-            lErrorG = True
-        Finally
-
-
-        End Try
-        Return lErrorG
-    End Function
-
-    Function CruzarDatosG(ByRef bg As BackgroundWorker) As Byte()
-        Dim dtg As DataTable = ws.GetDatosGProc(Num_Proc, Grupo)
-        ' Create an instance of MSWord  and make it visible. 
-        wrdApp = New MSWord.Application()
-        OpenedWord = True
-        Dim imgLogo As String = "" ' = 'Entidad.Ruta_Logo
-        wrdApp.Visible = True
-        Dim oTemplate As Object = pathTemporal
-        wrdDoc = wrdApp.Documents.Open(oTemplate, oMissing, oMissing, oMissing, oMissing, oMissing, _
-         oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, _
-         oMissing, oMissing, oMissing)
-        '-----------------------------------------------------------
-        Ultimo_Msg = "Se Abre la Plantilla"
-        progress += 1
-        bg.ReportProgress(progress)
-        If bg.CancellationPending = True Then
-            Ultimo_Msg = "Se Cancela la Generación de la Minuta"
-            Dim r As Byte() = {}
-            Me.Cancelado = True
-            lErrorG = False
-            Return r
-        End If
-        '-----------------------------------------------------------
-        wrdDoc.Unprotect(Me.Clave_Protect)
-        Ultimo_Msg = "Se desportege la Plantilla"
-        progress += 1
-        bg.ReportProgress(progress)
-        If bg.CancellationPending = True Then
-            Ultimo_Msg = "Se Cancela la Generación de la Minuta"
-            Dim r As Byte() = {}
-            Me.Cancelado = True
-            lErrorG = False
-            Return r
-        End If
-        Dim wrdTable As MSWord.Table
-        Dim logoCustom As MSWord.InlineShape = Nothing
-        wrdApp.ActiveWindow.ActivePane.View.SeekView = MSWord.WdSeekView.wdSeekCurrentPageHeader
-        Dim NFilas As Integer = 1, NColumnas As Integer = 2
-        For Each Section As MSWord.Section In wrdDoc.Sections
-            wrdTable = Section.Headers(MSWord.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range.Tables.Add(Section.Headers(MSWord.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range, NFilas, NColumnas, oMissing, oMissing)
-            ' Set the column widths. 
-            wrdTable.Columns(1).SetWidth(70, MSWord.WdRulerStyle.wdAdjustNone)
-            wrdTable.Columns(2).SetWidth(400, MSWord.WdRulerStyle.wdAdjustNone)
-            logoCustom = wrdTable.Cell(1, 1).Range.InlineShapes.AddPicture(imgLogo, oMissing, oMissing, oMissing)
-            Dim Encabezado As String
-            Encabezado = dtg.Rows(0)("NOM_TIP").ToString + " DE " + dtg.Rows(0)("NOM_STIP").ToString & "  N°: " & ChrW(13)
-            '  Encabezado += Entidad.Nombre & ChrW(13)
-            Encabezado += "CONTRATISTA: " + UCase(dtg.Rows(0)("Contratista_ENC").ToString)
-            wrdTable.Cell(1, 2).Range.InsertAfter(Encabezado)
-            wrdTable.Cell(1, 2).Range.Font.Size = 9
-            wrdTable.Cell(1, 2).Range.Font.Name = "Arial"
-            'Pie de Pagina
-            'wrdTable = section.Footers(MSWord.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range.Tables.Add(section.Headers(MSWord.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range, 3, 1, oMissing, oMissing)
-            'wrdTable.Cell(1, 2).Range.InsertAfter(Entidad.Lema)
-            'wrdTable.Cell(1, 2).Range.InsertAfter(Entidad.Direccion + " " + Entidad.Telefono)
-            'SETTING FOCUES BACK TO DOCUMENT
-            If bg.CancellationPending = True Then
-                Ultimo_Msg = "Se Canceló la Generación de Minuta"
-                Dim r As Byte() = {}
-                Me.Cancelado = True
-                lErrorG = False
-                Return r
-            End If
-        Next Section
-        progress += 3
-        Ultimo_Msg = "Se Combinó el Encabezado del Documento e Inserto Logo"
-        bg.ReportProgress(progress)
-        wrdApp.ActiveWindow.ActivePane.View.SeekView = MSWord.WdSeekView.wdSeekMainDocument
-        Dim dt As DataTable = ws.GetCamposPla("VGPROCESOSC")
-        Dim p_cuota As Integer = dt.Rows.Count / 65
-        For k As Integer = 0 To dt.Rows.Count - 1
-            'dtg.Columns.Contains() si contiene la columna
-            Dim Nom_Pla As String = dt.Rows(k)("Nom_Pla").ToString.Trim
-            Dim Nom_Campo As String = dt.Rows(k)("Nom_Cam").ToString
-            Dim Tip_Dato As String = dt.Rows(k)("Tip_Dat").ToString
-            Dim Genera_Tabla As String = dt.Rows(k)("GTabla").ToString
-            Dim Es_Marcador As Boolean = IIf(dt.Rows(k)("Marcador").ToString = "SI", True, False)
-
-            If Not Es_Marcador Then
-                If (Tip_Dato <> "T") AndAlso dtg.Columns.Contains(Nom_Campo) Then ' Si el campo existe como columna en la vista que contiene los datos
-                    Dim replaceAll As Object = MSWord.WdReplace.wdReplaceAll
-                    wrdApp.Selection.Find.ClearFormatting()
-                    wrdApp.Selection.Find.Text = "{" + Nom_Pla + "}" 'Buscar bajo el parametro del nombre del campo en la plantilla
-                    wrdApp.Selection.Find.Replacement.ClearFormatting()
-                    Dim strRemp As String = MostrarCampo(dtg.Rows(0)(Nom_Campo).ToString, Tip_Dato)
-
-                    If strRemp.Length <= 255 Then
-                        wrdApp.Selection.Find.Replacement.Text = strRemp  'Reemplaza por el valor del campo asociado
-                        'wrdApp.Selection.Find.Execute(oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, _
-                        ' oMissing, oMissing, oMissing, oMissing,Replace:= replaceAll, oMissing, _
-                        'oMissing, oMissing, oMissing)
-                        wrdApp.Selection.Find.Execute(Replace:=replaceAll)
-                    Else
-                        ''Dim strremp2 As String = Right(strRemp, Len(strRemp) - 255)
-                        'wrdApp.Selection.Find.Replacement.Text = ""  'Reemplaza por el valor del campo asociado
-                        'wrdApp.Selection.Find.Execute(Replace:=replaceAll)
-                        'Dim wrdRng As MSWord.Range = wrdApp.Selection.Range()
-                        'If wrdApp.Selection.Find.Found() Then
-                        '    wrdRng.InsertAfter(strRemp)
-                        'End If
-                    End If
-
-                    If wrdApp.Selection.Find.Found() Then
-
-                    End If
-                ElseIf Tip_Dato = "T" And Genera_Tabla = "S" Then ' Si el campo existe como columna en la vista que contiene los datos
-                    Dim oEncontrado As Boolean = False
-                    Dim wdFindStop As Object = MSWord.WdFindWrap.wdFindStop
-                    Dim replaceAll As Object = MSWord.WdReplace.wdReplaceAll
-                    wrdApp.Selection.Find.ClearFormatting()
-                    wrdApp.Selection.Find.Text = "{" + Nom_Pla + "}" 'Buscar bajo el parametro del nombre del campo en la plantilla
-                    wrdApp.Selection.Find.Wrap = wdFindStop
-                    wrdApp.Selection.Find.Forward = True ' Hacia Adelante
-                    Dim tip_find As Integer = 1
-                    Dim no_encontrado As Integer = 0
-                    'Primero busca hacia adelante
-                    Do While no_encontrado < 3
-                        wrdApp.Selection.Find.Execute()
-                        If wrdApp.Selection.Find.Found() Then
-                            Dim Tabla As String = dt.Rows(k)("NTabla").ToString
-                            Dim dtt As DataTable = ws.GetTablaGP(Tabla, Num_Proc, Grupo)
-                            'If dtt.Rows.Count > 0 Then
-                            Dim oTable As MSWord.Table
-                            Dim wrdRng As MSWord.Range = wrdApp.Selection.Range() 'wrdDoc.Bookmarks.Item(oEndOfDoc).Range
-                            Dim nc As Integer = dtt.Columns.Count
-                            Dim nf As Integer = dtt.Rows.Count
-                            Dim nf_adicional As Integer = 0
-                            If dt.Rows(k)("Mostrar_Titulos").ToString = "SI" Then
-                                nf_adicional = 1
-                            End If
-                            oTable = wrdDoc.Tables.Add(wrdRng, nf + nf_adicional, nc - 2, oMissing, oMissing)
-                            'oTable.Range.ParagraphFormat.SpaceAfter = 6
-                            Dim f As Integer, c As Integer
-                            ''Colocar Titulos
-                            If dt.Rows(k)("Mostrar_Titulos").ToString = "SI" Then
-                                For c = 1 To nc - 2
-                                    oTable.Cell(1, c).Range.Text = UCase(dtt.Columns(c + 1).ColumnName)
-                                    oTable.Cell(1, c).Range.Font.Bold = True
-                                Next c
-                            End If
-                            'Mostrar Datos
-                            For f = 0 To nf - 1
-                                For c = 1 To nc - 2
-                                    oTable.Cell(f + 1 + nf_adicional, c).Range.Text = dtt.Rows(f)(c + 1).ToString
-                                Next
-                            Next
-                            'oTable.Borders(Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom).LineStyle = MSWord.WdLineStyle.wdLineStyleDot
-                            oTable.Borders.Enable = IIf(dt.Rows(k)("Mostrar_Borde").ToString = "SI", True, False)
-                            'End If
-                        Else
-                            wrdApp.Selection.Find.Forward = Not wrdApp.Selection.Find.Forward
-                            no_encontrado = no_encontrado + 1
-                        End If
-                        tip_find += 1
-                    Loop
-                End If
-            Else
-                If wrdDoc.Bookmarks.Exists(Nom_Pla) Then
-                    wrdDoc.Bookmarks.Item(Nom_Pla).Range.Text = dtg.Rows(0)(Nom_Campo).ToString 'MostrarCampo(dtg.Rows(0)(Nom_Campo).ToString, Tip_Dato)
-                End If
-                If Nom_Pla = "OBJETO" Then
-                    wrdDoc.Bookmarks.Item("OBJETO_1").Range.Text = UCase(dtg.Rows(0)(Nom_Campo).ToString) 'MostrarCampo(dtg.Rows(0)(Nom_Campo).ToString, Tip_Dato)
-                    wrdDoc.Bookmarks.Item("OBJETO_2").Range.Text = UCase(dtg.Rows(0)(Nom_Campo).ToString) 'MostrarCampo(dtg.Rows(0)(Nom_Campo).ToString, Tip_Dato)
-                End If
-            End If
-
-            '----------------------------.-------------------------------------------------------
-            progress += p_cuota
-            Ultimo_Msg = "......Se combino Campo [" + dt.Rows(k)("Nom_Pla").ToString.Trim + "]"
-            bg.ReportProgress(progress)
-            If bg.CancellationPending = True Then
-                Ultimo_Msg = "Se canceló la Generación de la Minuta"
-                Dim r As Byte() = {}
-                Me.Cancelado = True
-                lErrorG = False
-                Return r
-            End If
-        Next k
-        wrdDoc.Protect(MSWord.WdProtectionType.wdAllowOnlyReading, oMissing, Me.Clave_Protect, oMissing, oMissing) 'Se bloque nuevamente
-        '-------------------------------------------------------------------------------------
-        progress += 1
-        Ultimo_Msg = "Se protege el documento...."
-        bg.ReportProgress(progress)
-        '----------------------------------------------------------------
-        'PRUEBA
-        Dim RutaDocGen As Object = GMinuta.FolderEspecial & "\" & Num_Proc & "G" & Grupo & ".doc" ' Generarlo en la ruta del sistema
-        wrdDoc.SaveAs(RutaDocGen)
-        wrdDoc.Close()
-        '..........................................
-        progress += 2
-        Ultimo_Msg = "Se genera documento temporal...."
-        bg.ReportProgress(progress)
-        wrdApp.Quit()
-        Dim oFileStream As FileStream = New FileStream(RutaDocGen, FileMode.Open)
-        Dim bR As New BinaryReader(oFileStream)
-        Return bR.ReadBytes(oFileStream.Length)
-    End Function
-
-    Sub OpenMinuta()
-        Dim Minuta As Byte() = ws.GetMinutasPGID(Num_Proc, Grupo, ID)
-        'pathTemporal = Util.FolderEspecial & "\" + Num_Proc + "_G" + Grupo.ToString + "_ID" + ID + ".doc"
-        'Try
-        ' CrearArchivo(pathTemporal, Minuta)
-        ' wrdApp = New MSWord.Application()
-        ' wrdApp.Visible = True
-        ' wrdDoc = wrdApp.Documents.Open(pathTemporal, [ReadOnly]:=True)
-        ' Catch ex As Exception
-        ' MessageBox.Show(ex.Message, Nom_Aplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'End Try
-    End Sub
-
-    Sub OpenMinutaM()
-
-        'Dim Minuta As Byte() = ws.GetMinutasPGID(Num_Proc, Grupo, ID)
-        'pathTemporal = Util.FolderEspecial & "\" + Num_Proc + "_G" + Grupo.ToString + "_ID" + ID + ".doc"
-        'Try
-        'CrearArchivo(pathTemporal, minuta)
-        'wrdAppEvent = New MSWord.Application()
-        'wrdAppEvent.Visible = True
-        ', [ReadOnly]:=True
-        'wrdDoc = wrdAppEvent.Documents.Open(pathTemporal)
-        'wrdDoc.Unprotect(Me.Clave_Protect)
-        'wrdDoc.PrintPreview()
-        'Catch ex As Exception
-        'MessageBox.Show(ex.Message, Nom_Aplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'End Try
-
-    End Sub
-
-    'End Sub
-
-    'Private Sub DocumentBeforeClose(ByVal doc As MSWord.Document, ByRef Cancel As Boolean) Handles wrdAppEvent.DocumentBeforeClose
-    '    Dim r As DialogResult
-    '    r = MessageBox.Show("Desea Guardar las Modificaciones definitivamente", Nom_Aplicacion, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-    '    If r = DialogResult.Yes Then
-    '        MessageBox.Show("Se Guardaron los cambios con Éxito...", Nom_Aplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information)
-    '        'Se bloque nuevamente
-    '        wrdDoc.Protect(MSWord.WdProtectionType.wdAllowOnlyReading, oMissing, Me.Clave_Protect, oMissing, oMissing)
-    '        ''Guarda los Cambios en el Archivo
-    '        wrdDoc.Save()
-    '        wrdDoc.Close()
-    '        Dim oFileStream As FileStream = New FileStream(pathTemporal, FileMode.Open)
-    '        Dim bR As New BinaryReader(oFileStream)
-    '        ws.SetMinutaPG(Num_Proc, Grupo, bR.ReadBytes(oFileStream.Length), Me.Ultimo_Msg, Me.lErrorG)
-    '    Else
-    '        wrdDoc.Close()
-    '    End If
-    'End Sub
-    'Private Sub DocumentBeforeSave(ByVal doc As MSWord.Document, ByRef SaveASUI As Boolean, ByRef Cancel As Boolean) Handles wrdAppEvent.DocumentBeforeSave
-    'MessageBox.Show("DocumentBeforeSave ( You are closing " & Convert.ToString(doc.Name) & " )")
-    'End Sub
-
-    'Sub AnularMinuta()
-
-    '    ws.Anular(Num_Proc, Grupo, ID, Me.Ultimo_Msg, lErrorG)
-
-
-    'End Sub
+  
+   
+   
+   
 
     Sub CrearArchivo(ByVal pathTemporal As String, ByVal doc As Byte())
 

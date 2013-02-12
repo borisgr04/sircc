@@ -29,6 +29,26 @@ Public Class PGContratosM
         Me.Desconectar()
         Return Minuta
     End Function
+
+    ''' <summary>
+    ''' REtorna Bytes de MINUTA ACTIVA
+    ''' </summary>
+    ''' <param name="NUM_PROC"></param>
+    ''' <param name="GRUPO"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetMinutaPDF(ByVal NUM_PROC As String, ByVal GRUPO As Integer) As Byte()
+        Me.Conectar()
+        querystring = "SELECT MinutaPDF FROM PGContratosM Where ESTADO='AC' AND NUM_PROC=:NUM_PROC And  GRUPO=:GRUPO "
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":NUM_PROC", NUM_PROC)
+        AsignarParametroEntero(":GRUPO", GRUPO)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Dim Minuta As Byte() = DirectCast(dataTb.Rows(0)("MinutaPDF"), Byte())
+        Me.Desconectar()
+        Return Minuta
+    End Function
     ''' <summary>
     ''' RETORNA BYTES DE MINUTA ESPECIFICADA
     ''' </summary>
@@ -40,13 +60,35 @@ Public Class PGContratosM
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetMinuta(ByVal NUM_PROC As String, ByVal GRUPO As Integer, ByVal ID As Integer) As Byte()
         Me.Conectar()
-        querystring = "SELECT * FROM PGContratosM Where NUM_PROC=:NUM_PROC And  GRUPO=:GRUPO And ID =:ID"
+        querystring = "SELECT Minuta FROM PGContratosM Where NUM_PROC=:NUM_PROC And  GRUPO=:GRUPO And ID =:ID"
         Me.CrearComando(querystring)
         AsignarParametroCadena(":NUM_PROC", NUM_PROC)
         AsignarParametroEntero(":GRUPO", GRUPO)
         AsignarParametroEntero(":ID", ID)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
         Dim Minuta As Byte() = DirectCast(dataTb.Rows(0)("Minuta"), Byte())
+        Me.Desconectar()
+        Return Minuta
+    End Function
+
+    ''' <summary>
+    ''' RETORNA BYTES DE MINUTA ESPECIFICADA
+    ''' </summary>
+    ''' <param name="NUM_PROC"></param>
+    ''' <param name="GRUPO"></param>
+    ''' <param name="ID"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetMinutaPDF(ByVal NUM_PROC As String, ByVal GRUPO As Integer, ByVal ID As Integer) As Byte()
+        Me.Conectar()
+        querystring = "SELECT MinutaPDF FROM PGContratosM Where NUM_PROC=:NUM_PROC And  GRUPO=:GRUPO And ID =:ID"
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":NUM_PROC", NUM_PROC)
+        AsignarParametroEntero(":GRUPO", GRUPO)
+        AsignarParametroEntero(":ID", ID)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Dim Minuta As Byte() = DirectCast(dataTb.Rows(0)("MinutaPDF"), Byte())
         Me.Desconectar()
         Return Minuta
     End Function
@@ -129,17 +171,18 @@ Public Class PGContratosM
     ''' <param name="MINUTABASE"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Insert1(ByVal NUM_PROC As String, ByVal GRUPO As Integer, ByVal EDITABLE As String, ByVal MINUTA As Byte(), ByVal MINUTABASE As Byte()) As String
+    Public Function Insert1(ByVal NUM_PROC As String, ByVal GRUPO As Integer, ByVal EDITABLE As String, ByVal MINUTA As Byte(), ByVal MINUTABASE As Byte(), ByVal MINUTAPDF As Byte()) As String
         Try
             Conectar()
             ComenzarTransaccion()
-            querystring = "Insert Into PGContratosM(MINUTA,NUM_PROC,GRUPO,MINUTABASE,EDITABLE)Values(:MINUTA,:NUM_PROC,:GRUPO,:MINUTABASE,:EDITABLE)"
+            querystring = "Insert Into PGContratosM(MINUTA,NUM_PROC,GRUPO,MINUTABASE,EDITABLE,MINUTAPDF)Values(:MINUTA,:NUM_PROC,:GRUPO,:MINUTABASE,:EDITABLE,:MINUTAPDF)"
             CrearComando(querystring)
             AsignarParametroCadena(":NUM_PROC", NUM_PROC)
             AsignarParametroEntero(":GRUPO", GRUPO)
             AsignarParametroEntero(":EDITABLE", EDITABLE)
             AsignarParametroBLOB("MINUTA", MINUTA)
             AsignarParametroBLOB("MINUTABASE", MINUTABASE)
+            AsignarParametroBLOB("MINUTAPDF", MINUTAPDF)
             num_reg = EjecutarComando()
             ConfirmarTransaccion()
             Msg = "Se guardo el Registro " + num_reg.ToString
