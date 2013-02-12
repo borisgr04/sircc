@@ -14,6 +14,15 @@ Partial Class Procesos_GProcesoN_Default
             Return ViewState("operRubro")
         End Get
     End Property
+
+    Property Estado As String
+        Get
+            Return ViewState("Estado")
+        End Get
+        Set(value As String)
+            ViewState("Estado") = value
+        End Set
+    End Property
     Private Property ID_FP() As String
         Set(ByVal value As String)
             ViewState("ID_FP") = value
@@ -401,12 +410,15 @@ Partial Class Procesos_GProcesoN_Default
             Me.MsgResult.CssClass = ""
             UpdateTodaAcordeon()
             Grv_Ppol.DataBind()
-
-            If dt.Rows(0)("ESTADO").ToString = "RA" Then
+            Estado = dt.Rows(0)("ESTADO").ToString
+            If Estado = "RA" Then
                 Me.IbtnEditar.Enabled = False
                 MsgResult.Text = " El Contrato ya esta Radicado "
                 MsgBoxInfo(MsgResult, True)
-
+                Me.BtnGen.Enabled = False
+                Me.CboPlantilla.Enabled = False
+                Me.CboPlantillaW.Enabled = False
+                PnlGenMinWord.Enabled = False
             End If
 
         Else
@@ -827,39 +839,47 @@ Partial Class Procesos_GProcesoN_Default
         MsgBoxLimpiar(MsgResult)
         MsgBoxLimpiar(LbMinuta)
         If dt.Rows.Count > 0 Then
-            If est = "TR" Then
-                Me.MsgResult.Text = "El proceso no se encuentra validado para generar MINUTA"
-                LbMinuta.Text = Me.MsgResult.Text
-                MsgBoxAlert(MsgResult, True)
-                MsgBoxAlert(LbMinuta, True)
-            Else
-                Dim GM As New GMinuta
-                GM.operacion = GMinuta.eoperacion.Generar
-                GM.Num_Proc = Me.TxtNprocA.Text
-                GM.Grupo = Me.CboGrupos.SelectedValue
-                GM.Ide_Pla = Me.CboPlantilla.SelectedValue
-                GM.GenerarMinuta()
-                Me.TxtLog.Text = GM.Ultimo_Msg.Replace("<br>", vbCrLf)
-                GrdMin.DataBind()
-
-            End If
+            'If est = "TR" Then
+            '    Me.MsgResult.Text = "El proceso no se encuentra validado para generar MINUTA"
+            '    LbMinuta.Text = Me.MsgResult.Text
+            '    MsgBoxAlert(MsgResult, True)
+            '    MsgBoxAlert(LbMinuta, True)
+            'Else
+            Dim GM As New GMinuta
+            GM.operacion = GMinuta.eoperacion.Generar
+            GM.Num_Proc = Me.TxtNprocA.Text
+            GM.Grupo = Me.CboGrupos.SelectedValue
+            GM.Ide_Pla = Me.CboPlantilla.SelectedValue
+            GM.GenerarMinuta()
+            Me.TxtLog.Text = GM.Ultimo_Msg.Replace("<br>", vbCrLf)
+            GrdMin.DataBind()
+            'End If
         Else
-            Me.MsgResult.Text = "No encuentra datos del Contrato."
+        Me.MsgResult.Text = "No encuentra datos del Contrato."
 
         End If
 
 
     End Sub
     Protected Sub GrdMin_Ppol_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GrdMin.RowCommand
+
+
         Select Case e.CommandName
             Case "Inhabilitar"
-                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-                Me.GrdMin.SelectedIndex = index
-                Dim objMin As New PGContratosM
-                LbMinuta.Text = objMin.Anular(Me.TxtNprocA.Text, Me.CboGrupos.SelectedValue, Me.GrdMin.DataKeys(index).Values(0).ToString)
-                MsgBox(LbMinuta, objMin.lErrorG)
-                GrdMin.DataBind()
-                UpdMin.Update()
+                If Estado <> "RA" Then
+                    Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                    Me.GrdMin.SelectedIndex = index
+                    Dim objMin As New PGContratosM
+                    LbMinuta.Text = objMin.Anular(Me.TxtNprocA.Text, Me.CboGrupos.SelectedValue, Me.GrdMin.DataKeys(index).Values(0).ToString)
+                    MsgBox(LbMinuta, objMin.lErrorG)
+                    GrdMin.DataBind()
+                    UpdMin.Update()
+                Else
+                    LbMinuta.Text = "El Contrato ya esta Radicado, No se puede Anular la Minuta"
+                    MsgBoxAlert(LbMinuta, True)
+
+                End If
+
             Case "pdf"
                 Redireccionar_Pagina("/ashx/VerMinutaPDF.ashx?Num_Proc=" + Me.TxtNprocA.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
 
@@ -892,5 +912,9 @@ Partial Class Procesos_GProcesoN_Default
         MsgBox(LbMinutaW, objMin.lErrorG)
         GrdMin.DataBind()
         UpdMin.Update()
+    End Sub
+
+    Protected Sub BtnActGriMin_Click(sender As Object, e As System.EventArgs) Handles BtnActGriMin.Click
+        GrdMin.DataBind()
     End Sub
 End Class
