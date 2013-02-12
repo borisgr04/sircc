@@ -8,6 +8,9 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <uc1:DetPContratoF ID="DetPContratoF1" runat="server" />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:HyperLink ID="HyperLink3" runat="server" 
+                NavigateUrl="~/Consultas/AvisosActD/AvisosActD.aspx" Target="_blank">Volver a Panel</asp:HyperLink>
             <br />
             <asp:Label ID="Label4" runat="server" CssClass="Titulo" 
                 Text="Documentos del Proceso"></asp:Label>
