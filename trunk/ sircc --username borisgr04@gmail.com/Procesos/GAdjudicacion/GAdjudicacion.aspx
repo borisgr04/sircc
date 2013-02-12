@@ -23,12 +23,17 @@
                     <td style="text-align: center">
                         <asp:ImageButton ID="IBtnDatosContrato" runat="server" SkinID="IBtnCont" />
                     </td>
+                    <td style="text-align: center">
+                        <asp:ImageButton ID="ImageButton1" runat="server" SkinID="IBtnCalen" />
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         Proponentes</td>
                     <td>
                         Datos del Contrato</td>
+                    <td>
+                        Cronograma</td>
                 </tr>
             </table>
             <br />

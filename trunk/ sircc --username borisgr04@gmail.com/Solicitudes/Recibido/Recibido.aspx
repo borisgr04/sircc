@@ -20,16 +20,16 @@
     <telerik:RadTabStrip ID="RadTabStrip1" runat="server" SelectedIndex="0" 
                     MultiPageID="RadMultiPage1" Skin="Office2007" Width="100%">
                     <Tabs>
-                        <telerik:RadTab runat="server" Text="Solicitudes sin Recibidas" 
-                            PageViewID="RadPageView1" Selected="True">
+                        <telerik:RadTab runat="server" Text="Solicitudes sin Recibir" 
+                            PageViewID="RadPageView1" Selected="True" Value="recibir">
                         </telerik:RadTab>
                         <telerik:RadTab runat="server" Text="Solicitudes Sin Revisar" 
-                            PageViewID="RadPageView1">
+                            PageViewID="RadPageView1" Value="revisar">
                         </telerik:RadTab>
-                        <telerik:RadTab runat="server" Owner="RadTabStrip1" PageViewID="RadPageView1" 
+                        <telerik:RadTab runat="server" Value="aceptadas" Owner="RadTabStrip1" PageViewID="RadPageView1" 
                             Text="Solicitudes Aceptadas">
                         </telerik:RadTab>
-                        <telerik:RadTab runat="server" Owner="RadTabStrip1" 
+                        <telerik:RadTab runat="server" Value="rechazadas" Owner="RadTabStrip1" 
                             Text="Solicitudes Rechazadas">
                         </telerik:RadTab>
                     </Tabs>
@@ -136,47 +136,47 @@
                              <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                              <Columns>
                                  <asp:BoundField DataField="Cod_Sol" HeaderText="N° Solicitud" 
-                                     SortExpression="COD_SOL">
+                                     >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="N° Proceso" 
-                                     SortExpression="PRO_SEL_NRO">
+                                     >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="asignado_por" HeaderText="Asignado por" 
-                                     SortExpression="asignado_por">
+                                     >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="FECHA_RECIBIDO" DataFormatString="{0:d}" 
-                                     HeaderText="Fecha Recibido - Dependencia" SortExpression="FECHA_RECIBIDO">
+                                     HeaderText="Fecha Recibido - Dependencia" >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="Obj_sol" HeaderText="Objeto a Contratar" 
-                                     SortExpression="Obj_sol">
+                                     >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="Dep_Nec" 
-                                     HeaderText="Dependencia que Genera la Necesidad" SortExpression="Dep_Nec">
+                                     HeaderText="Dependencia que Genera la Necesidad" >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="FEC_ASIGNADO" HeaderText="Fecha de Asignación" 
-                                     SortExpression="FEC_ASIGNADO">
+                                     >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="FEC_REC_ABOG" HeaderText="Fecha Recibido - Abogado" 
-                                     SortExpression="FEC_REC_ABOG">
+                                     >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="Est_Concepto" HeaderText="Concepto de Revisión" 
-                                     SortExpression="Est_Concepto">
+                                     >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="FECHA_REVISADO" HeaderText="Fecha Revisado" 
-                                     SortExpression="FECHA_REVISADO">
+                                     >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:BoundField DataField="OBS_REVISADO" HeaderText="Observación Revisión" 
-                                     SortExpression="OBS_REVISADO">
+                                     >
                                  <ItemStyle VerticalAlign="Top" />
                                  </asp:BoundField>
                                  <asp:ButtonField CommandName="recibir" Text="Recibir" />
