@@ -1319,8 +1319,10 @@
                                                 EnableModelValidation="True" DataKeyNames="ID">
                                                 <Columns>
                                                     <asp:BoundField DataField="Fec_Reg" HeaderText="Fecha de Generación" />
-                                                    <asp:CommandField SelectText="Ver" HeaderText="Imprimir" SelectImageUrl="~/images/2012/document.png"
+                                                    <asp:CommandField SelectText="Ver" HeaderText="Ver .Doc" SelectImageUrl="~/images/2012/EditarM.png"
                                                         ShowSelectButton="True" ButtonType="Image" />
+                                                     <asp:ButtonField ButtonType="Image" HeaderText="Ver PDF" ImageUrl="~/images/2013/pdf.png"
+                                                        CommandName="pdf" Text="Ver PDF" />
                                                     <asp:ButtonField ButtonType="Image" HeaderText="Anular" ImageUrl="~/images/2012/AnularMinuta.png"
                                                         CommandName="Inhabilitar" Text="Anular" />
                                                     

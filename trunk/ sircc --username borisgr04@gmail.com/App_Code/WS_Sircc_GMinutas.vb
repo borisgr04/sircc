@@ -165,9 +165,9 @@ Public Class WS_Sircc_GMinutas
     End Sub
 
     <WebMethod(Description:="Registra Minuta a un ProcesoxGrupo ")> _
-    Public Sub SetMinutaPG1(ByVal Num_Proc As String, ByVal Grupo As String, ByVal Editable As String, ByVal Minuta As Byte(), ByVal MinutaBase As Byte(), ByRef Msg As String, ByRef lErrorG As Boolean)
+    Public Sub SetMinutaPG1(ByVal Num_Proc As String, ByVal Grupo As String, ByVal Editable As String, ByVal Minuta As Byte(), ByVal MinutaBase As Byte(), ByRef Msg As String, ByRef lErrorG As Boolean, ByVal MinutaPDF As Byte())
         Dim obj As New PGContratosM
-        Msg = obj.Insert1(Num_Proc, Grupo, Editable, Minuta, MinutaBase)
+        Msg = obj.Insert1(Num_Proc, Grupo, Editable, Minuta, MinutaBase, MinutaPDF)
         lErrorG = obj.lErrorG
     End Sub
 
