@@ -15,6 +15,16 @@ Public Class PSolicitudes
         End Set
     End Property
 
+    Private _Num_Proc As String
+    Property Num_Proc() As String
+        Get
+            Return _Num_Proc
+        End Get
+        Set(ByVal value As String)
+            _Num_Proc = value
+        End Set
+    End Property
+
     Public Sub New()
         Me.Tabla = "PSolicitudes"
         Me.Vista = "VPSolicitudes"
@@ -374,7 +384,7 @@ Public Class PSolicitudes
         Me.Num_PSol = Num_PSol
         Me.Conectar()
         If String.IsNullOrEmpty(Cod_Sol) Then
-            querystring = "SELECT * FROM VPSOLICITUDESHREV WHERE Recibido=:Recibido and Id_Abog_Enc=:Id_Abog_Enc And FECHA_RECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') And Concepto Like :Concepto"
+            querystring = "SELECT * FROM VPSOLICITUDESHREV WHERE Recibido=:Recibido and Id_Abog_Enc=:Id_Abog_Enc And FECHA_RECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') And Concepto Like :Concepto order by FECHA_RECIBIDO desc"
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Id_Abog_Enc", Me.usuario)
             Me.AsignarParametroCadena(":Recibido", RECIBIDO)
@@ -382,7 +392,7 @@ Public Class PSolicitudes
             Me.AsignarParametroCadena(":F2", Hasta.ToShortDateString)
             Me.AsignarParametroCadena(":Concepto", "%" + UCase(Concepto) + "%")
         Else
-            querystring = "SELECT * FROM VPSOLICITUDESHREV WHERE Recibido=:Recibido and Id_Abog_Enc=:Id_Abog_Enc And FECHA_RECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') And Cod_Sol Like :Cod_Sol And Concepto Like :Concepto"
+            querystring = "SELECT * FROM VPSOLICITUDESHREV WHERE Recibido=:Recibido and Id_Abog_Enc=:Id_Abog_Enc And FECHA_RECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') And Cod_Sol Like :Cod_Sol And Concepto Like :Concepto order by FECHA_RECIBIDO desc"
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Id_Abog_Enc", Me.usuario)
             Me.AsignarParametroCadena(":Recibido", RECIBIDO)
@@ -392,7 +402,7 @@ Public Class PSolicitudes
             Me.AsignarParametroCadena(":Concepto", "%" + UCase(Concepto) + "%")
             '
         End If
-        'Throw New Exception(Me.vComando.CommandText)
+
 
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
 
@@ -793,7 +803,7 @@ Public Class PSolicitudes
             If concepto = "A" Then
                 proc.InsertP(dt.Rows(0).Item("Cod_Tpro").ToString, dt.Rows(0).Item("Obj_Sol").ToString, dt.Rows(0).Item("Dep_sol").ToString, dt.Rows(0).Item("Dep_Psol").ToString, dt.Rows(0).Item("Vig_sol").ToString, dt.Rows(0).Item("Tip_Con").ToString, dt.Rows(0).Item("Stip_Con").ToString, CDate(dt.Rows(0).Item("Fecha_Recibido").ToString), COD_SOL_PK, dt.Rows(0).Item("Val_Con").ToString)
                 proc.Asignar_Usuario_EncargadoP(proc.Num_PCon, dt.Rows(0).Item("Id_Abog_Enc").ToString)
-                msgNot = "<br/> N° de Proceso <B>" + proc.Num_PCon + "</B>"
+                Num_Proc = proc.Num_PCon
             End If
 
             Me.ConfirmarTransaccion()

@@ -103,6 +103,14 @@ Partial Class Consultas_AvisosActD_Default
             Dim dt As DataTable = objP.GetProcxDepDel(Session("Vigencia"))
             Dim tab5 As RadTab = RadTabStrip1.Tabs.FindTabByValue("procesos")
             tab5.Text = "Procesos a Cargo (" + dt.Rows.Count.ToString + ")"
+
+            Dim t As New Terceros
+
+            If t.GetIsAsig_Proc() Then
+                Me.HyperLink1.Visible = True
+            End If
+
+
         End If
     End Sub
 

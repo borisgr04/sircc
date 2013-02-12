@@ -44,11 +44,16 @@ Partial Class Solicitudes_Revision_Default
             Return
         End If
         MsgResult.Text = obj.Revision(Me.DetPSolicitudes1.CodigoPContrato, Me.TxtFechaRevision.Text, Me.TxtObs.Text, Me.CboConcepto.SelectedValue, Pk1)
-        Me.MsgBox(Me.MsgResult, obj.lErrorG)
         If Not obj.lErrorG Then
+            If CboConcepto.SelectedValue = "A" Then
+                MsgResult.Text += "<br/> N° de Proceso <a href='" + ResolveClientUrl("~/Procesos/DBProcesos/DBProcesos.aspx?Num_Proc=") + obj.Num_Proc + "'><B>" + obj.Num_Proc + "</B></>"
+            End If
+            Me.MsgBox(Me.MsgResult, obj.lErrorG)
             Me.GridView1.DataBind()
             limpiar()
             Habilitar(False)
+        Else
+            Me.MsgBox(Me.MsgResult, obj.lErrorG)
         End If
         
     End Sub

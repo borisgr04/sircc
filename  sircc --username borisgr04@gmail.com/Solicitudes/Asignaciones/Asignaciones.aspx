@@ -79,7 +79,6 @@
                                             <asp:ImageButton ID="IBtnAsignar" runat="server" SkinID="IBtnAsig" />
                                         </td>
                                         <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             </td>
                                         <td style="width: 99px; text-align: center;">
                                             &nbsp;

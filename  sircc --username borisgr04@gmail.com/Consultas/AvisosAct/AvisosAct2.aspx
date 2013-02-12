@@ -11,8 +11,39 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <br />
-                <asp:Label ID="LbTitulos" CssClass="Titulo" runat="server" Text="Panel de Procesos de Contratación"></asp:Label>
+                <asp:Label ID="LbTitulos" CssClass="Titulo" runat="server" 
+                    Text="Panel de Procesos de Contratación por Funcionario"></asp:Label>
                 <hr />
+                <table style="width:30%;">
+                    <tr>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:HyperLink ID="HyperLink1" runat="server" 
+                                NavigateUrl="~/Consultas/AvisosActD/AvisosActD.aspx">Ir a Panel de Coordinador</asp:HyperLink>
+                        </td>
+                        <td>
+                            <asp:HyperLink ID="HyperLink2" runat="server" 
+                                NavigateUrl="~/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx">Nueva Solicitud</asp:HyperLink>
+                        </td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                </table>
                 <br />
                 <telerik:RadTabStrip ID="RadTabStrip1" runat="server" SelectedIndex="0" Skin="Windows7"
                     MultiPageID="RadMultiPage1">
@@ -42,13 +73,13 @@
                             EnableModelValidation="True" DataKeyNames="Num_Proc,ID" AutoGenerateColumns="False"
                             EmptyDataText="No tiene tareas pendientes para hoy">
                             <Columns>
-                                <asp:CommandField ShowSelectButton="True" ButtonType="Image" SelectImageUrl="~/images/BlueTheme/Select.png" />
                                 <asp:BoundField DataField="Num_Proc" HeaderText="N° de Proceso" SortExpression="Num_Proc" />
                                 <asp:BoundField DataField="Nom_Act" HeaderText="Actividad" SortExpression="Nom_Act" />
                                 <asp:BoundField DataField="DateTimeI" HeaderText="Fecha y Hora Inicial" SortExpression="DateTimeI" />
                                 <asp:BoundField DataField="Notas" HeaderText="Notas" SortExpression="Notas" />
                                 <asp:BoundField DataField="Ocupado" HeaderText="Ocupado" SortExpression="Ocupado" />
                                 <asp:BoundField DataField="Nom_Est" HeaderText="Estado" SortExpression="Nom_Est" />
+                                <asp:CommandField ShowSelectButton="True" ButtonType="Image" SelectImageUrl="~/images/BlueTheme/Select.png" />
                             </Columns>
                         </asp:GridView>
 
@@ -102,13 +133,13 @@
                         <asp:GridView ID="GridView2" runat="server" AllowSorting="True" DataSourceID="ObjAtrasados"
                             EnableModelValidation="True" DataKeyNames="Num_Proc,ID" AutoGenerateColumns="False">
                             <Columns>
-                                <asp:CommandField ShowSelectButton="True" ButtonType="Image" SelectImageUrl="~/images/BlueTheme/Select.png" />
                                 <asp:BoundField DataField="Num_Proc" HeaderText="N° de Proceso" SortExpression="Num_Proc" />
                                 <asp:BoundField DataField="Nom_Act" HeaderText="Actividad" SortExpression="Nom_Act" />
                                 <asp:BoundField DataField="DateTimeI" HeaderText="Fecha y Hora Inicial" SortExpression="DateTimeI" />
                                 <asp:BoundField DataField="Notas" HeaderText="Notas" SortExpression="Notas" />
                                 <asp:BoundField DataField="Ocupado" HeaderText="Ocupado" SortExpression="Ocupado" />
                                 <asp:BoundField DataField="Nom_Est" HeaderText="Estado" SortExpression="Nom_Est" />
+                                <asp:CommandField ShowSelectButton="True" ButtonType="Image" SelectImageUrl="~/images/BlueTheme/Select.png" />
                             </Columns>
                         </asp:GridView>
                         <%--<telerik:RadGrid ID="RadGrid2" runat="server" AutoGenerateColumns="False" 
@@ -167,8 +198,6 @@
                             EmptyDataText="No tiene solicitudes pendientes para recibir" AllowSorting="True"
                             EnableModelValidation="True">
                             <Columns>
-                                <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True"
-                                    ButtonType="Image"></asp:CommandField>
                                 <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
                                     <ItemTemplate>
                                         <asp:Label ID="LbCod0" runat="server" Text='<%# Bind("Cod_Sol") %>' __designer:wfdid="w9"></asp:Label>
@@ -189,6 +218,8 @@
                                         <asp:Label ID="LbVal0" runat="server" Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True"
+                                    ButtonType="Image"></asp:CommandField>
                             </Columns>
                         </asp:GridView>
                     </telerik:RadPageView>
@@ -197,8 +228,6 @@
                             DataKeyNames="Cod_Sol" DataSourceID="ObjPSolRv" EmptyDataText="No tiene solicitudes pendientes para revisar"
                             EnableModelValidation="True" Width="724px">
                             <Columns>
-                                <asp:CommandField ButtonType="Image" SelectImageUrl="~/images/Operaciones/Select.png"
-                                    ShowSelectButton="True" />
                                 <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
                                     <ItemTemplate>
                                         <asp:Label ID="LbCod" runat="server" text='<%# Bind("Cod_Sol") %>'></asp:Label>
@@ -219,6 +248,8 @@
                                         <asp:Label ID="LbVal" runat="server"  Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:CommandField ButtonType="Image" SelectImageUrl="~/images/Operaciones/Select.png"
+                                    ShowSelectButton="True" />
                             </Columns>
                         </asp:GridView>
                     </telerik:RadPageView>
@@ -244,6 +275,12 @@
                             EmptyDataText="No tiene procesos a cargo" EnableModelValidation="True" AllowSorting="True"
                             Width="100%">
                             <Columns>
+                                <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="N° de Proceso" SortExpression="Pro_Sel_Nro" />
+                                <asp:BoundField DataField="Nom_TProc" HeaderText="Tipo de Procesos" SortExpression="Nom_TProc" />
+                                <asp:BoundField HeaderText="Objeto a Contratar" SortExpression="Obj_Con" DataField="Obj_Con">
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Dep_Nec" HeaderText="Dependencia-Necesidad" SortExpression="Dep_Nec" />
+                                <asp:BoundField DataField="Dep_Del" HeaderText="Dependencia-A Cargo" SortExpression="Dep_Del" />
                                 <asp:ButtonField ButtonType="Image" CommandName="crono" HeaderText="Cronograma" ImageUrl="~/images/mnProcesos/Calendar-icon24.png"
                                     Text="Cronograma">
                                     <ItemStyle HorizontalAlign="Center" />
@@ -254,12 +291,6 @@
                                 </asp:ButtonField>
                                 <asp:ButtonField ButtonType="Image" CommandName="documentos" HeaderText="Documentos"
                                     ImageUrl="~/images/2012/archivo.png" Text="Documentos Precontractuales" />
-                                <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="N° de Proceso" SortExpression="Pro_Sel_Nro" />
-                                <asp:BoundField DataField="Nom_TProc" HeaderText="Tipo de Procesos" SortExpression="Nom_TProc" />
-                                <asp:BoundField HeaderText="Objeto a Contratar" SortExpression="Obj_Con" DataField="Obj_Con">
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Dep_Nec" HeaderText="Dependencia-Necesidad" SortExpression="Dep_Nec" />
-                                <asp:BoundField DataField="Dep_Del" HeaderText="Dependencia-A Cargo" SortExpression="Dep_Del" />
                             </Columns>
                         </asp:GridView>
                     </telerik:RadPageView>

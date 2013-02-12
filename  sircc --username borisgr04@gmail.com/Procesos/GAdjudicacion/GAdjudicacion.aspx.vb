@@ -104,4 +104,10 @@ Partial Class Procesos_GAdjudicacion_Default
     Protected Sub IBtnDatosContrato_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnDatosContrato.Click
         IrDatosC()
     End Sub
+
+    Protected Sub ImageButton1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ImageButton1.Click
+        querystringSeguro = Me.SetRequest()
+        querystringSeguro("Num_Proc") = Me.DetPContrato1.CodigoPContrato
+        Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?data=" + HttpUtility.UrlEncode(querystringSeguro.ToString()))
+    End Sub
 End Class

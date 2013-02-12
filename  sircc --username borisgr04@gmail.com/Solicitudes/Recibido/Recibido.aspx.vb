@@ -1,5 +1,5 @@
 ﻿Imports System.Data
-
+Imports Telerik.Web.UI
 Partial Class Solicitudes_Recibido_Default
     Inherits PaginaComun
     Dim obj As New PSolicitudes
@@ -111,6 +111,23 @@ Partial Class Solicitudes_Recibido_Default
             GridView1.DataSource = obj.GetByAbogxFec("N", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
             GridView1.DataBind()
             DataBind()
+            Dim dt As New DataTable
+
+            Dim tab1 As RadTab = RadTabStrip1.Tabs.FindTabByValue("recibir")
+            dt = obj.GetByAbogxFec("N", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
+            tab1.Text = "Solicitudes sin Recibir (" + dt.Rows.Count.ToString() + ")"
+
+            Dim tab2 As RadTab = RadTabStrip1.Tabs.FindTabByValue("revisar")
+            dt = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "P")
+            tab2.Text = "Solicitudes sin Revisar (" + dt.Rows.Count.ToString() + ")"
+
+            Dim tab3 As RadTab = RadTabStrip1.Tabs.FindTabByValue("aceptadas")
+            dt = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "A")
+            tab3.Text = "Solicitudes Aceptadas (" + dt.Rows.Count.ToString() + ")"
+
+            Dim tab4 As RadTab = RadTabStrip1.Tabs.FindTabByValue("rechazadas")
+            dt = obj.GetByAbogxFec("S", TxtDesde.Text, TxtHasta.Text, TxtNSol.Text, "R")
+            tab4.Text = "Solicitudes Rechazadas (" + dt.Rows.Count.ToString() + ")"
         End If
     End Sub
 
