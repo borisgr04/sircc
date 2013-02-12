@@ -1270,8 +1270,8 @@
                     <Content>
                         <asp:UpdatePanel ID="UpdMin" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <asp:Label ID="LbMinuta" runat="server" Text="" Width="80%" Height="100%"></asp:Label>
-                                <table style="width: 80%; border:1px">
+                                <asp:Label ID="LbMinuta" runat="server" Text="" Width="50%" Height="100%"></asp:Label>
+                                <table style="width: 80%; ">
                                     <tr >
                                         <td >
                                             <asp:DropDownList ID="CboPlantilla" runat="server" Height="21px" Width="226px" DataSourceID="ObjPlantillas"
@@ -1291,6 +1291,8 @@
                                         </td>
                                         <td>
                                             &nbsp;
+                                            <asp:Button ID="BtnActGriMin" runat="server" Text="Actualizar" style="visibility:hidden"  />
+                        
                                         </td>
                                     </tr>
                                     <tr>
@@ -1370,6 +1372,9 @@
                     <Content>
                         <asp:UpdatePanel ID="UpdMinWord" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
+                                <asp:Panel ID="PnlGenMinWord" runat="server">
+                                
+
                                 <asp:HiddenField ID="HdUsuario" runat="server" />
                                 <asp:Label ID="LbMinutaW" runat="server" Text="" Width="80%" Height="100%"></asp:Label>
                                 <table>
@@ -1424,6 +1429,9 @@
                                         </td>
                                     </tr>
                                 </table>
+
+
+                                </asp:Panel>
                                 <asp:ObjectDataSource ID="ObjPlantillas0" runat="server" OldValuesParameterFormatString="original_{0}"
                                     SelectMethod="GetbyNumProc" TypeName="PPlantillas">
                                     <SelectParameters>
@@ -1433,6 +1441,7 @@
                                     </SelectParameters>
                                 </asp:ObjectDataSource>
                             </ContentTemplate>
+
                         </asp:UpdatePanel>
                         <asp:UpdateProgress ID="UpdPMinWord" runat="server" AssociatedUpdatePanelID="UpdMinWord">
                             <ProgressTemplate>

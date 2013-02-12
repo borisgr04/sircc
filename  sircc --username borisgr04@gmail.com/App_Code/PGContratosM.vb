@@ -31,7 +31,7 @@ Public Class PGContratosM
     End Function
 
     ''' <summary>
-    ''' REtorna Bytes de MINUTA ACTIVA
+    ''' REtorna Bytes de MINUTA ACTIVA PDF
     ''' </summary>
     ''' <param name="NUM_PROC"></param>
     ''' <param name="GRUPO"></param>
@@ -139,15 +139,16 @@ Public Class PGContratosM
     ''' <param name="MINUTA"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Insert(ByVal NUM_PROC As String, ByVal GRUPO As Integer, ByVal MINUTA As Byte()) As String
+    Public Function Insert(ByVal NUM_PROC As String, ByVal GRUPO As Integer, ByVal MINUTA As Byte(), MINUTAPDF As Byte()) As String
         Try
             Conectar()
             ComenzarTransaccion()
-            querystring = "Insert Into PGContratosM(MINUTA,NUM_PROC,GRUPO)Values(:MINUTA,:NUM_PROC,:GRUPO)"
+            querystring = "Insert Into PGContratosM(MINUTA,NUM_PROC,GRUPO,MINUTAPDF)Values(:MINUTA,:NUM_PROC,:GRUPO,:MINUTAPDF)"
             CrearComando(querystring)
             AsignarParametroCadena(":NUM_PROC", NUM_PROC)
             AsignarParametroEntero(":GRUPO", GRUPO)
             AsignarParametroBLOB("MINUTA", MINUTA)
+            AsignarParametroBLOB("MINUTAPDF", MINUTAPDF)
             num_reg = EjecutarComando()
             ConfirmarTransaccion()
             Msg = "Se guardo el Registro " + num_reg.ToString
@@ -388,20 +389,21 @@ Public Class PGContratosM
         Return Msg
     End Function
 
-    Public Function UpdateMinutaAC(ByVal NUM_PROC As String, ByVal grupo As String, ByVal dContent As [Byte]()) As String
+    Public Function UpdateMinutaAC(ByVal NUM_PROC As String, ByVal grupo As String, ByVal MinutaDOC As [Byte](), MinutaPDF As Byte()) As String
         Dim tbCon As New DataTable
         Conectar()
         ComenzarTransaccion()
         Try
-            querystring = "UPDATE PGContratosM SET Minuta=:PLANTILLA WHERE NUM_PROC=:NUM_PROC And GRUPO=:GRUPO And ESTADO='AC'"
+            querystring = "UPDATE PGContratosM SET Minuta=:MinutaDoc,MinutaPDF=:MinutaPDF WHERE NUM_PROC=:NUM_PROC And GRUPO=:GRUPO And ESTADO='AC'"
             CrearComando(querystring)
-            AsignarParametroBLOB(":PLANTILLA", dContent)
+            AsignarParametroBLOB(":MinutaDoc", MinutaDOC)
+            AsignarParametroBLOB(":MinutaPDF", MinutaPDF)
             AsignarParametroCadena(":NUM_PROC", NUM_PROC)
             AsignarParametroEntero(":GRUPO", grupo)
             num_reg = EjecutarComando()
             'Throw New Exception(Me.vComando.CommandText)
             ConfirmarTransaccion()
-            Msg = MsgOk + "Tamaño del Archivo: " & FormatNumber(dContent.Length / 1024).ToString & " kb - "
+            Msg = MsgOk + "Tamaño del Archivo: " & FormatNumber(MinutaDOC.Length / 1024).ToString & " kb - "
             Me.lErrorG = False
         Catch ex As Exception
             CancelarTransaccion()

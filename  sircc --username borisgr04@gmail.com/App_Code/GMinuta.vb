@@ -188,7 +188,7 @@ Public Class GMinuta
         wrdApp = New MSWord.Application()
         OpenedWord = True
 
-        wrdApp.Visible = True
+        wrdApp.Visible = False
         Dim oTemplate As Object = pathTemporal
         wrdDoc = wrdApp.Documents.Open(FileName:=oTemplate)
 

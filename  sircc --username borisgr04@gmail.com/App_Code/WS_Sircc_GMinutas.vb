@@ -145,12 +145,12 @@ Public Class WS_Sircc_GMinutas
         Return obj.GetbyPG(Num_Proc)
     End Function
 
-    <WebMethod(Description:="Registra Minuta a un ProcesoxGrupo ")> _
-    Public Sub SetMinutaPG(ByVal Num_Proc As String, ByVal Grupo As String, ByVal Minuta As Byte(), ByRef Msg As String, ByRef lErrorG As Boolean)
-        Dim obj As New PGContratosM
-        Msg = obj.Insert(Num_Proc, Grupo, Minuta)
-        lErrorG = obj.lErrorG
-    End Sub
+    '<WebMethod(Description:="Registra Minuta a un ProcesoxGrupo ")> _
+    'Public Sub SetMinutaPG(ByVal Num_Proc As String, ByVal Grupo As String, ByVal Minuta As Byte(), ByRef Msg As String, ByRef lErrorG As Boolean)
+    '    Dim obj As New PGContratosM
+    '    Msg = obj.Insert(Num_Proc, Grupo, Minuta)
+    '    lErrorG = obj.lErrorG
+    'End Sub
     <WebMethod(Description:="Registra Documento a un Proceso ")> _
     Public Sub SetDocumento(ByVal Num_Proc As String, ByVal Minuta As Byte(), ByVal MinutaBase As Byte(), ByVal Tip_Doc As String, ByVal Editable As String, ByRef Msg As String, ByRef lErrorG As Boolean, ByVal Nombre As String)
         Dim obj As New DocPContratos
@@ -175,6 +175,12 @@ Public Class WS_Sircc_GMinutas
     Public Function GetMinutasPGID(ByVal Num_Proc As String, ByVal Grupo As String, ByVal ID As Integer) As Byte()
         Dim obj As New PGContratosM
         Return obj.GetMinuta(Num_Proc, Grupo, ID)
+    End Function
+
+    <WebMethod(Description:="Devuelve, Minutas en Bytes PDF ")> _
+    Public Function GetOpenMinutaPDF(ByVal Num_Proc As String, ByVal Grupo As String) As Byte()
+        Dim obj As New PGContratosM
+        Return obj.GetMinutaPDF(Num_Proc, Grupo)
     End Function
 
     <WebMethod(Description:="Devuelve, Minutas en Bytes ")> _
@@ -222,10 +228,17 @@ Public Class WS_Sircc_GMinutas
         Return obj.GetExitsAC(Num_Proc, TipDocumento)
     End Function
 
-    <WebMethod(Description:="Devuelve, Si Existen Minutas Activas ")> _
+    <WebMethod(Description:="Devuelve, Anular Minutas x ID ")> _
     Public Sub Anular(ByVal Num_Proc As String, ByVal Grupo As String, ByVal ID As Integer, ByRef Msg As String, ByRef lErrorG As Boolean)
         Dim obj As New PGContratosM
         Msg = obj.Anular(Num_Proc, Grupo, ID)
+        lErrorG = obj.lErrorG
+    End Sub
+
+    <WebMethod(Description:="Devuelve, Anular Minuta Activa ")> _
+    Public Sub AnularAC(ByVal Num_Proc As String, ByVal Grupo As String, ByRef Msg As String, ByRef lErrorG As Boolean)
+        Dim obj As New PGContratosM
+        Msg = obj.AnularAC(Num_Proc, Grupo)
         lErrorG = obj.lErrorG
     End Sub
     <WebMethod(Description:="Devuelve, Si Existen Minutas Activas ")> _
@@ -282,9 +295,9 @@ Public Class WS_Sircc_GMinutas
         Return p.UpdatePBaseMinAC(Num_Proc, Grupo, Plantilla)
     End Function
     <WebMethod(Description:="Actualiza la Minuta Cruzada ")> _
-    Public Function UpdateMinutaAC(ByVal Num_Proc As String, ByVal grupo As String, ByVal Plantilla As [Byte]()) As String
+    Public Function UpdateMinutaAC(ByVal Num_Proc As String, ByVal grupo As String, ByVal MinutaDoc As [Byte](), MinutaPDF As Byte()) As String
         Dim p As New PGContratosM
-        Return p.UpdateMinutaAC(Num_Proc, grupo, Plantilla)
+        Return p.UpdateMinutaAC(Num_Proc, grupo, MinutaDoc, MinutaPDF)
     End Function
 
     <WebMethod(Description:="Actualiza la Minuta Cruzada ")> _
