@@ -423,7 +423,7 @@ Public Class GDocWord
             lErrorG = False
         Catch ex As Exception
             lErrorG = True
-            Msg = ex.Message + "<br/>" + ex.StackTrace + ex.Source + "</br>"
+            Msg = ex.Message '+ "<br/>" + ex.StackTrace + ex.Source + "</br>"
             If iniciada Then
                 CerrarAplicacionWord(oWrdApp)
             End If

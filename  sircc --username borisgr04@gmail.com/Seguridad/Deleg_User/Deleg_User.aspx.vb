@@ -8,11 +8,15 @@ Partial Class Seguridad_Deleg_User_Deleg_User
     End Sub
 
     Protected Sub TxtUsername_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtUsername.TextChanged
+        ConsultarUSer()
+    End Sub
+
+    Sub ConsultarUSer()
         Dim Obj As New Terceros
         Dim dt As DataTable = Obj.GetByIde(Me.TxtUsername.Text)
         If dt.Rows.Count > 0 Then
             Me.TxtRazSoc.Text = dt.Rows(0)("Nom_Ter").ToString
-            
+
         Else
             Me.TxtRazSoc.Text = ""
             Me.msgResult.Text = "El usuario debe estar registrado cómo Tercero"
@@ -25,9 +29,11 @@ Partial Class Seguridad_Deleg_User_Deleg_User
         End If
     End Sub
 
-    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnGuardar.Click
+
+
+    Sub Guardar()
         Dim ld As New List(Of UsuDel)
-    
+
         For Each row In GridView1.Rows
             Dim u As New UsuDel
             u.IdeTer = TxtUsername.Text
@@ -63,9 +69,7 @@ Partial Class Seguridad_Deleg_User_Deleg_User
         GridView1.DataBind()
 
 
-
     End Sub
-
 
     Public Function MostrarBool(ByVal Valor As String) As Boolean
         If IsDBNull(Valor) Then
@@ -78,4 +82,21 @@ Partial Class Seguridad_Deleg_User_Deleg_User
 
     End Function
 
+    Protected Sub Page_Load1(sender As Object, e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            If Not String.IsNullOrEmpty(Request("username")) Then
+                Me.TxtUsername.Text = Request("username")
+                ConsultarUSer()
+            End If
+        End If
+
+    End Sub
+
+    Protected Sub BtnGuardar_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardar.Click
+        Guardar()
+    End Sub
+
+    Protected Sub IBtnAuto_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IBtnAuto.Click
+        Response.Redirect("../Roles/Admin.aspx?Username=" + TxtUsername.Text)
+    End Sub
 End Class

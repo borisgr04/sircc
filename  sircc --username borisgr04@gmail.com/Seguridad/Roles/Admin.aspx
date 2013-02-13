@@ -63,11 +63,7 @@
                 <tr>
                     <td>
         <asp:TextBox ID="TxtUserName" runat="server" AutoPostBack="True" Width="500px"></asp:TextBox>
-    <%--<ajaxToolkit:AutoCompleteExtender 
-    ID="AutoCompleteExtender1" 
-    TargetControlID="TxtUserName" MinimumPrefixLength="2"  DelimiterCharacters=";, :"
-    runat="server" ServiceMethod="GetTerceros" UseContextKey="True" />
-    --%>                </td>
+                 </td>
                     <td style="width: 100px; text-align: center;">
                         <asp:ImageButton ID="ImageButton1" runat="server" SkinID="IBtnBuscar" />
                     </td>
@@ -146,6 +142,9 @@
                                 <asp:ButtonField CommandName="activar" Text="Activar/Inactivar" />
                                 <asp:ButtonField CommandName="desbloquear" Text="Desbloquear" />
                                 <asp:ButtonField CommandName="AdminDesktop" Text="AdminDesktop" />
+                                <asp:HyperLinkField DataNavigateUrlFields="username" 
+                                    DataNavigateUrlFormatString="../Deleg_User/Deleg_User.aspx?username={0}" 
+                                    Text="Roles x Dependencia" />
                             </Columns>
                         </asp:GridView>
 
@@ -194,7 +193,7 @@
                         </tr>
            </table>
                         &nbsp;<asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
-                        <div style="height:300px; overflow:auto">
+                        <%--<div style="height:300px; overflow:auto">--%>
         <table style="width: 693px; height: 331px">
             <tr>
                 <td valign="top" colspan="3">
@@ -216,7 +215,7 @@
         </asp:UpdatePanel>--%>
         
     
-    </div>
+    <%--</div>--%>
 
 </asp:Content>
 

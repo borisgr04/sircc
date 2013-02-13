@@ -8,6 +8,10 @@ namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
         <ajaxtoolkit:toolkitscriptmanager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
     </ajaxtoolkit:toolkitscriptmanager>
+        <asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" > REPORTE PARAMETRIZADO </asp:Label>
+        <br />
+        <asp:HyperLink ID="HyperLink1" runat="server" 
+            NavigateUrl="~/Reportes/Parametrizado/Parametrizado.aspx">Volver</asp:HyperLink>
         <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="100%" 
             Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
             WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">

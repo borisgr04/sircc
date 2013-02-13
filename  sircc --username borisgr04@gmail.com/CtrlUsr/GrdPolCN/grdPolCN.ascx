@@ -30,6 +30,7 @@
         <EditRowStyle BackColor="#999999" />
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
     </asp:GridView>
+    <br />
     <fieldset id="fspol">
         <legend>Registro de Polizas de Garantia </legend>
         <table>
@@ -110,7 +111,7 @@
                         ControlToValidate="TxtNPol" ErrorMessage="N° Poliza es Requerido" 
                         ValidationGroup="pol">*</asp:RequiredFieldValidator>
                 </td>
-                <td style="width: 188px; height: 10px">
+                <td style="width: 188px; height: 10px" valign="top">
                     <telerik:RadNumericTextBox ID="TxtValP" runat="server" Culture="es-CO" Type="Currency"
                         Width="125px">
                     </telerik:RadNumericTextBox>

@@ -72,8 +72,28 @@
                 &nbsp;</td>
         </tr>
         <tr>
+            <td colspan="4">
+                Agrupar por</td>
+            <td style="width: 161px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <asp:RadioButtonList ID="rdGroup" runat="server" RepeatDirection="Horizontal">
+                    <asp:ListItem Selected="True" Value="sa">Sin Agrupar</asp:ListItem>
+                    <asp:ListItem Value="Dep_Nec">Dependencia que Genera la Necesidad</asp:ListItem>
+                    <asp:ListItem Value="Dep_Del">Dependencia a Cargo del Proceso</asp:ListItem>
+                    <asp:ListItem Value="Pro_Con">Proyecto</asp:ListItem>
+                    <asp:ListItem Value="Pol_Con">Detallado con Polizas</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+            <td style="width: 161px">
+                &nbsp;</td>
+        </tr>
+        <tr>
             <td style="width: 177px">
-                <asp:CheckBox ID="ChkVig" runat="server" Text="Vigencia" Font-Bold="False" /></td>
+                <asp:CheckBox ID="ChkVig" runat="server" Font-Bold="False" Text="Vigencia" />
+            </td>
             <td style="width: 126px">
             </td>
             <td style="width: 150px">
@@ -81,7 +101,7 @@
             <td style="width: 161px">
             </td>
             <td style="width: 161px">
-                </td>
+            </td>
         </tr>
         <tr>
             <td style="width: 177px">
@@ -415,7 +435,7 @@
                     Text="Registro Presupuestal (RP)" />
             </td>
             <td style="width: 126px; height: 9px">
-                Vigencia CDP</td>
+                Vigencia RP</td>
             <td style="width: 150px; height: 9px">
                 &nbsp;</td>
             <td style="width: 161px; height: 9px">
@@ -478,7 +498,7 @@
         </tr>
         <tr>
             <td style="width: 177px; height: 10px;">
-                AGRUPAR POR</td>
+                &nbsp;</td>
             <td style="width: 126px; height: 10px;">
                 <asp:CheckBox ID="ChkGDep" runat="server" Text="Dependencias" Visible="False" />
             </td>
@@ -491,13 +511,7 @@
         </tr>
         <tr>
             <td colspan="5" style="height: 10px;">
-                <asp:RadioButtonList ID="rdGroup" runat="server" RepeatDirection="Horizontal">
-                    <asp:ListItem Value="Dep_Nec">Dependencia que Genera la Necesidad</asp:ListItem>
-                    <asp:ListItem Value="Dep_Del">Dependencia a Cargo del Proceso</asp:ListItem>
-                    <asp:ListItem Value="Pro_Con">Proyecto</asp:ListItem>
-                    <asp:ListItem Value="Pol_Con">Polizas</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
+                &nbsp;</td>
         </tr>
     </table>
     </ContentTemplate>

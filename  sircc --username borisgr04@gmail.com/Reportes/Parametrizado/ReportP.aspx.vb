@@ -257,16 +257,14 @@ Partial Class Reportes_Parametrizado_report
     End Function
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'report()
+        Reporte()
 
+    End Sub
+
+    Sub Reporte()
         Dim Sql As String = Request.QueryString("Sql")
-        If Membership.GetUser.UserName.ToUpper = "ADMIN" Then
-            Me.TxtSql.Visible = True
-        Else
-            Me.TxtSql.Visible = False
-        End If
         Me.TxtSql.Text = Sql
-
+        Me.TxtSql.Visible = False
         Select Case Request.QueryString("Rpte")
             Case "Dep_Nec"
                 rutaReport = "Rpt\RptConsTCt2011xDep.rdlc"
@@ -288,7 +286,6 @@ Partial Class Reportes_Parametrizado_report
 
         ReportViewer1.LocalReport.ReportPath = rutaReport
         ReportViewer1.LocalReport.Refresh()
-
     End Sub
 
     Protected Function Sumar_Plazo(ByVal fecha As Object, ByVal dias As Long) As String

@@ -14,6 +14,16 @@ Public Class Cert_Contratos
     Dim mNro_Imp As Integer
     Dim mEstado As String
     Dim mide_Con As String
+    Dim mIde_Pla As String
+
+    Public Property Ide_Pla As String
+        Get
+            Return mIde_Pla
+        End Get
+        Set(value As String)
+            mIde_Pla = value
+        End Set
+    End Property
 
     Public Property Ide_Con As String
         Get
@@ -175,79 +185,79 @@ Public Class Cert_Contratos
     End Function
     
     Function GenCertificado() As String
-        'Try
-        'En listanomtabla va el nombre de las tablas que se llena en pplantillas_campos
-        Dim ide_con As String = Me.Ide_Con
-        Dim dtDatos As New DataTable
-        Dim dtPlantilla As New DataTable
-        Dim ListaNomTablas As New List(Of String)
-        Dim ListaTablas As New List(Of DataTable)
-        Dim ListaGrupoNomTabla As New List(Of String)
-        Dim ListaGrupoTabla As New List(Of DataTable)
-        Dim oPlantilla As New PPlantillas
-        Dim oPlantillaC As New PPlantillas_Campos
-        Dim dtConsulta As New DataTable
-        'Llenar la tabla de configuracion
-        dtConsulta = oPlantillaC.GetRecords("VCERTIFICACIONES")
-        dtPlantilla = oPlantilla.GetPorIde(Publico.Ide_Cert)
-        'Se obtiene la plantila
-        'Generar el Documento Word
-        If dtConsulta.Rows.Count > 0 Then
-            'Se conecta a la base de datos
-            lErrorG = False
-            Conectar()
-            ComenzarTransaccion()
-            ''DATOS DEL CERTIFICADO
-            'Crea el Registro del Certificado 
-            Insert()
-            'Llenar los datos a Imprimir
-            dtDatos = GetCertificadoD()
-            Dim dtTabla As DataTable = GetCertificadoL() ' LISTA DEL CONTRATO
-            If dtTabla.Rows.Count > 0 Then
-                ListaTablas.Add(dtTabla)
-                ListaNomTablas.Add("VLSTCONTRATOS")
-            End If
-            Dim DocPlantilla As Byte()
-            Dim Documento As Byte()
-            Dim DocumentoPDF As Byte()
-            Dim oWord As New GDocWord
-            DocPlantilla = DirectCast(dtPlantilla.Rows(0)("PLANTILLA"), Byte())
-            If Not IsNothing(DocPlantilla) Then
-                If dtPlantilla.Rows(0)("EDITABLE").ToString = "1" Then
-                    oWord.DocProtegido = True
-                    oWord.ClavePlantilla = dtPlantilla.Rows(0)("CLAVE").ToString
-                Else
-                    oWord.DocProtegido = False
+        Try
+            'En listanomtabla va el nombre de las tablas que se llena en pplantillas_campos
+            Dim ide_con As String = Me.Ide_Con
+            Dim dtDatos As New DataTable
+            Dim dtPlantilla As New DataTable
+            Dim ListaNomTablas As New List(Of String)
+            Dim ListaTablas As New List(Of DataTable)
+            Dim ListaGrupoNomTabla As New List(Of String)
+            Dim ListaGrupoTabla As New List(Of DataTable)
+            Dim oPlantilla As New PPlantillas
+            Dim oPlantillaC As New PPlantillas_Campos
+            Dim dtConsulta As New DataTable
+            'Llenar la tabla de configuracion
+            dtConsulta = oPlantillaC.GetRecords("VCERTIFICACIONES")
+            dtPlantilla = oPlantilla.GetPorIde(Ide_Pla)
+            'Se obtiene la plantila
+            'Generar el Documento Word
+            If dtConsulta.Rows.Count > 0 Then
+                'Se conecta a la base de datos
+                lErrorG = False
+                Conectar()
+                ComenzarTransaccion()
+                ''DATOS DEL CERTIFICADO
+                'Crea el Registro del Certificado 
+                Insert()
+                'Llenar los datos a Imprimir
+                dtDatos = GetCertificadoD()
+                Dim dtTabla As DataTable = GetCertificadoL() ' LISTA DEL CONTRATO
+                If dtTabla.Rows.Count > 0 Then
+                    ListaTablas.Add(dtTabla)
+                    ListaNomTablas.Add("VLSTCONTRATOS")
                 End If
-                oWord.IdPlantilla = Publico.Ide_Cert
-                oWord.ListaNomTablas = ListaNomTablas
-                oWord.ListaTablas = ListaTablas
-                Documento = oWord.GenerarDocumento(DocPlantilla, dtConsulta, dtDatos)
-                DocumentoPDF = oWord.Documento_Pdf
-                lErrorG = oWord.lErrorG
-                Msg = oWord.Msg
-                If Not oWord.lErrorG Then
-                    If Not IsNothing(Documento) Then
-                        Doc_Doc = oWord.Documento_Word
-                        Doc_PDF = oWord.Documento_Pdf
-                        'Actualiza el Registro
-                        EnviarDocS()
-                        ConfirmarTransaccion()
-                        Msg = "Se Generó el Certificado N°" + Me.Nro_Cert.ToString
-                        lErrorG = False
+                Dim DocPlantilla As Byte()
+                Dim Documento As Byte()
+                Dim DocumentoPDF As Byte()
+                Dim oWord As New GDocWord
+                DocPlantilla = DirectCast(dtPlantilla.Rows(0)("PLANTILLA"), Byte())
+                If Not IsNothing(DocPlantilla) Then
+                    If dtPlantilla.Rows(0)("EDITABLE").ToString = "1" Then
+                        oWord.DocProtegido = True
+                        oWord.ClavePlantilla = Publico.Clave_Minuta
+                    Else
+                        oWord.DocProtegido = False
                     End If
+                    oWord.IdPlantilla = Publico.Ide_Cert
+                    oWord.ListaNomTablas = ListaNomTablas
+                    oWord.ListaTablas = ListaTablas
+                    Documento = oWord.GenerarDocumento(DocPlantilla, dtConsulta, dtDatos)
+                    DocumentoPDF = oWord.Documento_Pdf
+                    lErrorG = oWord.lErrorG
+                    Msg = oWord.Msg
+                    If Not oWord.lErrorG Then
+                        If Not IsNothing(Documento) Then
+                            Doc_Doc = oWord.Documento_Word
+                            Doc_PDF = oWord.Documento_Pdf
+                            'Actualiza el Registro
+                            EnviarDocS()
+                            ConfirmarTransaccion()
+                            Msg = "Se Generó el Certificado N°" + Me.Nro_Cert.ToString
+                            lErrorG = False
+                        End If
+                    End If
+                Else
+                    Msg = "La plantilla no esta definida. Por favor verifique"
+                    lErrorG = True
                 End If
-            Else
-                Msg = "La plantilla no esta definida. Por favor verifique"
-                lErrorG = True
+                Desconectar()
             End If
-            Desconectar()
-        End If
-        'Catch ex As Exception
-        'CancelarTransaccion()
-        'Msg = ex.Message
-        'lErrorG = True
-        'End Try
+        Catch ex As Exception
+            CancelarTransaccion()
+            Msg = ex.Message
+            lErrorG = True
+        End Try
 
         Return Msg
     End Function
@@ -283,4 +293,15 @@ Public Class Cert_Contratos
         Dim dataTb As DataTable = EjecutarConsultaDataTable()
         Return dataTb
     End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetPlantillas() As DataTable
+        Me.Conectar()
+        querystring = "Select * From PPlantillas Where Tip_Pla='03' And Est_Pla='AC' "
+        Me.CrearComando(querystring)
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
 End Class
