@@ -34,20 +34,7 @@ Partial Class Reportes_Certificados_Certificados
 
     Protected Sub TxtIde_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtIde.TextChanged
 
-        Dim Obj As New Terceros
-        Dim dt As DataTable = Obj.GetByIde(Me.TxtIde.Text)
-
-        If dt.Rows.Count > 0 Then
-            Me.TxtNom.Text = dt.Rows(0)("Nom_Ter").ToString
-            MsgBoxLimpiar(Me.MsgResult)
-        Else
-            Me.TxtNom.Text = ""
-            Me.MsgResult.Text = "El usuario debe estar registrado cómo Tercero"
-            MsgBoxAlert(Me.MsgResult, True)
-        End If
-        grdContratos.DataBind()
-        RdCert.SelectedValue = 0
-        MultiView1.ActiveViewIndex = 0
+        BuscarTer()
 
 
     End Sub
@@ -59,23 +46,23 @@ Partial Class Reportes_Certificados_Certificados
             Dim nuevoCheckBox As CheckBox = grdRows.FindControl("ChkSel")
             Dim estaCheckeado As Boolean = nuevoCheckBox.Checked
             If (estaCheckeado = True) Then
-                lstContratos += IIf(String.IsNullOrEmpty(lstContratos), "", ",") + grdRows.Cells(2).Text
+                lstContratos += IIf(String.IsNullOrEmpty(lstContratos), "", ",") + grdRows.Cells(1).Text
             End If
         Next
         lstContratosCVS = Util.FormatCVS(lstContratos)
         If Not String.IsNullOrEmpty(lstContratos) Then
-
-
             'SE INICIALIZAN LOS DATOS PAR CREAR EL REGISTRO DEL CERTIFICADO
             oCert.Ide_Con = TxtIde.Text
             oCert.Lst_Cont = lstContratos
-            MsgResult.Text = oCert.GenCertificado() ' Crea el Certificado
+            oCert.Ide_Pla = CboPlantilla.SelectedValue
+            MsgResult.Text = oCert.GenCertificado() '+ lstContratos ' Crea el Certificado
 
             If Not oCert.lErrorG Then
+
                 grdCert.DataBind()
-                MultiView1.ActiveViewIndex = 1
-                RdCert.SelectedValue = 1
                 MsgResult.Text = "Se Generó Certificado N° " + oCert.Nro_Cert.ToString
+                Me.grdCert.Enabled = False
+                MostrarTab(1)
             End If
             MsgBox(MsgResult, oCert.lErrorG)
         Else
@@ -83,12 +70,21 @@ Partial Class Reportes_Certificados_Certificados
             MsgBoxAlert(MsgResult, True)
         End If
     End Sub
+    Sub MostrarTab(Index As Integer)
+        RadTabStrip1.SelectedIndex = Index
+        RadMultiPage1.SelectedIndex = Index
 
-
-    Protected Sub RdCert_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles RdCert.SelectedIndexChanged
-        MultiView1.ActiveViewIndex = RdCert.SelectedValue
     End Sub
 
+    Private Sub Chequear(ByVal checkState As Boolean)
+        ' Iterate through the Products.Rows property 
+        For Each row As GridViewRow In grdContratos.Rows  ' Access the CheckBox 
+            Dim cb As CheckBox = row.FindControl("ChkSel")
+            If cb IsNot Nothing Then
+                cb.Checked = checkState
+            End If
+        Next
+    End Sub
     Protected Sub grdCert_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdCert.SelectedIndexChanged
         Redireccionar_Pagina(String.Format("/ashx/verCert.ashx?nro_cert={0}&vig_cert={1}&CVXX={2}", grdCert.SelectedRow.Cells(1).Text, grdCert.SelectedRow.Cells(0).Text, grdCert.SelectedRow.Cells(2).Text))
     End Sub
@@ -157,37 +153,65 @@ Partial Class Reportes_Certificados_Certificados
         objLienzo.Save(Context.Response.OutputStream, ImageFormat.Jpeg)
     End Sub
 
-    'Protected Sub Button2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button2.Click
-
-    '    Dim obj As New BDDatos
-    '    Dim ds As New DataSet
-
-    '    ds.Tables.Add(obj.GetSelect("select * FROM cert_contratos").Copy)
-    '    ds.Tables(0).TableName = "Certificado"
-    '    ds.Tables.Add(obj.GetSelect("SELECT * FROM vLstContratos where Numero In ('2010020070','2011020023') ").Copy)
-    '    ds.Tables(1).TableName = "LstContratos"
-    '    Dim rpt As New ReportDocument
-    '    rpt.Load("D:\x\SIRCC\SIRCCGoogleCode\CReport\CrystalReport3.rpt")
-    '    rpt.SetDataSource(ds)
-    '    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, True, "rpt")
-    '    'CrystalReportViewer1.ReportSource = rpt
-
-    'End Sub
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
 
-    Protected Sub grdContratos_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdContratos.SelectedIndexChanged
+   
+    Function GetObjeto(Numero As String) As String
         Dim c As New Contratos
-        TxtObj.Text = c.GetObjeto(grdContratos.SelectedValue)
+        Return c.GetObjeto(Numero)
+    End Function
 
 
-
-    End Sub
 
     Protected Sub IBtnCert_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnCert.Click
         GenerarCert()
+    End Sub
+
+    
+    Protected Sub grdCert_RowDataBound(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdCert.RowDataBound
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            e.Row.Attributes.Add("OnMouseOver", "Resaltar_On(this);")
+            e.Row.Attributes.Add("OnMouseOut", "Resaltar_Off(this);")
+            e.Row.Attributes("OnClick") = Page.ClientScript.GetPostBackClientHyperlink(Me.grdCert, "Select$" + e.Row.RowIndex.ToString)
+        End If
+    End Sub
+
+    Protected Sub grdContratos_RowDataBound(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdContratos.RowDataBound
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            e.Row.Attributes.Add("OnMouseOver", "Resaltar_On(this);")
+            e.Row.Attributes.Add("OnMouseOut", "Resaltar_Off(this);")
+        End If
+    End Sub
+
+    Protected Sub chTodos_CheckedChanged(sender As Object, e As System.EventArgs) Handles chTodos.CheckedChanged
+        Chequear(chTodos.Checked)
+    End Sub
+
+    Protected Sub ImageButton1_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs)
+        BuscarTer()
+    End Sub
+
+    Private Sub BuscarTer()
+        Dim Obj As New Terceros
+        Dim dt As DataTable = Obj.GetByIde(Me.TxtIde.Text)
+
+        If dt.Rows.Count > 0 Then
+            Me.TxtNom.Text = dt.Rows(0)("Nom_Ter").ToString
+            MsgBoxLimpiar(Me.MsgResult)
+        Else
+            Me.TxtNom.Text = ""
+            Me.MsgResult.Text = "El usuario debe estar registrado cómo Tercero"
+            MsgBoxAlert(Me.MsgResult, True)
+        End If
+        grdContratos.DataBind()
+
+        MostrarTab(0)
+    End Sub
+
+    Protected Sub IBtnBuscar_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IBtnBuscar.Click
+        BuscarTer()
     End Sub
 End Class
 

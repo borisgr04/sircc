@@ -266,7 +266,7 @@ Partial Class Reportes_ParametrizadoPol_report
             Me.TxtSql.Visible = False
         End If
         Me.TxtSql.Text = Sql
-
+        Me.TxtSql.Visible = False
         Select Case Request.QueryString("Rpte")
             Case "Dep_Nec"
                 rutaReport = "Rpt\RptConsTCt2011xDep.rdlc"

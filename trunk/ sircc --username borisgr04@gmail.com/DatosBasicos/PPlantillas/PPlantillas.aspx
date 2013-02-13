@@ -6,7 +6,7 @@
     // Add click handlers for buttons to show and hide modal popup on pageLoad
     function pageLoad() {
         $addHandler($get("BtnCerrar"), 'click', CerrarModalTercero);
-        $addHandler($get("BtnCancelar"), 'click', CerrarModalTercero);
+       // $addHandler($get("BtnCancelar"), 'click', CerrarModalTercero);
     }
     function CerrarModalTercero(ev) {
         ev.preventDefault();
@@ -14,11 +14,6 @@
         modalPopupBehavior2.hide();
     }
 
-    function CerrarModalEliminar(ev) {
-        ev.preventDefault();
-        var modalPopupBehavior2 = $find('programmaticModalPopupBehavior');
-        modalPopupBehavior2.hide();
-    }
         
         </script>
 <div class="demoarea">
@@ -94,7 +89,7 @@
         runat="server"><contenttemplate>
 <!-- Mensaje de Salida--><BR /><asp:Button style="DISPLAY: none" id="hiddenTargetControlForModalPopup2" runat="server"></asp:Button> <ajaxToolkit:ModalPopupExtender id="ModalPopupTer" runat="server" PopupDragHandleControlID="programmaticPopupDragHandle2" PopupControlID="programmaticPopup2" DropShadow="True" BackgroundCssClass="modalBackground" BehaviorID="programmaticModalPopupBehavior2" RepositionMode="RepositionOnWindowScroll" TargetControlID="hiddenTargetControlForModalPopup2">
             </ajaxToolkit:ModalPopupExtender>&nbsp;&nbsp; 
-            <asp:Panel id="programmaticPopup2" runat="server" Width="656px" Height="350px" 
+            <asp:Panel id="programmaticPopup2" runat="server" Width="657px" Height="504px" 
                 CssClass="ModalPanel2"><asp:Panel id="programmaticPopupDragHandle2" runat="Server" Width="655px" Height="30px" CssClass="BarTitleModal2">
                     <DIV style="padding: 5px; VERTICAL-ALIGN: middle; width: 648px;"><DIV style="FLOAT: left">
                             Plantillas</DIV><DIV style="FLOAT: right">
@@ -102,39 +97,37 @@
                 &nbsp;<asp:Label ID="SubT" runat="server" CssClass="SubTitulo" Text="Nuevo"></asp:Label>
                 <table style="width:99%;">
                     <tr>
-                        <td colspan="4">
+                        <td colspan="8">
                             <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
                                 ValidationGroup="Guardar" SkinID="ValidationSummary1" />
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 140px" colspan="2">
                             <asp:Label ID="Label9" runat="server" Text="Código"></asp:Label>
                         </td>
-                        <td colspan="2">
+                        <td colspan="4">
                             <asp:TextBox ID="TxtCod" runat="server" Enabled="False"></asp:TextBox>
                         </td>
-                        <td>
+                        <td colspan="2">
                             &nbsp;</td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 140px" colspan="2">
                             <asp:Label ID="Label15" runat="server" Text="Tipo"></asp:Label>
                         </td>
-                        <td colspan="3">
+                        <td colspan="6">
                             <asp:DropDownList ID="CboTipPla" runat="server" DataSourceID="ObjTipPlantillas" 
                                 DataTextField="nom_tippla" DataValueField="id_tippla">
-                                <asp:ListItem Value="01">MINUTA INICIAL</asp:ListItem>
-                                <asp:ListItem Value="02">MODIFICATORIO</asp:ListItem>
-                                <asp:ListItem Value="03">CERTIFICACIONES</asp:ListItem>
+                               
                             </asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 140px" colspan="2">
                             <asp:Label ID="Label17" runat="server" Text="Clase de Contratación"></asp:Label>
                             (Solo para Minutas)</td>
-                        <td colspan="3">
+                        <td colspan="6">
                             <asp:DropDownList ID="CboSTip" runat="server" CssClass="txt" 
                                 DataSourceID="ObjSubTipos" DataTextField="Nom_STip" DataValueField="Cod_STip" 
                                 ToolTip="Proceso PreContractual">
@@ -142,82 +135,91 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 140px" colspan="2">
                             <asp:Label ID="Label11" runat="server" Text="Nombre"></asp:Label>
                         </td>
-                        <td colspan="2">
+                        <td colspan="4">
                             <asp:TextBox ID="TxtNom" runat="server" 
                                  Width="198px"></asp:TextBox>
                         </td>
-                        <td>
+                        <td colspan="2">
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="TxtNom" Display="None" ErrorMessage="Debe digitar El Nombre" 
                                 ValidationGroup="Guardar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 140px" colspan="2">
                             <asp:Label ID="Label16" runat="server" Text="Extensión"></asp:Label>
                         </td>
-                        <td style="width: 109px">
+                        <td style="width: 109px" colspan="2">
                             <asp:DropDownList ID="CboExt" runat="server">
                                 <asp:ListItem Value="DOC">*.Doc</asp:ListItem>
                             </asp:DropDownList>
                         </td>
-                        <td style="width: 91px">
+                        <td style="width: 91px" colspan="2">
                             &nbsp;</td>
-                        <td>
+                        <td colspan="2">
                             &nbsp;</td>
                        
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 140px" colspan="2">
                             <asp:Label ID="Label14" runat="server" Text="Estado"></asp:Label>
                         </td>
-                        <td colspan="2" style="width: 109px">
+                        <td colspan="4" style="width: 109px">
                             <asp:DropDownList ID="CboEst" runat="server">
                                 <asp:ListItem Value="AC">Activo</asp:ListItem>
                                 <asp:ListItem Value="IN">Inacitvo</asp:ListItem>
                             </asp:DropDownList>
                         </td>
-                        <td style="width: 91px">
+                        <td style="width: 91px" colspan="2">
                             &nbsp;</td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 140px" colspan="2">
                             <asp:Label ID="Label13" runat="server" Text="Plantilla"></asp:Label>
                         </td>
-                        <td colspan="2">
+                        <td colspan="4">
                             <asp:FileUpload ID="FileUpload1" runat="server" />
                         </td>
-                        <td>
+                        <td colspan="2">
                             &nbsp;</td>
                       
                     </tr>
                     <tr>
-                        <td colspan="4" style="text-align: center">
+                        <td colspan="8" style="text-align: center">
                             &nbsp;</td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="text-align: center">
-                            &nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="text-align: center">
-                            &nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="text-align: center">
-                            <asp:Button ID="BtnGuardar" runat="server" onclick="BtnGuardar_Click" 
-                                Text="Guardar" ValidationGroup="Guardar" />
-                            &nbsp;<asp:Button ID="BtnEliminar" runat="server" onclick="BtnEliminar_Click" 
-                                Text="Eliminar" />
-                            &nbsp;
-                            <input ID="BtnCancelar" type="button" value="Cancelar" />
+                        <td style="text-align: center">
+                            &nbsp;&nbsp;&nbsp;</td>
+                        <td colspan="2" style="text-align: center">
+                            <asp:ImageButton ID="BtnGuardar" runat="server" SkinID="IBtnGuardar" />
                         </td>
+                        <td colspan="2" style="text-align: center">
+                            <asp:ImageButton ID="BtnEliminar" runat="server" SkinID="IBtnEliminar" />
+                        </td>
+                        <td colspan="2" style="text-align: center">
+                            <asp:ImageButton ID="BtnCancelar" runat="server" SkinID="IBtnCancelar" OnClientClick="CerrarModalTercero(this)" />
+                        </td>
+                        <td style="text-align: center">
+                            &nbsp;</td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="text-align: center">
+                        <td style="text-align: center">
+                            &nbsp;</td>
+                        <td colspan="2" style="text-align: center">
+                            Guardar</td>
+                        <td colspan="2" style="text-align: center">
+                            Anular</td>
+                        <td colspan="2" style="text-align: center">
+                            Cancelar</td>
+                        <td style="text-align: center">
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" style="text-align: center">
                             &nbsp;</td>
                     </tr>
                 </table>

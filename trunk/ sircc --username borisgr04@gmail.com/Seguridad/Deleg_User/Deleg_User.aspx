@@ -14,7 +14,7 @@
     <asp:Label id="msgResult" runat="server" Width="90%" Height="30px"  
             Visible="True"></asp:Label>&nbsp;<table >
     <tr ><td style="WIDTH: 84px" ><asp:Label id="Label1" runat="server"  Text="Usuario"></asp:Label></td>
-        <td >
+        <td colspan="4" >
     <asp:TextBox id="TxtUsername" runat="server" Width="150px" 
         AutoPostBack="True"></asp:TextBox>&nbsp; 
     <asp:ImageButton id="ImageButton1" onclick="ImageButton1_Click" runat="server" 
@@ -27,12 +27,12 @@
             <asp:Label ID="LbIsUser" runat="server"></asp:Label>
         </td></tr>
     <tr ><td style="WIDTH: 84px" >&nbsp;</td>
-        <td >
+        <td colspan="4" >
             &nbsp;</td>
         <td >
             &nbsp;</td></tr>
     <tr ><td style="WIDTH: 84px" >&nbsp;</td>
-        <td >
+        <td colspan="4" >
             <asp:GridView ID="GridView1" runat="server" Width="589px"  AllowSorting="False"
                 DataSourceID="ObjUsuDel" GridLines="None"
                 CellPadding="4" DataKeyNames="Cod_dep" 
@@ -82,12 +82,41 @@
         <td >
             &nbsp;</td></tr>
     <tr ><td style="WIDTH: 84px" >&nbsp;</td>
-        <td style="text-align: center" >
-                            <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" />
-
-        </td>
+        <td style="text-align: center" colspan="4" >
+                            &nbsp;</td>
         <td >
             &nbsp;</td></tr>
+                <tr>
+                    <td style="WIDTH: 84px">
+                        &nbsp;</td>
+                    <td style="text-align: center">
+                        &nbsp;</td>
+                    <td style="text-align: center">
+                        <asp:ImageButton ID="BtnGuardar" runat="server" SkinID="IBtnGuardar" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:ImageButton ID="IBtnAuto" runat="server" SkinID="IBtnPanelUser" 
+                            ValidationGroup="no" />
+                    </td>
+                    <td style="text-align: center">
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="WIDTH: 84px">
+                        &nbsp;</td>
+                    <td style="text-align: center">
+                        &nbsp;</td>
+                    <td style="text-align: center">
+                        Guardar</td>
+                    <td style="text-align: center">
+                        Ir Autorización</td>
+                    <td style="text-align: center">
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
      </table>
      </ContentTemplate>
         </asp:UpdatePanel>

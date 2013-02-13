@@ -260,11 +260,12 @@ Partial Class Reportes_ParametrizadoR_report
         'report()
 
         Dim Sql As String = Request.QueryString("Sql")
-        If Membership.GetUser.UserName.ToUpper = "ADMIN" Then
-            Me.TxtSql.Visible = True
-        Else
-            Me.TxtSql.Visible = False
-        End If
+        'If Membership.GetUser.UserName.ToUpper = "ADMIN" Then
+        '    Me.TxtSql.Visible = True
+        'Else
+        '    Me.TxtSql.Visible = False
+        'End If
+        Me.TxtSql.Visible = True
         Me.TxtSql.Text = Sql
 
         Select Case Request.QueryString("Rpte")

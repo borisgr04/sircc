@@ -47,6 +47,7 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
                         Me.TxtNom.Text = tb.Rows(0)("NOM_PLA")
                         Me.CboExt.Text = tb.Rows(0)("Ext")
                         Me.CboEst.Text = tb.Rows(0)("Est_Pla")
+                        Me.CboTipPla.SelectedValue = tb.Rows(0)("Tip_Pla")
                         If Not (tb.Rows(0)("Cod_Stip") Is DBNull.Value) Then
                             Me.CboSTip.Text = tb.Rows(0)("Cod_Stip")
                         End If
@@ -69,14 +70,12 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
                 Try
                     Me.TxtCod.Text = tb.Rows(0)("IDE_PLA")
                     Me.TxtNom.Text = tb.Rows(0)("NOM_PLA")
+                    Me.CboExt.Text = tb.Rows(0)("Ext")
+                    Me.CboEst.Text = tb.Rows(0)("Est_Pla")
+                    Me.CboTipPla.SelectedValue = tb.Rows(0)("Tip_Pla")
                     If Not (tb.Rows(0)("Cod_Stip") Is DBNull.Value) Then
                         Me.CboSTip.Text = tb.Rows(0)("Cod_Stip")
                     End If
-
-                    Me.CboExt.Text = tb.Rows(0)("Ext")
-                    Me.CboEst.Text = tb.Rows(0)("Est_Pla")
-                    ' Me.TxtColor.Text = tb.Rows(0)("Color").ToString
-
                     Pk1 = tb.Rows(0)("IDE_PLA").ToString
 
                 Catch ex As Exception
@@ -118,7 +117,8 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
      
     End Sub
 
-    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) 'Handles BtnGuardar.Click
+    
+    Sub Guardar()
         Dim Obj As New PPlantillas
         Select Case Me.Oper
             Case "Nuevo"
@@ -144,13 +144,6 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
         MsgBoxLimpiar(MsgResult)
     End Sub
 
-    Protected Sub BtnEliminar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim Obj As New PPlantillas
-        MsgResult.Text = Obj.Delete(Pk1)
-        Me.MsgBox(MsgResult, Obj.lErrorG)
-        FillCustomerInGrid()
-    End Sub
-
     Protected Sub GridView1_RowDataBound1(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs)
 
         If e.Row.RowType = DataControlRowType.DataRow Then
@@ -161,39 +154,7 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
         End If
 
     End Sub
-    'Sub SubirAchivo(ByVal Archivo As HttpPostedFile)
-    '    Try
-    '        Dim savePath As String = "~/Docs/imgpact/"
-    '        Dim fileName As String = FileUpload1.FileName
-    '        Dim pathToCheck As String = Server.MapPath(savePath + fileName)
-    '        Dim tempfileName As String = ""
-    '        If Me.FileUpload1.PostedFile.ContentType = "image/pjpeg" Or Me.FileUpload1.PostedFile.ContentType = "image/gif" Or Me.FileUpload1.PostedFile.ContentType = "image/x-png" Then
-    '            If (System.IO.File.Exists(pathToCheck)) Then
-    '                Dim counter As Integer = 2
-    '                While (System.IO.File.Exists(pathToCheck))
-    '                    tempfileName = counter.ToString() + fileName
-    '                    pathToCheck = savePath + tempfileName
-    '                    counter = counter + 1
-    '                End While
-    '                fileName = tempfileName
-    '            End If
-    '            savePath += fileName
-    '            FileUpload1.SaveAs(Server.MapPath(savePath))
-    '            Select Case Me.Oper
-    '                Case "Nuevo"
-    '                    'Me.MsgResult.Text = Obj.Insert(Me.TxtCod.Text, Me.TxtNom.Text, "~/Docs/imgpact/" + FileUpload1.FileName, Me.TxtColor.Text)
-    '                Case "Editar"
-    '                    ' Me.MsgResult.Text = Obj.Update(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString, Me.TxtCod.Text, Me.TxtNom.Text, "~/Docs/imgpact/" + FileUpload1.FileName, Me.TxtColor.Text)
-    '            End Select
-    '        Else
-    '            Throw New Exception("Esta intentando subir un archivo que no corresponde a una imagen")
-    '        End If
-    '    Catch ex As Exception
-    '        MsgResult.Text = "Error al subir el archivo. " + ex.Message
-    '        MsgBox(Me.MsgResult, True)
-    '    End Try
-    'End Sub
-
+    
     Protected Sub BtnNuevo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnNuevo.Click
         Me.Oper = "Nuevo"
         Habilitar(True)
@@ -208,5 +169,24 @@ Partial Class DatosBasicos_PPlantillas_PPlantillas
         Else
             CboSTip.Enabled = True
         End If
+    End Sub
+
+    Protected Sub BtnGuardar_Click1(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardar.Click
+        Guardar()
+    End Sub
+
+    Protected Sub BtnEliminar_Click1(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles BtnEliminar.Click
+        Eliminar()
+    End Sub
+
+    Sub Eliminar()
+        Dim Obj As New PPlantillas
+        MsgResult.Text = Obj.Delete(Pk1)
+        Me.MsgBox(MsgResult, Obj.lErrorG)
+        FillCustomerInGrid()
+    End Sub
+
+    Protected Sub BtnCancelar_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles BtnCancelar.Click
+
     End Sub
 End Class
