@@ -2,7 +2,7 @@
                   
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server" >
     <div class="demoarea">
-    <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptLocalization="true" EnablePartialRendering="true" >
+    <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptLocalization="true" EnableScriptGlobalization="True" EnablePartialRendering="true" >
     </ajaxToolkit:ToolkitScriptManager>
              
         <asp:Label ID="Label11" runat="server" CssClass="Titulo" 
@@ -39,6 +39,85 @@
                     &nbsp;</td>
             </tr>
         </table>
+             
+    <table style="width: 100%">
+                       
+        <tr>
+            <td style="width: 135px">
+                &nbsp;</td>
+            <td style="width: 145px">
+                &nbsp;</td>
+            <td style="width: 144px">
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+               
+        <tr>
+            <td style="width: 135px">
+                <asp:Label ID="Label25" runat="server" CssClass="selectIndex" 
+                    Text="Fecha Inicial"></asp:Label>
+            </td>
+            <td style="width: 145px">
+                <asp:Label ID="Label26" runat="server" CssClass="selectIndex" 
+                    Text="Fecha Final"></asp:Label>
+            </td>
+            <td style="width: 144px">
+                <asp:Label ID="Label28" runat="server" CssClass="selectIndex" 
+                    Text="N° Solicitud"></asp:Label>
+            </td>
+            <td>
+                <asp:Label ID="LbConcepto" runat="server" CssClass="selectIndex" 
+                    Text="Concepto" Visible="False"></asp:Label>
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+               
+        <tr>
+            <td style="width: 135px">
+                <asp:TextBox ID="TxtDesde" runat="server"></asp:TextBox>
+                <ajaxToolkit:CalendarExtender ID="TxtDesde_CalendarExtender" runat="server" 
+                    Enabled="True" TargetControlID="TxtDesde" Format="dd/MM/yyyy">
+                </ajaxToolkit:CalendarExtender>
+            </td>
+            <td style="width: 145px">
+                <asp:TextBox ID="TxtHasta" runat="server"></asp:TextBox>
+                <ajaxToolkit:CalendarExtender ID="TxtHasta_CalendarExtender" runat="server" 
+                    Enabled="True" TargetControlID="TxtHasta" Format="dd/MM/yyyy">
+                </ajaxToolkit:CalendarExtender>
+            </td>
+            <td style="width: 144px">
+                <asp:TextBox ID="TxtNSol" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                 <asp:ImageButton ID="ImageButton1" runat="server" SkinID="IBtnBuscar" />
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+               
+        <tr>
+            <td style="width: 135px">
+                &nbsp;</td>
+            <td style="width: 145px">
+                &nbsp;</td>
+            <td colspan="3">
+                <asp:Label ID="LBPrueba" runat="server"></asp:Label>
+            </td>
+            <td>
+                &nbsp;</td>
+        </tr>
+               
+    </table>
              
     <br />
     <br />
@@ -83,7 +162,7 @@
                 <br />
             <br />
         <asp:GridView ID="grdRevisar0" runat="server" AllowSorting="True" 
-                AutoGenerateColumns="False" DataKeyNames="Cod_Sol" DataSourceID="ObjSolxAsig" 
+                AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
                 EmptyDataText="No tiene solicitudes pendientes para revisar" 
                 EnableModelValidation="True">
                 <Columns>
@@ -129,7 +208,7 @@
                 <br />
             <br />
         <asp:GridView ID="GvAcep" runat="server" AllowSorting="True" 
-                AutoGenerateColumns="False" DataKeyNames="Cod_Sol" DataSourceID="ObjSolAcep" 
+                AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
                 EmptyDataText="No tiene solicitudes pendientes para revisar" 
                 EnableModelValidation="True" SkinID="gridView">
                 <Columns>
@@ -190,7 +269,7 @@
                 <br />
             <br />
         <asp:GridView ID="GvRech" runat="server" AllowSorting="True" 
-                AutoGenerateColumns="False" DataKeyNames="Cod_Sol" DataSourceID="ObjSolRech" 
+                AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
                 EmptyDataText="No tiene solicitudes pendientes para revisar" 
                 EnableModelValidation="True">
                 <Columns>
@@ -246,7 +325,7 @@
             <br />
             <br />
             <asp:GridView ID="GridView1" runat="server"
-        AllowSorting="True" DataSourceID="ObjAvisosHoy" EnableModelValidation="True" 
+        AllowSorting="True" EnableModelValidation="True" 
         DataKeyNames="Num_Proc,ID" AutoGenerateColumns="False" 
              EmptyDataText="No tiene tareas pendientes para hoy">
         <Columns>
@@ -280,7 +359,7 @@
             <br />
         <br />
             <asp:GridView ID="GridView2" runat="server"
-        AllowSorting="True" DataSourceID="ObjAtrasados" EnableModelValidation="True" 
+        AllowSorting="True" EnableModelValidation="True" 
         DataKeyNames="Num_Proc,ID" AutoGenerateColumns="False">
         <Columns>
             <asp:BoundField DataField="Num_Proc" HeaderText="N° de Proceso" 
@@ -314,7 +393,6 @@
         <br />
             <asp:GridView OnRowDataBound="GridView1_RowDataBound" 
                 id="grdRecibir" runat="server" 
-                DataSourceID="ObjPSol" 
                 DataKeyNames="Cod_Sol" 
                 AutoGenerateColumns="False" 
                 EmptyDataText="No tiene solicitudes pendientes para recibir" 
@@ -367,7 +445,7 @@
             <br />
         <br />
             <asp:GridView ID="grdRevisar" runat="server" AllowSorting="True" 
-                    AutoGenerateColumns="False" DataKeyNames="Cod_Sol" DataSourceID="ObjPSolRv" 
+                    AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
                     EmptyDataText="No tiene solicitudes pendientes para revisar" 
                     EnableModelValidation="True" Width="724px">
                     <Columns>
@@ -415,8 +493,7 @@
             <br />
         <br />
             <asp:DataList ID="DtProcesosACargo" runat="server" CellPadding="4" ForeColor="#333333" 
-        RepeatDirection="Horizontal" DataKeyField="Estado" 
-        DataSourceID="ObjConPContratos">
+        RepeatDirection="Horizontal" DataKeyField="Estado">
         <AlternatingItemStyle BackColor="White" ForeColor="#284775" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -440,7 +517,6 @@
     </asp:ObjectDataSource>
                 <asp:GridView 
                 id="grdProcACargo" runat="server" OnRowDataBound="GridView1_RowDataBound" 
-                DataSourceID="ObjConPContratosD" 
                 DataKeyNames="Pro_Sel_Nro" 
                 AutoGenerateColumns="False" 
                 EmptyDataText="No tiene procesos a cargo" 
