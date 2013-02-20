@@ -298,7 +298,23 @@
                 <br />
                 <br />
                 <asp:ObjectDataSource ID="ObjConPContratos" runat="server" 
-                    OldValuesParameterFormatString="original_{0}" SelectMethod="GetMisProcesos" TypeName="Con_PContratos">
+                    OldValuesParameterFormatString="original_{0}" 
+                    SelectMethod="GetMisProcesos" TypeName="AvisosAct" InsertMethod="InsertP">
+                    <InsertParameters>
+                        <asp:Parameter Name="COD_TPRO" Type="String" />
+                        <asp:Parameter Name="OBJ_CON" Type="String" />
+                        <asp:Parameter Name="DEP_CON" Type="String" />
+                        <asp:Parameter Name="DEP_PCON" Type="String" />
+                        <asp:Parameter Name="VIG_CON" Type="Decimal" />
+                        <asp:Parameter Name="TIP_CON" Type="String" />
+                        <asp:Parameter Name="STIP_CON" Type="String" />
+                        <asp:Parameter Name="FEC_RECIBIDO" Type="DateTime" />
+                        <asp:Parameter Name="NUM_SOL" Type="String" />
+                        <asp:Parameter Name="VAL_CON" Type="Decimal" />
+                    </InsertParameters>
+                    <SelectParameters>
+                        <asp:SessionParameter Name="vigencia" SessionField="vigencia" Type="String" />
+                    </SelectParameters>
                 </asp:ObjectDataSource>
                 <asp:ObjectDataSource ID="ObjAvisosHoy" runat="server" OldValuesParameterFormatString="original_{0}"
                     SelectMethod="GetAvisosHoy" TypeName="PCronogramas"></asp:ObjectDataSource>
@@ -316,12 +332,13 @@
                 </asp:ObjectDataSource>
                 <br />
                 <asp:HiddenField ID="HdPNom_Est" runat="server" />
-                <asp:ObjectDataSource ID="ObjConPContratosD" runat="server" InsertMethod="InsertP"
+                <asp:ObjectDataSource ID="ObjConPContratosD" runat="server"
                     OldValuesParameterFormatString="original_{0}" SelectMethod="GetMisProcbyEstado"
-                    TypeName="Con_PContratos">
+                    TypeName="AvisosAct">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="HdPNom_Est" Name="Nom_Est" PropertyName="Value"
                             Type="String" />
+                        <asp:SessionParameter Name="Vigencia" SessionField="vigencia" Type="String" />
                     </SelectParameters>
                 </asp:ObjectDataSource>
             </ContentTemplate>

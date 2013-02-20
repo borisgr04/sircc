@@ -137,11 +137,11 @@
                                             Enabled="false" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:CommandField ButtonType="Image" SelectImageUrl="~/images/Operaciones/Select.png"
-                                    ShowSelectButton="True" />
+                                <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png"
+                                    ShowSelectButton="True" SelectText="Asignar Permisos" />
                                 <asp:ButtonField CommandName="activar" Text="Activar/Inactivar" />
                                 <asp:ButtonField CommandName="desbloquear" Text="Desbloquear" />
-                                <asp:ButtonField CommandName="AdminDesktop" Text="AdminDesktop" />
+                                <asp:ButtonField CommandName="AdminDesktop" Text="Administrador" />
                                 <asp:HyperLinkField DataNavigateUrlFields="username" 
                                     DataNavigateUrlFormatString="../Deleg_User/Deleg_User.aspx?username={0}" 
                                     Text="Roles x Dependencia" />

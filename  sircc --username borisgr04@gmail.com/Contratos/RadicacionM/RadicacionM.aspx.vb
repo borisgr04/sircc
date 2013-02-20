@@ -252,7 +252,8 @@ Partial Class Contratos_RadicacionM_Default
             TxtPro.Text = dt.Rows(0)("pro_con").ToString
             TxtFsus.Text = CDate(dt.Rows(0)("fec_sus_con")).ToShortDateString
             CboDep.SelectedValue = dt.Rows(0)("dep_con").ToString
-            CboDepSup.SelectedValue = dt.Rows(0)("Dep_Sup").ToString
+         
+           
             Try
                 CboDepP.SelectedValue = dt.Rows(0)("dep_pcon").ToString
                 'TxtObj.Text = "asignar combop." + dt.Rows(0)("dep_pcon").ToString
@@ -302,6 +303,24 @@ Partial Class Contratos_RadicacionM_Default
             Else
                 Me.IBtnEditar.Enabled = True
             End If
+
+            Me.MsgResult.Text = dt.Rows(0)("Dep_Sup").ToString + "-" + dt.Rows(0)("dep_con").ToString
+            Try
+                If String.IsNullOrEmpty(dt.Rows(0)("Dep_Sup").ToString) Then
+                    CboDepSup.SelectedValue = dt.Rows(0)("dep_con").ToString
+                Else
+                    CboDepSup.SelectedValue = dt.Rows(0)("dep_sup").ToString
+                End If
+
+            Catch ex As Exception
+                Dim c As String = ""
+                'For Each it As ListItem In CboDepSup.Items()
+                '    c += ";" + it.Value
+                'Next
+                Me.MsgResult.Text += ex.Message
+                Me.MsgResult.Visible = True
+                MsgBox(Me.MsgResult, True)
+            End Try
 
             Me.IBtnCancelar.Enabled = True
             Me.IBtnNuevo.Enabled = True

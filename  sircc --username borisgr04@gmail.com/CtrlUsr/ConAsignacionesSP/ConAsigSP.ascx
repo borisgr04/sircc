@@ -27,18 +27,7 @@
 </rsweb:ReportViewer>
 <asp:ObjectDataSource ID="ObjCargaPS" runat="server" InsertMethod="InsertP" 
     OldValuesParameterFormatString="original_{0}" SelectMethod="GetCargaPSxDel" 
-    TypeName="Con_PContratos">
-    <InsertParameters>
-        <asp:Parameter Name="COD_TPRO" Type="String" />
-        <asp:Parameter Name="OBJ_CON" Type="String" />
-        <asp:Parameter Name="DEP_CON" Type="String" />
-        <asp:Parameter Name="DEP_PCON" Type="String" />
-        <asp:Parameter Name="VIG_CON" Type="Decimal" />
-        <asp:Parameter Name="TIP_CON" Type="String" />
-        <asp:Parameter Name="STIP_CON" Type="String" />
-        <asp:Parameter Name="FEC_RECIBIDO" Type="DateTime" />
-        <asp:Parameter Name="NUM_SOL" Type="String" />
-    </InsertParameters>
+    TypeName="CargaPS">
     <SelectParameters>
         <asp:ControlParameter ControlID="CboDepP" Name="Dep_PCon" 
             PropertyName="SelectedValue" Type="String" />

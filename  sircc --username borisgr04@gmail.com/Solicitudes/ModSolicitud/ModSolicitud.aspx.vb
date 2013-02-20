@@ -184,9 +184,7 @@ Partial Class Solicitudes_ModSolicitud_Default
         Abrir()
     End Sub
 
-    Protected Sub BtnBuscar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnBuscar.Click
-        Me.ModalPopupSolicitudes.Show()
-    End Sub
+
 
 
     Protected Sub ConPSolicitudesPK1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles conpsolicitudes1.SelClicked
@@ -205,5 +203,9 @@ Partial Class Solicitudes_ModSolicitud_Default
         If (Not IsNothing(e.Exception)) And (Not IsNothing(e.Exception.InnerException)) Then
             ToolkitScriptManager1.AsyncPostBackErrorMessage = e.Exception.InnerException.Message + "Ajax"
         End If
+    End Sub
+
+    Protected Sub BtnBuscar_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles BtnBuscar.Click
+        Me.ModalPopupSolicitudes.Show()
     End Sub
 End Class

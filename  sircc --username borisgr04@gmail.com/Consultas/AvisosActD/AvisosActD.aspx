@@ -9,54 +9,41 @@
             Text="Panel de procesos de contratación por dependencia"></asp:Label>
         <br />
         <br />
-        <table style="width:30%;">
-            <tr>
-                <td>
-                    &nbsp;</td>
-                <td>
-                    &nbsp;</td>
-                <td>
-                    &nbsp;</td>
-            </tr>
-            <tr>
-                <td>
-        <asp:HyperLink ID="HyperLink1" runat="server" 
-            NavigateUrl="~/Consultas/AvisosAct/AvisosAct2.aspx">Ir a Panel de Funcionario</asp:HyperLink>
+
              
-                </td>
-                <td>
-                    <asp:HyperLink ID="HyperLink2" runat="server" 
-                        NavigateUrl="~/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx">Nueva Solicitud</asp:HyperLink></td>
-                <td>
-                    &nbsp;</td>
-            </tr>
-            <tr>
-                <td>
-                    &nbsp;</td>
-                <td>
-                    &nbsp;</td>
-                <td>
-                    &nbsp;</td>
-            </tr>
-        </table>
-             
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<ContentTemplate>
+    <telerik:RadTabStrip ID="RadTabStrip1" runat="server" 
+        Skin="Windows7" MultiPageID="RadMultiPage1" ReorderTabsOnSelect="True" 
+        SelectedIndex="6">
+    <Tabs>
+        <telerik:RadTab runat="server" Value="asignar" Owner="RadTabStrip1" PageViewID="RpSolAsig" 
+            Text="Solicitudes sin Asignar">
+        </telerik:RadTab>
+    <telerik:RadTab Text="Solicitudes por Recibir" Value="recibir" 
+            PageViewID="RpSolRec">
+    </telerik:RadTab>
+        <telerik:RadTab runat="server" Owner="RadTabStrip1" Value="revisar" PageViewID="RpSolRev" 
+            Text="Solicitudes por Revisar">
+        </telerik:RadTab>
+        <telerik:RadTab runat="server" PageViewID="RpSolAcep" Value="Aceptadas" 
+            Text="Solicitudes Aceptadas">
+        </telerik:RadTab>
+        <telerik:RadTab runat="server" PageViewID="RpSolRech" Value="Rechazadas" 
+            Text="Solicitudes Rechazadas">
+        </telerik:RadTab>
+    <telerik:RadTab Text="Actividades para Hoy" Value="hoy" PageViewID="RpActHoy" >
+    </telerik:RadTab>
+    <telerik:RadTab Text="Actividades Atrasadas" Value="atrazadas" 
+            PageViewID="RpActAtra" Selected="True">
+    </telerik:RadTab>
+    <telerik:RadTab Text="Procesos a Cargo" Value="procesos" PageViewID="RpProcCar">
+    </telerik:RadTab>
+    </Tabs>
+    </telerik:RadTabStrip>
+
+                 
     <table style="width: 100%">
-                       
-        <tr>
-            <td style="width: 135px">
-                &nbsp;</td>
-            <td style="width: 145px">
-                &nbsp;</td>
-            <td style="width: 144px">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-        </tr>
-               
         <tr>
             <td style="width: 135px">
                 <asp:Label ID="Label25" runat="server" CssClass="selectIndex" 
@@ -100,7 +87,12 @@
                  <asp:ImageButton ID="ImageButton1" runat="server" SkinID="IBtnBuscar" />
             </td>
             <td>
-                &nbsp;</td>
+        <asp:HyperLink ID="HyperLink1" runat="server" 
+            NavigateUrl="~/Consultas/AvisosAct/AvisosAct2.aspx">Ir a Panel de Funcionario</asp:HyperLink>
+             
+                &nbsp;&nbsp;
+                    <asp:HyperLink ID="HyperLink2" runat="server" 
+                        NavigateUrl="~/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx">Nueva Solicitud</asp:HyperLink></td>
             <td>
                 &nbsp;</td>
         </tr>
@@ -118,41 +110,8 @@
         </tr>
                
     </table>
-             
-    <br />
-    <br />
-             
-<asp:UpdatePanel ID="UpdatePanel1" runat="server">
-<ContentTemplate>
-    <telerik:RadTabStrip ID="RadTabStrip1" runat="server" 
-        Skin="Office2007" MultiPageID="RadMultiPage1" ReorderTabsOnSelect="True" 
-        SelectedIndex="7">
-    <Tabs>
-        <telerik:RadTab runat="server" Value="asignar" Owner="RadTabStrip1" PageViewID="RpSolAsig" 
-            Text="Solicitudes sin Asignar">
-        </telerik:RadTab>
-    <telerik:RadTab Text="Solicitudes por Recibir" Value="recibir" 
-            PageViewID="RpSolRec">
-    </telerik:RadTab>
-        <telerik:RadTab runat="server" Owner="RadTabStrip1" Value="revisar" PageViewID="RpSolRev" 
-            Text="Solicitudes por Revisar">
-        </telerik:RadTab>
-        <telerik:RadTab runat="server" PageViewID="RpSolAcep" Value="Aceptadas" 
-            Text="Solicitudes Aceptadas">
-        </telerik:RadTab>
-        <telerik:RadTab runat="server" PageViewID="RpSolRech" Value="Rechazadas" 
-            Text="Solicitudes Rechazadas">
-        </telerik:RadTab>
-    <telerik:RadTab Text="Actividades para Hoy" Value="hoy" PageViewID="RpActHoy" >
-    </telerik:RadTab>
-    <telerik:RadTab Text="Actividades Atrasadas" Value="atrazadas" PageViewID="RpActAtra">
-    </telerik:RadTab>
-    <telerik:RadTab Text="Procesos a Cargo" Value="procesos" PageViewID="RpProcCar" 
-            Selected="True">
-    </telerik:RadTab>
-    </Tabs>
-    </telerik:RadTabStrip>
-    <telerik:RadMultiPage ID="RadMultiPage1" runat="server" SelectedIndex="7" 
+
+    <telerik:RadMultiPage ID="RadMultiPage1" runat="server" SelectedIndex="4" 
         BorderStyle="None">
 
             <telerik:RadPageView ID="RpSolAsig" runat="server">
@@ -161,7 +120,7 @@
                 Text="Solicitudes sin Asignar"></asp:Label>
                 <br />
             <br />
-        <asp:GridView ID="grdRevisar0" runat="server" AllowSorting="True" 
+        <asp:GridView ID="grdxRevisar" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
                 EmptyDataText="No tiene solicitudes pendientes para revisar" 
                 EnableModelValidation="True">

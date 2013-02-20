@@ -265,7 +265,7 @@
                 <table style="width:100%;">
                     <tr>
                         <td style="width: 1159px">
-                            <asp:Label ID="LbTitModal" runat="server" ForeColor="White" Text=" Consulta de Procesos a Cargo" 
+                            <asp:Label ID="LbTitModal" runat="server" ForeColor="White" Text=" Consulta de Procesos x Radicar" 
                                 Font-Bold="True"></asp:Label>
                         </td>
                         <td style="width: 923px">

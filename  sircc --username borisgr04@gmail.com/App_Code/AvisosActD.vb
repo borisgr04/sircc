@@ -45,6 +45,7 @@ Public Class AvisosActD
         End Set
     End Property
 
+    
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetxAsig(ByVal Vigencia As String) As DataTable
         'Me.Num_PSol = Num_PSol
@@ -69,6 +70,45 @@ Public Class AvisosActD
 
         Return dataTb
     End Function
+
+    ''' <summary>
+    '''  Retorna las solicitudes a cargo del usuario actual dependenciendo de su estado de RECIBIDO, en un periodio de fecha
+    ''' </summary>
+    ''' <param name="RECIBIDO">SI (S) o (NO)</param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByDepxFec(ByVal RECIBIDO As String, Optional ByVal Concepto As String = "") As DataTable
+
+        Me.Conectar()
+        If String.IsNullOrEmpty(Num_PSol) Then
+            querystring = "SELECT * FROM VPSOLICITUDESHREV WHERE Recibido=:Recibido and FECHA_RECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') And Concepto Like :Concepto And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) order by FECHA_RECIBIDO desc"
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":usuario", Me.usuario)
+            Me.AsignarParametroCadena(":Recibido", RECIBIDO)
+            Me.AsignarParametroCadena(":F1", Me.Fec_Ini)
+            Me.AsignarParametroCadena(":F2", Me.Fec_Fin)
+            Me.AsignarParametroCadena(":Concepto", "%" + UCase(Concepto) + "%")
+        Else
+            querystring = "SELECT * FROM VPSOLICITUDESHREV WHERE Recibido=:Recibido And FECHA_RECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') And Cod_Sol Like :Cod_Sol And Concepto Like :Concepto And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) Order by FECHA_RECIBIDO desc"
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":usuario", Me.usuario)
+            Me.AsignarParametroCadena(":Recibido", RECIBIDO)
+            Me.AsignarParametroCadena(":F1", Me.Fec_Ini)
+            Me.AsignarParametroCadena(":F2", Me.Fec_Fin)
+            Me.AsignarParametroCadena(":Cod_Sol", "%" + UCase(Num_PSol) + "%")
+            Me.AsignarParametroCadena(":Concepto", "%" + UCase(Concepto) + "%")
+            '
+        End If
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+
+        Me.Desconectar()
+
+        Return dataTb
+    End Function
+
+
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetxRecibirD(ByVal Vigencia As String) As DataTable
@@ -203,6 +243,20 @@ Public Class AvisosActD
         Return dataSet
     End Function
 
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetCProcesosxDepDel(ByVal Vigencia As String) As DataTable
+        Me.Conectar()
+        querystring = "Select count(*) Cantidad from vpcontratos where final='NO' and Dep_PCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) And FECHARECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') "
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":usuario", Me.usuario)
+        Me.AsignarParametroCadena(":F1", Fec_Ini)
+        Me.AsignarParametroCadena(":F2", Fec_Fin)
+        'Me.AsignarParametroCadena(":Vig_Con", Vigencia)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Desconectar()
+        Return dataTb
+
+    End Function
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetProcesosxDepDel(ByVal Vigencia As String) As DataTable
         Me.Conectar()

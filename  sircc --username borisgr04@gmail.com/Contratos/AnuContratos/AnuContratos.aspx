@@ -1,16 +1,8 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="GesContratos.aspx.vb" Inherits="Contratos_GesContratos_Default" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="AnuContratos.aspx.vb" Inherits="Contratos_GesContratos_Default" %>
 
 <%@ Register src="../../CtrlUsr/DetContratos/DetContratoD.ascx" tagname="DetContrato" tagprefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
-<style>
-.disabledImageButton
-{
-     filter: alpha(opacity=30);
-     opacity: .30;
-     background-color:#111;
-}
-</style>
 
     <div class="demoarea">
     <br />
@@ -18,12 +10,10 @@
             EnableScriptGlobalization="True">
         </ajaxToolkit:ToolkitScriptManager>
 
-    
-
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                 <asp:Label ID="Label1" runat="server" CssClass="Titulo" 
-                    Text="GESTIÓN DE CONTRATOS"></asp:Label>
+                    Text="ANULACIÓN DE CONTRATOS"></asp:Label>
                 <uc1:DetContrato ID="DetContrato1" runat="server"  />
                 <br />
                     <asp:Panel ID="Panel1" runat="server" Visible="false">
@@ -73,43 +63,8 @@
         </tr>
         <tr>
             <td >
-                N° de Visitas</td>
-            <td colspan="3" >
-                <asp:TextBox ID="TxtNVisitas" runat="server"></asp:TextBox>
-                <ajaxToolkit:FilteredTextBoxExtender ID="TxtNVisitas_FilteredTextBoxExtender" 
-                    runat="server" Enabled="True" FilterType="Numbers" 
-                    TargetControlID="TxtNVisitas">
-                </ajaxToolkit:FilteredTextBoxExtender>
-                &nbsp; En el Periodo del Acta</td>
-            <td >
                 &nbsp;</td>
-            <td >
-            </td>
-        </tr>
-        <tr>
-            <td >
-                Valor Autorizado Pago</td>
             <td colspan="3" >
-                <asp:TextBox ID="TxtValPago" runat="server">0</asp:TextBox>
-                <ajaxToolkit:FilteredTextBoxExtender ID="TxtValPago_FilteredTextBoxExtender" FilterType="Custom, Numbers"
-                                                ValidChars="."
-                    runat="server" Enabled="True" TargetControlID="TxtValPago">
-                </ajaxToolkit:FilteredTextBoxExtender>
-                &nbsp; En el Acta</td>
-            <td >
-                &nbsp;</td>
-            <td >
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td >
-                % de Ejecución Fisico</td>
-            <td colspan="3" >
-                <asp:TextBox ID="TxtPorFis" runat="server">0</asp:TextBox>
-                <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" FilterType="Custom, Numbers"
-                                                ValidChars="."
-                    runat="server" Enabled="True" TargetControlID="TxtPorFis">
-                </ajaxToolkit:FilteredTextBoxExtender>
                 &nbsp;</td>
             <td >
                 &nbsp;</td>
@@ -150,18 +105,13 @@
                 &nbsp;</td>
         </tr>
         <tr>
-            <td colspan="6" >
-                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            </td>
-        </tr>
-        <tr>
             <td colspan="6" style="height: 21px; text-align: center">
                 &nbsp;</td>
         </tr>
         <tr>
             <td colspan="6" style="height: 21px; text-align: center">
                 <asp:ObjectDataSource ID="ObjRutaEst" runat="server" 
-                    OldValuesParameterFormatString="original_{0}" SelectMethod="GetByEstIni" 
+                    OldValuesParameterFormatString="original_{0}" SelectMethod="GetByEstIniA" 
                     TypeName="Est_Ruta">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="DetContrato1" DefaultValue="00" Name="EST_INI" 
@@ -171,8 +121,6 @@
             </td>
         </tr>
     </table>
-    <br />
-    <br />
                     <asp:Label ID="Label2" runat="server" Text="Total por Pagar"></asp:Label>
                     &nbsp;
                     <asp:Label ID="lbTotalPorPagar" runat="server" CssClass="subheading"></asp:Label>
@@ -182,7 +130,7 @@
 <asp:GridView ID="grdEstContratos" runat="server" 
         AutoGenerateColumns="False" CellPadding="4"
                     DataKeyNames="ID" DataSourceID="ObjEstContratos" 
-        ForeColor="#333333" ShowFooter="True" SkinID="gridView">
+        ForeColor="#333333" ShowFooter="True" SkinID="gridView" EnableModelValidation="True">
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                     <Columns>
                         <asp:CommandField ButtonType="Image" 
@@ -195,13 +143,6 @@
                         <asp:BoundField DataField="USUARIO" HeaderText="USUARIO" SortExpression="USUARIO" />
                         <asp:BoundField DataField="OBSERVACION" HeaderText="OBSERVACION" Visible="False" />
                         <asp:BoundField DataField="OBSERVACION" HeaderText="OBSERVACION" Visible="False" />
-                        <asp:BoundField DataField="NVISITAS" HeaderText="N° VISITAS" Visible="True" />
-                        <asp:BoundField DataField="por_eje_fis" HeaderText="% EJECUCIÓN FISICO" Visible="True"  >
-                        <ItemStyle HorizontalAlign="Right" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="VALOR_PAGO" HeaderText="VALOR AUTORIZADO A PAGAR" Visible="True" DataFormatString="{0:c}" >
-                            <ItemStyle HorizontalAlign="Right" />
-                        </asp:BoundField>
                         <asp:ButtonField ButtonType="Image" CommandName="Editar" HeaderText="EDITAR" 
                             ImageUrl="~/images/Operaciones/Edit2.png" Text="Editar" />
                         <asp:TemplateField ShowHeader="False" HeaderText="ANULAR">
@@ -251,6 +192,7 @@
                 </asp:DetailsView>
 
                 </asp:Panel>
+
                 </ContentTemplate>
                 </asp:UpdatePanel>
 

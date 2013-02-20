@@ -21,9 +21,10 @@ Partial Class Contratos_GesContratos_Default
     End Property
 
     Sub Guardar()
+        Dim obj As New AnuContratos()
         If Me.Oper = "Nuevo" Then
-            Dim obj As New EstContratos()
-            MsgResult.Text = obj.Insert(DetContrato1.Cod_Con, DetContrato1.Estado, CboEstSig.SelectedValue, CDate(txtFecDoc.Text), "", txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text, Publico.PuntoPorComa(TxtPorFis.Text))
+
+            MsgResult.Text = obj.Insert(DetContrato1.Cod_Con, DetContrato1.Estado, CboEstSig.SelectedValue, CDate(txtFecDoc.Text), txtObs.Text)
             Me.MsgBox(MsgResult, obj.lErrorG)
             If obj.lErrorG = False Then
                 Limpiar()
@@ -31,9 +32,7 @@ Partial Class Contratos_GesContratos_Default
                 BtnNuevo.Enabled = True
             End If
         ElseIf Me.Oper = "Editar" Then
-            Dim obj As New EstContratos()
-
-            MsgResult.Text = obj.Update(Pk1, CDate(txtFecDoc.Text), txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text, Publico.PuntoPorComa(TxtPorFis.Text))
+            MsgResult.Text = obj.Update(Pk1, CDate(txtFecDoc.Text), txtObs.Text)
             Me.MsgBox(MsgResult, obj.lErrorG)
             If obj.lErrorG = False Then
                 Limpiar()
@@ -48,6 +47,7 @@ Partial Class Contratos_GesContratos_Default
 
         If DetContrato1.Encontrado = True Then
             Panel1.Visible = True
+            Panel1.Enabled = True
             Limpiar()
             Habilitar(False)
             BtnNuevo.Enabled = True
@@ -60,29 +60,35 @@ Partial Class Contratos_GesContratos_Default
         End If
         grdEstContratos.DataBind()
         CboEstSig.DataBind()
-        Habilitar(False)
-        If CboEstSig.Items.Count = 0 Then
-            Panel1.Enabled = False
-            BtnNuevo.Enabled = False
-            Limpiar()
-            MsgBox(MsgResult, True)
-        Else
-            Panel1.Enabled = True
-            BtnNuevo.Enabled = True
-            Limpiar()
-        End If
 
-        Dim sw As Boolean
+        'If CboEstSig.Items.Count = 0 Then
+        Limpiar()
+        
+        Dim isAnulable As Boolean = False
 
         If DetContrato1.Estado = "00" Then
-            Me.MsgResult.Text = "El Contrato No se ha Legalizado."
-            sw = False
+            Me.MsgResult.Text = "El Contrato No se ha Legalizado, puede realizar la Anulación, especifique el soporte de la misma."
+            isAnulable = True
+            grdEstContratos.Enabled = True
         ElseIf DetContrato1.Estado = "07" Then
             Me.MsgResult.Text = "El Contrato Fue Anulado."
-            sw = False
+            grdEstContratos.Enabled = True
+        ElseIf DetContrato1.Estado = "09" Then
+            Me.MsgResult.Text = "El Contrato ya fue legalizado, No se puede Anular."
+            grdEstContratos.Enabled = False
         Else
-            sw = True
+            Me.MsgResult.Text = "El Contrato se encuentra en ejecución No se puede Anular."
+
+            grdEstContratos.Enabled = False
         End If
+        Habilitar(False)
+        BtnNuevo.Enabled = isAnulable
+        If isAnulable Then
+            MsgBoxAlert(MsgResult, True)
+        Else
+            MsgBox(MsgResult, True)
+        End If
+
 
 
     End Sub
@@ -93,7 +99,7 @@ Partial Class Contratos_GesContratos_Default
 
         If Me.Oper = "Anular" Then
 
-            Dim Obj As EstContratos = New EstContratos()
+            Dim Obj As AnuContratos = New AnuContratos()
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
             Me.grdEstContratos.SelectedIndex = index
 
@@ -102,14 +108,16 @@ Partial Class Contratos_GesContratos_Default
             Me.MsgBox(MsgResult, Obj.lErrorG)
 
             If Obj.lErrorG = False Then
-                LIMPIAR()
+                Limpiar()
+                BtnNuevo.Enabled = True
             End If
             DetContrato1.Buscar()
             grdEstContratos.DataBind()
+            CboEstSig.DataBind()
             Me.grdEstContratos.DataBind()
 
         ElseIf Me.Oper = "Editar" Then
-            Dim Obj As EstContratos = New EstContratos()
+            Dim Obj As AnuContratos = New AnuContratos()
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
             Me.grdEstContratos.SelectedIndex = index
 
@@ -122,9 +130,7 @@ Partial Class Contratos_GesContratos_Default
                 Me.LbEst.Text = dt.Rows(0)("ESTado_FINAL").ToString
                 txtFecDoc.Text = CDate(dt.Rows(0)("FECHA").ToString).ToShortDateString
                 txtObs.Text = dt.Rows(0)("OBSERVACION").ToString
-                TxtNVisitas.Text = dt.Rows(0)("NVisitas").ToString
-                TxtValPago.Text = dt.Rows(0)("Valor_Pago").ToString.Replace(Publico.Punto_DecOracle, ".")
-                TxtPorFis.Text = dt.Rows(0)("por_eje_fis").ToString.Replace(Publico.Punto_DecOracle, ".")
+
                 Me.Pk1 = dt.Rows(0)("ID").ToString
                 Habilitar(True)
                 BtnNuevo.Enabled = False
@@ -146,39 +152,15 @@ Partial Class Contratos_GesContratos_Default
 
         End If
 
-        Select Case e.Row.RowType
-            Case DataControlRowType.Header
-                Me.Total = 0
-                Me.TCan = 0
-            Case DataControlRowType.DataRow
-
-                Me.Total += CDec(DataBinder.Eval(e.Row.DataItem, "VALOR_PAGO"))
-                'Me.TCan += CDec(DataBinder.Eval(e.Row.DataItem, "Cantidad"))
-            Case DataControlRowType.Footer
-                e.Row.Cells(7).Text = FormatCurrency(Me.Total.ToString)
-                e.Row.Cells(7).HorizontalAlign = HorizontalAlign.Right
-                e.Row.Font.Bold = True
-
-                lbTotalPorPagar.Text = FormatCurrency(CDec(DetContrato1.Valor_Total_Prop) - Me.Total)
-                'Valor_Total_Prop
-                'e.Row.Cells(5).Text = FormatNumber(Me.TCan.ToString)
-                'e.Row.Cells(5).HorizontalAlign = HorizontalAlign.Right
-                'e.Row.Font.Bold = True
-        End Select
     End Sub
    
     
 
     Sub Limpiar()
-        Me.TxtNVisitas.Text = 0
-        Me.TxtValPago.Text = 0
-        TxtPorFis.Text = 0
+ 
         Me.txtFecDoc.Text = Today.ToShortDateString
         Me.txtObs.Text = "."
-
         MsgBoxLimpiar(MsgResult)
-
-
         LbEst.Text = ""
     End Sub
 
@@ -197,25 +179,10 @@ Partial Class Contratos_GesContratos_Default
         Nuevo()
     End Sub
 
-    'Sub Nuevo()
-    '    Limpiar()
-    '    MsgResult.Text = " Agregando Nueva Acta"
-    '    MsgBoxInfo(MsgResult, False)
-    '    Habilitar(True)
-    '    LbEst.Visible = False
-    '    BtnNuevo.Enabled = False
-    '    BtnAceptar.Enabled = True
-    '    BtnCancelar.Enabled = True
-    '    Me.Oper = "Nuevo"
-    '    Me.CboEstSig.Visible = True
-    'End Sub
 
     Sub Habilitar(ByVal v As Boolean)
         txtFecDoc.Enabled = v
-        TxtNVisitas.Enabled = v
         txtObs.Enabled = v
-        TxtPorFis.Enabled = v
-        TxtValPago.Enabled = v
         CboEstSig.Enabled = v
 
         BtnNuevo.Enabled = v
@@ -287,9 +254,9 @@ Partial Class Contratos_GesContratos_Default
 
 
     Public Sub Habilitar2(ByVal valor As Boolean)
-        Me.TxtValPago.Enabled = valor
-        Me.TxtNVisitas.Enabled = valor
-        Me.TxtPorFis.Enabled = valor
+        'Me.TxtValPago.Enabled = valor
+        'Me.TxtNVisitas.Enabled = valor
+        'Me.TxtPorFis.Enabled = valor
     End Sub
 
 

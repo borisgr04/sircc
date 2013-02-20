@@ -49,8 +49,8 @@
             <br />
             <asp:TextBox ID="TextBox2" runat="server" Height="282px" TextMode="MultiLine" 
                 Width="748px" Visible="False">select  Num_Egreso,Nit,Ben_Cheque,Nro_CtaBancaria,Cod_BAnco,VAl_Total,Val_Neto,Cta_BAnco,Cod_Banco_Nit,Tipo_Cta_BAnco,sec_operacion,
-(Select Num_Orden From pct2012.morden where Num_Orden=sec_operacion) orden
-  from pct2012.degreso de where Num_Egreso BetWeen </asp:TextBox>
+(Select Num_Orden From pct2013.morden where Num_Orden=sec_operacion) orden
+  from pct2013.degreso de where Estado<>'AC' Num_Egreso BetWeen </asp:TextBox>
 </div>
     </div>
     </form>

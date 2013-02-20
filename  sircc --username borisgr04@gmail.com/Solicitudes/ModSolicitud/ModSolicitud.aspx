@@ -40,24 +40,24 @@ Inherits="Solicitudes_ModSolicitud_Default"  %>
                             <asp:TextBox ID="TxtNprocA" runat="server" AutoPostBack="True"></asp:TextBox>
                             
                         </td>
-                        <td style="width: 53px">
-                            <asp:Button ID="BtnBuscar" runat="server" Text="..." />
+                        <td style="width: 53px; text-align: center;">
+                            <asp:ImageButton ID="BtnBuscar" runat="server" SkinID="IBtnBuscar" />
                         </td>
-                        <td style="width: 47px">
-                            <asp:ImageButton ID="IBtnAbrir" runat="server" Height="32px" 
-                                ImageUrl="~/images/mnProcesos/open-icon32.png" Width="32px" />
+                        <td style="width: 47px; text-align: center;">
+                            <asp:ImageButton ID="IBtnAbrir" runat="server" Height="32px" Width="32px" 
+                                SkinID="IBtnAbrir" />
                         </td>
                         <td style="width: 33px" class="style4">
-                            <asp:ImageButton ID="IBtnEditar" runat="server" Height="32px" 
-                                ImageUrl="~/images/Operaciones/Edit2.png" Width="32px" />
+                            <asp:ImageButton ID="IBtnEditar" runat="server" Height="32px" Width="32px" 
+                                SkinID="IBtnEditar" />
                         </td>
                         <td style="width: 43px">
                             <asp:ImageButton ID="IBtnGuardar" runat="server" Height="32px" 
                                 SkinID="IBtnGuardar" Width="32px" />
                         </td>
                         <td style="width: 44px" class="style1">
-                            <asp:ImageButton ID="IBtnCancelar" runat="server" Height="32px" 
-                                ImageUrl="~/images/mnProcesos/undo.png" Width="32px" />
+                            <asp:ImageButton ID="IBtnCancelar" runat="server" Height="32px" Width="32px" 
+                                SkinID="IBtnCancelar" />
                         </td>
                         <td style="width: 87px; text-align: center">
                             &nbsp;</td>
@@ -69,9 +69,9 @@ Inherits="Solicitudes_ModSolicitud_Default"  %>
                             </td>
                         <td style="width: 115px">
                             &nbsp;</td>
-                        <td style="width: 53px">
-                            &nbsp;</td>
-                        <td style="width: 47px">
+                        <td style="width: 53px; text-align: center;">
+                            Buscar</td>
+                        <td style="width: 47px; text-align: center;">
                             Abrir</td>
                         <td style="width: 33px" class="style4">
                             Editar</td>
