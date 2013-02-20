@@ -66,6 +66,7 @@
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="True">
     </ajaxToolkit:ToolkitScriptManager>
     <div class="demoarea">
+    
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
             <ContentTemplate>
                 <asp:Label ID="MsgResult" runat="server" Height="30px" Text="Label" Visible="False"
@@ -75,7 +76,7 @@
                 <table border="0" width="90%">
                     <tr>
                         <td class="Titulos" colspan="6" style="height: 13px">
-                            <asp:Label ID="Label18" runat="server" CssClass="Titulo" Text="RADICACIÓN"></asp:Label>
+                            <asp:Label ID="Label18" runat="server" CssClass="Titulo" Text="RADICACIÓN DE CONTRATOS"></asp:Label>
                         </td>
                     </tr>
                     <tr>

@@ -100,17 +100,20 @@ Partial Class Consultas_AvisosAct_AvisosAct2
 
             Dim tab4 As RadTab = RadTabStrip1.Tabs.FindTabByValue("sinrevisar")
             tab4.Text = "Solicitudes Sin Revisar (" + grdRevisar.Rows.Count.ToString + ")"
-            Dim objP As New Con_PContratos
+            Dim objP As New AvisosAct
 
-            Dim dt As DataTable = objP.GetxUsuario("")
+            Dim dt As DataTable = objP.GetxUsuario(Session("Vigencia"))
             Dim tab5 As RadTab = RadTabStrip1.Tabs.FindTabByValue("procesos")
             tab5.Text = "Procesos a Cargo (" + dt.Rows.Count.ToString + ")"
 
             lnkVerTodos.Text = "Ver Todos (" + dt.Rows.Count.ToString + ")"
             Dim t As New Terceros
-
             If t.GetIsCoordinador() Then
                 Me.HyperLink1.Visible = True
+                Me.HyperLink2.Visible = True
+            Else
+                Me.HyperLink1.Visible = False
+                Me.HyperLink2.Visible = False
             End If
         End If
 

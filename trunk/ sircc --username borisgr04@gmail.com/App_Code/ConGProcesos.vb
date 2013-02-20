@@ -216,7 +216,7 @@ Public Class ConGProcesos
     End Function
     ''' <summary>
     ''' RESPONSABLE: ERIC MARTINEZ GONZALEZ
-    ''' FECHA: 28 DE MARZO DE 2011
+    ''' FECHA: 28 DE MARZO DE 2011/Por BOris el 13 de Febrero de 2013
     ''' </summary>
     ''' <param name="Num_PCon"></param>
     ''' <returns></returns>
@@ -226,7 +226,7 @@ Public Class ConGProcesos
         Me.Num_PCon = Num_PCon
         Me.Conectar()
         Grupo = IIf(String.IsNullOrEmpty(Grupo), "1", Grupo)
-        querystring = "SELECT * FROM VPContratosRep where Pro_Sel_Nro=:NUm_Pcon And Grupo=:Grupo"
+        querystring = "SELECT * FROM VPContratosRep where Pro_Sel_Nro=:NUm_Pcon And Grupo=:Grupo "
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":NUm_Pcon", Num_PCon)
         Me.AsignarParametroCadena(":Grupo", Grupo)

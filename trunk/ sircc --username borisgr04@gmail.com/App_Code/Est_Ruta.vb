@@ -6,15 +6,35 @@ Imports System.ComponentModel
 Public Class Est_Ruta
     Inherits BDDatos
 
+    
+    ''' <summary>
+    ''' Anular Contratos
+    ''' </summary>
+    ''' <param name="EST_INI"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetByEstIniA(ByVal EST_INI As String) As DataTable
+        Me.Conectar()
+        Dim dataTb As DataTable
+        If EST_INI <> "09" And EST_INI <> "07" Then
+            querystring = "SELECT EST_INI, EST_FIN, NOM_EST FROM RUTAESTADOS WHERE (EST_INI = :EST_INI) AND EST_FIN='07'" 'diferente de legalizado
+            Me.CrearComando(querystring)
+            AsignarParametroCadena(":EST_INI", EST_INI)
+            dataTb = Me.EjecutarConsultaDataTable()
+        Else
+            dataTb = New DataTable()
+        End If
+        Me.Desconectar()
+        Return dataTb
+    End Function
+    'Para Gestión Normal
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetByEstIni(ByVal EST_INI As String) As DataTable
         Me.Conectar()
-        
-
-        querystring = "SELECT EST_INI, EST_FIN, NOM_EST FROM RUTAESTADOS WHERE (EST_INI = :EST_INI)"
+        querystring = "SELECT EST_INI, EST_FIN, NOM_EST FROM RUTAESTADOS WHERE (EST_INI = :EST_INI) AND EST_INI NOT IN ('00','07') "
         Me.CrearComando(querystring)
         AsignarParametroCadena(":EST_INI", EST_INI)
-
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataTb

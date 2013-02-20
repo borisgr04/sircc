@@ -95,10 +95,10 @@ Partial Class Consultas_AvisosActD_Default
             GvAcep.DataSource = obj.GetSolAcep(Vigencia)
             GridView1.DataSource = obj.GetAvisosHoyD
             GridView2.DataSource = obj.GetAvisosAtrasadosD
-            grdRevisar.DataSource = obj.GetxAsig(Vigencia)
+            grdRevisar.DataSource = obj.GetByDepxFec("S", "P")
             grdRecibir.DataSource = obj.GetxRecibirD(Vigencia)
             GvRech.DataSource = obj.GetSolRech(Vigencia)
-            grdRevisar0.DataSource = obj.GetxAsig(Vigencia)
+            grdxRevisar.DataSource = obj.GetxAsig(Vigencia)
             DtProcesosACargo.DataSource = obj.GetProcesosxDepDel(Vigencia)
             grdProcACargo.DataSource = obj.GetProcbyDepDelEstado(DtProcesosACargo.SelectedValue, Vigencia)
 
@@ -108,7 +108,7 @@ Partial Class Consultas_AvisosActD_Default
             grdRevisar.DataBind()
             GvRech.DataBind()
             GvAcep.DataBind()
-            grdRevisar0.DataBind()
+            grdxRevisar.DataBind()
             grdProcACargo.DataBind()
             DtProcesosACargo.DataBind()
 
@@ -131,13 +131,20 @@ Partial Class Consultas_AvisosActD_Default
             tab8.Text = "Solicitudes Rechazadas (" + GvRech.Rows.Count.ToString + ")"
 
             Dim tab6 As RadTab = RadTabStrip1.Tabs.FindTabByValue("asignar")
-            tab6.Text = "Solicitudes Sin Asignar (" + grdRevisar0.Rows.Count.ToString + ")"
+            tab6.Text = "Solicitudes Sin Asignar (" + grdxRevisar.Rows.Count.ToString + ")"
 
             Dim objP As New AvisosActD
 
             Dim dt As DataTable = objP.GetProcxDepDel(Session("Vigencia"))
             Dim tab5 As RadTab = RadTabStrip1.Tabs.FindTabByValue("procesos")
-            tab5.Text = "Procesos a Cargo (" + dt.Rows.Count.ToString + ")"
+            Dim dtp As DataTable = objP.GetCProcesosxDepDel(Session("Vigencia"))
+
+            If dtp.Rows.Count > 0 Then
+                tab5.Text = "Procesos a Cargo (" + dtp.Rows(0)("cantidad").ToString + ")"
+            Else
+                tab5.Text = "Procesos a Cargo (0)"
+
+            End If
 
             Dim t As New Terceros
 
@@ -149,12 +156,12 @@ Partial Class Consultas_AvisosActD_Default
         End If
     End Sub
 
-    Protected Sub grdRevisar0_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdRevisar0.RowCommand
+    Protected Sub grdRevisar0_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdxRevisar.RowCommand
 
     End Sub
 
-    Protected Sub grdRevisar0_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdRevisar0.SelectedIndexChanged
-        Redireccionar_Pagina("/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx?Cod_Sol=" + grdRevisar0.SelectedValue)
+    Protected Sub grdRevisar0_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdxRevisar.SelectedIndexChanged
+        Redireccionar_Pagina("/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx?Cod_Sol=" + grdxRevisar.SelectedValue)
     End Sub
 
     Protected Sub GvAcep_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GvAcep.SelectedIndexChanged
@@ -178,7 +185,7 @@ Partial Class Consultas_AvisosActD_Default
         grdRevisar.DataSource = obj.GetxAsig(Vigencia)
         grdRecibir.DataSource = obj.GetxRecibirD(Vigencia)
         GvRech.DataSource = obj.GetSolRech(Vigencia)
-        grdRevisar0.DataSource = obj.GetxAsig(Vigencia)
+        grdxRevisar.DataSource = obj.GetxAsig(Vigencia)
         DtProcesosACargo.DataSource = obj.GetProcesosxDepDel(Vigencia)
         grdProcACargo.DataSource = obj.GetProcbyDepDelEstado(DtProcesosACargo.SelectedValue, Vigencia)
 
@@ -189,7 +196,7 @@ Partial Class Consultas_AvisosActD_Default
         grdRevisar.DataBind()
         GvRech.DataBind()
         GvAcep.DataBind()
-        grdRevisar0.DataBind()
+        grdxRevisar.DataBind()
         DtProcesosACargo.DataBind()
         grdProcACargo.DataBind()
 
@@ -212,7 +219,7 @@ Partial Class Consultas_AvisosActD_Default
         tab8.Text = "Solicitudes Rechazadas (" + GvRech.Rows.Count.ToString + ")"
 
         Dim tab6 As RadTab = RadTabStrip1.Tabs.FindTabByValue("asignar")
-        tab6.Text = "Solicitudes Sin Asignar (" + grdRevisar0.Rows.Count.ToString + ")"
+        tab6.Text = "Solicitudes Sin Asignar (" + grdxRevisar.Rows.Count.ToString + ")"
 
 
         Dim dt As DataTable = obj.GetProcxDepDel(Session("Vigencia"))

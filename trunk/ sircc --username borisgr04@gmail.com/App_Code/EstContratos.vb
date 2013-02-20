@@ -5,6 +5,8 @@ Imports System.ComponentModel
 <System.ComponentModel.DataObject()> _
 Public Class EstContratos
     Inherits BDDatos
+
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetRecords(ByVal cod_con As String) As DataTable
         Me.Conectar()

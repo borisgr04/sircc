@@ -87,7 +87,7 @@ Partial Class Procesos_DBProceso_Default
         Me.TxtNProc.Enabled = False
         Me.TxtObj.Enabled = Valor
         'Me.TxtPro.Enabled = Valor
-        Me.TxtValOtros.Enabled = Valor
+        Me.TxtValOtros.Enabled = False
         Me.TxtValProp.Enabled = Valor
         Me.TxtValTot.Enabled = Valor
         Me.cboDep.Enabled = Valor
