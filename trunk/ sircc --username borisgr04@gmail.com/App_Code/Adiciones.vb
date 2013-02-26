@@ -15,6 +15,39 @@ Imports System.Data.Common
             Return nro
         End Get
     End Property
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function Delete(ByVal Nro_Adi As String) As String
+        Try
+            Conectar()
+            querystring = "DELETE FROM ADICIONES WHERE Nro_Adi = :Nro_Adi "
+            CrearComando(querystring)
+            AsignarParametroCadena(":Nro_Adi", Nro_Adi)
+            num_reg = EjecutarComando()
+            Msg = MsgOk + " Filas Afectadas " + num_reg.ToString
+            lErrorG = False
+        Catch ex As Exception
+            lErrorG = True
+            Msg = ex.Message
+        Finally
+            Desconectar()
+        End Try
+        Return Msg
+    End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetRecordsUlt(ByVal Cod_Con As String) As DataTable
+        Conectar()
+        querystring = "SELECT va.*,Decode(Substr(va.Nro_Adi,-2), (Select Max(Substr(Nro_Adi,-2)) From Adiciones Where Cod_Con=:COD_CON),1,0) Ult  FROM VADICIONES va WHERE COD_CON=:COD_CON Order by FEc_Sus_Adi"
+        CrearComando(querystring)
+        AsignarParametroCadena(":COD_CON", Cod_Con)
+        AsignarParametroCadena(":COD_CON", Cod_Con)
+        Dim data As DataTable = EjecutarConsultaDataTable()
+        Desconectar()
+
+        Return data
+    End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetRecords(ByVal Cod_Con As String) As DataTable
         Conectar()
@@ -177,6 +210,23 @@ Imports System.Data.Common
         AsignarParametroCadena(":cod_con", codcon)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
         Return dataTb
+    End Function
+
+
+    ''' <summary>
+    ''' Retorna los todos los registros de la tabla de la Base de datos
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overridable Function GetPk(Nro_Adi As String) As DataTable
+        Dim queryString As String = "SELECT * FROM  " + Vista + " Where Nro_Adi=:Nro_Adi"
+        Me.Conectar()
+        Me.CrearComando(queryString)
+
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
     End Function
 
 

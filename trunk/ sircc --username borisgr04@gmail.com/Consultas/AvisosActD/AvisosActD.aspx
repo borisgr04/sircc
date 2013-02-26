@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_Default" %>
                   
+<%@ Register src="../../CtrlUsr/Progreso/Progress.ascx" tagname="Progress" tagprefix="uc1" %>
+                  
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server" >
     <div class="demoarea">
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptLocalization="true" EnableScriptGlobalization="True" EnablePartialRendering="true" >
@@ -58,11 +60,14 @@
                     Text="N° Solicitud"></asp:Label>
             </td>
             <td>
-                <asp:Label ID="LbConcepto" runat="server" CssClass="selectIndex" 
-                    Text="Concepto" Visible="False"></asp:Label>
-            </td>
+                &nbsp;</td>
             <td>
                 &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:Label ID="LBPrueba" runat="server"></asp:Label>
+            </td>
             <td>
                 &nbsp;</td>
         </tr>
@@ -86,13 +91,16 @@
             <td>
                  <asp:ImageButton ID="ImageButton1" runat="server" SkinID="IBtnBuscar" />
             </td>
-            <td>
-        <asp:HyperLink ID="HyperLink1" runat="server" 
-            NavigateUrl="~/Consultas/AvisosAct/AvisosAct2.aspx">Ir a Panel de Funcionario</asp:HyperLink>
+            <td style="text-align: center">
+                <asp:ImageButton ID="IBtnPanelF" runat="server" SkinID="IBtnPanelD" />
              
                 &nbsp;&nbsp;
-                    <asp:HyperLink ID="HyperLink2" runat="server" 
-                        NavigateUrl="~/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx">Nueva Solicitud</asp:HyperLink></td>
+                    </td>
+            <td style="text-align: center">
+                <asp:ImageButton ID="IBtnNuevo" runat="server" SkinID="IBtnNuevo" />
+            </td>
+            <td>
+                &nbsp;</td>
             <td>
                 &nbsp;</td>
         </tr>
@@ -102,9 +110,20 @@
                 &nbsp;</td>
             <td style="width: 145px">
                 &nbsp;</td>
-            <td colspan="3">
-                <asp:Label ID="LBPrueba" runat="server"></asp:Label>
+            <td style="width: 144px">
+                &nbsp;</td>
+            <td>
+                Buscar</td>
+            <td style="text-align: center">
+                <asp:HyperLink ID="HyperLink1" runat="server" 
+                    NavigateUrl="~/Consultas/AvisosAct/AvisosAct2.aspx">Panel de Funcionario</asp:HyperLink>
             </td>
+            <td style="text-align: center">
+                <asp:HyperLink ID="HyperLink2" runat="server" 
+                    NavigateUrl="~/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx">Nueva Solicitud</asp:HyperLink>
+            </td>
+            <td>
+                &nbsp;</td>
             <td>
                 &nbsp;</td>
         </tr>
@@ -632,6 +651,12 @@
             
     </ContentTemplate>
 </asp:UpdatePanel>
+        <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
+            AssociatedUpdatePanelID="UpdatePanel1">
+            <ProgressTemplate>
+                <uc1:Progress ID="Progress1" runat="server" />
+            </ProgressTemplate>
+        </asp:UpdateProgress>
 </div>
 </asp:Content>
 

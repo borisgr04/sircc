@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
     CodeFile="AvisosAct2.aspx.vb" Inherits="Consultas_AvisosAct_AvisosAct2" %>
 
+<%@ Register src="../../CtrlUsr/Progreso/Progress.ascx" tagname="Progress" tagprefix="uc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" runat="Server">
     <telerik:RadScriptManager ID="ToolkitScriptManager1" runat="server" 
         EnableTheming="True">
@@ -16,21 +18,23 @@
                 <hr />
                 <table style="width:30%;">
                     <tr>
-                        <td>
-                            &nbsp;</td>
-                        <td>
-                            &nbsp;</td>
+                        <td style="text-align: center">
+                            <asp:ImageButton ID="IBtnNuevo" runat="server" SkinID="IBtnNuevo" />
+                        </td>
+                        <td style="text-align: center">
+                            <asp:ImageButton ID="IBtnPanelD" runat="server" SkinID="IBtnPanelD" />
+                        </td>
                         <td>
                             &nbsp;</td>
                     </tr>
                     <tr>
-                        <td>
-                            <asp:HyperLink ID="HyperLink1" runat="server" 
-                                NavigateUrl="~/Consultas/AvisosActD/AvisosActD.aspx">Ir a Panel de Coordinador</asp:HyperLink>
-                        </td>
-                        <td>
+                        <td style="text-align: center">
                             <asp:HyperLink ID="HyperLink2" runat="server" 
                                 NavigateUrl="~/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx">Nueva Solicitud</asp:HyperLink>
+                        </td>
+                        <td style="text-align: center">
+                            <asp:HyperLink ID="HyperLink1" runat="server" 
+                                NavigateUrl="~/Consultas/AvisosActD/AvisosActD.aspx">Panel de Coordinador</asp:HyperLink>
                         </td>
                         <td>
                             &nbsp;</td>
@@ -341,6 +345,11 @@
                         <asp:SessionParameter Name="Vigencia" SessionField="vigencia" Type="String" />
                     </SelectParameters>
                 </asp:ObjectDataSource>
+                <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" >
+                    <ProgressTemplate>
+                        <uc1:Progress ID="Progress1" runat="server" />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>

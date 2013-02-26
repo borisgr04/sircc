@@ -111,9 +111,13 @@ Partial Class Consultas_AvisosAct_AvisosAct2
             If t.GetIsCoordinador() Then
                 Me.HyperLink1.Visible = True
                 Me.HyperLink2.Visible = True
+                Me.IBtnNuevo.Visible = True
+                IBtnPanelD.Visible = True
             Else
                 Me.HyperLink1.Visible = False
                 Me.HyperLink2.Visible = False
+                Me.IBtnNuevo.Visible = False
+                IBtnPanelD.Visible = False
             End If
         End If
 
@@ -130,5 +134,13 @@ Partial Class Consultas_AvisosAct_AvisosAct2
     Protected Sub lnkVerTodos_Click(sender As Object, e As System.EventArgs) Handles lnkVerTodos.Click
         HdPNom_Est.Value = ""
         grdProcACargo.DataBind()
+    End Sub
+
+    Protected Sub IBtnNuevo_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IBtnNuevo.Click
+        Response.Redirect(HyperLink2.NavigateUrl)
+    End Sub
+
+    Protected Sub IBtnPanelD_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IBtnPanelD.Click
+        Response.Redirect(HyperLink1.NavigateUrl)
     End Sub
 End Class
