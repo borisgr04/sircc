@@ -41,7 +41,7 @@ Partial Class CtrlUsr_grdAdiC_grdAdiC
 
     Private Function GetRecords() As DataTable
         Dim dt As DataTable = New DataTable
-        dt = obj.GetRecords(Me.Cod_Con)
+        dt = obj.GetRecordsUlt(Me.Cod_Con)
         Return dt
     End Function
 
@@ -90,7 +90,22 @@ Partial Class CtrlUsr_grdAdiC_grdAdiC
     End Sub
 
     Protected Sub RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grd.RowCommand
-     
+        Dim obj As New Adiciones
+        Me.Oper = e.CommandName
+
+
+
+
+
+        If Oper = "eliminar" Then
+            Dim nro_adi As String = Cod_Con + "-" + e.CommandArgument.PadLeft(2, "0")
+            MsgResult.Text = obj.Delete(nro_adi) + nro_adi
+            MsgBox(MsgResult, obj.lErrorG)
+            LlenarGrid()
+        End If
+
+
+
     End Sub
 
     Protected Sub RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grd.RowDataBound
@@ -185,7 +200,7 @@ Partial Class CtrlUsr_grdAdiC_grdAdiC
         End Select
     End Sub
 
-    Protected Sub BtnRadicar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnRadicar.Click
+    Sub Radicar()
         If Not IsDate(Me.TxtFec.Text) Then
             Me.MsgResult.Text = "Fecha No Válida"
             MsgBoxAlert(MsgResult, True)
@@ -228,6 +243,10 @@ Partial Class CtrlUsr_grdAdiC_grdAdiC
             LlenarGrid()
         End If
         MsgBox(MsgResult, obj.lErrorG)
+
+    End Sub
+    Protected Sub BtnGuardar_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardar.Click
+        Radicar()
         OnClick(sender)
     End Sub
 End Class

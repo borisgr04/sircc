@@ -74,6 +74,7 @@ Public Class Contratos
         Todos = 0
         DepNec = 1
         DepDel = 2
+        DepSup = 3
     End Enum
 
     Dim FiltroC As FiltroContratos
@@ -520,6 +521,9 @@ Public Class Contratos
         ElseIf FiltroC = FiltroContratos.DepNec Then
             'Throw New Exception("Entro por DepNec:" + FiltroC.ToString)
             Return GetByPkN(Cod_Con)
+        ElseIf FiltroC = FiltroContratos.DepSup Then
+            'Throw New Exception("Entro por DepSup:" + FiltroC.ToString)
+            Return GetByPkS(Cod_Con)
         Else
             'Throw New Exception("Entro por Todos:" + FiltroC.ToString)
             Return GetByPk(Cod_Con)
@@ -549,6 +553,27 @@ Public Class Contratos
         Me.NroCon = Cod_Con
         Me.Conectar()
         querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con And Dep_Con In (SELECT cod_dep FROM vdepter WHERE ide_ter_abo=:ide_ter_abo ) "
+
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":cod_con", Cod_Con)
+        Me.AsignarParametroCadena(":ide_ter_abo", Me.usuario)
+
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
+    ''' <summary>
+    ''' Consulta de contratos por llave primaria, filtrando por dependencia que hace la Supervisión
+    ''' </summary>
+    ''' <param name="Cod_Con"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByPkS(ByVal Cod_Con As String) As DataTable
+        Me.NroCon = Cod_Con
+        Me.Conectar()
+        querystring = "SELECT * FROM VCONTRATOSC_A2_2012 Where numero =:cod_con And Dep_Sup In (SELECT cod_dep FROM vdepter WHERE ide_ter_abo=:ide_ter_abo ) "
 
         Me.CrearComando(querystring)
         AsignarParametroCadena(":cod_con", Cod_Con)

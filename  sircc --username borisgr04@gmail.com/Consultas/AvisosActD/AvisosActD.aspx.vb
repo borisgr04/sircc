@@ -75,86 +75,31 @@ Partial Class Consultas_AvisosActD_Default
     End Sub
 
     Protected Sub RadTabStrip1_TabClick(ByVal sender As Object, ByVal e As Telerik.Web.UI.RadTabStripEventArgs) Handles RadTabStrip1.TabClick
-        'If RadTabStrip1.SelectedIndex = 5 Then
-        '    grdRevisar0.Visible = True
-        'Else
-        '    grdRevisar0.Visible = False
-        'End If
+        'Me.TxtNSol.Text = RadTabStrip1.SelectedIndex
+        Filtrar()
     End Sub
 
     Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             TxtDesde.Text = "01/01/" + Today.Year.ToString
             TxtHasta.Text = "31/12/" + Today.Year.ToString
-            Dim obj As New AvisosActD
-            obj.Num_PSol = TxtNSol.Text
-            obj.Num_Proc = TxtNSol.Text
-            obj.Fec_Ini = "01/01/" + Today.Year.ToString
-            obj.Fec_Fin = "31/12/" + Today.Year.ToString
-            'DtProcesosACargo.SelectedIndex = 0
-            GvAcep.DataSource = obj.GetSolAcep(Vigencia)
-            GridView1.DataSource = obj.GetAvisosHoyD
-            GridView2.DataSource = obj.GetAvisosAtrasadosD
-            grdRevisar.DataSource = obj.GetByDepxFec("S", "P")
-            grdRecibir.DataSource = obj.GetxRecibirD(Vigencia)
-            GvRech.DataSource = obj.GetSolRech(Vigencia)
-            grdxRevisar.DataSource = obj.GetxAsig(Vigencia)
-            DtProcesosACargo.DataSource = obj.GetProcesosxDepDel(Vigencia)
-            grdProcACargo.DataSource = obj.GetProcbyDepDelEstado(DtProcesosACargo.SelectedValue, Vigencia)
-
-            GridView1.DataBind()
-            GridView2.DataBind()
-            grdRecibir.DataBind()
-            grdRevisar.DataBind()
-            GvRech.DataBind()
-            GvAcep.DataBind()
-            grdxRevisar.DataBind()
-            grdProcACargo.DataBind()
-            DtProcesosACargo.DataBind()
-
-            Dim tab1 As RadTab = RadTabStrip1.Tabs.FindTabByValue("hoy")
-            tab1.Text = "Actividades para hoy (" + GridView1.Rows.Count.ToString + ")"
-
-            Dim tab2 As RadTab = RadTabStrip1.Tabs.FindTabByValue("atrazadas")
-            tab2.Text = "Actividades Atrazadas/En Curso (" + GridView2.Rows.Count.ToString + ")"
-
-            Dim tab3 As RadTab = RadTabStrip1.Tabs.FindTabByValue("recibir")
-            tab3.Text = "Solicitudes Sin Recibir (" + grdRecibir.Rows.Count.ToString + ")"
-
-            Dim tab4 As RadTab = RadTabStrip1.Tabs.FindTabByValue("revisar")
-            tab4.Text = "Solicitudes Sin Revisar (" + grdRevisar.Rows.Count.ToString + ")"
-
-            Dim tab7 As RadTab = RadTabStrip1.Tabs.FindTabByValue("Aceptadas")
-            tab7.Text = "Solicitudes Aceptadas (" + GvAcep.Rows.Count.ToString + ")"
-
-            Dim tab8 As RadTab = RadTabStrip1.Tabs.FindTabByValue("Rechazadas")
-            tab8.Text = "Solicitudes Rechazadas (" + GvRech.Rows.Count.ToString + ")"
-
-            Dim tab6 As RadTab = RadTabStrip1.Tabs.FindTabByValue("asignar")
-            tab6.Text = "Solicitudes Sin Asignar (" + grdxRevisar.Rows.Count.ToString + ")"
-
-            Dim objP As New AvisosActD
-
-            Dim dt As DataTable = objP.GetProcxDepDel(Session("Vigencia"))
-            Dim tab5 As RadTab = RadTabStrip1.Tabs.FindTabByValue("procesos")
-            Dim dtp As DataTable = objP.GetCProcesosxDepDel(Session("Vigencia"))
-
-            If dtp.Rows.Count > 0 Then
-                tab5.Text = "Procesos a Cargo (" + dtp.Rows(0)("cantidad").ToString + ")"
-            Else
-                tab5.Text = "Procesos a Cargo (0)"
-
-            End If
-
+            
+            Filtrar()
+           
             Dim t As New Terceros
 
             If t.GetIsAsig_Proc() Then
                 Me.HyperLink1.Visible = True
+                IBtnPanelF.Enabled = True
+            Else
+                Me.HyperLink1.Visible = False
+                IBtnPanelF.Enabled = False
             End If
 
 
         End If
     End Sub
+
 
     Protected Sub grdRevisar0_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdxRevisar.RowCommand
 
@@ -173,57 +118,72 @@ Partial Class Consultas_AvisosActD_Default
     End Sub
 
     Protected Sub ImageButton1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ImageButton1.Click
+        Filtrar()
+    End Sub
+
+    Sub Filtrar()
         Dim obj As New AvisosActD
         obj.Num_PSol = TxtNSol.Text
         obj.Num_Proc = TxtNSol.Text
         obj.Fec_Ini = TxtDesde.Text
         obj.Fec_Fin = TxtHasta.Text
 
-        GvAcep.DataSource = obj.GetSolAcep(Vigencia)
-        GridView1.DataSource = obj.GetAvisosHoyD
-        GridView2.DataSource = obj.GetAvisosAtrasadosD
-        grdRevisar.DataSource = obj.GetxAsig(Vigencia)
-        grdRecibir.DataSource = obj.GetxRecibirD(Vigencia)
-        GvRech.DataSource = obj.GetSolRech(Vigencia)
+        'Select Case RadTabStrip1.SelectedIndex
+
+        'Case 0
         grdxRevisar.DataSource = obj.GetxAsig(Vigencia)
-        DtProcesosACargo.DataSource = obj.GetProcesosxDepDel(Vigencia)
-        grdProcACargo.DataSource = obj.GetProcbyDepDelEstado(DtProcesosACargo.SelectedValue, Vigencia)
-
-
-        GridView1.DataBind()
-        GridView2.DataBind()
-        grdRecibir.DataBind()
-        grdRevisar.DataBind()
-        GvRech.DataBind()
-        GvAcep.DataBind()
         grdxRevisar.DataBind()
-        DtProcesosACargo.DataBind()
-        grdProcACargo.DataBind()
-
-        Dim tab1 As RadTab = RadTabStrip1.Tabs.FindTabByValue("hoy")
-        tab1.Text = "Actividades para hoy (" + GridView1.Rows.Count.ToString + ")"
-
-        Dim tab2 As RadTab = RadTabStrip1.Tabs.FindTabByValue("atrazadas")
-        tab2.Text = "Actividades Atrazadas/En Curso (" + GridView2.Rows.Count.ToString + ")"
-
+        Dim tab6 As RadTab = RadTabStrip1.Tabs.FindTabByValue("asignar")
+        tab6.Text = "Solicitudes Sin Asignar (" + grdxRevisar.Rows.Count.ToString + ")"
+        'Case 1
+        grdRecibir.DataSource = obj.GetxRecibirD(Vigencia)
+        grdRecibir.DataBind()
         Dim tab3 As RadTab = RadTabStrip1.Tabs.FindTabByValue("recibir")
         tab3.Text = "Solicitudes Sin Recibir (" + grdRecibir.Rows.Count.ToString + ")"
-
+        'Case 2
+        grdRevisar.DataSource = obj.GetxAsig(Vigencia)
+        grdRevisar.DataBind()
         Dim tab4 As RadTab = RadTabStrip1.Tabs.FindTabByValue("revisar")
         tab4.Text = "Solicitudes Sin Revisar (" + grdRevisar.Rows.Count.ToString + ")"
 
+        'Case 3
+        GvAcep.DataSource = obj.GetSolAcep(Vigencia)
+        GvAcep.DataBind()
         Dim tab7 As RadTab = RadTabStrip1.Tabs.FindTabByValue("Aceptadas")
         tab7.Text = "Solicitudes Aceptadas (" + GvAcep.Rows.Count.ToString + ")"
-
+        'Case 4
+        GvRech.DataSource = obj.GetSolRech(Vigencia)
+        GvRech.DataBind()
         Dim tab8 As RadTab = RadTabStrip1.Tabs.FindTabByValue("Rechazadas")
         tab8.Text = "Solicitudes Rechazadas (" + GvRech.Rows.Count.ToString + ")"
+        ' Case 5
+        GridView1.DataSource = obj.GetAvisosHoyD()
+        GridView1.DataBind()
+        Dim tab1 As RadTab = RadTabStrip1.Tabs.FindTabByValue("hoy")
+        tab1.Text = "Actividades para hoy (" + GridView1.Rows.Count.ToString + ")"
+        '  Case 6
+        GridView2.DataSource = obj.GetAvisosAtrasadosD()
+        GridView2.DataBind()
+        Dim tab2 As RadTab = RadTabStrip1.Tabs.FindTabByValue("atrazadas")
+        tab2.Text = "Actividades Atrazadas/En Curso (" + GridView2.Rows.Count.ToString + ")"
 
-        Dim tab6 As RadTab = RadTabStrip1.Tabs.FindTabByValue("asignar")
-        tab6.Text = "Solicitudes Sin Asignar (" + grdxRevisar.Rows.Count.ToString + ")"
 
-
+        '   Case 7
+        DtProcesosACargo.DataSource = obj.GetProcesosxDepDel(Vigencia)
+        DtProcesosACargo.DataBind()
+        grdProcACargo.DataSource = obj.GetProcbyDepDelEstado(DtProcesosACargo.SelectedValue, Vigencia)
+        grdProcACargo.DataBind()
+        'End Select
         Dim dt As DataTable = obj.GetProcxDepDel(Session("Vigencia"))
         Dim tab5 As RadTab = RadTabStrip1.Tabs.FindTabByValue("procesos")
         tab5.Text = "Procesos a Cargo (" + dt.Rows.Count.ToString + ")"
+    End Sub
+
+    Protected Sub IBtnPanelF_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IBtnPanelF.Click
+        Response.Redirect(HyperLink1.NavigateUrl)
+    End Sub
+
+    Protected Sub IBtnNuevo_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IBtnNuevo.Click
+        Response.Redirect(HyperLink2.NavigateUrl)
     End Sub
 End Class
