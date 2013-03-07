@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsCargaPS" targetNamespace="http://tempuri.org/dsCargaPS.xsd" xmlns:mstns="http://tempuri.org/dsCargaPS.xsd" xmlns="http://tempuri.org/dsCargaPS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsCargaPS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dsCargaPS" msprop:Generator_UserDSName="dsCargaPS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="VCargaPS" msprop:Generator_TableClassName="VCargaPSDataTable" msprop:Generator_TableVarName="tableVCargaPS" msprop:Generator_TablePropName="VCargaPS" msprop:Generator_RowDeletingName="VCargaPSRowDeleting" msprop:Generator_UserTableName="VCargaPS" msprop:Generator_RowChangingName="VCargaPSRowChanging" msprop:Generator_RowEvHandlerName="VCargaPSRowChangeEventHandler" msprop:Generator_RowDeletedName="VCargaPSRowDeleted" msprop:Generator_RowEvArgName="VCargaPSRowChangeEvent" msprop:Generator_RowChangedName="VCargaPSRowChanged" msprop:Generator_RowClassName="VCargaPSRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TIPO" msdata:Caption="PRO_SEL_NRO" msprop:Generator_ColumnVarNameInTable="columnTIPO" msprop:Generator_ColumnPropNameInRow="TIPO" msprop:Generator_ColumnPropNameInTable="TIPOColumn" msprop:Generator_UserColumnName="TIPO" type="xs:string" minOccurs="0" />
+              <xs:element name="OBJETO" msdata:Caption="OBJ_CON" msprop:Generator_ColumnVarNameInTable="columnOBJETO" msprop:Generator_ColumnPropNameInRow="OBJETO" msprop:Generator_ColumnPropNameInTable="OBJETOColumn" msprop:Generator_UserColumnName="OBJETO" type="xs:string" minOccurs="0" />
+              <xs:element name="ENCARGADO" msprop:Generator_ColumnVarNameInTable="columnENCARGADO" msprop:Generator_ColumnPropNameInRow="ENCARGADO" msprop:Generator_ColumnPropNameInTable="ENCARGADOColumn" msprop:Generator_UserColumnName="ENCARGADO" type="xs:string" minOccurs="0" />
+              <xs:element name="NOM_TPROC" msprop:Generator_ColumnVarNameInTable="columnNOM_TPROC" msprop:Generator_ColumnPropNameInRow="NOM_TPROC" msprop:Generator_ColumnPropNameInTable="NOM_TPROCColumn" msprop:Generator_UserColumnName="NOM_TPROC" type="xs:string" minOccurs="0" />
+              <xs:element name="DEP_NEC" msprop:Generator_ColumnVarNameInTable="columnDEP_NEC" msprop:Generator_ColumnPropNameInRow="DEP_NEC" msprop:Generator_ColumnPropNameInTable="DEP_NECColumn" msprop:Generator_UserColumnName="DEP_NEC" type="xs:string" minOccurs="0" />
+              <xs:element name="DEP_DEL" msprop:Generator_ColumnVarNameInTable="columnDEP_DEL" msprop:Generator_ColumnPropNameInRow="DEP_DEL" msprop:Generator_ColumnPropNameInTable="DEP_DELColumn" msprop:Generator_UserColumnName="DEP_DEL" type="xs:string" minOccurs="0" />
+              <xs:element name="CODIGO" msprop:Generator_ColumnVarNameInTable="columnCODIGO" msprop:Generator_ColumnPropNameInRow="CODIGO" msprop:Generator_ColumnPropNameInTable="CODIGOColumn" msprop:Generator_UserColumnName="CODIGO" type="xs:string" minOccurs="0" />
+              <xs:element name="ESTADO" msprop:Generator_ColumnVarNameInTable="columnESTADO" msprop:Generator_ColumnPropNameInRow="ESTADO" msprop:Generator_ColumnPropNameInTable="ESTADOColumn" msprop:Generator_UserColumnName="ESTADO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

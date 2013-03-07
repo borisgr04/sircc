@@ -1,0 +1,262 @@
+﻿Imports System.Data
+Partial Class Interventorias_InfContratista_InfContratista
+    Inherits PaginaComun
+
+    'Sub Guardar()
+    '    Me.CodCon = Request("Cod_Con")
+    '    Dim obj As New ActaInicio
+    '    'Datos Requeridos para Acta de Inicio
+    '    obj.Cod_Con = Me.hdCodCon.Value
+    '    obj.Est_Ini = hdEstInicial.Value
+    '    obj.Fec_Ent = CDate(txtFecDoc.Text)
+    '    obj.Fec_Fin = CDate(TxtFecFin.Text)
+    '    obj.Obs = txtObs.Text
+    '    If obj.Fec_Ent > obj.Fec_Fin Then
+    '        MsgResult.Text = "Fechas No Válidas, Verifique la Fecha Final sea posterior a la Fecha Inicial"
+    '        Me.MsgBox(MsgResult, True)
+    '        Return
+    '    End If
+    '    If Me.Oper = "Nuevo" Then
+    '        MsgResult.Text = obj.Insert()
+    '        Me.MsgBox(MsgResult, obj.lErrorG)
+    '        If obj.lErrorG = False Then
+    '            Habilitar(False)
+    '            Me.NoID = obj.GetIdbyCod_con(Me.CodCon)
+    '            Me.TxtNoDocumento.Text = Me.NoID
+    '            Me.lBtnGenerar.Enabled = True
+    '        End If
+    '    ElseIf Me.Oper = "Editar" Then
+    '        MsgResult.Text = obj.Update(Pk1, CDate(txtFecDoc.Text), txtObs.Text, CDate(TxtFecFin.Text))
+    '        Me.MsgBox(MsgResult, obj.lErrorG)
+    '        If obj.lErrorG = False Then
+    '            Habilitar(False)
+    '        End If
+    '    End If
+    'End Sub
+    'Sub Limpiar()
+    '    'Me.TxtNoDocumento.Text = ""
+    '    'Me.txtFecDoc.Text = Today.ToShortDateString
+    '    'Me.txtObs.Text = "."
+    '    'LbEst1.Text = ""
+    'End Sub
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not Page.IsPostBack Then
+            hdCodCon.Value = Request("Cod_Con")
+            Me.Oper = Request("Oper")
+            Me.NoID = Request("NoID")
+            mostrarDatos()
+            'Me.lBtnGenerar.Enabled = True
+            'Me.lBtnGenerar.CssClass = ""
+        End If
+
+    End Sub
+
+    'Sub Nuevo()
+    '    If Me.Oper = "Nuevo" Then
+    '        'MsgResult.Text = " Agregando Nueva Acta"
+    '        'MsgBoxInfo(MsgResult, False)
+    '        Habilitar(True)
+    '        'LbEst1.Visible = False
+    '        ' BtnNuevo.Enabled = False
+    '        'IBtnGuardar.Enabled = True
+
+    '        Me.Oper = "Nuevo"
+    '        ' Me.CboEstSig.Visible = True
+    '    End If
+    'End Sub
+
+    'Sub Habilitar(ByVal v As Boolean)
+    '    'txtFecDoc.Enabled = v
+    '    'TxtFecFin.Enabled = v
+    '    'txtObs.Enabled = v
+    '    'TxtNoDocumento.Enabled = False
+
+    '    'IBtnGuardar.Enabled = v
+    '    'IBtnGuardar.CssClass = cssEnabled(v)
+
+
+    'End Sub
+
+
+
+    'Sub EnableValidar(ByVal v As Boolean)
+    '    Me.IBtnValidar.Enabled = v
+    '    Me.LbValidar.Enabled = v
+    '    Me.IBtnValidar.CssClass = cssEnabled(v)
+    'End Sub
+    'Sub EnableRevertir(ByVal v As Boolean)
+    '    Me.IBtnRevertir.Enabled = v
+    '    Me.LbRevertir.Enabled = v
+    '    Me.IBtnRevertir.CssClass = cssEnabled(v)
+    '    Me.lBtnGenerar.Enabled = v
+    '    Me.lBtnGenerar.CssClass = cssEnabled(v)
+    'End Sub
+
+    Protected Sub mostrarDatos()
+        'EnableRevertir(False)
+        'EnableValidar(False)
+        grdInformes.DataBind()
+        Dim v As New InfContratista
+        'Me.Panel1.Visible = False
+        Dim dt As DataTable = v.GetByPkS(hdCodCon.Value)
+        DtPCon.DataSource = dt
+        DtPCon.DataBind()
+        If dt.Rows.Count > 0 Then
+            hdEstInicial.Value = dt.Rows(0)("Est_Con").ToString
+        End If
+        UpdatePanel1.Update()
+    End Sub
+
+    Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
+
+    End Sub
+
+    Protected Sub grdInformes_RowDataBound1(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdInformes.RowDataBound
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            e.Row.Attributes.Add("OnMouseOver", "Resaltar_On(this);")
+            e.Row.Attributes.Add("OnMouseOut", "Resaltar_Off(this);")
+        End If
+    End Sub
+
+    Protected Sub grdInformes_RowEditing(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewEditEventArgs) Handles grdInformes.RowEditing
+        grdInformes.EditIndex = e.NewEditIndex
+        '        FillCustomerInGrid()
+    End Sub
+
+    Protected Sub grdInformes_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdInformes.RowCommand
+
+        Dim Obj As New InfContratista
+        Me.Oper = e.CommandName
+        Select Case Me.Oper
+            Case "Nuevo"
+                    Me.SubT.Text = "Nuevo..."
+                Habilitar("New")
+                Limpiar()
+                    Me.ModalPopupTer.Show()
+            Case "Editar"
+                Me.SubT.Text = "Editando..."
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Me.grdInformes.SelectedIndex = index
+                Dim num_inf As String = grdInformes.DataKeys(index).Values(0).ToString()
+                Try
+                    If Obj.GetbyPk(Me.hdCodCon.Value, num_inf) Then
+                        TxtFecInf.Text = Obj.Fec_Inf
+                        TxtFecIni.Text = Obj.Fec_Ini
+                        TxtFecFin.Text = Obj.Fec_Fin
+                        TxtAnexo.Text = Obj.Can_Hoj
+                        TxtNInf.Text = num_inf
+                        TxtDesInf.Text = Obj.Des_Inf
+                    End If
+                    Me.Pk1 = num_inf
+                    Me.ModalPopupTer.Show()
+                    Habilitar("Edit")
+                    Me.MsgResult2.Text = "Editando: Código [" + Me.Pk1 + "]"
+                Catch ex As Exception
+                    MsgResult2.Text = ex.Message
+                    MsgBox(MsgResult2, True)
+                End Try
+
+            Case "Eliminar"
+                Me.SubT.Text = "Eliminando..."
+                MsgResult2.Text = Obj.Delete(Me.hdCodCon.Value, e.CommandArgument)
+                MsgBox(MsgResult2, Obj.lErrorG)
+            Case "Exportar"
+                ExportGridView(grdInformes, "Export de Informes del Contratista")
+        End Select
+        grdInformes.DataBind()
+
+    End Sub
+    Protected Sub Habilitar(ByVal opcion As String)
+        Dim b As Boolean
+        b = True
+        TxtNInf.Enabled = False
+        If opcion = "Edit" Then
+            TxtDesInf.Enabled = b
+            TxtFecFin.Enabled = b
+            TxtFecIni.Enabled = b
+            TxtFecInf.Enabled = b
+            Me.BtnGuardarPinv.Enabled = b
+            TxtFecFin.Focus()
+            'Me.txtvalor.Focus()
+        ElseIf (opcion = "New") Then
+            TxtDesInf.Enabled = b
+            TxtFecFin.Enabled = b
+            TxtFecIni.Enabled = b
+            TxtFecInf.Enabled = b
+            Me.BtnEliminarPinv.Enabled = Not b
+            Me.BtnGuardarPinv.Enabled = b
+            'Me.CboPlanAnticipo.Focus()
+            '
+        ElseIf (opcion = "Delete") Then
+            'Me.txtporcentaje.Enabled = Not b
+            'Me.CboEstado.Enabled = Not b
+            'Me.CboPlanAnticipo.Enabled = Not b
+            'Me.txtvalor.Enabled = Not b
+            TxtDesInf.Enabled = Not b
+            TxtFecFin.Enabled = Not b
+            TxtFecIni.Enabled = Not b
+            TxtFecInf.Enabled = Not b
+
+            Me.BtnEliminarPinv.Enabled = b
+            Me.BtnGuardarPinv.Enabled = Not b
+            Me.BtnEliminarPinv.Focus()
+
+        End If
+
+
+
+    End Sub
+
+    Protected Sub Limpiar()
+
+        'Me.txtporcentaje.Text = ""
+
+        'Me.txtvalor.Text = ""
+
+
+    End Sub
+
+
+   
+    Protected Sub BtnGuardarPinv_Click(sender As Object, e As System.EventArgs) Handles BtnGuardarPinv.Click
+        Guardar()
+    End Sub
+
+    Protected Sub Guardar()
+        Dim Obj As New InfContratista
+        Try
+            'RUploadAnexos.
+            Obj.Fec_Inf = TxtFecInf.Text
+            Obj.Fec_Ini = TxtFecIni.Text
+            Obj.Fec_Fin = TxtFecFin.Text
+            Obj.Cod_Con = hdCodCon.Value
+            Obj.Can_Hoj = TxtAnexo.Text
+            Obj.Des_Inf = TxtDesInf.Text
+            If Oper = "Editar" Then
+                Obj.Num_Inf = TxtNInf.Text
+            End If
+            MsgBoxAlert(MsgResult2, Obj.lErrorG)
+        Catch ex As Exception
+            MsgResult2.Text = "Error en Validación:" + ex.Message
+            MsgBox(MsgResult2, True)
+            Return
+        End Try
+        Select Case Me.Oper
+            Case "Nuevo"
+                MsgResult2.Text = Obj.Insert()
+            Case "Editar"
+
+                MsgResult2.Text = Obj.Update(Me.hdCodCon.Value, TxtNInf.Text)
+        End Select
+        MsgBox(MsgResult2, Obj.lErrorG)
+        grdInformes.DataBind()
+        If Not Obj.lErrorG Then
+            Me.Limpiar()
+        End If
+
+
+
+
+    End Sub
+End Class

@@ -1,0 +1,52 @@
+﻿/** Customize the demo canvas */
+.qsf-demo-canvas {}
+
+.qsf-demo-canvas label {
+    padding-right: 10px;
+    width: 200px;
+    display: inline-block;
+    text-align: right;
+}
+
+
+/** Columns */
+.rcbHeader ul,
+.rcbFooter ul,
+.rcbItem ul,
+.rcbHovered ul,
+.rcbDisabled ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: inline-block;
+    list-style-type: none;
+}
+
+.col1{
+    margin: 0;
+    padding: 0 5px 0 0;
+    width: 60px;
+    line-height: 14px;
+    float: left;  
+    }
+.col2,
+.col3,
+.col4 {
+    margin: 0;
+    padding: 0 5px 0 0;
+    width: 110px;
+    line-height: 14px;
+    float: left;
+}
+
+
+/** Multiple rows and columns */
+.multipleRowsColumns .rcbItem,
+.multipleRowsColumns .rcbHovered {
+    float: left;
+    margin: 0 1px;
+    min-height: 13px;
+    overflow: hidden;
+    padding: 2px 19px 2px 6px;
+    width: 125px;
+}

@@ -1,0 +1,137 @@
+<%--
+Plantilla de máscara predeterminada. Las siguientes máscaras se proporcionan sólo como ejemplos.
+
+1. Máscara de control con nombre. SkinId debería definirse de forma única porque
+no se permite que haya varios SkinId por tipo de control en el mismo tema.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Máscara predeterminada. Skinid no está definido Sólo se permite 
+   una máscara de control por tipo de control en el mismo tema.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+<%---'ImabeButton                                                 --%>
+<asp:ImageButton SkinId="IBtnGuardar" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/save.png" Width="32px" />
+<asp:ImageButton SkinId="IBtnSuper" runat="server" Height="32px" 
+                        ImageUrl="~/images/2013/Supervisor.png" Width="32px" />
+<asp:ImageButton SkinId="IBtnCancelar" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/cancel.png" Width="32px" />
+<asp:ImageButton SkinId="IBtnEditar" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Edit.png" Width="32px" />                        
+<asp:ImageButton SkinId="IBtnAbrir" runat="server" Height="32px" 
+                        ImageUrl="~/images/mnProcesos/open-icon32.png" Width="32px" />                        
+<asp:ImageButton SkinId="IBtnNuevo" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Nuevo.png" Width="32px" />                        
+<asp:ImageButton SkinId="IBtnSelect2" runat="server" Height="32px" 
+                        ImageUrl="~/images/Operaciones/Select.png" Width="32px" />               
+
+<asp:ImageButton SkinId="IBtnBuscar" runat="server" AccessKey="b" AlternateText="Buscar" Height="32px" Width="32px"
+                ImageUrl="~/images/2012/buscar.png"  />
+<asp:ImageButton SkinId="IBtnAdd" runat="server"  
+                        ImageUrl="~/images/mnProcesos/add.gif"  />
+
+
+
+<asp:ImageButton SkinId="IBtnExcel" runat="server"  Height="32px" Width="32px"
+                        ImageUrl="~/Images/2012/document-excel-icon.png"  />
+                                                
+<%---'Imagens                                                 --%>
+<asp:Image SkinId="ImgSel" runat="server" ImageUrl="~/images/BlueTheme/Select.png" />                        
+<asp:Image SkinId="ImgOK" runat="server" ImageUrl="~/images/BlueTheme/Ok.gif" />                        
+<asp:Image SkinId="ImgLogo" runat="server" ImageUrl="~/Images/BlueTheme/logo.jpg" />                        
+<asp:Image SkinId="ImgError" runat="server" ImageUrl="~/Images/BlueTheme/Error.gif" />                        
+<asp:Image SkinId="ImgFoot" runat="server" ImageUrl="~/Images/BlueTheme/img_foot.png" />                        
+<asp:Image SkinId="ImgProgress" runat="server" ImageUrl="~/Images/BlueTheme/loading.gif" />      
+
+<asp:Image SkinId="ImgAAlerta" runat="server" ImageUrl="~/Images/2012/Alarm-Warning-icon.png" />   
+<asp:Image SkinId="ImgAError" runat="server" ImageUrl="~/Images/2012/Alarm-Error-icon.png" />   
+<asp:Image SkinId="ImgAOk" runat="server" ImageUrl="~/Images/2012/Alarm-Tick-icon.png" />   
+<asp:Image SkinId="ImgAInfo" runat="server" ImageUrl="~/Images/2012/Alarm-Info-icon.png" />   
+
+
+<%-------- --%>
+<asp:Label SkinId="MsgResult" runat="server" Height="100%" ></asp:Label>      
+<asp:ValidationSummary runat="server" SkinID="ValidationSummary1" CssClass="alerta" />    
+
+
+<asp:HyperLink SkinId="HlnNuevo" runat="server" ImageUrl="~/images/Operaciones/New1.png"
+                           >Nuevo </asp:HyperLink>              
+                                        
+<asp:HyperLink SkinId="HlnUsers" runat="server" ImageUrl="~/images/2012/Users.png"
+                           >Users OnLine</asp:HyperLink>              
+
+<asp:ImageButton SkinId="IBtnPanelUser" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Panel.png" Width="32px" />               
+                                        
+<asp:ImageButton SkinId="IBtnRoles" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/SincronizarRoles.png" Width="32px" />               
+<asp:ImageButton SkinId="IBtnRoles2" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Autorizaciones.png" Width="32px" />               
+
+                        
+<asp:ImageButton SkinId="IBtnAsig" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/asignar.png" Width="32px" />               
+
+<asp:ImageButton SkinId="IBtnCont" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/datoscont.png" Width="32px" />
+
+<asp:ImageButton SkinId="IBtnProp" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/proponents.png" Width="32px" />
+<asp:ImageButton SkinId="IBtnAdj" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Adjudicar.png" Width="32px" />
+
+<asp:ImageButton SkinId="IBtnEliminar" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/eliminar.png" Width="32px" />     
+
+<asp:ImageButton SkinId="IBtnListItemObj" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/ListItemObj.png" Width="32px" />   
+                        
+<asp:ImageButton SkinId="IBtnRadCont" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/Radcont.png" Width="32px" />                       
+
+<asp:ImageButton SkinId="IBtnReabrir" runat="server" Height="32px" 
+                        ImageUrl="~/images/2012/ReAbrir.png" Width="32px" />   
+                        
+<asp:ImageButton SkinId="IBtnEditMin" runat="server" Height="32px" tooltip="Edita los Datos de la Minuta/Documento Generado."
+                        ImageUrl="~/images/2012/EditarM.png" Width="32px" />                                   
+
+<asp:ImageButton SkinId="IBtnEditBase" runat="server" Height="32px" tooltip="Edita la Plantilla para el Presente Documento. NO Afecta otros Documentos del Sistema"
+                        ImageUrl="~/images/2012/EditarB.png" Width="32px" />                                   
+
+<asp:ImageButton SkinId="IBtnAnularM" runat="server" Height="32px"  tooltip="Anula Minuta/Documento Actual o Activo"
+                        ImageUrl="~/images/2012/AnularMinuta.png" Width="32px" /> 
+
+<asp:ImageButton SkinId="IBtnMinuta" runat="server"  Height="32px" Width="32px" tooltip="Genera Nuevo Documento/Minuta"
+                        ImageUrl="~/images/2012/gminuta.png"  />
+
+<asp:ImageButton SkinId="IBtnSincronizar" runat="server"  Height="32px" Width="32px" tooltip="Actualiza los Datos del Sistema con los Datos del Documento/Minuta"
+                        ImageUrl="~/images/2012/sincronizar.png"  />
+
+<asp:ImageButton SkinId="IBtnArchivoD" runat="server"  Height="32px" Width="32px" 
+                        ImageUrl="~/images/2012/archivo.png"  />
+                        
+<asp:ImageButton SkinId="BtnAprobar" runat="server" Height="32px" ImageUrl="~/images/2012/Validar.png"
+                                 Width="32px" />
+<asp:ImageButton SkinId="BtnDesaprobar" runat="server" Height="32px" ImageUrl="~/images/2012/Revertir.png"
+                                 Width="32px" />
+
+<asp:ImageButton SkinId="IBtnReload" runat="server"  ImageUrl="~/images/2012/Reload.png"
+                                 />
+
+<asp:ImageButton SkinId="IBtnSS" runat="server"  ImageUrl="~/images/2013/health2.png"
+                                 />
+
+<asp:ImageButton SkinId="IBtnCalen" runat="server"  ImageUrl="~/images/2012/calendario.png"
+                                 />
+
+<asp:ImageButton SkinId="IBtnDescargarDoc" runat="server" AlternateText="Descargar" Height="32px" Width="32px"
+                ImageUrl="~/images/2013/Dowload_Doc.png"  />
+<asp:ImageButton SkinId="IBtnDescargarZip" runat="server" AlternateText="Descargar Todo" Height="32px" Width="32px"
+                ImageUrl="~/images/2013/Descargar_Zip.png"  />
+
+<asp:ImageButton SkinId="IBtnDetalle" runat="server" Height="32px" 
+                        ImageUrl="~/images/2013/AbrirC.png" Width="32px" />

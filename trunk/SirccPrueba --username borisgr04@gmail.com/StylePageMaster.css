@@ -1,0 +1,217 @@
+﻿/* CSS Document */
+    body
+    {
+
+        background-image:url('imagenes/gradiente.jpg') ;
+        background-repeat:repeat-x;
+     
+      
+    }
+    
+   
+/* plantilla contenedora*/
+
+    #contenedor-general
+	    {
+	
+	 
+	    margin: 2em auto 0 auto;
+	    width:1024px;
+	    height:auto;
+	    background-color:#FFFFFF;
+	    -moz-box-shadow:5px 4px 20px #06B1B7;
+        -webkit-box-shadow: 5px 4px 20px #06B1B7;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(color=#06B1B7,direction=125,strength=5)";	
+	    }
+
+    #header
+	 
+	      {
+	 
+	          width:1024px;
+	          height:100px;
+	          background-image:url(imagenes/header1.jpg);
+	          background-repeat:no-repeat;	 
+	
+	      }
+
+     #contenido
+	    {
+	
+	        margin-right :0;
+	        margin-left: 0;
+	        top:14.5em;	
+            width:1024px;
+            height:auto;
+	        background-color:#f9f9f9;
+	        background-position:center;
+  
+         }
+         
+/*font-size:medium; font-size:70%;*/
+     #contenido2
+	    {
+	
+	        font-family :Calibri;
+	        font-family: Tahoma, Arial, sans-serif;
+	        
+	        top:17em;	
+            width:945px;
+            height:auto;
+	        background-color:White;
+	        margin-left:20px;
+	        padding:15px;  
+           -moz-border-radius:15px;
+           -webkit-border-radius:10px;
+            background-color:White;
+       }    
+    
+	  
+    #fooder
+
+	    {
+
+	         background-image:url(imagenes/fooder1.jpg);
+	         background-repeat:no-repeat;
+	         background-position:center;
+	         width:1024px;
+	         height:80px;
+		 
+	     }
+	     
+	 /* division dentro del contenido */
+	 #barra_menu
+	    {
+			
+	        top:0.2em;	
+            width:1024px;
+            height:27px;
+           
+	    
+        }
+        
+    #barra-modulos
+        {    
+        
+            width: 253px;
+            height: 27px;
+            position:relative;
+            top: 50px;
+            left: 770px;
+            margin-top: 0px;
+           
+        }
+
+    #barra-modulo-activo
+        {
+            
+            height: 27px;
+            position:relative; 
+            top: 50px;
+            left: 508px;
+            width: 136px;
+}
+
+    #barra-infologin
+    {
+        top:3em;
+        width:1024px;
+        height:27px;
+        background-color:#f9f9f9;
+    
+}
+
+
+
+
+
+	
+
+#sombraFooder
+{
+    
+        width: 1024px;
+        height: 15px;
+        background-image:url('imagenes/sombra.png');
+        background-repeat:repeat-x;
+        
+    
+    }
+    
+    
+     #area_trabajo
+	    {
+        
+	
+	    margin-right:20px;
+	    left :239px;
+	    right :558px ;
+	    position :absolute;	
+        width:288px;
+        height:225px;
+        top: 337px;
+        
+    }
+        #divis
+        {
+            left :630px;	    
+	        position :absolute;	
+            width:13px;
+            height:224px;
+            top: 340px;
+            padding:10px;
+         background-image:url('imagenes/divi.png');
+         background-repeat:no-repeat;
+        	    
+            }
+     #area_trabajo-left
+	    {
+	    
+	        font-family: Tahoma;
+            font-size:medium;
+            color: #007777;
+	        left :750px;	    
+	        position :absolute;	
+            width:309px;
+            height:auto;
+            top: 339px;
+            padding:10px;
+        
+    }
+       .area_trabajo-left h1
+           
+           {
+                font-family: Tahoma;
+                font-size:large;
+                color: #000;
+                font-weight:bold;
+            }
+           .area_trabajo-left Tel-dir
+           
+               {
+                   font-weight:bold;
+                   font-size:large;
+                   color:#007777 ;
+                          
+                }
+                
+              .area_trabajo-left link
+              
+              {
+                  font-family:Tahoma;
+                  font-size:large;
+                  font-style:italic;
+                  color:#72b610;
+                  text-decoration:underline;
+                  
+              
+                  }  
+    
+    .imagen-entidad
+        {
+            width:347px;
+            height:203px;
+            margin-left:6em;
+            padding:5px;
+            margin-top:20px;
+            }

@@ -1,0 +1,74 @@
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Copy of Default.aspx.vb" Inherits="Contratos_Legalizacion_Default" %>
+
+<%@ Register src="../../CtrlUsr/DetContratos/DetContrato.ascx" tagname="DetContrato" tagprefix="uc1" %>
+
+<%@ Register src="../../CtrlUsr/grdRP/grdRP.ascx" tagname="grdRP" tagprefix="uc2" %>
+
+<%@ Register src="../../CtrlUsr/grdImpC/grdImpC.ascx" tagname="grdImpC" tagprefix="uc3" %>
+
+<%@ Register src="../../CtrlUsr/ExImpC/ExImpC.ascx" tagname="ExImpC" tagprefix="uc4" %>
+
+<%@ Register src="../../CtrlUsr/grdPolC/grdPolC.ascx" tagname="grdPolC" tagprefix="uc5" %>
+
+<%@ Register src="../../CtrlUsr/grdIntC/grdIntC.ascx" tagname="grdIntC" tagprefix="uc6" %>
+
+<%@ Register src="../../CtrlUsr/grdLegC/grdLegC.ascx" tagname="grdLegC" tagprefix="uc7" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
+<div class="demoarea">
+    
+    
+    
+    <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" 
+            EnableScriptGlobalization="True">
+        </ajaxToolkit:ToolkitScriptManager>
+    <uc1:DetContrato ID="DetContrato1" runat="server" AceptarClicked="DetContrato1_AceptarClicked" />
+    <ajaxToolkit:Accordion ID="MyAccordion" runat="server" SelectedIndex="-1"
+            HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected"
+            ContentCssClass="accordionContentByA" FadeTransitions="true" FramesPerSecond="40" 
+            TransitionDuration="250" AutoSize="None" RequireOpenedPane="false" SuppressHeaderPostbacks="true">
+           <Panes>
+            <ajaxToolkit:AccordionPane ID="AccordionPane2" runat="server">
+                <Header><a href="" class="accordionLink"> Registro Presupuestal ...</a></Header>
+                <Content>
+                <uc2:grdRP ID="grdRP1" runat="server" />
+                </Content>
+            </ajaxToolkit:AccordionPane>
+            <ajaxToolkit:AccordionPane ID="AccordionPane3" runat="server">
+                <Header><a href="" class="accordionLink"> Pólizas ...</a></Header>
+                <Content>
+                    <uc5:grdPolC ID="grdPolC1" runat="server" />
+                </Content>
+            </ajaxToolkit:AccordionPane>
+            <ajaxToolkit:AccordionPane ID="AccordionPane4" runat="server">
+                <Header><a href="" class="accordionLink"> Impuestos ...</a></Header>
+                <Content>
+                    <uc3:grdImpC ID="grdImpC1" runat="server" />            
+                </Content>
+            </ajaxToolkit:AccordionPane>
+            <ajaxToolkit:AccordionPane ID="AccordionPane5" runat="server">
+                <Header><a href="" class="accordionLink"> Exónerar Impuestos ...</a></Header>
+                <Content>
+                    <uc4:ExImpC ID="ExImpC1" runat="server" />
+                </Content>
+            </ajaxToolkit:AccordionPane>
+            <ajaxToolkit:AccordionPane ID="AccordionPane6" runat="server">
+                <Header><a href="" class="accordionLink"> Interventor ...</a></Header>
+                <Content>
+                <uc6:grdIntC ID="grdIntC1" runat="server" />
+                </Content>
+            </ajaxToolkit:AccordionPane>
+            <ajaxToolkit:AccordionPane ID="AccordionPane8" runat="server">
+                <Header><a href="" class="accordionLink"> Confirmar Legalización ...</a></Header>
+                <Content>
+                <uc7:grdLegC ID="grdLegC1" runat="server" />
+                </Content>
+            </ajaxToolkit:AccordionPane>
+            </Panes>
+        </ajaxToolkit:Accordion>
+
+
+
+</div>
+</asp:Content>
+

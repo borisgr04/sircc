@@ -1,0 +1,145 @@
+
+Conectado a: Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production
+Exportación realizada en el juego de caracteres WE8MSWIN1252 y el juego de caracteres NCHAR AL16UTF16
+
+Exportando los usuarios especificados ...
+. exportando acciones y objetos de procedimiento pre-esquema
+. exportando nombres de biblioteca de funciones ajenas para el usuario SIRCCGOB 
+. exportando sinónimos de tipo público
+. exportando sinónimos de tipo privado
+. exportando definiciones de tipos de objetos para el usuario SIRCCGOB 
+Exportando los objetos de SIRCCGOB  ...
+. exportando enlaces a la base de datos
+. exportando números de secuencia
+. exportando definiciones de cluster
+. exportando las tablas de SIRCCGOB a través de la Ruta de Acceso Convencional ...
+. exportando la tabla                      ADICIONES        320 filas exportadas
+. exportando la tabla                  ANX_CONTRATOS         78 filas exportadas
+. exportando la tabla                   ASEGURADORAS         20 filas exportadas
+. exportando la tabla                 AUDI_CONTRATOS         26 filas exportadas
+. exportando la tabla                      AUDITORIA      44379 filas exportadas
+. exportando la tabla                     AUDTRIGGER         18 filas exportadas
+. exportando la tabla                     CALCULOPOL          5 filas exportadas
+. exportando la tabla                    CAL_VIG_POL          9 filas exportadas
+. exportando la tabla                  CDP_ADICIONES          0 filas exportadas
+. exportando la tabla                  CDP_CONTRATOS       4179 filas exportadas
+. exportando la tabla                 CDP_PCONTRATOS          6 filas exportadas
+. exportando la tabla                       CESIONES          8 filas exportadas
+. exportando la tabla                       CMINUTAS          2 filas exportadas
+. exportando la tabla                      CONF_SMTP          3 filas exportadas
+. exportando la tabla                         CONMUN        732 filas exportadas
+. exportando la tabla                           CONS          0 filas exportadas
+. exportando la tabla                   CONSORCIOSUT          0 filas exportadas
+. exportando la tabla                      CONS_PROC          3 filas exportadas
+. exportando la tabla                      CONTRATOS       4668 filas exportadas
+. exportando la tabla                       CORREOSE          2 filas exportadas
+. exportando la tabla                     CPROYECTOS          0 filas exportadas
+. exportando la tabla                   CTRL_ENTIDAD          1 filas exportadas
+. exportando la tabla                    CUBRIMIENTO          2 filas exportadas
+. exportando la tabla                    DEPENDENCIA         27 filas exportadas
+. exportando la tabla                  DOC_CONTRATOS          0 filas exportadas
+. exportando la tabla                 DOC_PCONTRATOS          0 filas exportadas
+. exportando la tabla                      DOCU_PROC          0 filas exportadas
+. exportando la tabla                        ESTADOS         10 filas exportadas
+. exportando la tabla                      ESTADOSDB          7 filas exportadas
+. exportando la tabla               ESTADOSGENERALES          5 filas exportadas
+. exportando la tabla                   ESTCONTRATOS        904 filas exportadas
+. exportando la tabla                       EST_RUTA         18 filas exportadas
+. exportando la tabla                         ETAPAS          5 filas exportadas
+. exportando la tabla                       FESTIVOS        236 filas exportadas
+. exportando la tabla                     HAUDITORIA        402 filas exportadas
+. exportando la tabla                     HCONTRATOS         46 filas exportadas
+. exportando la tabla                  HDEP_ABOGADOS         13 filas exportadas
+. exportando la tabla                        HESTACT         69 filas exportadas
+. exportando la tabla                    HOJAS_RUTAS         46 filas exportadas
+. exportando la tabla                          HORAS         24 filas exportadas
+. exportando la tabla                      HREVISADO         38 filas exportadas
+. exportando la tabla                   HUSUENC_PCON         79 filas exportadas
+. exportando la tabla                   HUSUENC_PSOL         50 filas exportadas
+. exportando la tabla                  IMP_ADICIONES          0 filas exportadas
+. exportando la tabla                  IMP_CONTRATOS       3584 filas exportadas
+. exportando la tabla                      IMPUESTOS          5 filas exportadas
+. exportando la tabla         INTERVENTORES_CONTRATO        461 filas exportadas
+. exportando la tabla                           MENU        126 filas exportadas
+. exportando la tabla                         MENUMB          3 filas exportadas
+. exportando la tabla                    MENU_PERFIL          0 filas exportadas
+. exportando la tabla                          MENU2         57 filas exportadas
+. exportando la tabla                        MODULOS          2 filas exportadas
+. exportando la tabla                     MUNICIPIOS         26 filas exportadas
+. exportando la tabla                      NROCONVIG         12 filas exportadas
+. exportando la tabla        ORA_ASPNET_APPLICATIONS          1 filas exportadas
+. exportando la tabla          ORA_ASPNET_MEMBERSHIP          4 filas exportadas
+. exportando la tabla               ORA_ASPNET_PATHS          0 filas exportadas
+. exportando la tabla ORA_ASPNET_PERSONALIZNALLUSERS          0 filas exportadas
+. exportando la tabla  ORA_ASPNET_PERSONALIZNPERUSER          0 filas exportadas
+. exportando la tabla             ORA_ASPNET_PROFILE          0 filas exportadas
+. exportando la tabla               ORA_ASPNET_ROLES         57 filas exportadas
+. exportando la tabla ORA_ASPNET_SESSIONAPPLICATIONS          0 filas exportadas
+. exportando la tabla            ORA_ASPNET_SESSIONS          0 filas exportadas
+. exportando la tabla             ORA_ASPNET_SITEMAP          0 filas exportadas
+. exportando la tabla               ORA_ASPNET_USERS          4 filas exportadas
+. exportando la tabla        ORA_ASPNET_USERSINROLES        127 filas exportadas
+. exportando la tabla           ORA_ASPNET_WEBEVENTS          0 filas exportadas
+. exportando la tabla                   PACTIVIDADES         30 filas exportadas
+. exportando la tabla                         PAGAUT         41 filas exportadas
+. exportando la tabla                PAGOS_PARCIALES          5 filas exportadas
+. exportando la tabla                        PCONMUN          2 filas exportadas
+. exportando la tabla                     PCONTRATOS         16 filas exportadas
+. exportando la tabla                    PCONTRATOSM         11 filas exportadas
+. exportando la tabla                    PCRONO_DIAS        101 filas exportadas
+. exportando la tabla                    PCRONOGRAMA          2 filas exportadas
+. exportando la tabla                   PCRONOGRAMAS         43 filas exportadas
+. exportando la tabla                       PESTADOS          7 filas exportadas
+. exportando la tabla                    PESTADOSACT          5 filas exportadas
+. exportando la tabla                    PFORMA_PAGO          0 filas exportadas
+. exportando la tabla                  POBLIGACIONES         12 filas exportadas
+. exportando la tabla                        POLIZAS         10 filas exportadas
+. exportando la tabla              POLIZAS_ADICIONES          0 filas exportadas
+. exportando la tabla               POLIZAS_CONTRATO       5802 filas exportadas
+. exportando la tabla                    PPLANTILLAS          3 filas exportadas
+. exportando la tabla                       PPOLIZAS          1 filas exportadas
+. exportando la tabla                   PPROPONENTES         14 filas exportadas
+. exportando la tabla                     PPROYECTOS          4 filas exportadas
+. exportando la tabla                      PROYECTOS       1400 filas exportadas
+. exportando la tabla                   PSOLICITUDES         24 filas exportadas
+. exportando la tabla                PTIPO_ACTIVIDAD          9 filas exportadas
+. exportando la tabla                             RP          0 filas exportadas
+. exportando la tabla                   RP_ADICIONES          0 filas exportadas
+. exportando la tabla                   RP_CONTRATOS       4276 filas exportadas
+. exportando la tabla                 RP_CONTRATOS_A          1 filas exportadas
+. exportando la tabla                         RUBROS       1401 filas exportadas
+. exportando la tabla               RUBROS_ADICIONES          0 filas exportadas
+. exportando la tabla               RUBROS_CONTRATOS       3929 filas exportadas
+. exportando la tabla              RUBROS_PCONTRATOS          3 filas exportadas
+. exportando la tabla                         SECTOR          9 filas exportadas
+. exportando la tabla                       SUBTIPOS         30 filas exportadas
+. exportando la tabla          SUPERVISORES_CONTRATO          0 filas exportadas
+. exportando la tabla                       TDOC_IDE          5 filas exportadas
+. exportando la tabla                       TERCEROS       3550 filas exportadas
+. exportando la tabla                        TIP_DOC         46 filas exportadas
+. exportando la tabla                  TIPO_ADCIONES          5 filas exportadas
+. exportando la tabla                     TIPO_AGENT          3 filas exportadas
+. exportando la tabla                      TIPO_PAGO          3 filas exportadas
+. exportando la tabla                    TIPO_PLAZOS          3 filas exportadas
+. exportando la tabla                      TIPOSCONT          4 filas exportadas
+. exportando la tabla                    TIPOSGASTOS          6 filas exportadas
+. exportando la tabla                      TIPOSPROC         13 filas exportadas
+. exportando la tabla                       USUARIOS         15 filas exportadas
+. exportando la tabla                      VIGENCIAS          4 filas exportadas
+. exportando sinónimos
+. exportando vistas
+. exportando procedimientos almacenados
+. exportando operadores
+. exportando restricciones de integridad referencial
+. exportando disparadores
+. exportando tipos de índice
+. exportando índices bitmap, funcionales y extensibles
+. exportando acciones de posttables
+. exportando vistas materializadas
+. exportando logs de instantáneas
+. exportando colas de trabajo
+. exportando grupos de refrescamiento y secundarios
+. exportando dimensiones
+. exportando acciones y objetos de procedimiento post-esquema
+. exportando estadísticas
+La exportación ha terminado correctamente y sin advertencias.
