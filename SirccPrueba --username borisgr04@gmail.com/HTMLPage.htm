@@ -1,0 +1,91 @@
+﻿<html>
+<head>
+<style type="text/css">
+<!--
+.Estilo2 {font-size: x-small}
+.Estilo3 {font-size: xx-small}
+.tabla {
+ border: 1px solid #cccccc;
+ border-width: 1px 1px 0 0;
+}
+
+.tabla td {
+ border: 1px solid #cccccc;
+ border-with: 0 0 1px 1px;
+}
+-->
+</style>
+</head>
+<body>
+<p>Valledupar, {FECHA_HOY}&nbsp; </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Doctor(a)<br>
+  <strong>{ENC_DEP_NEC} </strong><br> 
+  {DEP_NEC}
+  <br>
+</p>
+<p>&nbsp;</p>
+<p>Asunto: Concepto de Revisi&oacute;n de Solicitud&nbsp; de Otro Si N&deg; <strong>{COD_SOL}  </strong>recibida el <strong>{FECHA_RECIBIDO}</strong>.</p>
+<p>&nbsp;</p>
+<table width="100%" border="0" class="tabla" cellpading="0" cellspacing="0">
+  <tr>
+    <td width="30%"><strong>CONCEPTO: </strong></td>
+    <td width="70%"><strong>{EST_CONCEPTO} </strong></td>
+  </tr>
+  <tr>
+    <td><strong>OBSERVACI&Oacute;N</strong></td>
+    <td>{OBS_REVISADO}</td>
+  </tr>
+  <tr>
+    <td><strong>FECHA REVISI&Oacute;N</strong> </td>
+    <td>{FECHA_REVISADO}</td>
+  </tr>
+  <tr>
+    <td><strong>N&deg; DE PROCESO GENERADO</strong> </td>
+    <td>{PRO_SEL_NRO}</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p><strong>DATOS DE LA SOLICITUD </strong></p>
+<table width="100%" border="0"  class="tabla" cellpading="0" cellspacing="0">
+  <tr>
+    <td><strong>Dependencia a cargo de la Solicitud</strong></td>
+    <td>{DEP_DEL}</td>
+  </tr>
+  <tr>
+    <td width="30%"><strong>Dependencia que Genera la Necesidad</strong></td>
+    <td width="70%">{DEP_NEC}</td>
+  </tr>
+  <tr>
+    <td><strong>Contrato:</strong></td>
+    <td>{NOM_TPROC} </td>
+  </tr>
+  
+  <tr>
+    <td><strong>Tipo de Documento Contractual </strong></td>
+    <td>{NOM_TIP}</td>
+  </tr>
+  <tr>
+    <td><strong>Tipo de Contrataci&oacute;n</strong></td>
+    <td>{NOM_STIP}</td>
+  </tr>
+  <tr>
+    <td><strong>Objeto del Contrato</strong></td>
+    <td>{OBJ_CO}</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>Atentamente,</p>
+<p>&nbsp;</p>
+<p><strong>{ENC_DEP_DEL} </strong><br>
+{DEP_DEL} </p>
+<p>{EMAIL_DEP_DEL}</p>
+<p>&nbsp;</p>
+<p>{FECHA_Y_HORA}</p>
+<p><span class="Estilo2">Funcionario Encargado: <strong>{ENCARGADO}</strong></span> </p>
+<p class="Estilo3">Por favor no responder este correo, es netamente informativo, responder al Correo de la Dependencia encargada del Proceso {EMAIL_DEP_DEL}. </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

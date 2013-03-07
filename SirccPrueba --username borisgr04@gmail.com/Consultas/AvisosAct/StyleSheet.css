@@ -1,0 +1,29 @@
+﻿#exampleBg
+{
+    background: url(Img/bg.gif) no-repeat;
+    width: 395px;
+    height: 339px;
+    padding-top: 61px;
+    padding-left: 27px;
+    position: relative;
+}
+.tabStrip
+{
+    position: absolute;
+    top: 79px;
+    left: 101px;
+}
+.multiPage
+{
+    position: absolute;
+    top: 106px;
+    left: 101px;
+    color: white;
+    width: 679px;
+    height: 362px;
+}
+
+.multiPage p
+{
+    margin-left: 40px;
+}

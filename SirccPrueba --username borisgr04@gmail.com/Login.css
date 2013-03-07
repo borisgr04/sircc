@@ -1,0 +1,88 @@
+﻿
+body 
+{
+    background-image:none; 
+}
+
+
+.formulario
+
+ {
+    position:absolute;
+    left:40px;
+    height:82px;
+    width:263px;
+    top: 38px;
+    margin-bottom: 19px;
+}
+
+
+#cajas
+{
+    position:absolute;
+    margin:7px;
+    height:338px;
+    width:417px;
+    top: 214px;
+    left: 437px;
+    z-index:2;
+}
+
+
+.tablitas
+{
+    position:relative;
+    top: -297px;
+    left: 94px;
+    width: 280px;
+    height:119px;
+    font-family:Tahoma;
+    font-size:small;
+}
+
+
+.usuario
+
+{
+    position:absolute;
+    height:243px;
+    width:237px;
+    top: 14px;
+    left: -138px;
+    z-index:3;
+}
+
+.logo
+{
+    position:absolute;
+    height:94px;
+    width:414px;
+    top: -156px;
+    left: 18px;
+    z-index:4;
+}
+
+
+.imagenboton
+
+{
+    position:relative;
+    height:27px;
+    width:68px;
+    top: -301px;
+    left: 328px;
+    font-family:Tahoma;
+    font-size:small;
+}
+
+.arab 
+{
+    width:322px;
+    position:relative;
+    z-index:1;
+    background-image:url('imagenes/arab.png');
+    background-repeat:no-repeat;
+    top: 63px;
+    left: 273px;
+    height: 260px;
+}

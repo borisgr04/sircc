@@ -1,0 +1,110 @@
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Default.aspx.vb" Inherits="DatosBasicos_Calendario2_Default" %>
+
+<%@ Register assembly="DataCalendar" namespace="DataControls" tagprefix="dc" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
+<style>
+a.info {
+    position:relative;
+    z-index:24; 
+    background-color:#FFFFFF;
+    background-color:transparent;
+    color:#000000;
+    text-decoration:none;
+    
+} 
+a.info:hover {
+    z-index:25;
+    color:#0000FF;
+} 
+a.info div   
+{
+    
+    display: none;
+} 
+a.info:hover div   
+{
+    
+    display:block;
+    position:absolute;
+    top:2em;
+    left:2em;
+    width:200px;
+    border:1px solid #0cf;
+    background-color:#EEEEEE;
+    color:#000000;
+    background-color:lemonchiffon;
+    border:solid 1px Black;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    padding: 5px;
+} </style>
+
+
+<div class="demoarea">
+
+    <asp:Button ID="BtnCargar" runat="server" Text="Cargar... " />
+            
+            <br />
+    <asp:GridView ID="GridView1" runat="server" 
+        EnableModelValidation="True">
+
+    </asp:GridView>
+            
+            <dc:DataCalendar id="cal1" runat="server" width="100%"
+                             DayField="Fecha" DayNameFormat="Full"
+                             VisibleDate="12/12/2010"
+                             OnVisibleMonthChanged="MonthChange" SelectionMode=Day>
+                
+                <OtherMonthDayStyle BackColor="LightGray" ForeColor="DarkGray"/>
+                <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
+                <DayHeaderStyle BackColor="#AACCFF" ForeColor="#003399" Height="1px" />
+                <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
+                <OtherMonthDayStyle ForeColor="#999999" />
+                <SelectedDayStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
+                <SelectorStyle BackColor="#99CCCC" ForeColor="#336666" />
+                <TitleStyle BackColor="#003399" BorderColor="#3366CC" BorderWidth="1px" 
+                    Font-Bold="True" Font-Size="10pt" ForeColor="#CCCCFF" Height="25px" />
+                <TodayDayStyle BackColor="#99CCCC" ForeColor="White" />
+                <WeekendDayStyle BackColor="#CCCCFF" />
+ 
+                <DayStyle HorizontalAlign="Left" VerticalAlign="Top" 
+                          Font-Size="8" Font-Name="Arial" BackColor="White"  />
+                          
+                
+                           
+
+                <ItemTemplate>
+                    <br />
+                    <a href='../Calendario/eventDetail.aspx?id=<%# Container.DataItem("Id") %>' class="info"
+                    >  
+                    <asp:Image runat=server ImageUrl='<%# Container.DataItem("Imagen") %>'  height="16" width="16" align="absmiddle" border="0"/>
+                    <asp:Label ID="LbProc" runat="server" Text="" >
+                    <%# Container.DataItem("Num_Proc") + "<br/><b>" + Container.DataItem("Nom_Est") + "</b><br/>" + Container.DataItem("HoraIni")
+                        %></asp:Label>
+                    <div>
+                        <b>Modalidad Contratación:</b><%# Container.DataItem("nom_tproc")%><br />
+                        <b>Dependencia Necesidad:</b><%# Container.DataItem("dep_nec")%><br />
+                        <b>Dependencia Delegada:</b><%# Container.DataItem("dep_del")%><br />
+                        <b>Objeto:</b><%# Container.DataItem("Obj_Con")%><br />
+                        <b>Encargado:</b> Luis Rivera<br />
+                        <b>Fecha Asignación:</b> 20/OCT/2010
+                    </div>
+                    </a>            
+                    
+                </ItemTemplate>
+                
+                <NoEventsTemplate>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </NoEventsTemplate>
+                
+            </dc:DataCalendar>
+            
+</div>
+</asp:Content>
+

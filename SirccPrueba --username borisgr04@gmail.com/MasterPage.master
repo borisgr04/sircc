@@ -1,0 +1,195 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title> 
+    
+    <script type="text/javascript">
+        function Resaltar_On(GridView) {
+            if (GridView != null) {
+                GridView.originalBgColor = GridView.style.backgroundColor;
+                GridView.style.backgroundColor = "#DBE7F6";
+            }
+        }
+        function Resaltar_Off(GridView) {
+            if (GridView != null) {
+                GridView.style.backgroundColor = GridView.originalBgColor;
+            }
+        }
+
+        
+    sfFocus = function () {
+        var sfEls = document.getElementsByTagName("INPUT");
+        for (var i = 0; i < sfEls.length; i++) {
+            sfEls[i].onfocus = function () {
+                this.className += " sffocus";
+            }
+            sfEls[i].onblur = function () {
+                this.className = this.className.replace(new RegExp(" sffocus\\b"), "");
+            }
+        } 
+    }
+    if (window.attachEvent) window.attachEvent("onload", sfFocus); 
+
+    </script>
+    <style type="text/css">
+        .ul_rp
+        {
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+        }
+        .li_rp
+        {
+            background-repeat: no-repeat;
+            background-color: transparent;
+            background-position: 0px 5px;
+            padding-left: 5px;
+            display: inline;
+            padding-right: 20px;
+        }
+        .li_rp a
+        {
+            background-color: #336699;
+            background-color: transparent;
+            border-color: #336699;
+            border-width: 1px;
+            color: White;
+            font-weight: bold;
+        }
+    </style>
+    <link rel="shortcut icon" href="~/imagenes/favicon.ico"></link>
+    
+</head>
+<body>
+    <form id="form1" runat="server">
+    
+    <table class="main" cellspacing="0" cellpadding="0" width="100%;heigth:600px"  >
+        <tr >
+            <td class="laterali" > &nbsp;</td>
+            <td>
+             <div id="contenedor-general">
+            
+            <div id="header">
+            <div id="barra-modulo-activo">
+                <asp:Label ID="LbModulo" runat="server" Text="" Font-Size="Large"></asp:Label></div>
+            <div id="barra-modulos">
+            <asp:ListView ID="lstMenu" runat="server" DataSourceID="ObjModulos"
+                        DataKeyNames="Cod_Mod,Nom_Mod">
+                        <LayoutTemplate>
+                            <ul id="itemPlaceholderContainer" runat="server">
+                                <li id="itemPlaceholder" runat="server" />
+                            </ul>
+                        </LayoutTemplate>
+                        <ItemTemplate>
+                            <li class="li_rp">
+                            <asp:LinkButton ID="LnkMenu" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"Cod_Mod")+","+DataBinder.Eval(Container.DataItem, "Nom_Mod")%>'
+                                OnClick="Change_Menu" ToolTip='<%# DataBinder.Eval(Container.DataItem,"Des_Mod")%>'
+                                CausesValidation="False">
+                                     <%# DataBinder.Eval(Container.DataItem, "Nom_Mod") %></asp:LinkButton>
+                        </li>
+                        </ItemTemplate>
+                    </asp:ListView>
+                    
+                    
+            </div>
+        </div>
+        <div id="barra_menu">
+            <telerik:RadMenu ID="RMnPpal" runat="server" Skin="Web20" Width="100%">
+            </telerik:RadMenu>
+            <asp:Menu ID="MnuPpal" runat="server" BackColor="#b1c3d9" BorderColor="#336699" BorderStyle="Solid"
+                BorderWidth="1px" DynamicHorizontalOffset="2" Font-Bold="true" Font-Names="Verdana"
+                Font-Size="11px" ForeColor="#336699" Height="20px" MaximumDynamicDisplayLevels="2"
+                Orientation="Horizontal" StaticSubMenuIndent="">
+                <StaticMenuStyle BackColor="#336699" BorderColor="#336699" BorderWidth="1px" />
+                <StaticMenuItemStyle ForeColor="White" HorizontalPadding="5px" VerticalPadding="2px"
+                    Width="160px" />
+                <DynamicHoverStyle BackColor="#336699" Font-Bold="True" ForeColor="White" />
+                <DynamicMenuStyle BackColor="#B1C3D9" BorderColor="#336699" BorderWidth="1px" CssClass="MenuIE8" />
+                <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" Width="120px" />
+                <StaticHoverStyle BackColor="#B1C3D9" Font-Bold="True" ForeColor="White" />
+            </asp:Menu>
+        </div>
+        
+
+        <div id="barra-infologin">
+            &nbsp;&nbsp;<asp:LoginName ID="LoginName1" runat="server" FormatString="Bienvenido @ {0}" />
+            <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutPageUrl="~/Publico/Logout.aspx"
+                ToolTip="Cierra la Sesión del Usuario actual" />
+            <asp:Label ID="LbTer" runat="server"></asp:Label>
+            &nbsp;<asp:Label ID="LbVigenciaText" runat="server">Vigencia:</asp:Label>
+            <asp:Label ID="LbVig" runat="server"></asp:Label>
+            &nbsp;
+            <asp:DropDownList ID="CmbVigencia" runat="server" Visible="false" DataSourceID="ObjVigencias"
+                DataTextField="Year_Vig" DataValueField="Year_Vig" AutoPostBack="True">
+            </asp:DropDownList>
+            &nbsp;&nbsp;&nbsp;
+            <div style="float: right; position: relative; padding-right: 20px; ">
+                <a href="" onclick="javascript:window.location.reload();">Actualizar</a>&nbsp;&nbsp;
+                <asp:HyperLink ID="Inicio" runat="server" NavigateUrl="~/Default.aspx">
+                Ir a Página Inicial</asp:HyperLink>
+            </div>
+        </div>
+        <%--<div id="contenido">
+            <div id="contenido2">
+                <asp:ContentPlaceHolder ID="SampleContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        --%>   
+          <div id="master_page">
+            <div id="master_content">
+                <div id="master_contentheader">
+                    <div style="position: relative; padding-right: 20px; top: 0px">
+                        <%--<uc1:BarraTareas ID="BarraTareas1" runat="server" />--%>
+                    </div>
+                </div>
+                <div id="master_contentplaceholder">
+                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
+                        <tr>
+                            <td colspan="2">
+                                <asp:ContentPlaceHolder ID="SampleContent" runat="server" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            
+            <div id="sombraFooder">
+               </div>
+                <div id="fooder">
+                  <div id="fooderText">
+                  
+                    Copyright &#169; 2007-2012 B&A Systems(Ing. Boris Arturo González Rivera). Todos los derechos reservados.<br />
+                    Licenciado para
+                    <asp:Label ID="LbEntidad" runat="server" Text=""></asp:Label>
+                    Nit:
+                    <asp:Label ID="LbNit" runat="server" Text=""></asp:Label>
+                    Código Dane:
+                    <asp:Label ID="LbCodigo" runat="server" Text=""></asp:Label>
+                    <hr />
+                    Correo Electrónico de Soporte:
+                    <%--<%=ConfigurationManager.AppSettings("MailAdmin") %>--%>
+                    Teléfono de Soporte:
+                    <%--<%= ConfigurationManager.AppSettings("TelAdmin")%>--%>
+                    <asp:Label ID="LbConex" runat="server" Text="Label"></asp:Label>
+                      <%--<asp:HyperLink ID="HyperLink1"  NavigateUrl="~/exe/setup.msi" runat="server">Descargar SirccD.exe</asp:HyperLink>--%>
+                    </div>
+                </div>   
+            </div>
+
+            
+        </div>
+        
+                </div>
+            </td> 
+    <td class="laterald" >&nbsp;</td>
+    </tr>
+  </table>
+        <asp:ObjectDataSource ID="ObjModulos" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetRecords" TypeName="Modulos"></asp:ObjectDataSource>
+        <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetRecords" TypeName="Vigencias"></asp:ObjectDataSource>
+    </form>
+</body>
+</html>
