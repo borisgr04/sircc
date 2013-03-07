@@ -348,19 +348,20 @@ Public Function Delete(ByVal cod_dep As String) As String
             'ComenzarTransaccion()
             Dim Sw As Boolean = False
             Dim cant_proc As Integer = ProcesosActxDepxUsu(ID_HDEP)
-            If cant_proc > 0 Then
-                Msg = "El Usuario Tiene (" + cant_proc.ToString + ") Procesos a Cargo sin Finalizar.   "
-                Sw = True
-            End If
-            Dim cant_sol As Integer = SolicitudesActxDepxUsu(ID_HDEP)
-            If cant_sol > 0 Then
-                Msg += IIf(Msg <> "", "<br/>", "") + "El Usuario Tiene (" + cant_proc.ToString + ") Solicitudes a Cargo sin Revisar.   "
-                Sw = True
-            End If
-            If Sw = True Then
-                lErrorG = True
-                Throw New Exception(Msg)
-            End If
+            'Se cambia Temporarlmente para 
+            'If cant_proc > 0 Then
+            '    Msg = "El Usuario Tiene (" + cant_proc.ToString + ") Procesos a Cargo sin Finalizar.   "
+            '    Sw = True
+            'End If
+            'Dim cant_sol As Integer = SolicitudesActxDepxUsu(ID_HDEP)
+            'If cant_sol > 0 Then
+            '    Msg += IIf(Msg <> "", "<br/>", "") + "El Usuario Tiene (" + cant_proc.ToString + ") Solicitudes a Cargo sin Revisar.   "
+            '    Sw = True
+            'End If
+            'If Sw = True Then
+            '    lErrorG = True
+            '    Throw New Exception(Msg)
+            'End If
             Dim queryString As String = "UPDATE HDEP_ABOGADOS SET ESTADO='IN' WHERE ID_HDEP=:ID_HDEP"
             Me.CrearComando(queryString)
             Me.AsignarParametroCadena(":ID_HDEP", ID_HDEP)
