@@ -13,7 +13,7 @@ Partial Class DependenciasD_DependenciasD
             Case "Exportar"
                 GridView2.DataSource = Obj.GetRecordsDB
                 GridView2.DataBind()
-                ExportGridView(GridView2, "Aseguradoras-SIRCC")
+                ExportGridView(GridView2, "DELEGACIONES")
             Case "nuevo"
                 Me.SubT.Text = "Nuevo..."
                 Me.Habilitar(True)

@@ -79,8 +79,12 @@ Public Class EntidadMin
         End Set
     End Property
 
-
-
+    Public Function GetDatos() As DataTable
+        Dim ws As New WS_Sircc_GMinutas
+        Dim dtEnt As DataTable
+        dtEnt = ws.GetEntidad()
+        Return dtEnt
+    End Function
 
     Public Sub CargarDatos()
         Dim ws As New WS_Sircc_GMinutas

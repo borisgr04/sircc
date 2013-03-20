@@ -49,7 +49,7 @@
                 <tr>
                     <td style="width: 72px">
                         <asp:CheckBox ID="Chk_Vig" runat="server" CssClass="selectIndex" 
-                            Text="Vigencia" AutoPostBack="True" />
+                            Text="Vigencia" AutoPostBack="True" Checked="True" Enabled="False" />
                     </td>
                     <td style="width: 171px">
                         <asp:DropDownList ID="CboFilVig" runat="server" DataSourceID="Vigencias" 
