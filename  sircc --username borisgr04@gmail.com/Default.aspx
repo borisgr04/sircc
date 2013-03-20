@@ -16,10 +16,15 @@
        <%--<asp:Image ID="ImgControl" runat="server" 
             AlternateText="No tiene imagenes asociadas" 
             ImageUrl="~/ashx/logo.ashx" />--%>
+       
+       <%-- <a href="Docs/2011020001/2011020001_1.pdf">Docs/2011020001/2011020001_1.pdf.pdf</a>
+        <iframe src="Docs/2011020001/2011020001_2.doc" scrolling="auto" height="300" width="300"  >
+        </iframe>
+        <iframe src="ashx/verActas.ashx?Ide_Acta=3912"  scrolling="auto" height="300" width="300"  >
+        </iframe>--%>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            
-        
+      
          <uc3:Alert_Inf ID="Alert_Inf1" runat="server" />
             
         </ContentTemplate>

@@ -76,6 +76,9 @@ Partial Class Consultas_AvisosAct_AvisosAct2
                 Redireccionar_Pagina("/Procesos/DBProcesos/DBProcesos.aspx?Num_Proc=" + Num_Proc)
             Case "documentos"
                 Redireccionar_Pagina("/Procesos/DocProceso/DocProcesos.aspx?Num_Proc=" + Num_Proc)
+            Case "hojaRutas"
+                Redireccionar_Pagina("/Procesos/HojaRuta/HojaRuta.aspx?Codigo=" + Num_Proc + "&tp=p")
+
         End Select
     End Sub
 

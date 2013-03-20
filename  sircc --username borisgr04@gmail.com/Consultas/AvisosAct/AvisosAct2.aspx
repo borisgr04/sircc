@@ -48,14 +48,14 @@
                             &nbsp;</td>
                     </tr>
                 </table>
-                <telerik:RadTabStrip ID="RadTabStrip1" runat="server" SelectedIndex="1" Skin="Windows7"
+                <telerik:RadTabStrip ID="RadTabStrip1" runat="server" SelectedIndex="0" Skin="Windows7"
                     MultiPageID="RadMultiPage1">
                     <Tabs>
                         <telerik:RadTab runat="server" Owner="RadTabStrip1" Value="hoy" 
-                            Text="Actividades Hoy " PageViewID="RadPageView1">
+                            Text="Actividades Hoy " PageViewID="RadPageView1" Selected="True">
                         </telerik:RadTab>
                         <telerik:RadTab runat="server" Owner="RadTabStrip1"  Value="atrazadas"
-                            Text="Actividades Atrazadas" PageViewID="RadPageView2" Selected="True">
+                            Text="Actividades Atrazadas" PageViewID="RadPageView2">
                         </telerik:RadTab>
                         <telerik:RadTab runat="server" Owner="RadTabStrip1" Value="sinrecibir" 
                             Text="Solicitudes Sin Recibir" PageViewID="RadPageView3">
@@ -69,7 +69,7 @@
                     </Tabs>
                 </telerik:RadTabStrip>
                 <br />
-                <telerik:RadMultiPage ID="RadMultiPage1" runat="server" SelectedIndex="1">
+                <telerik:RadMultiPage ID="RadMultiPage1" runat="server" SelectedIndex="0">
                     <telerik:RadPageView ID="RadPageView1" runat="server">
                         <br />
                         <asp:GridView ID="GridView1" runat="server" AllowSorting="True" DataSourceID="ObjAvisosHoy"
@@ -251,6 +251,9 @@
                                         <asp:Label ID="LbVal" runat="server"  Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:HyperLinkField DataNavigateUrlFields="Cod_Sol" 
+                                    DataNavigateUrlFormatString="~/Procesos/HojaRuta/HojaRuta.aspx={0}&amp;tp='s'" 
+                                    HeaderText="Hoja de Ruta" />
                                 <asp:CommandField ButtonType="Image" SelectImageUrl="~/images/Operaciones/Select.png"
                                     ShowSelectButton="True" />
                             </Columns>
@@ -284,6 +287,8 @@
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Dep_Nec" HeaderText="Dependencia-Necesidad" SortExpression="Dep_Nec" />
                                 <asp:BoundField DataField="Dep_Del" HeaderText="Dependencia-A Cargo" SortExpression="Dep_Del" />
+                                <asp:ButtonField ButtonType="Image" CommandName="hojaRutas" HeaderText="Hoja de Ruta" 
+                                    ImageUrl="~/images/2013/listcheck.png" Text="Diligenciar Hoja de Ruta" />
                                 <asp:ButtonField ButtonType="Image" CommandName="crono" HeaderText="Cronograma" ImageUrl="~/images/mnProcesos/Calendar-icon24.png"
                                     Text="Cronograma">
                                     <ItemStyle HorizontalAlign="Center" />

@@ -35,7 +35,7 @@ Partial Class DatosBasicos_PActividades_Default
                 Dim index As Integer = Convert.ToInt32(e.CommandArgument)
                 Me.GridView1.SelectedIndex = index
 
-                Dim tb As DataTable = Obj.GetbyPKDB(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString, Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(1).ToString)
+                Dim tb As DataTable = Obj.GetbyPKDB(Me.CboFilVig.SelectedValue, Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString, Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(1).ToString)
                 If tb.Rows.Count > 0 Then
                     Me.TxtCodNew.Text = tb.Rows(0)("Cod_Act").ToString
                     Me.TxtNomNew.Text = tb.Rows(0)("Nom_Act").ToString
@@ -64,7 +64,7 @@ Partial Class DatosBasicos_PActividades_Default
                 Dim index As Integer = Convert.ToInt32(e.CommandArgument)
                 Me.GridView1.SelectedIndex = index
                 Pk1 = GridView1.DataKeys(index).Values(0).ToString()
-                Dim tb As DataTable = Obj.GetbyPKDB(Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString, Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(1).ToString)
+                Dim tb As DataTable = Obj.GetbyPKDB(Me.CboFilVig.SelectedValue, Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(0).ToString, Me.GridView1.DataKeys(Me.GridView1.SelectedIndex).Values(1).ToString)
                 If tb.Rows.Count > 0 Then
                     Me.TxtCodNew.Text = tb.Rows(0)("Cod_Act").ToString
                     Me.TxtNomNew.Text = tb.Rows(0)("Nom_Act").ToString

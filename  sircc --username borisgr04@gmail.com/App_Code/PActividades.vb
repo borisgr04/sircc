@@ -168,10 +168,11 @@ Public Class PActividades
         Return Msg
     End Function
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Function GetbyPKDB(ByVal Cod_Act As String, ByVal Cod_Tpro As String) As DataTable
+    Public Function GetbyPKDB(ByVal Vig_Act As String, ByVal Cod_Act As String, ByVal Cod_Tpro As String) As DataTable
         Me.Conectar()
-        querystring = "SELECT * FROM " + Me.VistaDB + " Where Cod_Act=:Cod_Act and Cod_Tpro=:Cod_Tpro"
+        querystring = "SELECT * FROM " + Me.VistaDB + " Where Vigencia=:Vig_Act And Cod_Act=:Cod_Act and Cod_Tpro=:Cod_Tpro"
         Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":Vig_Act", Vig_Act)
         Me.AsignarParametroCadena(":Cod_Act", Cod_Act)
         Me.AsignarParametroCadena(":Cod_Tpro", Cod_Tpro)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
@@ -184,7 +185,7 @@ Public Class PActividades
         Me.Conectar()
         Try
             ' Me.ComenzarTransaccion()
-            querystring = "UPDATE PACTIVIDADES SET Cod_Act=:Cod_Act, Nom_Act=:Nom_Act,Cod_Tpro=:Cod_Tpro, vigencia=:vigencia, Est_Proc=:Cod_Tact, Orden=:Orden, Estado=:Estado, Ocupado=:Ocupado, Obligatorio=:Obligatorio,dia_nohabil=:dia_nohabil,notificar=:notificar,MFECINI=:MFECINI,MHORINI=:MHORINI,MFECFIN=:MFECFIN,MHORFIN=:MHORFIN,Ubicacion=:Ubicacion   WHERE Cod_Act=:Cod_Act_PK and Cod_Tpro=:Cod_Tpro_PK"
+            querystring = "UPDATE PACTIVIDADES SET Cod_Act=:Cod_Act, Nom_Act=:Nom_Act,Cod_Tpro=:Cod_Tpro,  Est_Proc=:Cod_Tact, Orden=:Orden, Estado=:Estado, Ocupado=:Ocupado, Obligatorio=:Obligatorio,dia_nohabil=:dia_nohabil,notificar=:notificar,MFECINI=:MFECINI,MHORINI=:MHORINI,MFECFIN=:MFECFIN,MHORFIN=:MHORFIN,Ubicacion=:Ubicacion   WHERE vigencia=:vigencia And Cod_Act=:Cod_Act_PK and Cod_Tpro=:Cod_Tpro_PK"
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Act", Cod_Act)
             Me.AsignarParametroCadena(":Nom_Act", Nom_Act)

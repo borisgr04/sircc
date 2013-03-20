@@ -14,6 +14,8 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 <asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
 --%>
 <%---'ImabeButton                                                 --%>
+<asp:ImageButton SkinId="IBtnPDF" runat="server" Height="32px" 
+                        ImageUrl="~/images/2013/pdf.png" Width="32px" />
 <asp:ImageButton SkinId="IBtnGuardar" runat="server" Height="32px" 
                         ImageUrl="~/images/2012/save.png" Width="32px" />
 <asp:ImageButton SkinId="IBtnSuper" runat="server" Height="32px" 

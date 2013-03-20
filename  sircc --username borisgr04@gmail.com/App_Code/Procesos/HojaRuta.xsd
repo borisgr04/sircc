@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="HojaRuta" targetNamespace="http://tempuri.org/HojaRuta.xsd" xmlns:mstns="http://tempuri.org/HojaRuta.xsd" xmlns="http://tempuri.org/HojaRuta.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="HojaRuta" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="HojaRuta" msprop:Generator_UserDSName="HojaRuta">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="HRSolPro" msprop:Generator_TableClassName="HRSolProDataTable" msprop:Generator_TableVarName="tableHRSolPro" msprop:Generator_RowChangedName="HRSolProRowChanged" msprop:Generator_TablePropName="HRSolPro" msprop:Generator_RowDeletingName="HRSolProRowDeleting" msprop:Generator_RowChangingName="HRSolProRowChanging" msprop:Generator_RowEvHandlerName="HRSolProRowChangeEventHandler" msprop:Generator_RowDeletedName="HRSolProRowDeleted" msprop:Generator_RowClassName="HRSolProRow" msprop:Generator_UserTableName="HRSolPro" msprop:Generator_RowEvArgName="HRSolProRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="COD_TIP" msprop:Generator_ColumnVarNameInTable="columnCod_Tip" msprop:Generator_ColumnPropNameInRow="Cod_Tip" msprop:Generator_ColumnPropNameInTable="Cod_TipColumn" msprop:Generator_UserColumnName="COD_TIP" type="xs:string" minOccurs="0" />
+              <xs:element name="NOM_DOC" msprop:Generator_ColumnVarNameInTable="columnNOM_DOC" msprop:Generator_ColumnPropNameInRow="NOM_DOC" msprop:Generator_ColumnPropNameInTable="NOM_DOCColumn" msprop:Generator_UserColumnName="NOM_DOC" type="xs:string" minOccurs="0" />
+              <xs:element name="FEC_DOC" msprop:Generator_ColumnVarNameInTable="columnFec_Doc" msprop:Generator_ColumnPropNameInRow="Fec_Doc" msprop:Generator_ColumnPropNameInTable="Fec_DocColumn" msprop:Generator_UserColumnName="FEC_DOC" type="xs:string" minOccurs="0" />
+              <xs:element name="IDE_DOC" msprop:Generator_ColumnVarNameInTable="columnIDE_DOC" msprop:Generator_ColumnPropNameInRow="IDE_DOC" msprop:Generator_ColumnPropNameInTable="IDE_DOCColumn" msprop:Generator_UserColumnName="IDE_DOC" type="xs:string" minOccurs="0" />
+              <xs:element name="NOM_ETA" msprop:Generator_ColumnVarNameInTable="columnNOM_ETA" msprop:Generator_ColumnPropNameInRow="NOM_ETA" msprop:Generator_ColumnPropNameInTable="NOM_ETAColumn" msprop:Generator_UserColumnName="NOM_ETA" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SolPro" msprop:Generator_TableClassName="SolProDataTable" msprop:Generator_TableVarName="tableSolPro" msprop:Generator_TablePropName="SolPro" msprop:Generator_RowDeletingName="SolProRowDeleting" msprop:Generator_RowChangingName="SolProRowChanging" msprop:Generator_RowEvHandlerName="SolProRowChangeEventHandler" msprop:Generator_RowDeletedName="SolProRowDeleted" msprop:Generator_UserTableName="SolPro" msprop:Generator_RowChangedName="SolProRowChanged" msprop:Generator_RowEvArgName="SolProRowChangeEvent" msprop:Generator_RowClassName="SolProRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="COD_SOL" msprop:Generator_ColumnVarNameInTable="columnCOD_SOL" msprop:Generator_ColumnPropNameInRow="COD_SOL" msprop:Generator_ColumnPropNameInTable="COD_SOLColumn" msprop:Generator_UserColumnName="COD_SOL" type="xs:string" minOccurs="0" />
+              <xs:element name="OBJ_SOL" msprop:Generator_ColumnVarNameInTable="columnOBJ_SOL" msprop:Generator_ColumnPropNameInRow="OBJ_SOL" msprop:Generator_ColumnPropNameInTable="OBJ_SOLColumn" msprop:Generator_UserColumnName="OBJ_SOL" type="xs:string" minOccurs="0" />
+              <xs:element name="DEP_NEC" msprop:Generator_ColumnVarNameInTable="columnDEP_NEC" msprop:Generator_ColumnPropNameInRow="DEP_NEC" msprop:Generator_ColumnPropNameInTable="DEP_NECColumn" msprop:Generator_UserColumnName="DEP_NEC" type="xs:string" minOccurs="0" />
+              <xs:element name="DEP_DEL" msprop:Generator_ColumnVarNameInTable="columnDEP_DEL" msprop:Generator_ColumnPropNameInRow="DEP_DEL" msprop:Generator_ColumnPropNameInTable="DEP_DELColumn" msprop:Generator_UserColumnName="DEP_DEL" type="xs:string" minOccurs="0" />
+              <xs:element name="NOM_TIP" msprop:Generator_ColumnVarNameInTable="columnNOM_TIP" msprop:Generator_ColumnPropNameInRow="NOM_TIP" msprop:Generator_ColumnPropNameInTable="NOM_TIPColumn" msprop:Generator_UserColumnName="NOM_TIP" type="xs:string" minOccurs="0" />
+              <xs:element name="NOM_STIP" msprop:Generator_ColumnVarNameInTable="columnNOM_STIP" msprop:Generator_ColumnPropNameInRow="NOM_STIP" msprop:Generator_ColumnPropNameInTable="NOM_STIPColumn" msprop:Generator_UserColumnName="NOM_STIP" type="xs:string" minOccurs="0" />
+              <xs:element name="NOM_TPROC" msprop:Generator_ColumnVarNameInTable="columnNOM_TPROC" msprop:Generator_ColumnPropNameInRow="NOM_TPROC" msprop:Generator_ColumnPropNameInTable="NOM_TPROCColumn" msprop:Generator_UserColumnName="NOM_TPROC" type="xs:string" minOccurs="0" />
+              <xs:element name="PROCESO" msprop:Generator_ColumnVarNameInTable="columnPROCESO" msprop:Generator_ColumnPropNameInRow="PROCESO" msprop:Generator_ColumnPropNameInTable="PROCESOColumn" msprop:Generator_UserColumnName="PROCESO" type="xs:string" minOccurs="0" />
+              <xs:element name="VAL_CON" msprop:Generator_ColumnVarNameInTable="columnVAL_CON" msprop:Generator_ColumnPropNameInRow="VAL_CON" msprop:Generator_ColumnPropNameInTable="VAL_CONColumn" msprop:Generator_UserColumnName="VAL_CON" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

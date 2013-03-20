@@ -17,7 +17,9 @@ Public Class verActas: Implements IHttpHandler
         If Not obj.Doc_PDF Is Nothing Then
             If obj.Doc_PDF.Length > 0 Then
                 context.Response.Clear()
-                context.Response.AddHeader("content-disposition", "attachment; filename=" + Ide_Acta + ".pdf")
+                context.Response.ContentType = "application/pdf"
+                'inline; filename=Report.pdf o attachment
+                context.Response.AddHeader("content-disposition", "inline; filename=" + Ide_Acta + ".pdf")
                 context.Response.BinaryWrite(obj.Doc_PDF)
                 context.Response.End()
             End If
