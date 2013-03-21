@@ -108,6 +108,12 @@
                                     <asp:TextBox ID="TxtIdeDoc" runat="server" Enabled="true" Text='<%# Bind("Ide_Doc") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="N° Folios">
+                                <ItemTemplate>
+                                    <telerik:RadNumericTextBox ID="txtFolios" runat="server" Enabled="true" Text='<%# Bind("Folios") %>' NumberFormat-DecimalDigits="0">
+                                    </telerik:RadNumericTextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </telerik:RadPageView>

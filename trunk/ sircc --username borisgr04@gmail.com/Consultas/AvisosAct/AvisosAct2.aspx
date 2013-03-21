@@ -86,50 +86,7 @@
                             </Columns>
                         </asp:GridView>
 
-                     <%--   <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" 
-                            CellSpacing="0" DataSourceID="ObjAvisosHoy" GridLines="None" Skin="Windows7">
-                            <MasterTableView DataSourceID="ObjAvisosHoy">
-                                <CommandItemSettings ExportToPdfText="Export to PDF" />
-                                <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column">
-                                </RowIndicatorColumn>
-                                <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column">
-                                </ExpandCollapseColumn>
-                                <Columns>
-                                    <telerik:GridBoundColumn DataField="Num_Proc" 
-                                        FilterControlAltText="Filter column column" HeaderText="N° Proceso" 
-                                        SortExpression="Num_Proc" UniqueName="column">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Nom_Act" 
-                                        FilterControlAltText="Filter column1 column" HeaderText="Actividad" 
-                                        SortExpression="Nom_Act" UniqueName="column1">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Nom_Est" 
-                                        FilterControlAltText="Filter column2 column" HeaderText="Estado" 
-                                        SortExpression="Nom_Est" UniqueName="column2">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="DateTimeI" 
-                                        FilterControlAltText="Filter column3 column" HeaderText="Fecha y Hora Inicial" 
-                                        SortExpression="DateTimeI" UniqueName="column3">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Notas" 
-                                        FilterControlAltText="Filter column4 column" HeaderText="Notas" 
-                                        SortExpression="Notas" UniqueName="column4">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Ocupado" 
-                                        FilterControlAltText="Filter column5 column" HeaderText="Ocupado" 
-                                        SortExpression="Ocupado" UniqueName="column5">
-                                    </telerik:GridBoundColumn>
-                                </Columns>
-                                <EditFormSettings>
-                                    <EditColumn FilterControlAltText="Filter EditCommandColumn column">
-                                    </EditColumn>
-                                </EditFormSettings>
-                            </MasterTableView>
-                            <FilterMenu EnableImageSprites="False">
-                            </FilterMenu>
-                            <HeaderContextMenu CssClass="GridContextMenu GridContextMenu_Default">
-                            </HeaderContextMenu>
-                        </telerik:RadGrid>--%>
+                     
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="RadPageView2" runat="server">
                         <br />
@@ -145,55 +102,7 @@
                                 <asp:CommandField ShowSelectButton="True" ButtonType="Image" SelectImageUrl="~/images/BlueTheme/Select.png" />
                             </Columns>
                         </asp:GridView>
-                        <%--<telerik:RadGrid ID="RadGrid2" runat="server" AutoGenerateColumns="False" 
-                            CellSpacing="0" DataSourceID="ObjAtrasados" GridLines="None" 
-                            Skin="Windows7"  DataKeyNames="Num_Proc,ID">
-                            <MasterTableView DataSourceID="ObjAtrasados">
-                                <CommandItemSettings ExportToPdfText="Export to PDF" />
-                                <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column">
-                                </RowIndicatorColumn>
-                                <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column">
-                                </ExpandCollapseColumn>
-                                <Columns>
-                                    <telerik:GridBoundColumn DataField="Num_Proc" 
-                                        FilterControlAltText="Filter column column" HeaderText="N° Proceso" 
-                                        SortExpression="Num_Proc" UniqueName="column">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Nom_Act" 
-                                        FilterControlAltText="Filter column1 column" HeaderText="Actividad" 
-                                        SortExpression="Nom_Act" UniqueName="column1">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Nom_Est" 
-                                        FilterControlAltText="Filter column2 column" HeaderText="Estado" 
-                                        SortExpression="Nom_Est" UniqueName="column2">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="DateTimeI" 
-                                        FilterControlAltText="Filter column3 column" HeaderText="Fecha y Hora Inicial" 
-                                        SortExpression="DateTimeI" UniqueName="column3">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Notas" 
-                                        FilterControlAltText="Filter column4 column" HeaderText="Notas" 
-                                        SortExpression="Notas" UniqueName="column4">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Ocupado" 
-                                        FilterControlAltText="Filter column5 column" HeaderText="Ocupado" 
-                                        SortExpression="Ocupado" UniqueName="column5">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridButtonColumn ButtonType="ImageButton" CommandName="select" 
-                                        ConfirmDialogType="RadWindow" FilterControlAltText="Filter column6 column" 
-                                        ImageUrl="~/images/BlueTheme/Select.png" UniqueName="column6">
-                                    </telerik:GridButtonColumn>
-                                </Columns>
-                                <EditFormSettings>
-                                    <EditColumn FilterControlAltText="Filter EditCommandColumn column">
-                                    </EditColumn>
-                                </EditFormSettings>
-                            </MasterTableView>
-                            <FilterMenu EnableImageSprites="False">
-                            </FilterMenu>
-                            <HeaderContextMenu CssClass="GridContextMenu GridContextMenu_Default">
-                            </HeaderContextMenu>
-                        </telerik:RadGrid>--%>
+                        
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="RadPageView3" runat="server">
                         <asp:GridView OnRowDataBound="GridView1_RowDataBound" ID="grdRecibir" runat="server"
@@ -251,9 +160,8 @@
                                         <asp:Label ID="LbVal" runat="server"  Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:HyperLinkField DataNavigateUrlFields="Cod_Sol" 
-                                    DataNavigateUrlFormatString="~/Procesos/HojaRuta/HojaRuta.aspx={0}&amp;tp='s'" 
-                                    HeaderText="Hoja de Ruta" />
+                                <asp:ButtonField ButtonType="Image" CommandName="hojaRutas" HeaderText="Hoja de Ruta" 
+                                    ImageUrl="~/images/2013/listcheck.png" Text="Diligenciar Hoja de Ruta" />
                                 <asp:CommandField ButtonType="Image" SelectImageUrl="~/images/Operaciones/Select.png"
                                     ShowSelectButton="True" />
                             </Columns>

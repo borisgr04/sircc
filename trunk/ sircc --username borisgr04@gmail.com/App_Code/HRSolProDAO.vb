@@ -46,12 +46,13 @@ Public Class HRSolProDAO
     End Sub
 
     Private Sub Update(Cod_Sol As String, obj As HRSolPro)
-        Me.querystring = " Update HRSolPro Set Fec_Doc=:Fec_Doc, Ide_Doc=:Ide_Doc,UsAp_M=:UsAp_M,UsBd=user,FecMod=sysdate Where Cod_Sol=:Cod_Sol And  Cod_Tip = :Cod_Tip"
+        Me.querystring = " Update HRSolPro Set Fec_Doc=:Fec_Doc, Ide_Doc=:Ide_Doc,UsAp_M=:UsAp_M,UsBd_m=user,FecMod=sysdate, Folios=:Folios Where Cod_Sol=:Cod_Sol And  Cod_Tip = :Cod_Tip"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":Cod_Sol", Cod_Sol)
         Me.AsignarParametroCadena(":Cod_Tip", obj.Cod_Tip)
         Me.AsignarParametroCadena(":Fec_Doc", obj.Fec_Doc)
         Me.AsignarParametroCadena(":Ide_Doc", obj.Ide_Doc)
+        Me.AsignarParametroCadena(":Folios", obj.Folios)
         Me.AsignarParametroCadena(":UsAp_M", Me.usuario)
         num_reg += EjecutarComando()
     End Sub
@@ -63,14 +64,15 @@ Public Class HRSolProDAO
         Me.AsignarParametroCadena(":Cod_Tip", obj.Cod_Tip)
         datatb = EjecutarConsultaDataTable()
         If datatb.Rows.Count = 0 Then
-            Me.querystring = " Insert Into HRSolPro (Cod_Sol, Cod_Tip, Fec_Doc, Ide_Doc, UsAp, UsBd, FecReg)"
-            Me.querystring += " Values (:Cod_Sol, :Cod_Tip, :Fec_Doc, :Ide_Doc, :UsAp, user, sysdate)"
+            Me.querystring = " Insert Into HRSolPro (Cod_Sol, Cod_Tip, Fec_Doc, Ide_Doc, UsAp, UsBd, FecReg, Folios)"
+            Me.querystring += " Values (:Cod_Sol, :Cod_Tip, :Fec_Doc, :Ide_Doc, :UsAp, user, sysdate,:Folios)"
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Sol", obj.Cod_Sol)
             Me.AsignarParametroCadena(":Cod_Tip", obj.Cod_Tip)
             Me.AsignarParametroCadena(":Fec_Doc", obj.Fec_Doc)
             Me.AsignarParametroCadena(":Ide_Doc", obj.Ide_Doc)
             Me.AsignarParametroCadena(":UsAp", Me.usuario)
+            Me.AsignarParametroCadena(":Folios", obj.Folios)
             num_reg += EjecutarComando()
             Msg += obj.Cod_Tip + "-"
             'Else

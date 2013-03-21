@@ -25,16 +25,25 @@ Partial Class Procesos_HojaRuta_HojaRuta
             Dim LbCodTip As Label = DirectCast(grow.FindControl("LbCodTip"), Label)
             Dim TxtFecDoc As RadDatePicker = DirectCast(grow.FindControl("TxtFecDoc"), RadDatePicker)
             Dim ChkSel As CheckBox = DirectCast(grow.FindControl("ChkSel"), CheckBox)
+            Dim txtFolios As RadNumericTextBox = DirectCast(grow.FindControl("txtFolios"), RadNumericTextBox)
             If ChkSel.Checked Then
                 Dim hr As New HRSolPro
                 If Not TxtFecDoc.SelectedDate Is Nothing Then
+                    hr.Fec_Doc = TxtFecDoc.SelectedDate
                     hr.Oper = "M"
                     hr.Ide_Doc = TxtIdeDoc.Text
                     hr.Fec_Doc = TxtFecDoc.SelectedDate
                     hr.Cod_Sol = TxtCodSol.Text
                     hr.Cod_Tip = LbCodTip.Text
+                    hr.Folios = txtFolios.Text
                     lhr.Add(hr)
+                Else
+                    'log += LbCodTip.Text + "-"
+                    LbCodTip.Font.Bold = True
+                    'hr.Fec_Doc = New Date(1900, 1, 1)
                 End If
+                    
+
             Else
                 Dim hr As New HRSolPro
                 hr.Oper = "D"
@@ -56,6 +65,7 @@ Partial Class Procesos_HojaRuta_HojaRuta
             Dim LbCodTip As Label = DirectCast(grow.FindControl("LbCodTip"), Label)
             Dim TxtFecDoc As RadDatePicker = DirectCast(grow.FindControl("TxtFecDoc"), RadDatePicker)
             Dim ChkSel As CheckBox = DirectCast(grow.FindControl("ChkSel"), CheckBox)
+            Dim txtFolios As RadNumericTextBox = DirectCast(grow.FindControl("txtFolios"), RadNumericTextBox)
             If ChkSel.Checked Then
                 Dim hr As New HRSolPro
                 If Not TxtFecDoc.SelectedDate Is Nothing Then
@@ -69,6 +79,7 @@ Partial Class Procesos_HojaRuta_HojaRuta
                 hr.Ide_Doc = TxtIdeDoc.Text
                 hr.Cod_Sol = TxtCodSol.Text
                 hr.Cod_Tip = LbCodTip.Text
+                hr.Folios = txtFolios.Text
                 LbCodTip.Font.Bold = False
                 lhr.Add(hr)
 
