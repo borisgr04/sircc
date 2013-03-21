@@ -6,6 +6,16 @@ Public Class HRSolPro
     Private _ide_Doc As String
     Private _cod_Sol As String
     Private _Cod_Tip As String
+    Private _Folios As Integer
+
+    Public Property Folios As String
+        Get
+            Return _Folios
+        End Get
+        Set(value As String)
+            _Folios = value
+        End Set
+    End Property
 
 
     Public Property Oper As String

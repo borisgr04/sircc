@@ -33,7 +33,7 @@ Public Class Hojas_Rutas
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetRecords(Cod_Sol As String, Tip As String, Eta As String, FEtapa As Boolean) As DataTable
-        querystring = " Select nom_eta, des_tip AS nom_doc,  cod_eta, td.cod_tip, est_tip, cod_eta,Doc_Oblig,  Nvl(cod_Sol,0) cod_Sol,Fec_Doc,Ide_Doc From vTip_Doc td LEFT JOIN HRSolPro hrs On td.Cod_Tip=hrs.cod_tip Where  Proceso = 'SI' "
+        querystring = " Select nom_eta, des_tip AS nom_doc,  cod_eta, td.cod_tip, est_tip, cod_eta,Doc_Oblig,  Nvl(cod_Sol,0) cod_Sol,Fec_Doc,Ide_Doc, Folios From vTip_Doc td LEFT JOIN HRSolPro hrs On td.Cod_Tip=hrs.cod_tip And hrs.Cod_Sol='" + Cod_Sol + "' Where  Proceso = 'SI' "
         Dim Filtro As String = ""
         If Tip = "SIN" Then
             querystring += " And hrs.Cod_Sol Is Null "

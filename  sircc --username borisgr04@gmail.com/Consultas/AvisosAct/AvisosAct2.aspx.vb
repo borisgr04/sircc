@@ -146,4 +146,16 @@ Partial Class Consultas_AvisosAct_AvisosAct2
     Protected Sub IBtnPanelD_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IBtnPanelD.Click
         Response.Redirect(HyperLink1.NavigateUrl)
     End Sub
+
+    Protected Sub grdRevisar_RowCommand(sender As Object, e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdRevisar.RowCommand
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Me.grdRevisar.SelectedIndex = index
+        Dim Num_Proc = grdRevisar.DataKeys(grdRevisar.SelectedIndex).Values(0).ToString()
+        If e.CommandName = "hojaRutas" Then
+            Redireccionar_Pagina("/Procesos/HojaRuta/HojaRuta.aspx?Codigo=" + Num_Proc + "&tp=s")
+        End If
+
+
+
+    End Sub
 End Class
