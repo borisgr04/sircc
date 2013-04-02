@@ -8,7 +8,11 @@
     <table >
         <tr>
             <td>
-                &nbsp;</td>
+                Vigencia</td>
+            <td>
+                <asp:DropDownList ID="CmbVigencia" runat="server" Width="140px" 
+                    DataSourceID="ObjVigencias" DataTextField="Year_Vig" 
+                    DataValueField="Year_Vig"></asp:DropDownList></td>
             <td>
                 &nbsp;</td>
         </tr>
@@ -20,6 +24,8 @@
             <td>
     <asp:TextBox ID="TxtCdp" runat="server" AutoPostBack="True"></asp:TextBox>
             </td>
+            <td>
+                &nbsp;</td>
         </tr>
     </table>
     <br />
@@ -46,7 +52,8 @@
     <asp:ObjectDataSource ID="ObjRPT_CDP_DEP" runat="server" 
         SelectMethod="GetCdp_Dep" TypeName="Rpt_Cdp_Dep">
         <SelectParameters>
-            <asp:Parameter DefaultValue="2012" Name="Vigencia" />
+            <asp:ControlParameter ControlID="CmbVigencia" DefaultValue="" Name="Vigencia" 
+                PropertyName="Text" />
             <asp:ControlParameter ControlID="TxtCdp" DefaultValue="" Name="LstCdp" 
                 PropertyName="Text" />
         </SelectParameters>
@@ -55,11 +62,14 @@
     <asp:ObjectDataSource ID="ObjRPT_CDP_DEP_CLASE" runat="server" 
         SelectMethod="GetCdp_Dep_Clase" TypeName="Rpt_Cdp_Dep">
         <SelectParameters>
-            <asp:Parameter DefaultValue="2012" Name="Vigencia" />
+            <asp:ControlParameter ControlID="CmbVigencia" DefaultValue="" Name="Vigencia" 
+                PropertyName="Text" />
             <asp:ControlParameter ControlID="TxtCdp" DefaultValue="" Name="LstCdp" 
                 PropertyName="Text" />
         </SelectParameters>
     </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetRecords" TypeName="Vigencias"></asp:ObjectDataSource>
     <br />
 </asp:Content>
 

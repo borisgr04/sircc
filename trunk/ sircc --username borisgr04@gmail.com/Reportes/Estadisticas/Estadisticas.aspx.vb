@@ -13,4 +13,10 @@ Partial Class Reportes_Estadisticas_Estadisticas
         'Title = Util.FormatCVS(TxtCdp.Text)
 
     End Sub
+
+    Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+
+        End If
+    End Sub
 End Class
