@@ -9,6 +9,19 @@ namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
         EnableScriptLocalization="true">
     </ajaxtoolkit:toolkitscriptmanager>
         &nbsp;
+          <table >
+        <tr>
+            <td>
+                Vigencia</td>
+            <td>
+                <asp:DropDownList ID="CmbVigencia" runat="server" Width="140px" 
+                    DataSourceID="ObjVigencias" DataTextField="Year_Vig" 
+                    DataValueField="Year_Vig"></asp:DropDownList></td>
+        </tr>
+    </table>
+
+    <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetRecords" TypeName="Vigencias"></asp:ObjectDataSource>
         <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" 
             Font-Size="8pt" InteractiveDeviceInfos="(Colección)" 
             WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="800px">
@@ -21,7 +34,9 @@ namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
         <asp:ObjectDataSource ID="ObjMesDepClase" runat="server" 
             SelectMethod="GetMesDepClase" TypeName="RptEstMes">
             <SelectParameters>
-                <asp:Parameter DefaultValue="2012" Name="vigencia" />
+                
+                <asp:ControlParameter ControlID="CmbVigencia" DefaultValue="" Name="Vigencia" 
+                PropertyName="Text" />
             </SelectParameters>
         </asp:ObjectDataSource>
         <br />
