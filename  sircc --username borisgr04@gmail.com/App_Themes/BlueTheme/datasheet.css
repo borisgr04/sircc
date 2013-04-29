@@ -43,9 +43,10 @@
     border-bottom:1px solid #999;
     background-color:#fff;
 }
-.datatable TD INPUT {
-    border:0px none;
-    width:95%;
+.datatable TD INPUT,TEXTAREA {
+    border-style: none;
+    border-color: inherit;
+    border-width: 0px;
 }
 .datatable TH.first {
     text-align:center;

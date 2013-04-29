@@ -4,6 +4,7 @@ Partial Class Consultas_Pcontratos_PContratosCord
 
     Protected Sub FiltroPConP1_FiltrarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles FiltroPConP1.FiltrarClicked
         ValFiltro.Value = FiltroPConP1.Filtro
+
         ReportViewer1.LocalReport.Refresh()
     End Sub
 

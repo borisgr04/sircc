@@ -100,7 +100,7 @@ Partial Class Procesos_HojaRuta_HojaRuta
         If e.Row.RowType = DataControlRowType.DataRow Then
 
             'DataBinder.Eval(e.Row.DataItem, "Cod_Eta")
-
+            Dim ChkSel As CheckBox = DirectCast(e.Row.FindControl("ChkSel"), CheckBox)
             Dim TxtFecDoc As RadDatePicker = DirectCast(e.Row.FindControl("TxtFecDoc"), RadDatePicker)
             'TxtFecDoc.SelectedDate = e.Row.DataItem(
             Try
@@ -108,6 +108,9 @@ Partial Class Procesos_HojaRuta_HojaRuta
                     If CDate(DataBinder.Eval(e.Row.DataItem, "FEC_DOC")).Year > 1950 Then
                         TxtFecDoc.SelectedDate = CDate(DataBinder.Eval(e.Row.DataItem, "FEC_DOC"))
                     End If
+                End If
+                If DataBinder.Eval(e.Row.DataItem, "Doc_Oblig") = "S" Then
+                    ChkSel.Checked = True
                 End If
             Catch ex As Exception
 

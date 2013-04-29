@@ -39,6 +39,9 @@ Partial Class CtrlUsr_FiltroPCon_FiltroPConP
 
     Sub FiltrarD()
         Dim cFiltro As String = ""
+        If (Me.ChkVigencia.Checked = True) Then
+            Util.AddFiltro(cFiltro, "Vig_Con=" + Me.CmbVigencia.SelectedValue + "")
+        End If
         If (Me.ChkNProc.Checked = True) Then
             Me.TxtNProc.Text = UCase(Me.TxtNProc.Text)
             Util.AddFiltro(cFiltro, "UPPER(Pro_Sel_Nro) Like '%" + Me.TxtNProc.Text + "%'")
@@ -61,7 +64,7 @@ Partial Class CtrlUsr_FiltroPCon_FiltroPConP
             Util.AddFiltro(cFiltro, "UsuEncargado = '" + Me.CboEnc.SelectedValue + "'")
         End If
         Me.Filtro = cFiltro
-        'LbFiltro.Text = cFiltro
+        LbFiltro.Text = cFiltro
 
     End Sub
 
