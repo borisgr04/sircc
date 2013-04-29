@@ -14,7 +14,9 @@
                     DataSourceID="ObjVigencias" DataTextField="Year_Vig" 
                     DataValueField="Year_Vig"></asp:DropDownList></td>
             <td>
-                &nbsp;</td>
+    <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetRecords" TypeName="Vigencias"></asp:ObjectDataSource>
+            </td>
         </tr>
         <tr>
             <td>
@@ -68,8 +70,6 @@
                 PropertyName="Text" />
         </SelectParameters>
     </asp:ObjectDataSource>
-    <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="GetRecords" TypeName="Vigencias"></asp:ObjectDataSource>
     <br />
 </asp:Content>
 

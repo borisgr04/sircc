@@ -122,7 +122,7 @@
                 <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt"
                     InteractiveDeviceInfos="(Collection)" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt"
                     Width="100%">
-                    <LocalReport ReportPath="Reportes\HojaRuta\RptHR.rdlc">
+                    <LocalReport ReportPath="Rpt\HojaRuta\RptHR.rdlc">
                         <DataSources>
                             <rsweb:ReportDataSource DataSourceId="ObjHRSolPro" Name="DataSet1" />
                             <rsweb:ReportDataSource DataSourceId="ObjSolPro" Name="DataSet2" />

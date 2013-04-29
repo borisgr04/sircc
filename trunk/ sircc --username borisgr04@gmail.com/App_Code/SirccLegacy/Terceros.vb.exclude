@@ -1,0 +1,366 @@
+Imports Microsoft.VisualBasic
+Imports oracle.DataAccess.Client
+Imports oracle.DataAccess.Types
+Imports System.Data
+Imports System.ComponentModel
+
+Public Class Terceros
+    Inherits BDDatos
+
+    Public Function Insert(ByVal TER_TDOC As String, ByVal TER_NIT As String, ByVal TER_DVER As String, _
+    ByVal TER_NOM As String, ByVal TER_TIP As String, ByVal TER_MPIO As String, _
+    ByVal TER_EMAI As String, ByVal TER_TEL As String, ByVal TER_DIR As String, _
+    ByVal TER_CED As String, ByVal TER_REP As String, ByVal TER_USU As String, ByVal TER_TUS As String, _
+    ByVal TER_EST As String, ByVal TER_OBS As String) As String
+
+        Dim na As Integer
+        Me.AbrirDB()
+        Try
+            Dim dbCommand As New OracleCommand
+            dbCommand.Connection = dbConnection
+
+            dbCommand.CommandText = "INSERT INTO TERCEROS(TER_TDOC, TER_NIT, TER_DVER, TER_NOM, TER_TIP, TER_MPIO, TER_EMAI, TER_TEL, TER_DIR, TER_CED, TER_REP, TER_USU, TER_TUS,TER_FREG, TER_FNOV,  TER_EST, TER_OBS, TER_USAP, TER_USBD )"
+
+            dbCommand.CommandText += "VALUES(:TER_TDOC, :TER_NIT, :TER_DVER, :TER_NOM, :TER_TIP, :TER_MPIO, :TER_EMAI, :TER_TEL, :TER_DIR, :TER_CED, :TER_REP, :TER_USU, :TER_TUS,SYSDATE, SYSDATE,  :TER_EST, :TER_OBS, :TER_USAP, USER)"
+
+
+            dbCommand.Parameters.Add("TER_TDOC", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_TDOC
+            dbCommand.Parameters.Add("TER_NIT", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_NIT
+            dbCommand.Parameters.Add("TER_DVER", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_DVER
+            dbCommand.Parameters.Add("TER_NOM", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_NOM
+            dbCommand.Parameters.Add("TER_TIP", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_TIP
+            dbCommand.Parameters.Add("TER_MPIO", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_MPIO
+            dbCommand.Parameters.Add("TER_EMAI", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_EMAI
+            dbCommand.Parameters.Add("TER_TEL", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_TEL
+            dbCommand.Parameters.Add("TER_DIR", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_DIR
+            dbCommand.Parameters.Add("TER_CED", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_CED
+            dbCommand.Parameters.Add("TER_REP", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_REP
+            dbCommand.Parameters.Add("TER_USU", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_USU
+            dbCommand.Parameters.Add("TER_TUS", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_TUS
+            'dbCommand.Parameters.Add("TER_FREG", OracleDbType.Varchar2, ParameterDirection.Input).Value = SYSDATE
+            ' dbCommand.Parameters.Add("TER_FNOV", OracleDbType.Varchar2, ParameterDirection.Input).Value =
+            'dbCommand.Parameters.Add("TER_FFIN", OracleDbType.Varchar2, ParameterDirection.Input).Value =
+            dbCommand.Parameters.Add("TER_EST", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_EST
+            dbCommand.Parameters.Add("TER_OBS", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_OBS
+            dbCommand.Parameters.Add("TER_USAP", OracleDbType.Varchar2, ParameterDirection.Input).Value = Me.usuario
+            'dbCommand.Parameters.Add("TER_USBD", OracleDbType.Varchar2, ParameterDirection.Input).Value = 
+
+            
+            na = dbCommand.ExecuteNonQuery()
+            'Dim objmn As DBMenu = New DBMenu
+            'If TER_TUS = "AR" Then
+            ' objmn.AsigPerfilUser("AGENTER", TER_NIT)
+            'End If
+
+            Me.Msg = MsgOk + "<BR> Número de Filas Afectadas " + na.ToString
+            Me.lErrorG = False
+        Catch exo As OracleException
+            Me.lErrorG = True
+            Me.Msg = "Error de Datos:" + exo.Message
+        Catch ex As Exception
+            Me.lErrorG = True
+            Me.Msg = "Error de App:" + ex.Message
+        Finally
+            Me.CerrarBD()
+        End Try
+
+        Return Msg
+
+    End Function
+    Public Function Update(ByVal OldNit As String, ByVal OldTDoc As String, _
+    ByVal OldDver As String, ByVal TER_TDOC As String, ByVal TER_NIT As String, ByVal TER_DVER As String, _
+ ByVal TER_NOM As String, ByVal TER_TIP As String, ByVal TER_MPIO As String, _
+ ByVal TER_EMAI As String, ByVal TER_TEL As String, ByVal TER_DIR As String, _
+ ByVal TER_CED As String, ByVal TER_REP As String, ByVal TER_USU As String, ByVal TER_TUS As String, _
+ ByVal TER_EST As String, ByVal TER_OBS As String) As String
+        Dim na As String
+        Dim dig As String
+        Me.AbrirDB()
+        Try
+            Dim dbCommand As New OracleCommand
+            dbCommand.Connection = dbConnection
+
+            If OldDver <> "" Then
+                dig = "' and TER_DVER='" + OldDver + "'"
+            Else
+                dig = "'"
+            End If
+            dbCommand.CommandText = "UPDATE TERCEROS SET TER_TDOC=:TER_TDOC, TER_NIT=:TER_NIT, TER_DVER=:TER_DVER, TER_NOM=:TER_NOM, TER_TIP=:TER_TIP, TER_MPIO=:TER_MPIO, TER_EMAI=:TER_EMAI, TER_TEL=:TER_TEL, TER_DIR=:TER_DIR, TER_CED=:TER_CED, TER_REP=:TER_REP, TER_USU=:TER_USU, TER_TUS=:TER_TUS, TER_FNOV=SYSDATE, TER_EST=:TER_EST, TER_OBS=:TER_OBS, TER_USAP=:TER_USAP, TER_USBD=USER WHERE TER_NIT='" + OldNit + "' and TER_TDOC='" + OldTDoc + dig
+
+            dbCommand.Parameters.Add("TER_TDOC", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_TDOC
+            dbCommand.Parameters.Add("TER_NIT", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_NIT
+            dbCommand.Parameters.Add("TER_DVER", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_DVER
+            dbCommand.Parameters.Add("TER_NOM", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_NOM
+            dbCommand.Parameters.Add("TER_TIP", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_TIP
+            dbCommand.Parameters.Add("TER_MPIO", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_MPIO
+            dbCommand.Parameters.Add("TER_EMAI", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_EMAI
+            dbCommand.Parameters.Add("TER_TEL", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_TEL
+            dbCommand.Parameters.Add("TER_DIR", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_DIR
+            dbCommand.Parameters.Add("TER_CED", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_CED
+            dbCommand.Parameters.Add("TER_REP", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_REP
+            dbCommand.Parameters.Add("TER_USU", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_USU
+            dbCommand.Parameters.Add("TER_TUS", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_TUS
+            'dbCommand.Parameters.Add("TER_FREG", OracleDbType.Varchar2, ParameterDirection.Input).Value = SYSDATE
+            ' dbCommand.Parameters.Add("TER_FNOV", OracleDbType.Varchar2, ParameterDirection.Input).Value =
+            'dbCommand.Parameters.Add("TER_FFIN", OracleDbType.Varchar2, ParameterDirection.Input).Value =
+            dbCommand.Parameters.Add("TER_EST", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_EST
+            dbCommand.Parameters.Add("TER_OBS", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_OBS
+            dbCommand.Parameters.Add("TER_USAP", OracleDbType.Varchar2, ParameterDirection.Input).Value = Membership.GetUser().UserName
+            'dbCommand.Parameters.Add("TER_USBD", OracleDbType.Varchar2, ParameterDirection.Input).Value = 
+
+            na = dbCommand.ExecuteNonQuery()
+
+            na = dbCommand.ExecuteNonQuery()
+
+            'Dim objmn As DBMenu = New DBMenu
+            'If TER_TUS = "AR" Then
+            'objmn.AsigPerfilUser("AGENTER", TER_NIT)
+            'End If
+
+            Me.Msg = MsgOk + " Registros Actualizados [" + na + "]"
+            Me.lErrorG = False
+        Catch exo As OracleException
+            Me.lErrorG = True
+            Me.Msg = "Error de Datos:" + exo.Message
+        Catch ex As Exception
+            Me.lErrorG = True
+            Me.Msg = "Error de App:" + ex.Message
+        Finally
+            Me.CerrarBD()
+        End Try
+        Return Msg
+    End Function
+
+    Public Function Inactivar(ByVal TER_NIT As String, ByVal TER_TDOC As String, ByVal TER_DVER As String, ByVal TER_EST As String, ByVal TER_OBS As String) As String
+        Dim x As String
+
+        'If (CInt(COD) = 1) Or (CInt(COD) = 2) Or (CInt(COD) = 3) Then
+        'Return "Esta Clase de Impuesto, No se puede eliminar"
+        'End If
+        Me.AbrirDB()
+        Try
+            Dim dbCommand As New OracleCommand
+            dbCommand.Connection = dbConnection
+            dbCommand.CommandText = "UPDATE TERCEROS SET  TER_EST=:TER_EST, TER_OBS=:TER_OBS, TER_FFIN=SYSDATE, TER_USAP=:TER_USAP, TER_USBD=USER WHERE TER_NIT=" + TER_NIT + " and TER_TDOC=" + TER_TDOC + " and TER_DVER=" + TER_DVER
+            dbCommand.Parameters.Add("TER_EST", OracleDbType.Varchar2, ParameterDirection.Input).Value = "IN"
+            dbCommand.Parameters.Add("TER_OBS", OracleDbType.Varchar2, ParameterDirection.Input).Value = TER_OBS
+            dbCommand.Parameters.Add("TER_USAP", OracleDbType.Varchar2, ParameterDirection.Input).Value = Membership.GetUser().UserName
+
+
+            ' dbCommand.CommandText = "DELETE IMPUESTOS WHERE IMP_COD='" + IMP_COD + "'"
+            x = dbCommand.ExecuteNonQuery()
+            Me.Msg = MsgOk + " # Registros Eliminados:" + x.ToString
+            Me.lErrorG = False
+        Catch exo As OracleException
+            Me.lErrorG = True
+            Me.Msg = "Error de Datos:" + exo.Message
+        Catch ex As Exception
+            Me.lErrorG = True
+            Me.Msg = "Error de App:" + ex.Message
+        Finally
+            Me.CerrarBD()
+        End Try
+        Return Msg
+    End Function
+    Public Function Delete(ByVal TER_NIT As String) As String
+        Dim x As String
+
+        'If (CInt(COD) = 1) Or (CInt(COD) = 2) Or (CInt(COD) = 3) Then
+        'Return "Esta Clase de Impuesto, No se puede eliminar"
+        'End If
+        Me.AbrirDB()
+        Try
+            Dim dbCommand As New OracleCommand
+            dbCommand.Connection = dbConnection
+
+            dbCommand.CommandText = "DELETE TERCEROS WHERE TER_NIT='" + TER_NIT + "'"
+            x = dbCommand.ExecuteNonQuery()
+            Me.Msg = MsgOk + " # Registros Eliminados:" + x.ToString
+            Me.lErrorG = False
+        Catch exo As OracleException
+            Me.lErrorG = True
+            Me.Msg = "Error de Datos:" + exo.Message
+        Catch ex As Exception
+            Me.lErrorG = True
+            Me.Msg = "Error de App:" + ex.Message
+        Finally
+            Me.CerrarBD()
+        End Try
+        Return Msg
+    End Function
+
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetRecords() As DataTable
+        Me.AbrirDB()
+        Dim queryString As String = "SELECT * FROM VTERCEROS "
+        Dim dbCommand As New OracleCommand(queryString, dbConnection)
+        Dim dataAdapter As New OracleDataAdapter
+        dataAdapter.SelectCommand = dbCommand
+        Dim dataTb As DataTable = New DataTable
+        dataAdapter.Fill(dataTb)
+        Me.CerrarBD()
+        Return dataTb
+
+    End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+     Public Overloads Function GetRecords(ByVal busc As String, ByVal tipo As String) As DataTable
+
+        Me.AbrirDB()
+        '++++++++++ TIPO: 
+        '** AR -> AGENTE RECAUDADOR
+        '** RT -> RENTAS
+        '** OT -> OTRO - PD o P
+        '**
+        Dim tp As String = "OT"
+        If (tipo = "AR") Or (tipo = "RT") Then
+            tp = tipo
+        End If
+        Dim queryString As String
+        If busc <> "" Then
+            If tipo = "" Then
+                queryString = "SELECT * FROM VTERCEROS WHERE TER_EST='AC' And (ter_nit like '%" + busc + "%') OR (upper(ter_nom) like '%" + UCase(busc) + "%') "
+            Else
+                queryString = "SELECT * FROM VTERCEROS WHERE TER_EST='AC' And (ter_nit like '%" + busc + "%') OR (upper(ter_nom) like '%" + UCase(busc) + "%') and ter_tus='" + tp + "'"
+            End If
+        Else
+            queryString = "SELECT * FROM VTERCEROS WHERE 1<>1"
+        End If
+        Dim dbCommand As New OracleCommand(queryString, dbConnection)
+        Dim dataAdapter As New OracleDataAdapter
+        dataAdapter.SelectCommand = dbCommand
+        Dim dataTb As DataTable = New DataTable
+        dataAdapter.Fill(dataTb)
+        Me.CerrarBD()
+        Return dataTb
+
+    End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+     Public Overloads Function GetRecords(ByVal busc As String) As DataTable
+
+        Me.AbrirDB()
+        Dim queryString As String = "SELECT * FROM VTERCEROS WHERE (ter_nit like '%" + busc + "%') OR (upper(ter_nom) like '%" + UCase(busc) + "%')"
+        Dim dbCommand As New OracleCommand(queryString, dbConnection)
+        Dim dataAdapter As New OracleDataAdapter
+        dataAdapter.SelectCommand = dbCommand
+        Dim dataTb As DataTable = New DataTable
+        dataAdapter.Fill(dataTb)
+        Me.CerrarBD()
+        Return dataTb
+
+    End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetByTer(ByVal TER_NIT As String, ByVal TER_MUN As String, ByVal TER_NOM As String, ByVal TER_TDOC As String) As DataTable
+        Me.AbrirDB()
+        Dim queryString As String = "SELECT * FROM vTERCEROS WHERE TER_NIT='" + TER_NIT + "'"
+        Dim dbCommand As New OracleCommand(queryString, dbConnection)
+        Dim dataAdapter As New OracleDataAdapter
+        dataAdapter.SelectCommand = dbCommand
+        Dim dataTb As DataTable = New DataTable
+        dataAdapter.Fill(dataTb)
+        Me.CerrarBD()
+        Return dataTb
+
+    End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByIde(ByVal IDE As String) As DataTable
+
+        Me.AbrirDB()
+        Dim queryString As String = "SELECT * FROM vTerceros WHERE Ter_NIT='" + IDE + "'"
+        Dim dbCommand As New OracleCommand(queryString, dbConnection)
+        Dim dataAdapter As New OracleDataAdapter
+        dataAdapter.SelectCommand = dbCommand
+        Dim dataTb As DataTable = New DataTable
+        dataAdapter.Fill(dataTb)
+        Me.CerrarBD()
+        Return dataTb
+
+    End Function
+    
+    Public Overloads Function GetByIde(ByVal Nit As String, ByVal DV As String, ByVal TUS As String) As DataTable
+
+        Me.AbrirDB()
+        Dim queryString As String = "SELECT * FROM vTerceros WHERE Ter_NIT='" + Nit + "' And Ter_Dver='" + DV + "' And Ter_TUs='" + TUS + "'"
+        Dim dbCommand As New OracleCommand(queryString, dbConnection)
+        Dim dataAdapter As New OracleDataAdapter
+        dataAdapter.SelectCommand = dbCommand
+        Dim dataTb As DataTable = New DataTable
+        dataAdapter.Fill(dataTb)
+        Me.CerrarBD()
+        Return dataTb
+
+    End Function
+
+
+    Public Function GetAgentesSinUsuario() As DataTable
+
+        Me.AbrirDB()
+        Dim queryString As String = "Select * from vAgentesSinUsuario"
+        Dim dbCommand As New OracleCommand(queryString, dbConnection)
+        Dim dataAdapter As New OracleDataAdapter
+        dataAdapter.SelectCommand = dbCommand
+        Dim dataTb As DataTable = New DataTable
+        dataAdapter.Fill(dataTb)
+        Me.CerrarBD()
+        Return dataTb
+
+    End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+Public Overloads Function GetByUser(Optional ByVal User As String = "") As DataTable
+
+        'Si no recibe ningún Usuario, buscará los Datos del Usuario Conectado
+
+        If User = "" Then
+            User = Me.usuario
+        End If
+
+        Me.AbrirDB()
+        Dim queryString As String = "SELECT * FROM vTerceros WHERE ter_est='AC' And upper(Ter_usu)='" + UCase(User) + "'"
+        Dim dbCommand As New OracleCommand(queryString, dbConnection)
+        Dim dataAdapter As New OracleDataAdapter
+        dataAdapter.SelectCommand = dbCommand
+        Dim dataTb As DataTable = New DataTable
+        dataAdapter.Fill(dataTb)
+        Me.CerrarBD()
+        Return dataTb
+
+    End Function
+
+
+
+    
+    Public Function DigitoNIT(ByVal sNit As String) As String
+        On Error Resume Next
+        '<-- Devuelve el Digito de verificación del NIT.
+        Dim sTMP, sTmp1, sTMP2 As String
+        Dim DigitoNIT0 As String = ""
+        Dim i As Integer
+        Dim iResiduo As Integer
+        Dim iChequeo As Integer
+        Dim iPrimos(15) As Integer '<- Defino el Arreglo de los Primos.
+        iPrimos(1) = 3 : iPrimos(2) = 7 : iPrimos(3) = 13 : iPrimos(4) = 17 : iPrimos(5) = 19
+        iPrimos(6) = 23 : iPrimos(7) = 29 : iPrimos(8) = 37 : iPrimos(9) = 41 : iPrimos(10) = 43
+        iPrimos(11) = 47 : iPrimos(12) = 53 : iPrimos(13) = 59 : iPrimos(14) = 67 : iPrimos(15) = 71
+        iChequeo = 0 : iResiduo = 0
+        For i = 0 To Len(Trim(sNit)) - 1
+            sTMP = Mid(sNit, Len(Trim(sNit)) - i, 1)
+            iChequeo = iChequeo + (Val(sTMP) * iPrimos(i + 1))
+            'MsgBox Val(sTmp), vbCritical, iPrimos(i + 1)
+        Next i
+        iResiduo = iChequeo Mod 11
+        If iResiduo <= 1 Then
+            If iResiduo = 0 Then DigitoNIT = 0
+            If iResiduo = 1 Then DigitoNIT = 1
+        Else
+            DigitoNIT0 = 11 - iResiduo
+        End If
+        Return DigitoNIT0
+        'MsgBox DigitoNIT
+        'By GeNeTiKo
+    End Function
+
+
+End Class
+
+

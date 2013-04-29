@@ -10,6 +10,21 @@
     </style>
   
     <table style="width: 80%">
+     <tr>
+            <td style="width: 20px">
+                            &nbsp;</td>
+            <td class="stylefp">
+                            <asp:CheckBox ID="ChkVigencia" runat="server" AutoPostBack="True" 
+                                Text="Vigencia" />
+                            
+                        </td>
+            <td>
+                <asp:DropDownList ID="CmbVigencia" runat="server" Width="140px" 
+                    DataSourceID="ObjVigencias" DataTextField="Year_Vig" 
+                    DataValueField="Year_Vig"></asp:DropDownList> <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetRecords" TypeName="Vigencias"></asp:ObjectDataSource>
+                        </td>
+        </tr>
         <tr>
             <td style="width: 20px">
                             &nbsp;</td>
@@ -99,8 +114,8 @@
                         </td>
         </tr>
         <tr>
-            <td colspan="3">
-                <asp:Button ID="BtnFiltrar" runat="server" Text="Filtrar" Visible="False" />
+            <td colspan="3" style="text-align: center">
+                <asp:Button ID="BtnFiltrar" runat="server" Text="Filtrar" />
                             <asp:Label ID="LbFiltro" runat="server"></asp:Label>
                         </td>
         </tr>

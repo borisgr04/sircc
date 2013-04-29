@@ -11,7 +11,8 @@
             EnableScriptGlobalization="True">
         </ajaxToolkit:ToolkitScriptManager>
 
-     <div class="demoheading">REPORTE DE PROCESOS</div>
+     <div class="demoheading">REPORTE DE PROCESOS X DELEGACIÓN</div>
+        
         <uc2:FiltroPConP ID="FiltroPConP1" runat="server" />
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -34,18 +35,7 @@
         <asp:ObjectDataSource ID="ObjPCont" runat="server" 
             OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecordsRep" 
             TypeName="Con_PContratos" InsertMethod="InsertP">
-            <InsertParameters>
-                <asp:Parameter Name="COD_TPRO" Type="String" />
-                <asp:Parameter Name="OBJ_CON" Type="String" />
-                <asp:Parameter Name="DEP_CON" Type="String" />
-                <asp:Parameter Name="DEP_PCON" Type="String" />
-                <asp:Parameter Name="VIG_CON" Type="Decimal" />
-                <asp:Parameter Name="TIP_CON" Type="String" />
-                <asp:Parameter Name="STIP_CON" Type="String" />
-                <asp:Parameter Name="FEC_RECIBIDO" Type="DateTime" />
-                <asp:Parameter Name="NUM_SOL" Type="String" />
-            </InsertParameters>
-            <SelectParameters>
+          <SelectParameters>
                 <asp:ControlParameter ControlID="ValFiltro" Name="Filtro" PropertyName="Value" 
                     Type="String" />
             </SelectParameters>
