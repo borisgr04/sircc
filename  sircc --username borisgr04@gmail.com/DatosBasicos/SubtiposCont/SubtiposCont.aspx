@@ -209,10 +209,9 @@
                 <asp:TextBox ID="Txt_Cod_Aux" runat="server" Width="107px"></asp:TextBox>
             </TD>
             <TD style="WIDTH: 100px; HEIGHT: 19px">
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
-                        ControlToValidate="Txt_Cod_Aux" ErrorMessage="Digite el código auxiliar">*</asp:RequiredFieldValidator></TD></TR>
+                    &nbsp;</TD></TR>
         <TR><TD style="WIDTH: 162px">
-                <asp:Label ID="Label7" runat="server" Text="Codigo Formato Contraloria"></asp:Label>
+                <asp:Label ID="Label7" runat="server" Text="Codigo Formato Contraloria" ToolTip="F20"></asp:Label>
             </TD>
             <TD style="WIDTH: 513px">
                 <asp:TextBox ID="Txt_Cod_For_Con" runat="server" Width="107px"></asp:TextBox>

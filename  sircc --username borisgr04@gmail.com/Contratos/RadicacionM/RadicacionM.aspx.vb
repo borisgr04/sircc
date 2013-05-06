@@ -243,7 +243,7 @@ Partial Class Contratos_RadicacionM_Default
             Me.TxtIde.Text = dt.Rows(0)("ide_con").ToString
             Me.TxtIdeRlc.Text = dt.Rows(0)("ide_rep").ToString
             Me.TxtCsor.Text = dt.Rows(0)("otr_cns").ToString
-            Me.TxtPla.Text = dt.Rows(0)("pla_eje_con").ToString
+
             Me.TxtPlapre.Text = dt.Rows(0)("nro_pla_con").ToString
             Me.CboTip.Enabled = False
             Me.CboTip.SelectedValue = dt.Rows(0)("tip_con").ToString
@@ -256,7 +256,6 @@ Partial Class Contratos_RadicacionM_Default
            
             Try
                 CboDepP.SelectedValue = dt.Rows(0)("dep_pcon").ToString
-                'TxtObj.Text = "asignar combop." + dt.Rows(0)("dep_pcon").ToString
             Catch ex As Exception
                 Me.MsgResult.Text = "El usuario no puede acceder al contrato " + TxtCodCon.Text
                 TxtObj.Text = MsgResult.Text
@@ -284,6 +283,7 @@ Partial Class Contratos_RadicacionM_Default
 
             Me.CboTPlazo.Text = dt.Rows(0)("TIPO_PLAZO").ToString
 
+            Me.TxtPla.Text = dt.Rows(0)("plazo1_eje_con").ToString ''toma el plazo  de ejecución de la primera casilla
             If Not (DBNull.Value Is dt.Rows(0)("TIPO_PLAZO2")) Then
                 Me.CboTPlazo3.Text = dt.Rows(0)("TIPO_PLAZO2").ToString
                 Me.TxtPlazo2.Text = dt.Rows(0)("PLAZO2_EJE_CON").ToString
