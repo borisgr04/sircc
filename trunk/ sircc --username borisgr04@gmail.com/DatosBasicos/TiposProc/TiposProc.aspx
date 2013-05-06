@@ -216,7 +216,7 @@
                     <asp:TextBox ID="txtNomNew" runat="server"></asp:TextBox></TD>
             <TD style="WIDTH: 100px; HEIGHT: 23px">
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                        ControlToValidate="txtNomNew" ErrorMessage="Digite Codigo Impuesto">*</asp:RequiredFieldValidator></TD></TR>
+                        ControlToValidate="txtNomNew" ErrorMessage="Requerido">*</asp:RequiredFieldValidator></TD></TR>
         <TR><TD style="WIDTH: 166px; HEIGHT: 18px">
                     <asp:Label ID="Label5" runat="server" Text="Abreviatura Proceso"></asp:Label>
                     </TD><TD style="WIDTH: 100px; HEIGHT: 18px">
@@ -224,7 +224,7 @@
                     </TD><TD style="WIDTH: 100px; HEIGHT: 18px">
                         
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
-                        ControlToValidate="txtNomNew" ErrorMessage="Digite Codigo Impuesto">*</asp:RequiredFieldValidator>
+                        ControlToValidate="txtNomNew" ErrorMessage="Requerido">*</asp:RequiredFieldValidator>
                     </TD></TR>
         <TR><TD style="WIDTH: 166px; HEIGHT: 19px">
                 <asp:Label ID="Label6" runat="server" Text="Estado"></asp:Label>
@@ -245,7 +245,7 @@
             </TD>
             <TD style="WIDTH: 100px"></TD></TR>
         <TR><TD style="WIDTH: 166px">
-                <asp:Label ID="Label8" runat="server" Text="Código Formato Contraloria"></asp:Label>
+                <asp:Label ID="Label8" runat="server" Text="Código Formato Contraloria" ToolTip="F20" ></asp:Label>
             </TD>
             <TD style="WIDTH: 100px">
                 <asp:TextBox ID="Txt_Cod_Con_Dep" runat="server"></asp:TextBox>

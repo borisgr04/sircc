@@ -2,117 +2,7 @@
 Partial Class Reportes_ParametrizadoF20_Default
     Inherits PaginaComun
 
-    'Protected Sub Generar_Reporte_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Generar_Reporte.Click
-
-    '    Response.Redirect("Rpt.aspx?sql=" + Server.UrlEncode(SqlReporte()) & "&tit=" + Server.UrlEncode(""))
-    'End Sub
-    
-
-    'Protected Sub BtnExport_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExport.Click
-
-    '    Me.HdSql.Value = SqlExcel()
-    '    GridView1.DataBind()
-    '    GridView1.Visible = True
-    '    ExportGridView(GridView1, "Formato_20_1a")
-    '    ''ExportarCSV2()
-    'End Sub
-
-
-
-    'Sub exportar_csv()
-
-    '    Dim str As String = ""
-    '    For m As Integer = 0 To GridView1.Rows.Count - 1
-    '        For n As Integer = 0 To GridView1.Columns.Count - 1
-    '            str = (GridView1.Rows(m).Cells(n).Text + ",")
-    '        Next
-    '    Next
-
-    '    str = (Environment.NewLine)
-
-    '    'Context.Response.[End]()
-    '    Dim attachment As String = String.Format("attachment; filename={0}.xls", "Boris")
-    '    Response.ClearContent()
-    '    Response.AddHeader("content-disposition", attachment)
-    '    Response.ContentType = "text/csv"
-    '    Response.Write("BORIS,ARTURO")
-    '    Response.End()
-    'End Sub
-
-    'Protected Sub ExportarCSV()
-    '    'Response.Clear()
-    '    Response.ClearContent()
-    '    Response.Buffer = True
-    '    Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.csv")
-    '    Response.Charset = ""
-    '    Response.ContentType = "text/csv"
-    '    Me.HdSql.Value = SqlExcel()
-
-    '    Dim obj As New Reportes
-    '    Dim dt As DataTable = obj.GetSql(SqlExcel())
-
-    '    GridView1.AllowPaging = False
-    '    GridView1.DataBind()
-    '    Response.Write(GridView1.Columns.Count)
-    '    Dim sb As New StringBuilder()
-    '    Dim k As Integer = 0
-    '    While k < GridView1.Columns.Count
-    '        sb.Append(GridView1.Columns(k).HeaderText + ","c)
-    '        System.Math.Max(System.Threading.Interlocked.Increment(k), k - 1)
-    '    End While
-    '    sb.Append(vbCr & vbLf)
-    '    Dim i As Integer = 0
-    '    While i < GridView1.Rows.Count
-    '        Dim k2 As Integer = 0
-    '        While k2 < GridView1.Columns.Count
-    '            sb.Append(GridView1.Rows(i).Cells(k2).Text + ","c)
-    '            System.Math.Max(System.Threading.Interlocked.Increment(k2), k2 - 1)
-    '        End While
-    '        sb.Append(vbCr & vbLf)
-    '        System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
-    '    End While
-    '    Response.Output.Write(sb.ToString())
-    '    Response.Flush()
-    '    Response.End()
-    'End Sub
-
-    'Protected Sub ExportarCSV2()
-    '    'Response.Clear()
-    '    Response.ClearContent()
-    '    Response.Buffer = True
-    '    Response.AddHeader("content-disposition", "attachment;filename=Formato20_1a.csv")
-    '    Response.Charset = ""
-    '    Response.ContentType = "text/csv"
-    '    'Me.HdSql.Value = SqlExcel()
-
-    '    Me.HdSql.Value = SqlExcel()
-    '    GridView1.DataBind()
-
-    '    Dim obj As New Reportes
-    '    Dim dt As DataTable = obj.GetSql(Me.HdSql.Value)
-
-    '    Dim sb As New StringBuilder()
-    '    Dim k As Integer = 0
-    '    While k < dt.Columns.Count
-    '        sb.Append(dt.Columns(k).ColumnName + ","c)
-    '        System.Math.Max(System.Threading.Interlocked.Increment(k), k - 1)
-    '    End While
-    '    sb.Append(vbCr & vbLf)
-    '    Dim i As Integer = 0
-    '    While i < dt.Rows.Count
-    '        Dim k2 As Integer = 0
-    '        While k2 < dt.Columns.Count
-    '            sb.Append(dt.Rows(i)(k2).ToString + ","c)
-    '            System.Math.Max(System.Threading.Interlocked.Increment(k2), k2 - 1)
-    '        End While
-    '        sb.Append(vbCr & vbLf)
-    '        System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
-    '    End While
-    '    Response.Output.Write(sb.ToString())
-    '    Response.Flush()
-    '    Response.End()
-    'End Sub
-
+ 
 
     Protected Function genFiltro() As String
 
@@ -199,34 +89,14 @@ Partial Class Reportes_ParametrizadoF20_Default
 
         If (ChkVig.Checked = True) Then
             Util.AddFiltro(cFiltro, "vig_con='" + TxtVig.Text + "'")
-            '        Else
-            '           Dim v As String = Request.Cookies("contratacion")("vigencia")
-            '          Util.AddFiltro(cFiltro, "vig_con='" + v.ToString + "'")
-        End If
+         End If
         If cFiltro <> String.Empty Then
             cFiltro = " Where " + cFiltro
         End If
-        'strSql = "SELECT *  FROM VCONTRATOS_RUBROS2  " + cFiltro + " Order by Numero"
-        'strSql = "SELECT *  FROM VCONTRATOSC2  " + cFiltro + " Order by Numero"
-        'strSql = "SELECT * FROM vcontratosc2 c  LEFT JOIN (SELECT   cod_con, COUNT (*) nro_adi, Nvl(SUM (Nvl(pla_eje_adi,0)),0) pla_adi,Nvl(SUM(Nvl(val_adi,0)),0) val_adi FROM adiciones GROUP BY cod_con) a ON c.numero = a.cod_con " + cFiltro + " ORDER BY numero"
-
+  
 
         Return cFiltro
     End Function
-
-    'Protected Function SqlReporte() As String
-
-    '    Dim cFiltro As String = genFiltro()
-    '    Dim strSql As String
-
-    '    strSql = "SELECT c.* FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
-    '    'strSql = "Select Numero, pro_ctr_f20_1a MODALIDAD_DE_SELECCION,sti_ctr_f20_1a CLASE,OBJ_CON OBJETO,VAL_CON VALOR_CONTRATO,IDE_CON IDENTIFICACION_CONTRATISTA,CONTRATISTA NOMBRE_CONTRATISTA, FEC_SUS_CON FECHA_FIRMA,IDE_INT IDENTIFICADOR_INTERVENTOR, NOM_TER NOMBRE_COMPLETO_INTERVENTOR,'' TIPO_VINCULACION,'DIAS' UNIDAD_DE_EJECUCIÓN, PLA_EJE_CON NUMERO_UNIDADES_EJECUCIÓN,to_char(FEC_APR_POL,'yyyy/mm/dd') FECHA_APROBACIÓN_POLIZA,NVL(to_char(FECHAINICIO,'yyyy/mm/dd'),'ND')  FECHA_INICIACION,NVL(to_char(FECHAFINAL,'yyyy/mm/dd'),'ND') FECHA_TERMINACION, NVL(to_char(FECHALIQ,'yyyy/mm/dd'),'ND') FECHA_ACTA_LIQUIDACION From( "
-    '    'strSql += "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
-    '    'strSql += ")"
-
-    '    strSql = cFiltro
-    '    Return strSql
-    'End Function
 
     Protected Function SqlExcel() As String
         Dim cFiltro As String = genFiltro()
