@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.VisualBasic
 Imports System.Data
 Imports System.ComponentModel
+Imports System.Data.Common
 
 <System.ComponentModel.DataObject()> _
 Public Class EstContratos
@@ -72,6 +73,7 @@ Public Class EstContratos
 
             num_reg = EjecutarComando()
 
+
             querystring = "UPDATE Contratos Set est_con='" & est_fin & "' Where cod_con='" & cod_con & "'"
             CrearComando(querystring)
 
@@ -79,7 +81,7 @@ Public Class EstContratos
 
             'f.InsAud(Me.dbConnection, t, "CONTRATOS", "REGISTRO DE ACTA/CAMBIO DE ESTADO", Me.usuario)
             ConfirmarTransaccion()
-            Msg = MsgOk
+            Msg = MsgOk + " Código de Verficación: " + GetIdbyCod_con(cod_con)
             Me.lErrorG = False
         Catch ex As Exception
             CancelarTransaccion()
@@ -94,7 +96,17 @@ Public Class EstContratos
 
     End Function
 
-    
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetIdbyCod_con(ByVal cod_con As String) As String
+        Dim id_cont1 As String
+        querystring = "SELECT MAX(ID) as ID FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":cod_con", cod_con)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        id_cont1 = dataTb.Rows(0)("ID")
+        Return id_cont1
+    End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetEstByIde(ByVal cod As String) As System.Data.DataTable
         Dim datat As New DataTable
@@ -118,7 +130,7 @@ Public Class EstContratos
         AsignarParametroCadena(":cod_con", cod)
         Return CInt(EjecutarEscalar())
     End Function
-   
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Protected Function GetEstByIdep(ByVal cod As String) As System.Data.DataTable
         Dim datat As New DataTable
@@ -132,7 +144,7 @@ Public Class EstContratos
     Public Function GetbyCod_Con(ByVal cod_con As String) As System.Data.DataTable
         Conectar()
         Dim datat As New DataTable
-        querystring = "SELECT ESTADO_INICIAL, ESTADO_FINAL, FECHA, DOCUMENTO, USUARIO, NRO_CONTRATO, EXT , 0 DIAS_EJEC, OBSERVACION,ID,VALOR_PAGO,Ult,NRO_DOC,por_eje_fis,NVISITAS,ESTADO FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN'"
+        querystring = "SELECT ESTADO_INICIAL, ESTADO_FINAL, FECHA, DOCUMENTO, USUARIO, NRO_CONTRATO, EXT , 0 DIAS_EJEC, OBSERVACION,ID,VALOR_PAGO,Ult,NRO_DOC,por_eje_fis,NVISITAS,ESTADO FROM VGESACTAS WHERE (NRO_CONTRATO = :cod_con)  and estado <>'AN' ORDER BY ID DESC"
         CrearComando(querystring)
         AsignarParametroCadena(":cod_con", cod_con)
         datat = EjecutarConsultaDataTable()

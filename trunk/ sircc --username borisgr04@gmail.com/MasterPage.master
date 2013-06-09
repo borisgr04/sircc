@@ -159,8 +159,7 @@
                </div>
                 <div id="fooder">
                   <div id="fooderText">
-                  
-                    Copyright &#169; 2007-2012 B&A Systems(Ing. Boris Arturo González Rivera). Todos los derechos reservados.<br />
+                    Copyright &#169; 2007-2013 B&A Systems S.A.S. Todos los derechos reservados.<br />
                     Licenciado para
                     <asp:Label ID="LbEntidad" runat="server" Text=""></asp:Label>
                     Nit:
@@ -169,11 +168,13 @@
                     <asp:Label ID="LbCodigo" runat="server" Text=""></asp:Label>
                     <hr />
                     Correo Electrónico de Soporte:
-                    <%--<%=ConfigurationManager.AppSettings("MailAdmin") %>--%>
+                    <%=ConfigurationManager.AppSettings("MailAdmin") %>
                     Teléfono de Soporte:
-                    <%--<%= ConfigurationManager.AppSettings("TelAdmin")%>--%>
+                    <%= ConfigurationManager.AppSettings("TelAdmin")%>
+                    <br />
                     <asp:Label ID="LbConex" runat="server" Text="Label"></asp:Label>
-                      <%--<asp:HyperLink ID="HyperLink1"  NavigateUrl="~/exe/setup.msi" runat="server">Descargar SirccD.exe</asp:HyperLink>--%>
+                    <br />
+                    <asp:HyperLink ID="HyperLink1"  NavigateUrl="~/exe/setup.msi" runat="server">Descargar SirccD.exe</asp:HyperLink>
                     </div>
                 </div>   
             </div>

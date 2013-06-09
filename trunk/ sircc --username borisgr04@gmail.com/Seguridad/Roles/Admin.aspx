@@ -1,6 +1,6 @@
 <%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Admin.aspx.vb" Inherits="Seguridad_Roles_Admin" title="Permisos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
-    <script src="../../Scripts/jquery-1.4.2.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery-ui-1.8rc3.custom.min.js" type="text/javascript"></script>
     <link href="../../Styles/Estyle.css" rel="stylesheet" type="text/css" />
     

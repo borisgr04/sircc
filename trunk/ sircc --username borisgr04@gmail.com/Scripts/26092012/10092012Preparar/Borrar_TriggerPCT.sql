@@ -1,1 +1,0 @@
-drop trigger pct2012.tg_ins_dcompromiso;

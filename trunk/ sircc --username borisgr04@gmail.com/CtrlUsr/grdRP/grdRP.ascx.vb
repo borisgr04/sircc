@@ -13,7 +13,7 @@ Partial Class CtrlUsr_grdRP_grdRP
         End Set
     End Property
 
-    Private obj As New RP_Contratos
+    Private obj As New CtrLegalizacion_RP
 
     Property Cod_Con As String
         Set(ByVal value As String)
@@ -35,17 +35,6 @@ Partial Class CtrlUsr_grdRP_grdRP
         dt = obj.GetRecords(Me.Cod_Con)
         Return dt
     End Function
-
-    'Private Function Create_Table() As DataTable
-    '    Dim dt As DataTable = New DataTable
-    '    Dim column As DataColumn = New DataColumn
-    '    dt.Columns.Add("Nro_Cdp", Type.GetType("System.Int32"))
-    '    dt.Columns.Add("Fec_Cdp", Type.GetType("System.DateTime"))
-    '    dt.Columns.Add("Val_Cdp", Type.GetType("System.Decimal"))
-    '    dt.AcceptChanges()
-    '    Me.Tabla_Vacia = True
-    '    Return dt
-    'End Function
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
@@ -105,14 +94,6 @@ Partial Class CtrlUsr_grdRP_grdRP
     End Sub
 
     Protected Sub RowDeleting(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewDeleteEventArgs) Handles grd.RowDeleting
-        'customer.Delete(Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0].ToString()));
-        'Dim dt As DataTable = Me.Tabla
-        'dt.Rows.RemoveAt(e.RowIndex)
-        'dt.AcceptChanges()
-        'If dt.Rows.Count() = 0 Then
-        '    Me.Tabla_Vacia = True
-        'End If
-        'Me.Tabla = dt
 
         Me.MsgResult.Text = obj.Delete(Me.Cod_Con, Me.grd.DataKeys(e.RowIndex).Values(0).ToString())
         If obj.lErrorG = True Then
@@ -130,18 +111,7 @@ Partial Class CtrlUsr_grdRP_grdRP
     End Sub
 
     Protected Sub RowUpdating(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewUpdateEventArgs) Handles grd.RowUpdating
-        'Dim txtNro_Cdp As TextBox = DirectCast(grd.Rows(e.RowIndex).FindControl("txtNro_Cdp"), TextBox)
-        'Dim txtFec_CDP As TextBox = DirectCast(grd.Rows(e.RowIndex).FindControl("txtFec_Cdp"), TextBox)
-        'Dim txtVal_CDP As TextBox = DirectCast(grd.Rows(e.RowIndex).FindControl("txtVal_Cdp"), TextBox)
-        'Dim dt As DataTable = Me.Tabla
-        ''dtrow("item") = "a"
-        'dt.Rows.Item(e.RowIndex)("Nro_Cdp") = txtNro_Cdp.Text
-        'dt.Rows.Item(e.RowIndex)("Fec_Cdp") = txtFec_CDP.Text
-        'dt.Rows.Item(e.RowIndex)("Val_Cdp") = txtVal_CDP.Text
-        'dt.AcceptChanges()
-        'Me.Tabla = dt
-        'grd.EditIndex = -1
-        'LlenarGrid()
+   
     End Sub
 
     Protected Sub SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grd.SelectedIndexChanged
