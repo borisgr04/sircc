@@ -2,6 +2,14 @@
 Partial Class Contratos_GesContratos_Default
     Inherits PaginaComun
 
+    Private Property Val_App_Pro As Decimal
+        Set(ByVal value As Decimal)
+            ViewState("Val_App_Pro") = value
+        End Set
+        Get
+            Return ViewState("Val_App_Pro")
+        End Get
+    End Property
     Private Property Total As Decimal
         Set(ByVal value As Decimal)
             ViewState("Total") = value
@@ -21,38 +29,37 @@ Partial Class Contratos_GesContratos_Default
     End Property
 
     Sub Guardar()
+        Dim obj As New CtrGesContratos
         If Me.Oper = "Nuevo" Then
-            Dim obj As New EstContratos()
-            MsgResult.Text = obj.Insert(DetContrato1.Cod_Con, DetContrato1.Estado, CboEstSig.SelectedValue, CDate(txtFecDoc.Text), "", txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text, Publico.PuntoPorComa(TxtPorFis.Text))
-            Me.MsgBox(MsgResult, obj.lErrorG)
-            If obj.lErrorG = False Then
-                Limpiar()
-                Habilitar(False)
-                BtnNuevo.Enabled = True
-            End If
+            obj.Insert(TxtCodCon.Text, hdEstado.Value, CboEstSig.SelectedValue, CDate(txtFecDoc.Text), "", txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text, Publico.PuntoPorComa(TxtPorFis.Text))
         ElseIf Me.Oper = "Editar" Then
-            Dim obj As New EstContratos()
-
-            MsgResult.Text = obj.Update(Pk1, CDate(txtFecDoc.Text), txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text, Publico.PuntoPorComa(TxtPorFis.Text))
-            Me.MsgBox(MsgResult, obj.lErrorG)
-            If obj.lErrorG = False Then
-                Limpiar()
-                Habilitar(False)
-                BtnNuevo.Enabled = True
-            End If
+            obj.Update(Pk1, CDate(txtFecDoc.Text), txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text, Publico.PuntoPorComa(TxtPorFis.Text))
         End If
-        DetContrato1.Buscar()
+        If obj.lErrorG = False Then
+            Limpiar()
+            Habilitar(False)
+            BtnNuevo.Enabled = True
+        End If
+        MsgResult.Text = obj.Msg
+        Me.MsgBox(MsgResult, obj.lErrorG)
+        Buscar()
         grdEstContratos.DataBind()
     End Sub
-    Protected Sub DetContrato1_AceptarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles DetContrato1.AceptarClicked
-
-        If DetContrato1.Encontrado = True Then
+    Protected Sub Buscar()
+        Dim c As New Contratos
+        Dim dt As DataTable = c.GetByPk(TxtCodCon.Text)
+        DtPCon.DataSource = dt
+        DtPCon.DataBind()
+        If dt.Rows.Count > 0 Then
             Panel1.Visible = True
             Limpiar()
             Habilitar(False)
             BtnNuevo.Enabled = True
-            lbTotalPorPagar.Text = FormatCurrency(DetContrato1.Valor_Total_Prop)
+            Val_App_Pro = dt.Rows(0).Item("Valor_Total_Prop").ToString
+            lbTotalPorPagar.Text = FormatCurrency(Val_App_Pro)
+            hdEstado.Value = dt.Rows(0)("Est_Con")
         Else
+            hdEstado.Value = ""
             Panel1.Enabled = True
             Panel1.Visible = False
             Limpiar()
@@ -74,26 +81,37 @@ Partial Class Contratos_GesContratos_Default
 
         Dim sw As Boolean
 
-        If DetContrato1.Estado = "00" Then
+        If hdEstado.Value = "00" Then
             Me.MsgResult.Text = "El Contrato No se ha Legalizado."
             sw = False
-        ElseIf DetContrato1.Estado = "07" Then
+        ElseIf hdEstado.Value = "07" Then
             Me.MsgResult.Text = "El Contrato Fue Anulado."
             sw = False
         Else
             sw = True
         End If
 
+        Dim cg As New CtrGesContratos
+        If Not cg.TieneInterventor(TxtCodCon.Text) Then
+            Me.MsgResult.Text = cg.Msg
+            MsgBoxAlert(MsgResult, True)
+            sw = False
+        End If
+
+        If sw = False Then
+            Panel1.Enabled = False
+            Habilitar(False)
+        End If
 
     End Sub
 
     Protected Sub grdEstContratos_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdEstContratos.RowCommand
-
+        Dim Obj As New CtrGesContratos
         Me.Oper = e.CommandName
 
         If Me.Oper = "Anular" Then
 
-            Dim Obj As EstContratos = New EstContratos()
+
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
             Me.grdEstContratos.SelectedIndex = index
 
@@ -102,14 +120,14 @@ Partial Class Contratos_GesContratos_Default
             Me.MsgBox(MsgResult, Obj.lErrorG)
 
             If Obj.lErrorG = False Then
-                LIMPIAR()
+                Limpiar()
             End If
-            DetContrato1.Buscar()
+            Buscar()
             grdEstContratos.DataBind()
             Me.grdEstContratos.DataBind()
 
         ElseIf Me.Oper = "Editar" Then
-            Dim Obj As EstContratos = New EstContratos()
+
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
             Me.grdEstContratos.SelectedIndex = index
 
@@ -159,7 +177,7 @@ Partial Class Contratos_GesContratos_Default
                 e.Row.Cells(7).HorizontalAlign = HorizontalAlign.Right
                 e.Row.Font.Bold = True
 
-                lbTotalPorPagar.Text = FormatCurrency(CDec(DetContrato1.Valor_Total_Prop) - Me.Total)
+                lbTotalPorPagar.Text = FormatCurrency(Val_App_Pro - Me.Total)
                 'Valor_Total_Prop
                 'e.Row.Cells(5).Text = FormatNumber(Me.TCan.ToString)
                 'e.Row.Cells(5).HorizontalAlign = HorizontalAlign.Right
@@ -184,10 +202,13 @@ Partial Class Contratos_GesContratos_Default
 
     Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
+            TxtCodCon.Text = Request("CodCon")
+            If TxtCodCon.Text <> "" Then
+                Buscar()
+            End If
             Limpiar()
             Habilitar(False)
             Habilitar2(False)
-
         End If
 
     End Sub
@@ -197,18 +218,6 @@ Partial Class Contratos_GesContratos_Default
         Nuevo()
     End Sub
 
-    'Sub Nuevo()
-    '    Limpiar()
-    '    MsgResult.Text = " Agregando Nueva Acta"
-    '    MsgBoxInfo(MsgResult, False)
-    '    Habilitar(True)
-    '    LbEst.Visible = False
-    '    BtnNuevo.Enabled = False
-    '    BtnAceptar.Enabled = True
-    '    BtnCancelar.Enabled = True
-    '    Me.Oper = "Nuevo"
-    '    Me.CboEstSig.Visible = True
-    'End Sub
 
     Sub Habilitar(ByVal v As Boolean)
         txtFecDoc.Enabled = v
@@ -222,13 +231,7 @@ Partial Class Contratos_GesContratos_Default
         BtnGuardar.Enabled = v
         BtnCancelar.Enabled = v
 
-        If Not v Then
-            BtnGuardar.CssClass = "disabledImageButton"
-            BtnCancelar.CssClass = "disabledImageButton"
-        Else
-            BtnGuardar.CssClass = ""
-            BtnCancelar.CssClass = ""
-        End If
+        
 
         If CboEstSig.SelectedValue = "01" Then
             Habilitar2(False)
@@ -263,18 +266,7 @@ Partial Class Contratos_GesContratos_Default
         Me.CboEstSig.Visible = True
     End Sub
 
-    Protected Sub BtnNuevo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnNuevo.Click
-        Nuevo()
-    End Sub
-
-    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGuardar.Click
-        Guardar()
-    End Sub
-
-    Protected Sub BtnCancelar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnCancelar.Click
-        Cancelar()
-    End Sub
-
+    
     Protected Sub CboEstSig_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboEstSig.SelectedIndexChanged
 
         If CboEstSig.SelectedValue = "01" Then
@@ -293,4 +285,20 @@ Partial Class Contratos_GesContratos_Default
     End Sub
 
 
+    Protected Sub TxtCodCon_TextChanged(sender As Object, e As System.EventArgs) Handles TxtCodCon.TextChanged
+        Buscar()
+    End Sub
+
+
+    Protected Sub BtnGuardar_Click(sender As Object, e As System.EventArgs) Handles BtnGuardar.Click
+        Guardar()
+    End Sub
+
+    Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+
+    End Sub
+
+    Protected Sub BtnBuscar_Click(sender As Object, e As System.EventArgs) Handles BtnBuscar.Click
+        Buscar()
+    End Sub
 End Class

@@ -142,3 +142,12 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
                         ImageUrl="~/images/2013/PanelDep.png" Width="32px" />
 <asp:ImageButton SkinId="IBtnPanelF" runat="server" Height="32px" 
                         ImageUrl="~/images/2013/PanelFun.png" Width="32px" />
+
+
+<asp:GridView   SkinId="grdSkin" runat="server" 
+                            CssClass="mGrid"  
+                            PagerStyle-CssClass="pgr"  
+                            AlternatingRowStyle-CssClass="alt" 
+                            RowStyle-CssClass="rows"
+                            AllowPaging="True" PageSize="10"  
+                            />

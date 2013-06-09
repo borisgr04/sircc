@@ -617,20 +617,7 @@ Public Class Reportes
         Dim obj As New Contratos()
         Dim dt, dt2 As New DataTable()
         Const _SEP_ As String = ";"
-        'If CBool(Request.QueryString("Rpte")) Then
-        'rutaReport = "Rpt/RptConsTCtxDep.rdlc"
-        'ReportViewer1.LocalReport.DisplayName = "Reporte x Dependencia"
-        'Else
-        'rutaReport = "Rpt/RptConsTCt.rdlc"
-        'ReportViewer1.LocalReport.DisplayName = "Reporte x Consecutivo"
-        'End If
-        'ReportViewer1.LocalReport.ReportPath = rutaReport
-        'Dim Parm(0) As ReportParameter
-        'Parm(0) = New ReportParameter("TITULO1", Request.QueryString("tit"))
-        'ReportViewer1.LocalReport.SetParameters(Parm)
-        'Dim Sql As String = Request.QueryString("Sql")
-        'Dim txtSql As New TextBox
-        'txtSql = Me.PreviousPage.FindControl("TextBox1")
+
         Dim consultas As String
         'consultas = txtSql.Text
         consultas = Sql
@@ -760,26 +747,14 @@ Public Class Reportes
         Return dt2
 
     End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GenerarReportPol(ByVal Sql As String) As DataTable
         Dim ds As New DataSet()
         Dim obj As New Contratos()
         Dim dt, dt2 As New DataTable()
         Const _SEP_ As String = ";"
-        'If CBool(Request.QueryString("Rpte")) Then
-        'rutaReport = "Rpt/RptConsTCtxDep.rdlc"
-        'ReportViewer1.LocalReport.DisplayName = "Reporte x Dependencia"
-        'Else
-        'rutaReport = "Rpt/RptConsTCt.rdlc"
-        'ReportViewer1.LocalReport.DisplayName = "Reporte x Consecutivo"
-        'End If
-        'ReportViewer1.LocalReport.ReportPath = rutaReport
-        'Dim Parm(0) As ReportParameter
-        'Parm(0) = New ReportParameter("TITULO1", Request.QueryString("tit"))
-        'ReportViewer1.LocalReport.SetParameters(Parm)
-        'Dim Sql As String = Request.QueryString("Sql")
-        'Dim txtSql As New TextBox
-        'txtSql = Me.PreviousPage.FindControl("TextBox1")
+
         Dim consultas As String
         'consultas = txtSql.Text
         consultas = Sql
@@ -848,8 +823,18 @@ Public Class Reportes
 
 
             dr("FECHAINICIO") = (row("FechaInicio"))
+            'select plazo1_eje_con, Tipo_Plazo,plazo2_eje_con from vcontratos_Sinc where Numero like '2013010001'
 
-            dr("FECHAFINAL") = Sumar_Plazo((row("FechaInicio")), (Plazo(row("pla_adi")) + Plazo(row("pla_eje_con"))))
+            Dim fecIni, FecFin As Date
+
+            If row("Tipo_Plazo") = "M" Then
+                fecIni = row("FechaInicio")
+                FecFin = fecIni.AddMonths(Plazo(row("plazo1_eje_con"))).AddDays(Plazo(row("pla_adi")))
+            Else
+                fecIni = row("FechaInicio")
+                FecFin = fecIni.AddDays(Plazo(row("plazo1_eje_con"))).AddDays(Plazo(row("pla_adi")))
+            End If
+            dr("FECHAFINAL") = FecFin ' Sumar_Plazo((row("FechaInicio")), (Plazo(row("pla_adi")) + Plazo(row("pla_eje_con"))))
             dr("FECHALIQ") = (row("FechaLiq"))
             'Beneficiados - 28 de Octubre 2010
             dr("BENEFICIADOS") = (row("Beneficiados"))
@@ -909,9 +894,7 @@ Public Class Reportes
         Next
         ds.Tables.Add(dt2)
         '--------------------
-        ' Dim objE As Entidad = New Entidad()
-        'Dim dsEnt As DataTable = objE.GetRecords()
-
+        
 
         '-----------------------------
         Return dt2
@@ -1148,10 +1131,6 @@ Public Class Reportes
         dt.Columns.Add("PORCEJECUCION", System.Type.GetType("System.String"))
         '07 de Junio 2011
         dt.Columns.Add("NOMBRE_PROYECTO", System.Type.GetType("System.String"))
-        'Dim keys(0) As DataColumn
-        'keys(0) = dtc
-        'dt.PrimaryKey = keys
-        'dt.AcceptChanges()
 
         dt.Columns.Add("STI_CTR_F20_1A", System.Type.GetType("System.String"))
         dt.Columns.Add("PRO_CTR_F20_1A", System.Type.GetType("System.String"))

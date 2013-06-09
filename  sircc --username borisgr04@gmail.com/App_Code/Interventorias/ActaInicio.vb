@@ -34,7 +34,7 @@ Public Class ActaInicio
         If IsValido() Then
             'Try
             querystring = "INSERT INTO EstContratos (cod_con,est_ini,est_fin,fec_ent,usuario,fec_reg,obs_est,val_pago,nvisitas,por_eje_fis,estado,fec_fin) "
-            querystring += " Values(:cod_con,:est_ini,:est_fin,to_date(:fec_ent,'dd/mm/yyyy'),user,sysdate,:obs_est,:val_pago,to_number(:nvisitas),:por_eje_fis,:estado,to_date(:fec_fin,'dd/mm/yyyy'))"
+            querystring += " Values(:cod_con,:est_ini,:est_fin,to_date(:fec_ent,'dd/mm/yyyy'),user,sysdate,:obs_est,:val_pago,to_number(:nvisitas),:por_eje_fis,:estado,to_date(:fec_fin,'dd/mm/yyyy')) "
             CrearComando(querystring)
             AsignarParametroCadena(":cod_con", Cod_Con)
             AsignarParametroCadena(":est_ini", Est_Ini)
@@ -47,6 +47,7 @@ Public Class ActaInicio
             AsignarParametroDecimal(":por_eje_fis", 0)
             AsignarParametroCadena(":fec_fin", Fec_Fin)
             num_reg = EjecutarComando()
+
             ConfirmarTransaccion()
             Msg = MsgOk
             Me.lErrorG = False

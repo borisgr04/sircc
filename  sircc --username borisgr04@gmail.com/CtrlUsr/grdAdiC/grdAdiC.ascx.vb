@@ -121,7 +121,6 @@ Partial Class CtrlUsr_grdAdiC_grdAdiC
                 Me.Total = 0
                 Me.PlazoT = 0
             Case DataControlRowType.DataRow
-
                 Me.Total += CDec(DataBinder.Eval(e.Row.DataItem, "VAL_ADI"))
                 Me.PlazoT += CDec(DataBinder.Eval(e.Row.DataItem, "PLA_EJE_ADI"))
                 'Me.TCan += CDec(DataBinder.Eval(e.Row.DataItem, "Cantidad"))
@@ -129,11 +128,9 @@ Partial Class CtrlUsr_grdAdiC_grdAdiC
                 e.Row.Cells(4).Text = FormatCurrency(Me.Total.ToString)
                 e.Row.Cells(4).HorizontalAlign = HorizontalAlign.Right
                 e.Row.Font.Bold = True
-
                 e.Row.Cells(3).Text = FormatNumber(Me.PlazoT.ToString)
                 e.Row.Cells(3).HorizontalAlign = HorizontalAlign.Right
                 e.Row.Font.Bold = True
-
         End Select
     End Sub
 
