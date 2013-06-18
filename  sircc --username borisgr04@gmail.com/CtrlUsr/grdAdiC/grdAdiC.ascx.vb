@@ -5,8 +5,8 @@ Partial Class CtrlUsr_grdAdiC_grdAdiC
 
 
 #Region "Eventos del control"
-    Dim Total As Integer
-    Dim PlazoT As Integer
+    Dim Total As Decimal
+    Dim PlazoT As Decimal
 
     Public Event RadClicked As EventHandler
     Protected Overridable Sub OnClick(ByVal sender As Object)

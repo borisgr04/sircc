@@ -88,7 +88,8 @@ Partial Class CtrlUsr_ConsultaTer2
 
     Property Nom_Ter() As String
         Get
-            Return GridView1.SelectedRow.Cells(1).Text 'ViewState("nom_ter")
+            Dim nom As String = HttpUtility.HtmlDecode((GridView1.SelectedRow.Cells(1).Text))
+            Return nom 'ViewState("nom_ter")
         End Get
         Set(ByVal value As String)
             ViewState("nom_ter") = value
