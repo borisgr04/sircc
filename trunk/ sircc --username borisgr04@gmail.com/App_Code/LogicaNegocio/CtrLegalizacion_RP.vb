@@ -2,6 +2,7 @@
 Imports System.Data
 Imports System.ComponentModel
 
+<System.ComponentModel.DataObject()> _
 Public Class CtrLegalizacion_RP
     Implements IMsg
     Dim _Msg As String

@@ -2,10 +2,10 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 <script src="<%= ResolveUrl("~/Scripts/jquery-1.9.1.js") %>" type="text/javascript"></script>
-    <script src="<%= ResolveUrl("~/Scripts/jquery-ui-1.10.3.js") %>" type="text/javascript"></script>
-    <script src="<%= ResolveUrl("~/Scripts/jquery-ui.js") %>" type="text/javascript"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script src="<%= ResolveUrl("~/Scripts/jquery-ui-1.10.3.js") %>" type="text/javascript"></script>
+<script src="<%= ResolveUrl("~/Scripts/jquery-ui.js") %>" type="text/javascript"></script>
+<link rel="stylesheet" href="<%= ResolveUrl("~/Styles/base/jquery-ui.css") %>" />
+<link rel="stylesheet" href="<%= ResolveUrl("~/Styles/smoothness/jquery-ui.js") %>" />
 
 <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
@@ -256,6 +256,7 @@
                     </p>
                     <span id="botones">
                     <asp:Button ID="BtnCons" runat="server" OnClick="BtnCons_Click" Text="Consultar" CssClass="button_example" />
+                    <input id="BtnGestión" Class="button_example" type="button"  onclick="AbrirPagina('GesContratos.aspx')" value="Ir a Gestión" title="Haga click aquí para dirigirse inmediantamente al formulario de gestión." />
                     </span>
 
                     <asp:HiddenField ID="hdIdeCon" runat="server" />
@@ -327,7 +328,7 @@
                             <asp:Label ID="Valor_ContratoLabel" runat="server" Text='<%# Eval("Val_Otros")+Eval("Val_Apo_Gob") %>' />
                         </td>
                         <td>
-                            <asp:Label ID="Fecha_SuscripcionLabel" runat="server" Text='<%# Eval("Fec_Sus_Con") %>' />
+                            <asp:Label ID="Fecha_SuscripcionLabel" runat="server" Text='<%# Eval("Fec_Sus_Con","{0:d}") %>' />
                         </td>
                         <td>
                             <asp:Label ID="EstadoLabel" runat="server" Text='<%# Eval("Estado") %>' />
@@ -374,7 +375,7 @@
                             <asp:Label ID="Valor_ContratoLabel" runat="server" Text='<%# Eval("Val_Otros")+Eval("Val_Apo_Gob") %>' />
                         </td>
                         <td>
-                            <asp:Label ID="Fecha_SuscripcionLabel" runat="server" Text='<%# Eval("Fec_Sus_Con") %>' />
+                            <asp:Label ID="Fecha_SuscripcionLabel" runat="server" Text='<%# Eval("Fec_Sus_Con","{0:d}") %>' />
                         </td>
                         <td>
                             <asp:Label ID="EstadoLabel" runat="server" Text='<%# Eval("Estado") %>' />

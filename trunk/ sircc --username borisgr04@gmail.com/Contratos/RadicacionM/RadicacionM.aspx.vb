@@ -397,7 +397,7 @@ Partial Class Contratos_RadicacionM_Default
         MsgResult.Text = obj.UpdateP(Me.TxtCodCon.Text, TxtIde.Text, TxtObj.Text, TxtPro.Text, CDate(TxtFsus.Text), Val(TxtPla.Text), CboDep.Text, cboStip.Text, CboTip.Text, Me.valor_dec(TxtVal.Text), mun, j - 1, CboSec.Text, CboFor.Text, TxtCsor.Text, CboTproc.Text, Me.TxtPlapre.Text, Me.TxtIdeRlc.Text, Me.ChkUM.Checked, Me.ChkEC.Checked, Me.TxtNProc.Text, Me.CboDepP.SelectedValue, Me.valor_dec(Me.TxtValProp.Text), ChkAnticipo.Checked, Me.TxtNEmpleos.Text, Me.ChkApo.Checked, Me.ChkAgotarPpto.Checked, Me.TxtPlazo2.Text, CboTPlazo.Text, CboTPlazo3.Text, CboDepSup.SelectedValue)
         If obj.lErrorG = False Then
             Me.TxtUId.Text = obj.Cod_Con.ToString
-            Oper = ""
+            Oper = "editar"
         Else
 
         End If

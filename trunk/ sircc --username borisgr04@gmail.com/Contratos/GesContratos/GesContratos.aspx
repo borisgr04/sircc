@@ -9,16 +9,34 @@
     <script src="<%= ResolveUrl("~/Scripts/jquery-1.9.1.js") %>" type="text/javascript"></script>
     <script src="<%= ResolveUrl("~/Scripts/jquery-ui-1.10.3.js") %>" type="text/javascript"></script>
     <script src="<%= ResolveUrl("~/Scripts/jquery-ui.js") %>" type="text/javascript"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-    <%--<script type="text/javascript">
-        $(function () {
-            $("#tabs").tabs({
-                collapsible: true
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Styles/base/jquery-ui.css") %>" />
+    <%--<link rel="stylesheet" href="<%= ResolveUrl("~/Styles/smoothness/jquery-ui.css") %>" />--%>
+    <script type="text/javascript">
+
+        function pageLoad(){
+//            $("#tabs").tabs({
+//                collapsible: true
+//            });
+
+            $('#<%=TxtCodCon.ClientID %>').blur(function () {
+                var nro = 0;
+                var TxtNroCto = $get('<%=TxtCodCon.ClientID %>');
+                var CmbVig = $get('<%=CmbVigencia.ClientID %>');
+                var cboTipo = $get('<%=cboTip.ClientID %>');
+                if (TxtNroCto.value.length < 10) {
+                    nro = CmbVig.value + cboTipo.value + pad(TxtNroCto.value, 4);
+                }
+                else {
+                    nro = TxtNroCto.value;
+                }
+                TxtNroCto.value = nro;
             });
-        });
-    </script>--%>
-    
+            function pad(str, max) {
+                return str.length < max ? pad("0" + str, max) : str;
+            }
+        
+        }
+    </script>
     <div class="demoarea">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -26,24 +44,21 @@
                     Gestión del Contrato
                 </h2>
                 <hr />
-                
                 <p>
-                <asp:Label ID="Label6" runat="server" CssClass="Caption" Text="Vigencia" Visible="False"></asp:Label>
-                <asp:DropDownList ID="CmbVigencia" runat="server" AutoPostBack="True" DataSourceID="ObjVigencias"
-                    DataTextField="Year_Vig" DataValueField="Year_Vig" Visible="False">
-                </asp:DropDownList>
+                    <asp:Label ID="Label6" runat="server" CssClass="Caption" Text="Vigencia" Visible="False"></asp:Label>
+                    <asp:DropDownList ID="CmbVigencia" runat="server" AutoPostBack="True" DataSourceID="ObjVigencias"
+                        DataTextField="Year_Vig" DataValueField="Year_Vig" Visible="True">
+                    </asp:DropDownList>
                     <asp:Label ID="Label3" runat="server" CssClass="Caption" Text="Tipo"></asp:Label>
                     <asp:DropDownList ID="CboTip" runat="server" AutoPostBack="True" CssClass="txt" DataSourceID="ObjTiposCont"
                         DataTextField="NOM_TIP" DataValueField="COD_TIP">
                     </asp:DropDownList>
                     <asp:Label ID="Label4" runat="server" CssClass="Caption" Text="Número"></asp:Label>
                     <asp:TextBox ID="TxtCodCon" runat="server" AutoPostBack="True"></asp:TextBox>
-                    <asp:Button ID="BtnBuscar" runat="server" Text=""  class="button_buscar" CausesValidation="False" />
-                    
+                    <asp:Button ID="BtnBuscar" runat="server" Text="" class="button_buscar" CausesValidation="False" />
                     <asp:Label ID="LbCodCod" runat="server"></asp:Label>
-                    
-                    <a href="CGesContratos.aspx" title="Ir a opción de Filtro de Otros Contratos ">Volver Filtro de Contratos</a>
-                
+                    <a href="CGesContratos.aspx" title="Ir a opción de Filtro de Otros Contratos ">Volver
+                        Filtro de Contratos</a>
                 </p>
                 <asp:HiddenField ID="hdEstado" runat="server" />
                 <div style="height: 200px; overflow: auto">
@@ -64,6 +79,7 @@
                             <asp:BoundField DataField="Numero" HeaderText="Número" SortExpression="Numero">
                                 <ItemStyle Font-Bold="True" Font-Italic="False" Font-Size="Medium" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" />
                             <asp:BoundField DataField="OBJ_CON" HeaderText="Objeto" SortExpression="OBJ_CON" />
                             <asp:BoundField DataField="CONTRATISTA" HeaderText="Contratista" SortExpression="CONTRATISTA" />
                             <asp:BoundField DataField="FEC_SUS_CON" HeaderText="Fecha de Suscripción" SortExpression="FEC_SUS_CON"
@@ -80,7 +96,6 @@
                             <asp:BoundField DataField="Valor_Total_Doc" DataFormatString="{0:c}" HeaderText="Valor Total del Contrato/Convenio" />
                             <asp:BoundField DataField="FechaInicio" HeaderText="Fecha de Acta de Inicio" DataFormatString="{0:d}" />
                             <asp:BoundField DataField="fec_apr_pol" HeaderText="Fecha Legalización" DataFormatString="{0:d}" />
-                            <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" />
                             <asp:BoundField DataField="Dependencia" HeaderText="Dependencia que Genera la Necesidad"
                                 SortExpression="Dependencia" />
                             <asp:BoundField DataField="DependenciaP" HeaderText="Dependencia a Cargo del Proceso"

@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.VisualBasic
 Imports System.Data
 
+<System.ComponentModel.DataObject()> _
 Public Class CtrGesContratos
     Implements IMsg
     Dim _Msg As String
@@ -59,7 +60,8 @@ Public Class CtrGesContratos
     End Function
 
     Public Function GetbyPk(ByVal ID As String) As System.Data.DataTable
-        Return GetbyPk(ID)
+        Dim ec As New EstContratos
+        Return ec.GetbyPk(ID)
     End Function
 
 End Class

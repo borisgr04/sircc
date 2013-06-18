@@ -173,7 +173,7 @@ font-weight:bold;
         {
             color: #7D7D7D;
             border-left: 1px solid #DBDBDB;
-            font-size: 10px;
+            font-size: 14px;
             font-weight: normal;
             
         }
@@ -408,4 +408,13 @@ div.error {
 	background-position: 5px 5px;
 	background-repeat: no-repeat;
 	margin-bottom: 10px;
+}
+
+
+.TextBox_LetrasGrandes{
+border:solid 1px #aacfe4;
+margin:3px  0 3px 3px;
+vertical-align:middle;
+padding:3px;
+font-size:24px;
 }
