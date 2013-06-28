@@ -61,6 +61,9 @@ Public Class BDDatosG
             Me.inLine = False
         End Try
     End Sub
+    Public Function getComando() As String
+        Return Me.vComando.CommandText
+    End Function
     ' ''' <summary>
     ' ''' Inicializa el Usuario, MemberShip en la base de datos (v.usap)
     ' ''' </summary>

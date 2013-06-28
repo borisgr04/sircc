@@ -4,11 +4,26 @@ Imports System.ComponentModel
 Imports System.Data
 
 
+
 Public Class CContratos
 
     Private ctx As New BDDatosG
+    Private cFil As vContratosInt
 
-    Public Function GetRecords(cFil As vContratosInt) As DataTable
+    Public Function GetRecordsC(cFil As vContratosInt) As DataTable
+        Me.cFil = cFil
+        Dim f As String = Filtrar()
+        ctx.Conectar()
+        Dim querystring As String = "SELECT Upper(Estado) Estado, Count(*) Cantidad  FROM vcontratos_sinc_p  WHERE " + f + "   group by Estado "
+        ctx.CrearComando(querystring)
+        Dim dataTb As DataTable = ctx.EjecutarConsultaDataTable()
+        ctx.Desconectar()
+        Return dataTb
+    End Function
+
+  
+
+    Private Function Filtrar() As String
         Dim f As String = ""
 
         If Not String.IsNullOrEmpty(cFil.Cod_Tip) Then
@@ -43,12 +58,21 @@ Public Class CContratos
             f = Util.AddFiltro(f, " Estado= '" + cFil.Estado + "'")
         End If
 
+
+        f = Util.AddFiltro(f, " Estado<> 'AN'")
+
+
         If cFil.Objeto <> "" Then
             f = Util.AddFiltro(f, " Upper(Obj_Con) Like  '%" + cFil.Objeto.ToUpper + "%'")
         End If
 
+        Return f
+    End Function
+    Public Function GetRecords(cFil As vContratosInt) As DataTable
+        Me.cFil = cFil
+        Dim f As String = Filtrar()
         ctx.Conectar()
-        Dim querystring As String = "Select Numero, Tipo,Obj_Con, Ide_Con, Contratista, Dependencia,Dependenciap,Estado,Fec_Sus_Con,Val_Apo_Gob,Val_otros,Id_Interventor, Nom_Interventor, Tip_Con, STip_Con,Dep_Con, DEp_pcon From vcontratos_Sinc_p Where " + f
+        Dim querystring As String = "Select Numero, Tipo,Obj_Con, Ide_Con, Trim(Contratista) Contratista, Dependencia,Dependenciap,Upper(Estado) Estado,Fec_Sus_Con,Val_Apo_Gob,Val_otros,Id_Interventor, Nom_Interventor, Tip_Con, STip_Con,Dep_Con, DEp_pcon From vcontratos_Sinc_p Where " + f
         ctx.CrearComando(querystring)
 
         Dim dataTb As DataTable = ctx.EjecutarConsultaDataTable()

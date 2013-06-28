@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="<%= ResolveUrl("~/Styles/base/jquery-ui.css") %>" />
 <link rel="stylesheet" href="<%= ResolveUrl("~/Styles/smoothness/jquery-ui.js") %>" />
 
-<asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+<asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="true">
     </asp:ToolkitScriptManager>
     <script src="../../Scripts/dataTables.js" type="text/javascript"></script>
     <style type="text/css" title="currentStyle">
@@ -17,6 +17,16 @@
     </style>
     <script type="text/javascript">
         $(function () {
+            $('#tb-consultaC').dataTable({
+                "oLanguage": { "sSearch": "Buscar :" },
+                "bJQueryUI": true,
+                "bPaginate": false,
+                "bInfo": false,
+                "oLanguage": {
+                    "sUrl": "../../Styles/datatablesES.txt"
+                }
+                
+            });
             $('#tb-consulta').dataTable({
                 "oLanguage": { "sSearch": "Buscar el Contrato:" },
                 "bJQueryUI": true,
@@ -30,7 +40,29 @@
                 "sScrollXInner": "120%"
             });
 
+            $('#<%=TxtNroCto.ClientID %>').keypress(function (e) {
+                if (e.which == 13) {
+                    numeroC();
+                }
+            });
+            
+            $('#<%=BtnCons.ClientID %>').click(function () {
+                return VerDependencia();
+
+            });
+            function VerDependencia() {
+               if ($('#<%=HdUser.ClientID %>').val() != "admin") {
+                    if ($get('<%=CmbDep.ClientID %>').selectedIndex == -1) {
+                        alert("No tiene ninguna dependencia asignada, por favor comuniquese con el Administrador del Sistema!!!");
+                        return false;
+                    }
+                }
+                return true;
+            }
             $('#<%=TxtNroCto.ClientID %>').blur(function () {
+                numeroC();
+            });
+            function numeroC() {
                 var nro = 0;
                 var TxtNroCto = $get('<%=TxtNroCto.ClientID %>');
                 var CmbVig = $get('<%=CmbVig.ClientID %>');
@@ -42,7 +74,7 @@
                     nro = TxtNroCto.value;
                 }
                 TxtNroCto.value = nro;
-            });
+            }
             $('#<%=TxtIdeCon.ClientID %>').blur(function () {
                 var TxtIdeCon = $get('<%=TxtIdeCon.ClientID %>');
                 var TxtCtotista = $get('<%=TxtCtotista.ClientID %>');
@@ -140,7 +172,6 @@
                 $get('<%=TxtIdeSup.ClientID %>').value = codigo;
 
             }
-
         }
             
             
@@ -255,18 +286,18 @@
                     <asp:TextBox ID="TxtObjCont" runat="server" TextMode="MultiLine" ></asp:TextBox>
                     </p>
                     <span id="botones">
+                    <input id="BtnConsCon" class="button_example" type="button"  onclick="AbrirPagina('ConsolidadosxD.aspx')" value="Ir a Consolidado" title="Haga click aquí para dirigirse inmediantamente al formulario de gestión." />
                     <asp:Button ID="BtnCons" runat="server" OnClick="BtnCons_Click" Text="Consultar" CssClass="button_example" />
-                    <input id="BtnGestión" Class="button_example" type="button"  onclick="AbrirPagina('GesContratos.aspx')" value="Ir a Gestión" title="Haga click aquí para dirigirse inmediantamente al formulario de gestión." />
+                    <input id="BtnGestión" class="button_example" type="button"  onclick="AbrirPagina('GesContratos.aspx')" value="Ir a Gestión" title="Haga click aquí para dirigirse inmediantamente al formulario de gestión." />
                     </span>
 
                     <asp:HiddenField ID="hdIdeCon" runat="server" />
                     <asp:HiddenField ID="hdIdeSup" runat="server" />
                     <asp:ObjectDataSource ID="odsVigencias" runat="server" SelectMethod="GetRecords"
                         TypeName="Vigencias" OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource>
-                    <asp:ObjectDataSource ID="odsDepNec" runat="server" SelectMethod="GetDelbySoloUser"
+                    <asp:ObjectDataSource ID="odsDepNec" runat="server" SelectMethod="GetNecbyUser"
                         TypeName="Dependencias" 
-                        OldValuesParameterFormatString="original_{0}" DeleteMethod="Delete" 
-                        InsertMethod="AsignarAbogado" UpdateMethod="Update">
+                        OldValuesParameterFormatString="original_{0}" >
                     </asp:ObjectDataSource>
                     <asp:ObjectDataSource ID="odsSTipos" runat="server" SelectMethod="GetByTipo" 
                         TypeName="SubTipos" InsertMethod="Insert" 
@@ -336,18 +367,6 @@
                         <td>
                             <asp:Label ID="DependenciaDelLabel" runat="server" Text='<%# Eval("Dependencia") %>' />
                         </td>
-                        <%--<td>
-                                <asp:Label ID="DependenciaNecLabel" runat="server" Text='<%# Eval("DependenciaNec") %>' />
-                            </td>
-                            <td>
-                                <asp:Label ID="Ide_InterventorLabel" runat="server" Text='<%# Eval("Ide_Interventor") %>' />
-                            </td>
-                            <td>
-                                <asp:Label ID="Nom_InterventorLabel" runat="server" Text='<%# Eval("Nom_Interventor") %>' />
-                            </td>
-                            <td>
-                                <asp:Label ID="VigenciaLabel" runat="server" Text='<%# Eval("Vigencia") %>' />
-                            </td>--%>
                     </tr>
                 </ItemTemplate>
                 <AlternatingItemTemplate>
@@ -383,19 +402,6 @@
                         <td>
                             <asp:Label ID="DependenciaDelLabel" runat="server" Text='<%# Eval("Dependencia") %>' />
                         </td>
-                        <%--
-                            <td>
-                                <asp:Label ID="DependenciaNecLabel" runat="server" Text='<%# Eval("DependenciaNec") %>' />
-                            </td>
-                            <td>
-                                <asp:Label ID="Ide_InterventorLabel" runat="server" Text='<%# Eval("Ide_Interventor") %>' />
-                            </td>
-                            <td>
-                                <asp:Label ID="Nom_InterventorLabel" runat="server" Text='<%# Eval("Nom_Interventor") %>' />
-                            </td>
-                            <td>
-                                <asp:Label ID="VigenciaLabel" runat="server" Text='<%# Eval("Vigencia") %>' />
-                            </td>--%>
                     </tr>
                 </AlternatingItemTemplate>
                 <LayoutTemplate>
@@ -432,56 +438,11 @@
                                 <th>
                                     Dependencia a Cargo del Proceso
                                 </th>
-                                <%-- 
-                                   <th>
-                                        DependenciaNec
-                                    </th>
-                                   <th>
-                                        Ide_Interventor
-                                    </th>
-                                    <th>
-                                        Nom_Interventor
-                                    </th>
-                                    <th>
-                                        Vigencia
-                                    </th>--%>
                             </tr>
                         </thead>
                         <tbody>
                             <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="9">
-                                    <div id="paging">
-                                        <ul>
-                                            <%--<asp:DataPager ID="dtBottom" runat="server" PageSize="5">
-                            <Fields>
-                                    <asp:NextPreviousPagerField   
-                                        ButtonType="Link"   
-                                        ShowFirstPageButton="true"  
-                                        ShowNextPageButton="true"  
-                                        ShowPreviousPageButton="false" 
-                                        ButtonCssClass="pagerCSS" 
-                                        />
-                                    <asp:NumericPagerField   
-                                        NumericButtonCssClass="pagerCSS"  
-                                        CurrentPageLabelCssClass="CurrentPageLabelCSS"  
-                                        NextPreviousButtonCssClass="pagerCSS"
-                                        />  
-                                     <asp:NextPreviousPagerField   
-                                        ButtonType="Link" 
-                                        ShowLastPageButton="true"  
-                                        ShowNextPageButton="false"
-                                        ButtonCssClass="pagerCSS"   
-                                        />
-                            </Fields>
-                        </asp:DataPager>--%>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tfoot>
                     </table>
                 </LayoutTemplate>
                 <EmptyItemTemplate>
@@ -498,6 +459,63 @@
                     <asp:Parameter Name="cFil" Type="Object" />
                 </SelectParameters>
             </asp:ObjectDataSource>
+        </asp:View>
+
+        <asp:View ID="ViewConsolidados" runat="server">
+            <br />
+            <h2>Resultado del Filtro</h2>
+            <br />
+            <div class="information">
+            Seleccione un Contrato para Ingresar su Gestión de Actas
+            </div>
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LnBtFilt_Click">[Volver a Filtrar]</asp:LinkButton>
+            <br />
+            <asp:ListView ID="ListView2" runat="server" EnableModelValidation="True">
+                <ItemTemplate>
+                    <tr >
+                        <td>
+                            <asp:Label ID="lbEstado" runat="server" Text='<%# Eval("Estado") %>' />
+                        </td>
+                        <td>
+                            <asp:Label ID="lbCantidad" runat="server" Text='<%# Eval("Cantidad") %>' />
+                        </td>
+                    </tr>
+                </ItemTemplate>
+                <AlternatingItemTemplate>
+                    <tr >
+                        <td>
+                            <asp:Label ID="lbEstado" runat="server" Text='<%# Eval("Estado") %>' />
+                        </td>
+                        <td>
+                            <asp:Label ID="lbCantidad" runat="server" Text='<%# Eval("Cantidad") %>' />
+                        </td>
+                    </tr>
+                </AlternatingItemTemplate>
+                <LayoutTemplate>
+                    <table id="tb-consultaC" class="mGridx">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Estado
+                                </th>
+                                <th>
+                                    Cantidad
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
+                        </tbody>
+                    </table>
+                </LayoutTemplate>
+                <EmptyItemTemplate>
+                    <td>
+                        &nbsp; NO HAY DATOS
+                    </td>
+                </EmptyItemTemplate>
+            </asp:ListView>
+            <br />
+            
         </asp:View>
     </asp:MultiView>
 </div>

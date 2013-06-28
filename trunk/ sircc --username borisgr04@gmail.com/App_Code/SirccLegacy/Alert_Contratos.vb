@@ -79,14 +79,7 @@ Public Class Alert_Contratos
                 Me.AsignarParametroCadena(":vigencia", Vigencia)
                 'Msg = Me.vComando.CommandText
                 dataTb = Me.EjecutarConsultaDataTable()
-                'Case "PxV"
-                '    querystring = "SELECT vpc.*,cod_con numero   FROM vpolizas_contrato VPC INNER JOIN   valertcontratos VA ON VA.numero=VPC.COD_CON AND estado NOT IN ('SUSCRITO','TERMINADO') AND vig_con = :vigencia WHERE fec_pol <= (SYSDATE + :dias)"
-                '    'querystring = "Select * from vPolizas_Contrato where fec_pol <= (sysdate + :dias) and Cod_Con In (SELECT va.numero FROM valertcontratos va  WHERE va.estado not IN ('TERMINADO') and va.vig_con = :vigencia)"
-                '    Me.CrearComando(querystring)
-                '    'Throw New Exception(Me.querystring)
-                '    Me.AsignarParametroCadena(":dias", dias)
-                '    Me.AsignarParametroCadena(":vigencia", Vigencia)
-                '    dataTb = Me.EjecutarConsultaDataTable()
+   
         End Select
         Me.Desconectar()
         Return dataTb

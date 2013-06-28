@@ -184,6 +184,52 @@ Public Class vContratosInt
     End Property
     Private m_FS_Final As DateTime
 
+    Public Function Filtrar() As String
+        Dim cFil As vContratosInt = Me
+        Dim f As String = ""
+
+        If Not String.IsNullOrEmpty(Me.Cod_Tip) Then
+            f = Util.AddFiltro(f, " Tip_Con= '" + cFil.Cod_Tip + "'")
+        End If
+
+        If cFil.Vigencia > 0 Then
+            f = Util.AddFiltro(f, " Vig_Con= '" + cFil.Vigencia.ToString + "'")
+        End If
+
+        If cFil.Ide_Contratista <> "" Then
+            f = Util.AddFiltro(f, " Ide_Con= '" + cFil.Ide_Contratista + "'")
+        End If
+
+        If cFil.Ide_Interventor <> "" Then
+            f = Util.AddFiltro(f, " Id_Interventor= '" + cFil.Ide_Interventor + "'")
+        End If
+
+        If cFil.Numero <> "" Then
+            f = Util.AddFiltro(f, " Numero= '" + cFil.Numero + "'")
+        End If
+
+        If cFil.Dep_Del <> "" Then
+            f = Util.AddFiltro(f, " Dep_pCon= '" + cFil.Dep_Del + "'")
+        End If
+
+        If cFil.Dep_Nec <> "" Then
+            f = Util.AddFiltro(f, " Dep_Con= '" + cFil.Dep_Nec + "'")
+        End If
+
+        If cFil.Estado <> "" Then
+            f = Util.AddFiltro(f, " Estado= '" + cFil.Estado + "'")
+        End If
+
+
+        f = Util.AddFiltro(f, " Upper(Estado)<> 'ANULADO'")
+
+
+        If cFil.Objeto <> "" Then
+            f = Util.AddFiltro(f, " Upper(Obj_Con) Like  '%" + cFil.Objeto.ToUpper + "%'")
+        End If
+
+        Return f
+    End Function
 
 
 End Class

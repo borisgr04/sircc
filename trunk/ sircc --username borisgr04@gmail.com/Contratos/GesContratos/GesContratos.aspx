@@ -18,7 +18,15 @@
 //                collapsible: true
 //            });
 
+            $('#<%=TxtCodCon.ClientID %>').keypress(function (e) {
+                if (e.which == 13) {
+                    numeroC();
+                }
+            });
             $('#<%=TxtCodCon.ClientID %>').blur(function () {
+                numeroC();
+            });
+            function numeroC() {
                 var nro = 0;
                 var TxtNroCto = $get('<%=TxtCodCon.ClientID %>');
                 var CmbVig = $get('<%=CmbVigencia.ClientID %>');
@@ -30,6 +38,9 @@
                     nro = TxtNroCto.value;
                 }
                 TxtNroCto.value = nro;
+            }
+            $('#<%=TxtCodCon.ClientID %>').blur(function () {
+                numeroC();
             });
             function pad(str, max) {
                 return str.length < max ? pad("0" + str, max) : str;
