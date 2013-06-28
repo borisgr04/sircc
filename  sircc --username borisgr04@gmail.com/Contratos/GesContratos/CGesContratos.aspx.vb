@@ -47,6 +47,48 @@ Partial Class Contratos_GesContratos_CGesContratos
         MultiView1.ActiveViewIndex = 1
     End Sub
 
+    'Protected Sub BtnConsCon_Click(sender As Object, e As System.EventArgs) Handles BtnCons.Click, BtnConsCon.Click
+    '    Dim vc As New vContratosInt()
+    '    If ChkTipo.Checked Then
+    '        vc.Cod_Tip = Me.cboTipo.SelectedValue
+    '    End If
+    '    If ChkSTipo.Checked Then
+    '        vc.Cod_STip = Me.CboSubTipo.SelectedValue
+    '    End If
+
+    '    If ChkVigencia.Checked Then
+    '        vc.Vigencia = Convert.ToInt16(Me.CmbVig.SelectedValue)
+    '    End If
+    '    If ChkEstado.Checked Then
+    '        vc.Estado = CmbEst.SelectedValue
+    '    End If
+    '    vc.FilxFS = ChkFecha.Checked
+    '    If vc.FilxFS Then
+    '        vc.FS_Inicial = Convert.ToDateTime(Me.TxtFecIni.Text)
+    '        vc.FS_Final = Convert.ToDateTime(Me.TxtFecFin.Text)
+    '    End If
+    '    If Me.ChkNContrato.Checked Then
+    '        vc.Numero = TxtNroCto.Text
+    '    End If
+    '    If ChkContratista.Checked Then
+    '        vc.Ide_Contratista = Me.TxtIdeCon.Text
+    '    End If
+    '    If Me.ChkSup.Checked Then
+    '        vc.Ide_Interventor = Me.TxtIdeSup.Text
+    '    End If
+    '    If Me.ChkDepNec.Checked Then
+    '        vc.Dep_Nec = CmbDep.SelectedValue
+    '    End If
+    '    If Me.ChkObj.Checked Then
+    '        vc.Objeto = Me.TxtObjCont.Text
+    '    End If
+    '    Dim cc As New CContratos
+
+    '    Me.ListView2.DataSource = cc.GetRecordsC(vc)
+    '    Me.ListView2.DataBind()
+    '    MultiView1.ActiveViewIndex = 2
+    'End Sub
+
     Protected Sub LnBtFilt_Click(sender As Object, e As System.EventArgs) Handles LnBtFilt.Click
         MultiView1.ActiveViewIndex = 0
     End Sub
@@ -77,4 +119,10 @@ Partial Class Contratos_GesContratos_CGesContratos
         Return If(tb.Rows.Count = 0, "0", tb.Rows(0)("Nom_Ter"))
     End Function
 
+    Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            HdUser.Value = Usuarios.UserName
+        End If
+
+    End Sub
 End Class
