@@ -26,9 +26,6 @@
     <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
-    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
-    <script type="text/javascript" src="../../jqwidgets/jqxdata.export.js"></script> 
-    <script type="text/javascript" src="../../jqwidgets/jqxgrid.export.js"></script>
     <script src="../../Scripts/jquery.BlockUI.js" type="text/javascript"></script>
     <script type="text/javascript" src="../../js/gettheme.js"></script>
     <script type="text/javascript">
@@ -84,6 +81,7 @@
                         Ide_Sup: "'" + iIde_Sup + "'"
                     }
                 };
+                
                 var dataAdapter = new $.jqx.dataAdapter(source, { contentType: 'application/json; charset=utf-8' });
                 //var dataAdapter = new $.jqx.dataAdapter(source);
                 var cellsrenderer = function (row, columnfield, value, defaulthtml, columnproperties) {
@@ -235,15 +233,41 @@
                     async: false,
                     record: 'Table',
                     url: 'ConsolidadosxD.aspx/GetDetalle',
+                    formatdata: function (data) {
+                        return {
+                            Vigencia: "'" + iVig_Con + "'",
+                            Dep_Nec: "'" + iDep_Nec + "'",
+                            Ide_Sup: "'" + iIde_Sup + "'",
+                            Est: "'" + iEstado + "'",
+                            pagenum: data.pagenum,
+                            pagesize: data.pagesize
+                        }
+                    }
+                };
+                /*data: {
+                        Vigencia: "'" + iVig_Con + "'",
+                        Dep_Nec: "'" + iDep_Nec + "'",
+                        Ide_Sup: "'" + iIde_Sup + "'",
+                        Est: "'" + iEstado + "'"
+                    },*/
+                $.ajax({
+                    url: 'ConsolidadosxD.aspx/GetDetalleTotal',
+                    contentType: 'application/json; charset=utf-8',
                     data: {
                         Vigencia: "'" + iVig_Con + "'",
                         Dep_Nec: "'" + iDep_Nec + "'",
                         Ide_Sup: "'" + iIde_Sup + "'",
                         Est: "'" + iEstado + "'"
+                    },
+                    async: false,
+                    success: function (data) {
+                        source.totalrecords = data.d;
+                        
                     }
-                };
+                });
+                
                 var dataAdapter = new $.jqx.dataAdapter(source,
-        	{ contentType: 'application/json; charset=utf-8' }
+        	    { contentType: 'application/json; charset=utf-8' }
             );
                 //var dataAdapter = new $.jqx.dataAdapter(source);
                 var cellsrenderer = function (row, columnfield, value, defaulthtml, columnproperties) {
@@ -253,17 +277,7 @@
                     else {
                         return '<span style="margin: 4px; float: ' + columnproperties.cellsalign + '; color: #008000;">' + value + '</span>';
                     }
-                };
-                var linkrenderer = function (row, column, value) {
-                    /*
-                    if (value.indexOf('#') != -1) {
-                        value = value.substring(0, value.indexOf('#'));
-                    }
-                    var format = { target: '"_blank"' };
-                    var html = $.jqx.dataFormat.formatlink("GesContratos.aspx?CodCon=" + value, format);
-                    return html;*/
-                    return '<a href="GesContratos.aspx?CodCon=' + value+'" target=_blank/>' + value + '</a>'
-                };
+                }
                 // initialize jqxGrid
                 $("#jqxgridD").jqxGrid(
             {
@@ -279,8 +293,12 @@
                 enabletooltips: true,
                 showaggregates: true,
                 showstatusbar: true,
+                virtualmode: true,
+                rendergridrows: function () {
+                    return dataAdapter.records;
+                },
                 columns: [
-                  { text: 'Número', datafield: 'NUMERO', width: 100, cellsrenderer: linkrenderer },
+                  { text: 'Número', datafield: 'NUMERO', width: 100 },
                   { text: 'Estado', datafield: 'ESTADO', width: 100 },
                   { text: 'Contratista', datafield: 'CONTRATISTA' },
                   { text: 'F. Suscripción', datafield: 'FEC_SUS_CON' },
@@ -292,18 +310,11 @@
                 ]
             });
 
-                /*
-                $("#jqxgridD").bind('rowselect', function (event) {
-
-                var selectedRowIndex = event.args.rowindex;
-                var cell = $('#jqxgridD').jqxGrid('getcell', selectedRowIndex, 'NUMERO');
-
-                //alert(cell.value);
-                self.location.href = "GesContratos.aspx?CodCon=" + cell.value;
-
-                    
+                $("#jqxgrid2").bind('rowselect', function (event) {
+                    var selectedRowIndex = event.args.rowindex;
+                    var datafield = event.args.datafield;
+                    alert(selectedRowIndex + datafield);
                 });
-                */
                 //-------------------------------------------------------------------
 
             }

@@ -86,7 +86,7 @@ Partial Class Contratos_GesContratos_ConsolidadosxD
             vc.Estado = Est.ToUpper()
         End If
         Dim cc As New GesCConsolidados
-        Return cc.GetDetalleXML(vc)
+        Return cc.GetDetalleXML(vc, 2, 10)
     End Function
 
   

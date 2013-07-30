@@ -97,25 +97,6 @@ Partial Class DatosBasicos_TiposProc_Default
     End Sub
     Private Sub FillCustomerInGrid()
         Me.GridView1.DataBind()
-        'Dim cl As String = Me.CboImpto.SelectedValue
-        'If Left(Me.CboImpto.SelectedValue, 2) <> Me.CmbClase.SelectedValue Then
-        ' Me.CboImpto.SelectedIndex = 0
-        ' cl = ""
-        'End If
-        'Dim dtCustomer As DataTable = Obj.GetByImpuesto(cl)
-        'If (dtCustomer.Rows.Count > 0) Then
-        ' GridView1.DataSource = dtCustomer
-        'GridView1.DataBind()
-        'Else
-        'dtCustomer.Rows.Add(dtCustomer.NewRow())
-        'GridView1.DataSource = dtCustomer
-        'GridView1.DataBind()
-        'Dim TotalColumns As Integer = GridView1.Rows(0).Cells.Count
-        'GridView1.Rows(0).Cells.Clear()
-        'GridView1.Rows(0).Cells.Add(New TableCell())
-        ' GridView1.Rows(0).Cells(0).ColumnSpan = TotalColumns
-        'GridView1.Rows(0).Cells(0).Text = "No se encontraron Registro"
-        'End If
     End Sub
 
     Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs)

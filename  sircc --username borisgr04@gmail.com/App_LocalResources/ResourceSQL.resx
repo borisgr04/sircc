@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="F20_1A_2013_01" xml:space="preserve">
+    <value>Select c.Cod_Con Numero,tp.NOM_TIP||' '||Nom_Stip Clase,  sec.NOM_SEC Tipo_Gasto, Replace(Obj_Con,'"','-') Obj_Con,Val_Con Valor_Contrato,
+TO_CHAR (ide_con) identificacion_contratista,
+Trim(Ctista.APE1_TER || ' ' ||Ctista.APE2_TER ||' '|| Ctista.NOM1_TER ||' '|| Ctista.NOM2_TER) Nombre_Contratista,
+CASE
+             WHEN Ctista.TIP_IDE = 'CC'
+                THEN 'NATURAL'
+             WHEN Ctista.TIP_IDE = 'NI'
+                THEN 'JURÍDICA'
+             END tipo_persona,
+             NVL (TO_CHAR (fec_sus_con, 'yyyy/mm/dd'), 'ND') fecha_suscripcion,
+             NVL (Nvl(int_ext.ide_int,int_int.ide_int), 'ND') identificador_interventor,
+             NVL (
+                    Nvl(
+                        Trim(terint_ext.APE1_TER || ' ' ||terint_ext.APE2_TER ||' '|| terint_ext.NOM1_TER ||' '|| terint_ext.NOM2_TER),
+                        Trim(terint_int.APE1_TER || ' ' ||terint_int.APE2_TER ||' '|| terint_int.NOM1_TER ||' ' || terint_int.NOM2_TER)
+                        ), 'ND') nombre_interventor,
+                        NVL (int_ext.tip_int,Nvl(int_int.tip_int, 'ND')) tipo_vinculacion,
+                        Case 
+                            WHEN c.TIPO_PLAZO='M' And Nvl(c.PLAZO2_EJE_CON,0)=0 Then 'M'
+                            WHEN c.TIPO_PLAZO='M' And Nvl(c.PLAZO2_EJE_CON,0)&gt;0 Then 'D'
+                            WHEN c.TIPO_PLAZO='A' And Nvl(c.PLAZO2_EJE_CON,0)=0 Then 'A'
+                            WHEN c.TIPO_PLAZO='A' And Nvl(c.PLAZO2_EJE_CON,0)&gt;0 Then 'M'
+                            WHEN c.TIPO_PLAZO='D' Then 'D' 
+                        End Unidad_de_Ejecucion,
+                        Case 
+                            WHEN c.TIPO_PLAZO='M' And Nvl(c.PLAZO2_EJE_CON,0)=0 Then c.PLA_EJE_CON
+                            WHEN c.TIPO_PLAZO='M' And Nvl(c.PLAZO2_EJE_CON,0)&gt;0 Then c.PLA_EJE_CON*30+Nvl(c.PLAZO2_EJE_CON,0)
+                            WHEN c.TIPO_PLAZO='A' And Nvl(c.PLAZO2_EJE_CON,0)=0 Then c.PLA_EJE_CON        
+                            WHEN c.TIPO_PLAZO='A' And Nvl(c.PLAZO2_EJE_CON,0)&gt;0 Then c.PLA_EJE_CON*360+Nvl(c.PLAZO2_EJE_CON,0)
+                            WHEN c.TIPO_PLAZO='D' Then c.PLA_EJE_CON 
+                        End Plazo_Ejecucion,
+                        Decode(c.anticipo,0,'N','S') Anticipo,
+                        Nvl((SELECT actaanticipo.val_pago FROM estcontratos actaanticipo WHERE actaanticipo.cod_con = c.cod_con AND actaanticipo.est_fin = '08' AND actaanticipo.estado = 'AC'),0) Val_anticipo,--Ojo Anticipo
+                        'ND' contituyofiducia,
+                        (SELECT NVL (TO_CHAR (actainicio.fec_ent, 'yyyy/mm/dd'), 'ND') FROM estcontratos actainicio WHERE actainicio.est_fin = '01' AND actainicio.estado = 'AC' AND actainicio.cod_con = c.cod_con) fechainicio,
+                        (SELECT NVL (TO_CHAR (actafin.fec_ent, 'yyyy/mm/dd'), 'ND') FROM estcontratos actafin WHERE actafin.est_fin = '01' AND actafin.estado = 'AC' AND actafin.cod_con = c.cod_con) fechafinal,
+                        Nvl(
+                            (SELECT Sum(
+                            Case 
+                                WHEN adi.Tipo_Plazo1_adi='M' And Nvl(adi.plazo2_adi,0)&gt;0 Then adi.Pla_Eje_Adi*30+Nvl(adi.PLAZO2_ADI,0)
+                                WHEN adi.Tipo_Plazo1_adi='A' And Nvl(adi.plazo2_adi,0)&gt;0 Then adi.Pla_Eje_Adi*360+Nvl(adi.PLAZO2_ADI,0)
+                                WHEN c.TIPO_PLAZO='D' Then adi.Pla_Eje_Adi
+                            End) Plazo_Ejecucion_adicion
+                            FROM adiciones adi WHERE adi.Cod_Con=c.COD_CON)
+                            ,0) PlazoProrroga,
+                            'Dias' Unidad_Ejecucion_prorroga,
+                            'SI' Secop,
+                            Nvl((SELECT NVL (TO_CHAR (actaliq.fec_ent, 'yyyy/mm/dd'), 'ND') FROM estcontratos actaliq WHERE actaliq.est_fin = '06' AND actaliq.estado = 'AC' AND actaliq.cod_con = c.cod_con),'ND') fechaliq,
+                            depnec.NOM_DEP Dependencia
+From Contratos c
+Inner Join TiposCont tp On tp.COD_TIP=c.TIP_CON 
+Inner Join Subtipos stp On stp.COD_STIP=c.STIP_CON
+Inner Join Sector sec On sec.COD_SEC=c.COD_SEC
+Inner Join Terceros Ctista On Ctista.IDE_TER=c.IDE_CON
+Left Join Interventores_Contrato int_ext On int_ext.COD_CON=c.COD_CON And int_ext.TIP_INT='I'
+Left Join Terceros terint_ext On terint_ext.IDE_TER=int_ext.IDE_INT
+Left Join Interventores_Contrato int_int On int_int.COD_CON=c.COD_CON And int_ext.TIP_INT='S'--supervisor
+Left Join Terceros terint_int On terint_int.IDE_TER=int_int.IDE_INT
+Left Join Dependencia depnec On depnec.COD_DEP=c.dep_con
+WHERE fec_sus_con BETWEEN TO_DATE (:fec_ini, 'dd/mm/yyyy')
+                                    AND TO_DATE (:fec_fin, 'dd/mm/yyyy')
+                                    Order by Cod_Con</value>
+  </data>
+</root>

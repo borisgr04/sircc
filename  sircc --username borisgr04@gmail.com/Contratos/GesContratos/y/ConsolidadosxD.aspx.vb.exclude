@@ -28,6 +28,7 @@ Partial Class Contratos_GesContratos_ConsolidadosxD
         If Not IsPostBack Then
             HdUser.Value = Usuarios.UserName
         End If
+        GetDetalle("2013", "02", "02", "EST")
         'Dim vc As New vContratosInt()
         'vc.Vigencia = "2012"
         'GridView1.DataSource = New GesCConsolidados().GetDetalle(vc)
@@ -69,7 +70,6 @@ Partial Class Contratos_GesContratos_ConsolidadosxD
         Return cc.GetConsolidadXML(vc)
 
     End Function
-    <WebMethod()> _
     <ScriptMethod(UseHttpGet:=True, ResponseFormat:=ResponseFormat.Xml)> _
     Public Shared Function GetDetalle(Vigencia As String, Dep_Nec As String, Ide_Sup As String, Est As String) As String
         Dim vc As New vContratosInt()
@@ -89,9 +89,49 @@ Partial Class Contratos_GesContratos_ConsolidadosxD
         Return cc.GetDetalleXML(vc)
     End Function
 
-  
+#Region "SERVER SIDE"
+    'Agrega para activar server side
+    '<WebMethod()> _
+    '<ScriptMethod(UseHttpGet:=True, ResponseFormat:=ResponseFormat.Xml)> _
+    'Public Shared Function GetDetalle(Vigencia As String, Dep_Nec As String, Ide_Sup As String, Est As String, pagenum As Integer, pagesize As Integer) As String
+    '    Dim vc As New vContratosInt()
+    '    If Vigencia <> "" Then
+    '        vc.Vigencia = Vigencia
+    '    End If
+    '    If Dep_Nec <> "" Then
+    '        vc.Dep_Nec = Dep_Nec
+    '    End If
+    '    If Ide_Sup <> "" Then
+    '        vc.Ide_Interventor = Ide_Sup
+    '    End If
+    '    If Est <> "" Then
+    '        vc.Estado = Est.ToUpper()
+    '    End If
+    '    Dim cc As New GesCConsolidados
+    '    Return cc.GetDetalleXML(vc, pagenum, pagesize)
+    'End Function
+    'Fin 
+    '<WebMethod()> _
+    '<ScriptMethod(UseHttpGet:=True, ResponseFormat:=ResponseFormat.Json)> _
+    'Public Shared Function GetDetalleTotal(Vigencia As String, Dep_Nec As String, Ide_Sup As String, Est As String) As String
+    '    Dim vc As New vContratosInt()
+    '    If Vigencia <> "" Then
+    '        vc.Vigencia = Vigencia
+    '    End If
+    '    If Dep_Nec <> "" Then
+    '        vc.Dep_Nec = Dep_Nec
+    '    End If
+    '    If Ide_Sup <> "" Then
+    '        vc.Ide_Interventor = Ide_Sup
+    '    End If
+    '    If Est <> "" Then
+    '        vc.Estado = Est.ToUpper()
+    '    End If
+    '    Dim cc As New GesCConsolidados
+    '    Return cc.GetDetalleTotal(vc)
+    'End Function
 
-    '
+#End Region    '
 
 
 End Class
