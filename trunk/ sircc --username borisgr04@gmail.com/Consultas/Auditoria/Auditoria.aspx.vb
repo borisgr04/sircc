@@ -2,10 +2,10 @@
 Imports System.Web.Script.Services
 Imports System.Data
 
-Partial Class Contratos_GesContratos_ConsolidadosxD
+Partial Class Consultas_Auditoria_Auditoria
     Inherits System.Web.UI.Page
 
-    
+
 
 
 
@@ -28,10 +28,7 @@ Partial Class Contratos_GesContratos_ConsolidadosxD
         If Not IsPostBack Then
             HdUser.Value = Usuarios.UserName
         End If
-        'Dim vc As New vContratosInt()
-        'vc.Vigencia = "2012"
-        'GridView1.DataSource = New GesCConsolidados().GetDetalle(vc)
-        'GridView1.DataBind()
+        
     End Sub
 
     <WebMethod()> _
@@ -89,7 +86,14 @@ Partial Class Contratos_GesContratos_ConsolidadosxD
         Return cc.GetDetalleXML(vc)
     End Function
 
-  
+
+    '<WebMethod()> _
+    '    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
+    'Public Shared Function GetTercerosPk(ide_ter As String) As String
+    '    Dim t As New Terceros
+    '    Dim tb As DataTable = t.GetByIde(ide_ter)
+    '    Return If(tb.Rows.Count = 0, "0", tb.Rows(0)("Nom_Ter"))
+    'End Function
 
     '
 

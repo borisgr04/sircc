@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript">
+    var Datos = {};
+
+    $(function () {
+
+        wizard.LeerDatos();
+        verDatos();
+        verDetalle('00');
+
+        function AbrirPagina(url) {
+            self.location.href = url;
+        }
+
+        function verDatos() {
+
+            // prepare the data
+            var source = {
+                datatype: "xml",
+                datafields: [
+	                { name: 'ESTADO' },
+                    { name: 'CANTIDAD' }
+	             ],
+                async: false,
+                record: 'Table',
+                url: 'Auditoria.aspx/GetDatos2',
+                data: {
+                    Vigencia: "'" + wizard.config.iVig_Con + "'",
+                    Dep_Nec: "'" + wizard.config.iDep_Nec + "'",
+                    Ide_Sup: "'" + wizard.config.iIde_Sup + "'"
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, { contentType: 'application/json; charset=utf-8' });
+
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid({
+                width: 200,
+                source: dataAdapter,
+                theme: wizard.config.theme,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                showaggregates: true,
+                showstatusbar: true,
+                columns: [
+                  { text: 'Estado', datafield: 'ESTADO', width: 100 },
+                  { text: 'Cantidad', datafield: 'CANTIDAD', cellsalign: 'right', align: 'right', width: 100, aggregates: ['sum'] }
+                ]
+            });
+
+            $("#jqxgrid").bind('rowselect', function (event) {
+                var selectedRowIndex = event.args.rowindex;
+                var cell = $('#jqxgrid').jqxGrid('getcell', selectedRowIndex, 'ESTADO');
+                verDetalle(cell.value);
+
+            });
+            //-------------------------------------------------------------------
+
+        }
+
+
+        function verDetalle(iEstado) {
+            // prepare the data
+            var source = {
+                datatype: "xml",
+                datafields: [
+	                { name: 'NUMERO' },
+                    { name: 'CONTRATISTA' },
+                    { name: 'FEC_SUS_CON' },
+                    { name: 'FECHAINICIO' },
+                    { name: 'ESTADO' },
+                    { name: 'PLAZO_TOTAL' },
+                    { name: 'SUSPENSION' },
+                    { name: 'DEPENDENCIA' },
+                    { name: 'FECHAFINALPROB' },
+                    { name: 'POR_TERMINAR' },
+		     { name: 'ESTADO' }
+
+	             ],
+                async: false,
+                record: 'Table',
+                url: 'Auditoria.aspx/GetDetalle',
+                data: {
+                    Vigencia: "'" + wizard.config.iVig_Con + "'",
+                    Dep_Nec: "'" + wizard.config.iDep_Nec + "'",
+                    Ide_Sup: "'" + wizard.config.iIde_Sup + "'",
+                    Est: "'" + iEstado + "'"
+                }
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { contentType: 'application/json; charset=utf-8' });
+
+            var linkrenderer = function (row, column, value) {
+                return '<a href="/consultas/Contratos/Contratos.aspx?Numero=' + value + '" target=_blank>' + value + "</a> ";
+            };
+            // initialize jqxGrid
+            $("#jqxgridD").jqxGrid(
+                {
+                    width: 800,
+                    source: dataAdapter,
+                    theme: wizard.config.theme,
+                    autoheight: true,
+                    sortable: true,
+                    altrows: true,
+                    showfilterrow: true,
+                    filterable: true,
+                    pageable: true,
+                    enabletooltips: true,
+                    showaggregates: true,
+                    showstatusbar: true,
+                    columns: [
+                  { text: 'Número', datafield: 'NUMERO', width: 100, cellsrenderer: linkrenderer },
+                  { text: 'Estado', datafield: 'ESTADO', width: 100 },
+                  { text: 'Contratista', datafield: 'CONTRATISTA' },
+                  { text: 'F. Suscripción', datafield: 'FEC_SUS_CON' },
+                  { text: 'F.Inicio', datafield: 'FECHAINICIO' },
+                  { text: 'Plazo Total', datafield: 'PLAZO_TOTAL' },
+                  { text: 'Suspensión', datafield: 'SUSPENSION' },
+                  { text: 'F.Fin Estimada ', datafield: 'FECHAFINALPROB' },
+                  { text: 'Por Terminar', datafield: 'POR_TERMINAR', columntype: 'checkbox', filtertype: 'checkedlist' }
+                ]
+                });
+        }
+
+    });        
+    </script>
+</head>
+<body>
+            <br />
+            <div class="information">
+                Puede hacer Click en un Estado para ver el detalle de los contratos
+            </div>
+            <div id="jqxgrid">
+            </div>
+            <br />
+            <div id="jqxgridD">
+            </div>
+</body>
+</html>

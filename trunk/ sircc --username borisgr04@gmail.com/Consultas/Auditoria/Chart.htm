@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript">
+        $(function () {
+            wizard.LeerDatos();
+            verGrafica();
+        });
+
+
+        function verGrafica() {
+         jsonData = "{'Vigencia':'" + wizard.config.iVig_Con + "','Dep_Nec':'" + wizard.config.iDep_Nec + "','Ide_Sup':'" + wizard.config.iIde_Sup + "'}";
+            $.ajax({
+                type: "POST",
+                url: "Auditoria.aspx/GetDatos",
+                data: jsonData,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: Graficar,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus + ": " + XMLHttpRequest.responseText);
+                }
+            }); // Fin de Ajax
+            };
+
+            function Graficar(response) {
+                var sampleData = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                var MaximoValor = 0;
+                $.each(sampleData, function (index, item) {
+                    if (item.Cantidad > MaximoValor) MaximoValor = item.Cantidad;
+                });
+                mInterval = MaximoValor > 10 ? MaximoValor / 5 : 1;
+                MaximoValor = MaximoValor * 1;
+                // prepare jqxChart settings
+                var settings = {
+                    title: "Contratos ",
+                    description: "Consolidado por Dependencia",
+                    showLegend: true,
+                    enableAnimations: true,
+                    padding: { left: 20, top: 5, right: 20, bottom: 5 },
+                    titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                    source: sampleData,
+                    categoryAxis:
+                    {
+                        dataField: 'Estado',
+                        showGridLines: true,
+                        flip: false
+                    },
+                    colorScheme: 'scheme01',
+                    seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            orientation: 'horizontal',
+                            columnsGapPercent: 100,
+                            toolTipFormatSettings: { thousandsSeparator: ',' },
+                            valueAxis:
+                            {
+                                flip: true,
+                                unitInterval: mInterval,
+                                minValue: 0,
+                                maxValue: MaximoValor,
+                                displayValueAxis: true,
+                                description: '',
+                                formatFunction: function (value) {
+                                    return parseInt(value);
+                                }
+                            },
+                            click: myEventHandler,
+                            series: [
+                                    { dataField: 'Cantidad', displayText: 'Cantidad (unidades)' }
+                                ]
+                        }
+                    ]
+                };
+                function myEventHandler(e) {
+                    var eventData = '<div><b>Last Event: </b>' + e.event + '<b>, DataField: </b>' + e.serie.dataField + '<b>, Value: </b>' + e.elementValue + "<b> Elemento:</b> " + sampleData[e.elementIndex].Estado + "</div>";
+                    $('#eventText').html(eventData);
+                };
+                $('#jqxChart').jqxChart(settings);
+            }
+        
+    </script>
+</head>
+<body>
+    <br />
+    <div id='jqxChart' style="width: 680px; height: 600px; position: relative; margin: 0;">
+    </div>
+    <div id='eventText' style="width: 600px; height: 30px">
+    </div>
+</body>
+</html>

@@ -1,0 +1,308 @@
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
+    CodeFile="SiaF20.aspx.vb" Inherits="Informes4_SIAF20_SiaF20" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" runat="Server">
+    <script src="<%= ResolveUrl("~/Scripts/jquery-1.9.1.js") %>" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.aggregates.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.export.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.export.js"></script>
+    <script src="../../Scripts/jquery.BlockUI.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../js/gettheme.js"></script>
+    <script src="../../Scripts/jquery.BlockUI.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../js/gettheme.js"></script>
+    <script type="text/javascript">
+        var theme;
+        $(function () {
+
+            $.blockUI.defaults.message = '<h1><img src="../../imagenes/loading.gif" /> Procesando</h1>';
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+
+            var theme = getDemoTheme();
+
+            function bloquear() {
+                $.blockUI();
+            }
+            function desbloquear() {
+                $.unblockUI();
+            }
+
+            $('#btnAceptar').click(function () {
+                F20_1a();
+                F20_1b();
+                F20_1c();
+            });
+
+            $("#excelExport_a").click(function () {
+                $("#jqxgridF20_1a").jqxGrid('exportdata', 'xls', 'fmF20_1a');
+            });
+            $("#excelExport_b").click(function () {
+                $("#jqxgridF20_1b").jqxGrid('exportdata', 'xls', 'fmF20_1b');
+            });
+            $("#excelExport_c").click(function () {
+                $("#jqxgridF20_1c").jqxGrid('exportdata', 'xls', 'fmF20_1c');
+            });
+        });
+
+        /*,data: {
+        Vigencia: "'" + iVig_Con + "'",
+        Dep_Nec: "'" + iDep_Nec + "'",
+        Ide_Sup: "'" + iIde_Sup + "'"
+        }*/
+        function F20_1b() {
+            alert(txtfini.value);
+            // prepare the data
+            var source = {
+                datatype: "xml",
+                datafields: [
+	                { name: 'COD_CON', type: 'string' },
+                    { name: 'PRORROGAS', type: 'string' },
+                    { name: 'VAL_ADIC', type: 'float' },
+                    { name: 'FECHALIQ', type: 'string' },
+                    { name: 'SECOP', type: 'string' }
+	             ],
+                async: false,
+                record: 'Table',
+                url: 'SiaF20.aspx/Formato20_1bXML',
+                data: {
+                    fec_ini: "'" + txtfini.value + "'",
+                    fec_fin: "'" + txtffin.value + "'"
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, { contentType: 'application/json; charset=utf-8' });
+
+            // initialize jqxGrid
+            $("#jqxgridF20_1b").jqxGrid({
+                width: 900,
+                source: dataAdapter,
+                theme: theme,
+                autoheight: true,
+                sortable: true,
+                pageable: true,
+                altrows: true,
+                enabletooltips: true,
+                showstatusbar: true,
+                columns: [
+                  { text: 'COD_CON', datafield: 'COD_CON', width: 100 },
+                  { text: 'PRORROGAS', datafield: 'PRORROGAS' },
+                  { text: 'VAL_ADIC', datafield: 'VAL_ADIC' },
+                  { text: 'FECHALIQ', datafield: 'FECHALIQ' },
+                  { text: 'SECOP', datafield: 'SECOP' }
+                ]
+            });
+
+            
+
+        }
+
+        function F20_1c() {
+
+            // prepare the data
+            var source = {
+                datatype: "xml",
+                datafields: [
+	                { name: 'NIT_CSUT', type: 'string' },
+                    { name: 'NOM_CSUT', type: 'string' },
+                    { name: 'NIT_INTEGRANTE', type: 'string' },
+                    { name: 'NOM_INTEGRANTE', type: 'string' },
+                    { name: 'NIT_ENTIDAD', type: 'string' },
+                    { name: 'COD_CON', type: 'string' }
+	             ],
+                async: false,
+                record: 'Table',
+                url: 'SiaF20.aspx/Formato20_1cXML',
+                data: {
+                    fec_ini: "'" + txtfini.value + "'",
+                    fec_fin: "'" + txtffin.value + "'"
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, { contentType: 'application/json; charset=utf-8' });
+
+            // initialize jqxGrid
+            $("#jqxgridF20_1c").jqxGrid({
+                width: 900,
+                source: dataAdapter,
+                theme: theme,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                pageable: true,
+                enabletooltips: true,
+                showstatusbar: true,
+                columns: [
+                  { text: 'NIT_CSUT', datafield: 'NIT_CSUT' },
+                  { text: 'NOM_CSUT', datafield: 'NOM_CSUT' },
+                  { text: 'NIT_INTEGRANTE', datafield: 'NIT_INTEGRANTE' },
+                  { text: 'NOM_INTEGRANTE', datafield: 'NOM_INTEGRANTE' },
+                  { text: 'NIT_ENTIDAD', datafield: 'NIT_ENTIDAD' },
+                  { text: 'COD_CON', datafield: 'COD_CON' }
+                ]
+            });
+
+            
+            //            //-------------------------------------------------------------------
+
+        }
+
+
+
+        function F20_1a() {
+
+            // prepare the data
+            var source = {
+                datatype: "xml",
+                datafields: [
+                    { name: 'DEPENDENCIA' },
+	                { name: 'NUMERO', type:'string' },
+                    { name: 'CLASE' },
+                    { name: 'TIPO_GASTO' },
+                    { name: 'OBJ_CON' },
+                    { name: 'VALOR_CONTRATO', type: 'float' },
+                    { name: 'IDENTIFICACION_CONTRATISTA' },
+                    { name: 'NOMBRE_CONTRATISTA' },
+                    { name: 'TIPO_PERSONA' },
+                    { name: 'FECHA_SUSCRIPCION' },
+                    { name: 'IDENTIFICADOR_INTERVENTOR' },
+                    { name: 'NOMBRE_INTERVENTOR' },
+                    { name: 'TIPO_VINCULACION' },
+                    { name: 'UNIDAD_DE_EJECUCION' },
+                    { name: 'PLAZO_EJECUCION', type: 'int' },
+                    { name: 'ANTICIPO' },
+                    { name: 'VAL_ANTICIPO', type: 'float' },
+                    { name: 'CONTITUYOFIDUCIA' },
+                    { name: 'FECHAINICIO' },
+                    { name: 'FECHAFINAL' },
+                    { name: 'PLAZOPRORROGA', type: 'int' },
+                    { name: 'UNIDAD_EJECUCION_PRORROGA', type: 'NUMBER' },
+                    { name: 'SECOP' },
+                    { name: 'FECHALIQ' }
+	             ],
+                async: false,
+                record: 'Table',
+                url: 'SiaF20.aspx/Formato20_1aXML',
+                data: {
+                    fec_ini: "'" + txtfini.value + "'",
+                    fec_fin: "'" + txtffin.value + "'"
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, { contentType: 'application/json; charset=utf-8' });
+
+            // initialize jqxGrid
+            $("#jqxgridF20_1a").jqxGrid({
+                width: 900,
+                source: dataAdapter,
+                theme: theme,
+                autoheight: true,
+                sortable: true,
+                pageable: true,
+                altrows: true,
+                enabletooltips: true,
+                showstatusbar: true,
+                columns: [
+                    { text: 'NUMERO', datafield: 'NUMERO', width: 100 },
+                    { text: 'CLASE', datafield: 'CLASE', width: 100 },
+                    { text: 'TIPO_GASTO', datafield: 'TIPO_GASTO', width: 100 },
+                    { text: 'OBJ_CON', datafield: 'OBJ_CON', width: 100 },
+                    { text: 'VALOR_CONTRATO', datafield: 'VALOR_CONTRATO' , width: 100 },
+                    { text: 'IDENTIFICACION_CONTRATISTA', datafield: 'IDENTIFICACION_CONTRATISTA', width: 100  },
+                    { text: 'NOMBRE_CONTRATISTA', datafield: 'NOMBRE_CONTRATISTA' , width: 100 },
+                    { text: 'TIPO_PERSONA', datafield: 'TIPO_PERSONA', width: 100  },
+                    { text: 'FECHA_SUSCRIPCION', datafield: 'FECHA_SUSCRIPCION', width: 100  },
+                    { text: 'IDENTIFICADOR_INTERVENTOR', datafield: 'IDENTIFICADOR_INTERVENTOR', width: 100  },
+                    { text: 'NOMBRE_INTERVENTOR', datafield: 'NOMBRE_INTERVENTOR', width: 100  },
+                    { text: 'TIPO_VINCULACION', datafield: 'TIPO_VINCULACION', width: 100  },
+                    { text: 'UNIDAD_DE_EJECUCION', datafield: 'UNIDAD_DE_EJECUCION', width: 100  },
+                    { text: 'PLAZO_EJECUCION', datafield: 'PLAZO_EJECUCION', width: 100  },
+                    { text: 'ANTICIPO', datafield: 'ANTICIPO', width: 100  },
+                    { text: 'VAL_ANTICIPO', datafield: 'VAL_ANTICIPO', width: 100  },
+                    { text: 'CONTITUYOFIDUCIA', datafield: 'CONTITUYOFIDUCIA', width: 100  },
+                    { text: 'FECHAINICIO', datafield: 'FECHAINICIO', width: 100  },
+                    { text: 'FECHAFINAL', datafield: 'FECHAFINAL', width: 100  },
+                    { text: 'PLAZOPRORROGA', datafield: 'PLAZOPRORROGA', width: 100  },
+                    { text: 'UNIDAD_EJECUCION_PRORROGA', datafield: 'UNIDAD_EJECUCION_PRORROGA', width: 100  },
+                    { text: 'SECOP', datafield: 'SECOP', width: 100  },
+                    { text: 'FECHALIQ', datafield: 'FECHALIQ', width: 100  },
+                    { text: 'DEPENDENCIA', datafield: 'DEPENDENCIA', width: 100  }
+                ]
+            });
+
+            
+
+        }
+    </script>
+    <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="True">
+    </ajaxToolkit:ToolkitScriptManager>
+    <br />
+    <h2>
+        GENERACION DE FORMATOS SIA
+    </h2>
+    <br />
+    <input type="button" value="aceptar" id="btnAceptar" />
+    <input type="text" id="txtfini" />
+    <input type="text" id="txtffin" />
+    Fecha Inicial
+    <asp:TextBox ID="TxtFecIni" runat="server"></asp:TextBox>
+    <ajaxToolkit:CalendarExtender ID="TxtFecIni_CalendarExtender" runat="server" Enabled="True"
+        TargetControlID="TxtFecIni">
+    </ajaxToolkit:CalendarExtender>
+    Fecha Final
+    <asp:TextBox ID="TxtFecFin" runat="server"></asp:TextBox>
+    <ajaxToolkit:CalendarExtender ID="TxtFecFinCalendarExtender1" runat="server" Enabled="True"
+        TargetControlID="TxtFecFin">
+    </ajaxToolkit:CalendarExtender>
+    <br />
+    <br />
+    <asp:GridView ID="grdListaFormatos" runat="server" AutoGenerateColumns="False" DataKeyNames="IDE_RPT,VIG_RPT"
+        EnableModelValidation="True" Width="100%">
+        <Columns>
+            <asp:BoundField HeaderText="ID" DataField="ID" />
+            <asp:BoundField HeaderText="FORMATO" DataField="IDE_RPT" />
+            <asp:BoundField HeaderText="VIGENCIA" DataField="VIG_RPT" />
+            <asp:BoundField HeaderText="VERSION" DataField="VERSION" />
+            <asp:BoundField HeaderText="DESCRIPCIÓN" DataField="DESC_RPT" />
+            <asp:BoundField HeaderText="SOLICITADO POR" DataField="ENT_RPT" />
+            <asp:CommandField ButtonType="Button" SelectText="Exportar" ShowSelectButton="True" />
+            <%--<asp:ButtonField ButtonType="Button" Text="Exportar XLS" CommandName="xls" />--%>
+            <%--<asp:ButtonField ButtonType="Button" Text="Exportar CSV" CommandName="csv" />
+            <asp:ButtonField ButtonType="Button" Text="Consultar" CommandName="cns" />--%>
+            <asp:ButtonField ButtonType="Button" Text="Consultar" CommandName="cns" />
+        </Columns>
+    </asp:GridView>
+    <br />
+    <hr />
+    Resultado... [
+    <asp:Label ID="MsgResult" runat="server" Text="Label"></asp:Label>]
+    <hr />
+    <asp:Button ID="BtnExportar" runat="server" Text="Exportar" />
+    <%--<div style="width: 900px; min-height: 200px; max-height: 400px; overflow: auto">--%>
+        <asp:GridView ID="GridView1" runat="server" SkinID="gridCSS">
+        </asp:GridView>
+        <br />
+    <%--</div>--%>
+    <input type="button" value="Export to Excel" id='excelExport_a' />
+    <div id="jqxgridF20_1a">
+    </div>
+    <input type="button" value="Export to Excel" id='excelExport_b' />
+    <div id="jqxgridF20_1b">
+    </div>
+    <input type="button" value="Export to Excel" id='excelExport_c' />
+    <div id="jqxgridF20_1c">
+    </div>
+    
+</asp:Content>

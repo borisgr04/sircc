@@ -1,0 +1,171 @@
+﻿Imports System.Data
+Imports System.IO
+Imports System.Web.Services
+Imports System.Web.Script.Services
+
+Partial Class Informes4_SIAF20_SiaF20
+    Inherits System.Web.UI.Page
+
+    <WebMethod()> _
+    <ScriptMethod(UseHttpGet:=True, ResponseFormat:=ResponseFormat.Xml)> _
+    Public Shared Function Formato20_1bXML(fec_ini As String, fec_fin As String) As String
+        Dim c As New CtrF20_2013()
+        Dim dataTb As DataTable = c.getF20_1b(fec_ini, fec_fin)
+        Dim writer As New System.IO.StringWriter()
+        dataTb.WriteXml(writer, XmlWriteMode.WriteSchema, False)
+        Return writer.ToString()
+    End Function
+
+    <WebMethod()> _
+    <ScriptMethod(UseHttpGet:=True, ResponseFormat:=ResponseFormat.Xml)> _
+    Public Shared Function Formato20_1cXML(fec_ini As String, fec_fin As String) As String
+        Dim c As New CtrF20_2013()
+        Dim dataTb As DataTable = c.getF20_1c(fec_ini, fec_fin)
+        Dim writer As New System.IO.StringWriter()
+        dataTb.WriteXml(writer, XmlWriteMode.WriteSchema, False)
+        Return writer.ToString()
+    End Function
+
+    <WebMethod()> _
+    <ScriptMethod(UseHttpGet:=True, ResponseFormat:=ResponseFormat.Xml)> _
+    Public Shared Function Formato20_1aXML(fec_ini As String, fec_fin As String) As String
+        Dim c As New CtrF20_2013()
+        Dim dataTb As DataTable = c.getF20_1a(fec_ini, fec_fin)
+        Dim writer As New System.IO.StringWriter()
+        dataTb.WriteXml(writer, XmlWriteMode.WriteSchema, False)
+        Return writer.ToString()
+    End Function
+
+    Public Sub Formato20_1b(fec_ini As Date, fec_fin As Date)
+        Dim c As New CtrF20_2013()
+        GridView1.DataSource = c.getF20_1b(fec_ini, fec_fin)
+        GridView1.DataBind()
+
+    End Sub
+
+    Public Sub Formato20_1c(fec_ini As Date, fec_fin As Date)
+        Dim c As New CtrF20_2013()
+        GridView1.DataSource = c.getF20_1c(fec_ini, fec_fin)
+        GridView1.DataBind()
+
+    End Sub
+    Public Sub Formato20_1a(fec_ini As Date, fec_fin As Date)
+
+
+    End Sub
+
+
+    Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            Dim c As New CtrF20_2013()
+            grdListaFormatos.DataSource = c.getF20s("AC")
+            grdListaFormatos.DataBind()
+        End If
+    End Sub
+
+    Protected Sub grdListaFormatos_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles grdListaFormatos.SelectedIndexChanged
+        Dim ide_rpt As String = grdListaFormatos.SelectedRow.Cells(1).Text
+        Dim vig_rpt As String = grdListaFormatos.SelectedRow.Cells(2).Text
+        GenerarFormato(ide_rpt, vig_rpt)
+
+    End Sub
+    Public Sub ExportGridView(ByVal grd As GridView, Optional ByVal Archivo As String = "Export")
+
+        Dim attachment As String = String.Format("attachment; filename={0}.xls", Archivo)
+        Response.ClearContent()
+        Response.ContentType = "application/vnd.ms-excel"
+        Response.AddHeader("content-disposition", attachment)
+
+        'application/CSV
+        Dim sw As New StringWriter()
+        Dim htw As New HtmlTextWriter(sw)
+        grd.RenderControl(htw)
+        Response.Write(sw.ToString())
+        Response.End()
+    End Sub
+    Public Sub ExportGridView(dt As DataTable)
+        Dim attachment As String = String.Format("attachment; filename={0}.csv", "x")
+        Response.ClearContent()
+        Response.ContentType = "application/vnd.ms-excel"
+        Response.AddHeader("content-disposition", attachment)
+        Dim tab As String = ""
+        For Each dc As DataColumn In dt.Columns
+            Response.Write(tab + dc.ColumnName)
+            tab = ","
+        Next
+        Response.Write(vbLf)
+        Dim i As Integer
+        For Each dr As DataRow In dt.Rows
+            tab = ""
+            For i = 0 To dt.Columns.Count - 1
+                Response.Write(tab + dr(i).ToString())
+                tab = ","
+            Next
+            Response.Write(vbLf)
+        Next
+        Response.End()
+    End Sub
+    Private Sub GenerarFormato(ide_rpt As String, vig_rpt As String)
+        Dim c As New CtrF20_2013()
+        Dim dt As DataTable = New DataTable
+        Select Case ide_rpt
+            Case "F20_1A"
+                dt = c.getF20_1a(TxtFecIni.Text, TxtFecFin.Text)
+            Case "F20_1B"
+                dt = c.getF20_1b(TxtFecIni.Text, TxtFecFin.Text)
+            Case "F20_1C"
+                dt = c.getF20_1c(TxtFecIni.Text, TxtFecFin.Text)
+        End Select
+        ExportGridView(dt)
+        GridView1.DataSource = dt
+        GridView1.DataBind()
+
+        MsgResult.Text = c.Msg
+    End Sub
+    Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
+
+    End Sub
+
+    Protected Sub BtnExportar_Click(sender As Object, e As System.EventArgs) Handles BtnExportar.Click
+        ExportGridView(GridView1)
+    End Sub
+
+    Protected Sub grdListaFormatos_RowCommand(sender As Object, e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdListaFormatos.RowCommand
+        Dim comando As String = e.CommandName
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Me.grdListaFormatos.SelectedIndex = index
+        Dim ide_rpt As String = grdListaFormatos.SelectedRow.Cells(1).Text
+        Dim vig_rpt As String = grdListaFormatos.SelectedRow.Cells(2).Text
+
+        Dim dt As DataTable = GenFormato(ide_rpt, vig_rpt)
+        Select Case comando
+            Case "xls"
+                GridView1.DataSource = dt
+                GridView1.DataBind()
+                ExportGridView(GridView1)
+            Case "csv"
+                ExportGridView(dt)
+            Case "cns"
+                GridView1.DataSource = dt
+                GridView1.DataBind()
+        End Select
+
+    End Sub
+
+    Private Function GenFormato(ide_rpt As String, vig_rpt As String) As DataTable
+
+        Dim c As New CtrF20_2013()
+        Dim dt As DataTable = New DataTable
+        Select Case ide_rpt
+            Case "F20_1A"
+                dt = c.getF20_1a(TxtFecIni.Text, TxtFecFin.Text)
+            Case "F20_1B"
+                dt = c.getF20_1b(TxtFecIni.Text, TxtFecFin.Text)
+            Case "F20_1C"
+                dt = c.getF20_1c(TxtFecIni.Text, TxtFecFin.Text)
+        End Select
+        MsgResult.Text = c.Msg
+        Return dt
+
+    End Function
+End Class
