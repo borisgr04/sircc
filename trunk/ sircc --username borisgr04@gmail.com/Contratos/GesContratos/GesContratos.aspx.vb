@@ -203,12 +203,14 @@ Partial Class Contratos_GesContratos_Default
     Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
             TxtCodCon.Text = Request("CodCon")
+            Habilitar(False)
+            Habilitar2(False)
+            Limpiar()
             If TxtCodCon.Text <> "" Then
                 Buscar()
             End If
-            Limpiar()
-            Habilitar(False)
-            Habilitar2(False)
+
+            
         End If
 
     End Sub
