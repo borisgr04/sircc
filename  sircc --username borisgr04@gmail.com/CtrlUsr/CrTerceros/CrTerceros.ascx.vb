@@ -276,7 +276,7 @@ Partial Class CtrlUsr_CrTerceros_CrTerceros
     Protected Sub Page_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreRender
         Dim strjscript As String = "function ColocarNit(){"
         strjscript = strjscript & " document.getElementById ('" + Me.TxtDver.ClientID + "').value='';"
-        strjscript = strjscript & " if(document.getElementById ('" + Me.CbTdoc.ClientID + "').value='NI'){"
+        strjscript = strjscript & " if(document.getElementById ('" + Me.CbTdoc.ClientID + "').value=='NI'){"
         strjscript = strjscript & "  var dv=calcularDV(document.aspnetForm." + Me.TxtNit.ClientID + ".value);"
         strjscript = strjscript & "  document.aspnetForm." + Me.TxtDver.ClientID + ".value=dv;"
         strjscript = strjscript & " }"

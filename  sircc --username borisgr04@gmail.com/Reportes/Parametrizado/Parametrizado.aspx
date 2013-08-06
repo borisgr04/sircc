@@ -321,6 +321,32 @@
         </tr>
         <tr>
             <td style="width: 177px">
+                <asp:CheckBox ID="chkRep" runat="server" Text="Representante Legal" Font-Bold="False" /></td>
+            <td style="width: 126px">
+            </td>
+            <td style="width: 150px">
+            </td>
+            <td style="width: 161px">
+            </td>
+            <td style="width: 161px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 177px">
+                <asp:TextBox ID="TxtIdeRep" runat="server" Font-Size="8pt"></asp:TextBox>
+                <asp:Button ID="BtnRep" runat="server" CausesValidation="False" Text="..." />
+            </td>
+            <td style="width: 126px">
+                <asp:TextBox ID="TxtNomRep" runat="server" ReadOnly="True" Width="200px" Font-Size="8pt"></asp:TextBox></td>
+            <td style="width: 150px">
+            </td>
+            <td style="width: 161px">
+            </td>
+            <td style="width: 161px">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 177px">
                 <asp:CheckBox ID="ChkProc" runat="server" Text="Tipo de Proceso" Font-Bold="False" /></td>
             <td style="width: 126px">
             </td>

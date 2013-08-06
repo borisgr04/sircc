@@ -84,6 +84,9 @@ Partial Class Reportes_Parametrizado_Default
         If (Me.ChkInt.Checked = True) Then
             Util.AddFiltro(cFiltro, "IDE_INT = '" + Me.TxtIdeInt.Text + "'")
         End If
+        If (Me.chkRep.Checked = True) Then
+            Util.AddFiltro(cFiltro, "IDE_REP = '" + Me.TxtIdeRep.Text + "'")
+        End If
         If (Me.ChkAnul.Checked = False) Then
             Util.AddFiltro(cFiltro, "EST_CON <> '07'")
         End If
@@ -160,6 +163,9 @@ Partial Class Reportes_Parametrizado_Default
         ElseIf ConsultaTerS1.TipoTer = "INT" Then
             TxtIdeInt.Text = ConsultaTerS1.Ide_Ter
             BuscarCon()
+        ElseIf ConsultaTerS1.TipoTer = "REP" Then
+            TxtIdeRep.Text = ConsultaTerS1.Ide_Ter
+            BuscarREP()
         End If
         TxtIde.Text = ConsultaTerS1.Ide_Ter
         'BuscarContratista()
@@ -199,5 +205,21 @@ Partial Class Reportes_Parametrizado_Default
             'MsgBox(MsgResult, False)
             'VerModalPopup("RLC")
         End If
+    End Sub
+
+    Sub BuscarREP()
+        Dim t As New Terceros
+        Dim dt As DataTable = t.GetByIde(Me.TxtIdeRep.Text)
+        If dt.Rows.Count > 0 Then
+            Me.TxtNomRep.Text = dt.Rows(0)("Nom_Ter").ToString()
+        Else
+            'Me.MsgResult.Text = "No encontro el Tercero"
+            'MsgBox(MsgResult, False)
+            'VerModalPopup("RLC")
+        End If
+    End Sub
+
+    Protected Sub BtnRep_Click(sender As Object, e As System.EventArgs) Handles BtnRep.Click
+        VerModalPopup("REP")
     End Sub
 End Class
