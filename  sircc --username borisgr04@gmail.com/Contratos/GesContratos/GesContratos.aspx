@@ -39,9 +39,7 @@
                 }
                 TxtNroCto.value = nro;
             }
-            $('#<%=TxtCodCon.ClientID %>').blur(function () {
-                numeroC();
-            });
+            
             function pad(str, max) {
                 return str.length < max ? pad("0" + str, max) : str;
             }

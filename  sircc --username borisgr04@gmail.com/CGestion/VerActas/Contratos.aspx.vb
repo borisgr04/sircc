@@ -1,4 +1,5 @@
-﻿
+﻿Imports System.Data
+
 Partial Class Consultas_Contratos_Default
     Inherits PaginaComun
 
@@ -19,9 +20,9 @@ Partial Class Consultas_Contratos_Default
             Return ViewState("Can")
         End Get
     End Property
-    Protected Sub DetContratoN1_AceptarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles DetContratoN1.AceptarClicked
-        'Me.ConDocContratos1.CodigoContrato = Me.DetContratoN1.Cod_Con
-    End Sub
+    'Protected Sub DetContratoN1_AceptarClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles DetContratoN1.AceptarClicked
+    'Me.ConDocContratos1.CodigoContrato = Me.DetContratoN1.Cod_Con
+    'End Sub
     Protected Sub grdEstContratos_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdEstContratos.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then
             'ASIGNA(EVENTOS)
@@ -53,9 +54,27 @@ Partial Class Consultas_Contratos_Default
 
     Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            Me.DetContratoN1.ValoraBuscar = Request("CodCon")
-            Me.DetContratoN1.Buscar()
+            TxtCodCon.Text = Request("CodCon")
+            If TxtCodCon.Text <> "" Then
+                Buscar()
+            End If
         End If
-        
+
     End Sub
+    Protected Sub Buscar()
+        Dim c As New Contratos
+        Dim dt As DataTable = c.GetByPk(TxtCodCon.Text)
+        DtPCon.DataSource = dt
+        DtPCon.DataBind()
+        grdEstContratos.DataBind()
+
+
+
+
+    End Sub
+
+    Protected Sub TxtCodCon_TextChanged(sender As Object, e As System.EventArgs) Handles TxtCodCon.TextChanged
+        Buscar()
+    End Sub
+
 End Class

@@ -5,8 +5,50 @@
 <%@ Register src="../../CtrlUsr/DetContratosN/DetContratoN.ascx" tagname="DetContratoN" tagprefix="uc1" %>
 
 <%@ Register src="../../CtrlUsr/ConDocContratos/ConDocContratos.ascx" tagname="ConDocContratos" tagprefix="uc3" %>
-<%@ Register src="../../CtrlUsr/DetContratos/DetContrato.ascx" tagname="DetContrato" tagprefix="uc2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
+<script src="<%= ResolveUrl("~/Scripts/jquery-1.9.1.js") %>" type="text/javascript"></script>
+    <script src="<%= ResolveUrl("~/Scripts/jquery-ui-1.10.3.js") %>" type="text/javascript"></script>
+    <script src="<%= ResolveUrl("~/Scripts/jquery-ui.js") %>" type="text/javascript"></script>
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Styles/base/jquery-ui.css") %>" />
+    <%--<link rel="stylesheet" href="<%= ResolveUrl("~/Styles/smoothness/jquery-ui.css") %>" />--%>
+    <script type="text/javascript">
+
+        function pageLoad() {
+            //            $("#tabs").tabs({
+            //                collapsible: true
+            //            });
+
+            $('#<%=TxtCodCon.ClientID %>').keypress(function (e) {
+                if (e.which == 13) {
+                    numeroC();
+                }
+            });
+            $('#<%=TxtCodCon.ClientID %>').blur(function () {
+                numeroC();
+            });
+            function numeroC() {
+                var nro = 0;
+                var TxtNroCto = $get('<%=TxtCodCon.ClientID %>');
+                var CmbVig = $get('<%=CmbVigencia.ClientID %>');
+                var cboTipo = $get('<%=cboTip.ClientID %>');
+                if (TxtNroCto.value.length < 10) {
+                    nro = CmbVig.value + cboTipo.value + pad(TxtNroCto.value, 4);
+                }
+                else {
+                    nro = TxtNroCto.value;
+                }
+                TxtNroCto.value = nro;
+            }
+            $('#<%=TxtCodCon.ClientID %>').blur(function () {
+                numeroC();
+            });
+            function pad(str, max) {
+                return str.length < max ? pad("0" + str, max) : str;
+            }
+
+        }
+    </script>
     <div class="demoarea">
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </ajaxToolkit:ToolkitScriptManager>
@@ -19,14 +61,82 @@
             <div style="float:right">
             <a href="VerActas.aspx" title="Ir a Verificar Actas" class="button_example">Verficicación de Actas</a>
             </div>
-            <uc2:DetContrato ID="DetContratoN1" runat="server" />
+
+            <p>
+                    <asp:Label ID="Label6" runat="server" CssClass="Caption" Text="Vigencia" Visible="False"></asp:Label>
+                    <asp:DropDownList ID="CmbVigencia" runat="server" AutoPostBack="True" DataSourceID="ObjVigencias"
+                        DataTextField="Year_Vig" DataValueField="Year_Vig" Visible="True">
+                    </asp:DropDownList>
+                    <asp:Label ID="Label3" runat="server" CssClass="Caption" Text="Tipo"></asp:Label>
+                    <asp:DropDownList ID="CboTip" runat="server" AutoPostBack="True" CssClass="txt" DataSourceID="ObjTiposCont"
+                        DataTextField="NOM_TIP" DataValueField="COD_TIP">
+                    </asp:DropDownList>
+                    <asp:Label ID="Label4" runat="server" CssClass="Caption" Text="Número"></asp:Label>
+                    <asp:TextBox ID="TxtCodCon" runat="server" AutoPostBack="True"></asp:TextBox>
+                    <asp:Button ID="BtnBuscar" runat="server" Text="" class="button_buscar" CausesValidation="False" />
+                    <asp:Label ID="LbCodCod" runat="server"></asp:Label>
+                    <a href="CGesContratos.aspx" title="Ir a opción de Filtro de Otros Contratos ">Volver
+                        Filtro de Contratos</a>
+                </p>
+                <asp:HiddenField ID="hdEstado" runat="server" />
+                <div style="height: 200px; overflow: auto">
+                    <asp:DetailsView ID="DtPCon" runat="server" AutoGenerateRows="False" CellPadding="4"
+                        DataKeyNames="Cod_Tpro" Font-Size="Small" ForeColor="#333333" GridLines="None"
+                        Height="84px" Width="95%" EnableModelValidation="True">
+                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
+                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                        <EmptyDataTemplate>
+                            <br />
+                            El Contrato no existe o pertenece a una Delegación de la cual no esta autorizado.
+                        </EmptyDataTemplate>
+                        <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
+                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                        <Fields>
+                            <asp:BoundField DataField="Tipo" HeaderText="Tipo" SortExpression="Tipo" />
+                            <asp:BoundField DataField="Numero" HeaderText="Número" SortExpression="Numero">
+                                <ItemStyle Font-Bold="True" Font-Italic="False" Font-Size="Medium" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" />
+                            <asp:BoundField DataField="OBJ_CON" HeaderText="Objeto" SortExpression="OBJ_CON" />
+                            <asp:BoundField DataField="CONTRATISTA" HeaderText="Contratista" SortExpression="CONTRATISTA" />
+                            <asp:BoundField DataField="FEC_SUS_CON" HeaderText="Fecha de Suscripción" SortExpression="FEC_SUS_CON"
+                                DataFormatString="{0:d}" />
+                            <asp:BoundField DataField="Valor_Total_Prop" DataFormatString="{0:c}" HeaderText="Valor Total   ">
+                                <ItemStyle Font-Bold="True" Font-Size="Medium" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="PLAZO_TOTAL" HeaderText="Plazo de Ejecución Total" />
+                            <asp:BoundField DataField="VAL_CON" DataFormatString="{0:c}" HeaderText="Valor Inicial  " />
+                            <asp:BoundField DataField="PLA_EJE_CON" HeaderText="Plazo de Ejecución Inicial" />
+                            <asp:BoundField DataField="NRO_ADI" HeaderText="Cantidad de Adiciones " />
+                            <asp:BoundField DataField="VAL_ADI" DataFormatString="{0:c}" HeaderText="Valor Adicionado " />
+                            <asp:BoundField DataField="PLA_ADI" HeaderText="Plazo de Ejecución Adicional" />
+                            <asp:BoundField DataField="Valor_Total_Doc" DataFormatString="{0:c}" HeaderText="Valor Total del Contrato/Convenio" />
+                            <asp:BoundField DataField="FechaInicio" HeaderText="Fecha de Acta de Inicio" DataFormatString="{0:d}" />
+                            <asp:BoundField DataField="fec_apr_pol" HeaderText="Fecha Legalización" DataFormatString="{0:d}" />
+                            <asp:BoundField DataField="Dependencia" HeaderText="Dependencia que Genera la Necesidad"
+                                SortExpression="Dependencia" />
+                            <asp:BoundField DataField="DependenciaP" HeaderText="Dependencia a Cargo del Proceso"
+                                SortExpression="DependenciaP" />
+                            <asp:BoundField DataField="Abogado" HeaderText="Proyectó" />
+                            <asp:BoundField DataField="RevisadoPor" HeaderText="Revisado Por" />
+                        </Fields>
+                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <HeaderTemplate>
+                            INFORMACIÓN DETALLADA DEL CONTRATO
+                        </HeaderTemplate>
+                        <EditRowStyle BackColor="#999999" />
+                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                    </asp:DetailsView>
+                </div>
+                
             <br />
             <asp:ObjectDataSource ID="ObjObli" runat="server" 
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="CObligaciones">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DetContratoN1" Name="Cod_Con" 
-                        PropertyName="Cod_Con" Type="String" />
+                    <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" 
+                        PropertyName="Text" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
             
@@ -34,8 +144,8 @@
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetbyNum_Proc" 
                 TypeName="CProyectos">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DetContratoN1" Name="Cod_Con" 
-                        PropertyName="Cod_Con" Type="String" />
+                    <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" 
+                        PropertyName="Text" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
             
@@ -43,8 +153,8 @@
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="CDP_Contratos">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DetContratoN1" Name="Cod_Con" 
-                        PropertyName="Cod_Con" Type="String" />
+                    <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" 
+                        PropertyName="Text" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
             
@@ -52,8 +162,8 @@
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="Rubros_Contratos">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DetContratoN1" Name="Cod_Con" 
-                        PropertyName="Cod_Con" Type="String" />
+                    <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" 
+                        PropertyName="Text" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
             <ajaxToolkit:Accordion ID="Accordion1" runat="server" SelectedIndex="-1"
@@ -259,8 +369,8 @@
                     OldValuesParameterFormatString="original_{0}" SelectMethod="GetbyCod_Con" 
                     TypeName="EstContratos">
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="DetContratoN1" Name="cod_con" 
-                            PropertyName="cod_con" Type="String" />
+                        <asp:ControlParameter ControlID="TxtCodCon" Name="cod_con" 
+                            PropertyName="Text" Type="String" />
                     </SelectParameters>
                 </asp:ObjectDataSource>
                 <asp:ObjectDataSource ID="ObjDetEstContratos" runat="server" 
@@ -279,42 +389,53 @@
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="RP_Contratos">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DetContratoN1" Name="Cod_Con" 
-                        PropertyName="Cod_Con" Type="String" />
+                    <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" 
+                        PropertyName="Text" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
             <asp:ObjectDataSource ID="ObjPol" runat="server" 
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="Polizas_Contrato">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DetContratoN1" Name="Cod_Con" 
-                        PropertyName="Cod_Con" Type="String" />
+                    <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" 
+                        PropertyName="Text" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
             <asp:ObjectDataSource ID="ObjImpuestos" runat="server" 
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="Imp_Contratos">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DetContratoN1" Name="Cod_Con" 
-                        PropertyName="Cod_Con" Type="String" />
+                    <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" 
+                        PropertyName="Text" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
             <asp:ObjectDataSource ID="ObjInterventor" runat="server" 
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="Interventores_Contrato">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DetContratoN1" Name="Cod_Con" 
-                        PropertyName="Cod_Con" Type="String" />
+                    <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" 
+                        PropertyName="Text" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
             <asp:ObjectDataSource ID="ObjCFP" runat="server" 
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="CForma_Pago">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DetContratoN1" Name="Cod_Con" 
-                        PropertyName="Cod_Con" Type="String" />
+                    <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" 
+                        PropertyName="Text" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
+            <asp:ObjectDataSource ID="ObjTiposCont" runat="server" OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetRecords" TypeName="Tipos"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ObjContratos" runat="server" OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetByPk" TypeName="Contratos">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="TxtCodCon" Name="Cod_Con" PropertyName="Text" Type="String" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ObjVigencias" runat="server" OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetRecords" TypeName="Vigencias"></asp:ObjectDataSource>
+    
         </ContentTemplate>
     </asp:UpdatePanel>
     <br />
