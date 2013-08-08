@@ -49,7 +49,7 @@
                             <asp:Label ID="NVISITASLabel" runat="server" Text='<%# Eval("NVISITAS") %>' />
                         </td>
                         <td>
-                            <asp:Label ID="VALOR_PAGOLabel" runat="server" Text='<%# Eval("VALOR_PAGO","0:c") %>' />
+                            <asp:Label ID="VALOR_PAGOLabel" runat="server" Text='<%# Eval("VALOR_PAGO","{0:c}") %>' />
                         </td>
                         <td>
                             <asp:Label ID="POR_EJE_FISLabel" runat="server" Text='<%# Eval("POR_EJE_FIS") %>' />
@@ -81,7 +81,7 @@
                             <asp:Label ID="NVISITASLabel" runat="server" Text='<%# Eval("NVISITAS") %>' />
                         </td>
                         <td>
-                            <asp:Label ID="VALOR_PAGOLabel" runat="server" Text='<%# Eval("VALOR_PAGO") %>' />
+                            <asp:Label ID="VALOR_PAGOLabel" runat="server" Text='<%# Eval("VALOR_PAGO","{0:c}") %>' />
                         </td>
                         <td>
                             <asp:Label ID="POR_EJE_FISLabel" runat="server" Text='<%# Eval("POR_EJE_FIS") %>' />
