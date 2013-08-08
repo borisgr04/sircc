@@ -20,8 +20,6 @@ Partial Class Contratos_RadicacionM_Default
         Else
             Me.Radicar()
         End If
-
-
     End Sub
 
     Protected Sub Radicar()
@@ -304,7 +302,7 @@ Partial Class Contratos_RadicacionM_Default
                 Me.IBtnEditar.Enabled = True
             End If
 
-            Me.MsgResult.Text = dt.Rows(0)("Dep_Sup").ToString + "-" + dt.Rows(0)("dep_con").ToString
+            'Me.MsgResult.Text = dt.Rows(0)("Dep_Sup").ToString + "-" + dt.Rows(0)("dep_con").ToString
             Try
                 If String.IsNullOrEmpty(dt.Rows(0)("Dep_Sup").ToString) Then
                     CboDepSup.SelectedValue = dt.Rows(0)("dep_con").ToString

@@ -2,6 +2,8 @@ Imports Microsoft.VisualBasic
 Imports System.ComponentModel
 Imports System.Data
 Imports System.Data.Common
+'FECHA 6 DE AGOSTO  DE 2013, SE AGREGAN METODOS PRIVADOS PARA VALIDAR LOS CONTRATOS/PROCESOS/CRONOGRAMAS
+
 'FEcha 02 de Febrero de 2012,
 'Boris
 ' Se cambia Dep_Sup x Interventoria (El Campo requerido ya existia
@@ -18,6 +20,8 @@ Public Class Contratos
     Dim Vigencia As String
     Dim Tip_Con As String
     Dim NroCon As String
+    Dim Dep_Nec As String
+
 
 
     ''' <summary>
@@ -144,9 +148,12 @@ Public Class Contratos
         Me.NroCon = Right(año.ToString, Contratos.Dig_Vigencia) + tip.ToString + Right("0000" + nro.ToString, 4)
         Dim cod_con As String = Me.NroCon
         Msg = InsertP(nro, cod_con, vigencia, ide, obj, pro, fsus, pla, dep, stip, tip, val_con, Mun, nm, cod_sec, tip_for, cc, tip_proc, pla_pre, ide_rep, Urg_man, Est_Conv, Pro_Sel_Nro, dep_pcon, val_apo_gob, ANTICIPO, NEMPLEOS, PER_APO, AGOTAR_PPTO, PLAZO2_EJE_CON, TIPO_PLAZO, TIPO_PLAZO2, Dep_Sup)
+
         Me.Desconectar()
         Return Msg
     End Function
+
+    
 
     'CLASE              : Contratos
     'METODO             : Insert
@@ -161,8 +168,13 @@ Public Class Contratos
         Me.Tip_Con = tip
         Dim gac As String = ""
         Dim fsa As Date
-
         '--------------Validaciones 
+        'agrega 6/8/2013
+        If Not esValidoProceso(Pro_Sel_Nro, tip_proc, dep_pcon) Then
+            Return Msg
+            Exit Function
+        End If
+
         If Year(fsus) <> vigencia Then
             Msg = "La Fecha de Suscripción no coincide con la vigencia " + fsa.ToShortDateString
             Me.lErrorG = True
@@ -255,6 +267,9 @@ Public Class Contratos
                 CrearComando(querystring)
                 EjecutarComando()
             Next i
+
+            'Se actualiza estado del proceso
+            PonerEnCelebrado(Pro_Sel_Nro, dep_pcon)
 
             Msg = "Se Agrego un Nuevo Contrato Nº" + Me.NroCon
             'f.InsAud(Me.dbConnection, t, "Contratos", Msg, usuario)
@@ -395,6 +410,8 @@ Public Class Contratos
     Public Function UpdateP(ByVal cod_con As String, ByVal ide As String, ByVal obj As String, ByVal pro As String, ByVal fsus As Date, ByVal pla As Integer, ByVal dep As String, ByVal stip As String, ByVal tip As String, ByVal val_con As Decimal, ByVal Mun() As String, ByVal nm As Integer, ByVal cod_sec As String, ByVal tip_for As String, ByVal cc As String, ByVal tip_proc As String, ByVal pla_pre As String, ByVal ide_rep As String, ByVal Urg_man As Boolean, ByVal Est_Conv As Boolean, ByVal Pro_Sel_Nro As String, ByVal dep_pcon As String, ByVal val_apo_gob As Decimal, ByVal ANTICIPO As Boolean, ByVal NEMPLEOS As Integer, ByVal PER_APO As Boolean, ByVal Agotar_Ppto As Boolean, ByVal PLAZO2_EJE_CON As String, ByVal TIPO_PLAZO As String, ByVal TIPO_PLAZO2 As String, Dep_Sup As String) As String
         Dim gac As String = ""
 
+        
+
         Me.NroCon = cod_con
 
         Dim UM As String = IIf(Urg_man = True, "1", "0")
@@ -408,6 +425,11 @@ Public Class Contratos
         Try
             Me.Conectar()
             Me.ComenzarTransaccion()
+            If Not esValidoProceso(Pro_Sel_Nro, tip_proc, dep_pcon) Then
+
+                Throw New Exception(Msg)
+
+            End If
             Dim i As Integer
 
             gac = IIf(gac <> "", gac, " ")
@@ -470,6 +492,9 @@ Public Class Contratos
                 Me.CrearComando(querystring)
                 EjecutarComando()
             Next i
+
+            PonerEnCelebrado(Pro_Sel_Nro, dep_pcon)
+
             Msg = "Se Actualizó La Información del Contrato Nº" + Me.NroCon
             'f.InsAud(Me.dbConnection, t, "Contratos", msg, usuario)
             ConfirmarTransaccion()
@@ -753,5 +778,84 @@ Public Class Contratos
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataTb
+    End Function
+
+    ''BORIS MODIFICACION DEL 06/AGOSTO A 8 DE AGOSTO
+    
+    Class cProceso
+        Public Estado As String
+        Public Modalidad As String
+    End Class
+    ''' <summary>
+    ''' Se agrega el dia 6 de agosto d 2013
+    ''' Para Que se pueda validar si tiene activo la integracion con procesos cronograma
+    ''' </summary>
+    ''' <param name="pro_sel_nro"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Private Function ExisteProceso(pro_sel_nro As String) As cProceso
+        Dim cm As New cProceso()
+        cm.Estado = "0"
+        Dim ep As String = "0"
+        querystring = "select Est_Con,Cod_Tpro  from pcontratos where pro_sel_nro=:pro_sel_nro "
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":pro_sel_nro", pro_sel_nro)
+        Dim datat As DataTable = EjecutarConsultaDataTable()
+        If datat.Rows.Count > 0 Then
+            cm.Estado = datat.Rows(0)("Est_Con")
+            cm.Modalidad = datat.Rows(0)("Cod_Tpro")
+        End If
+        Return cm
+    End Function
+
+    ''' <summary>
+    ''' ''' Se agrega el dia 6 de agosto d 2013
+    ''' Para Que se pueda validar si tiene activo la integracion con procesos cronograma
+    ''' </summary>
+    ''' <param name="Pro_sel_Nro"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function esValidoProceso(Pro_sel_Nro As String, Modalidad As String, Cod_Dep As String) As Boolean
+        If (esIntPro(Cod_Dep)) Then
+            Dim cm As cProceso = ExisteProceso(Pro_sel_Nro)
+            If cm.Estado = "0" Then
+                Msg = "El proceso no existe en el sistema :" + Pro_sel_Nro
+                Me.lErrorG = True
+                Return False
+            End If
+            If cm.Modalidad <> Modalidad Then
+                Msg = "No Coincide la Modalidad del Proceso, verificar "
+                Me.lErrorG = True
+                Return False
+            End If
+            If Not ((cm.Estado = "AD") Or (cm.Estado = "CE")) Then
+                Msg = "El sistema esta Integrado con el Módulo de Procesos/Cronograma, el proceso debe estar en estado Adjudicado " + Pro_sel_Nro
+                Me.lErrorG = True
+                Return False
+            Else
+                Return True
+            End If
+        Else
+            Return True
+        End If
+
+    End Function
+    Private Sub PonerEnCelebrado(pro_sel_nro As String, cod_dep As String)
+        If (esIntPro(cod_dep)) Then
+            Dim pc As New PCronogramas
+            pc.Conexion = Me.Conexion
+            pc.UpdateCE(pro_sel_nro, "Se actualiza automaticamente al Radicar el Contrato")
+        End If
+        
+    End Sub
+    Private Function esIntPro(Cod_Dep As String) As Boolean
+
+        Dim d As New Dependencias()
+
+        Dim dt As DataTable = d.GetbyPK(Cod_Dep)
+
+        Return dt.Rows(0)("Int_Pro") = "S"
+
+
     End Function
 End Class
