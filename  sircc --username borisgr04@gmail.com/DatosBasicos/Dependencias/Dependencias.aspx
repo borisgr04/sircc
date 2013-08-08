@@ -270,6 +270,18 @@
                         </td>
                     </tr>
                     <tr>
+                        <td style="WIDTH: 98px">
+                            Integrado con Cronograma</td>
+                        <td style="WIDTH: 100px" colspan="3">
+                            <asp:DropDownList ID="CboIntPrc" runat="server">
+                                <asp:ListItem Value="S">SI</asp:ListItem>
+                                <asp:ListItem Value="N">NO</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                        <td style="WIDTH: 100px">
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="5" style="TEXT-ALIGN: center">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     </tr>

@@ -366,6 +366,24 @@ Public Class PCronogramas
         End If
         Return Me.Msg
     End Function
+    ''' <summary>
+    ''' Poner en Celebrado
+    ''' </summary>
+    ''' <param name="Num_Proc"></param>
+    ''' <param name="OBS_SEG"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
+    Public Function UpdateCE(ByVal Num_Proc As String, ByVal OBS_SEG As String) As String
+        querystring = "Update PCronogramas Set EST_ACT='0003', OBS_SEG=:OBS_SEG  WHERE Num_Proc=:Num_Proc"
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":Num_Proc", Num_Proc)
+        Me.AsignarParametroCadena(":OBS_SEG", OBS_SEG)
+        Me.num_reg = Me.EjecutarComando()
+        Return Me.Msg
+    End Function
+
+    
     '
     ''' <summary>
     ''' Consulta de Cronograma por ID (Pk)
