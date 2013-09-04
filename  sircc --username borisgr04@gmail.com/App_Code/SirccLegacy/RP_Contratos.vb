@@ -18,12 +18,24 @@ Public Class RP_Contratos
     End Function
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetxNroRp(Nro_Rp As String) As DataTable
+        Me.Conectar()
+        querystring = "SELECT * FROM vRP_CONTRATOS Where Nro_Rp=:Nro_Rp "
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":Nro_Rp", Nro_Rp)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+
+    End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetbyPk(ByVal Cod_Con As String, ByVal Nro_Rp As String) As DataTable
         Me.Conectar()
         querystring = "SELECT * FROM vRP_CONTRATOS Where Cod_Con=:Cod_Con And Nro_Cdp=:Nro_Rp"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":Cod_Con", Cod_Con)
-        Me.AsignarParametroCadena(":Nro_Cdp", Nro_Rp)
+        Me.AsignarParametroCadena(":Nro_Rp", Nro_Rp)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataTb

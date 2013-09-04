@@ -111,7 +111,9 @@ Partial Class Reportes_ParametrizadoB_Parametrizado
         End If
 
         If (ChkRP.Checked = True) Then
-            If Not (String.IsNullOrEmpty(TxtNroRP.Text)) And Not (String.IsNullOrEmpty(TxtVigRP.Text)) Then
+            If Not (String.IsNullOrEmpty(TxtNroRP.Text)) And (String.IsNullOrEmpty(TxtVigRP.Text)) Then
+                Util.AddFiltro(cFiltro, "NUMERO IN (select Cod_Con from rp_contratos where nro_rp In (" + Util.FormatCVS(TxtNroRP.Text) + ") ) ")
+            ElseIf Not (String.IsNullOrEmpty(TxtNroRP.Text)) And Not (String.IsNullOrEmpty(TxtVigRP.Text)) Then
                 Util.AddFiltro(cFiltro, "NUMERO IN (select Cod_Con from rp_contratos where nro_rp In (" + Util.FormatCVS(TxtNroRP.Text) + ") AND to_char(fec_rp,'yyyy')=" + TxtVigRP.Text + ")")
             Else
                 MsgResult.Text = "Cuando Desee Filtrar por RP, debe digitar el numero de RP y La Vigencia del RP"

@@ -40,13 +40,22 @@ Public Class CtrLegalizacion_RP
 
         Dim cdp As New CDP_Contratos
         Dim dt As DataTable = cdp.GetRecords(Cod_Con)
-        If dt.Rows.Count > 0 Then
-            Msg = rp.Insert(Cod_Con, Nro_Rp, Fec_Rp, Val_RP, Vigencia, Doc_Sop)
-            lErrorG = rp.lErrorG
-        Else
+
+        If dt.Rows.Count = 0 Then
             Msg = "No ha registrado CDP para el Contrato. Por favor Registrar CDP"
             lErrorG = True
+            Return Msg
         End If
+
+        If Fec_Rp.Year <> CInt(Vigencia) Then
+            Msg = "La Fecha del RP no coincide con la Vigenca en la cual esta abierta la sesión actual."
+            lErrorG = True
+            Return Msg
+        End If
+
+        Msg = rp.Insert(Cod_Con, Nro_Rp, Fec_Rp, Val_RP, Vigencia, Doc_Sop)
+        lErrorG = rp.lErrorG
+
 
         Return Msg
     End Function
