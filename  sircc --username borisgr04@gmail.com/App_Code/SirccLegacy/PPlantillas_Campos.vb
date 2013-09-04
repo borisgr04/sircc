@@ -12,7 +12,7 @@ Public Class PPlantillas_Campos
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetRecords(ByVal Vista As String) As DataTable
         Me.Conectar()
-        querystring = "SELECT * FROM vPPlantillas_Campos where vista=:vista"
+        querystring = "SELECT * FROM vPPlantillas_Campos where vista=:vista Order by Nom_Cam "
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":vista", Vista)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()

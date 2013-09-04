@@ -143,12 +143,12 @@ Partial Class Reportes_ParametrizadoB_Parametrizado
         Dim strsql As String
         Dim cFiltro As String = Filtro()
 
-        If Me.rdGroup.SelectedValue = "Pol_Con" Then
-            strsql = "SELECT c.*,Cant_Adicion(c.numero) nro_adi,Plazo_Adicion(c.numero) Pla_Adi,Valor_Adicion(c.numero) Val_Adi FROM vcontratos_Sinc_p_pol c  " + cFiltro + " ORDER BY numero, cod_pol"
-            strsql = "SELECT c.* FROM vcontratos_Sinc_p_pol c  " + cFiltro + " ORDER BY numero, cod_pol"
-        Else
-            strsql = "SELECT c.* FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
-        End If
+        'If Me.rdGroup.SelectedValue = "Pol_Con" Then
+        '    strsql = "SELECT c.*,Cant_Adicion(c.numero) nro_adi,Plazo_Adicion(c.numero) Pla_Adi,Valor_Adicion(c.numero) Val_Adi FROM vcontratos_Sinc_p_pol c  " + cFiltro + " ORDER BY numero, cod_pol"
+        '    strsql = "SELECT c.* FROM vcontratos_Sinc_p_pol c  " + cFiltro + " ORDER BY numero, cod_pol"
+        'Else
+        strsql = "SELECT c.* FROM vcontratosma c  " + cFiltro + " ORDER BY numero"
+        'End If
 
 
         Return strsql

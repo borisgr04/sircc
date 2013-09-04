@@ -79,4 +79,23 @@ Public Class CContratos
         ctx.Desconectar()
         Return dataTb
     End Function
+
+    Public Function GetbyCodCon(Cod_Con As String) As EContratos
+        Dim c As EContratos = Nothing
+        ctx.Conectar()
+        Dim querystring As String = "select * from vcontratosma where numero=:numero"
+        ctx.CrearComando(querystring)
+        ctx.AsignarParametroCadena(":numero", Cod_Con)
+        Dim dataTb As DataTable = ctx.EjecutarConsultaDataTable()
+        ctx.Desconectar()
+        If dataTb.Rows.Count > 0 Then
+            c = New EContratos
+            c.Cod_Con = dataTb.Rows(0)("Numero")
+            c.Nom_Ter = dataTb.Rows(0)("Contratista")
+            c.Ide_Con = dataTb.Rows(0)("Ide_Con")
+            c.Obj_Con = dataTb.Rows(0)("Obj_Con")
+        End If
+        Return c
+    End Function
+
 End Class
