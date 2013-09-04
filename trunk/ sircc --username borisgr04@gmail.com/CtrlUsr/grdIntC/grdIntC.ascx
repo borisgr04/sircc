@@ -27,12 +27,11 @@
                                         <ItemTemplate>
                                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("NTip_Int") %>'></asp:Label>
                                         </ItemTemplate>
-                                        <EditItemTemplate>
-                                            <asp:DropDownList ID="CboEditTip_Int" runat="server" Text='<%# Bind("Tip_Int") %>'   >
-                                                            <asp:ListItem Value="S" Text="Interno - (Supervisor)"></asp:ListItem>
-                                                            <asp:ListItem Value="I" Text="Externo"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                        </EditItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Contrato">
+                                        <ItemTemplate>
+                                            <asp:Label ID="LabelCCI" runat="server" Text='<%# Bind("Cod_Con_Int") %>'></asp:Label>
+                                        </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Observación">
                                         <ItemTemplate>
@@ -103,19 +102,38 @@
                                 </tr>
                                 <tr>
                                     <td class="style2">
-                                        <asp:Label ID="Label10" runat="server" Text="Identificación"></asp:Label>
+                                        <asp:Label ID="Label11" runat="server" Text="Tipo"></asp:Label>
                                     </td>
                                     <td class="style2">
+                                        <asp:DropDownList ID="CboNewTip_Int" runat="server" AutoPostBack="True">
+                                            <asp:ListItem Text="Interno(Supervisor)" Value="S"></asp:ListItem>
+                                            <asp:ListItem Text="Externo" Value="I"></asp:ListItem>
+                                            <asp:ListItem Text="Interno - (Apoyo Técnico)" Value="T"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td >
+                                        &nbsp;</td>
+                                    <td >
+                                        <asp:Panel ID="Panel1" runat="server" Visible="False">
+                                            &nbsp;<asp:Label ID="lbCodCon" runat="server" Text="Código Contrato"></asp:Label>
+                                            <asp:TextBox ID="txtCodCon" runat="server" AutoPostBack="True"></asp:TextBox>
+                                        </asp:Panel>
+                                    </td>
+                                    <td>
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="style2" >
+                                        <asp:Label ID="Label10" runat="server" Text="Identificación"></asp:Label>
+                                    </td>
+                                    <td class="style2" >
                                         <asp:TextBox ID="txtIde" runat="server" AutoPostBack="True"></asp:TextBox>
                                         <ajaxToolkit:FilteredTextBoxExtender ID="txtNewIde_Int_FilteredTextBoxExtender" 
-                                                runat="server" 
-                                                Enabled="True" 
-                                                TargetControlID="txtIde" 
-                                                FilterType="Numbers">
+                                            runat="server" Enabled="True" FilterType="Numbers" TargetControlID="txtIde">
                                         </ajaxToolkit:FilteredTextBoxExtender>
                                     </td>
                                     <td >
-                            <asp:Button ID="BtnBuscar" runat="server" CausesValidation="False" Text="..." />
+                                        <asp:Button ID="BtnBuscar" runat="server" CausesValidation="False" Text="..." />
                                     </td>
                                     <td >
                                         <asp:TextBox ID="txtNom" runat="server" Enabled="False" Width="279px"></asp:TextBox>
@@ -125,23 +143,6 @@
                                             ControlToValidate="txtIde" 
                                             ErrorMessage="Debe especificar un Interventor/Supervisor"></asp:RequiredFieldValidator>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td >
-                                        <asp:Label ID="Label11" runat="server" Text="Tipo"></asp:Label>
-                                    </td>
-                                    <td >
-                                        <asp:DropDownList ID="CboNewTip_Int" runat="server"  >
-                                            <asp:ListItem Value="S" Text="Interno(Supervisor)"></asp:ListItem>
-                                            <asp:ListItem Value="I" Text="Externo"></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td >
-                                        &nbsp;</td>
-                                    <td >
-                                        &nbsp;</td>
-                                    <td>
-                                        &nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td >

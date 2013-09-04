@@ -16,51 +16,6 @@ Public Class CtrF20_2013
         End Set
     End Property
 
-    ' ''' <summary>
-    ' ''' Genera el Formato 20
-    ' ''' </summary>
-    ' ''' <param name="fec_ini"></param>
-    ' ''' <param name="fec_fin"></param>
-    ' ''' <returns>
-    ' ''' (N) Nit Sujeto Vigilado,(C) Nombre Sujeto Vigilado,(C) Número Del Contrato,(C) Prorroga,(D) Valor Total De Las Adicciones En Pesos,(F) Fecha Suscripción Del Acta De Liquidación (Aaaa/mm/dd),(C) Actualización En El Secop
-    ' ''' </returns>
-    ' ''' <remarks></remarks>
-    'Public Function getF20_1bX(fec_ini As Date, fec_fin As Date) As DataTable
-
-    '    Dim sb As New StringBuilder()
-    '    sb.Append(" SELECT cod_con, CASE  WHEN pla_eje_adi > 0 THEN 'SI' ELSE 'NO' END prorrogas, val_adi val_adic, NVL (TO_CHAR (fecha_liq (cod_con), 'yyyy/mm/dd'), 'ND') fechaliq,  'NO' Secop ")
-    '    sb.Append(" FROM adiciones  WHERE   (pla_eje_adi>0 or Val_Adi>0) ")
-    '    sb.Append(" AND fec_sus_adi BETWEEN TO_DATE ('" + fec_ini.ToShortDateString + "', 'dd/mm/yyyy') AND TO_DATE ('" + fec_fin.ToShortDateString + "', 'dd/mm/yyyy')")
-    '    sb.Append(" UNION")
-    '    sb.Append(" SELECT cod_con, 'NO' Prorroga, 0 valor, NVL (TO_CHAR (fecha_liq (cod_con), 'yyyy/mm/dd'), 'ND') fechaliq,'NO' secop")
-    '    sb.Append("  FROM adiciones ")
-    '    sb.Append(" WHERE fecha_liq (cod_con) BETWEEN TO_DATE ('" + fec_ini.ToShortDateString + "', 'dd/mm/yyyy') AND TO_DATE ('" + fec_fin.ToShortDateString + "', 'dd/mm/yyyy')")
-
-    '    ctx.Conectar()
-    '    Dim querystring As String = sb.ToString()
-    '    ctx.CrearComando(querystring)
-    '    Dim datat As New DataTable
-    '    datat = ctx.EjecutarConsultaDataTable()
-    '    ctx.Desconectar()
-    '    Return datat
-    'End Function
-
-    'Public Function getF20_1cX(fec_ini As Date, fec_fin As Date) As DataTable
-
-    '    Dim sb As New StringBuilder()
-    '    sb.Append(" SELECT c.ide_ter nit_csut, t.nom_ter nom_csut, id_miembros nit_integrante, nom_miembro nom_integrante, (Select Nit from Ctrl_Entidad) Nit_Entidad, cod_con ")
-    '    sb.Append(" FROM vconsorciosutxc c INNER JOIN vterceros t ON t.ide_ter = c.ide_ter ")
-    '    sb.Append(" WHERE cod_con IN (SELECT numero FROM vcontratos_sinc_p c WHERE fec_sus_con BETWEEN TO_DATE ('" + fec_ini.ToShortDateString + "', 'dd/mm/yyyy') AND TO_DATE ('" + fec_fin.ToShortDateString + "', 'dd/mm/yyyy'))")
-    '    Dim querystring As String = sb.ToString()
-
-    '    ctx.Conectar()
-    '    ctx.CrearComando(querystring)
-    '    Dim datat As New DataTable
-    '    datat = ctx.EjecutarConsultaDataTable()
-    '    ctx.Desconectar()
-    '    Return datat
-
-    'End Function
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function getF20_1a(fec_ini As Date, fec_fin As Date) As DataTable
         Dim datat As New DataTable

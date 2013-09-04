@@ -50,7 +50,7 @@
         <tr>
             <td style="text-align: center">
             
-                <asp:Button ID="Generar_Reporte" runat="server" Text="Generar Reporte" /></td>
+                <asp:Button ID="Generar_Reporte" runat="server" CssClass="button_example" Text="Generar Reporte" /></td>
         </tr>
        <tr>
            <td style="text-align: center">
