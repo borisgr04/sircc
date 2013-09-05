@@ -199,11 +199,18 @@ Partial Class CtrlUsr_grdIntC_grdIntC
         Dim s As Boolean = (CboNewTip_Int.SelectedValue = "I")
         If s Then
             c = obj.getContrato(Me.txtCodCon.Text)
-            txtIde.Text = c.Ide_Con
-            txtNom.Text = c.Nom_Ter
-
+            If Not c Is Nothing Then
+                txtIde.Text = c.Ide_Con
+                txtNom.Text = c.Nom_Ter
+            Else
+                txtIde.Text = ""
+                txtNom.Text = ""
+            End If
+            
         Else
-            txtNewObs_Int.Text = "NAda"
+            txtIde.Text = ""
+            txtNom.Text = ""
+            txtNewObs_Int.Text = "."
         End If
     End Sub
 End Class

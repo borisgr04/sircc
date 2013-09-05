@@ -18,7 +18,7 @@ namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
             <LocalReport ReportPath="Rpt/RptB/RptConsTCt2013.rdlc">
                 
                 <DataSources>
-                    <rsweb:ReportDataSource DataSourceId="ObjRptContratos" Name="VCONTRATOSC_A" />
+                    <rsweb:ReportDataSource DataSourceId="ObjRptContratos" Name="DataSet1" />
                 </DataSources>
             </LocalReport>
             
