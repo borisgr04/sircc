@@ -36,7 +36,7 @@
                             "Seguimiento de la Pila:" & objErr.StackTrace.ToString()
             Mail.EnviarAuto("Error:[" + Membership.GetUser.UserName + "]" + Now.ToLongTimeString, ConstruirMensaje)
         
-            EventLog.WriteEntry("SIRCC2011", Err, EventLogEntryType.Error)
+            EventLog.WriteEntry("SIRCC2012", Err, EventLogEntryType.Error)
             
         Catch ex As Exception
 

@@ -80,7 +80,7 @@ Partial Class CtrlUsr_FiltroContratos_FiltroContratos
             Util.AddFiltro(cFiltro, "dep_pcon = '" + Me.CboDepP.SelectedValue + "'")
         End If
         If (Me.ChkInt.Checked = True) Then
-            Util.AddFiltro(cFiltro, "IDE_INT = '" + Me.TxtIdeInt.Text + "'")
+            Util.AddFiltro(cFiltro, "Interventores_Ide = '" + Me.TxtIdeInt.Text + "' Or Supervisores_Ide = '" + Me.TxtIdeInt.Text + "'")
         End If
         If (Me.ChkAnul.Checked = False) Then
             Util.AddFiltro(cFiltro, "EST_CON <> '07'")
@@ -100,9 +100,6 @@ Partial Class CtrlUsr_FiltroContratos_FiltroContratos
 
         If (ChkVig.Checked = True) Then
             Util.AddFiltro(cFiltro, "vig_con='" + TxtVig.Text + "'")
-            '        Else
-            '           Dim v As String = Request.Cookies("contratacion")("vigencia")
-            '          Util.AddFiltro(cFiltro, "vig_con='" + v.ToString + "'")
         End If
 
         '---se agrega filtro cdp y rp dia 15 de julio de 2012
