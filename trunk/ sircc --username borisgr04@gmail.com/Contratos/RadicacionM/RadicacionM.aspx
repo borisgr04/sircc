@@ -267,7 +267,7 @@
                                     <td class="STitulos" colspan="5">
                                         Representante Legal del Contrato<asp:RequiredFieldValidator ID="RequiredFieldValidator14"
                                             runat="server" ControlToValidate="TxtIdeRlc" ErrorMessage="Seleccione Representante Legal"
-                                            Width="22px">*</asp:RequiredFieldValidator>
+                                            Width="22px" InitialValue="00">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -295,9 +295,10 @@
                     </tr>
                     <tr>
                         <td colspan="6" valign="top" class="STitulos">
-                            Dependencia que Genera la Necesidad<asp:Label ID="Label6" runat="server" ForeColor="Red"
-                                Text="*" Width="13px"></asp:Label>
-                            &nbsp;
+                            Dependencia que Genera la Necesidad<asp:RequiredFieldValidator 
+                                ID="RequiredFieldValidator24" runat="server" ControlToValidate="CboDep" 
+                                ErrorMessage="Es necesario especificar la Dependencia que Genera la Necesidad" 
+                                InitialValue="00">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -312,7 +313,9 @@
                     <tr>
                         <td class="STitulos" colspan="3" valign="top">
                             Dependencia a cargo del Proceso Contractual<asp:RequiredFieldValidator ID="RequiredFieldValidator21"
-                                runat="server" ControlToValidate="CboDepP" ErrorMessage="Es necesario especificar la Dependencia Delegada">*</asp:RequiredFieldValidator>
+                                runat="server" ControlToValidate="CboDepP" 
+                                ErrorMessage="Es necesario especificar la Dependencia Delegada" 
+                                InitialValue="00">*</asp:RequiredFieldValidator>
                             &nbsp;
                         </td>
                         <td class="STitulos" colspan="3">
@@ -331,6 +334,10 @@
                     <tr>
                         <td class="STitulos"  colspan="6" valign="top">
                             Dependencia que realizará la Supervisión &nbsp;&nbsp;
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" 
+                                ControlToValidate="CboDepSup" 
+                                ErrorMessage="Es necesario especificar la Dependencia que Supervisará el Contrato." 
+                                InitialValue="00">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -443,6 +450,10 @@
                     <tr>
                         <td class="STitulos" style="height: 15px; ">
                             Modalidad de Contratación
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" 
+                                ControlToValidate="CboTproc" 
+                                ErrorMessage="Es necesario especificar la Modalidad de Contratación" 
+                                InitialValue="TP00">*</asp:RequiredFieldValidator>
                         </td>
                         <td class="STitulos" style="height: 15px; width: 115px;">
                             N° Proceso

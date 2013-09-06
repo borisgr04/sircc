@@ -170,10 +170,7 @@
                             <asp:TextBox ID="TxtCod" runat="server"></asp:TextBox>
                         </td>
                         <td style="WIDTH: 100px">
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="TxtCod" ErrorMessage="Digite un Código" 
-                                ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
-                        </td>
+                            &nbsp;</td>
                     </tr>
                     <tr>
                         <td style="WIDTH: 98px">
