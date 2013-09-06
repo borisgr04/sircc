@@ -129,7 +129,7 @@ Partial Class Dependencias_Dependencias
 
     End Sub
 
-    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnGuardar.Click 'Handles BtnGuardar.Click
+    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Select Case Me.Oper
             Case "Nuevo"
                 Me.MsgResult.Text = Obj.Insert(Me.TxtCod.Text, Me.TxtNom.Text, Me.CboDel.SelectedValue, Me.TxtAbr.Text, Me.TxtIde.Text, Me.TxtNorma.Text, Me.TxtEmail.Text, Me.TxtCargo.Text, CboEst.SelectedValue, CboIntPrc.SelectedValue)

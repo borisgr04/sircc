@@ -164,8 +164,14 @@ Public Class Dependencias
     <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
     Public Function Insert(ByVal cod_dep As String, ByVal nom_dep As String, ByVal dep_del As String, ByVal dep_abr As String, ByVal ide_ter As String, ByVal norma_del As String, ByVal Email As String, ByVal cargo_enc As String, ByVal Estado As String, int_pro As String) As String
         Me.Conectar()
+        Dim queryString As String
         Try
-            Dim queryString As String = "Insert Into dependencia (cod_dep, nom_dep, dep_del, dep_abr,ide_ter,norma_del, Email,cargo_enc, Estado,int_pro)Values(:cod_dep, :nom_dep, :dep_del, :dep_abr,:ide_ter,:norma_del, :Email,cargo_enc, :Estado,:int_pro)"
+            queryString = "Select Max(cod_dep) from dependencia"
+            Me.CrearComando(queryString)
+            cod_dep = (Convert.ToInt32(EjecutarEscalar()) + 1).ToString.PadLeft(2, "0")
+
+            queryString = "Insert Into dependencia (cod_dep, nom_dep, dep_del, dep_abr,ide_ter,norma_del, Email,cargo_enc, Estado,int_pro)"
+            queryString += "Values(:cod_dep, :nom_dep, :dep_del, :dep_abr,:ide_ter,:norma_del, :email,:cargo_enc, :estado,:int_pro)"
             Me.CrearComando(queryString)
             Me.AsignarParametroCadena(":cod_dep", cod_dep)
             Me.AsignarParametroCadena(":nom_dep", nom_dep)
@@ -173,11 +179,10 @@ Public Class Dependencias
             Me.AsignarParametroCadena(":dep_abr", dep_abr)
             Me.AsignarParametroCadena(":ide_ter", ide_ter)
             Me.AsignarParametroCadena(":norma_del", norma_del)
-            Me.AsignarParametroCadena(":Email", Email)
+            Me.AsignarParametroCadena(":email", Email)
             Me.AsignarParametroCadena(":cargo_enc", cargo_enc)
-            Me.AsignarParametroCadena(":Estado", Estado)
-            Me.AsignarParametroCadena(":int_prc", int_pro)
-
+            Me.AsignarParametroCadena(":estado", Estado)
+            Me.AsignarParametroCadena(":int_pro", int_pro)
 
             Me.num_reg = EjecutarComando()
             Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
