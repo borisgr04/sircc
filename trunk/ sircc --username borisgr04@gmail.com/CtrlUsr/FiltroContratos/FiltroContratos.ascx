@@ -366,9 +366,9 @@
         <tr>
             <td style="width: 177px; height: 9px">
                 <asp:TextBox ID="TxtNroCdp" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
-                <cc1:FilteredTextBoxExtender ID="TxtNroCdp_FilteredTextBoxExtender" FilterType="Numbers" 
+                <%--<cc1:FilteredTextBoxExtender ID="TxtNroCdp_FilteredTextBoxExtender" FilterType="Numbers" 
                     runat="server" Enabled="True" TargetControlID="TxtNroCdp">
-                </cc1:FilteredTextBoxExtender>
+                </cc1:FilteredTextBoxExtender>--%>
             </td>
             <td style="width: 126px; height: 9px">
                 <asp:TextBox ID="TxtVigCDP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
@@ -400,9 +400,9 @@
         <tr>
             <td style="width: 177px; height: 9px">
                 <asp:TextBox ID="TxtNroRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
-                <cc1:FilteredTextBoxExtender ID="TxtNroRP_FilteredTextBoxExtender" 
+                <%--<cc1:FilteredTextBoxExtender ID="TxtNroRP_FilteredTextBoxExtender" 
                     runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtNroRP">
-                </cc1:FilteredTextBoxExtender>
+                </cc1:FilteredTextBoxExtender>--%>
             </td>
             <td style="width: 126px; height: 9px">
                 <asp:TextBox ID="TxtVigRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>

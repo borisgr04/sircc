@@ -22,7 +22,7 @@
                     </asp:Repeater>
                 </ul>
             </HeaderTemplate>--%>
-        <asp:Wizard ID="Wizard1" runat="server" ActiveStepIndex="0">
+        <asp:Wizard ID="Wizard1" runat="server" ActiveStepIndex="3">
             <WizardSteps>
                 <asp:WizardStep runat="server" title="Paso 1. Seleccion Campos">
                 <uc1:SelCampos ID="SelCampos1" runat="server" Vista="VContratosMA" />
