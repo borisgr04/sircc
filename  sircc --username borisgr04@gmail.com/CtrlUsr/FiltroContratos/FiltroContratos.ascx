@@ -31,7 +31,7 @@
     <br />
     
 <asp:Label id="labelTit" runat="server" Text="Seleccione Filtro a Aplicar" class="SubTitulo"></asp:Label>
-<div id="div1" style="z-index: 101; overflow: auto; width: 800px; height: 350px;
+<div id="div1" style="z-index: 101; overflow:none; width: 800px; height: 350px;
                         background-color: transparent; border-bottom-style: outset" title="Filtro">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
@@ -355,9 +355,9 @@
                     Text="Disponibilidad Presupuestal(CDP)" />
             </td>
             <td style="width: 126px; height: 9px">
-                Vigencia CDP</td>
-            <td style="width: 150px; height: 9px">
                 &nbsp;</td>
+            <td style="width: 150px; height: 9px">
+                Vigencia CDP</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
             <td style="width: 161px; height: 9px">
@@ -365,21 +365,17 @@
         </tr>
         <tr>
             <td style="width: 177px; height: 9px">
-                <asp:TextBox ID="TxtNroCdp" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+                <asp:TextBox ID="TxtNroCdp" runat="server" CssClass="txt" Width="369px"></asp:TextBox>
                 <%--<cc1:FilteredTextBoxExtender ID="TxtNroCdp_FilteredTextBoxExtender" FilterType="Numbers" 
                     runat="server" Enabled="True" TargetControlID="TxtNroCdp">
                 </cc1:FilteredTextBoxExtender>--%>
             </td>
-            <td style="width: 126px; height: 9px">
+            <td style="width: 161px; height: 9px">
                 <asp:TextBox ID="TxtVigCDP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
-                <cc1:FilteredTextBoxExtender ID="TxtVigCDP_FilteredTextBoxExtender" FilterType="Numbers" 
-                    runat="server" Enabled="True" TargetControlID="TxtVigCDP">
+                <cc1:FilteredTextBoxExtender ID="TxtVigCDP_FilteredTextBoxExtender" 
+                    runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtVigCDP">
                 </cc1:FilteredTextBoxExtender>
             </td>
-            <td style="width: 150px; height: 9px">
-                &nbsp;</td>
-            <td style="width: 161px; height: 9px">
-                &nbsp;</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
         </tr>
@@ -389,31 +385,27 @@
                     Text="Registro Presupuestal (RP)" />
             </td>
             <td style="width: 126px; height: 9px">
-                Vigencia CDP</td>
-            <td style="width: 150px; height: 9px">
                 &nbsp;</td>
+            <td style="width: 150px; height: 9px">
+                Vigencia RP</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 177px; height: 9px">
-                <asp:TextBox ID="TxtNroRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+            <td style="height: 9px" colspan="2">
+                <asp:TextBox ID="TxtNroRP" runat="server" CssClass="txt" Width="300px"></asp:TextBox>
                 <%--<cc1:FilteredTextBoxExtender ID="TxtNroRP_FilteredTextBoxExtender" 
                     runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtNroRP">
                 </cc1:FilteredTextBoxExtender>--%>
             </td>
-            <td style="width: 126px; height: 9px">
+            <td style="width: 161px; height: 9px">
                 <asp:TextBox ID="TxtVigRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
                 <cc1:FilteredTextBoxExtender ID="TxtVigRP_FilteredTextBoxExtender" 
                     runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtVigRP">
                 </cc1:FilteredTextBoxExtender>
             </td>
-            <td style="width: 150px; height: 9px">
-                &nbsp;</td>
-            <td style="width: 161px; height: 9px">
-                &nbsp;</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
         </tr>
