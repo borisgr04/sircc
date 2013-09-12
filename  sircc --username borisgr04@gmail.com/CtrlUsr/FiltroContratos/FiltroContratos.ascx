@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="FiltroContratos.ascx.vb" Inherits="CtrlUsr_FiltroContratos_FiltroContratos" %>
 <%@ Register src="../AdmTercero/AdmTercero.ascx" tagname="AdmTercero" tagprefix="uc3" %><%@ Register src="../Terceros/ConsultaTerS.ascx" tagname="ConsultaTerS" tagprefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <script type='text/javascript'>
     function cancelClick() {
         var label = $get('ctl00_SampleContent_LbRpt');
@@ -31,7 +32,7 @@
     <br />
     
 <asp:Label id="labelTit" runat="server" Text="Seleccione Filtro a Aplicar" class="SubTitulo"></asp:Label>
-<div id="div1" style="z-index: 101; overflow:none; width: 800px; height: 350px;
+<div id="div1" style="z-index: 101; overflow:scroll; width: 800px; height: 350px;
                         background-color: transparent; border-bottom-style: outset" title="Filtro">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
@@ -364,7 +365,7 @@
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 177px; height: 9px">
+            <td style="height: 9px" colspan="2">
                 <asp:TextBox ID="TxtNroCdp" runat="server" CssClass="txt" Width="369px"></asp:TextBox>
                 <%--<cc1:FilteredTextBoxExtender ID="TxtNroCdp_FilteredTextBoxExtender" FilterType="Numbers" 
                     runat="server" Enabled="True" TargetControlID="TxtNroCdp">
@@ -376,8 +377,6 @@
                     runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtVigCDP">
                 </cc1:FilteredTextBoxExtender>
             </td>
-            <td style="width: 161px; height: 9px">
-                &nbsp;</td>
         </tr>
         <tr>
             <td style="width: 177px; height: 9px">
