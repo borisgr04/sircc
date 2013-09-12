@@ -146,7 +146,6 @@ Partial Class CtrlUsr_FiltroContratos_FiltroContratos
         If Me.rdGroup.SelectedValue = "Pol_Con" Then
             strsql = cFiltro + " ORDER BY numero, cod_pol"
         Else
-            strsql = "SELECT * FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
             strsql = cFiltro + " ORDER BY numero"
         End If
         Return strsql

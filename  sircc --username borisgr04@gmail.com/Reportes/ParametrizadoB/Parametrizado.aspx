@@ -32,6 +32,8 @@
         {
          background-color:#F0F0F0;    
         }
+        .txt
+        {}
     </style>
 <div class="demoarea">
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" 
@@ -393,29 +395,27 @@
                     Text="Disponibilidad Presupuestal(CDP)" />
             </td>
             <td style="width: 126px; height: 9px">
-                Vigencia CDP</td>
-            <td style="width: 150px; height: 9px">
                 &nbsp;</td>
+            <td style="width: 150px; height: 9px">
+                Vigencia CDP</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 177px; height: 9px">
-                <asp:TextBox ID="TxtNroCdp" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+            <td style="height: 9px" colspan="2">
+                <asp:TextBox ID="TxtNroCdp" runat="server" CssClass="txt" Width="364px"></asp:TextBox>
                 <cc1:FilteredTextBoxExtender ID="TxtNroCdp_FilteredTextBoxExtender" FilterType="Numbers" 
                     runat="server" Enabled="True" TargetControlID="TxtNroCdp">
                 </cc1:FilteredTextBoxExtender>
             </td>
-            <td style="width: 126px; height: 9px">
+            <td style="width: 150px; height: 9px">
                 <asp:TextBox ID="TxtVigCDP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
-                <cc1:FilteredTextBoxExtender ID="TxtVigCDP_FilteredTextBoxExtender" FilterType="Numbers" 
-                    runat="server" Enabled="True" TargetControlID="TxtVigCDP">
+                <cc1:FilteredTextBoxExtender ID="TxtVigCDP_FilteredTextBoxExtender" 
+                    runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtVigCDP">
                 </cc1:FilteredTextBoxExtender>
             </td>
-            <td style="width: 150px; height: 9px">
-                &nbsp;</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
             <td style="width: 161px; height: 9px">
@@ -427,29 +427,27 @@
                     Text="Registro Presupuestal (RP)" />
             </td>
             <td style="width: 126px; height: 9px">
-                Vigencia RP</td>
-            <td style="width: 150px; height: 9px">
                 &nbsp;</td>
+            <td style="width: 150px; height: 9px">
+                Vigencia RP</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 177px; height: 9px">
-                <asp:TextBox ID="TxtNroRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
-                <cc1:FilteredTextBoxExtender ID="TxtNroRP_FilteredTextBoxExtender" 
+            <td style="height: 9px" colspan="2">
+                <asp:TextBox ID="TxtNroRP" runat="server" CssClass="txt" Width="367px"></asp:TextBox>
+                <%--<cc1:FilteredTextBoxExtender ID="TxtNroRP_FilteredTextBoxExtender" 
                     runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtNroRP">
-                </cc1:FilteredTextBoxExtender>
-            </td>
-            <td style="width: 126px; height: 9px">
-                <asp:TextBox ID="TxtVigRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
-                <cc1:FilteredTextBoxExtender ID="TxtVigRP_FilteredTextBoxExtender" 
+                </cc1:FilteredTextBoxExtender>--%>
+                <%--<cc1:FilteredTextBoxExtender ID="TxtVigRP_FilteredTextBoxExtender" 
                     runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtVigRP">
-                </cc1:FilteredTextBoxExtender>
+                </cc1:FilteredTextBoxExtender>--%>
             </td>
             <td style="width: 150px; height: 9px">
-                &nbsp;</td>
+                <asp:TextBox ID="TxtVigRP" runat="server" CssClass="txt" Width="103px"></asp:TextBox>
+            </td>
             <td style="width: 161px; height: 9px">
                 &nbsp;</td>
             <td style="width: 161px; height: 9px">
