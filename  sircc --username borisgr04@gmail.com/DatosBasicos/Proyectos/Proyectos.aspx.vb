@@ -30,8 +30,8 @@ Partial Class DatosBasicos_Proyectos_Default
                 Me.Habilitar(True)
                 Limpiar()
 
-                Me.ModalPopupTer.Show()
-                'Me.TxtCodNew.ReadOnly = True
+                MostrarEdicion()
+
                 Me.SetFocus(Me.TxtCodNew)
 
             Case "Editar"
@@ -44,13 +44,13 @@ Partial Class DatosBasicos_Proyectos_Default
                     Me.TxtCodNew.Text = tb.Rows(0)("Vigencia").ToString
                     Me.txt_proy.Text = tb.Rows(0)("Proyecto").ToString
                     Me.txtNomProy.Text = tb.Rows(0)("Nombre_Proyecto").ToString
-                    Me.Txt_Fec_Rad.Text = tb.Rows(0)("Fecha_Rad").ToString
+                    Me.Txt_Fec_Rad.Text = CDate(tb.Rows(0)("Fecha_Rad").ToString).ToShortDateString()
                     Me.Txt_comite.Text = tb.Rows(0)("Comite").ToString
                     Me.Txt_Val.Text = tb.Rows(0)("Valor").ToString
                     Me.Cmb_Estado.Text = tb.Rows(0)("Estado").ToString
                     Me.Pk1 = tb.Rows(0)("Proyecto").ToString
                     Habilitar(True)
-                    Me.ModalPopupTer.Show()
+                    MostrarEdicion()
                 End If
 
                 'MultiView1.ActiveViewIndex = 0
@@ -71,11 +71,11 @@ Partial Class DatosBasicos_Proyectos_Default
                     Me.Txt_Val.Text = tb.Rows(0)("Valor").ToString
                     Me.Cmb_Estado.Text = tb.Rows(0)("Estado").ToString
                     Me.Pk1 = tb.Rows(0)("Proyecto").ToString
-                    Me.ModalPopupTer.Show()
+                    MostrarEdicion()
                     Habilitar(False)
                 End If
-                Me.ModalPopupTer.Show()
-                'MultiView1.ActiveViewIndex = 0
+                'Me.ModalPopupTer.Show()
+
             Case "Exportar"
                 ExportGridView(GridView1, "Proyectos-SIRCC")
         End Select
@@ -100,25 +100,7 @@ Partial Class DatosBasicos_Proyectos_Default
     End Sub
     Private Sub FillCustomerInGrid()
         Me.GridView1.DataBind()
-        'Dim cl As String = Me.CboImpto.SelectedValue
-        'If Left(Me.CboImpto.SelectedValue, 2) <> Me.CmbClase.SelectedValue Then
-        ' Me.CboImpto.SelectedIndex = 0
-        ' cl = ""
-        'End If
-        'Dim dtCustomer As DataTable = Obj.GetByImpuesto(cl)
-        'If (dtCustomer.Rows.Count > 0) Then
-        ' GridView1.DataSource = dtCustomer
-        'GridView1.DataBind()
-        'Else
-        'dtCustomer.Rows.Add(dtCustomer.NewRow())
-        'GridView1.DataSource = dtCustomer
-        'GridView1.DataBind()
-        'Dim TotalColumns As Integer = GridView1.Rows(0).Cells.Count
-        'GridView1.Rows(0).Cells.Clear()
-        'GridView1.Rows(0).Cells.Add(New TableCell())
-        ' GridView1.Rows(0).Cells(0).ColumnSpan = TotalColumns
-        'GridView1.Rows(0).Cells(0).Text = "No se encontraron Registro"
-        'End If
+        
     End Sub
 
     Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -170,10 +152,33 @@ Partial Class DatosBasicos_Proyectos_Default
     Protected Sub IbtnNuevo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IbtnNuevo.Click
         Me.SubT.Text = "Nuevo..."
         Me.Oper = "Nuevo"
-        Me.ModalPopupTer.Show()
+        'Me.ModalPopupTer.Show()
+        MultiView1.ActiveViewIndex = 1
         Me.Habilitar(True)
         Limpiar()
         'Me.TxtCodNew.ReadOnly = True
         Me.SetFocus(Me.TxtCodNew)
+    End Sub
+
+    Protected Sub Button1_Click(sender As Object, e As System.EventArgs) Handles BtnBuscar.Click
+        Dim p As New Proyectos()
+        GridView1.DataSource = p.GetProyectos(CmbVig.SelectedValue, TxtBuscar.Text)
+        GridView1.DataBind()
+    End Sub
+
+    Private Sub MostrarEdicion()
+        MultiView1.ActiveViewIndex = 1
+    End Sub
+
+    Private Sub MostrarConsulta()
+        MultiView1.ActiveViewIndex = 0
+    End Sub
+
+    Protected Sub BtnVolver_Click(sender As Object, e As System.EventArgs) Handles BtnVolver.Click
+        MostrarConsulta()
+    End Sub
+
+    Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
+
     End Sub
 End Class

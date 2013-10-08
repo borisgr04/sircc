@@ -61,6 +61,8 @@ Public Class Proyectos
         Me.Desconectar()
         Return dataSet
     End Function
+
+    
     <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
     Public Function Insert(ByVal Vigencia As String, ByVal Proyecto As String, ByVal Nombre_Proyecto As String, ByVal Fecha_Rad As String, ByVal Comite As String, ByVal Valor As String, ByVal estado As String) As String
         Me.Conectar()
@@ -147,6 +149,30 @@ Public Class Proyectos
         Me.Conectar()
         Me.CrearComando(querystring)
         AsignarParametroCadena(":Proyecto", Proyecto)
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
+    End Function
+    ''' <summary>
+    ''' Get Proyectos
+    ''' </summary>
+    ''' <param name="Proyecto"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetProyectos(Vigencia As String, ByVal Proyecto As String) As DataTable
+        Me.Conectar()
+        If Not String.IsNullOrEmpty(Proyecto) Then
+            querystring = "SELECT * FROM  " + Vista + " WHERE Vigencia=:Vigencia And (Proyecto LIKE :Proyecto or Upper(Nombre_Proyecto) LIKE :NomProyecto) "
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":Vigencia", Vigencia)
+            Me.AsignarParametroCadena(":Proyecto", "%" + Proyecto + "%")
+            Me.AsignarParametroCadena(":NomProyecto", "%" + UCase(Proyecto) + "%")
+        Else
+            querystring = "SELECT * FROM  " + Vista + " WHERE Vigencia=:Vigencia"
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":Vigencia", Vigencia)
+        End If
         Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataSet

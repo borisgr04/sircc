@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="grdProyC.ascx.vb" Inherits="CtrlUsr_grdOblig_grdProyC" %>
 <%@ Register Src="../grdProy/ConProyectos.ascx" TagName="ConProyectos" TagPrefix="uc1" %>
+<fieldset>
+<legend>   Proyectos Relacionados </legend>
 <asp:GridView ID="grd" runat="server" AutoGenerateColumns="False" CellPadding="4"
     DataKeyNames="Proyecto" EnableModelValidation="True" ForeColor="#333333" GridLines="None"
     ShowFooter="True" Width="100%">
@@ -15,7 +17,7 @@
             <ItemTemplate>
                 <asp:Label ID="LbProyecto" runat="server" Text='<%# Bind("Proyecto") %>'></asp:Label>
             </ItemTemplate>
-            <ItemStyle Width="20%" />
+            <ItemStyle Width="30%" />
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Nombre del Proyecto" SortExpression="Nombre_Proyecto">
             <EditItemTemplate>
@@ -49,6 +51,9 @@
     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
 </asp:GridView>
 <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
+
+</fieldset>
+
 <%--<p>
     &nbsp;</p>
 <table>

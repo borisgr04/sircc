@@ -370,6 +370,17 @@ Public Class PContratos
         Me.Desconectar()
         Return preturn.Value.ToString()
     End Function
+    Public Function EliminarProc(ByVal Num_Proc As String, ByVal Observacion As String) As String
+        Me.Conectar()
+        querystring = "GP_ELIMINAR"
+        CrearComando(querystring, CommandType.StoredProcedure)
+        Dim preturn As DbParameter = AsignarParametroReturn(20)
+        AsignarParametroCad("NUM_PROCE", Num_Proc)
+        AsignarParametroCad("OBSER", Observacion)
+        EjecutarComando()
+        Me.Desconectar()
+        Return preturn.Value.ToString()
+    End Function
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetCons(ByVal cod_dep As String, ByVal cod_tpro As String, ByVal vig_con As String, Optional ByVal connectar As Boolean = False) As Integer
 

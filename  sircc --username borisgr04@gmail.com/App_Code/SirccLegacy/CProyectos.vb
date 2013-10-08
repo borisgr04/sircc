@@ -45,14 +45,26 @@ Public Class CProyectos
         Me.Conectar()
         Try
             Me.ComenzarTransaccion()
-            querystring = "INSERT INTO CProyectos(Cod_Con, Proyecto)VALUES(:Cod_Con, :Proyecto) "
+
+            querystring = " SELECT Proyecto FROM CProyectos WHERE Cod_Con=:Cod_Con And Proyecto=:Proyecto "
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Con", Cod_Con)
             Me.AsignarParametroCadena(":Proyecto", Proyecto)
-            Me.num_reg = Me.EjecutarComando()
-            Me.ConfirmarTransaccion()
-            Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
-            Me.lErrorG = False
+            Dim datatb As DataTable = Me.EjecutarConsultaDataTable()
+
+            If datatb.Rows.Count() = 0 Then
+                querystring = " INSERT INTO CProyectos(Cod_Con, Proyecto)VALUES(:Cod_Con, :Proyecto) "
+                Me.CrearComando(querystring)
+                Me.AsignarParametroCadena(":Cod_Con", Cod_Con)
+                Me.AsignarParametroCadena(":Proyecto", Proyecto)
+                Me.num_reg = Me.EjecutarComando()
+                Me.ConfirmarTransaccion()
+                Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
+                Me.lErrorG = False
+            Else
+                Me.Msg = "El proyecto ya se encuentra asociado al Contrato."
+                Me.lErrorG = True
+            End If
         Catch ex As Exception
             Me.Msg = "Error:" + ex.Message
             Me.CancelarTransaccion()

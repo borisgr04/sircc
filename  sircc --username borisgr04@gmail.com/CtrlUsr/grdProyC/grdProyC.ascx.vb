@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 Partial Class CtrlUsr_grdOblig_grdProyC
-    Inherits System.Web.UI.UserControl
+    Inherits CtrlUsrComun
     Property Tabla_Vacia() As Boolean
         Get
             Return ViewState("_tObligVacia")
@@ -86,6 +86,7 @@ Partial Class CtrlUsr_grdOblig_grdProyC
         If e.CommandName.Equals("AddNew") Then
             Dim txtNewProy As TextBox = DirectCast(grd.FooterRow.FindControl("txtNewProyecto"), TextBox)
             Me.MsgResult.Text = obj.Insert(txtNewProy.Text, Me.Cod_Con)
+            MsgBox(MsgResult, obj.lErrorG)
             LlenarGrid()
         End If
 
@@ -104,16 +105,7 @@ Partial Class CtrlUsr_grdOblig_grdProyC
         LlenarGrid()
     End Sub
 
-    Protected Sub RowUpdating(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewUpdateEventArgs) Handles grd.RowUpdating
-        Dim txtOblig As TextBox = DirectCast(grd.Rows(e.RowIndex).FindControl("txtOblig"), TextBox)
-        Dim dt As DataTable = Me.Tabla
-        'dtrow("item") = "a"
-        dt.Rows.Item(e.RowIndex)("Des_Oblig") = txtOblig.Text
-        dt.AcceptChanges()
-        Me.Tabla = dt
-        grd.EditIndex = -1
-        LlenarGrid()
-    End Sub
+    
 
     Protected Sub SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grd.SelectedIndexChanged
 

@@ -1,6 +1,10 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="grdCDPC.ascx.vb" Inherits="CtrlUsr_grdCDPC_grdCDPC" %>
+<fieldset>
+<legend>
+Certificados de Disponibilidad Prespuestal
+</legend>
 <asp:GridView ID="grd" runat="server" AutoGenerateColumns="False" 
- CellPadding="4" DataKeyNames="nro_cdp" 
+ CellPadding="4" DataKeyNames="nro_cdp" Width="100%" 
     ForeColor="#333333" GridLines="None" 
                                 ShowFooter="True" EnableModelValidation="True">
                                 <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
@@ -23,7 +27,8 @@
                                         <ItemTemplate>
                                             <asp:Label ID="LbNro_Cdp" runat="server" Text='<%# Bind("Nro_Cdp") %>'></asp:Label>
                                         </ItemTemplate>
-                                        <ItemStyle Width="50px" />
+                                        
+                                        <ItemStyle Width="25%" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Fecha CDP" SortExpression="Fec_Cdp">
                                         <EditItemTemplate>
@@ -39,7 +44,7 @@
                                         <ItemTemplate>
                                             <asp:Label ID="LbFec_Cdp" runat="server" Text='<%# Eval("Fec_Cdp","{0:d}") %>'  ></asp:Label>
                                         </ItemTemplate>
-                                        <ItemStyle Width="50px" />
+                                        <ItemStyle Width="25%" />
                                     </asp:TemplateField>
                                      <asp:TemplateField HeaderText="Valor CDP" SortExpression="Val_Cdp">
                                         <EditItemTemplate>
@@ -60,7 +65,7 @@
                                         <ItemTemplate>
                                             <asp:Label ID="Label9" runat="server" Text='<%# Bind("Val_Cdp") %>'></asp:Label>
                                         </ItemTemplate>
-                                        <ItemStyle Width="50px" />
+                                        <ItemStyle Width="25%" />
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <ItemTemplate>
@@ -80,6 +85,7 @@
                                 <EditRowStyle BackColor="#999999" />
                                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             </asp:GridView>
-                        <p>
-                        <asp:Label ID="MsgResult" runat="server"></asp:Label>
-                        </p>
+
+                        <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
+
+                        </fieldset>
