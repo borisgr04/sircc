@@ -104,6 +104,7 @@ Partial Class CtrlUsr_grdCDP_grdCDP
             'Me.MsgResult.Text = Me.Num_Proc
             If IsNumeric(txtNewNro_Cdp.Text) And IsDate(txtNewFec_Cdp.Text) And IsNumeric(txtNewVal_Cdp.Text) Then
                 Me.MsgResult.Text = obj.Insert(Me.Num_Proc, txtNewNro_Cdp.Text, CDate(txtNewFec_Cdp.Text), CDec(txtNewVal_Cdp.Text.Replace(".", ",")))
+                MsgBox(MsgResult, obj.lErrorG)
                 LlenarGrid()
                 OnClick(sender)
             Else

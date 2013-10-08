@@ -102,6 +102,7 @@ Partial Class CtrlUsr_grdCDPC_grdCDPC
             Dim txtNewVal_Cdp As TextBox = DirectCast(grd.FooterRow.FindControl("txtNewVal_Cdp"), TextBox)
             'Me.MsgResult.Text = Me.Cod_Con
             Me.MsgResult.Text = obj.Insert(Me.Cod_Con, txtNewNro_Cdp.Text, CDate(txtNewFec_Cdp.Text), CDec(txtNewVal_Cdp.Text))
+            MsgBox(MsgResult, obj.lErrorG)
             LlenarGrid()
         End If
     End Sub
@@ -113,12 +114,9 @@ Partial Class CtrlUsr_grdCDPC_grdCDPC
     Protected Sub RowDeleting(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewDeleteEventArgs) Handles grd.RowDeleting
         'customer.Delete(Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0].ToString()));
         Me.MsgResult.Text = obj.Delete(Me.Cod_Con, Me.grd.DataKeys(e.RowIndex).Values(0).ToString())
-        If obj.lErrorG = True Then
-            Me.MsgResult.Font.Bold = True
-        Else
-            Me.MsgResult.Font.Bold = False
-        End If
+        
         grd.EditIndex = -1
+        MsgBox(MsgResult, obj.lErrorG)
 
         LlenarGrid()
     End Sub

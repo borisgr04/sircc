@@ -130,7 +130,7 @@ Partial Class Contratos_RadicacionM_Default
         Me.TxtNom.Enabled = V
         Me.TxtObj.Enabled = V
         Me.TxtPla.Enabled = V
-        Me.TxtPro.Enabled = V
+        Me.TxtPro.Enabled = False
         Me.ChkEC.Enabled = V
         Me.ChkUM.Enabled = V
         Me.BtnBCon.Enabled = V

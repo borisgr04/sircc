@@ -508,7 +508,7 @@
                             </asp:DropDownList>
                         </td>
                         <td style="width: 115px; height: 8px" valign="top">
-                            <asp:TextBox ID="TxtPro" runat="server" CssClass="txt"></asp:TextBox>
+                            <asp:TextBox ID="TxtPro" runat="server" CssClass="txt" Enabled="False"></asp:TextBox>
                         </td>
                         <td style="width: 92px; height: 8px" valign="top">
                             <asp:DropDownList ID="CboFor" runat="server" CssClass="txt" ToolTip="Forma Contractual">
@@ -559,11 +559,9 @@
                                         MUNICIPIOS Y/O CORREGIMIENTOS
                                     </td>
                                     <td>
-                                        CERTIFICADO DE DISPONIBILIDAD PPTAL
-                                    </td>
+                                        &nbsp;</td>
                                     <td>
-                                        PROYECTOS
-                                    </td>
+                                        &nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -586,9 +584,17 @@
                                         </div>
                                     </td>
                                     <td valign="top">
+                                        &nbsp;</td>
+                                    <td valign="top">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
                                         <uc2:grdCDPC ID="grdCDPC1" runat="server" Visible="False" />
                                     </td>
-                                    <td valign="top">
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
                                         <uc1:grdProyC ID="grdProyC1" runat="server" Visible="False" />
                                     </td>
                                 </tr>

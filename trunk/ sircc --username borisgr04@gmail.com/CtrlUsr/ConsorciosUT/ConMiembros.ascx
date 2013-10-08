@@ -1,5 +1,8 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ConMiembros.ascx.vb" Inherits="CtrlUsr_ConsorciosUT_ConMiembros" %>
-
+<fieldset>
+<legend>
+Miembros de Consorcio o Union Temporal.
+</legend>
                 <asp:GridView ID="GridView1" runat="server" 
                 AutoGenerateColumns="False" 
                 EnableModelValidation="True" 
@@ -26,3 +29,4 @@
                 <asp:HiddenField ID="HdIde_Ter" runat="server" />
 
 
+</fieldset>
