@@ -1,8 +1,25 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="grdCDPC.ascx.vb" Inherits="CtrlUsr_grdCDPC_grdCDPC" %>
+<style type="text/css">
+.RadInput_Default{font:12px "segoe ui",arial,sans-serif}.RadInput{vertical-align:middle;width:160px}.RadInput_Default{font:12px "segoe ui",arial,sans-serif}.RadInput{vertical-align:middle;width:160px}
+    .style1
+    {
+        width: 100%;
+        vertical-align: middle;
+        overflow: visible;
+        border-style: none;
+        border-color: inherit;
+        border-width: 0;
+        padding-left: 0;
+        padding-right: 4px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+</style>
 <fieldset>
 <legend>
 Certificados de Disponibilidad Prespuestal
 </legend>
+<asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
 <asp:GridView ID="grd" runat="server" AutoGenerateColumns="False" 
  CellPadding="4" DataKeyNames="nro_cdp" Width="100%" 
     ForeColor="#333333" GridLines="None" 
@@ -52,18 +69,16 @@ Certificados de Disponibilidad Prespuestal
                                                 Width="100%"></asp:TextBox>
                                         </EditItemTemplate>
                                         <FooterTemplate>
-                                            <asp:TextBox ID="txtNewVal_Cdp" runat="server" Width="100%"></asp:TextBox>
-                                            <ajaxToolkit:FilteredTextBoxExtender ID="txtNewVal_Cdp_FilteredTextBoxExtender" 
-                                                runat="server" 
-                                                Enabled="True" 
-                                                TargetControlID="txtNewVal_Cdp" 
-                                                FilterType="Custom, Numbers"
-                                                ValidChars=".">
-                                            </ajaxToolkit:FilteredTextBoxExtender>
+                                            
+                                            </fieldset><telerik:RadNumericTextBox ID="txtNewVal_Cdp" 
+                                                runat="server" AutoPostBack="True" Culture="es-CO"
+                                                Height="19px" Skin="Default" 
+                                                Value="0" Width="125px">
+                                            </telerik:RadNumericTextBox>
                                             
                                         </FooterTemplate>
                                         <ItemTemplate>
-                                            <asp:Label ID="Label9" runat="server" Text='<%# Bind("Val_Cdp") %>'></asp:Label>
+                                            <asp:Label ID="Label9" runat="server" Text='<%# Bind("Val_Cdp","{0:c}") %>'></asp:Label>
                                         </ItemTemplate>
                                         <ItemStyle Width="25%" />
                                     </asp:TemplateField>
@@ -86,6 +101,7 @@ Certificados de Disponibilidad Prespuestal
                                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             </asp:GridView>
 
-                        <asp:Label ID="MsgResult" runat="server" SkinID="MsgResult"></asp:Label>
+                        
 
-                        </fieldset>
+                        
+                                        
