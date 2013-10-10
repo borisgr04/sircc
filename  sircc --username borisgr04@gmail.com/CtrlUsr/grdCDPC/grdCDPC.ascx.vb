@@ -1,4 +1,6 @@
 ﻿Imports System.Data
+Imports Telerik.Web.UI
+
 Partial Class CtrlUsr_grdCDPC_grdCDPC
     Inherits CtrlUsrComun
     Const NumCol As Integer = 3
@@ -99,9 +101,9 @@ Partial Class CtrlUsr_grdCDPC_grdCDPC
         If e.CommandName.Equals("AddNew") Then
             Dim txtNewNro_Cdp As TextBox = DirectCast(grd.FooterRow.FindControl("txtNewNro_Cdp"), TextBox)
             Dim txtNewFec_Cdp As TextBox = DirectCast(grd.FooterRow.FindControl("txtNewFec_Cdp"), TextBox)
-            Dim txtNewVal_Cdp As TextBox = DirectCast(grd.FooterRow.FindControl("txtNewVal_Cdp"), TextBox)
+            Dim txtNewVal_Cdp As RadNumericTextBox = DirectCast(grd.FooterRow.FindControl("txtNewVal_Cdp"), RadNumericTextBox)
             'Me.MsgResult.Text = Me.Cod_Con
-            Me.MsgResult.Text = obj.Insert(Me.Cod_Con, txtNewNro_Cdp.Text, CDate(txtNewFec_Cdp.Text), CDec(txtNewVal_Cdp.Text))
+            Me.MsgResult.Text = obj.Insert(Me.Cod_Con, txtNewNro_Cdp.Text, CDate(txtNewFec_Cdp.Text), Me.valor_dec(txtNewVal_Cdp.Text))
             MsgBox(MsgResult, obj.lErrorG)
             LlenarGrid()
         End If
@@ -114,7 +116,7 @@ Partial Class CtrlUsr_grdCDPC_grdCDPC
     Protected Sub RowDeleting(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewDeleteEventArgs) Handles grd.RowDeleting
         'customer.Delete(Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0].ToString()));
         Me.MsgResult.Text = obj.Delete(Me.Cod_Con, Me.grd.DataKeys(e.RowIndex).Values(0).ToString())
-        
+
         grd.EditIndex = -1
         MsgBox(MsgResult, obj.lErrorG)
 
@@ -144,4 +146,8 @@ Partial Class CtrlUsr_grdCDPC_grdCDPC
         grd.EditIndex = -1
         LlenarGrid()
     End Sub
+    Private Function valor_dec(ByVal v As String) As Decimal
+        Return v.Replace(".", ",")
+    End Function
+
 End Class
