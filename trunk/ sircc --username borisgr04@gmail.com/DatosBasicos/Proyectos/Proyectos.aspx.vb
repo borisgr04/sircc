@@ -1,4 +1,7 @@
 ﻿Imports System.Data
+Imports System.Web.Services
+Imports System.Web.Script.Services
+
 Partial Class DatosBasicos_Proyectos_Default
     Inherits PaginaComun
 
@@ -32,7 +35,7 @@ Partial Class DatosBasicos_Proyectos_Default
 
                 MostrarEdicion()
 
-                Me.SetFocus(Me.TxtCodNew)
+                Me.SetFocus(Me.CmbVigP)
 
             Case "Editar"
                 Me.SubT.Text = "Editando..."
@@ -41,20 +44,23 @@ Partial Class DatosBasicos_Proyectos_Default
 
                 Dim tb As DataTable = Obj.GetbyPk(GridView1.DataKeys(index).Values(0).ToString())
                 If tb.Rows.Count > 0 Then
-                    Me.TxtCodNew.Text = tb.Rows(0)("Vigencia").ToString
+                    Me.CmbVigP.Text = tb.Rows(0)("Vigencia").ToString
                     Me.txt_proy.Text = tb.Rows(0)("Proyecto").ToString
                     Me.txtNomProy.Text = tb.Rows(0)("Nombre_Proyecto").ToString
                     Me.Txt_Fec_Rad.Text = CDate(tb.Rows(0)("Fecha_Rad").ToString).ToShortDateString()
                     Me.Txt_comite.Text = tb.Rows(0)("Comite").ToString
-                    Me.Txt_Val.Text = tb.Rows(0)("Valor").ToString
+                    Me.TxtValTot.Text = tb.Rows(0)("Valor").ToString
+                    Me.TxtValProp.Text = tb.Rows(0)("APORTES_PROPIOS").ToString
+                    Me.TxtValOtros.Text = (tb.Rows(0)("Valor") - tb.Rows(0)("APORTES_PROPIOS"))
                     Me.Cmb_Estado.Text = tb.Rows(0)("Estado").ToString
                     Me.Pk1 = tb.Rows(0)("Proyecto").ToString
+                    Me.TxtIdeTer.Text = tb.Rows(0)("Ide_Aportante").ToString
                     Habilitar(True)
                     MostrarEdicion()
                 End If
 
                 'MultiView1.ActiveViewIndex = 0
-                Me.MsgResult.Text = "Editando: Código [" + Me.TxtCodNew.Text + "]"
+                Me.MsgResult.Text = "Editando: Código [" + Me.CmbVigP.Text + "]"
 
             Case "Eliminar"
                 Dim index As Integer = Convert.ToInt32(e.CommandArgument)
@@ -63,13 +69,17 @@ Partial Class DatosBasicos_Proyectos_Default
                 'Me.Hdpk2.Value = GridView1.DataKeys(index).Values(1).ToString()
                 Dim tb As DataTable = Obj.GetbyPk(GridView1.DataKeys(index).Values(0).ToString())
                 If tb.Rows.Count > 0 Then
-                    Me.TxtCodNew.Text = tb.Rows(0)("Vigencia").ToString
+                    Me.CmbVigP.Text = tb.Rows(0)("Vigencia").ToString
                     Me.txt_proy.Text = tb.Rows(0)("Proyecto").ToString
                     Me.txtNomProy.Text = tb.Rows(0)("Nombre_Proyecto").ToString
                     Me.Txt_Fec_Rad.Text = tb.Rows(0)("Fecha_Rad").ToString
                     Me.Txt_comite.Text = tb.Rows(0)("Comite").ToString
-                    Me.Txt_Val.Text = tb.Rows(0)("Valor").ToString
+                    Me.TxtValTot.Text = tb.Rows(0)("Valor").ToString
+                    Me.TxtValProp.Text = tb.Rows(0)("APORTES_PROPIOS").ToString
+
+                    Me.TxtValOtros.Text = (tb.Rows(0)("Valor") - tb.Rows(0)("APORTES_PROPIOS"))
                     Me.Cmb_Estado.Text = tb.Rows(0)("Estado").ToString
+                    Me.TxtIdeTer.Text = tb.Rows(0)("Ide_Aportante").ToString
                     Me.Pk1 = tb.Rows(0)("Proyecto").ToString
                     MostrarEdicion()
                     Habilitar(False)
@@ -84,11 +94,11 @@ Partial Class DatosBasicos_Proyectos_Default
 
 
     Protected Sub Habilitar(ByVal b As Boolean)
-        Me.TxtCodNew.Enabled = b
+        Me.CmbVigP.Enabled = b
         Me.txt_proy.Enabled = b
         Me.txtNomProy.Enabled = b
         Me.Txt_Fec_Rad.Enabled = b
-        Me.Txt_Val.Enabled = b
+        Me.TxtValTot.Enabled = b
         Me.Txt_comite.Enabled = b
         Me.Cmb_Estado.Enabled = b
         Me.BtnGuardar.Enabled = b
@@ -100,29 +110,30 @@ Partial Class DatosBasicos_Proyectos_Default
     End Sub
     Private Sub FillCustomerInGrid()
         Me.GridView1.DataBind()
-        
+
     End Sub
 
-    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+    Protected Sub BtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnGuardar.Click
         Select Case Me.Oper
             Case "Nuevo"
-                Me.MsgResult.Text = Obj.Insert(Me.TxtCodNew.Text, Me.txt_proy.Text, Me.txtNomProy.Text, Me.Txt_Fec_Rad.Text, Me.Txt_comite.Text, Me.Txt_Val.Text, Cmb_Estado.SelectedValue)
+                Me.MsgResult.Text = Obj.Insert(Me.CmbVigP.Text, Me.txt_proy.Text, Me.txtNomProy.Text, Me.Txt_Fec_Rad.Text, Me.Txt_comite.Text, Me.TxtValTot.Text, Cmb_Estado.SelectedValue, Me.TxtIdeTer.Text, cboTipPro.SelectedValue, TxtValProp.Text)
             Case "Editar"
-                Me.MsgResult.Text = Obj.Update(Pk1, Me.TxtCodNew.Text, Me.txt_proy.Text, Me.txtNomProy.Text, Me.Txt_Fec_Rad.Text, Me.Txt_comite.Text, Me.Txt_Val.Text, Cmb_Estado.SelectedValue)
+                Me.MsgResult.Text = Obj.Update(Pk1, Me.CmbVigP.Text, Me.txt_proy.Text, Me.txtNomProy.Text, Me.Txt_Fec_Rad.Text, Me.Txt_comite.Text, Me.TxtValTot.Text, Cmb_Estado.SelectedValue, Me.TxtIdeTer.Text, cboTipPro.SelectedValue, TxtValProp.Text)
         End Select
         Me.MsgBox(MsgResult, Obj.lErrorG)
         FillCustomerInGrid()
-        If Obj.lErrorG = False Then
-            Me.Limpiar()
-        End If
+
     End Sub
 
     Protected Sub Limpiar()
-        Me.TxtCodNew.Text = ""
+
         Me.txt_proy.Text = ""
         Me.Txt_Fec_Rad.Text = ""
-        Me.Txt_Val.Text = ""
+        Me.TxtValTot.Text = 0
+        Me.TxtValProp.Text = 0
+        Me.TxtValOtros.Text = 0
         Me.Txt_comite.Text = ""
+
 
         'Me.MultiView1.ActiveViewIndex = -1
     End Sub
@@ -157,13 +168,14 @@ Partial Class DatosBasicos_Proyectos_Default
         Me.Habilitar(True)
         Limpiar()
         'Me.TxtCodNew.ReadOnly = True
-        Me.SetFocus(Me.TxtCodNew)
+        Me.SetFocus(Me.CmbVigP)
     End Sub
 
     Protected Sub Button1_Click(sender As Object, e As System.EventArgs) Handles BtnBuscar.Click
         Dim p As New Proyectos()
         GridView1.DataSource = p.GetProyectos(CmbVig.SelectedValue, TxtBuscar.Text)
         GridView1.DataBind()
+
     End Sub
 
     Private Sub MostrarEdicion()
@@ -172,12 +184,20 @@ Partial Class DatosBasicos_Proyectos_Default
 
     Private Sub MostrarConsulta()
         MultiView1.ActiveViewIndex = 0
+        MsgBoxLimpiar(Me.MsgResult)
     End Sub
 
     Protected Sub BtnVolver_Click(sender As Object, e As System.EventArgs) Handles BtnVolver.Click
         MostrarConsulta()
     End Sub
 
+    <WebMethod()> _
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
+    Public Shared Function GetTercerosPk(ide_ter As String) As String
+        Dim t As New Terceros
+        Dim tb As DataTable = t.GetByIde(ide_ter)
+        Return If(tb.Rows.Count = 0, "0", tb.Rows(0)("Nom_Ter"))
+    End Function
     Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
 
     End Sub

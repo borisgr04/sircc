@@ -1,28 +1,104 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Proyectos.aspx.vb" EnableEventValidation="false" Inherits="DatosBasicos_Proyectos_Default" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
 
-    <script type='text/javascript'>
-    // Add click handlers for buttons to show and hide modal popup on pageLoad
-    function pageLoad() {
-        //$addHandler($get("showModalPopupClientButton"), 'click', showModalPopupViaClient);
-        //$addHandler($get("hideModalPopupViaClientButton"), 'click', hideModalPopupViaClient);        
-        $addHandler($get("BtnCerrar"), 'click', CerrarModalTercero);
-        $addHandler($get("BtnCancelar"), 'click', CerrarModalTercero);
-    }
-    function CerrarModalTercero(ev) {
-        ev.preventDefault();
-        var modalPopupBehavior2 = $find('programmaticModalPopupBehavior2');
-        modalPopupBehavior2.hide();
-    }
+<script src="<%= ResolveUrl("~/Scripts/jquery-1.9.1.js") %>" type="text/javascript"></script>
+<script src="<%= ResolveUrl("~/Scripts/jquery-ui-1.10.3.js") %>" type="text/javascript"></script>
+<script src="<%= ResolveUrl("~/Scripts/jquery-ui.js") %>" type="text/javascript"></script>
 
-    function CerrarModalEliminar(ev) {
-        ev.preventDefault();
-        var modalPopupBehavior2 = $find('programmaticModalPopupBehavior');
-        modalPopupBehavior2.hide();
-    }
+
+    <script type='text/javascript'>
+        $(function () {
+
+            var cboTipPro = $('#<%=cboTipPro.ClientID %>');
+            var Txt_comite = $('#<%=Txt_comite.ClientID %>');
+
+            cboTipPro.change(function () {
+                Txt_comite.val(cboTipPro.val() == "SGR" ? "ACTA N°:" : "COMITE N°: ");
+                Txt_comite.focus();
+            });
+
+            $('#<%=TxtIdeTer.ClientID %>').blur(function () {
+                var TxtIdeCon = $get('<%=TxtIdeTer.ClientID %>');
+                var TxtCtotista = $get('<%=TxtNomTer.ClientID %>');
+                if (TxtIdeCon.value.length > 0) {
+                    BuscarTercero(TxtIdeCon.value, TxtCtotista);
+                }
+            });
+
+            function BuscarTercero(ide_ter, txtNom) {
+                var nombre = "";
+                $.ajax({
+                    type: "POST",
+                    url: "Proyectos.aspx/GetTercerosPk",
+                    data: "{ide_ter:'" + ide_ter + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.d == "0") {
+                            alert("Tercero no Encontrado");
+                            txtNom.value = "";
+                        } else {
+                            txtNom.value = response.d;
+                        }
+
+                    },
+                    error: function (response) {
+                        if (response.length != 0)
+                            alert(response);
+                    }
+                });
+                return nombre;
+            }
+
+        });
         
         </script>
+        
+
+        <script type="text/javascript">
+            
+            function AportesTotalesT (sender, EventArgs) {
+                
+             var txtTotal =$find( '<%=Me.TxtValTot.ClientID%>');
+             var txtAportes = $find( '<%=Me.TxtValProp.ClientID%>');
+             var txtOtros = $find( '<%=Me.TxtValOtros.ClientID%>');
+             
+             var valTotal = txtTotal.get_value ();
+
+             if(valTotal==0){
+             txtTotal.set_value(0);
+             valTotal=0;
+             }
+             txtAportes.set_value (valTotal);
+             txtOtros.set_value (0);
+            }
+
+            function AportesProp (sender, EventArgs)
+            {
+             var txtTotal =$find( '<%=Me.TxtValTot.ClientID%>');
+             var txtAportes = $find( '<%=Me.TxtValProp.ClientID%>');
+             var txtOtros = $find( '<%=Me.TxtValOtros.ClientID%>');
+             var valTotal = txtTotal.get_value ();
+             var valAportes = txtAportes.get_value ();
+             var valOtros = valTotal-valAportes;
+             if(valOtros<0){
+                alert("El Valor de los Aportes no puede ser mayor que el Valor total");
+                txtAportes.set_value(valTotal);
+                txtOtros.set_value (0);
+                txtAportes.focus();
+             }
+             else{
+                txtOtros.set_value (valOtros);
+             }
+            }
+
+            
+
+            
+        </script>
+        
 <div class="demoarea">
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
@@ -32,12 +108,17 @@
     <%--<asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>--%>
 &nbsp;
+<asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" 
+                Text="Proyectos"></asp:Label><BR />
+                <asp:Label id="MsgResult" runat="server" 
+                SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<br />
+    <asp:HyperLink ID="hlReportes" runat="server" 
+        NavigateUrl="~/Reportes/PorProyectos/PorProyectos.aspx">Contratos por Proyectos</asp:HyperLink>
+    <br />
     <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
         <asp:View ID="View1" runat="server">
         <div >
-            <asp:Label id="Tit" runat="server" Width="286px" CssClass="Titulo" 
-                Text="Proyectos"></asp:Label><BR /><asp:Label id="MsgResult" runat="server" 
-                SkinID="MsgResult"></asp:Label>&nbsp;&nbsp;&nbsp;<br />
+            
             <asp:Label ID="Label11" runat="server" Text="Vigencia"></asp:Label>
             <asp:DropDownList ID="CmbVig" runat="server" DataSourceID="odsVigencias" DataTextField="YEAR_VIG" 
                     DataValueField="YEAR_VIG">
@@ -48,6 +129,10 @@
                 Text="Buscar" />
                 </div>
                 <br />
+                <br />
+            <asp:ImageButton ID="IbtnNuevo" runat="server" SkinID="IBtnNuevo" 
+                ValidationGroup="NoValidar" />
+            <br />
             <asp:GridView ID="GridView1" runat="server" 
                 AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
                 DataKeyNames="Proyecto" 
@@ -67,7 +152,8 @@
                                 </FooterTemplate><ItemTemplate><asp:Label ID="Lbcimp" runat="server" Text='<%# Bind("Proyecto") %>'></asp:Label></ItemTemplate></asp:TemplateField>
                     <asp:TemplateField HeaderText="Nombre de Proyecto" SortExpression="Nombre_Proyecto"><ItemTemplate><asp:Label ID="LbEst" runat="server" Text='<%# Bind("Nombre_Proyecto") %>'></asp:Label></ItemTemplate></asp:TemplateField>
                     <asp:TemplateField HeaderText="Fecha de Radicacion" SortExpression="Fecha_Rad"><ItemTemplate><asp:Label ID="LbCodAux" runat="server" Text='<%# Bind("Fecha_Rad","{0:d}") %>'></asp:Label></ItemTemplate></asp:TemplateField>
-                    <asp:TemplateField HeaderText="Comite" SortExpression="Comite"><ItemTemplate><asp:Label ID="LbCodFor" runat="server" Text='<%# Bind("Comite") %>'></asp:Label></ItemTemplate></asp:TemplateField>
+                    <asp:TemplateField HeaderText="Documento Aprobación(Comite/Acta)" 
+                        SortExpression="Comite"><ItemTemplate><asp:Label ID="LbCodFor" runat="server" Text='<%# Bind("Comite") %>'></asp:Label></ItemTemplate></asp:TemplateField>
                     <asp:TemplateField HeaderText="Valor" SortExpression="Valor"><ItemTemplate><asp:Label ID="LbCodCon" runat="server" Text='<%# Bind("Valor") %>'></asp:Label></ItemTemplate></asp:TemplateField>
                     <asp:TemplateField HeaderText="Estado" SortExpression="Estado"><ItemTemplate><asp:Label ID="LbEstado" runat="server" Text='<%# Bind("ESTADO") %>'></asp:Label></ItemTemplate></asp:TemplateField>
                     <asp:ButtonField ButtonType="Image" CommandName="Eliminar" 
@@ -88,10 +174,7 @@
                 <EditRowStyle BackColor="#999999" />
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             </asp:GridView>
-            <br />
-            <asp:ImageButton ID="IbtnNuevo" runat="server" SkinID="IBtnNuevo" 
-                ValidationGroup="NoValidar" />
-            <br />
+            
             <asp:ObjectDataSource id="ObjProyectos" runat="server" TypeName="Proyectos" 
                 SelectMethod="GetProyectos" 
                 OldValuesParameterFormatString="original_{0}" InsertMethod="Insert" 
@@ -108,9 +191,10 @@
             
         </asp:View>
         <asp:View ID="View2" runat="server">
-
-        <TABLE 
-                    align="center"><TBODY>
+        <fieldset>
+        <legend>Datos del Proyecto</legend>
+        <table 
+                    align="center"><tbody>
         <TR><TD colSpan=3>
             <asp:Label id="SubT" runat="server" Text="Nuevo" CssClass="SubTitulo"></asp:Label></TD></TR>
         <TR><TD colSpan=3>
@@ -120,10 +204,12 @@
                 <asp:Label ID="Label4" runat="server" Text="Vigencia" 
                         Width="143px"></asp:Label></TD>
             <TD style="WIDTH: 513px">
-                <asp:TextBox ID="TxtCodNew" runat="server" Width="107px"></asp:TextBox></TD>
+                <asp:DropDownList ID="CmbVigP" runat="server" DataSourceID="odsVigencias" 
+                    DataTextField="YEAR_VIG" DataValueField="YEAR_VIG">
+                </asp:DropDownList>
+            </TD>
             <TD style="WIDTH: 100px">
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                        ControlToValidate="TxtCodNew" ErrorMessage="Digite  Codigo ">*</asp:RequiredFieldValidator></TD></TR>
+                
         <TR><TD style="WIDTH: 162px; HEIGHT: 23px">
                 <asp:Label id="Label1" runat="server" Width="126px" Text="Proyecto"></asp:Label></TD>
             <TD style="WIDTH: 513px; HEIGHT: 23px">
@@ -152,20 +238,67 @@
             <TD style="WIDTH: 100px; HEIGHT: 19px">
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
                         ControlToValidate="txtNomProy" ErrorMessage="Digite Codigo Impuesto">*</asp:RequiredFieldValidator></TD></TR>
+                <tr>
+                    <td style="WIDTH: 162px; HEIGHT: 19px">
+                        Tipo Proyecto</td>
+                    <td style="WIDTH: 513px; HEIGHT: 19px">
+                        <asp:DropDownList ID="cboTipPro" runat="server" >
+                            <asp:ListItem Value="RP">RP - Recursos Propios</asp:ListItem>
+                            <asp:ListItem Value="SGR">SGR - Sistema General de Regalías</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td style="WIDTH: 100px; HEIGHT: 19px">
+                        &nbsp;</td>
+                </tr>
         <TR><TD style="WIDTH: 162px">
-                <asp:Label ID="Label7" runat="server" Text="Comite"></asp:Label>
+                <asp:Label ID="LbDoc" runat="server" Text="Documento Soporte(Comite/Acta)"></asp:Label>
             </TD>
             <TD style="WIDTH: 513px">
-                <asp:TextBox ID="Txt_comite" runat="server" Width="107px"></asp:TextBox>
+                <asp:TextBox ID="Txt_comite" runat="server" Width="320px"></asp:TextBox>
             </TD>
             <TD style="WIDTH: 100px"></TD></TR>
         <TR><TD style="WIDTH: 162px">
                 <asp:Label ID="Label8" runat="server" Text="Valor"></asp:Label>
-            </TD>
+                &nbsp;Total</TD>
             <TD style="WIDTH: 513px">
-                <telerik:RadNumericTextBox ID="Txt_Val" Runat="server">
+                <telerik:RadNumericTextBox ID="TxtValTot" Runat="server" Culture="es-CO" 
+                    Height="19px" Skin="Default" Value="0" Width="125px">
+                    <clientevents onvaluechanged="AportesTotalesT" />
                 </telerik:RadNumericTextBox>
             </TD><TD style="WIDTH: 100px"></TD></TR>
+                <tr>
+                    <td style="WIDTH: 162px">
+                        Aportes Propios</td>
+                    <td style="WIDTH: 513px">
+                        <telerik:RadNumericTextBox ID="TxtValProp" runat="server" Culture="es-CO" Height="19px"
+                                                        Skin="Default" Value="0" Width="125px">
+                                                        <ClientEvents OnValueChanged="AportesProp" />
+                                                    </telerik:RadNumericTextBox>
+                    </td>
+                    <td style="WIDTH: 100px">
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="WIDTH: 162px">
+                        Aportes Otros</td>
+                    <td style="WIDTH: 513px">
+                        <telerik:RadNumericTextBox ID="TxtValOtros" runat="server" Culture="es-CO" Height="19px"
+                                                        Skin="Default" Value="0" Width="125px" Enabled="false">
+                                                        
+                                                    </telerik:RadNumericTextBox>
+                    </td>
+                    <td style="WIDTH: 100px">
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="WIDTH: 162px">
+                        Aportante</td>
+                    <td colspan="2">
+                        <asp:TextBox ID="TxtIdeTer" runat="server"></asp:TextBox>
+                        <asp:Button ID="Button1" runat="server" Text="..." />
+                        <asp:TextBox ID="TxtNomTer" runat="server" ReadOnly="True" Width="335px"></asp:TextBox>
+                    </td>
+                </tr>
         <TR>
             <TD style="WIDTH: 162px">
                     <asp:Label ID="Label10" runat="server" Text="Estado"></asp:Label>
@@ -185,19 +318,23 @@
             </TD><TD style="WIDTH: 100px"></TD></TR>
         <TR><TD style="TEXT-ALIGN: center" colspan=3>
             &nbsp;</TD></TR>
-        <tr><td colspan="3" style="TEXT-ALIGN: center"><asp:Button ID="BtnGuardar" 
-                runat="server" onclick="BtnGuardar_Click" Text="Guardar">
+        <tr><td colspan="3" style="TEXT-ALIGN: center">
+            <asp:Button ID="BtnGuardar" runat="server" Text="Guardar">
                     </asp:Button>
             &#160;<asp:Button ID="BtnEliminar" runat="server" onclick="BtnEliminar_Click" 
                 Text="Eliminar">
                     </asp:Button>  
             <input id="BtnCancelar" type="button" value="Cancelar" /> 
-            <asp:Button ID="BtnVolver" runat="server" Text="Volver" />
+            <asp:Button ID="BtnVolver" runat="server" Text="Volver" ValidationGroup="SIN" />
             </td></tr>
         <tr><td colspan="3" style="TEXT-ALIGN: center">&#160;</td></tr></TBODY></TABLE>
+
+        </fieldset>
         </asp:View>
     </asp:MultiView>
 
+
+</div>
 <asp:ObjectDataSource ID="odsVigencias" runat="server" SelectMethod="GetRecords"
                         TypeName="Vigencias" OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource>            
 </asp:Content>

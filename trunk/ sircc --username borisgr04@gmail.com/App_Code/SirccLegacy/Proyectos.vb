@@ -1,7 +1,11 @@
 ﻿Imports Microsoft.VisualBasic
 Imports System.Data
 Imports System.ComponentModel
-
+''' <summary>
+''' Gestión de Proyectos
+''' Se agregaron campos de gestión de proyetco, valor aportes propios, aportantes(otros), tipo(sgr o rp), 
+''' </summary>
+''' <remarks></remarks>
 <System.ComponentModel.DataObject()> _
 Public Class Proyectos
     Inherits BDDatos
@@ -9,9 +13,7 @@ Public Class Proyectos
 
         Me.Tabla = "Proyectos"
         Me.Vista = "Proyectos"
-        'SELECT "COD_DEP", "NOM_DEP" FROM sircc.vdepdel ORDER BY "NOM_DEP"
-        'SELECT "COD_DEP", "NOM_DEP" FROM "DEPENDENCIA" ORDER BY "NOM_DEP"
-
+        
     End Sub
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
@@ -64,11 +66,11 @@ Public Class Proyectos
 
     
     <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
-    Public Function Insert(ByVal Vigencia As String, ByVal Proyecto As String, ByVal Nombre_Proyecto As String, ByVal Fecha_Rad As String, ByVal Comite As String, ByVal Valor As String, ByVal estado As String) As String
+    Public Function Insert(ByVal Vigencia As String, ByVal Proyecto As String, ByVal Nombre_Proyecto As String, ByVal Fecha_Rad As String, ByVal Comite As String, ByVal Valor As String, ByVal estado As String, IDE_APORTANTE As String, TIP_PRO As String, APORTES_PROPIOS As String) As String
         Me.Conectar()
         Try
-            Me.ComenzarTransaccion()
-            querystring = "INSERT INTO proyectos(Vigencia, Proyecto, Nombre_Proyecto, Fecha_Rad, Comite, Valor, Estado)VALUES(:Vigencia, :Proyecto, :Nombre_Proyecto,to_date(:Fecha_Rad,'dd/mm/yyyy'), :Comite, :Valor, :Estado) "
+            'Me.ComenzarTransaccion()
+            querystring = "INSERT INTO proyectos(Vigencia, Proyecto, Nombre_Proyecto, Fecha_Rad, Comite, Valor, Estado,IDE_APORTANTE,TIP_PRO,APORTES_PROPIOS)VALUES(:Vigencia, :Proyecto, :Nombre_Proyecto,to_date(:Fecha_Rad,'dd/mm/yyyy'), :Comite, :Valor, :Estado,:IDE_APORTANTE,:TIP_PRO,:APORTES_PROPIOS) "
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Vigencia", Vigencia)
             Me.AsignarParametroCadena(":Proyecto", Proyecto)
@@ -77,14 +79,18 @@ Public Class Proyectos
             Me.AsignarParametroCadena(":Comite", Comite)
             Me.AsignarParametroCadena(":Valor", Valor)
             Me.AsignarParametroCadena(":Estado", estado)
+            Me.AsignarParametroCadena(":IDE_APORTANTE", IDE_APORTANTE)
+            Me.AsignarParametroCadena(":TIP_PRO", TIP_PRO)
+            Me.AsignarParametroCadena(":APORTES_PROPIOS", APORTES_PROPIOS)
+
 
             Me.num_reg = Me.EjecutarComando()
-            Me.ConfirmarTransaccion()
+            'Me.ConfirmarTransaccion()
             Me.Msg = Me.MsgOk + " Filas Afectadas [" + Me.num_reg.ToString + "]"
             Me.lErrorG = False
         Catch ex As Exception
             Me.Msg = "Error:" + ex.Message
-            Me.CancelarTransaccion()
+            'Me.CancelarTransaccion()
             Me.lErrorG = True
         Finally
             Me.Desconectar()
@@ -93,19 +99,24 @@ Public Class Proyectos
     End Function
 
     <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
-    Public Function Update(ByVal Proyecto_O As String, ByVal Vigencia As String, ByVal Proyecto As String, ByVal Nombre_Proyecto As String, ByVal Fecha_Rad As String, ByVal Comite As String, ByVal Valor As String, ByVal estado As String) As String
+    Public Function Update(ByVal Proyecto_O As String, ByVal Vigencia As String, ByVal Proyecto As String, ByVal Nombre_Proyecto As String, ByVal Fecha_Rad As String, ByVal Comite As String, ByVal Valor As String, ByVal estado As String, IDE_APORTANTE As String, TIP_PRO As String, APORTES_PROPIOS As String) As String
         Me.Conectar()
         Try
             Me.ComenzarTransaccion()
-            querystring = "UPDATE Proyectos SET Vigencia=:Vigencia, Proyecto=:Proyecto, Nombre_Proyecto=:Nombre_Proyecto, Fecha_Rad=:Fecha_Rad, Comite=:Comite, Valor=:Valor, Estado=:Estado WHERE Proyecto=:Proyecto_O"
+            querystring = "UPDATE Proyectos SET Vigencia=:Vigencia, Proyecto=:Proyecto, Nombre_Proyecto=:Nombre_Proyecto, Fecha_Rad=to_date(:Fecha_Rad,'dd/mm/yyyy'), Comite=:Comite, Valor=:Valor, Estado=:Estado,IDE_APORTANTE=:IDE_APORTANTE,TIP_PRO=:TIP_PRO, APORTES_PROPIOS=:APORTES_PROPIOS WHERE Proyecto=:Proyecto_O"
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Vigencia", Vigencia)
             Me.AsignarParametroCadena(":Proyecto", Proyecto)
             Me.AsignarParametroCadena(":Nombre_Proyecto", Nombre_Proyecto)
-            Me.AsignarParametroCadena(":Fecha_Rad", Fecha_Rad)
+            Me.AsignarParametroCadena(":Fecha_Rad", CDate(Fecha_Rad).ToShortDateString)
             Me.AsignarParametroCadena(":Comite", Comite)
             Me.AsignarParametroCadena(":Valor", Valor)
             Me.AsignarParametroCadena(":Estado", estado)
+            Me.AsignarParametroCadena(":IDE_APORTANTE", IDE_APORTANTE)
+            Me.AsignarParametroCadena(":TIP_PRO", TIP_PRO)
+            Me.AsignarParametroCadena(":APORTES_PROPIOS", APORTES_PROPIOS)
+
+
             Me.AsignarParametroCadena(":Proyecto_O", Proyecto_O)
 
             Me.num_reg = Me.EjecutarComando()

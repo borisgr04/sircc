@@ -1,7 +1,7 @@
 ﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html >
 <head id="Head1" runat="server">
     <title></title> 
     
@@ -18,19 +18,19 @@
             }
         }
 
-        
-    sfFocus = function () {
-        var sfEls = document.getElementsByTagName("INPUT");
-        for (var i = 0; i < sfEls.length; i++) {
-            sfEls[i].onfocus = function () {
-                this.className += " sffocus";
-            }
-            sfEls[i].onblur = function () {
-                this.className = this.className.replace(new RegExp(" sffocus\\b"), "");
-            }
-        } 
-    }
-    if (window.attachEvent) window.attachEvent("onload", sfFocus); 
+//        
+//    sfFocus = function () {
+//        var sfEls = document.getElementsByTagName("INPUT");
+//        for (var i = 0; i < sfEls.length; i++) {
+//            sfEls[i].onfocus = function () {
+//                this.className += " sffocus";
+//            }
+//            sfEls[i].onblur = function () {
+//                this.className = this.className.replace(new RegExp(" sffocus\\b"), "");
+//            }
+//        } 
+//    }
+    //if (window.attachEvent) window.attachEvent("onload", sfFocus); 
 
     </script>
     <style type="text/css">
@@ -59,7 +59,7 @@
             font-weight: bold;
         }
     </style>
-    <link rel="shortcut icon" href="~/imagenes/favicon.ico"></link>
+    <link rel="shortcut icon" href="~/imagenes/favicon.ico"/>
     
 </head>
 <body>
