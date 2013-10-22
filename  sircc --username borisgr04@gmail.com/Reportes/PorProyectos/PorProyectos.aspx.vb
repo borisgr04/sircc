@@ -15,6 +15,6 @@ Partial Class Reportes_PorProyectos_PorProyectos
         strsql = "SELECT c.* FROM vcontratos_Sinc_p c  " + cFiltro + " ORDER BY numero"
         'Response.Write(strsql)
         'Response.End()
-        Response.Redirect("~/Reportes/Parametrizado/ReportP.aspx?sql=" + Server.UrlEncode(strsql) & "&tit=" + Server.UrlEncode("") & "&Rpte=" + Server.UrlEncode("Pro_Con"))
+        Response.Redirect("ReportP.aspx?sql=" + Server.UrlEncode(strsql) & "&tit=" + Server.UrlEncode("") & "&Rpte=" + Server.UrlEncode("Pro_Con"))
     End Sub
 End Class
