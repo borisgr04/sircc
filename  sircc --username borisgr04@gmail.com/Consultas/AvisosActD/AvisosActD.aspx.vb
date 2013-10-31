@@ -3,7 +3,7 @@ Imports System.Data
 Partial Class Consultas_AvisosActD_Default
     Inherits PaginaComun
 
-    Protected Sub GridView1_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
+    Protected Sub grdActHoy_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdActHoy.RowDataBound, grdRecibir.RowDataBound, grdProcACargo.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then
             ' ASIGNA EVENTOS
             e.Row.Attributes.Add("OnMouseOver", "Resaltar_On(this);")
@@ -11,12 +11,12 @@ Partial Class Consultas_AvisosActD_Default
         End If
     End Sub
 
-    Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
-        Dim Num_Proc = GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString()
+    Protected Sub grdActHoy_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdActHoy.SelectedIndexChanged
+        Dim Num_Proc = grdActHoy.DataKeys(grdActHoy.SelectedIndex).Values(0).ToString()
         Redireccionar_Pagina("/Consultas/AvisosActD/Con_Cronograma.aspx?Cod_PCon=" + Num_Proc)
     End Sub
 
-    Protected Sub GridView2_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
+    Protected Sub grdActAtrazadas_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdActAtrazadas.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then
             ' ASIGNA EVENTOS
             e.Row.Attributes.Add("OnMouseOver", "Resaltar_On(this);")
@@ -24,11 +24,10 @@ Partial Class Consultas_AvisosActD_Default
         End If
     End Sub
 
-    Protected Sub GridView2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView2.SelectedIndexChanged
-        Dim Num_Proc = GridView2.DataKeys(GridView2.SelectedIndex).Values(0).ToString()
+    Protected Sub grdActAtrazadas_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdActAtrazadas.SelectedIndexChanged
+        Dim Num_Proc = grdActAtrazadas.DataKeys(grdActAtrazadas.SelectedIndex).Values(0).ToString()
         Redireccionar_Pagina("/Consultas/AvisosActD/Con_Cronograma.aspx?Cod_PCon=" + Num_Proc)
     End Sub
-
 
     Protected Sub Selecc_DTProc(ByVal sender As Object, ByVal e As System.EventArgs) Handles DtProcesosACargo.SelectedIndexChanged
         HdPNom_Est.Value = DirectCast(sender, LinkButton).CommandArgument
@@ -100,13 +99,8 @@ Partial Class Consultas_AvisosActD_Default
         End If
     End Sub
 
-
-    Protected Sub grdRevisar0_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdxRecibir.RowCommand
-
-    End Sub
-
-    Protected Sub grdRevisar0_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdxRecibir.SelectedIndexChanged
-        Redireccionar_Pagina("/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx?Cod_Sol=" + grdxRecibir.SelectedValue)
+    Protected Sub grdxAsignar_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdxAsignar.SelectedIndexChanged
+        Redireccionar_Pagina("/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx?Cod_Sol=" + grdxAsignar.SelectedValue)
     End Sub
 
     Protected Sub GvAcep_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GvAcep.SelectedIndexChanged
@@ -131,10 +125,10 @@ Partial Class Consultas_AvisosActD_Default
         'Select Case RadTabStrip1.SelectedIndex
 
         'Case 0
-        grdxRecibir.DataSource = obj.GetxAsig(Vigencia)
-        grdxRecibir.DataBind()
+        grdxAsignar.DataSource = obj.GetxAsig(Vigencia)
+        grdxAsignar.DataBind()
         Dim tab6 As RadTab = RadTabStrip1.Tabs.FindTabByValue("asignar")
-        tab6.Text = "Solicitudes Sin Asignar (" + grdxRecibir.Rows.Count.ToString + ")"
+        tab6.Text = "Solicitudes Sin Asignar (" + grdxAsignar.Rows.Count.ToString + ")"
         'Case 1
         grdRecibir.DataSource = obj.GetxRecibirD(Vigencia)
         grdRecibir.DataBind()
@@ -144,7 +138,7 @@ Partial Class Consultas_AvisosActD_Default
         grdRevisar.DataSource = obj.GetSolPend(Vigencia)
         grdRevisar.DataBind()
         Dim tab4 As RadTab = RadTabStrip1.Tabs.FindTabByValue("revisar")
-        tab4.Text = "Solicitudes Sin Revisar (" + grdRevisar.Rows.Count.ToString + ")"
+        tab4.Text = "Solicitudes Pendientes (" + grdRevisar.Rows.Count.ToString + ")"
 
         'Case 3
         GvAcep.DataSource = obj.GetSolAcep(Vigencia)
@@ -157,15 +151,15 @@ Partial Class Consultas_AvisosActD_Default
         Dim tab8 As RadTab = RadTabStrip1.Tabs.FindTabByValue("Rechazadas")
         tab8.Text = "Solicitudes Rechazadas (" + GvRech.Rows.Count.ToString + ")"
         ' Case 5
-        GridView1.DataSource = obj.GetAvisosHoyD()
-        GridView1.DataBind()
+        grdActHoy.DataSource = obj.GetAvisosHoyD()
+        grdActHoy.DataBind()
         Dim tab1 As RadTab = RadTabStrip1.Tabs.FindTabByValue("hoy")
-        tab1.Text = "Actividades para hoy (" + GridView1.Rows.Count.ToString + ")"
+        tab1.Text = "Actividades para hoy (" + grdActHoy.Rows.Count.ToString + ")"
         '  Case 6
-        GridView2.DataSource = obj.GetAvisosAtrasadosD()
-        GridView2.DataBind()
+        grdActAtrazadas.DataSource = obj.GetAvisosAtrasadosD()
+        grdActAtrazadas.DataBind()
         Dim tab2 As RadTab = RadTabStrip1.Tabs.FindTabByValue("atrazadas")
-        tab2.Text = "Actividades Atrazadas/En Curso (" + GridView2.Rows.Count.ToString + ")"
+        tab2.Text = "Actividades Atrazadas/En Curso (" + grdActAtrazadas.Rows.Count.ToString + ")"
 
 
         '   Case 7
@@ -185,5 +179,51 @@ Partial Class Consultas_AvisosActD_Default
 
     Protected Sub IBtnNuevo_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IBtnNuevo.Click
         Response.Redirect(HyperLink2.NavigateUrl)
+    End Sub
+
+    Protected Sub BtnEx_SinAsig_Click(sender As Object, e As System.EventArgs) Handles BtnEx_SinAsig.Click
+        ExportGridView(grdxAsignar, "Solicitudes por Asignar")
+    End Sub
+
+    Protected Sub BtnExp_Aceptar_Click(sender As Object, e As System.EventArgs) Handles BtnExp_Aceptar.Click
+        ExportGridView(GvAcep, "Solicitudes Aceptadas")
+    End Sub
+
+    Protected Sub BtnExp_Rech_Click(sender As Object, e As System.EventArgs) Handles BtnExp_Rech.Click
+        ExportGridView(GvRech, "Solicitudes Rechazadas")
+    End Sub
+
+    Protected Sub BtnExp_Pend_Click(sender As Object, e As System.EventArgs) Handles BtnExp_Pend.Click
+        ExportGridView(grdRevisar, "Solicitudes Pendientes")
+    End Sub
+
+    Protected Sub BtnExp_xRecibir_Click(sender As Object, e As System.EventArgs) Handles BtnExp_xRecibir.Click
+        ExportGridView(grdRecibir, "Solicitudes por Recibir")
+    End Sub
+
+    Protected Sub BtnActHoy_Click(sender As Object, e As System.EventArgs) Handles BtnActHoy.Click
+        ExportGridView(grdActHoy, "Actividades para Hoy")
+    End Sub
+    Protected Sub BtnExpProcCargo_Click(sender As Object, e As System.EventArgs) Handles BtnExpProcCargo.Click
+        ExportGridView(grdProcACargo, "Procesos")
+    End Sub
+    Protected Sub BtnExpAtrazadas_Click(sender As Object, e As System.EventArgs) Handles BtnExpAtrazadas.Click
+
+        ExportGridView(grdActAtrazadas, "Actividades Atrazados")
+    End Sub
+
+
+    'Protected Sub lnkVerTodos_Click(sender As Object, e As System.EventArgs) Handles lnkVerTodos.Click
+    '    Dim obj As New AvisosActD
+    '    HdPNom_Est.Value = ""
+    '    grdProcACargo.DataSource = obj.GetProcbyDepDelEstado(HdPNom_Est.Value, Vigencia)
+    '    grdProcACargo.DataBind()
+    'End Sub
+
+
+
+    'Se requiere para exportar a excel
+    Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
+
     End Sub
 End Class
