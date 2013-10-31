@@ -101,12 +101,12 @@ Partial Class Consultas_AvisosActD_Default
     End Sub
 
 
-    Protected Sub grdRevisar0_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdxRevisar.RowCommand
+    Protected Sub grdRevisar0_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdxRecibir.RowCommand
 
     End Sub
 
-    Protected Sub grdRevisar0_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdxRevisar.SelectedIndexChanged
-        Redireccionar_Pagina("/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx?Cod_Sol=" + grdxRevisar.SelectedValue)
+    Protected Sub grdRevisar0_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdxRecibir.SelectedIndexChanged
+        Redireccionar_Pagina("/Solicitudes/NuevaSolicitud/NuevaSolicitud.aspx?Cod_Sol=" + grdxRecibir.SelectedValue)
     End Sub
 
     Protected Sub GvAcep_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GvAcep.SelectedIndexChanged
@@ -131,17 +131,17 @@ Partial Class Consultas_AvisosActD_Default
         'Select Case RadTabStrip1.SelectedIndex
 
         'Case 0
-        grdxRevisar.DataSource = obj.GetxAsig(Vigencia)
-        grdxRevisar.DataBind()
+        grdxRecibir.DataSource = obj.GetxAsig(Vigencia)
+        grdxRecibir.DataBind()
         Dim tab6 As RadTab = RadTabStrip1.Tabs.FindTabByValue("asignar")
-        tab6.Text = "Solicitudes Sin Asignar (" + grdxRevisar.Rows.Count.ToString + ")"
+        tab6.Text = "Solicitudes Sin Asignar (" + grdxRecibir.Rows.Count.ToString + ")"
         'Case 1
         grdRecibir.DataSource = obj.GetxRecibirD(Vigencia)
         grdRecibir.DataBind()
         Dim tab3 As RadTab = RadTabStrip1.Tabs.FindTabByValue("recibir")
         tab3.Text = "Solicitudes Sin Recibir (" + grdRecibir.Rows.Count.ToString + ")"
         'Case 2
-        grdRevisar.DataSource = obj.GetxAsig(Vigencia)
+        grdRevisar.DataSource = obj.GetSolPend(Vigencia)
         grdRevisar.DataBind()
         Dim tab4 As RadTab = RadTabStrip1.Tabs.FindTabByValue("revisar")
         tab4.Text = "Solicitudes Sin Revisar (" + grdRevisar.Rows.Count.ToString + ")"

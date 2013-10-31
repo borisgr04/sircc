@@ -13,14 +13,14 @@
     <br />
     &nbsp;&nbsp;
     Fecha Inicial
-    <asp:TextBox ID="TxtFecIni" runat="server">01/01/2012</asp:TextBox>
+    <asp:TextBox ID="TxtFecIni" runat="server">01/01/2013</asp:TextBox>
     <ajaxToolkit:CalendarExtender ID="TxtFecIni_CalendarExtender" runat="server" Enabled="True"
         TargetControlID="TxtFecIni">
     </ajaxToolkit:CalendarExtender>
     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
         ControlToValidate="TxtFecIni" ErrorMessage="*"></asp:RequiredFieldValidator>
     Fecha Final
-    <asp:TextBox ID="TxtFecFin" runat="server">31/12/2012</asp:TextBox>
+    <asp:TextBox ID="TxtFecFin" runat="server">31/12/2013</asp:TextBox>
     <ajaxToolkit:CalendarExtender ID="TxtFecFinCalendarExtender1" runat="server" Enabled="True"
         TargetControlID="TxtFecFin">
     </ajaxToolkit:CalendarExtender>
