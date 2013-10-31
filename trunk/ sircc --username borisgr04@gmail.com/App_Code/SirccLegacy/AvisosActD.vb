@@ -305,4 +305,6 @@ Public Class AvisosActD
         Me.Desconectar()
         Return dataTb
     End Function
+    '
+    
 End Class

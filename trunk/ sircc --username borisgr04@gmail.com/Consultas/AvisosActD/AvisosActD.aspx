@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_Default" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" 
+CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_Default" enableEventValidation ="false" %>
                   
 <%@ Register src="../../CtrlUsr/Progreso/Progress.ascx" tagname="Progress" tagprefix="uc1" %>
                   
@@ -25,7 +26,7 @@
             PageViewID="RpSolRec">
     </telerik:RadTab>
         <telerik:RadTab runat="server" Owner="RadTabStrip1" Value="revisar" PageViewID="RpSolRev" 
-            Text="Solicitudes por Revisar">
+            Text="Solicitudes Pendientes/Por Revisar">
         </telerik:RadTab>
         <telerik:RadTab runat="server" PageViewID="RpSolAcep" Value="Aceptadas" 
             Text="Solicitudes Aceptadas">
@@ -137,8 +138,10 @@
             <asp:Label ID="Label1" runat="server" CssClass="SubTitulo" 
                 Text="Solicitudes sin Asignar"></asp:Label>
                 <br />
+                <asp:Button ID="BtnEx_SinAsig" runat="server" Text="Exportar a Excel" />
+                <br />
             <br />
-        <asp:GridView ID="grdxRecibir" runat="server" AllowSorting="True" 
+        <asp:GridView ID="grdxAsignar" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
                 EmptyDataText="No tiene solicitudes pendientes para revisar" 
                 EnableModelValidation="True">
@@ -168,6 +171,13 @@
                                 Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Fecha Registro" SortExpression="Fecha_Registro">
+                        <ItemTemplate>
+                            <asp:Label ID="LbFR" runat="server" 
+                                Text='<%# Bind("Fecha_Registro") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    
                     <asp:CommandField ButtonType="Image" 
                         SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" />
                 </Columns>
@@ -183,6 +193,9 @@
             <asp:Label ID="Label9" runat="server" CssClass="SubTitulo" 
                 Text="Solicitudes Aceptadas"></asp:Label>
                 <br />
+                
+                <asp:Button ID="BtnExp_Aceptar" runat="server" Text="Exportar a Excel" />
+    
             <br />
         <asp:GridView ID="GvAcep" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
@@ -191,19 +204,19 @@
                 <Columns>
                     <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
                         <ItemTemplate>
-                            <asp:Label ID="LbCod1" runat="server" __designer:wfdid="w9" 
+                            <asp:Label ID="LbCod1" runat="server" 
                                 Text='<%# Bind("Cod_Sol") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="N° del Proceso" SortExpression="Cod_Sol">
                         <ItemTemplate>
-                            <asp:Label ID="LbNumP" runat="server" __designer:wfdid="w9" 
+                            <asp:Label ID="LbNumP" runat="server" 
                                 Text='<%# Bind("Proceso") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
                         <ItemTemplate>
-                            <asp:Label ID="Lbcimp1" runat="server" __designer:wfdid="w21" 
+                            <asp:Label ID="Lbcimp1" runat="server" 
                                 Text='<%# Bind("Obj_sol") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -211,23 +224,49 @@
                     SortExpression="ENCARGADO" />
                     <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
                         <ItemTemplate>
-                            <asp:Label ID="LbEst1" runat="server" __designer:wfdid="w22" 
+                            <asp:Label ID="LbEst1" runat="server" 
                                 Text='<%# Bind("Dep_Del") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Dependencia que genera" 
                         SortExpression="Val_Prop">
                         <ItemTemplate>
-                            <asp:Label ID="LbVal1" runat="server" __designer:wfdid="w22" 
+                            <asp:Label ID="LbVal1" runat="server" 
                                 Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Observación" SortExpression="obs_revisado">
                         <ItemTemplate>
-                            <asp:Label ID="Lbobs" runat="server" __designer:wfdid="w22" 
+                            <asp:Label ID="Lbobs" runat="server" 
                                 Text='<%# Bind("obs_revisado") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    
+                    <asp:TemplateField HeaderText="Fecha de Registro" 
+                            SortExpression="FECHA_RECIBIDO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFR" runat="server" 
+                                Text='<%# Bind("FECHA_REGISTRO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Fecha de Asignación" 
+                            SortExpression="FEC_ASIGNADO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFA" runat="server" 
+                                Text='<%# Bind("FEC_ASIGNADO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha de Revisión" 
+                            SortExpression="FECHA_REVISADO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFRV" runat="server" 
+                                Text='<%# Bind("FECHA_REVISADO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    
+
                     <asp:CommandField ButtonType="Image" 
                         SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" />
                 </Columns>
@@ -251,6 +290,8 @@
                 Text="Solicitudes Rechazadas"></asp:Label>
                 <br />
             <br />
+            <asp:Button ID="BtnExp_Rech" runat="server" Text="Exportar a Excel" />
+
         <asp:GridView ID="GvRech" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
                 EmptyDataText="No tiene solicitudes pendientes para revisar" 
@@ -259,37 +300,83 @@
                     <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
 
                         <ItemTemplate>
-                            <asp:Label ID="LbCod1" runat="server" __designer:wfdid="w9" 
+                            <asp:Label ID="LbCod1" runat="server" 
                                 Text='<%# Bind("Cod_Sol") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
                         <ItemTemplate>
-                            <asp:Label ID="Lbcimp1" runat="server" __designer:wfdid="w21" 
+                            <asp:Label ID="Lbcimp1" runat="server" 
                                 Text='<%# Bind("Obj_sol") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="ENCARGADO" HeaderText="Encargado" 
-                    SortExpression="ENCARGADO" />
+                    SortExpression="Dep_Del" />
                     <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
                         <ItemTemplate>
-                            <asp:Label ID="LbEst1" runat="server" __designer:wfdid="w22" 
+                            <asp:Label ID="LbEst1" runat="server" 
                                 Text='<%# Bind("Dep_Del") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                     <asp:TemplateField HeaderText="Observación" SortExpression="obs_revisado">
-                        <ItemTemplate>
-                            <asp:Label ID="Lbobs" runat="server" __designer:wfdid="w22" 
-                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                    
                     <asp:TemplateField HeaderText="Dependencia que genera" 
-                        SortExpression="Val_Prop">
+                        SortExpression="Dep_Nec">
                         <ItemTemplate>
-                            <asp:Label ID="LbVal1" runat="server" __designer:wfdid="w22" 
+                            <asp:Label ID="LbVal1" runat="server" 
                                 Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha de Registro" 
+                            SortExpression="FECHA_RECIBIDO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFR" runat="server" 
+                                Text='<%# Bind("FECHA_REGISTRO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha de Asignación" 
+                            SortExpression="FEC_ASIGNADO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFA" runat="server" 
+                                Text='<%# Bind("FEC_ASIGNADO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                        
+                    <asp:TemplateField HeaderText="Fecha de Recibido Encargado" 
+                            SortExpression="FEC_REC_ABOG">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFRA" runat="server" 
+                                Text='<%# Bind("FEC_REC_ABOG") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Observación Recibido" 
+                            SortExpression="OBSERVACION_RECIBIDO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbOR" runat="server" 
+                                Text='<%# Bind("OBSERVACION_RECIBIDO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha de Revisión" 
+                            SortExpression="FECHA_REVISADO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFRV" runat="server" 
+                                Text='<%# Bind("FECHA_REVISADO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    
+                    <asp:TemplateField HeaderText="Observación Revisión" 
+                            SortExpression="obs_revisado">
+                          <ItemTemplate>
+                            <asp:Label ID="Lbobs" runat="server" 
+                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
+                        </ItemTemplate>
+                    
+                    </asp:TemplateField>
+
+
                     <asp:CommandField ButtonType="Image" 
                         SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" />
                 </Columns>
@@ -312,8 +399,9 @@
             <asp:Label ID="Label4" runat="server" CssClass="SubTitulo" 
                 Text="Actividades para Hoy"></asp:Label>
             <br />
+            <asp:Button ID="BtnActHoy" runat="server" Text="Exportar a Excel" />
             <br />
-            <asp:GridView ID="GridView1" runat="server"
+            <asp:GridView ID="grdActHoy" runat="server"
         AllowSorting="True" EnableModelValidation="True" 
         DataKeyNames="Num_Proc,ID" AutoGenerateColumns="False" 
              EmptyDataText="No tiene tareas pendientes para hoy">
@@ -344,10 +432,12 @@
         <telerik:RadPageView ID="RpActAtra" runat="server">
             <br />
             <asp:Label ID="Label5" runat="server" CssClass="SubTitulo" 
-                Text="Actividade Atrasadas"></asp:Label>
-            <br />
+                Text="Actividades Atrasadas"></asp:Label>
+                <br />
+            <asp:Button ID="BtnExpAtrazadas" runat="server" Text="Exportar a Excel" />
+
         <br />
-            <asp:GridView ID="GridView2" runat="server"
+            <asp:GridView ID="grdActAtrazadas" runat="server"
         AllowSorting="True" EnableModelValidation="True" 
         DataKeyNames="Num_Proc,ID" AutoGenerateColumns="False">
         <Columns>
@@ -382,7 +472,10 @@
                 Text="Solicitudes sin Recibir"></asp:Label>
             <br />
         <br />
-            <asp:GridView OnRowDataBound="GridView1_RowDataBound" 
+        
+            <asp:Button ID="BtnExp_xRecibir" runat="server" Text="Exportar a Excel" />
+            
+            <asp:GridView 
                 id="grdRecibir" runat="server" 
                 DataKeyNames="Cod_Sol" 
                 AutoGenerateColumns="False" 
@@ -417,12 +510,21 @@
                             ></asp:Label> 
                 </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Observación" SortExpression="obs_revisado">
-                        <ItemTemplate>
-                            <asp:Label ID="Lbobs" runat="server" __designer:wfdid="w22" 
-                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
+    
+                    <asp:TemplateField HeaderText="Fecha de Registro" 
+                            SortExpression="FECHA_REGISTRO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFR" runat="server" 
+                                Text='<%# Bind("FECHA_REGISTRO") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha Asignación" SortExpression="FEC_ASIGNADO">
+                        <ItemTemplate>
+                            <asp:Label ID="LbFEC_ASIGNADO" runat="server" 
+                                Text='<%# Bind("FEC_ASIGNADO") %>'></asp:Label>
+                        </ItemTemplate>
+                </asp:TemplateField>
     
                 <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" 
                         ShowSelectButton="True" ButtonType="Image"></asp:CommandField>
@@ -438,13 +540,14 @@
         <telerik:RadPageView ID="RpSolRev" runat="server">
             <br />
             <asp:Label ID="Label7" runat="server" CssClass="SubTitulo" 
-                Text="Solicitudes por Revisar"></asp:Label>
+                Text="Solicitudes Pendientes/Sin Revisar "></asp:Label>
             <br />
-        <br />
+                <asp:Button ID="BtnExp_Pend" runat="server" Text="Exportar a Excel" />
+            <br />
             <asp:GridView ID="grdRevisar" runat="server" AllowSorting="True" 
                     AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
                     EmptyDataText="No tiene solicitudes pendientes para revisar" 
-                    EnableModelValidation="True" Width="724px">
+                    EnableModelValidation="True" >
                     <Columns>
                         <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
                             <ItemTemplate>
@@ -460,30 +563,78 @@
                          </asp:TemplateField>
                         <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
                             <ItemTemplate>
-                                <asp:Label ID="Lbcimp" runat="server" __designer:wfdid="w21" 
+                                <asp:Label ID="Lbcimp" runat="server" 
                                     Text='<%# Bind("Obj_sol") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
                             <ItemTemplate>
-                                <asp:Label ID="LbEst" runat="server" __designer:wfdid="w22" 
+                                <asp:Label ID="LbEst" runat="server" 
                                     Text='<%# Bind("Dep_Del") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Dependencia que genera" 
                             SortExpression="Val_Prop">
                             <ItemTemplate>
-                                <asp:Label ID="LbVal" runat="server" __designer:wfdid="w22" 
+                                <asp:Label ID="LbVal" runat="server" 
                                     Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Observación" 
-                            SortExpression="obs_revisado">
+                    
+                    <asp:TemplateField HeaderText="Fecha de Registro" 
+                            SortExpression="FECHA_RECIBIDO">
                           <ItemTemplate>
-                            <asp:Label ID="Lbobs" runat="server" __designer:wfdid="w22" 
-                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
+                            <asp:Label ID="LbFR" runat="server" 
+                                Text='<%# Bind("FECHA_REGISTRO") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha de Asignación" 
+                            SortExpression="FEC_ASIGNADO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFA" runat="server" 
+                                Text='<%# Bind("FEC_ASIGNADO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                        
+                    <asp:TemplateField HeaderText="Fecha de Recibido Encargado" 
+                            SortExpression="FEC_REC_ABOG">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFRA" runat="server" 
+                                Text='<%# Bind("FEC_REC_ABOG") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Observación Recibido" 
+                            SortExpression="OBSERVACION_RECIBIDO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbOR" runat="server" 
+                                Text='<%# Bind("OBSERVACION_RECIBIDO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha de Revisión" 
+                            SortExpression="FECHA_REVISADO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFRV" runat="server" 
+                                Text='<%# Bind("FECHA_REVISADO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    
+                    <asp:TemplateField HeaderText="Observación Revisión" 
+                            SortExpression="obs_revisado">
+                          <ItemTemplate>
+                            <asp:Label ID="Lbobs" runat="server" 
+                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
+                        </ItemTemplate>
+                    
+                    </asp:TemplateField>
+
+                    
+
+                    
+
+                    
                         <asp:CommandField ButtonType="Image" 
                             SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" />
                     </Columns>
@@ -499,7 +650,11 @@
             <asp:Label ID="Label8" runat="server" CssClass="SubTitulo" 
                 Text="Procesos a Cargo"></asp:Label>
             <br />
+            <asp:Button ID="BtnExpProcCargo" runat="server" Text="Exportar a Excel" />
         <br />
+        <div style="float:right">
+                        <asp:LinkButton ID="lnkVerTodos" runat="server">Ver Todos</asp:LinkButton>
+                        </div>
             <asp:DataList ID="DtProcesosACargo" runat="server" CellPadding="4" ForeColor="#333333" 
         RepeatDirection="Horizontal" DataKeyField="Estado">
         <AlternatingItemStyle BackColor="White" ForeColor="#284775" />
@@ -524,7 +679,7 @@
      
     </asp:ObjectDataSource>
                 <asp:GridView 
-                id="grdProcACargo" runat="server" OnRowDataBound="GridView1_RowDataBound" 
+                id="grdProcACargo" runat="server" 
                 DataKeyNames="Pro_Sel_Nro" 
                 AutoGenerateColumns="False" 
                 EmptyDataText="No tiene procesos a cargo" 
@@ -680,6 +835,21 @@
     <br />
             
     </ContentTemplate>
+    <Triggers>
+        <asp:PostBackTrigger ControlID="BtnEx_SinAsig" />
+        <asp:PostBackTrigger ControlID="BtnExp_Aceptar" />
+        <asp:PostBackTrigger ControlID="BtnExp_Rech" />
+        <asp:PostBackTrigger ControlID="BtnExp_Pend" />
+        <asp:PostBackTrigger ControlID="BtnExp_xRecibir" />
+        <asp:PostBackTrigger ControlID="BtnActHoy" />
+        <asp:PostBackTrigger ControlID="BtnExpProcCargo" />
+        <asp:PostBackTrigger ControlID="BtnExpAtrazadas" />
+
+        
+
+
+        
+    </Triggers>
 </asp:UpdatePanel>
         <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
             AssociatedUpdatePanelID="UpdatePanel1">

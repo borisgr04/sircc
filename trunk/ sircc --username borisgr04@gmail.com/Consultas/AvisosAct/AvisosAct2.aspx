@@ -168,9 +168,9 @@
                         </asp:GridView>
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="RadPageView5" runat="server">
-                    <div style="float:right">
+                    <%--<div style="float:right">
                         <asp:LinkButton ID="lnkVerTodos" runat="server">Ver Todos</asp:LinkButton>
-                        </div>
+                        </div>--%>
                         <asp:DataList ID="DtProcesosACargo" runat="server" CellPadding="4" ForeColor="#333333"
                             RepeatDirection="Horizontal" DataKeyField="Estado" DataSourceID="ObjConPContratos">
                             <AlternatingItemStyle BackColor="White" ForeColor="#284775" />
