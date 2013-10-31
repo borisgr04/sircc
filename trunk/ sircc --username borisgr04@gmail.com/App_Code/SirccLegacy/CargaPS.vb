@@ -12,9 +12,9 @@ Public Class CargaPS
     ''' <returns>Tabla Estado, Cantidad </returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Overloads Function GetCargaPSxDel(ByVal Dep_PCon As String) As DataTable
+    Public Overloads Function GetCargaPSxDel(ByVal Dep_PCon As String, Vigencia As String) As DataTable
         Me.Conectar()
-        querystring = "Select * from vCargaPS  where  Dep_PCon=:Dep_PCon"
+        querystring = "Select * from vCargaPS  where  Dep_PCon=:Dep_PCon And codigo like '%" + Vigencia + "'"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":Dep_PCon", Dep_PCon)
         Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
