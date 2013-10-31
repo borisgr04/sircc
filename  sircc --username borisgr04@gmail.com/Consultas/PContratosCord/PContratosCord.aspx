@@ -34,7 +34,7 @@
         <br />
         <asp:ObjectDataSource ID="ObjPCont" runat="server" 
             OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecordsRep" 
-            TypeName="Con_PContratos" InsertMethod="InsertP">
+            TypeName="Con_PContratos" >
           <SelectParameters>
                 <asp:ControlParameter ControlID="ValFiltro" Name="Filtro" PropertyName="Value" 
                     Type="String" />

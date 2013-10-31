@@ -110,6 +110,7 @@ Partial Class Consultas_AvisosAct_AvisosAct2
             tab5.Text = "Procesos a Cargo (" + dt.Rows.Count.ToString + ")"
 
             lnkVerTodos.Text = "Ver Todos (" + dt.Rows.Count.ToString + ")"
+
             Dim t As New Terceros
             If t.GetIsCoordinador() Then
                 Me.HyperLink1.Visible = True

@@ -264,6 +264,24 @@ Public Class AvisosActD
         Return dataSet
     End Function
 
+    ''' <summary>
+    ''' Muestra Todos los PROCESOS  DE LAS DEPENDENCIAS DELEGADAS A LAS CUALES EL USUARIO ACTUAL TIENE PERMISO
+    ''' </summary>
+    ''' <param name="Vigencia"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetProcbyDepDel(ByVal Vigencia As String) As DataTable
+        Dim queryString As String = "SELECT * FROM vPContratos Where final='NO' And vig_con=:vigencia And Dep_pcon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) "
+        Me.Conectar()
+        Me.CrearComando(queryString)
+        Me.AsignarParametroCadena(":vigencia", Vigencia)
+        Me.AsignarParametroCadena(":usuario", Me.usuario)
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
+    End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetCProcesosxDepDel(ByVal Vigencia As String) As DataTable
         Me.Conectar()
