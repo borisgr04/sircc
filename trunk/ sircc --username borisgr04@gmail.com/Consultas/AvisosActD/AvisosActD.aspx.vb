@@ -212,13 +212,13 @@ Partial Class Consultas_AvisosActD_Default
         ExportGridView(grdActAtrazadas, "Actividades Atrazados")
     End Sub
 
-
-    'Protected Sub lnkVerTodos_Click(sender As Object, e As System.EventArgs) Handles lnkVerTodos.Click
-    '    Dim obj As New AvisosActD
-    '    HdPNom_Est.Value = ""
-    '    grdProcACargo.DataSource = obj.GetProcbyDepDelEstado(HdPNom_Est.Value, Vigencia)
-    '    grdProcACargo.DataBind()
-    'End Sub
+    Protected Sub lnkVerTodos_Click(sender As Object, e As System.EventArgs) Handles lnkVerTodos.Click
+        Dim obj As New AvisosActD
+        Dim dt As DataTable = obj.GetProcbyDepDel(Vigencia)
+        lnkVerTodos.Text = "Ver Todos (" + dt.Rows.Count.ToString + ")"
+        grdProcACargo.DataSource = dt
+        grdProcACargo.DataBind()
+    End Sub
 
 
 
