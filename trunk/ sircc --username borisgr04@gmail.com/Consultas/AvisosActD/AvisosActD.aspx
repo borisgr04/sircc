@@ -11,7 +11,6 @@
             Text="Panel de procesos de contratación por dependencia"></asp:Label>
         <br />
         <br />
-
              
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 <ContentTemplate>
@@ -139,33 +138,33 @@
                 Text="Solicitudes sin Asignar"></asp:Label>
                 <br />
             <br />
-        <asp:GridView ID="grdxRevisar" runat="server" AllowSorting="True" 
+        <asp:GridView ID="grdxRecibir" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" DataKeyNames="Cod_Sol" 
                 EmptyDataText="No tiene solicitudes pendientes para revisar" 
                 EnableModelValidation="True">
                 <Columns>
                     <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
                         <ItemTemplate>
-                            <asp:Label ID="LbCod1" runat="server" __designer:wfdid="w9" 
+                            <asp:Label ID="LbCod1" runat="server" 
                                 Text='<%# Bind("Cod_Sol") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
                         <ItemTemplate>
-                            <asp:Label ID="Lbcimp1" runat="server" __designer:wfdid="w21" 
+                            <asp:Label ID="Lbcimp1" runat="server" 
                                 Text='<%# Bind("Obj_sol") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
                         <ItemTemplate>
-                            <asp:Label ID="LbEst1" runat="server" __designer:wfdid="w22" 
+                            <asp:Label ID="LbEst1" runat="server" 
                                 Text='<%# Bind("Dep_Del") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Dependencia que genera" 
                         SortExpression="Val_Prop">
                         <ItemTemplate>
-                            <asp:Label ID="LbVal1" runat="server" __designer:wfdid="w22" 
+                            <asp:Label ID="LbVal1" runat="server"
                                 Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -223,6 +222,12 @@
                                 Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Observación" SortExpression="obs_revisado">
+                        <ItemTemplate>
+                            <asp:Label ID="Lbobs" runat="server" __designer:wfdid="w22" 
+                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:CommandField ButtonType="Image" 
                         SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" />
                 </Columns>
@@ -270,6 +275,12 @@
                         <ItemTemplate>
                             <asp:Label ID="LbEst1" runat="server" __designer:wfdid="w22" 
                                 Text='<%# Bind("Dep_Del") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                     <asp:TemplateField HeaderText="Observación" SortExpression="obs_revisado">
+                        <ItemTemplate>
+                            <asp:Label ID="Lbobs" runat="server" __designer:wfdid="w22" 
+                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Dependencia que genera" 
@@ -349,6 +360,8 @@
             <asp:BoundField DataField="DateTimeI" HeaderText="Fecha y Hora Inicial" 
                 SortExpression="DateTimeI" />
             <asp:BoundField DataField="Notas" HeaderText="Notas" SortExpression="Notas" />
+            <asp:BoundField DataField="Obs_seg" HeaderText="Observación" 
+                SortExpression="Obs_seg" />
             <asp:BoundField DataField="Ocupado" HeaderText="Ocupado" 
                 SortExpression="Ocupado" />
             <asp:BoundField DataField="Nom_Est" HeaderText="Estado" 
@@ -366,7 +379,7 @@
         <telerik:RadPageView ID="RPSolRec" runat="server">
             <br />
             <asp:Label ID="Label6" runat="server" CssClass="SubTitulo" 
-                Text="Solicitudes por Recibir"></asp:Label>
+                Text="Solicitudes sin Recibir"></asp:Label>
             <br />
         <br />
             <asp:GridView OnRowDataBound="GridView1_RowDataBound" 
@@ -380,7 +393,7 @@
                 <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
                     <ItemTemplate>
                 <asp:Label id="LbCod0" runat="server" Text='<%# Bind("Cod_Sol") %>' 
-                        __designer:wfdid="w9"></asp:Label> 
+                        ></asp:Label> 
                 </ItemTemplate>
                 </asp:TemplateField>
                     <asp:BoundField DataField="Encargado" HeaderText="Encargado" 
@@ -388,21 +401,27 @@
                 <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
                     <ItemTemplate>
                 <asp:Label id="Lbcimp0" runat="server" Text='<%# Bind("Obj_sol") %>' 
-                            __designer:wfdid="w21"></asp:Label> 
+                            ></asp:Label> 
                 </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
                     <ItemTemplate>
                 <asp:Label id="LbEst0" runat="server" Text='<%# Bind("Dep_Del") %>' 
-                            __designer:wfdid="w22"></asp:Label> 
+                            ></asp:Label> 
                 </ItemTemplate>
                 </asp:TemplateField>
                     <asp:TemplateField HeaderText="Dependencia que Solicita" 
                         SortExpression="Dep_Nec">
                      <ItemTemplate>
                 <asp:Label id="LbVal0" runat="server" Text='<%# Bind("Dep_Nec") %>' 
-                            __designer:wfdid="w22"></asp:Label> 
+                            ></asp:Label> 
                 </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Observación" SortExpression="obs_revisado">
+                        <ItemTemplate>
+                            <asp:Label ID="Lbobs" runat="server" __designer:wfdid="w22" 
+                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
+                        </ItemTemplate>
                     </asp:TemplateField>
     
                 <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" 
@@ -429,12 +448,16 @@
                     <Columns>
                         <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
                             <ItemTemplate>
-                                <asp:Label ID="LbCod" runat="server" __designer:wfdid="w9" 
+                                <asp:Label ID="LbCod" runat="server" 
                                     Text='<%# Bind("Cod_Sol") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Encargado" HeaderText="Encargado" 
-                            SortExpression="Encargado" />
+                        <asp:TemplateField HeaderText ="Encargado" SortExpression="Encargado" >
+                        <ItemTemplate>
+                                <asp:Label ID="LbEncar" runat="server" 
+                                    Text='<%# Bind("encargado") %>'></asp:Label>
+                         </ItemTemplate>
+                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
                             <ItemTemplate>
                                 <asp:Label ID="Lbcimp" runat="server" __designer:wfdid="w21" 
@@ -454,6 +477,13 @@
                                     Text='<%# Bind("Dep_Nec") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Observación" 
+                            SortExpression="obs_revisado">
+                          <ItemTemplate>
+                            <asp:Label ID="Lbobs" runat="server" __designer:wfdid="w22" 
+                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                         <asp:CommandField ButtonType="Image" 
                             SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" />
                     </Columns>

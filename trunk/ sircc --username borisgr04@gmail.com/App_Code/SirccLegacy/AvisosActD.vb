@@ -169,19 +169,40 @@ Public Class AvisosActD
         Return dataTb
     End Function
 
+    '<DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    'Public Function GetSolPend(ByVal Vigencia As String) As DataTable
+    '    'Dim queryString As String = "SELECT * FROM " + Vista + " Where Estado='TR' And usuencargado=:usuencargado"
+    '    querystring = "SELECT * From VPSolicitudes Where Vig_Sol=:Vig_Sol and Recibido='S' And Concepto='P' And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario )"
+    '    Me.Conectar()
+    '    Me.CrearComando(querystring)
+    '    Me.AsignarParametroCadena(":usuario", Me.usuario)
+    '    Me.AsignarParametroCadena(":Vig_Sol", Vigencia)
+    '    Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+    '    Me.Desconectar()
+    '    Return dataSet
+    'End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Function GetSolPenD(ByVal Vigencia As String) As DataTable
+    Public Function GetSolPend(ByVal Vigencia As String) As DataTable
         'Dim queryString As String = "SELECT * FROM " + Vista + " Where Estado='TR' And usuencargado=:usuencargado"
-        querystring = "SELECT * From VPSolicitudes Where Vig_Sol=:Vig_Sol and Recibido='S' And Concepto='P' And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario )"
         Me.Conectar()
-        Me.CrearComando(querystring)
+        If Not String.IsNullOrEmpty(Me.Num_PSol) Then
+            querystring = "SELECT * From VPSolicitudes Where Concepto not in ('A','R') And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario) And FECHA_REVISADO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') And Cod_Sol Like :Cod_Sol"
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":Cod_Sol", "%" + UCase(Num_PSol) + "%")
+        Else
+            querystring = "SELECT * From VPSolicitudes Where Concepto not in ('A','R') And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario) And FECHA_REVISADO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy')"
+            Me.CrearComando(querystring)
+        End If
+        Me.AsignarParametroCadena(":F1", Fec_Ini)
+        Me.AsignarParametroCadena(":F2", Fec_Fin)
         Me.AsignarParametroCadena(":usuario", Me.usuario)
-        Me.AsignarParametroCadena(":Vig_Sol", Vigencia)
+        'Me.AsignarParametroCadena(":Vig_Sol", Vigencia)
+        'Throw New Exception(vComando.CommandText)
         Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
         Me.Desconectar()
         Return dataSet
     End Function
-
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetSolAcep(ByVal Vigencia As String) As DataTable
         'Dim queryString As String = "SELECT * FROM " + Vista + " Where Estado='TR' And usuencargado=:usuencargado"
