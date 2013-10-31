@@ -1,6 +1,6 @@
 ﻿Imports Telerik.Web.UI
 Imports System.Data
-Partial Class Consultas_AvisosActD_Default
+Partial Class Consultas_AvisosActD_AvisosActD
     Inherits PaginaComun
 
     Protected Sub grdActHoy_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdActHoy.RowDataBound, grdRecibir.RowDataBound, grdProcACargo.RowDataBound
@@ -82,9 +82,9 @@ Partial Class Consultas_AvisosActD_Default
         If Not IsPostBack Then
             TxtDesde.Text = "01/01/" + Today.Year.ToString
             TxtHasta.Text = "31/12/" + Today.Year.ToString
-            
+
             Filtrar()
-           
+
             Dim t As New Terceros
 
             If t.GetIsAsig_Proc() Then

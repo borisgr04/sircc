@@ -1990,7 +1990,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>ENCARGADO - DEPENDENCIA QUE GENERACIDAD</Value>
+                <Value>ENCARGADO - DEPENDENCIA QUE GENERA LA NECESIDAD</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -2002,7 +2002,7 @@
         <rd:DefaultName>Textbox38</rd:DefaultName>
         <Top>3.95083cm</Top>
         <Height>0.68792cm</Height>
-        <Width>9.7174cm</Width>
+        <Width>14.71739cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -2021,7 +2021,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>MODADIDAD DE CONTRATACIÓN-  DEPENDENCIA QUE GENERACIDAD</Value>
+                <Value>MODADIDAD DE CONTRATACIÓN-  DEPENDENCIA QUE GENERA LA NECESIDAD</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -2033,7 +2033,7 @@
         <rd:DefaultName>Textbox38</rd:DefaultName>
         <Top>7.61999cm</Top>
         <Height>0.68792cm</Height>
-        <Width>12.78657cm</Width>
+        <Width>14.71739cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -2045,8 +2045,41 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>SIRCC - B&amp;A Systems S.A.S.</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>11.34216cm</Top>
+        <Left>0.07091cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.9925cm</Width>
+        <ZIndex>6</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>4.64583in</Height>
+    <Height>4.70164in</Height>
     <Style />
   </Body>
   <Width>6.5in</Width>

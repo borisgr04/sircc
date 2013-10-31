@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" 
-CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_Default" enableEventValidation ="false" %>
+CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableEventValidation ="false" %>
                   
 <%@ Register src="../../CtrlUsr/Progreso/Progress.ascx" tagname="Progress" tagprefix="uc1" %>
                   
@@ -100,7 +100,8 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_Default" enableEven
                 <asp:ImageButton ID="IBtnNuevo" runat="server" SkinID="IBtnNuevo" />
             </td>
             <td>
-                &nbsp;</td>
+                <asp:HyperLink ID="hlcarga" NavigateUrl="~/Consultas/AvisosActD/ConAsignaciones.aspx"  Target="_blank" runat="server">Carga de Trabajo</asp:HyperLink>
+            </td>
             <td>
                 &nbsp;</td>
         </tr>
@@ -694,14 +695,28 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_Default" enableEven
         SortExpression="Nom_TProc" />
     <asp:BoundField HeaderText="Objeto a Contratar" SortExpression="Obj_Con" 
         DataField="Obj_Con" >
-    
     </asp:BoundField>
+
+    
+
     
     <asp:BoundField DataField="Dep_Nec" HeaderText="Dependencia-Necesidad" 
         SortExpression="Dep_Nec" />
     <asp:BoundField DataField="Dep_Del" HeaderText="Dependencia-A Cargo" 
         SortExpression="Dep_Del" />
     
+    <asp:BoundField HeaderText="Tipo" SortExpression="TIPDOCUMENTO" 
+        DataField="TIPDOCUMENTO" >
+    </asp:BoundField>
+    
+    <asp:BoundField HeaderText="Sub Tipo" SortExpression="NOMSTIP" 
+        DataField="NOMSTIP" >
+    </asp:BoundField>
+
+    <asp:BoundField HeaderText="Estado del Proceso" SortExpression="NOM_EST" 
+        DataField="NOM_EST" >
+    </asp:BoundField>
+
     <asp:ButtonField ButtonType="Image" CommandName="crono" HeaderText="Cronograma" 
         ImageUrl="~/images/mnProcesos/Calendar-icon24.png" Text="Cronograma">
     <ItemStyle HorizontalAlign="Center" />
@@ -726,36 +741,8 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_Default" enableEven
     <asp:ObjectDataSource ID="ObjAvisosHoy" runat="server" 
         OldValuesParameterFormatString="original_{0}" SelectMethod="GetAvisosHoyD" 
         TypeName="AvisosActD" InsertMethod="Insert" UpdateMethod="Anular">
-        <InsertParameters>
-            <asp:Parameter Name="NUM_PROC" Type="String" />
-            <asp:Parameter Name="COD_ACT" Type="String" />
-            <asp:Parameter Name="NOM_ACT" Type="String" />
-            <asp:Parameter Name="COD_TPRO" Type="String" />
-            <asp:Parameter Name="FECHAI" Type="DateTime" />
-            <asp:Parameter Name="HORAI" Type="Int32" />
-            <asp:Parameter Name="FECHAF" Type="DateTime" />
-            <asp:Parameter Name="HORAF" Type="Int32" />
-            <asp:Parameter Name="UBICACION" Type="String" />
-            <asp:Parameter Name="NOTAS" Type="String" />
-            <asp:Parameter Name="DIAS_AVISO" Type="Int32" />
-            <asp:Parameter Name="OCUPADO" Type="Boolean" />
-            <asp:Parameter Name="Color" Type="String" />
-            <asp:Parameter Name="Obligatorio" Type="Boolean" />
-            <asp:Parameter Name="Est_Proc" Type="String" />
-            <asp:Parameter Name="FEC_AVISO" Type="String" />
-            <asp:Parameter Name="NOTIFICAR" Type="String" />
-            <asp:Parameter Name="MIN_I" Type="String" />
-            <asp:Parameter Name="MIN_F" Type="String" />
-            <asp:Parameter Name="MFecIni" Type="String" />
-            <asp:Parameter Name="MHorIni" Type="String" />
-            <asp:Parameter Name="MFecFin" Type="String" />
-            <asp:Parameter Name="MHorFin" Type="String" />
-            <asp:Parameter Name="lstFechas" Type="Object" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="ID_O" Type="String" />
-            <asp:Parameter Name="OBS_SEG" Type="String" />
-        </UpdateParameters>
+       
+       
     </asp:ObjectDataSource>
 
     <asp:ObjectDataSource ID="ObjSolxAsig" runat="server" 
@@ -768,36 +755,6 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_Default" enableEven
     <asp:ObjectDataSource ID="ObjAtrasados" runat="server" 
         OldValuesParameterFormatString="original_{0}" SelectMethod="GetAvisosAtrasadosD" 
         TypeName="AvisosActD" InsertMethod="Insert" UpdateMethod="Anular">
-        <InsertParameters>
-            <asp:Parameter Name="NUM_PROC" Type="String" />
-            <asp:Parameter Name="COD_ACT" Type="String" />
-            <asp:Parameter Name="NOM_ACT" Type="String" />
-            <asp:Parameter Name="COD_TPRO" Type="String" />
-            <asp:Parameter Name="FECHAI" Type="DateTime" />
-            <asp:Parameter Name="HORAI" Type="Int32" />
-            <asp:Parameter Name="FECHAF" Type="DateTime" />
-            <asp:Parameter Name="HORAF" Type="Int32" />
-            <asp:Parameter Name="UBICACION" Type="String" />
-            <asp:Parameter Name="NOTAS" Type="String" />
-            <asp:Parameter Name="DIAS_AVISO" Type="Int32" />
-            <asp:Parameter Name="OCUPADO" Type="Boolean" />
-            <asp:Parameter Name="Color" Type="String" />
-            <asp:Parameter Name="Obligatorio" Type="Boolean" />
-            <asp:Parameter Name="Est_Proc" Type="String" />
-            <asp:Parameter Name="FEC_AVISO" Type="String" />
-            <asp:Parameter Name="NOTIFICAR" Type="String" />
-            <asp:Parameter Name="MIN_I" Type="String" />
-            <asp:Parameter Name="MIN_F" Type="String" />
-            <asp:Parameter Name="MFecIni" Type="String" />
-            <asp:Parameter Name="MHorIni" Type="String" />
-            <asp:Parameter Name="MFecFin" Type="String" />
-            <asp:Parameter Name="MHorFin" Type="String" />
-            <asp:Parameter Name="lstFechas" Type="Object" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="ID_O" Type="String" />
-            <asp:Parameter Name="OBS_SEG" Type="String" />
-        </UpdateParameters>
     </asp:ObjectDataSource>
      <asp:ObjectDataSource ID="ObjPSol" runat="server" 
             OldValuesParameterFormatString="original_{0}" SelectMethod="GetxRecibirD" 
