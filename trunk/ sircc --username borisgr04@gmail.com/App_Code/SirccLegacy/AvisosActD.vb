@@ -186,16 +186,18 @@ Public Class AvisosActD
     Public Function GetSolPend(ByVal Vigencia As String) As DataTable
         'Dim queryString As String = "SELECT * FROM " + Vista + " Where Estado='TR' And usuencargado=:usuencargado"
         Me.Conectar()
+        'And FECHA_REVISADO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') 
         If Not String.IsNullOrEmpty(Me.Num_PSol) Then
-            querystring = "SELECT * From VPSolicitudes Where Concepto not in ('A','R') And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario) And FECHA_REVISADO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') And Cod_Sol Like :Cod_Sol"
+
+            querystring = "SELECT * From VPSolicitudes Where Concepto not in ('A','R') And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario) And RECIBIDO='S' And Cod_Sol Like :Cod_Sol"
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Sol", "%" + UCase(Num_PSol) + "%")
         Else
-            querystring = "SELECT * From VPSolicitudes Where Concepto not in ('A','R') And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario) And FECHA_REVISADO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy')"
+            querystring = "SELECT * From VPSolicitudes Where Concepto not in ('A','R') And RECIBIDO='S' And Dep_PSol In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario) "
             Me.CrearComando(querystring)
         End If
-        Me.AsignarParametroCadena(":F1", Fec_Ini)
-        Me.AsignarParametroCadena(":F2", Fec_Fin)
+        'Me.AsignarParametroCadena(":F1", Fec_Ini)
+        'Me.AsignarParametroCadena(":F2", Fec_Fin)
         Me.AsignarParametroCadena(":usuario", Me.usuario)
         'Me.AsignarParametroCadena(":Vig_Sol", Vigencia)
         'Throw New Exception(vComando.CommandText)

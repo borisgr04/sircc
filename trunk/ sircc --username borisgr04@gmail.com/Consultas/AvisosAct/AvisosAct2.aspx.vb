@@ -4,7 +4,7 @@ Imports System.Data
 Partial Class Consultas_AvisosAct_AvisosAct2
     Inherits PaginaComun
 
-    Protected Sub GridView1_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
+    Protected Sub grdAvisosHoy_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdAvisosHoy.RowDataBound, grdProcACargo.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then
             ' ASIGNA EVENTOS
             e.Row.Attributes.Add("OnMouseOver", "Resaltar_On(this);")
@@ -12,17 +12,17 @@ Partial Class Consultas_AvisosAct_AvisosAct2
         End If
     End Sub
 
-    Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
+    Protected Sub grdAvisosHoy_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdAvisosHoy.SelectedIndexChanged
 
         querystringSeguro = Me.SetRequest()
-        querystringSeguro("Num_Proc") = GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString()
-        querystringSeguro("ID") = GridView1.DataKeys(GridView1.SelectedIndex).Values(1).ToString()
-        'Title = GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString() + GridView1.DataKeys(GridView1.SelectedIndex).Values(1).ToString()
+        querystringSeguro("Num_Proc") = grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(0).ToString()
+        querystringSeguro("ID") = grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(1).ToString()
+        'Title = grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(0).ToString() + grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(1).ToString()
         Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?data=" + HttpUtility.UrlEncode(querystringSeguro.ToString()))
-        'Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?Num_Proc=" + GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString())
+        'Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?Num_Proc=" + grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(0).ToString())
     End Sub
 
-    Protected Sub GridView2_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
+    Protected Sub grdAtrazadas_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdAtrazadas.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then
             ' ASIGNA EVENTOS
             e.Row.Attributes.Add("OnMouseOver", "Resaltar_On(this);")
@@ -30,13 +30,13 @@ Partial Class Consultas_AvisosAct_AvisosAct2
         End If
     End Sub
 
-    Protected Sub GridView2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView2.SelectedIndexChanged
+    Protected Sub grdAtrazadas_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdAtrazadas.SelectedIndexChanged
         querystringSeguro = Me.SetRequest()
-        querystringSeguro("Num_Proc") = GridView2.DataKeys(GridView2.SelectedIndex).Values(0).ToString()
-        querystringSeguro("ID") = GridView2.DataKeys(GridView2.SelectedIndex).Values(1).ToString()
-        'Title = GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString() + GridView1.DataKeys(GridView1.SelectedIndex).Values(1).ToString()
+        querystringSeguro("Num_Proc") = grdAtrazadas.DataKeys(grdAtrazadas.SelectedIndex).Values(0).ToString()
+        querystringSeguro("ID") = grdAtrazadas.DataKeys(grdAtrazadas.SelectedIndex).Values(1).ToString()
+        'Title = grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(0).ToString() + grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(1).ToString()
         Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?data=" + HttpUtility.UrlEncode(querystringSeguro.ToString()))
-        'Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?Num_Proc=" + GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString())
+        'Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?Num_Proc=" + grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(0).ToString())
     End Sub
 
 
@@ -68,10 +68,10 @@ Partial Class Consultas_AvisosAct_AvisosAct2
             Case "crono"
                 querystringSeguro = Me.SetRequest()
                 querystringSeguro("Num_Proc") = Num_Proc
-                querystringSeguro("ID") = "1" 'GridView1.DataKeys(GridView1.SelectedIndex).Values(1).ToString()
-                'Title = GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString() + GridView1.DataKeys(GridView1.SelectedIndex).Values(1).ToString()
+                querystringSeguro("ID") = "1" 'grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(1).ToString()
+                'Title = grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(0).ToString() + grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(1).ToString()
                 Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?data=" + HttpUtility.UrlEncode(querystringSeguro.ToString()))
-                'Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?Num_Proc=" + GridView1.DataKeys(GridView1.SelectedIndex).Values(0).ToString())
+                'Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?Num_Proc=" + grdAvisosHoy.DataKeys(grdAvisosHoy.SelectedIndex).Values(0).ToString())
             Case "dbproc"
                 Redireccionar_Pagina("/Procesos/DBProcesos/DBProcesos.aspx?Num_Proc=" + Num_Proc)
             Case "documentos"
@@ -84,8 +84,8 @@ Partial Class Consultas_AvisosAct_AvisosAct2
 
     'Protected Sub RadGrid2_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid2.ItemCommand
     '    querystringSeguro = Me.SetRequest()
-    '    querystringSeguro("Num_Proc") = RadGrid2.DataKeys(GridView1.SelectedIndex).Values(0).ToString()
-    '    querystringSeguro("ID") = RadGrid2.SelectedItems( .DataKeys(GridView1.SelectedIndex).Values(1).ToString()
+    '    querystringSeguro("Num_Proc") = RadGrid2.DataKeys(grdAvisosHoy.SelectedIndex).Values(0).ToString()
+    '    querystringSeguro("ID") = RadGrid2.SelectedItems( .DataKeys(grdAvisosHoy.SelectedIndex).Values(1).ToString()
     '    Redireccionar_Pagina("/Procesos/Programacion/Programacion.aspx?data=" + HttpUtility.UrlEncode(querystringSeguro.ToString()))
 
     'End Sub
@@ -93,16 +93,16 @@ Partial Class Consultas_AvisosAct_AvisosAct2
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             Dim tab1 As RadTab = RadTabStrip1.Tabs.FindTabByValue("hoy")
-            tab1.Text = "Actividades para hoy (" + GridView1.Rows.Count.ToString + ")"
+            tab1.Text = "Actividades para hoy (" + grdAvisosHoy.Rows.Count.ToString + ")"
 
             Dim tab2 As RadTab = RadTabStrip1.Tabs.FindTabByValue("atrazadas")
-            tab2.Text = "Actividades Atrazadas/En Curso (" + GridView2.Rows.Count.ToString + ")"
+            tab2.Text = "Actividades Atrazadas/En Curso (" + grdAtrazadas.Rows.Count.ToString + ")"
 
             Dim tab3 As RadTab = RadTabStrip1.Tabs.FindTabByValue("sinrecibir")
             tab3.Text = "Solicitudes Sin Recibir (" + grdRecibir.Rows.Count.ToString + ")"
 
             Dim tab4 As RadTab = RadTabStrip1.Tabs.FindTabByValue("sinrevisar")
-            tab4.Text = "Solicitudes Sin Revisar (" + grdRevisar.Rows.Count.ToString + ")"
+            tab4.Text = "Solicitudes Pendientes (" + grdRevisar.Rows.Count.ToString + ")"
             Dim objP As New AvisosAct
 
             Dim dt As DataTable = objP.GetxUsuario(Session("Vigencia"))
