@@ -686,7 +686,6 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableE
                 EmptyDataText="No tiene procesos a cargo" 
                 EnableModelValidation="True" AllowSorting="True" Width="100%">
 <Columns>
-    
     <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="N° de Proceso" 
         SortExpression="Pro_Sel_Nro" />
     <asp:BoundField DataField="Encargado" HeaderText="Encargado" 
@@ -696,10 +695,6 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableE
     <asp:BoundField HeaderText="Objeto a Contratar" SortExpression="Obj_Con" 
         DataField="Obj_Con" >
     </asp:BoundField>
-
-    
-
-    
     <asp:BoundField DataField="Dep_Nec" HeaderText="Dependencia-Necesidad" 
         SortExpression="Dep_Nec" />
     <asp:BoundField DataField="Dep_Del" HeaderText="Dependencia-A Cargo" 

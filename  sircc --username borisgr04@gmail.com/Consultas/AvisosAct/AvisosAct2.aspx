@@ -61,7 +61,7 @@
                             Text="Solicitudes Sin Recibir" PageViewID="RadPageView3">
                         </telerik:RadTab>
                         <telerik:RadTab runat="server" Owner="RadTabStrip1"  Value="sinrevisar"
-                            Text="Solicitudes Sin Revisar" PageViewID="RadPageView4">
+                            Text="Solicitudes Pendientes" PageViewID="RadPageView4">
                         </telerik:RadTab>
                         <telerik:RadTab runat="server" Text="Procesos a Cargo" Value="procesos" 
                             PageViewID="RadPageView5" Selected="True">
@@ -72,7 +72,7 @@
                 <telerik:RadMultiPage ID="RadMultiPage1" runat="server" SelectedIndex="0">
                     <telerik:RadPageView ID="RadPageView1" runat="server">
                         <br />
-                        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" DataSourceID="ObjAvisosHoy"
+                        <asp:GridView ID="grdAvisosHoy" runat="server" AllowSorting="True" DataSourceID="ObjAvisosHoy"
                             EnableModelValidation="True" DataKeyNames="Num_Proc,ID" AutoGenerateColumns="False"
                             EmptyDataText="No tiene tareas pendientes para hoy">
                             <Columns>
@@ -90,7 +90,7 @@
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="RadPageView2" runat="server">
                         <br />
-                        <asp:GridView ID="GridView2" runat="server" AllowSorting="True" DataSourceID="ObjAtrasados"
+                        <asp:GridView ID="grdAtrazadas" runat="server" AllowSorting="True" DataSourceID="ObjAtrasados"
                             EnableModelValidation="True" DataKeyNames="Num_Proc,ID" AutoGenerateColumns="False">
                             <Columns>
                                 <asp:BoundField DataField="Num_Proc" HeaderText="N° de Proceso" SortExpression="Num_Proc" />
@@ -105,67 +105,163 @@
                         
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="RadPageView3" runat="server">
-                        <asp:GridView OnRowDataBound="GridView1_RowDataBound" ID="grdRecibir" runat="server"
-                            Width="724px" DataSourceID="ObjPSol" DataKeyNames="Cod_Sol" AutoGenerateColumns="False"
-                            EmptyDataText="No tiene solicitudes pendientes para recibir" AllowSorting="True"
-                            EnableModelValidation="True">
-                            <Columns>
-                                <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
-                                    <ItemTemplate>
-                                        <asp:Label ID="LbCod0" runat="server" Text='<%# Bind("Cod_Sol") %>' __designer:wfdid="w9"></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
-                                    <ItemTemplate>
-                                        <asp:Label ID="Lbcimp0" runat="server" Text='<%# Bind("Obj_sol") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
-                                    <ItemTemplate>
-                                        <asp:Label ID="LbEst0" runat="server" Text='<%# Bind("Dep_Del") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Dependencia que Solicita" SortExpression="Dep_Nec">
-                                    <ItemTemplate>
-                                        <asp:Label ID="LbVal0" runat="server" Text='<%# Bind("Dep_Nec") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True"
-                                    ButtonType="Image"></asp:CommandField>
-                            </Columns>
-                        </asp:GridView>
+                    <asp:GridView 
+                id="grdRecibir" runat="server" DataSourceID="ObjPSol" 
+                DataKeyNames="Cod_Sol" 
+                AutoGenerateColumns="False" 
+                EmptyDataText="No tiene solicitudes pendientes para recibir" 
+        AllowSorting="True" EnableModelValidation="True">
+                <Columns>
+    
+                <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
+                    <ItemTemplate>
+                <asp:Label id="LbCod0" runat="server" Text='<%# Bind("Cod_Sol") %>' 
+                        ></asp:Label> 
+                </ItemTemplate>
+                </asp:TemplateField>
+                    <asp:BoundField DataField="Encargado" HeaderText="Encargado" 
+                        SortExpression="Encargado" />
+                <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
+                    <ItemTemplate>
+                <asp:Label id="Lbcimp0" runat="server" Text='<%# Bind("Obj_sol") %>' 
+                            ></asp:Label> 
+                </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
+                    <ItemTemplate>
+                <asp:Label id="LbEst0" runat="server" Text='<%# Bind("Dep_Del") %>' 
+                            ></asp:Label> 
+                </ItemTemplate>
+                </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Dependencia que Solicita" 
+                        SortExpression="Dep_Nec">
+                     <ItemTemplate>
+                <asp:Label id="LbVal0" runat="server" Text='<%# Bind("Dep_Nec") %>' 
+                            ></asp:Label> 
+                </ItemTemplate>
+                    </asp:TemplateField>
+    
+                    <asp:TemplateField HeaderText="Fecha de Registro" 
+                            SortExpression="FECHA_REGISTRO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFR" runat="server" 
+                                Text='<%# Bind("FECHA_REGISTRO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha Asignación" SortExpression="FEC_ASIGNADO">
+                        <ItemTemplate>
+                            <asp:Label ID="LbFEC_ASIGNADO" runat="server" 
+                                Text='<%# Bind("FEC_ASIGNADO") %>'></asp:Label>
+                        </ItemTemplate>
+                </asp:TemplateField>
+    
+                <asp:CommandField SelectImageUrl="~/images/Operaciones/Select.png" 
+                        ShowSelectButton="True" ButtonType="Image"></asp:CommandField>
+    
+                </Columns>
+                <EmptyDataTemplate>
+                <br />
+                        <asp:Label ID="Label2" runat="server" CssClass="infor" 
+                            Text="No tiene Solicitudes pendientes por Recibir"></asp:Label>
+                    </EmptyDataTemplate>
+        </asp:GridView>
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="RadPageView4" runat="server">
-                        <asp:GridView ID="grdRevisar" runat="server" AllowSorting="True" AutoGenerateColumns="False"
-                            DataKeyNames="Cod_Sol" DataSourceID="ObjPSolRv" EmptyDataText="No tiene solicitudes pendientes para revisar"
-                            EnableModelValidation="True" Width="724px">
-                            <Columns>
-                                <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
-                                    <ItemTemplate>
-                                        <asp:Label ID="LbCod" runat="server" text='<%# Bind("Cod_Sol") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
-                                    <ItemTemplate>
-                                        <asp:Label ID="Lbcimp" runat="server" Text='<%# Bind("Obj_sol") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
-                                    <ItemTemplate>
-                                        <asp:Label ID="LbEst" runat="server"  Text='<%# Bind("Dep_Del") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Dependencia que genera" SortExpression="Val_Prop">
-                                    <ItemTemplate>
-                                        <asp:Label ID="LbVal" runat="server"  Text='<%# Bind("Dep_Nec") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:ButtonField ButtonType="Image" CommandName="hojaRutas" HeaderText="Hoja de Ruta" 
-                                    ImageUrl="~/images/2013/listcheck.png" Text="Diligenciar Hoja de Ruta" />
-                                <asp:CommandField ButtonType="Image" SelectImageUrl="~/images/Operaciones/Select.png"
-                                    ShowSelectButton="True" />
-                            </Columns>
-                        </asp:GridView>
+                        <asp:GridView ID="grdRevisar" runat="server" AllowSorting="True" 
+                    AutoGenerateColumns="False" DataKeyNames="Cod_Sol" DataSourceID="ObjPSolRv"
+                    EmptyDataText="No tiene solicitudes pendientes para revisar" 
+                    EnableModelValidation="True" >
+                    <Columns>
+                        <asp:TemplateField HeaderText="Código" SortExpression="Cod_Sol">
+                            <ItemTemplate>
+                                <asp:Label ID="LbCod" runat="server" 
+                                    Text='<%# Bind("Cod_Sol") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText ="Encargado" SortExpression="Encargado" >
+                        <ItemTemplate>
+                                <asp:Label ID="LbEncar" runat="server" 
+                                    Text='<%# Bind("encargado") %>'></asp:Label>
+                         </ItemTemplate>
+                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
+                            <ItemTemplate>
+                                <asp:Label ID="Lbcimp" runat="server" 
+                                    Text='<%# Bind("Obj_sol") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
+                            <ItemTemplate>
+                                <asp:Label ID="LbEst" runat="server" 
+                                    Text='<%# Bind("Dep_Del") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Dependencia que genera" 
+                            SortExpression="Val_Prop">
+                            <ItemTemplate>
+                                <asp:Label ID="LbVal" runat="server" 
+                                    Text='<%# Bind("Dep_Nec") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    
+                    <asp:TemplateField HeaderText="Fecha de Registro" 
+                            SortExpression="FECHA_RECIBIDO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFR" runat="server" 
+                                Text='<%# Bind("FECHA_REGISTRO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha de Asignación" 
+                            SortExpression="FEC_ASIGNADO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFA" runat="server" 
+                                Text='<%# Bind("FEC_ASIGNADO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                        
+                    <asp:TemplateField HeaderText="Fecha de Recibido Encargado" 
+                            SortExpression="FEC_REC_ABOG">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFRA" runat="server" 
+                                Text='<%# Bind("FEC_REC_ABOG") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Observación Recibido" 
+                            SortExpression="OBSERVACION_RECIBIDO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbOR" runat="server" 
+                                Text='<%# Bind("OBSERVACION_RECIBIDO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Fecha de Revisión" 
+                            SortExpression="FECHA_REVISADO">
+                          <ItemTemplate>
+                            <asp:Label ID="LbFRV" runat="server" 
+                                Text='<%# Bind("FECHA_REVISADO") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    
+                    <asp:TemplateField HeaderText="Observación Revisión" 
+                            SortExpression="obs_revisado">
+                          <ItemTemplate>
+                            <asp:Label ID="Lbobs" runat="server" 
+                                Text='<%# Bind("obs_revisado") %>'></asp:Label>
+                        </ItemTemplate>
+                    
+                    </asp:TemplateField>
+                <asp:CommandField ButtonType="Image" 
+                            SelectImageUrl="~/images/Operaciones/Select.png" ShowSelectButton="True" />
+                    </Columns>
+                    <EmptyDataTemplate>
+                    <br />
+                        <asp:Label ID="Label2" runat="server" CssClass="infor" 
+                            Text="No tiene Solicitudes pendientes por Revisar"></asp:Label>
+                    </EmptyDataTemplate>
+                </asp:GridView>
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="RadPageView5" runat="server">
                     <div style="float:right">
@@ -184,7 +280,7 @@
                             </ItemTemplate>
                             <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
                         </asp:DataList>
-                        <asp:GridView ID="grdProcACargo" runat="server" OnRowDataBound="GridView1_RowDataBound"
+                        <%--<asp:GridView ID="grdProcACargo" runat="server" 
                             DataSourceID="ObjConPContratosD" DataKeyNames="Pro_Sel_Nro" AutoGenerateColumns="False"
                             EmptyDataText="No tiene procesos a cargo" EnableModelValidation="True" AllowSorting="True"
                             Width="100%">
@@ -208,7 +304,61 @@
                                 <asp:ButtonField ButtonType="Image" CommandName="documentos" HeaderText="Documentos"
                                     ImageUrl="~/images/2012/archivo.png" Text="Documentos Precontractuales" />
                             </Columns>
-                        </asp:GridView>
+                        </asp:GridView>--%>
+
+                        <asp:GridView 
+                id="grdProcACargo" runat="server" DataSourceID="ObjConPContratosD"
+                DataKeyNames="Pro_Sel_Nro" 
+                AutoGenerateColumns="False" 
+                EmptyDataText="No tiene procesos a cargo" 
+                EnableModelValidation="True" AllowSorting="True" Width="100%">
+<Columns>
+    <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="N° de Proceso" 
+        SortExpression="Pro_Sel_Nro" />
+    <asp:BoundField DataField="Encargado" HeaderText="Encargado" 
+        SortExpression="Encargado" />
+    <asp:BoundField DataField="Nom_TProc" HeaderText="Tipo de Procesos" 
+        SortExpression="Nom_TProc" />
+    <asp:BoundField HeaderText="Objeto a Contratar" SortExpression="Obj_Con" 
+        DataField="Obj_Con" >
+    </asp:BoundField>
+    <asp:BoundField DataField="Dep_Nec" HeaderText="Dependencia-Necesidad" 
+        SortExpression="Dep_Nec" />
+    <asp:BoundField DataField="Dep_Del" HeaderText="Dependencia-A Cargo" 
+        SortExpression="Dep_Del" />
+    
+    <asp:BoundField HeaderText="Tipo" SortExpression="TIPDOCUMENTO" 
+        DataField="TIPDOCUMENTO" >
+    </asp:BoundField>
+    
+    <asp:BoundField HeaderText="Sub Tipo" SortExpression="NOMSTIP" 
+        DataField="NOMSTIP" >
+    </asp:BoundField>
+
+    <asp:BoundField HeaderText="Estado del Proceso" SortExpression="NOM_EST" 
+        DataField="NOM_EST" >
+    </asp:BoundField>
+
+    <asp:ButtonField ButtonType="Image" CommandName="hojaRutas" HeaderText="Hoja de Ruta" 
+                                    ImageUrl="~/images/2013/listcheck.png" Text="Diligenciar Hoja de Ruta" />
+    <asp:ButtonField ButtonType="Image" CommandName="crono" HeaderText="Cronograma" 
+        ImageUrl="~/images/mnProcesos/Calendar-icon24.png" Text="Cronograma">
+    <ItemStyle HorizontalAlign="Center" />
+    </asp:ButtonField>
+    <asp:ButtonField ButtonType="Image" CommandName="documentos" HeaderText="Documentos"
+                                    ImageUrl="~/images/2012/archivo.png" Text="Documentos Precontractuales" />
+    <asp:ButtonField ButtonType="Image" Visible="false" CommandName="dbproc" 
+        HeaderText="Datos del Proceso" ImageUrl="~/images/Operaciones/Edit.png">
+    <ItemStyle HorizontalAlign="Center" />
+    </asp:ButtonField>
+    
+</Columns>
+<EmptyDataTemplate>
+<br />
+                        <asp:Label ID="Label2" runat="server" CssClass="infor" 
+                            Text="No se encontraron registros "></asp:Label>
+                    </EmptyDataTemplate>
+</asp:GridView> 
                     </telerik:RadPageView>
                 </telerik:RadMultiPage>
                 <br />
@@ -217,18 +367,6 @@
                 <asp:ObjectDataSource ID="ObjConPContratos" runat="server" 
                     OldValuesParameterFormatString="original_{0}" 
                     SelectMethod="GetMisProcesos" TypeName="AvisosAct" InsertMethod="InsertP">
-                    <InsertParameters>
-                        <asp:Parameter Name="COD_TPRO" Type="String" />
-                        <asp:Parameter Name="OBJ_CON" Type="String" />
-                        <asp:Parameter Name="DEP_CON" Type="String" />
-                        <asp:Parameter Name="DEP_PCON" Type="String" />
-                        <asp:Parameter Name="VIG_CON" Type="Decimal" />
-                        <asp:Parameter Name="TIP_CON" Type="String" />
-                        <asp:Parameter Name="STIP_CON" Type="String" />
-                        <asp:Parameter Name="FEC_RECIBIDO" Type="DateTime" />
-                        <asp:Parameter Name="NUM_SOL" Type="String" />
-                        <asp:Parameter Name="VAL_CON" Type="Decimal" />
-                    </InsertParameters>
                     <SelectParameters>
                         <asp:SessionParameter Name="vigencia" SessionField="vigencia" Type="String" />
                     </SelectParameters>
@@ -238,14 +376,13 @@
                 <br />
                 <asp:ObjectDataSource ID="ObjAtrasados" runat="server" OldValuesParameterFormatString="original_{0}"
                     SelectMethod="GetAvisosAtrasados" TypeName="PCronogramas"></asp:ObjectDataSource>
+                
                 <asp:ObjectDataSource ID="ObjPSol" runat="server" OldValuesParameterFormatString="original_{0}"
                     SelectMethod="GetByAbog" TypeName="PSolicitudes"></asp:ObjectDataSource>
+
                 <asp:ObjectDataSource ID="ObjPSolRv" runat="server" OldValuesParameterFormatString="original_{0}"
-                    SelectMethod="GetSolPen" TypeName="ConSolicitudes" InsertMethod="InsertHREV">
-                    <InsertParameters>
-                        <asp:Parameter Name="COD_SOL" Type="String" />
-                        <asp:Parameter Name="FECHA_RECIBIDO" Type="DateTime" />
-                    </InsertParameters>
+                    SelectMethod="GetSolPen" TypeName="ConSolicitudes" >
+                   
                 </asp:ObjectDataSource>
                 <br />
                 <asp:HiddenField ID="HdPNom_Est" runat="server" />
