@@ -252,7 +252,7 @@ Public Class AvisosActD
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetProcbyDepDelEstado(ByVal Nom_Est As String, ByVal Vigencia As String) As DataTable
-        Dim queryString As String = "SELECT * FROM vPContratos Where final='NO' and Nom_Est=:Nom_Est And Dep_pcon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) And FECHARECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy')"
+        Dim queryString As String = "SELECT * FROM vPContratos Where Nom_Est=:Nom_Est And Dep_pcon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) And FECHARECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy')"
         Me.Conectar()
         Me.CrearComando(queryString)
         Me.AsignarParametroCadena(":F1", Fec_Ini)
@@ -274,7 +274,7 @@ Public Class AvisosActD
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetProcbyDepDel(ByVal Vigencia As String) As DataTable
-        Dim queryString As String = "SELECT * FROM vPContratos Where final='NO' And vig_con=:vigencia And Dep_pcon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) "
+        Dim queryString As String = "SELECT * FROM vPContratos Where vig_con=:vigencia And Dep_pcon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) "
         Me.Conectar()
         Me.CrearComando(queryString)
         Me.AsignarParametroCadena(":vigencia", Vigencia)
@@ -287,7 +287,7 @@ Public Class AvisosActD
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetCProcesosxDepDel(ByVal Vigencia As String) As DataTable
         Me.Conectar()
-        querystring = "Select count(*) Cantidad from vpcontratos where final='NO' and Dep_PCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) And FECHARECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') "
+        querystring = "Select count(*) Cantidad from vpcontratos where Dep_PCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) And FECHARECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') "
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":usuario", Me.usuario)
         Me.AsignarParametroCadena(":F1", Fec_Ini)
@@ -301,7 +301,7 @@ Public Class AvisosActD
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetProcesosxDepDel(ByVal Vigencia As String) As DataTable
         Me.Conectar()
-        querystring = "Select nom_est Estado,count(*) Cantidad from vpcontratos where final='NO' and Dep_PCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) And FECHARECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') group by nom_est Order by Count(*)"
+        querystring = "Select nom_est Estado,count(*) Cantidad from vpcontratos where  Dep_PCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) And FECHARECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy') group by nom_est Order by Count(*)"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":usuario", Me.usuario)
         Me.AsignarParametroCadena(":F1", Fec_Ini)
@@ -315,7 +315,7 @@ Public Class AvisosActD
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetProcxDepDel(ByVal Vigencia As String) As DataTable
         Me.Conectar()
-        querystring = "Select * from vpcontratos where final='NO' and Dep_PCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) And FECHARECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy')"
+        querystring = "Select * from vpcontratos where  Dep_PCon In (SELECT cod_dep FROM vDepDelTer WHERE ide_ter_abo=:usuario ) And FECHARECIBIDO BETWEEN TO_DATE(:F1,'dd/mm/yyyy') AND TO_DATE(:F2,'dd/mm/yyyy')"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":F1", Fec_Ini)
         Me.AsignarParametroCadena(":F2", Fec_Fin)
