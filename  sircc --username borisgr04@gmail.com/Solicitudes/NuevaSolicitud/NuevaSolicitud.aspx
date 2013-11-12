@@ -72,8 +72,11 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                             <asp:ImageButton ID="BtnReabrir" runat="server" Height="32px" Width="32px" 
                                 Enabled="False" SkinID="IBtnReabrir" />
                         </td>
-                        <td>
+                        <td style="width: 68px">
                             <asp:ImageButton ID="BtnAsig0" runat="server" SkinID="IBtnAsig" />
+                        </td>
+                        <td>
+                            <asp:ImageButton ID="BtnAnulacion" runat="server" SkinID="IBtnEliminar" />
                         </td>
                     </tr>
                     <tr>
@@ -95,6 +98,8 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                             Reabrir Solicitud</td>
                         <td>
                             Asignar</td>
+                        <td>
+                            Anular</td>
                     </tr>
                     <tr>
                         <td style="width: 41px">
@@ -113,7 +118,7 @@ Inherits="Procesos_NuevaSolicitud_Default"  %>
                             &nbsp;</td>
                         <td style="width: 87px">
                             &nbsp;</td>
-                        <td>
+                        <td colspan="2">
                             &nbsp;</td>
                     </tr>
                 </table>

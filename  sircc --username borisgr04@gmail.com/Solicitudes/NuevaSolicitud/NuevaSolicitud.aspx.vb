@@ -346,4 +346,7 @@ Partial Class Procesos_NuevaSolicitud_Default
         buscar()
     End Sub
 
+    Protected Sub BtnAnulacion_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles BtnAnulacion.Click
+        Redireccionar_Pagina("/Solicitudes/Anulacion/Anulacion.aspx?cod_sol=" + TxtNProc.Text)
+    End Sub
 End Class
