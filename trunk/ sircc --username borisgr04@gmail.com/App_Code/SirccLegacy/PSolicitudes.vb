@@ -978,5 +978,47 @@ Public Class PSolicitudes
 
     End Function
 
+    Public Function Anular(ByVal COD_SOL_PK As String, OBS_REVISADO As String) As String
+        Dim ID_HREV, Concepto, Recibido As String
+        Me.Conectar()
+        Try
+            Me.ComenzarTransaccion()
+            querystring = "SELECT Concepto, Id_Hrev, Recibido FROM vPSOLICITUDES  WHERE COD_SOL=:COD_SOL_PK"
+            CrearComando(querystring)
+            Me.AsignarParametroCadena(":COD_SOL_PK", COD_SOL_PK)
+            Dim dt As DataTable = EjecutarConsultaDataTable()
+            If dt.Rows.Count > 0 Then
+                ID_HREV = dt.Rows(0)("ID_HREV")
+                Concepto = dt.Rows(0)("Concepto")
+                Recibido = dt.Rows(0)("Recibido")
+                If Concepto = "P" And Recibido = "N" Then
+                    querystring = "Update hrevisado SET Concepto_Revisado='X',  OBS_REVISADO=:OBS_REVISADO,Fecha_Revisado=sysdate WHERE COD_SOL=:COD_SOL_PK And ID_HREV=:ID_HREV"
+                    Me.CrearComando(querystring)
+                    Me.AsignarParametroCadena(":OBS_REVISADO", OBS_REVISADO)
+                    Me.AsignarParametroCadena(":COD_SOL_PK", COD_SOL_PK)
+                    Me.AsignarParametroCadena(":ID_HREV", ID_HREV)
+                    Me.num_reg = Me.EjecutarComando()
+                    Me.ConfirmarTransaccion()
+                    Me.Msg = Me.MsgOk + "Filas Afectadas [" + Me.num_reg.ToString + "]"
+                    Me.lErrorG = False
+                Else
+                    Me.Msg = "La Solicitud no se puede Anular, Ya ha sido Asignada"
+                    Me.lErrorG = True
+                End If
+            Else
+                Me.Msg = "No se encontró la Solicitud"
+                Me.lErrorG = True
+            End If
+        Catch ex As Exception
+            Me.Msg = "Error:" + ex.Message
+            Me.CancelarTransaccion()
+            Me.lErrorG = True
+        End Try
+        Me.Desconectar()
+
+
+        Return Me.Msg
+
+    End Function
 
 End Class
