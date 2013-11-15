@@ -12,7 +12,7 @@
   <xs:element name="dsPCronogramas" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dsPCronogramas" msprop:Generator_UserDSName="dsPCronogramas">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="vPCronogramas" msprop:Generator_TableClassName="vPCronogramasDataTable" msprop:Generator_TableVarName="tablevPCronogramas" msprop:Generator_TablePropName="vPCronogramas" msprop:Generator_RowDeletingName="vPCronogramasRowDeleting" msprop:Generator_UserTableName="vPCronogramas" msprop:Generator_RowChangingName="vPCronogramasRowChanging" msprop:Generator_RowEvHandlerName="vPCronogramasRowChangeEventHandler" msprop:Generator_RowDeletedName="vPCronogramasRowDeleted" msprop:Generator_RowEvArgName="vPCronogramasRowChangeEvent" msprop:Generator_RowChangedName="vPCronogramasRowChanged" msprop:Generator_RowClassName="vPCronogramasRow">
+        <xs:element name="vPCronogramas" msprop:Generator_TableClassName="vPCronogramasDataTable" msprop:Generator_TableVarName="tablevPCronogramas" msprop:Generator_TablePropName="vPCronogramas" msprop:Generator_RowDeletingName="vPCronogramasRowDeleting" msprop:Generator_RowChangingName="vPCronogramasRowChanging" msprop:Generator_RowEvHandlerName="vPCronogramasRowChangeEventHandler" msprop:Generator_RowDeletedName="vPCronogramasRowDeleted" msprop:Generator_UserTableName="vPCronogramas" msprop:Generator_RowChangedName="vPCronogramasRowChanged" msprop:Generator_RowEvArgName="vPCronogramasRowChangeEvent" msprop:Generator_RowClassName="vPCronogramasRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="COD_ACT" msprop:Generator_ColumnVarNameInTable="columnCOD_ACT" msprop:Generator_ColumnPropNameInRow="COD_ACT" msprop:Generator_ColumnPropNameInTable="COD_ACTColumn" msprop:Generator_UserColumnName="COD_ACT" type="xs:string" minOccurs="0" />
@@ -50,6 +50,8 @@
               <xs:element name="PRO_SEL_NRO" msprop:Generator_ColumnVarNameInTable="columnPRO_SEL_NRO" msprop:Generator_ColumnPropNameInRow="PRO_SEL_NRO" msprop:Generator_ColumnPropNameInTable="PRO_SEL_NROColumn" msprop:Generator_UserColumnName="PRO_SEL_NRO" type="xs:string" minOccurs="0" />
               <xs:element name="NOM_EST" msprop:Generator_ColumnVarNameInTable="columnNOM_EST" msprop:Generator_ColumnPropNameInRow="NOM_EST" msprop:Generator_ColumnPropNameInTable="NOM_ESTColumn" msprop:Generator_UserColumnName="NOM_EST" type="xs:string" minOccurs="0" />
               <xs:element name="FECHACRONO" msprop:Generator_ColumnVarNameInTable="columnFECHACRONO" msprop:Generator_ColumnPropNameInRow="FECHACRONO" msprop:Generator_ColumnPropNameInTable="FECHACRONOColumn" msprop:Generator_UserColumnName="FECHACRONO" type="xs:string" minOccurs="0" />
+              <xs:element name="ORDEN" msprop:Generator_ColumnVarNameInTable="columnORDEN" msprop:Generator_ColumnPropNameInRow="ORDEN" msprop:Generator_ColumnPropNameInTable="ORDENColumn" msprop:Generator_UserColumnName="ORDEN" type="xs:long" minOccurs="0" />
+              <xs:element name="OBS_SEG" msprop:Generator_ColumnVarNameInTable="columnOBS_SEG" msprop:Generator_ColumnPropNameInRow="OBS_SEG" msprop:Generator_ColumnPropNameInTable="OBS_SEGColumn" msprop:Generator_UserColumnName="OBS_SEG" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

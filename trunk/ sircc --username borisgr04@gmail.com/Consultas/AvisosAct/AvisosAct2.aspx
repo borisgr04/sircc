@@ -264,8 +264,11 @@
                 </asp:GridView>
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="RadPageView5" runat="server">
-                    <div style="float:right">
+                        <div style="float:right">
                         <asp:LinkButton ID="lnkVerTodos" runat="server">Ver Todos</asp:LinkButton>
+                        
+                        <asp:HyperLink ID="hlProcesos" Target="_blank" 
+                                NavigateUrl="~/Reportes/PanelProcesosE/PanelReporteE.aspx" runat="server">Panel de Procesos</asp:HyperLink>
                         </div>
                         <asp:DataList ID="DtProcesosACargo" runat="server" CellPadding="4" ForeColor="#333333"
                             RepeatDirection="Horizontal" DataKeyField="Estado" DataSourceID="ObjConPContratos">
@@ -280,32 +283,6 @@
                             </ItemTemplate>
                             <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
                         </asp:DataList>
-                        <%--<asp:GridView ID="grdProcACargo" runat="server" 
-                            DataSourceID="ObjConPContratosD" DataKeyNames="Pro_Sel_Nro" AutoGenerateColumns="False"
-                            EmptyDataText="No tiene procesos a cargo" EnableModelValidation="True" AllowSorting="True"
-                            Width="100%">
-                            <Columns>
-                                <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="N° de Proceso" SortExpression="Pro_Sel_Nro" />
-                                <asp:BoundField DataField="Nom_TProc" HeaderText="Tipo de Procesos" SortExpression="Nom_TProc" />
-                                <asp:BoundField HeaderText="Objeto a Contratar" SortExpression="Obj_Con" DataField="Obj_Con">
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Dep_Nec" HeaderText="Dependencia-Necesidad" SortExpression="Dep_Nec" />
-                                <asp:BoundField DataField="Dep_Del" HeaderText="Dependencia-A Cargo" SortExpression="Dep_Del" />
-                                <asp:ButtonField ButtonType="Image" CommandName="hojaRutas" HeaderText="Hoja de Ruta" 
-                                    ImageUrl="~/images/2013/listcheck.png" Text="Diligenciar Hoja de Ruta" />
-                                <asp:ButtonField ButtonType="Image" CommandName="crono" HeaderText="Cronograma" ImageUrl="~/images/mnProcesos/Calendar-icon24.png"
-                                    Text="Cronograma">
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:ButtonField>
-                                <asp:ButtonField ButtonType="Image" CommandName="dbproc" HeaderText="Datos del Proceso"
-                                    ImageUrl="~/images/Operaciones/Edit.png">
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:ButtonField>
-                                <asp:ButtonField ButtonType="Image" CommandName="documentos" HeaderText="Documentos"
-                                    ImageUrl="~/images/2012/archivo.png" Text="Documentos Precontractuales" />
-                            </Columns>
-                        </asp:GridView>--%>
-
                         <asp:GridView 
                 id="grdProcACargo" runat="server" DataSourceID="ObjConPContratosD"
                 DataKeyNames="Pro_Sel_Nro" 

@@ -688,6 +688,8 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableE
 <Columns>
     <asp:BoundField DataField="Pro_Sel_Nro" HeaderText="N° de Proceso" 
         SortExpression="Pro_Sel_Nro" />
+    <asp:BoundField DataField="Fec_Reg" HeaderText="Fecha de Creación"   
+        SortExpression="Fec_Reg" />
     <asp:BoundField DataField="Encargado" HeaderText="Encargado" 
         SortExpression="Encargado" />
     <asp:BoundField DataField="Nom_TProc" HeaderText="Tipo de Procesos" 
