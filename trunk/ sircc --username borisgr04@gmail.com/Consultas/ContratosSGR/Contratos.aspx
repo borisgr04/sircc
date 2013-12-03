@@ -291,7 +291,6 @@
                 <ItemTemplate>
                     <asp:Label ID="Label6" runat="server" Text='<%# Bind("NOM_tip") %>'></asp:Label>
                 </ItemTemplate>
-            
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Fecha de Suscripción">
                 <ItemTemplate>
@@ -315,19 +314,7 @@
                 <ItemStyle HorizontalAlign="Right" />
             </asp:TemplateField>
             <asp:BoundField DataField="Obser" HeaderText="Observación" />
-            <asp:ButtonField ButtonType="Image" CommandName="editar" 
-                ImageUrl="~/images/2012/edit.png" Text="Editar" Visible="False" />
-            <asp:TemplateField ShowHeader="False">
-                <ItemTemplate>
-                     <asp:ImageButton ID="IbtnEliminar" runat="server" CausesValidation="false" 
-                        CommandArgument='<%# Right(Eval("Nro_Adi"),2) %>' CommandName="eliminar"  
-                        ImageUrl="~/images/Operaciones/delete2.png" 
-                        OnClientClick="return confirm('Confirme si quiere Eliminar el Registro?');" 
-                        Text="Eliminar" 
-                        visible='<%#IIF((DataBinder.Eval(Container.DataItem, "Ult")="1"),True,False)%>' />
-                </ItemTemplate>
             
-            </asp:TemplateField>
         </Columns>
         
     </asp:GridView>
@@ -346,12 +333,14 @@
             <asp:BoundField DataField="Vigencia" HeaderText="Vigencia" />
             <asp:BoundField DataField="Num_Orden" HeaderText="Num_Orden" />
             <asp:BoundField DataField="Obj_Orden" HeaderText="Obj_Orden" />
-            <asp:BoundField DataField="Fec_Aprobacion" HeaderText="Fec_Aprobacion" />
+            <asp:BoundField DataField="Val_Total" HeaderText="Valor Orden"  DataFormatString="{0:c}" />
+            <asp:BoundField DataField="Estado_Orden" HeaderText="Estado Orden"  />
+            <asp:BoundField DataField="Fec_Aprobacion" HeaderText="Fec_Aprobacion" DataFormatString="{0:d}"/>
             <asp:BoundField DataField="Num_egreso" HeaderText="Num_egreso" />
-            <asp:BoundField DataField="Fec_egreso" HeaderText="Fec_egreso" />
+            <asp:BoundField DataField="Fec_egreso" HeaderText="Fec_egreso" DataFormatString="{0:d}"/>
             <asp:BoundField DataField="Anticipo" HeaderText="Anticipo" />
             <asp:BoundField DataField="Amortiza" HeaderText="Amortiza" />
-            <asp:BoundField DataField="Val_Amortizado" HeaderText="Val_Amortizado" />
+            <asp:BoundField DataField="Val_Amortizado" HeaderText="Val_Amortizado" DataFormatString="{0:c}" />
         </Columns>
         
     </asp:GridView>

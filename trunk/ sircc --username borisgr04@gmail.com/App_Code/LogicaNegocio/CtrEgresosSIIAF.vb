@@ -11,7 +11,7 @@ Public Class CtrEgresosSIIAF
         ctx.Conectar()
         Dim querystring As String
 
-        querystring = " Select Vigencia, Num_Orden, Obj_Orden, Fec_Aprobacion, Num_egreso,Fec_egreso, Anticipo, Amortiza,Val_Amortizado "
+        querystring = " Select Vigencia, Num_Orden, Obj_Orden,Val_Total,Estado_Orden, Fec_Aprobacion, Num_egreso,Fec_egreso, Anticipo, Amortiza,Val_Amortizado "
         querystring += " From pct2013.Morden"
         querystring += " Where(Num_compromiso, Vig_compromiso) "
         querystring += " In (Select Num_Compromiso, Vigencia from pct2013.MCompromiso where Substr(Nro_Documento,0,10) = :Cod_Con)"

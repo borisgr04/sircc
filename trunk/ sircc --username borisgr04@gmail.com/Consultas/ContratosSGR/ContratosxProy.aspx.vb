@@ -21,4 +21,8 @@ Partial Class Consultas_ContratosSGR_ContratosxProy
         GridView1.DataBind()
 
     End Sub
+
+    Protected Sub GridView1_PageIndexChanging(sender As Object, e As GridViewPageEventArgs) Handles GridView1.PageIndexChanging
+
+    End Sub
 End Class
