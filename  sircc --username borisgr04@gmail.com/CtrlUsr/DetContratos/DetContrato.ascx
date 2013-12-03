@@ -45,6 +45,8 @@
                             <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                             <Fields>
                                 <asp:BoundField DataField="Tipo" HeaderText="Tipo" SortExpression="Tipo" />
+                                <asp:BoundField DataField="Nom_Stip" HeaderText="Clase" SortExpression="Nom_Stip" />
+                                <asp:BoundField DataField="Nom_Tproc" HeaderText="Modalidad" SortExpression="Nom_Tproc" />
                                 <asp:BoundField DataField="Numero" HeaderText="Número" SortExpression="Numero" >
                                 <ItemStyle Font-Bold="True" Font-Italic="False" Font-Size="Medium" />
                                 </asp:BoundField>
