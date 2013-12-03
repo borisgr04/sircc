@@ -29,14 +29,14 @@
                     EmptyDataText="No se encontraron Registros en la Base de Datos"
                     EnableModelValidation="True" ForeColor="#333333" GridLines="None"
                     OnRowDataBound="GridView1_RowDataBound1"
-                    Width="845px" AllowPaging="True">
+                    Width="845px" >
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                     <Columns>
                         <asp:BoundField DataField="Vigencia" HeaderText="Vigencia" />
-                        <asp:BoundField DataField="Proyecto" HeaderText="N° Proyecto" />
+                        <asp:HyperLinkField DataNavigateUrlFields="Proyecto" DataNavigateUrlFormatString="lcontratos.aspx?Proyecto={0}" DataTextField="Proyecto" HeaderText="Ver Contratos" />
                         <asp:BoundField DataField="Nombre_Proyecto" HeaderText="Nombre de Proyecto" />
                         <asp:BoundField DataField="Valor" HeaderText="Valor" DataFormatString="{0:c}" />
-                        <asp:BoundField DataField="CantxCont" HeaderText="Cantidad de Contratos" />
+                        <asp:BoundField DataField="CantxCont" HeaderText="Cantidad de Contratos"  />
                         <asp:CommandField ShowSelectButton="True" SelectText="Ver Contratos" />
                     </Columns>
                     <FooterStyle BackColor="White" Font-Bold="True" ForeColor="#5D7B9D" />
