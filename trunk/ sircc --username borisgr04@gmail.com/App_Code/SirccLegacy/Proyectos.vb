@@ -188,4 +188,43 @@ Public Class Proyectos
         Me.Desconectar()
         Return dataSet
     End Function
+
+    ''' <summary>
+    ''' Get Proyectos
+    ''' </summary>
+    ''' <param name="Proyecto"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetProyectosC(Vigencia As String, ByVal Proyecto As String) As DataTable
+        Me.Conectar()
+
+
+
+        If Not String.IsNullOrEmpty(Proyecto) Then
+            querystring = "SELECT p.*, "
+            querystring += " (Select Count(cp.Proyecto) from cproyectos cp where cp.Proyecto=p.Proyecto) CantxCont FROM  " + Vista + " p WHERE  Vigencia=:Vigencia And p.Proyecto LIKE :Proyecto or Upper(p.Nombre_Proyecto) LIKE :NomProyecto"
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":Vigencia", Vigencia)
+            Me.AsignarParametroCadena(":Proyecto", "%" + Proyecto + "%")
+            Me.AsignarParametroCadena(":NomProyecto", "%" + UCase(Proyecto) + "%")
+        Else
+            querystring = "SELECT p.*, "
+            querystring += " (Select Count(cp.Proyecto) from cproyectos cp where cp.Proyecto=p.Proyecto) CantxCont FROM  " + Vista + " p WHERE  Vigencia=:Vigencia "
+
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":Vigencia", Vigencia)
+        End If
+        'Throw New Exception(Me.vComando.CommandText)
+
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
+    End Function
+
+    
+
+
+
+
 End Class
