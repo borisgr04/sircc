@@ -18,8 +18,9 @@
         <ContentTemplate>
             <uc2:DetContrato ID="DetContratoN1" runat="server" />
             <br />
+            <asp:LinkButton ID="BtnContratista" runat="server">Detalle Contratista</asp:LinkButton>
             
-            
+
             <asp:ObjectDataSource ID="ObjObli" runat="server" 
                 OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" 
                 TypeName="CObligaciones">
@@ -114,9 +115,10 @@
                     <asp:GridView ID="GridView4" runat="server" DataSourceID="ObjInterventor" 
                 EnableModelValidation="True" AutoGenerateColumns="false" SkinID="gridView">
                 <Columns>
-                    <asp:BoundField DataField="Ide_Int" HeaderText="Identificación" />
+                    <asp:HyperLinkField DataNavigateUrlFields="Ide_Int" DataNavigateUrlFormatString="detTercero.aspx?ide_ter={0}" DataTextField="Ide_Int" HeaderText="Identificación" />
                     <asp:BoundField DataField="Nom_Ter" HeaderText="Nombre" />
                     <asp:BoundField DataField="NTip_Int" HeaderText="Tipo" />
+                    <asp:BoundField DataField="est_Int" HeaderText="Estado" />
                     <asp:BoundField DataField="Obs_Int" HeaderText="Observación" />
                 </Columns>
             </asp:GridView>
@@ -347,6 +349,7 @@
 
                 </Content>
                 </ajaxToolkit:AccordionPane>
+                
             </Panes>
             </ajaxToolkit:Accordion>
             <asp:ObjectDataSource ID="ObjPagos" runat="server" 

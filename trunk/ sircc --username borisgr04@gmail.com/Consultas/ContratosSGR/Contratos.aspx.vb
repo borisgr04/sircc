@@ -58,4 +58,11 @@ Partial Class Consultas_ContratosSGR_Contratos
         End If
 
     End Sub
+
+    Protected Sub BtnContratista_Click(sender As Object, e As EventArgs) Handles BtnContratista.Click
+
+        Response.Redirect("detTercero.aspx?ide_ter=" + DetContratoN1.Ide_Con)
+    End Sub
+
+    
 End Class
