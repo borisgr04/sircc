@@ -16,4 +16,16 @@ Public Class CtrConxProy
         ctx.Desconectar()
         Return dataTb
     End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetTercero(ByVal Ide_Ter As String) As DataTable
+        ctx.Conectar()
+        Dim querystring As String
+        querystring = " Select   Tip_Ide, Ide_Ter,dv_ter,Nom_Ter,dir_Ter,Tel_Ter,Ema_Ter from vterceros where Ide_Ter=:Ide_Ter"
+        ctx.CrearComando(querystring)
+        ctx.AsignarParametroCadena(":Ide_Ter", Ide_Ter)
+        Dim dataTb As DataTable = ctx.EjecutarConsultaDataTable()
+        ctx.Desconectar()
+        Return dataTb
+    End Function
 End Class

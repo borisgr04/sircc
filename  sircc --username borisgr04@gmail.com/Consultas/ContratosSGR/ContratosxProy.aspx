@@ -5,7 +5,10 @@
             EnableScriptLocalization="true">
         </ajaxToolkit:ToolkitScriptManager>
      <div>
-
+         <asp:Label ID="Label1" runat="server" CssClass="Titulo" 
+        Text="Consulta de Proyecto"></asp:Label>
+         <br />
+         <br />
                     <asp:Label ID="Label11" runat="server" Text="Vigencia"></asp:Label>
                     <asp:DropDownList ID="CmbVig" runat="server" DataSourceID="odsVigencias" DataTextField="YEAR_VIG"
                         DataValueField="YEAR_VIG">
@@ -37,7 +40,6 @@
                         <asp:BoundField DataField="Nombre_Proyecto" HeaderText="Nombre de Proyecto" />
                         <asp:BoundField DataField="Valor" HeaderText="Valor" DataFormatString="{0:c}" />
                         <asp:BoundField DataField="CantxCont" HeaderText="Cantidad de Contratos"  />
-                        <asp:CommandField ShowSelectButton="True" SelectText="Ver Contratos" />
                     </Columns>
                     <FooterStyle BackColor="White" Font-Bold="True" ForeColor="#5D7B9D" />
                     <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
