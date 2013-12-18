@@ -1,5 +1,5 @@
 ﻿
-Partial Class Consultas_ContratosSGR_ContratosxProy
+Partial Class Consultas_ContratosSGR_ProyectosF12
     Inherits PaginaComun
 
     Protected Sub GridView1_RowDataBound1(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs)
@@ -12,14 +12,17 @@ Partial Class Consultas_ContratosSGR_ContratosxProy
         End If
 
     End Sub
+    Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
 
-    
+    End Sub
+    Protected Sub BtnExport_Click(sender As Object, e As System.EventArgs) Handles BtnExport.Click
+        ExportGridView(GridView1, "Export_F12")
+    End Sub
 
     Protected Sub BtnBuscar_Click(sender As Object, e As System.EventArgs) Handles BtnBuscar.Click
         Dim p As New Proyectos()
-        GridView1.DataSource = p.GetProyectosC(CmbVig.SelectedValue, TxtBuscar.Text, Me.CboTipPro.SelectedValue, Me.ChkHascto.Checked)
+        GridView1.DataSource = p.GetProyectosF12(CmbVig.SelectedValue)
         GridView1.DataBind()
-
     End Sub
 
     Protected Sub GridView1_PageIndexChanging(sender As Object, e As GridViewPageEventArgs) Handles GridView1.PageIndexChanging
