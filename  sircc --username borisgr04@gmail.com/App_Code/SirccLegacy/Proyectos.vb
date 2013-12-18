@@ -196,24 +196,41 @@ Public Class Proyectos
     ''' <returns></returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Function GetProyectosC(Vigencia As String, ByVal Proyecto As String) As DataTable
+    Public Function GetProyectosC(Vigencia As String, ByVal Proyecto As String, Tip_Pro As String, hasCto As Boolean) As DataTable
         Me.Conectar()
-
-
 
         If Not String.IsNullOrEmpty(Proyecto) Then
             querystring = "SELECT p.*, "
             querystring += " (Select Count(cp.Proyecto) from cproyectos cp where cp.Proyecto=p.Proyecto) CantxCont FROM  " + Vista + " p WHERE  Vigencia=:Vigencia And p.Proyecto LIKE :Proyecto or Upper(p.Nombre_Proyecto) LIKE :NomProyecto"
+            If Not String.IsNullOrEmpty(Tip_Pro) Then
+                querystring += " and p.tip_pro=:Tip_Pro"
+            End If
+
+            If hasCto = True Then
+                querystring += " and (Select Count(cp.Proyecto) from cproyectos cp where cp.Proyecto=p.Proyecto)> 0"
+            End If
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Vigencia", Vigencia)
             Me.AsignarParametroCadena(":Proyecto", "%" + Proyecto + "%")
             Me.AsignarParametroCadena(":NomProyecto", "%" + UCase(Proyecto) + "%")
+            If Not String.IsNullOrEmpty(Tip_Pro) Then
+                Me.AsignarParametroCadena(":Tip_Pro", Tip_Pro)
+            End If
+
         Else
             querystring = "SELECT p.*, "
             querystring += " (Select Count(cp.Proyecto) from cproyectos cp where cp.Proyecto=p.Proyecto) CantxCont FROM  " + Vista + " p WHERE  Vigencia=:Vigencia "
-
+            If Not String.IsNullOrEmpty(Tip_Pro) Then
+                querystring += " and p.tip_pro=:Tip_Pro"
+            End If
+            If hasCto = True Then
+                querystring += " and (Select Count(cp.Proyecto) from cproyectos cp where cp.Proyecto=p.Proyecto)> 0"
+            End If
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Vigencia", Vigencia)
+            If Not String.IsNullOrEmpty(Tip_Pro) Then
+                Me.AsignarParametroCadena(":Tip_Pro", Tip_Pro)
+            End If
         End If
         'Throw New Exception(Me.vComando.CommandText)
 
@@ -222,7 +239,48 @@ Public Class Proyectos
         Return dataSet
     End Function
 
-    
+
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetProyectosF12(Vigencia As String) As DataTable
+        Me.Conectar()
+
+        querystring = "SELECT  P.Vigencia,p.PROYECTO, P.NOMBRE_PROYECTO, p.valor, "
+        querystring += " (Select Count(cp.Proyecto) from cproyectos cp where cp.Proyecto=p.Proyecto) CantxCont, "
+        querystring += " (SELECT MIN (c.fechainicio) FROM vcontratos_sinc_p c WHERE p.proyecto = c.pro_con) fechainicio, "
+        querystring += " (SELECT MAX (c.fechafinal) FROM vcontratos_sinc_p c WHERE p.proyecto = c.pro_con) fechafinal, "
+        querystring += " (SELECT Nvl(Sum(Val_Con),0) FROM Contratos c WHERE p.proyecto = c.pro_con) Valor_Contratado "
+        querystring += " FROM  Proyectos p WHERE  P.Vigencia=:Vigencia "
+
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":Vigencia", Vigencia)
+
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
+    End Function
+
+    Function GetProyectosF18(Vigencia As String) As DataTable
+        Dim dataSet As DataTable = New DataTable
+        Try
+            If (Vigencia = "2013") Then
+                Me.Conectar()
+                querystring = "select * from dnp2013_2 "
+                Me.CrearComando(querystring)
+                dataSet = Me.EjecutarConsultaDataTable()
+
+                Me.lErrorG = False
+                Me.Desconectar()
+            End If
+
+        Catch ex As Exception
+            Me.Msg = ex.Message
+            Me.lErrorG = True
+        End Try
+        Return dataSet
+    End Function
+
 
 
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="ContratosxProy.aspx.vb" Inherits="Consultas_ContratosSGR_ContratosxProy" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" EnableEventValidation="false" CodeFile="ProyectosF12.aspx.vb" Inherits="Consultas_ContratosSGR_ProyectosF12" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
             <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="true"
@@ -6,28 +6,15 @@
         </ajaxToolkit:ToolkitScriptManager>
      <div>
          <asp:Label ID="Label1" runat="server" CssClass="Titulo" 
-        Text="Consulta de Proyectos"></asp:Label>
+        Text="FORMATO F12"></asp:Label>
          <br />
-         <hr />
-         <asp:HyperLink ID="HyperLink1" NavigateUrl="~/Consultas/ContratosSGR/ProyectosF12.aspx" runat="server">Formato F12</asp:HyperLink>
-         <asp:HyperLink ID="HyperLink2" NavigateUrl="~/Consultas/ContratosSGR/ProyectosF18.aspx" runat="server">Formato F18</asp:HyperLink>
-         <hr />
          <br />
-         
                     <asp:Label ID="Label11" runat="server" Text="Vigencia"></asp:Label>
                     <asp:DropDownList ID="CmbVig" runat="server" DataSourceID="odsVigencias" DataTextField="YEAR_VIG"
                         DataValueField="YEAR_VIG">
                     </asp:DropDownList>
-                    <asp:DropDownList ID="CboTipPro" runat="server">
-                        <asp:ListItem Text="Todas" Value=""></asp:ListItem>
-                        <asp:ListItem Text="Recursos Propios" Value="RP"></asp:ListItem>
-                        <asp:ListItem Text="Sistema General de Regalias" Value="SGR"></asp:ListItem>
-                    </asp:DropDownList>
-                     <asp:Label ID="Label12" runat="server" Text="Nombre/Número"></asp:Label>
-                    <asp:TextBox ID="TxtBuscar" runat="server" Width="387px"></asp:TextBox>
-                    <asp:CheckBox ID="ChkHascto" runat="server" Checked="true"/>Con Contrato asociados
-                    <asp:Button ID="BtnBuscar" runat="server" ValidationGroup="NoValidar"
-                        Text="Buscar" />
+                    <asp:Button ID="BtnBuscar" runat="server" ValidationGroup="NoValidar" Text="Buscar" />
+                    <asp:Button ID="BtnExport" runat="server" ValidationGroup="NoValidar" Text="Exportar" />
                 </div>
                 <br />
                 <br />
@@ -39,16 +26,18 @@
                     EmptyDataText="No se encontraron Registros en la Base de Datos"
                     EnableModelValidation="True" ForeColor="#333333" GridLines="None"
                     OnRowDataBound="GridView1_RowDataBound1"
-                    Width="90%" >
+                    Width="845px" >
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                     <Columns>
                         <asp:BoundField DataField="Vigencia" HeaderText="Vigencia" />
                         <asp:HyperLinkField DataNavigateUrlFields="Proyecto" DataNavigateUrlFormatString="lContratos.aspx?Proyecto={0}" DataTextField="Proyecto" HeaderText="Ver Contratos" />
-
                         <asp:BoundField DataField="Nombre_Proyecto" HeaderText="Nombre de Proyecto" />
-                        <asp:BoundField DataField="Valor" HeaderText="Valor" DataFormatString="{0:c}" />
+                        <asp:BoundField DataField="Valor" HeaderText="Valor Proyecto" DataFormatString="{0:c}" />
                         <asp:BoundField DataField="CantxCont" HeaderText="Cantidad de Contratos" />
+                        <asp:BoundField DataField="fechainicio" HeaderText="Fecha Inicial" DataFormatString="{0:d}" />
+                        <asp:BoundField DataField="fechafinal" HeaderText="Fecha Final" DataFormatString="{0:d}" />
                         
+                        <asp:BoundField DataField="Valor_Contratado" HeaderText="Valor Contratado" DataFormatString="{0:c}"  />
                         <asp:CommandField ShowSelectButton="True" SelectText="Ver Contratos" />
                     </Columns>
                     <FooterStyle BackColor="White" Font-Bold="True" ForeColor="#5D7B9D" />
@@ -59,7 +48,7 @@
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 </asp:GridView>
 
-                
+               
     <asp:ObjectDataSource ID="odsVigencias" runat="server" SelectMethod="GetRecords"
         TypeName="Vigencias" OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource>
 </asp:Content>
