@@ -1,300 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="dsF20_13">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>6a995419-062f-4cab-9d85-7cf3e92d8ff8</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="NUMERO">
-          <DataField>NUMERO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="MODALIDAD">
-          <DataField>MODALIDAD</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PROCEDIMIENTO">
-          <DataField>PROCEDIMIENTO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CLASE">
-          <DataField>CLASE</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TIPOS_GASTOS">
-          <DataField>TIPOS_GASTOS</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SECTOR">
-          <DataField>SECTOR</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="OBJETO">
-          <DataField>OBJETO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="VALOR_CONTRATO">
-          <DataField>VALOR_CONTRATO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IDENTIFICACION_CONTRATISTA">
-          <DataField>IDENTIFICACION_CONTRATISTA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NOMBRE_CONTRATISTA">
-          <DataField>NOMBRE_CONTRATISTA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TIPO_PERSONA">
-          <DataField>TIPO_PERSONA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FECHA_SUSCRIPCION">
-          <DataField>FECHA_SUSCRIPCION</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IDENTIFICADOR_INTERVENTOR">
-          <DataField>IDENTIFICADOR_INTERVENTOR</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NOMBRE_COMPLETO_INTERVENTOR">
-          <DataField>NOMBRE_COMPLETO_INTERVENTOR</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TIPO_VINCULACION">
-          <DataField>TIPO_VINCULACION</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="UNIDAD_DE_EJECUCION">
-          <DataField>UNIDAD_DE_EJECUCION</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NUMERO_UNIDADES_EJECUCION">
-          <DataField>NUMERO_UNIDADES_EJECUCION</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="P_ANTICIPO">
-          <DataField>P_ANTICIPO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="VAL_ANTICIPO">
-          <DataField>VAL_ANTICIPO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CONTITUYOFIDUCIA">
-          <DataField>CONTITUYOFIDUCIA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FECHA_INICIACION">
-          <DataField>FECHA_INICIACION</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FECHA_TERMINACION">
-          <DataField>FECHA_TERMINACION</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SECOP">
-          <DataField>SECOP</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FECHA_ACTA_LIQUIDACION">
-          <DataField>FECHA_ACTA_LIQUIDACION</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DEPENDENCIA">
-          <DataField>DEPENDENCIA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NUM_ACTO_DEC">
-          <DataField>NUM_ACTO_DEC</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FEC_ACTO">
-          <DataField>FEC_ACTO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RECPROPIOS">
-          <DataField>RECPROPIOS</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="REGALIAS">
-          <DataField>REGALIAS</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SGP">
-          <DataField>SGP</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="COLOMBIAHUMANITARIA">
-          <DataField>COLOMBIAHUMANITARIA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="VF_INICIO">
-          <DataField>VF_INICIO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="VF_FINAL">
-          <DataField>VF_FINAL</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="VF_TOTAL">
-          <DataField>VF_TOTAL</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="VF_MONTO">
-          <DataField>VF_MONTO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="VF_EJECUTADO">
-          <DataField>VF_EJECUTADO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="VF_SALDO">
-          <DataField>VF_SALDO</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>dsF20_13</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>dsF20_13</rd:DataSetName>
-        <rd:SchemaPath>E:\ByA\SIRCC\SIRCC11022013_F4\App_Code\SirccLegacy\dsF20_13.xsd</rd:SchemaPath>
-        <rd:TableName>F20_1A1</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.2655in</Width>
+              <Width>3.21437cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.55717in</Width>
+              <Width>3.95521cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.83842in</Width>
+              <Width>4.66959cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.33842in</Width>
+              <Width>5.93959cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.74467in</Width>
+              <Width>6.97146cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.98425in</Width>
+              <Width>5.03999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.33842in</Width>
+              <Width>5.93959cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.61967in</Width>
+              <Width>4.11396cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.6405in</Width>
+              <Width>4.16687cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.453in</Width>
+              <Width>3.69062cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.67175in</Width>
+              <Width>4.24624cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.96851in</Width>
+              <Width>5.00002cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.34883in</Width>
+              <Width>3.42603cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>4.53729cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.15092in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.92334cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.49999cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1258,6 +1086,38 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>FECHA AUTORIZACION VF</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox57">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -1483,7 +1343,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2387,6 +2247,45 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>ND</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="COLOMBIAHUMANITARIA">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -2638,6 +2537,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -2652,7 +2552,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Height>1.2cm</Height>
-        <Width>120.79688cm</Width>
+        <Width>125.33405cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2663,7 +2563,7 @@
     <Height>0.69792in</Height>
     <Style />
   </Body>
-  <Width>47.55783in</Width>
+  <Width>49.34412in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -2674,6 +2574,182 @@
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
-  <rd:ReportID>b5a64bb3-9b3f-4c0b-9ca5-ccecd60e4587</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="dsF20_13">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>6a995419-062f-4cab-9d85-7cf3e92d8ff8</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>dsF20_13</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="NUMERO">
+          <DataField>NUMERO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MODALIDAD">
+          <DataField>MODALIDAD</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PROCEDIMIENTO">
+          <DataField>PROCEDIMIENTO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CLASE">
+          <DataField>CLASE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TIPOS_GASTOS">
+          <DataField>TIPOS_GASTOS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SECTOR">
+          <DataField>SECTOR</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OBJETO">
+          <DataField>OBJETO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VALOR_CONTRATO">
+          <DataField>VALOR_CONTRATO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IDENTIFICACION_CONTRATISTA">
+          <DataField>IDENTIFICACION_CONTRATISTA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NOMBRE_CONTRATISTA">
+          <DataField>NOMBRE_CONTRATISTA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TIPO_PERSONA">
+          <DataField>TIPO_PERSONA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FECHA_SUSCRIPCION">
+          <DataField>FECHA_SUSCRIPCION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IDENTIFICADOR_INTERVENTOR">
+          <DataField>IDENTIFICADOR_INTERVENTOR</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NOMBRE_COMPLETO_INTERVENTOR">
+          <DataField>NOMBRE_COMPLETO_INTERVENTOR</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TIPO_VINCULACION">
+          <DataField>TIPO_VINCULACION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UNIDAD_DE_EJECUCION">
+          <DataField>UNIDAD_DE_EJECUCION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NUMERO_UNIDADES_EJECUCION">
+          <DataField>NUMERO_UNIDADES_EJECUCION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="P_ANTICIPO">
+          <DataField>P_ANTICIPO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VAL_ANTICIPO">
+          <DataField>VAL_ANTICIPO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CONTITUYOFIDUCIA">
+          <DataField>CONTITUYOFIDUCIA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FECHA_INICIACION">
+          <DataField>FECHA_INICIACION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FECHA_TERMINACION">
+          <DataField>FECHA_TERMINACION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SECOP">
+          <DataField>SECOP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FECHA_ACTA_LIQUIDACION">
+          <DataField>FECHA_ACTA_LIQUIDACION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DEPENDENCIA">
+          <DataField>DEPENDENCIA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NUM_ACTO_DEC">
+          <DataField>NUM_ACTO_DEC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FEC_ACTO">
+          <DataField>FEC_ACTO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RECPROPIOS">
+          <DataField>RECPROPIOS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="REGALIAS">
+          <DataField>REGALIAS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SGP">
+          <DataField>SGP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="COLOMBIAHUMANITARIA">
+          <DataField>COLOMBIAHUMANITARIA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VF_INICIO">
+          <DataField>VF_INICIO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VF_FINAL">
+          <DataField>VF_FINAL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VF_TOTAL">
+          <DataField>VF_TOTAL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VF_MONTO">
+          <DataField>VF_MONTO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VF_EJECUTADO">
+          <DataField>VF_EJECUTADO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VF_SALDO">
+          <DataField>VF_SALDO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsF20_13</rd:DataSetName>
+        <rd:SchemaPath>E:\ByA\SIRCC\SIRCC11022013_F4\App_Code\SirccLegacy\dsF20_13.xsd</rd:SchemaPath>
+        <rd:TableName>F20_1A1</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>b5a64bb3-9b3f-4c0b-9ca5-ccecd60e4587</rd:ReportID>
 </Report>
