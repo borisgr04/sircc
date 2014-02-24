@@ -1,56 +1,66 @@
 ﻿Imports System.Data
 
 Partial Class Contratos_GDocumentos_Designacion
-    Inherits System.Web.UI.Page
+    Inherits PaginaComun
 
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim oC As New Contratos
-        Dim oD As New Dependencias
+        If Not IsPostBack Then
 
-        Dim t As New Terceros
+            If Request.QueryString.Count > 0 Then
+                Dim Ncont As String = ""
+                querystringSeguro = Me.GetRequest()
+                Ncont = querystringSeguro("Nro_Cto")
+                hdNumero.Value = Ncont
+
+                Dim NomUsu As String = ""
+                Dim oC As New Contratos
+                Dim oD As New Dependencias
+                Dim t As New Terceros
+
+                Dim dt As DataTable = oC.GetByPk(Ncont)
+                Dim dtDN As DataTable = oD.GetbyPK(dt.Rows(0)("DEP_CON"))
+                Dim dtDD As DataTable = oD.GetbyPK(dt.Rows(0)("DEP_PCON"))
+                Dim dtT As DataTable = t.GetByUser()
+
+                If dtT.Rows.Count > 0 Then
+                    NomUsu = dtT.Rows(0)("NOM_TER")
+                Else
+                    NomUsu = "No hay usuario"
+                End If
+
+
+                Dim strPlantilla As String = ltPlantilla.Text
+
+                Dim fecha As String = DateTime.Now.ToLongDateString()
+
+                strPlantilla = strPlantilla.Replace("{OBJETO}", dt.Rows(0)("OBJ_CON").ToString())
+                strPlantilla = strPlantilla.Replace("{NUMERO}", dt.Rows(0)("Numero").ToString())
+                strPlantilla = strPlantilla.Replace("{CLASE_CONTRATO}", dt.Rows(0)("TIPO").ToString())
+                strPlantilla = strPlantilla.Replace("{VALOR_A_CONTRATAR}", dt.Rows(0)("VAL_CON").ToString())
+                strPlantilla = strPlantilla.Replace("{FECHA}", dt.Rows(0)("FEC_APR_POL").ToLongDateString())
+                strPlantilla = strPlantilla.Replace("{NOM_CONTRATISTA}", dt.Rows(0)("CONTRATISTA").ToString())
+
+                strPlantilla = strPlantilla.Replace("{NOM_SUPERVISOR}", dtDN.Rows(0)("nom_ter").ToString())
+                strPlantilla = strPlantilla.Replace("{CAR_SUPERVISOR}", dtDN.Rows(0)("cargo_enc").ToString())
+                strPlantilla = strPlantilla.Replace("{DEP_SUPERVISOR}", dtDN.Rows(0)("NOM_DEP").ToString())
+
+                strPlantilla = strPlantilla.Replace("{NOM_ENC_DEPENDENCIAD}", dtDD.Rows(0)("nom_ter").ToString())
+                strPlantilla = strPlantilla.Replace("{CAR_ENC_DEPENDENCIAD}", dtDD.Rows(0)("cargo_enc").ToString())
+
+
+                strPlantilla = strPlantilla.Replace("{NOM_USUARIO}", NomUsu)
 
 
 
+                ltPlantilla.Text = strPlantilla + hdNumero.Value
 
 
-        Dim dt As DataTable = oC.GetByPk("2012020533")
-        Dim dtDN As DataTable = oD.GetbyPK(dt.Rows(0)("DEP_CON"))
-        Dim dtDD As DataTable = oD.GetbyPK(dt.Rows(0)("DEP_PCON"))
-        Dim dtT As DataTable = t.GetByUser()
-        Dim NomUsu As String = ""
-        If dtT.Rows.Count > 0 Then
-            NomUsu = dtT.Rows(0)("NOM_TER")
+            End If
         End If
+    End Sub
 
-
-        Dim strPlantilla As String = ltPlantilla.Text
-
-        Dim fecha As String = DateTime.Now.ToLongDateString()
-
-        strPlantilla = strPlantilla.Replace("{OBJETO}", dt.Rows(0)("OBJ_CON").ToString())
-        strPlantilla = strPlantilla.Replace("{NUMERO}", dt.Rows(0)("Numero").ToString())
-        strPlantilla = strPlantilla.Replace("{CLASE_CONTRATO}", dt.Rows(0)("TIPO").ToString())
-        strPlantilla = strPlantilla.Replace("{VALOR_A_CONTRATAR}", dt.Rows(0)("VAL_CON").ToString())
-        strPlantilla = strPlantilla.Replace("{FECHA}", fecha)
-        strPlantilla = strPlantilla.Replace("{NOM_CONTRATISTA}", dt.Rows(0)("CONTRATISTA").ToString())
-
-        strPlantilla = strPlantilla.Replace("{NOM_SUPERVISOR}", dtDN.Rows(0)("nom_ter").ToString())
-        strPlantilla = strPlantilla.Replace("{CAR_SUPERVISOR}", dtDN.Rows(0)("cargo_enc").ToString())
-        strPlantilla = strPlantilla.Replace("{DEP_SUPERVISOR}", dtDN.Rows(0)("NOM_DEP").ToString())
-
-        strPlantilla = strPlantilla.Replace("{NOM_ENC_DEPENDENCIAD}", dtDD.Rows(0)("nom_ter").ToString())
-        strPlantilla = strPlantilla.Replace("{CAR_ENC_DEPENDENCIAD}", dtDD.Rows(0)("cargo_enc").ToString())
-
-
-        strPlantilla = strPlantilla.Replace("{NOM_USUARIO}", NomUsu)
-
-
-
-        ltPlantilla.Text = strPlantilla
-
-
-        'GridView1.DataSource = dt
-        'GridView1.DataBind()
+    Protected Sub IBtnAtras_Click(sender As Object, e As ImageClickEventArgs) Handles IBtnAtras.Click
+        Response.Redirect("/Contratos/GDocumentos/OficiosGral.aspx?Numero=" + hdNumero.Value)
     End Sub
 End Class
