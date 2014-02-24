@@ -9,17 +9,40 @@
     <link href="docEP.css" rel="stylesheet" />
     <style>
         
+        .auto-style1 {
+            width: 60px;
+        }
+        .auto-style2 {
+            width: 48px;
+        }
+        
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <button onclick="window.print();" class="BtnImprimir" >Imprimir</button>
+        <div "width:100%" class="BtnImprimir">
+            <asp:HiddenField ID="hdNumero" runat="server" />
+            <%--<button onclick="window.print();" class="BtnImprimir" >Imprimir</button>--%>
+           <table >
+               <tr>
+                    <td class="auto-style1"> <asp:ImageButton ID="IBtnImp"  runat="server" Height="32px" Width="32px"  OnClientClick="window.print();" SkinID="IBtnImp" /></td>
+                    
+                    <td class="auto-style2"><asp:ImageButton ID="IBtnAtras" runat="server" Height="32px" Width="33px"  SkinID="IBtnAtras" /></td>
+                   </tr>
+               <tr >
+                   <td class="auto-style1"><b>Imprimir</b> </td>
+                   <td class="auto-style2" ><b>Atras</b></td>
+
+               </tr>
+           </table>     
+            
+        </div>
         <div style="text-align: justify" contenteditable="true" class="hoja">
             <asp:Literal ID="ltPlantilla" runat="server">
                 <table class="tbconborde" style="width:100%">
                 <tr >
                     <td  rowspan="2">
-                        <img src="../../imagenes/logoOficios.png" />
+                        <img src="../../images/2014/logoOficios.png" />
                         <%--<img alt="" src="/ashx/ashxImg.ashx" width="60px" height="60px" />--%>
                     </td>
                     <th rowspan="2">

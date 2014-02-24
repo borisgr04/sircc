@@ -10,13 +10,29 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <button onclick="window.print();" class="BtnImprimir">Imprimir</button>
+        <div "width:100%" class="BtnImprimir">
+            <asp:HiddenField ID="hdNumero" runat="server" />
+            <%--<button onclick="window.print();" class="BtnImprimir" >Imprimir</button>--%>
+           <table >
+               <tr>
+                    <td class="auto-style1"> <asp:ImageButton ID="IBtnImp"  runat="server" Height="32px" Width="32px"  OnClientClick="window.print();" SkinID="IBtnImp" /></td>
+                    
+                    <td class="auto-style2"><asp:ImageButton ID="IBtnAtras" runat="server" Height="32px" Width="33px"  SkinID="IBtnAtras" /></td>
+                   </tr>
+               <tr >
+                   <td class="auto-style1"><b>Imprimir</b> </td>
+                   <td class="auto-style2" ><b>Atras</b></td>
+
+               </tr>
+           </table>     
+            
+        </div>
         <div style="text-align: justify" contenteditable="true" class="hoja">
             <asp:Literal ID="ltPlantilla" runat="server">
                 <table class="tbconborde" style="width:100%">
                 <tr >
                     <td  rowspan="2">
-                        <img src="../../imagenes/logoOficios.png" />
+                        <img src="../../images/2014/logoOficios.png" />
                         <%--<img alt="" src="/ashx/ashxImg.ashx" width="60px" height="60px" />--%>
                     </td>
                     <th rowspan="2">
@@ -33,29 +49,30 @@
                 
             </table>
             <br />
-            <p>
-            FECHA: {FECHA}
-            </p>
+            <p><b>FECHA:</b> {FECHA}</p>
             <br />
             <br />
-            <p> DEPENDENCIA: {DEPENDENCIA_DELEGADA} </p>
+            <p> <b>DEPENDENCIA:</b> {DEPENDENCIA_DELEGADA} </p>
             <br />
             <br />
-             CONTRATISTA: {NOM_CONTRATISTA}
+             <p><b> FUNCIONARIO RESPONSABLE:</b> {NOM_ENC_DEPENDENCIAD} </p>
             <br />
             <br />
-             NUMERO DEL CONTRATO: {NUMERO}
+             <p> <b> CONTRATISTA:</b> {NOM_CONTRATISTA} </p> 
             <br />
             <br />
-            Certificado(s) de disponiblidad Presupuestal : {CDP} 
+            <p><b> NUMERO DEL CONTRATO:</b> {NUMERO}</p> 
             <br />
             <br />
-            VALOR DEL CONTRATO: {VALOR_A_CONTRATAR}
+           <p> <b>CERTIFICADO(S) DE DISPONIBLIDAD PRESUPUESTAL:</b> {CDP} </p> 
             <br />
             <br />
-             <p> FUNCIONARIO RESPONSABLE:{NOM_ENC_DEPENDENCIAD} </p>  
-            
-      
+           <p> <b>VALOR DEL CONTRATO:</b> {VALOR_A_CONTRATAR}</p> 
+            <br />
+            <br />
+             <p> <b>FUNCIONARIO RESPONSABLE:</b> {NOM_ENC_DEPENDENCIAD} </p>  
+        <br />    
+        <br />
         <br />
         <br />
         Atentamente,

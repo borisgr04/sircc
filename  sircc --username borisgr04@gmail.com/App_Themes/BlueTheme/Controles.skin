@@ -130,6 +130,14 @@ no se permite que haya varios SkinId por tipo de control en el mismo tema.
 <asp:ImageButton SkinId="IBtnCalen" runat="server"  ImageUrl="~/images/2012/calendario.png"
                                  />
 
+
+<asp:ImageButton SkinId="IBtnImp" runat="server"  ImageUrl="~/images/2014/printer_4.png"
+                                 />
+<asp:ImageButton SkinId="IBtnAtras" runat="server"  ImageUrl="~/images/2014/back.png"
+                                 />
+
+
+
 <asp:ImageButton SkinId="IBtnDescargarDoc" runat="server" AlternateText="Descargar" Height="32px" Width="32px"
                 ImageUrl="~/images/2013/Dowload_Doc.png"  />
 <asp:ImageButton SkinId="IBtnDescargarZip" runat="server" AlternateText="Descargar Todo" Height="32px" Width="32px"
