@@ -6,7 +6,8 @@ Inherits="Solicitudes_ModSolicitud_Default"  %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit.HTMLEditor" tagprefix="cc2" %>
 
 <%@ Register src="../../CtrlUsr/DepSolicitudes/ConPSolicitudes.ascx" tagname="conpsolicitudes" tagprefix="uc1" %>
-
+<%@ Register Src="../../CtrlUsr/AdmTercero/AdmTercero.ascx" TagName="AdmTercero"
+    TagPrefix="uc4" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
     <div class="demoarea">
@@ -301,6 +302,23 @@ Inherits="Solicitudes_ModSolicitud_Default"  %>
                         <td>
                             &nbsp;</td>
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:TextBox ID="TxtIde" runat="server" AutoPostBack="True" CssClass="txt" Width="121px"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:Button ID="BtnBCon" runat="server" CausesValidation="False" Text="..." />
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtNom" runat="server" CssClass="txt" ReadOnly="True" Width="100%"></asp:TextBox>
+                            <ajaxToolkit:FilteredTextBoxExtender ID="TxtIde_FilteredTextBoxExtender1" runat="server"
+                                Enabled="True" FilterType="Numbers" TargetControlID="TxtIde" ValidChars="">
+                            </ajaxToolkit:FilteredTextBoxExtender>
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
                 </table>
                 <table style="width: 90%">
                     <tr>
@@ -508,5 +526,30 @@ Inherits="Solicitudes_ModSolicitud_Default"  %>
         DropShadow="True">
         </ajaxToolkit:ModalPopupExtender>  
          </div>
+         <asp:Button Style="display: none" ID="hiddenTargetControlForModalPopup" runat="server">
+        </asp:Button>
+         <ajaxToolkit:ModalPopupExtender ID="ModalPopup" runat="server" BackgroundCssClass="modalBackground"
+            BehaviorID="programmaticModalPopupBehavior" DropShadow="True" PopupControlID="programmaticPopup"
+            PopupDragHandleControlID="programmaticPopupDragHandle" RepositionMode="RepositionOnWindowScroll"
+            TargetControlID="hiddenTargetControlForModalPopup">
+        </ajaxToolkit:ModalPopupExtender>
+        <asp:Panel ID="programmaticPopup" runat="server" Width="693px" Height="555px" CssClass="ModalPanel2"
+            ScrollBars="Auto">
+            <asp:Panel ID="programmaticPopupDragHandle" runat="Server" Width="97%" Height="30px"
+                CssClass="BarTitleModal2">
+                <div style="padding-right: 5px; padding-left: 5px; padding-bottom: 5px; vertical-align: middle;
+                    padding-top: 5px">
+                    <div style="float: left">
+                        Buscar Tercero
+                    </div>
+                    <div style="float: right">
+                        <input id="hideModalPopupViaClientButton" type="button" value="X" /></div>
+                </div>
+            </asp:Panel>
+            <panel id="pnCuadroInterno" runat="Server" scrollbars="Auto">
+                    <uc4:AdmTercero ID="AdmTercero1" runat="server" />
+                    <BR />
+                </panel>
+        </asp:Panel>
 </asp:Content>
 

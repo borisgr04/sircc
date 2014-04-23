@@ -18,9 +18,9 @@ Partial Class Solicitudes_ModSolicitud_Default
         obj = New PSolicitudes
         Select Case Me.Oper
             Case "nuevo"
-                Me.MsgResult.Text = obj.Insert(Me.cboDep.SelectedValue, Me.CboDepP.SelectedValue, Me.Vigencia, Me.CboTip.SelectedValue, Me.cboStip.SelectedValue, Me.CboTproc.SelectedValue, Me.TxtObj.Text, Me.TxtFechaRecibido.Text, Me.TxtNPla.Text, Publico.PuntoPorComa(Me.TxtPpto.Text))
+                Me.MsgResult.Text = obj.Insert(Me.cboDep.SelectedValue, Me.CboDepP.SelectedValue, Me.Vigencia, Me.CboTip.SelectedValue, Me.cboStip.SelectedValue, Me.CboTproc.SelectedValue, Me.TxtObj.Text, Me.TxtFechaRecibido.Text, Me.TxtNPla.Text, Publico.PuntoPorComa(Me.TxtPpto.Text), TxtIde.Text)
             Case "editar"
-                Me.MsgResult.Text = obj.Update(Me.Pk1, Me.cboDep.SelectedValue, Me.CboDepP.SelectedValue, Me.Vigencia, Me.CboTip.SelectedValue, Me.cboStip.SelectedValue, Me.CboTproc.SelectedValue, Me.TxtObj.Text, Me.TxtFechaRecibido.Text, Me.TxtNPla.Text, Publico.PuntoPorComa(Me.TxtPpto.Text))
+                Me.MsgResult.Text = obj.Update(Me.Pk1, Me.cboDep.SelectedValue, Me.CboDepP.SelectedValue, Me.Vigencia, Me.CboTip.SelectedValue, Me.cboStip.SelectedValue, Me.CboTproc.SelectedValue, Me.TxtObj.Text, Me.TxtFechaRecibido.Text, Me.TxtNPla.Text, Publico.PuntoPorComa(Me.TxtPpto.Text), TxtIde.Text)
         End Select
         If obj.lErrorG = False Then
             Me.TxtNprocA.Text = obj.Num_PSol
@@ -70,7 +70,7 @@ Partial Class Solicitudes_ModSolicitud_Default
         Me.CboTproc.Enabled = Valor
         Me.TxtPpto.Enabled = Valor
         Me.TxtFechaRecibido.Enabled = Valor
-
+        Me.TxtIde.Enabled = Valor
     End Sub
 
     Private Sub Limpiar()
@@ -90,6 +90,8 @@ Partial Class Solicitudes_ModSolicitud_Default
         Me.LbEstado.Text = ""
         Me.MsgResult.CssClass = ""
         Me.MsgResult.Text = ""
+        Me.TxtIde.Text = ""
+        Me.TxtNom.Text = ""
 
 
     End Sub
@@ -146,6 +148,8 @@ Partial Class Solicitudes_ModSolicitud_Default
             Me.cboStip.SelectedValue = dt.Rows(0)("STIP_CON").ToString
             Me.TxtNPla.Text = dt.Rows(0)("NUM_PLA").ToString
             Me.TxtPpto.Text = dt.Rows(0)("VAL_CON").ToString
+            TxtIde.Text = dt.Rows(0)("IDE_CON").ToString
+            BuscarContratista()
             'Me.grdCDP1.Enabled = Valor
 
             Me.Habilitar(False)
@@ -207,5 +211,34 @@ Partial Class Solicitudes_ModSolicitud_Default
 
     Protected Sub BtnBuscar_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles BtnBuscar.Click
         Me.ModalPopupSolicitudes.Show()
+    End Sub
+
+    Sub BuscarContratista()
+        Dim t As New Terceros
+        Dim dt As DataTable = t.GetByIde(Me.TxtIde.Text)
+        If dt.Rows.Count > 0 Then
+            Me.TxtNom.Text = dt.Rows(0)("Nom_Ter").ToString()
+
+            Me.MsgResult.Text = ""
+        Else
+            Me.MsgResult.Text = "No encontro el Tercero"
+            MsgBox(MsgResult, False)
+            VerModalPopup("CON")
+        End If
+    End Sub
+    Protected Sub BtnBCon_Click(sender As Object, e As System.EventArgs) Handles BtnBCon.Click
+        VerModalPopup("CON")
+    End Sub
+    Sub VerModalPopup(ByVal Tipo As String)
+        AdmTercero1.tipoter = Tipo
+        Me.ModalPopup.Show()
+    End Sub
+    Protected Sub AdmTercero1_SelClicked(ByVal sender As Object, ByVal e As System.EventArgs) Handles AdmTercero1.SelClicked
+
+        TxtIde.Text = AdmTercero1.Nit
+        TxtNom.Text = AdmTercero1.Nom_Ter
+        'BuscarContratista()
+        ModalPopup.Hide()
+        'Me.UpdatePanel1.Update()
     End Sub
 End Class
