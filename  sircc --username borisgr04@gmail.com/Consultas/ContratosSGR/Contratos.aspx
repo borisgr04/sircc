@@ -326,7 +326,7 @@
             
 
             <ajaxToolkit:AccordionPane ID="AccordionPane12" runat="server">
-                <Header><a href="#" class="accordionLink"> 12. PAGOS </a></Header>
+                <Header><a href="#" class="accordionLink"> 13. PAGOS </a></Header>
                 <Content>
             <asp:GridView ID="grdPagos" runat="server" AllowSorting="True" 
                  AutoGenerateColumns="False"  EnableModelValidation="True" 
