@@ -512,6 +512,7 @@ Public Class PSolicitudes
     ''' MODIFICACION:
     ''' SE ELIMINO EL PARAMETRO FECHA RECIBIDO DE LA FUNCION INSERT
     ''' SE CREO LA FUNCION INSERTHREV Y SE AGREGO A LA FUNCION INSERT ORIGINAL
+    ''' Se agrego Ide de Contratista - 18/01/2014
     ''' </summary>
     ''' <param name="DEP_SOL"></param>
     ''' <param name="DEP_PSOL"></param>
@@ -529,14 +530,14 @@ Public Class PSolicitudes
                            ByVal VIG_SOL As String, _
                            ByVal TIP_CON As String, ByVal STIP_CON As String, _
                            ByVal COD_TPRO As String, ByVal OBJ_SOL As String, _
-                           ByVal FECHA_RECIBIDO As Date, ByVal NUM_PLA As String, ByVal PPTO As Decimal) As String
+                           ByVal FECHA_RECIBIDO As Date, ByVal NUM_PLA As String, ByVal PPTO As Decimal, IDE_CON As String) As String
 
         Me.Conectar()
 
         Try
             Me.ComenzarTransaccion()
             Me.CrearNumSol(DEP_PSOL, VIG_SOL)
-            querystring = "Insert Into PSOLICITUDES (COD_SOL, DEP_SOL, DEP_PSOL, VIG_SOL, TIP_CON, STIP_CON, COD_TPRO, OBJ_SOL, NUM_PLA,FEC_RECIBIDO, VAL_CON) Values(:Cod_Sol, :DEP_SOL, :DEP_PSOL,  :VIG_SOL,  :TIP_CON, :STIP_CON, :COD_TPRO, :OBJ_SOL, :NUM_PLA,TO_DATE(:FEC_RECIBIDO,'dd/mm/yyyy'), :VAL_CON)"
+            querystring = "Insert Into PSOLICITUDES (COD_SOL, DEP_SOL, DEP_PSOL, VIG_SOL, TIP_CON, STIP_CON, COD_TPRO, OBJ_SOL, NUM_PLA,FEC_RECIBIDO, VAL_CON, IDE_CON) Values(:Cod_Sol, :DEP_SOL, :DEP_PSOL,  :VIG_SOL,  :TIP_CON, :STIP_CON, :COD_TPRO, :OBJ_SOL, :NUM_PLA,TO_DATE(:FEC_RECIBIDO,'dd/mm/yyyy'), :VAL_CON,:IDE_CON)"
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":COD_TPRO", COD_TPRO)
             Me.AsignarParametroCadena(":OBJ_SOL", OBJ_SOL)
@@ -549,6 +550,14 @@ Public Class PSolicitudes
             Me.AsignarParametroCadena(":NUM_PLA", NUM_PLA)
             Me.AsignarParametroCadena(":Cod_Sol", Me.Num_PSol)
             Me.AsignarParametroDecimal(":VAL_CON", PPTO)
+
+            If Not String.IsNullOrEmpty(IDE_CON) Then
+                Me.AsignarParametroCadena(":IDE_CON", IDE_CON)
+            Else
+                Me.AsignarParametroCadena(":IDE_CON", Nothing)
+            End If
+
+
 
             'ID_ABOG_ENC
             Me.num_reg = Me.EjecutarComando()
@@ -649,17 +658,34 @@ Public Class PSolicitudes
 
     End Function
 
-
+    ''' <summary>
+    ''' Actualizar Solicitudes 
+    ''' Se agrega Ide_Con  
+    ''' </summary>
+    ''' <param name="COD_SOL_PK"></param>
+    ''' <param name="DEP_SOL"></param>
+    ''' <param name="DEP_PSOL"></param>
+    ''' <param name="VIG_SOL"></param>
+    ''' <param name="TIP_CON"></param>
+    ''' <param name="STIP_CON"></param>
+    ''' <param name="COD_TPRO"></param>
+    ''' <param name="OBJ_SOL"></param>
+    ''' <param name="FECHA_RECIBIDO"></param>
+    ''' <param name="NUM_PLA"></param>
+    ''' <param name="PPTO"></param>
+    ''' <param name="Ide_Con"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function Update(ByVal COD_SOL_PK As String, ByVal DEP_SOL As String, ByVal DEP_PSOL As String, _
                            ByVal VIG_SOL As String, _
                            ByVal TIP_CON As String, ByVal STIP_CON As String, _
                            ByVal COD_TPRO As String, ByVal OBJ_SOL As String, _
-                           ByVal FECHA_RECIBIDO As Date, ByVal NUM_PLA As String, ByVal PPTO As Decimal) As String
+                           ByVal FECHA_RECIBIDO As Date, ByVal NUM_PLA As String, ByVal PPTO As Decimal, IDE_CON As String) As String
         Me.Conectar()
 
         Try
             Me.ComenzarTransaccion()
-            querystring = "Update Psolicitudes SET VAL_CON=:VAL_CON, COD_TPRO=:COD_TPRO, OBJ_SOL=:OBJ_SOL, DEP_SOL=:DEP_SOL, TIP_CON=:TIP_CON, STIP_CON=:STIP_CON, DEP_PSOL=:DEP_PSOL, NUM_PLA=:NUM_PLA WHERE COD_SOL=:COD_SOL_PK"
+            querystring = "Update Psolicitudes SET IDE_CON=:IDE_CON,VAL_CON=:VAL_CON, COD_TPRO=:COD_TPRO, OBJ_SOL=:OBJ_SOL, DEP_SOL=:DEP_SOL, TIP_CON=:TIP_CON, STIP_CON=:STIP_CON, DEP_PSOL=:DEP_PSOL, NUM_PLA=:NUM_PLA WHERE COD_SOL=:COD_SOL_PK"
 
             Me.CrearComando(querystring)
             Me.Num_PSol = COD_SOL_PK
@@ -676,6 +702,12 @@ Public Class PSolicitudes
             Me.AsignarParametroCadena(":NUM_PLA", NUM_PLA)
             Me.AsignarParametroCadena(":COD_SOL_PK", Me.Num_PSol)
             Me.AsignarParametroDecimal(":VAL_CON", PPTO)
+
+            If Not String.IsNullOrEmpty(IDE_CON) Then
+                Me.AsignarParametroCadena(":IDE_CON", IDE_CON)
+            Else
+                Me.AsignarParametroCadena(":IDE_CON", Nothing)
+            End If
 
 
             'Throw New Exception(Me._Comando.CommandText)
@@ -818,7 +850,7 @@ Public Class PSolicitudes
                 Me.Msg = Me.Msg + msgNot
             End If
 
-            
+
         Catch ex As Exception
             Me.Msg += "Error:" + ex.Message '+ ex.StackTrace
             If Not is_commit Then
@@ -829,7 +861,7 @@ Public Class PSolicitudes
             Me.Desconectar()
         End Try
 
-        
+
 
         Return Me.Msg
 
@@ -837,7 +869,7 @@ Public Class PSolicitudes
 
     Public Function Enviar_Notificacion(ByVal De As String, ByVal Para As String, ByVal Asunto As String, ByVal Body_Mensaje As String, ByVal Adjuntos() As String) As String
         Dim csmtp As New Conf_Smtp
-        csmtp.CargarConf(de)
+        csmtp.CargarConf(De)
         MailSend.Port = csmtp.Puerto
         MailSend.Host = csmtp.Host
         MailSend.EnableSsl = csmtp.EnableSSL
