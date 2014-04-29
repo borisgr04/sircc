@@ -8,9 +8,7 @@ Partial Class Procesos_NuevaSolicitud_Default
     '    Guardar()
     'End Sub
 
-    Protected Sub IBtnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles IBtnGuardar.Click
-        Guardar()
-    End Sub
+   
     Public Sub Guardar()
         Dim sval As String = ""
         Dim sw As Boolean = False
@@ -390,4 +388,7 @@ Partial Class Procesos_NuevaSolicitud_Default
     End Sub
 
    
+    Protected Sub IBtnGuardar_Click(sender As Object, e As ImageClickEventArgs) Handles IBtnGuardar.Click
+        Guardar()
+    End Sub
 End Class
