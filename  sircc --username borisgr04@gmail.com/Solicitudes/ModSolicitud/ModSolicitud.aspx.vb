@@ -149,7 +149,9 @@ Partial Class Solicitudes_ModSolicitud_Default
             Me.TxtNPla.Text = dt.Rows(0)("NUM_PLA").ToString
             Me.TxtPpto.Text = dt.Rows(0)("VAL_CON").ToString
             TxtIde.Text = dt.Rows(0)("IDE_CON").ToString
-            BuscarContratista()
+            If Not String.IsNullOrEmpty(TxtIde.Text) Then
+                BuscarContratista()
+            End If
             'Me.grdCDP1.Enabled = Valor
 
             Me.Habilitar(False)
