@@ -214,4 +214,8 @@ Partial Class Controles_DetContratoL
     Public Sub Actualizar()
         Buscar()
     End Sub
+
+    Protected Sub DtPCon_PageIndexChanging(sender As Object, e As DetailsViewPageEventArgs) Handles DtPCon.PageIndexChanging
+
+    End Sub
 End Class

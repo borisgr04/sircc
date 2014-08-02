@@ -54,7 +54,9 @@
                 </tr>
                 <tr >
                     <th>
-                          {NUMERO}</th>
+                          {NUMERO}
+
+                    </th>
                 </tr>
                 
             </table>

@@ -780,6 +780,24 @@ Public Class Contratos
         Return dataTb
     End Function
 
+    ''' <summary>
+    ''' Recibe el Numero de proceso
+    ''' devuelve los datos de un contrato Generado a partir de un procesos
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetByNProc(ByVal Pro_Sel_nro As String) As DataTable
+        Me.Conectar()
+        querystring = "SELECT * FROM Contratos Where PRO_SEL_NRO=:Pro_Sel_nro"
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":Pro_Sel_nro", Pro_Sel_nro)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
     ''BORIS MODIFICACION DEL 06/AGOSTO A 8 DE AGOSTO
     
     Class cProceso

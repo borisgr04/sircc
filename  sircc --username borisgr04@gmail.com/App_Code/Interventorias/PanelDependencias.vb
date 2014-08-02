@@ -71,6 +71,8 @@ Public Class PanelDependencias
                 Return GetContratosDes(filtro)
             Case "Sin Asignar"
                 Return GetContratosSDes(filtro)
+
         End Select
+        Return Nothing
     End Function
 End Class

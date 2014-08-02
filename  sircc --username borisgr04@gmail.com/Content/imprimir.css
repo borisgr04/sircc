@@ -1,0 +1,146 @@
+@charset "utf-8";
+/*  ====================================================================
+    ESTILO PARA CABECERA Y PIES DE PAGINAS
+    Andrés de la Paz (c) 2010
+    Para el sitio www.wextensible.com
+
+    El estilo se configura en los siguientes archivos ubicados en la carpeta
+    raíz del sitio:
+    - "cabeza-pie.css" para la estructura de la cabecera y pie de página.
+    - "interior.css" para la estructura del contenido interior y laterales.
+    - "formatos.css" para configurar estilos de formato y presentación como
+      el texto tipo código, colores de texto, bordes de tablas, etc.
+    Luego en cada carpeta puede también haber un archivo de estilos para
+    el sitio, cuyo nombre será "xxx-estilo.css" donde "xxx" es la página
+    de entrada "xxx.html" de entrada en esa carpeta.
+    ====================================================================
+    */
+
+/*
+@-o-viewport {
+    width: device-width;
+    zoom: 1.0;
+    }
+@-ms-viewport {
+    width: device-width;
+    zoom: 1.0;
+    }
+@viewport {
+    width: device-width;
+    zoom: 1.0;
+    }
+*/
+
+
+@media print {
+#botonera, #migas, #marcas-sociales, #pie, .navega-temas, .lateral {
+    display: none;
+    }
+.lateral {
+    width: 0;
+    }
+#contenido {
+    margin-left: 0;
+    margin-right: 0;
+    }
+}
+
+
+/*  CUERPO DE LA PAGINA -------------------------------------------------
+    Especificamos el tamaño de la fuente, donde 1em = 16px. El resto se toman
+    relativas en em's para conseguir un diseño elástico.
+    El nombre de la fuente por defecto también lo establecemos aquí.
+    */
+
+body {
+    font-family: Verdana, Geneve, sans-serif;
+    font-size: 1em;
+    }
+div {
+    max-height: 100000px;
+    }
+
+/*  BLOQUE CONTENEDOR DE LA PAGINA -----------------------------------------
+    Toda la página se incluye en este contenedor:
+    - Una bloque cabecera
+    - Un bloque botonera
+    - Un bloque "migas" (opcional)
+    - Un lateral izquierdo (opcional)  (declarado en "interior.css")
+    - Un lateral derecho (opcional)    (declarado en "interior.css")
+    - Un contenido                     (declarado en "interior.css")
+    - Un pie
+    El ancho mínimo es para que la página no se deforme horizontalmente. Se toma
+    relativo al tamño de la fuente del <body>. Este ancho debe ser mayor que
+    el título de la cabecera.
+    Volvemos a especificar el tamaño de la fuente en este elemento que es donde
+    actua el botón "AAA" para cambiar el tamaño.
+    */
+div#total {
+    font-size: 1em;
+    /*min-width: 32em;*/
+    z-index: 0;
+    }
+
+
+/*  BLOQUE CABECERA DE LA PÁGINA -------------------------------------------
+    Es el contenedor primero de la página donde ponemos el nombre del sitio
+    y el logotipo.
+    Todos los contenedores llevan el mismo margen derecho e izquierdo.
+    */
+div#cabeza {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    padding-left: 0.5em;
+    background-color: rgb(49, 99, 98);
+    }
+
+/*  Logo Wextensible
+    ..................IMPORTANTE.............................
+    ESTOS DOS ELEMENTOS YA SON SUSTITUIDOS en el /index.html y
+    en los nuevos documentos por las clases logowx y titulowx
+    declaradas en formatos.css.
+    Las sigo manteniendo aquí para las páginas antiguas. Cuando
+    las actualice todas se eliminarán estos dos estilos.
+    ...........................................................
+*/
+
+div#cabeza span.titulo {
+    color: orange;
+    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+    font-size: 2.5em;
+    font-style: italic;
+    vertical-align: middle;
+    padding-left: 0.2em;
+    }
+
+div#cabeza img[class~=cabimg] {
+    vertical-align: middle;
+    }
+
+
+
+/*  BLOQUE DEL PIE DE PAGINA ---------------------------------------------------
+    Es el contenedor último de la página donde ponemos los créditos, validaciones,
+    autor, etc.
+    */
+div#pie {
+    margin-top: 0.5em;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    background-color: rgb(200, 225, 225);
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom:  rgb(49, 99, 98) solid 0.2em;
+    line-height: 2em;
+
+    }
+
+div#pie-dcha {
+    float: right;
+    line-height: 2em;
+    }
+
+

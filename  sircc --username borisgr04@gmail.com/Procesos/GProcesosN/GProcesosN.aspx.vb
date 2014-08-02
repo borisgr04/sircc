@@ -482,6 +482,8 @@ Partial Class Procesos_GProcesoN_Default
         Me.IbtnEditar.Enabled = True
     End Sub
 
+
+
     Protected Sub IBtnCancelar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnCancelar.Click
         Cancelar()
     End Sub
@@ -906,6 +908,7 @@ Partial Class Procesos_GProcesoN_Default
         Redireccionar_Pagina("/Procesos/GProcesosN/ItemObjeto.aspx?Num_Proc=" + Me.TxtNProc.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
     End Sub
 
+
     Protected Sub IBtnAnular_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IBtnAnular.Click
         Dim objMin As New PGContratosM
         LbMinutaW.Text = objMin.AnularAC(Me.TxtNprocA.Text, Me.CboGrupos.SelectedValue)
@@ -916,5 +919,12 @@ Partial Class Procesos_GProcesoN_Default
 
     Protected Sub BtnActGriMin_Click(sender As Object, e As System.EventArgs) Handles BtnActGriMin.Click
         GrdMin.DataBind()
+    End Sub
+
+    Protected Sub IBtnOficios_Click(sender As Object, e As ImageClickEventArgs) Handles IBtnOficios.Click
+
+        Redireccionar_Pagina("/Contratos/GDocumentos/HEAD/PresServProf/PPalServProf.aspx?Nro_Cto=" + Me.TxtNProc.Text)
+
+
     End Sub
 End Class

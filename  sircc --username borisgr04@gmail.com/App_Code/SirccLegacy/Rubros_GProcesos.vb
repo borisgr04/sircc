@@ -55,7 +55,7 @@ Public Class Rubros_GProcesos
             Me.CrearComando(querystring)
             Me.AsignarParametroCadena(":Cod_Rub", Cod_Rub)
             Me.AsignarParametroCadena(":Num_Pro", Num_Pro)
-            Me.AsignarParametroCadena(":Valor", Valor)
+            Me.AsignarParametroDecimal(":Valor", Valor)
             Me.AsignarParametroCadena(":Nro_Cdp", Nro_RP)
             Me.AsignarParametroCadena(":Grupo", Grupo)
             'Throw New Exception(vComando.CommandText)

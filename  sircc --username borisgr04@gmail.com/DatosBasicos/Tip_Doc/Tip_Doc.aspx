@@ -83,13 +83,13 @@
                     <asp:TemplateField HeaderText="Estado" SortExpression="Estado">
                         <ItemTemplate>
                             <asp:Label ID="LbEst" runat="server" __designer:wfdid="w22" 
-                                Text='<%# Bind("ESTADO") %>'></asp:Label>
+                                Text='<%# Bind("EST_TIP")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Etapa" SortExpression="Etapa">
                         <ItemTemplate>
                             <asp:Label ID="LbEtapa" runat="server" __designer:wfdid="w23" 
-                                Text='<%# Bind("ETAPA") %>'></asp:Label>
+                                Text='<%# Bind("COD_ETA") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:ButtonField ButtonType="Image" CommandName="Eliminar" 

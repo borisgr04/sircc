@@ -338,9 +338,13 @@ Public Class PContratos
         Me.AsignarParametroCadena(":DEP_PCON", DEP_PCON)
         Me.AsignarParametroCadena(":FEC_RECIBIDO", FEC_RECIBIDO.ToShortDateString)
         Me.AsignarParametroCadena(":NUM_SOL", NUM_SOL)
-        Me.AsignarParametroCadena(":VAL_CON", VAL_CON)
-        Me.AsignarParametroCadena(":VAL_APO_GOB", VAL_CON)
+        Me.AsignarParametroDecimal(":VAL_CON", VAL_CON)
+        'Me.AsignarParametroCadena(":VAL_CON", VAL_CON)
+
+        Me.AsignarParametroDecimal(":VAL_APO_GOB", VAL_CON)
+        'Me.AsignarParametroCadena(":VAL_APO_GOB", VAL_CON)
         'Throw New Exception(_Comando.CommandText)
+
         Me.num_reg = Me.EjecutarComando()
 
         querystring = "UPDATE PCONTRATOS SET NUMGRUPOS=1 WHERE PRO_SEL_NRO=:PRO_SEL_NRO"
