@@ -32,6 +32,7 @@ Partial Class Contratos_GDocumentos_SolicitudRPC
                    
                     strPlantilla = strPlantilla.Replace("{NUMERO}", dt.Rows(0)("Numero").ToString())
                     strPlantilla = strPlantilla.Replace("{VALOR_A_CONTRATAR}", String.Format("{0:$#,###.##}", dt.Rows(0)("VAL_CON")))
+                    strPlantilla = strPlantilla.Replace("{VALOR_APORTE_GOB}", String.Format("{0:$0,00.00}", dt.Rows(0)("VAL_APO_GOB")))
                     strPlantilla = strPlantilla.Replace("{FECHA}", dt.Rows(0)("fec_sus_con").ToLongDateString())
                     strPlantilla = strPlantilla.Replace("{NOM_CONTRATISTA}", dt.Rows(0)("CONTRATISTA").ToString())
                     strPlantilla = strPlantilla.Replace("{DEPENDENCIA_DELEGADA}", dtDD.Rows(0)("NOM_DEP").ToString())

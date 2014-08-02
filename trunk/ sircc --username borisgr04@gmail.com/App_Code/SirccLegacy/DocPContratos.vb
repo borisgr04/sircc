@@ -175,6 +175,7 @@ Public Class DocPContratos
         End Try
         Return Msg
     End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetExitsAC(ByVal NUM_PROC As String, ByVal TipoDocumento As String) As Boolean
         Me.Conectar()
@@ -262,4 +263,29 @@ Public Class DocPContratos
         Me.Desconectar()
         Return dataTb
     End Function
+
+    Public Function GetDocs2(ByVal NUM_PROC As String) As DataTable
+        Me.Conectar()
+
+        querystring = "SELECT dc.num_proc, dc.ID, dc.estado, dc.fec_doc, dc.tipdocumento,"
+        querystring += "dc.editable, dc.nombre, td.nom_eta, td.des_tip,"
+        querystring += " CASE"
+        querystring += " WHEN dc.editable = '1' "
+        querystring += " THEN 'EDITABLE' "
+        querystring += " ELSE 'NO EDITABLE' "
+        querystring += " END nom_editable, "
+        querystring += " CASE "
+        querystring += " WHEN dc.estado = 'AC' "
+        querystring += " THEN 'ACTIVO' "
+        querystring += " ELSE 'INACTIVO' "
+        querystring += " END nom_estado, dc.fec_reg "
+        querystring += " FROM docpcontratos dc LEFT JOIN vtip_doc td ON td.cod_tip = dc.tipdocumento  Where estado='AC' and NUM_PROC=:NUM_PROC"
+
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":NUM_PROC", NUM_PROC)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
 End Class

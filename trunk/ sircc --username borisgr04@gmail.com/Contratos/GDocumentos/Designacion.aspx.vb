@@ -6,11 +6,13 @@ Partial Class Contratos_GDocumentos_Designacion
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
-
             If Request.QueryString.Count > 0 Then
                 Dim Ncont As String = ""
-                querystringSeguro = Me.GetRequest()
-                Ncont = querystringSeguro("Nro_Cto")
+                Ncont = Request.QueryString("Nro_Cto")
+                '//If Request.QueryString.Count > 0 Then
+
+                'querystringSeguro = Me.GetRequest()
+                'Ncont = querystringSeguro("Nro_Cto")
                 hdNumero.Value = Ncont
 
                 Dim NomUsu As String = ""

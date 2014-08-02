@@ -551,5 +551,17 @@ Public Class PPlantillas
     End Function
 
 
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetPreCon(ByVal CODIGO As String) As DataTable
+        Me.Conectar()
+        Me.querystring = "SELECT * FROM PPLANTILLAS WHERE TIP_PLA='02' AND COD_STIP = :CODIGO "
+        CrearComando(querystring)
+        AsignarParametroCadena(":CODIGO", CODIGO)
+        Dim dataTb As DataTable = EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
+
     
 End Class

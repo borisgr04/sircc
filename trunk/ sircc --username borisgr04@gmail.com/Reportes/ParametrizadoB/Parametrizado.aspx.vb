@@ -78,7 +78,7 @@ Partial Class Reportes_ParametrizadoB_Parametrizado
             Util.AddFiltro(cFiltro, "dep_pcon = '" + Me.CboDepP.SelectedValue + "'")
         End If
         If (Me.ChkInt.Checked = True) Then
-            Util.AddFiltro(cFiltro, "IDE_INT = '" + Me.TxtIdeInt.Text + "'")
+            Util.AddFiltro(cFiltro, "ID_INTERVENTOR = '" + Me.TxtIdeInt.Text + "'")
         End If
         If (Me.ChkAnul.Checked = False) Then
             Util.AddFiltro(cFiltro, "EST_CON <> '07'")

@@ -64,27 +64,27 @@
             <p><b> NUMERO DEL CONTRATO:</b> {NUMERO}</p> 
             <br />
             <br />
-           <p> <b>CERTIFICADO(S) DE DISPONIBLIDAD PRESUPUESTAL:</b> {CDP} </p> 
+           <p> <b>CERTIFICADO(S) DE DISPONIBILIDAD PRESUPUESTAL:</b> {CDP} </p> 
             <br />
             <br />
-           <p> <b>VALOR DEL CONTRATO:</b> {VALOR_A_CONTRATAR}</p> 
+           <p> <b>VALOR DEL CONTRATO:</b> {VALOR_APORTE_GOB} </p> 
             <br />
             <br />
              <p> <b>FUNCIONARIO RESPONSABLE:</b> {NOM_ENC_DEPENDENCIAD} </p>  
         <br />    
         <br />
-        <br />
-        <br />
+        
         Atentamente,
         <br />
         <br />
         <br />
+        <br />
+        <br />
          <b>{NOM_ENC_DEPENDENCIAD}</b><br />
-            {CAR_ENC_DEPENDENCIAD}<br />
-            Gobernación del Cesar<br />
+            {CAR_ENC_DEPENDENCIAD}  Gobernación del Cesar<br />
         <br />
         <br />
-        Proyecto: {NOM_USUARIO}. <br />
+       <p class="txtsize"> Proyecto: {NOM_USUARIO}. </p><br />
         <br />
         <br />
        

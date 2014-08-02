@@ -42,7 +42,7 @@ Public Class Tip_Doc
     End Function
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
-    Public Function GetbyEtapa(ByVal Cod_Eta As String) As DataTable
+    Public Function GetbyEtapa0(ByVal Cod_Eta As String) As DataTable
         querystring = "SELECT * FROM  " + VistaDB + " Where Cod_Eta=:Cod_Eta"
         Me.Conectar()
         Me.CrearComando(querystring)
@@ -51,6 +51,30 @@ Public Class Tip_Doc
         Me.Desconectar()
         Return dataSet
     End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetbyEtapa(ByVal Cod_Eta As String) As DataTable
+        querystring = "SELECT * FROM  " + Vista + " Where Cod_Eta=:Cod_Eta     And Est_Tip='AC'"
+        Me.Conectar()
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":Cod_Eta", Cod_Eta)
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
+    End Function
+
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Function GetbyPkV(ByVal Cod_Tip As String) As DataTable
+        querystring = "SELECT * FROM  " + Vista + " Where Cod_Tip=:Cod_Tip"
+        Me.Conectar()
+        Me.CrearComando(querystring)
+        AsignarParametroCadena(":Cod_Tip", Cod_Tip)
+        Dim dataSet As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataSet
+
+    End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetbyPk(ByVal Cod_Tip As String) As DataTable
         querystring = "SELECT * FROM  " + Tabla + " Where Cod_Tip=:Cod_Tip"

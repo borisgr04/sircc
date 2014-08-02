@@ -203,6 +203,9 @@
                             <asp:ImageButton ID="IBtnAdj" runat="server" SkinID="IBtnAdj" />
                         </td>
                         <td class="style6" style="width: 33px">
+                            <asp:ImageButton ID="IBtnOficios" runat="server" SkinID="IBtnListItemObj" />
+                        </td>
+                        <td class="style6" style="width: 33px">
                             <asp:ImageButton ID="IBtnItemO" runat="server" SkinID="IBtnListItemObj" />
                         </td>
                         <td style="text-align: center" class="style46">
@@ -222,6 +225,7 @@
                                 ToolTip="Revertir Validación y permite modificar datos al proceso." Visible="False"
                                 Width="32px" />
                         </td>
+                        
                         <td>
                             &nbsp;
                         </td>
@@ -259,6 +263,9 @@
                         </td>
                         <td class="style32">
                             Adjudicación
+                        </td>
+                        <td class="style32">
+                           Oficios
                         </td>
                         <td class="style6" style="width: 33px">
                             Items Objeto

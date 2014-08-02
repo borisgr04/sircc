@@ -24,8 +24,10 @@ Public Class verMinutaPDF : Implements IHttpHandler
         
         If m.Length > 0 Then
             context.Response.Clear()
-            context.Response.AddHeader("content-disposition", "attachment; filename=" & Num_Proc + "-" + Grupo + ".pdf")
-            context.Response.BinaryWrite(DirectCast(m, Byte()))
+            context.Response.ContentType = "Application/pdf"
+            context.Response.AddHeader("Content-Length", m.Length.ToString)
+            context.Response.AddHeader("content-disposition", "inline; filename=" & Num_Proc + "-" + Grupo + ".pdf")
+            context.Response.BinaryWrite(m)
             context.Response.End()
         End If
     End Sub

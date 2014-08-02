@@ -201,5 +201,7 @@ Public Class EntSegSocial
         'Dim dataTb As DataTable = EjecutarConsultaDataTable()
         'Me.Desconectar()
         'Return dataTb
+        Return Nothing
+
     End Function
 End Class

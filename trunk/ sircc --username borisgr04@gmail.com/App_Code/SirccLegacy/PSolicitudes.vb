@@ -852,7 +852,7 @@ Public Class PSolicitudes
 
 
         Catch ex As Exception
-            Me.Msg += "Error:" + ex.Message '+ ex.StackTrace
+            Me.Msg += "Error:" + ex.Message + ex.StackTrace
             If Not is_commit Then
                 Me.CancelarTransaccion()
             End If
