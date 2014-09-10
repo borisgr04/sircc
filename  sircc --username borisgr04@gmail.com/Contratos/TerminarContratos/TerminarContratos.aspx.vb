@@ -65,26 +65,36 @@ Partial Class TerminarContratos_Default
         Limpiar()
 
         Dim isAnulable As Boolean = False
-
-        If DetContrato1.Estado = "00" Then
-            Me.MsgResult.Text = "El Contrato no ha sido Legalizado. Si desea realizar la Terminación del Contrato, especifique el soporte de la misma."
-            isAnulable = True
+        
+        If DetContrato1.Estado = "03" Or DetContrato1.Estado = "05" Or DetContrato1.Estado = "06" Or DetContrato1.Estado = "07" Or DetContrato1.Estado = "10" Or DetContrato1.Estado = "11" Or DetContrato1.Estado = "12" Then
+            Me.MsgResult.Text = "No es posible realizar la terminación del contrato debido a su estado acual "
             grdEstContratos.Enabled = True
-        ElseIf DetContrato1.Estado = "07" Then
-            Me.MsgResult.Text = "El Contrato está Anulado, No es posible realizar la Terminación."
-            grdEstContratos.Enabled = False
-        ElseIf DetContrato1.Estado = "09" Then
-            Me.MsgResult.Text = "El estado actual del Contrato es Legalizado. Si desea realizar la Terminación del Contrato, especifique el soporte de la misma."
-            isAnulable = True
-            grdEstContratos.Enabled = True
-        ElseIf DetContrato1.Estado = "12" Then
-            Me.MsgResult.Text = "El estado actual del Contrato es Terminado."
-            grdEstContratos.Enabled = True
+            'ElseIf DetContrato1.Estado = "12" Or DetContrato1.Estado = "05" Then
+            '    Me.MsgResult.Text = "El Contrato ya se encuentra en estado terminado, No es posible realizar una nueva Terminación"
+            '    grdEstContratos.Enabled = True
+            'ElseIf DetContrato1.Estado = "10" Or DetContrato1.Estado = "06" Then
+            '    Me.MsgResult.Text = "El Contrato ya se encuentra liquidado, No es posible realizar la Terminación"
+            '    grdEstContratos.Enabled = True
+            'ElseIf DetContrato1.Estado = "09" Then
+            '    Me.MsgResult.Text = "El estado actual del Contrato es Legalizado. Si desea realizar la Terminación del Contrato, especifique el soporte de la misma."
+            '    isAnulable = True
+            '    grdEstContratos.Enabled = True
+            'ElseIf DetContrato1.Estado = "00" Then
+            '    Me.MsgResult.Text = "El Contrato aún no se ha legalizado, por lo tanto puede realizar la terminación"
+            '    grdEstContratos.Enabled = True
+            'ElseIf DetContrato1.Estado = "01" Or DetContrato1.Estado = "02" Or DetContrato1.Estado = "08" Or DetContrato1.Estado = "04" Then
+            '    Me.MsgResult.Text = "El Contrato aún no se ha legalizado, por lo tanto puede realizar la terminación"
+            '    grdEstContratos.Enabled = True
         Else
-            Me.MsgResult.Text = "El estado actual del Contrato, no permite realizar la Terminación."
-            grdEstContratos.Enabled = False
-
+            Me.MsgResult.Text = "Digite el motivo de la Terminación del contrato en el campo observación."
+            isAnulable = True
+            grdEstContratos.Enabled = True
         End If
+
+
+
+
+        
         Habilitar(False)
         BtnNuevo.Enabled = isAnulable
         If isAnulable Then

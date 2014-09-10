@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="SolicitudRPC.aspx.vb" Inherits="Contratos_GDocumentos_SolicitudRPC" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="DesignacionAdicion.aspx.vb" Inherits="Contratos_GDocumentos_Designacion" %>
 
 <!DOCTYPE html>
 
@@ -7,6 +7,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link href="docEP.css" rel="stylesheet" />
+    <style>
+        
+        .auto-style1 {
+            width: 60px;
+        }
+        .auto-style2 {
+            width: 48px;
+        }
+        
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -36,7 +46,7 @@
                         <%--<img alt="" src="/ashx/ashxImg.ashx" width="60px" height="60px" />--%>
                     </td>
                     <th rowspan="2">
-                        SOLICITUD DE REGISTRO PRESUPUESTAL DE COMPROMISOS
+                        DESIGNACIÓN DE SUPERVISIÓN Y/O INTERVENTORIA
                     </th>
                     <th style="width:20%">
                           CONTRATO N°  
@@ -44,53 +54,47 @@
                 </tr>
                 <tr >
                     <th>
-                          {NUMERO}</th>
+                          {NUMERO}
+
+                    </th>
                 </tr>
                 
             </table>
             <br />
-            <p><b>FECHA:</b> {FECHA}</p>
+            <p>
+            Valledupar, {FECHA}
+            </p>
             <br />
             <br />
-            <p> <b>DEPENDENCIA:</b> {DEPENDENCIA_DELEGADA} </p>
+            Doctor<br />
+            <b>{NOM_SUPERVISOR}</b><br />
+            <b>{CAR_SUPERVISOR}</b><br />
+            <b>{DEP_SUPERVISOR}</b><br />
+            Gobernación Departamento del Cesar<br />
+            Valledupar <br />
             <br />
-            <br />
-             <p><b> FUNCIONARIO RESPONSABLE:</b> {NOM_ENC_DEPENDENCIAD} </p>
-            <br />
-            <br />
-             <p> <b> CONTRATISTA:</b> {NOM_CONTRATISTA} </p> 
-            <br />
-            <br />
-            <p><b> NUMERO DEL CONTRATO:</b> {NUMERO}</p> 
-            <br />
-            <br />
-           <p> <b>CERTIFICADO(S) DE DISPONIBILIDAD PRESUPUESTAL:</b> {CDP} </p> 
-            <br />
-            <br />
-           <p> <b>VALOR DEL CONTRATO:</b> {VALOR_APORTE_GOB} </p> 
-            <br />
-            <br />
-             
-        <br />    
         <br />
-        
+        Cordial Saludo:
+        <br />
+        <br />
+        <p>
+            Por medio de la presente, me permito comunicarle que el cargo que usted ocupa ha sido designado como Supervisor del adicional del Contrato de {CLASE_CONTRATO}: No <b>{NUMERO}</b> suscrito con: <b>{NOM_CONTRATISTA}</b>, cuyo Objeto consiste en: <b>{OBJETO}</b>.</p>
+        <br />
+        <br />
         Atentamente,
         <br />
         <br />
         <br />
-        <br />
-        <br />
-         <b>{NOM_ENC_DEPENDENCIAD}</b><br />
+           <b>{NOM_ENC_DEPENDENCIAD}</b><br />
             {CAR_ENC_DEPENDENCIAD}  Gobernación del Cesar<br />
         <br />
         <br />
        <p class="txtsize"> Proyecto: {NOM_USUARIO}. </p><br />
         <br />
         <br />
-       
         
-            </asp:Literal>
-
+        </asp:Literal>
+            
 
         </div>
         <asp:GridView ID="GridView1" runat="server"></asp:GridView>

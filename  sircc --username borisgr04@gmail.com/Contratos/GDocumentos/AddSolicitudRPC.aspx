@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="SolicitudRPC.aspx.vb" Inherits="Contratos_GDocumentos_SolicitudRPC" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="AddSolicitudRPC.aspx.vb" Inherits="Contratos_GDocumentos_SolicitudRPC" %>
 
 <!DOCTYPE html>
 
@@ -39,7 +39,7 @@
                         SOLICITUD DE REGISTRO PRESUPUESTAL DE COMPROMISOS
                     </th>
                     <th style="width:20%">
-                          CONTRATO N°  
+                         ADICIÓN CONTRATO N°  
                     </th>
                 </tr>
                 <tr >
@@ -67,7 +67,7 @@
            <p> <b>CERTIFICADO(S) DE DISPONIBILIDAD PRESUPUESTAL:</b> {CDP} </p> 
             <br />
             <br />
-           <p> <b>VALOR DEL CONTRATO:</b> {VALOR_APORTE_GOB} </p> 
+           <p> <b>VALOR DEL CONTRATO:</b> {VAL_ADI} </p> 
             <br />
             <br />
              
