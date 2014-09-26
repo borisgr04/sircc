@@ -50,6 +50,26 @@ Public Class Polizas_Contrato
         Me.Desconectar()
         Return dataTb
     End Function
+
+
+
+    ''' <summary>
+    ''' Consulta polizas para las plantillas de la gestión documental docuemntos
+    ''' </summary>
+    ''' <param name="Cod_Con"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetRecordsPlantillas(ByVal Cod_Con As String) As DataTable
+        Me.Conectar()
+        querystring = "SELECT NOM_ASE AS Aseguradora, NRO_POL as Poliza_No, NOM_POL as Amparo, FEC_POL as Fecha_Poliza, val_pol as Valor_Asegurado  FROM vPolizas_Contrato Where Cod_Con=:Cod_Con"
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":Cod_Con", Cod_Con)
+        'Throw New Exception(Me._Comando.CommandText)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
     ''' <summary>
     ''' Insertar impuesto a un contrato (cod_con)
     ''' </summary>

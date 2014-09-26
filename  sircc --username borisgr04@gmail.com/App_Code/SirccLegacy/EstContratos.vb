@@ -34,7 +34,7 @@ Public Class EstContratos
         tbCon = oCon.GetByIde(cod_con)
         fecsus = CDate(tbCon.Rows(0)("fec_sus_con").ToString)
         If fecsus > fec_ent Then
-            Msg = "La Fecha del Acta debe ser mayor a la Fecha de Suscripción"
+            Msg = "La fecha del acta que está regitrando debe ser mayor a la fecha de suscripción del contrato, cuya fecha es " + fecsus.ToShortDateString
             Return Msg
             Exit Function
         End If
@@ -44,13 +44,13 @@ Public Class EstContratos
         If tbCon.Rows.Count > 0 Then
             fecentant = CDate(tbCon.Rows(0)("fec_ent").ToString)
             If fecentant > fec_ent Then
-                Msg = "La Fecha del Acta debe ser mayor a la Fecha del Acta Anterior :" + fecentant.ToShortDateString
+                Msg = "La fecha de la nueva acta debe ser mayor a la fecha de la última acta registrada, cuya fecha es " + fecentant.ToShortDateString
                 Return Msg
                 Exit Function
             End If
             estfinant = tbCon.Rows(0)("est_fin").ToString
             If estfinant <> est_ini Then
-                Msg = "El Estado Final Actual no Coincide el Nuevo Estado Inicial "
+                Msg = "El estado final de la última acta registrada, no coincide el estado inicial del acta que está agregando "
                 Return Msg
                 Exit Function
             End If

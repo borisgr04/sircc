@@ -833,7 +833,7 @@ Public Class PSolicitudes
             Me.num_reg = Me.EjecutarComando()
             Dim msgNot As String = ""
             If concepto = "A" Then
-                proc.InsertP(dt.Rows(0).Item("Cod_Tpro").ToString, dt.Rows(0).Item("Obj_Sol").ToString, dt.Rows(0).Item("Dep_sol").ToString, dt.Rows(0).Item("Dep_Psol").ToString, dt.Rows(0).Item("Vig_sol").ToString, dt.Rows(0).Item("Tip_Con").ToString, dt.Rows(0).Item("Stip_Con").ToString, CDate(dt.Rows(0).Item("Fecha_Recibido").ToString), COD_SOL_PK, dt.Rows(0).Item("Val_Con").ToString)
+                proc.InsertP(dt.Rows(0).Item("Cod_Tpro").ToString, dt.Rows(0).Item("Obj_Sol").ToString, dt.Rows(0).Item("Dep_sol").ToString, dt.Rows(0).Item("Dep_Psol").ToString, dt.Rows(0).Item("Vig_sol").ToString, dt.Rows(0).Item("Tip_Con").ToString, dt.Rows(0).Item("Stip_Con").ToString, CDate(dt.Rows(0).Item("Fecha_Recibido").ToString), COD_SOL_PK, dt.Rows(0).Item("Val_Con").ToString, dt.Rows(0).Item("Ide_Con").ToString)
                 proc.Asignar_Usuario_EncargadoP(proc.Num_PCon, dt.Rows(0).Item("Id_Abog_Enc").ToString)
                 Num_Proc = proc.Num_PCon
             End If

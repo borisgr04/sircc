@@ -9,6 +9,24 @@ Imports System.Reflection
 Imports Microsoft.Office.Core
 Imports System.IO
 Imports System.Net
+
+
+'Dim Tabla As String = dt.Rows(k)("NTabla").ToString
+'Dim dtt As DataTable = ws.GetTablaGP(Tabla, Num_Proc, Grupo)
+
+Public Class GDFormatoTabla
+    Public NTABLA As String
+    Public NOM_CAM As String
+    Public DES_CAM As String
+    Public TIP_DAT As String
+    Public ANCHO As Integer
+End Class
+
+Public Class GDTabla
+    Public Formato As List(Of GDFormatoTabla) = New List(Of GDFormatoTabla)
+    Public Tabla As DataTable = New DataTable()
+End Class
+
 Public Class GDocumentos
 
 
@@ -63,6 +81,17 @@ Public Class GDocumentos
     Public Editable As String
     Public Fec_Doc As Date
     Public cNom_Tip_Doc As String
+
+    Dim DictionaryTablas As New Dictionary(Of String, GDTabla)
+
+    Public Sub AddDictionaryTablas(Tabla As String, gd As GDTabla)
+        DictionaryTablas.Add(Tabla, gd)
+    End Sub
+    Public Sub SetDictionaryTablas(d As Dictionary(Of String, GDTabla))
+        DictionaryTablas = d
+    End Sub
+
+
     Enum eoperacion
         Regenerar
         Generar
@@ -283,7 +312,7 @@ Public Class GDocumentos
                 If (Tip_Dato <> "T") AndAlso dtg.Columns.Contains(Nom_Campo) Then ' Si el campo existe como columna en la vista que contiene los datos
                     Dim replaceAll As Object = MSWord.WdReplace.wdReplaceAll
                     wrdApp.Selection.Find.ClearFormatting()
-                    wrdApp.Selection.Find.Text = "{" + Nom_Pla + "}" 'Buscar bajo el parametro del nombre del campo en la plantilla
+                    wrdApp.Selection.Find.Text = "{" + Nom_Pla.Trim() + "}" 'Buscar bajo el parametro del nombre del campo en la plantilla
                     wrdApp.Selection.Find.Replacement.ClearFormatting()
                     Dim strRemp As String = MostrarCampo(dtg.Rows(0)(Nom_Campo).ToString, Tip_Dato)
 
@@ -294,7 +323,7 @@ Public Class GDocumentos
                         Ultimo_Msg += "El tamaño del campo es de " + strRemp.Length + " No se puede reemplazar" + Enter
                     End If
                     If Not wrdApp.Selection.Find.Found() Then
-                        Ultimo_Msg += "No encontró el campo " + wrdApp.Selection.Find.Text + vbCrLf
+                        Ultimo_Msg += "No encontró el campo " + wrdApp.Selection.Find.Text + ".. {" + Nom_Pla + "}  .." + vbCrLf
                     Else
                         Ultimo_Msg += "Si encontró el campo " + wrdApp.Selection.Find.Text + vbCrLf
                     End If
@@ -313,74 +342,101 @@ Public Class GDocumentos
                         wrdApp.Selection.Find.Execute()
                         If wrdApp.Selection.Find.Found() Then
                             Dim Tabla As String = dt.Rows(k)("NTabla").ToString
-                            Dim dtt As DataTable = ws.GetTablaGP(Tabla, Num_Proc, Grupo)
-                            'If dtt.Rows.Count > 0 Then
-                            Dim oTable As MSWord.Table
-                            Dim wrdRng As MSWord.Range = wrdApp.Selection.Range() 'wrdDoc.Bookmarks.Item(oEndOfDoc).Range
-                            Dim nc As Integer = dtt.Columns.Count
-                            Dim nf As Integer = dtt.Rows.Count
-                            Dim nf_adicional As Integer = 0
-                            If dt.Rows(k)("Mostrar_Titulos").ToString = "SI" Then
-                                nf_adicional = 1
-                            End If
-                            If nf = 0 Then
-                                wrdRng.Text = ""
-                            Else
-                                oTable = wrdDoc.Tables.Add(wrdRng, nf + nf_adicional, nc - 2, oMissing, oMissing)
-                                'SE AGREGA FORMATO DE TABLAS
-                                Dim oPlantilla As New PPlantillas
-                                Dim dtConcepto As DataTable
-                                Dim dtConsulta As New DataTable
-                                dtConsulta = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla)
+                            Dim dict As GDTabla
+                            If DictionaryTablas.ContainsKey(Tabla) Then
+                                ' Write value of the key.
+                                dict = DictionaryTablas.Item(Tabla)
 
-                                'oTable.Range.ParagraphFormat.SpaceAfter = 6
-                                Dim f As Integer, c As Integer
-                                ''Colocar Titulos
-                                For c = 1 To nc - 2
-                                    If dt.Rows(k)("Mostrar_Titulos").ToString = "SI" Then
-                                        oTable.Cell(1, c).Range.Text = UCase(dtt.Columns(c + 1).ColumnName)
-                                        oTable.Cell(1, c).Range.Font.Bold = True
-                                        oTable.Cell(1, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphCenter
-                                    End If
-                                    dtConcepto = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla, dtt.Columns(c + 1).ColumnName)
-                                    If dtConcepto.Rows.Count > 0 Then
-                                        oTable.Columns(c).SetWidth(CInt(dtConcepto.Rows(0)("ANCHO").ToString), MSWord.WdRulerStyle.wdAdjustNone)
-                                        oTable.Columns(c).Cells.VerticalAlignment = MSWord.WdCellVerticalAlignment.wdCellAlignVerticalCenter
-                                    End If
-                                Next c
-                                'Mostrar Datos
-                                For f = 0 To nf - 1
-                                    For c = 1 To nc - 2
-                                        dtConcepto = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla, dtt.Columns(c + 1).ColumnName)
-                                        Dim tipoDato As String = "C"
-                                        If dtConsulta.Rows.Count > 0 And dtConcepto.Rows.Count > 0 Then
-                                            tipoDato = dtConcepto.Rows(0)("TIP_DAT").ToString
+                                Dim dtt As DataTable = dict.Tabla
+                                Dim formatoT As List(Of GDFormatoTabla) = dict.Formato
+                                'If dtt.Rows.Count > 0 Then
+                                Dim oTable As MSWord.Table
+                                Dim wrdRng As MSWord.Range = wrdApp.Selection.Range() 'wrdDoc.Bookmarks.Item(oEndOfDoc).Range
+                                Dim nc As Integer = dtt.Columns.Count
+                                Dim nf As Integer = dtt.Rows.Count
+                                Dim nf_adicional As Integer = 0
+                                If dt.Rows(k)("Mostrar_Titulos").ToString = "SI" Then
+                                    nf_adicional = 1
+                                End If
+                                If nf = 0 Then
+                                    wrdRng.Text = ""
+                                Else
+                                    '- 2
+                                    oTable = wrdDoc.Tables.Add(wrdRng, nf + nf_adicional, nc - 1, oMissing, oMissing)
+                                    'SE AGREGA FORMATO DE TABLAS
+                                    Dim oPlantilla As New PPlantillas
+                                    'Dim dtConcepto As DataTable
+                                    'Dim dtConsulta As New DataTable
+
+                                    'dtConsulta = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla)
+
+                                    'oTable.Range.ParagraphFormat.SpaceAfter = 6
+                                    Dim f As Integer, c As Integer
+                                    ''Colocar Titulos
+                                    For c = 1 To nc - 1 ' - 2
+                                        If dt.Rows(k)("Mostrar_Titulos").ToString = "SI" Then
+                                            oTable.Cell(1, c).Range.Text = UCase(dtt.Columns(c - 1).ColumnName)
+                                            oTable.Cell(1, c).Range.Font.Bold = True
+                                            oTable.Cell(1, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphCenter
                                         End If
-                                        Dim valor As String
-                                        valor = dtt.Rows(f)(c + 1).ToString
-                                        valor = MostrarCampo(valor, tipoDato)
-                                        If tipoDato = "M" Then
-                                            oTable.Cell(f + 1 + nf_adicional, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphRight
-                                        Else
-                                            oTable.Cell(f + 1 + nf_adicional, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphJustifyMed
-                                            'wrdApp.Selection.ParagraphFormat.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphJustify
+                                        If Not formatoT Is Nothing Then
+                                            Dim ft As GDFormatoTabla = formatoT.Where(Function(t) t.NOM_CAM = dtt.Columns(c - 1).ColumnName).Single()
+
+                                            If Not (ft Is Nothing) Then
+                                                oTable.Columns(c).SetWidth(ft.ANCHO, MSWord.WdRulerStyle.wdAdjustNone)
+                                                oTable.Columns(c).Cells.VerticalAlignment = MSWord.WdCellVerticalAlignment.wdCellAlignVerticalCenter
+                                            End If
                                         End If
-                                        oTable.Cell(f + 1 + nf_adicional, c).Range.Text = valor
-                                        ''SE AGREGO EL FORMATO DE TABLAS MAS O MENOS COMO SHIRLEY
 
-                                        'Aquí la aplicación- inicializarla con la activa
-                                        oTable.Cell(f + 1 + nf_adicional, c).Select()
+                                        'dtConcepto = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla, dtt.Columns(c + 1).ColumnName)
+                                        'If dtConcepto.Rows.Count > 0 Then
+                                        'oTable.Columns(c).SetWidth(CInt(dtConcepto.Rows(0)("ANCHO").ToString), MSWord.WdRulerStyle.wdAdjustNone)
+                                        'oTable.Columns(c).Cells.VerticalAlignment = MSWord.WdCellVerticalAlignment.wdCellAlignVerticalCenter
+                                        'End If
+                                    Next c
+                                    'Mostrar Datos
 
-                                        wrdApp.Selection.MoveDown()
-                                        wrdApp.ActiveDocument.Select()
-                                        wrdApp.Selection.MoveDown()
+
+                                    For f = 0 To nf - 1
+                                        For c = 1 To nc - 1 ' - 2
+                                            Dim tipoDato As String = "C"
+                                            If Not formatoT Is Nothing Then
+                                                'dtConcepto = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla, dtt.Columns(c + 1).ColumnName
+                                                Dim ft As GDFormatoTabla = formatoT.Where(Function(t) t.NOM_CAM = dtt.Columns(c - 1).ColumnName).Single()
+
+                                                If formatoT.Count() > 0 And Not (ft Is Nothing) Then
+                                                    tipoDato = ft.TIP_DAT
+                                                End If
+
+                                            End If
+                                            Dim valor As String
+                                            valor = dtt.Rows(f)(c - 1).ToString
+                                            valor = MostrarCampo(valor, tipoDato)
+                                            If tipoDato = "M" Then
+                                                oTable.Cell(f + 1 + nf_adicional, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphRight
+                                            Else
+                                                oTable.Cell(f + 1 + nf_adicional, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphJustifyMed
+                                                'wrdApp.Selection.ParagraphFormat.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphJustify
+                                            End If
+                                            oTable.Cell(f + 1 + nf_adicional, c).Range.Text = valor
+                                            ''SE AGREGO EL FORMATO DE TABLAS MAS O MENOS COMO SHIRLEY
+
+                                            'Aquí la aplicación- inicializarla con la activa
+                                            oTable.Cell(f + 1 + nf_adicional, c).Select()
+
+                                            wrdApp.Selection.MoveDown()
+                                            wrdApp.ActiveDocument.Select()
+                                            wrdApp.Selection.MoveDown()
+
+                                        Next
                                     Next
-                                Next
-                                'oTable.Borders(Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom).LineStyle = MSWord.WdLineStyle.wdLineStyleDot
-                                oTable.Borders.Enable = IIf(dt.Rows(k)("Mostrar_Borde").ToString = "SI", True, False)
-                                'End If
+                                    'oTable.Borders(Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom).LineStyle = MSWord.WdLineStyle.wdLineStyleDot
+                                    oTable.Borders.Enable = IIf(dt.Rows(k)("Mostrar_Borde").ToString = "SI", True, False)
+                                    'End If
 
+                                End If
                             End If
+
                         Else
                             wrdApp.Selection.Find.Forward = Not wrdApp.Selection.Find.Forward
                             no_encontrado = no_encontrado + 1
@@ -475,6 +531,30 @@ Public Class GDocumentos
                 Ret = FormatNumber(Valor)
             Case "C"
                 Ret = UCase(Valor)
+            Case "D"
+                Dim fecha As Date
+                fecha = CDate(Valor)
+                Ret = Str(Day(fecha)).PadLeft(2, "0") + " DE " + UCase(MonthName(Month(fecha))) + " DE " + Year(fecha).ToString
+            Case "DL"
+                Dim fecha As Date
+                fecha = CDate(Valor)
+                Ret = Str(Day(fecha)).PadLeft(2, "0") + " DIAS DEL MES DE " + UCase(MonthName(Month(fecha))) + " DE " + Year(fecha).ToString
+            Case "d"
+                Dim fecha As Date
+                fecha = CDate(Valor)
+                Ret = Str(Day(fecha)).PadLeft(2, "0") + " de " + (MonthName(Month(fecha))).ToLower + " de " + Year(fecha).ToString
+            Case "dl"
+                Dim fecha As Date
+                fecha = CDate(Valor)
+                Ret = Str(Day(fecha)).PadLeft(2, "0") + " dias del mes de " + LCase(MonthName(Month(fecha))) + " de " + Year(fecha).ToString
+            Case "dc"
+                Dim fecha As Date
+                fecha = CDate(Valor)
+                Ret = Str(Day(fecha)).PadLeft(2, "0") + " - " + LCase(MonthName(Month(fecha))).Substring(0, 3) + " - " + Year(fecha).ToString
+            Case "dn"
+                Dim fecha As Date
+                fecha = CDate(Valor)
+                Ret = Str(Day(fecha)).PadLeft(2, "0") + "/" + Str(Month(fecha)).PadLeft(2, "0") + "/" + Year(fecha).ToString
         End Select
         Return Ret
     End Function

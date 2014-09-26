@@ -46,6 +46,9 @@
             </DataSources>
         </LocalReport>
     </rsweb:ReportViewer>
+
+    <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+
     <asp:ObjectDataSource ID="ObjF20_1a" runat="server" 
         OldValuesParameterFormatString="original_{0}" SelectMethod="getF20_1a" 
         TypeName="CtrF20_2013">

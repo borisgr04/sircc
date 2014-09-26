@@ -16,6 +16,17 @@ Public Class RP_Contratos
         Return dataTb
 
     End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetRecordsPlantillas(ByVal Cod_Con As String) As DataTable
+        Me.Conectar()
+        querystring = "SELECT  'RP' AS Concepto, NRO_RP as No, FEC_RP as Fecha,  VAL_RP as Valor FROM  Rp_contratos where Cod_Con=:Cod_Con"
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":Cod_Con", Cod_Con)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+
+    End Function
 
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Function GetxNroRp(Nro_Rp As String) As DataTable

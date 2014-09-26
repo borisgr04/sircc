@@ -248,5 +248,17 @@ Imports System.Data.Common
         Return CDec(dataTb.Rows(0)("Val_Adi").ToString)
     End Function
 
-
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetAdiciones(ByVal fecini As String, ByVal fecfin As String) As DataTable
+        Conectar()
+        ''Total Adicionado', 'Plazo Total', '% Adición', COD_CON
+        querystring = "  SELECT  idcontratista, nom_stip, a.NRO_ADI AS NUMEROAD, cod_con AS CONTRATO, a.pla_eje_adi AS PLAZO, a.VAL_ADI AS VALORADI, a.fec_sus_adi AS FECHA_SUS, a.legalizado AS LEGALIZADO, a.fec_apr_pol, contratista, obj_con, DEPENDENCIA, TIPO"
+        querystring += " FROM adiciones a INNER JOIN vcontratos_sinc_p c ON a.cod_con = c.numero"
+        querystring += " WHERE   a.fec_sus_adi between to_date('" + fecini + "','dd/mm/yyyy') and to_date('" + fecfin + "','dd/mm/yyyy') ORDER BY TIPO, NUMEROAD"
+        CrearComando(querystring)
+      
+        Dim data As DataTable = EjecutarConsultaDataTable()
+        Desconectar()
+        Return data
+    End Function
 End Class

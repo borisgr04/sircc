@@ -1,5 +1,5 @@
 ﻿Imports System.Data
-Partial Class Contratos_GDocumentos_SolicitudRPC
+Partial Class Contratos_GDocumentos_AddSolicitudRPC
     Inherits PaginaComun
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 

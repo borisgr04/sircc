@@ -35,15 +35,17 @@ Partial Class Contratos_GesContratos_Default
         ElseIf Me.Oper = "Editar" Then
             obj.Update(Pk1, CDate(txtFecDoc.Text), txtObs.Text, Publico.PuntoPorComa(Me.TxtValPago.Text), TxtNVisitas.Text, Publico.PuntoPorComa(TxtPorFis.Text))
         End If
+        MsgResult.Text = obj.Msg
+        Me.MsgBox(MsgResult, obj.lErrorG)
         If obj.lErrorG = False Then
             Limpiar()
             Habilitar(False)
             BtnNuevo.Enabled = True
+            Buscar()
+            grdEstContratos.DataBind()
         End If
-        MsgResult.Text = obj.Msg
-        Me.MsgBox(MsgResult, obj.lErrorG)
-        Buscar()
-        grdEstContratos.DataBind()
+       
+       
     End Sub
     Protected Sub Buscar()
         Dim c As New Contratos
