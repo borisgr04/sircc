@@ -44,6 +44,9 @@ Partial Class Informes4_SIAF20_SiaF20
         ObjF20_1a.SelectMethod = "getF20_1a"
         ReportViewer1.LocalReport.ReportPath = "Informes4\SIAF20\RptF20_1a.rdlc"
         ReportViewer1.LocalReport.Refresh()
+
+        GridView1.DataSource = ObjF20_1a
+        GridView1.DataBind()
     End Sub
 
     Protected Sub BtnF20_1B_Click(sender As Object, e As System.EventArgs) Handles BtnF20_1B.Click

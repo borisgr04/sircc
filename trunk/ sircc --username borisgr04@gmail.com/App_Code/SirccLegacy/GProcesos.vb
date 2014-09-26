@@ -109,6 +109,27 @@ Public Class GProcesos
     ''' <returns></returns>
     ''' <remarks></remarks>
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByPkCEAD(ByVal Num_PCon As String, ByVal Grupo As String) As DataTable
+        Me.Num_PCon = Num_PCon
+        Me.Conectar()
+        Grupo = IIf(String.IsNullOrEmpty(Grupo), "1", Grupo)
+        querystring = "SELECT * FROM VGProcesos where Pro_Sel_Nro=:NUm_Pcon and Grupo=:Grupo And Est_Con In ('CE','AD')"
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":NUm_Pcon", Num_PCon)
+        Me.AsignarParametroCadena(":Grupo", Grupo)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+
+    End Function
+
+    ''' <summary>
+    ''' Consulta de Contratos por llave primaria
+    ''' </summary>
+    ''' <param name="Num_PCon"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetByPkCtr(ByVal Num_PCon As String, ByVal Grupo As String) As DataTable
         Me.Num_PCon = Num_PCon
         Me.Conectar()

@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Partial Class Contratos_GDocumentos_Designacion
+Partial Class Contratos_GDocumentos_DesignacionAdicion
     Inherits PaginaComun
 
 
@@ -36,7 +36,7 @@ Partial Class Contratos_GDocumentos_Designacion
                 ElseIf dt.Rows.Count = 0 Or dtAddCto.Rows.Count = 0 Then
                     ltPlantilla.Text = "No se encontro número de Contrato o la adición"
                 Else
-                   
+
                     Dim dtSubTip As DataTable = oSubTip.GetbyPk(dt.Rows(0)("STIP_CON").ToString())
                     Dim NomSubTip As String = ""
                     If dtSubTip.Rows.Count > 0 Then
@@ -63,7 +63,7 @@ Partial Class Contratos_GDocumentos_Designacion
                     End If
                     strPlantilla = strPlantilla.Replace("{NOM_USUARIO}", NomUsu)
 
-                   
+
 
 
 

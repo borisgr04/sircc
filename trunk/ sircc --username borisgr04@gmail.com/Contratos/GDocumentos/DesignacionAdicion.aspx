@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="DesignacionAdicion.aspx.vb" Inherits="Contratos_GDocumentos_Designacion" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="DesignacionAdicion.aspx.vb" Inherits="Contratos_GDocumentos_DesignacionAdicion" %>
 
 <!DOCTYPE html>
 
@@ -49,7 +49,7 @@
                         DESIGNACIÓN DE SUPERVISIÓN Y/O INTERVENTORIA
                     </th>
                     <th style="width:20%">
-                          CONTRATO N°  
+                         MODIFICATORIO N°  
                     </th>
                 </tr>
                 <tr >
@@ -78,7 +78,7 @@
         <br />
         <br />
         <p>
-            Por medio de la presente, me permito comunicarle que el cargo que usted ocupa ha sido designado como Supervisor del adicional del Contrato de {CLASE_CONTRATO}: No <b>{NUMERO}</b> suscrito con: <b>{NOM_CONTRATISTA}</b>, cuyo Objeto consiste en: <b>{OBJETO}</b>.</p>
+            Por medio de la presente, me permito enviarle información del modifcatorio con su respectiva aprobación de poliza del contrato de {CLASE_CONTRATO} No <b>{NUMERO}</b> suscrito con: <b>{NOM_CONTRATISTA}</b>, cuyo Objeto consiste en: <b>{OBJETO}</b>.</p>
         <br />
         <br />
         Atentamente,
@@ -90,6 +90,7 @@
         <br />
         <br />
        <p class="txtsize"> Proyecto: {NOM_USUARIO}. </p><br />
+       <p class="txtsize"> Adjunto: CD con información del contaro en meción </p><br />
         <br />
         <br />
         

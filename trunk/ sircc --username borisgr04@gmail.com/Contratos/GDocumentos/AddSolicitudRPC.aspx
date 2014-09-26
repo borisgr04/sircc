@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="AddSolicitudRPC.aspx.vb" Inherits="Contratos_GDocumentos_SolicitudRPC" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="AddSolicitudRPC.aspx.vb" Inherits="Contratos_GDocumentos_AddSolicitudRPC" %>
 
 <!DOCTYPE html>
 
@@ -72,11 +72,6 @@
             <br />
              
         <br />    
-        <br />
-        
-        Atentamente,
-        <br />
-        <br />
         <br />
         <br />
         <br />
