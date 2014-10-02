@@ -383,9 +383,9 @@ Public Class GDocumentos
                                     'oTable.Range.ParagraphFormat.SpaceAfter = 6
                                     Dim f As Integer, c As Integer
                                     ''Colocar Titulos
-                                    For c = 1 To nc - 1 ' - 2
+                                    For c = 1 To nc - 1
                                         If dt.Rows(k)("Mostrar_Titulos").ToString = "SI" Then
-                                            oTable.Cell(1, c).Range.Text = UCase(dtt.Columns(c - 1).ColumnName)
+                                            oTable.Cell(1, c).Range.Text = (dtt.Columns(c - 1).ColumnName)
                                             oTable.Cell(1, c).Range.Font.Bold = True
                                             oTable.Cell(1, c).Range.Paragraphs.Alignment = MSWord.WdParagraphAlignment.wdAlignParagraphCenter
                                         End If
@@ -408,7 +408,7 @@ Public Class GDocumentos
 
 
                                     For f = 0 To nf - 1
-                                        For c = 1 To nc - 1 ' - 2
+                                        For c = 1 To nc - 1
                                             Dim tipoDato As String = "C"
                                             If Not formatoT Is Nothing Then
                                                 'dtConcepto = oPlantilla.GetFormatoTabla(Tabla, Ide_Pla, dtt.Columns(c + 1).ColumnName
@@ -542,29 +542,54 @@ Public Class GDocumentos
             Case "C"
                 Ret = UCase(Valor)
             Case "D"
-                Dim fecha As Date
-                fecha = CDate(Valor)
-                Ret = Str(Day(fecha)).PadLeft(2, "0") + " DE " + UCase(MonthName(Month(fecha))) + " DE " + Year(fecha).ToString
+                If IsDate(Valor) Then
+                    Dim fecha As Date
+                    fecha = CDate(Valor)
+                    Ret = Str(Day(fecha)).PadLeft(2, "0") + " DE " + UCase(MonthName(Month(fecha))) + " DE " + Year(fecha).ToString
+                Else
+                    Ret = "El Campo está vacio"
+                End If
             Case "DL"
-                Dim fecha As Date
-                fecha = CDate(Valor)
-                Ret = Str(Day(fecha)).PadLeft(2, "0") + " DIAS DEL MES DE " + UCase(MonthName(Month(fecha))) + " DE " + Year(fecha).ToString
+                If IsDate(Valor) Then
+                    Dim fecha As Date
+                    fecha = CDate(Valor)
+                    Ret = Str(Day(fecha)).PadLeft(2, "0") + " DIAS DEL MES DE " + UCase(MonthName(Month(fecha))) + " DE " + Year(fecha).ToString
+                Else
+                    Ret = "El Campo está vacio"
+                End If
             Case "d"
-                Dim fecha As Date
-                fecha = CDate(Valor)
-                Ret = Str(Day(fecha)).PadLeft(2, "0") + " de " + (MonthName(Month(fecha))).ToLower + " de " + Year(fecha).ToString
+                If IsDate(Valor) Then
+                    Dim fecha As Date
+                    fecha = CDate(Valor)
+                    Ret = Str(Day(fecha)).PadLeft(2, "0") + " de " + (MonthName(Month(fecha))).ToLower + " de " + Year(fecha).ToString
+                Else
+                    Ret = "El Campo está vacio"
+                End If
             Case "dl"
-                Dim fecha As Date
-                fecha = CDate(Valor)
-                Ret = Str(Day(fecha)).PadLeft(2, "0") + " dias del mes de " + LCase(MonthName(Month(fecha))) + " de " + Year(fecha).ToString
+                If IsDate(Valor) Then
+                    Dim fecha As Date
+                    fecha = CDate(Valor)
+                    Ret = Str(Day(fecha)).PadLeft(2, "0") + " dias del mes de " + LCase(MonthName(Month(fecha))) + " de " + Year(fecha).ToString
+                Else
+                    Ret = "El Campo está vacio"
+                End If
             Case "dc"
-                Dim fecha As Date
-                fecha = CDate(Valor)
-                Ret = Str(Day(fecha)).PadLeft(2, "0") + " - " + LCase(MonthName(Month(fecha))).Substring(0, 3) + " - " + Year(fecha).ToString
+                If IsDate(Valor) Then
+                    Dim fecha As Date
+                    fecha = CDate(Valor)
+                    Ret = Str(Day(fecha)).PadLeft(2, "0") + " - " + LCase(MonthName(Month(fecha))).Substring(0, 3) + " - " + Year(fecha).ToString
+                Else
+                    Ret = "El Campo está vacio"
+                End If
             Case "dn"
-                Dim fecha As Date
-                fecha = CDate(Valor)
-                Ret = Str(Day(fecha)).PadLeft(2, "0") + "/" + Str(Month(fecha)).PadLeft(2, "0") + "/" + Year(fecha).ToString
+                If IsDate(Valor) Then
+                    Dim fecha As Date
+                    fecha = CDate(Valor)
+                    'Ret = Str(Day(fecha)).PadLeft(2, "0") + "/" + Str(Month(fecha)).PadLeft(2, "0") + "/" + Year(fecha).ToString
+                    Ret = fecha.ToShortDateString()
+                Else
+                    Ret = "El Campo está vacio"
+                End If
         End Select
         Return Ret
     End Function

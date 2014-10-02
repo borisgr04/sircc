@@ -89,6 +89,9 @@
                         <td>Fecha </td>
                         <td>
                             <asp:TextBox ID="txtFecha" runat="server"></asp:TextBox>
+                            <ajaxToolkit:CalendarExtender ID="TxtFecIni_CalendarExtender" runat="server" Enabled="True"
+                            TargetControlID="TxtFecha">
+                            </ajaxToolkit:CalendarExtender>
                         </td>
                         <td>
                             <asp:ImageButton ID="BtnGen" runat="server" Height="32px" SkinID="IBtnMinuta" style="text-align: center" Width="32px" />
