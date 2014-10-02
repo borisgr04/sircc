@@ -5,20 +5,20 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Sircc_35_250614", ".", "{6E
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
 		Debug.AspNetCompiler.VirtualPath = "/Sircc_35_250614"
-		Debug.AspNetCompiler.PhysicalPath = "D:\x\BYA\Sitios_SIRCC\Sircc_35\Sircc_35_250614\"
+		Debug.AspNetCompiler.PhysicalPath = "..\Sircc_35_250614\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Sircc_35_250614\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/Sircc_35_250614"
-		Release.AspNetCompiler.PhysicalPath = "D:\x\BYA\Sitios_SIRCC\Sircc_35\Sircc_35_250614\"
+		Release.AspNetCompiler.PhysicalPath = "..\Sircc_35_250614\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Sircc_35_250614\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "8856"
+		VWDPort = "6546"
 	EndProjectSection
 EndProject
 Global

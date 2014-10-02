@@ -348,7 +348,7 @@ Public Class PContratos
 
         Me.num_reg = Me.EjecutarComando()
 
-        querystring = "UPDATE PCONTRATOS SET NUMGRUPOS=1, TIPO_PLAZO='M' WHERE PRO_SEL_NRO=:PRO_SEL_NRO"
+        querystring = "UPDATE PCONTRATOS SET NUMGRUPOS=1, TIPO_PLAZO='D' WHERE PRO_SEL_NRO=:PRO_SEL_NRO"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":PRO_SEL_NRO", Me.Num_PCon)
         EjecutarComando()

@@ -161,25 +161,35 @@ Public Class GDocumentos
 
         End If
         Try
+            Dim ctrdoc As New CtrDocPContratos
+            Dim ObjDoc As New EDocumentoWPDto
+
+
             CrearArchivo(pathTemporal, DocByte)
             '---------------------------------------------------
             progress = 10
-            'bg.ReportProgress(progress)
-            'If bg.CancellationPending = True Then
-            '    Ultimo_Msg = "Se Canceló la Generación de Minuta"
-            '    Me.Cancelado = True
-            '    lErrorG = False
-            '    Return False
-            'End If
             '---------------------------------------------------
             Dim MinutaBytes As Byte() = CruzarDatos()
             Dim Msg_Ins_Min As String = ""
             Dim lError_Ins_Min As Boolean = False
+
+            ObjDoc.Num_Proc = Num_Proc
+            ObjDoc.MinutaBase = DocByte
+            ObjDoc.Minuta = MinutaBytes
+            ObjDoc.MinutaPDF = docPDF
+            ObjDoc.TipDocumento = cTip_Doc
+            ObjDoc.Nombre = cNom_Tip_Doc
+            ObjDoc.Editable = Editable
+            ObjDoc.Id = ID
+            ObjDoc.Fec_Doc = Fec_Doc
+
             If Me.operacion = eoperacion.Generar Then
                 'Grupo, 
-                ws.SetDocumento2(Num_Proc, MinutaBytes, DocByte, cTip_Doc, Editable, Msg_Ins_Min, lError_Ins_Min, cNom_Tip_Doc, Fec_Doc)
+                'ws.SetDocumento2(Num_Proc, MinutaBytes, DocByte, cTip_Doc, Editable, Msg_Ins_Min, lError_Ins_Min, cNom_Tip_Doc, Fec_Doc)
+                ctrdoc.SetDocumento(ObjDoc)
             Else
-                ws.RegenerarDoc(Num_Proc, ID, MinutaBytes)
+                ctrdoc.UpdDocumento(ObjDoc)
+                'ws.RegenerarDoc(Num_Proc, ID, MinutaBytes)
             End If
             Ultimo_Msg += "Se Guarda el Documento en Base de Datos...."
             progress += 32
