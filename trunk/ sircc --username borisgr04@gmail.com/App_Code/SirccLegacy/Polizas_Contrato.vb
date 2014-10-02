@@ -62,7 +62,7 @@ Public Class Polizas_Contrato
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function GetRecordsPlantillas(ByVal Cod_Con As String) As DataTable
         Me.Conectar()
-        querystring = "SELECT NOM_ASE AS Aseguradora, NRO_POL as Poliza_No, NOM_POL as Amparo,FEC_INI AS Fecha_Inicio, FEC_POL as Fecha_Final, val_pol as Valor_Asegurado  FROM vPolizas_Contrato Where Cod_Con=:Cod_Con"
+        querystring = "SELECT  NRO_POL, NOM_POL, FEC_INI, FEC_POL, VAL_POL, NOM_ASE  FROM vPolizas_Contrato Where Cod_Con=:Cod_Con"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":Cod_Con", Cod_Con)
         'Throw New Exception(Me._Comando.CommandText)

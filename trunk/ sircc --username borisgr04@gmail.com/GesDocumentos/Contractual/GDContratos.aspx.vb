@@ -6,16 +6,16 @@ Partial Class GesDocumentos_Contractual_GDContratos
     Inherits PaginaComun
     Dim obj As GProcesos = New GProcesos
 
-    'Protected Sub GrdMin_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GrdMin.SelectedIndexChanged
+    Protected Sub GrdMin_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GrdMin.SelectedIndexChanged
 
-    '    If Me.TxtNprocA.Text <> "" Then
-    '        Redireccionar_Pagina("/ashx/VerMinuta.ashx?Num_Proc=" + Me.TxtNprocA.Text + "&Grupo=1" + "&ID=" + GrdMin.SelectedValue.ToString)
-    '    Else
-    '        LbMinuta.Text = "Debe presionar el botón abrir"
-    '        MsgBoxAlert(LbMinuta, True)
-    '    End If
+        If Me.TxtNprocA.Text <> "" Then
+            Redireccionar_Pagina("/ashx/VerMinuta.ashx?Num_Proc=" + Me.TxtNprocA.Text + "&Grupo=1" + "&ID=" + GrdMin.SelectedValue.ToString)
+        Else
+            LbMinuta.Text = "Debe presionar el botón abrir"
+            MsgBoxAlert(LbMinuta, True)
+        End If
 
-    'End Sub
+    End Sub
 
     Protected Sub BtnGen_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnGen.Click
 
@@ -70,54 +70,75 @@ Partial Class GesDocumentos_Contractual_GDContratos
                 'Crear DataTable Con Informacion de la Tabla
                 Dim dtCDP As DataTable = cdp.GetRecordsPlantillas(Me.TxtNprocA.Text)
                 gdTabla.Tabla = dtCDP
-                gdTabla.Formato = Nothing
+                'gdTabla.Formato = Nothing
 
-                'Por Cada Columna Hacer Esto
                 ft = New GDFormatoTabla()
-                ft.ANCHO = 10
-                ft.NOM_CAM = "NRO_CDP"
+                ft.NTABLA = "CDP"
+                ft.ANCHO = 200
+                ft.NOM_CAM = "CONCEPTO"
+                ft.DES_CAM = "Concepto"
+                ft.TIP_DAT = "C"
+                gdTabla.Formato.Add(ft)
+
+                ft = New GDFormatoTabla()
+                ft.NTABLA = "CDP"
+                ft.ANCHO = 100
+                ft.NOM_CAM = "NO"
                 ft.DES_CAM = "N° CDP"
                 ft.TIP_DAT = "C"
+                gdTabla.Formato.Add(ft)
 
-                'gdTabla.Formato.Add(ft)
 
-                'formato para otroa columan
                 ft = New GDFormatoTabla()
-                ft.ANCHO = 10
-                ft.NOM_CAM = "FEC_CDP"
-                ft.DES_CAM = "FECHA CDP"
-                ft.TIP_DAT = "D"
+                ft.NTABLA = "CDP"
+                ft.ANCHO = 100
+                ft.NOM_CAM = "FECHA"
+                ft.DES_CAM = "Fecha CDP"
+                ft.TIP_DAT = "dn"
+                gdTabla.Formato.Add(ft)
 
-                'gdTabla.Formato.Add(ft)
+                ft = New GDFormatoTabla()
+                ft.NTABLA = "CDP"
+                ft.ANCHO = 200
+                ft.NOM_CAM = "VALOR"
+                ft.DES_CAM = "Valor"
+                ft.TIP_DAT = "M"
+                gdTabla.Formato.Add(ft)
+
 
                 GM.AddDictionaryTablas("CDP", gdTabla)
 
 
-                'Por Cada tabla Hacer Esto
-
+                
                 gdTabla = New GDTabla()
-                'Crear DataTable Con Informacion de la Tabla
                 Dim dtRP As DataTable = rp.GetRecordsPlantillas(Me.TxtNprocA.Text)
                 gdTabla.Tabla = dtRP
-                gdTabla.Formato = Nothing
+                'gdTabla.Formato = Nothing
 
-                'Por Cada Columna Hacer Esto
                 ft = New GDFormatoTabla()
-                ft.ANCHO = 10
-                ft.NOM_CAM = "NRO_RP"
+                ft.NTABLA = "RP"
+                ft.ANCHO = 200
+                ft.NOM_CAM = "CONCEPTO"
+                ft.DES_CAM = "Concepto"
+                ft.TIP_DAT = "C"
+                gdTabla.Formato.Add(ft)
+
+                ft = New GDFormatoTabla()
+                ft.NTABLA = "RP"
+                ft.ANCHO = 100
+                ft.NOM_CAM = "NO"
                 ft.DES_CAM = "N° RP"
                 ft.TIP_DAT = "C"
+                gdTabla.Formato.Add(ft)
 
-                'gdTabla.Formato.Add(ft)
 
-                'formato para otroa columan
                 ft = New GDFormatoTabla()
-                ft.ANCHO = 10
-                ft.NOM_CAM = "FEC_RP"
+                ft.NTABLA = "RP"
+                ft.ANCHO = 100
+                ft.NOM_CAM = "FECHA"
                 ft.DES_CAM = "FECHA RP"
-                ft.TIP_DAT = "D"
-
-                'gdTabla.Formato.Add(ft)
+                ft.TIP_DAT = "dn"
+                gdTabla.Formato.Add(ft)
 
                 GM.AddDictionaryTablas("RP", gdTabla)
 
@@ -127,25 +148,50 @@ Partial Class GesDocumentos_Contractual_GDContratos
                 'Crear DataTable Con Informacion de la Tabla
                 Dim dtPol As DataTable = pol.GetRecordsPlantillas(Me.TxtNprocA.Text)
                 gdTabla.Tabla = dtPol
-                gdTabla.Formato = Nothing
-
-                'Por Cada Columna Hacer Esto
-                ft = New GDFormatoTabla()
-                ft.ANCHO = 10
-                ft.NOM_CAM = "NRO_RP"
-                ft.DES_CAM = "N° RP"
-                ft.TIP_DAT = "C"
-
-                'gdTabla.Formato.Add(ft)
+              
 
                 'formato para otroa columan
                 ft = New GDFormatoTabla()
-                ft.ANCHO = 10
-                ft.NOM_CAM = "FEC_RP"
-                ft.DES_CAM = "FECHA RP"
-                ft.TIP_DAT = "D"
+                ft.NTABLA = "POLIZA"
+                ft.ANCHO = 70
+                ft.NOM_CAM = "NRO_POL"
+                ft.DES_CAM = "Póliza No"
+                ft.TIP_DAT = "C"
+                gdTabla.Formato.Add(ft)
 
-                'gdTabla.Formato.Add(ft)
+                ft = New GDFormatoTabla()
+                ft.NTABLA = "POLIZA"
+                ft.ANCHO = 100
+                ft.NOM_CAM = "NOM_POL"
+                ft.DES_CAM = "Concepto del amparo"
+                ft.TIP_DAT = "C"
+                gdTabla.Formato.Add(ft)
+
+
+                ft = New GDFormatoTabla()
+                ft.NTABLA = "POLIZA"
+                ft.ANCHO = 80
+                ft.NOM_CAM = "FEC_INI"
+                ft.DES_CAM = "Fecha Inicio"
+                ft.TIP_DAT = "dn"
+                gdTabla.Formato.Add(ft)
+
+                ft = New GDFormatoTabla()
+                ft.NTABLA = "POLIZA"
+                ft.ANCHO = 80
+                ft.NOM_CAM = "FEC_POL"
+                ft.DES_CAM = "Fecha Final"
+                ft.TIP_DAT = "dn"
+                gdTabla.Formato.Add(ft)
+
+                ft = New GDFormatoTabla()
+                ft.NTABLA = "POLIZA"
+                ft.ANCHO = 90
+                ft.NOM_CAM = "VAL_POL"
+                ft.DES_CAM = "Valor Asegurado"
+                ft.TIP_DAT = "M"
+                gdTabla.Formato.Add(ft)
+
                 GM.AddDictionaryTablas("POLIZA", gdTabla)
 
 
