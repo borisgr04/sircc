@@ -121,7 +121,6 @@ Partial Class Procesos_GProcesoN_Default
 
             Cancelar()
             Me.TxtNprocA.Text = Request("Num_Proc")
-            
             Abrir()
         End If
 
@@ -779,7 +778,7 @@ Partial Class Procesos_GProcesoN_Default
     End Sub
 
     Protected Sub TxtNprocA_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtNprocA.TextChanged
-        Buscar("1")
+        'Buscar("1")
     End Sub
 
     Protected Sub CboTPlazo_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CboTPlazo.SelectedIndexChanged

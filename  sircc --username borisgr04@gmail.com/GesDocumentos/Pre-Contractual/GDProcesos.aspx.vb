@@ -116,30 +116,28 @@ Partial Class GesDocumentos_Pre_Contractual_GDProcesos
     End Sub
 
     Protected Sub grdDocP_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles grdDocP.RowCommand
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Me.grdDocP.SelectedIndex = index
+
         Select Case e.CommandName
             Case "Inhabilitar"
-                'If Estado <> "RA" Then
-                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-                Me.grdDocP.SelectedIndex = index
                 Dim obj As New DocPContratos
                 LbMinuta.Text = obj.Anular(Me.TxtNprocA.Text, Me.grdDocP.SelectedValue)
                 MsgBox(LbMinuta, obj.lErrorG)
                 grdDocP.DataBind()
-
-                'Else
-                'LbMinuta.Text = "El Contrato ya esta Radicado, No se puede Anular la Minuta"
-                'MsgBoxAlert(LbMinuta, True)
-                'End If
-
             Case "pdf"
-                Redireccionar_Pagina("/ashx/VerMinutaPDF.ashx?Num_Proc=" + Me.TxtNprocA.Text + "&Grupo=" + Me.CboGrupos.SelectedValue)
-
+                Redireccionar_Pagina("/ashx/VerPDoc.ashx?tipo=pdf&ID=" + grdDocP.SelectedValue.ToString)
+            Case "doc"
+                Redireccionar_Pagina("/ashx/VerPDoc.ashx?ID=" + grdDocP.SelectedValue.ToString)
         End Select
     End Sub
 
 
+    Protected Sub Page_Load1(sender As Object, e As EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            cboEtapas.SelectedValue = "02"
+            cboEtapas.Enabled = False
+        End If
 
-    Protected Sub grdDocP_SelectedIndexChanged(sender As Object, e As EventArgs) Handles grdDocP.SelectedIndexChanged
-        Redireccionar_Pagina("/ashx/VerPDoc.ashx?ID=" + grdDocP.SelectedValue.ToString)
     End Sub
 End Class

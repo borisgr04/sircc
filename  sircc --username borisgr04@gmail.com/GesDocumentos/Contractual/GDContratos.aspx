@@ -25,27 +25,25 @@
                             <asp:TextBox ID="TxtNprocA" runat="server" AutoPostBack="True" Width="200px"></asp:TextBox>
                         </td>
                        
-                        <td style="width: 50px">&nbsp;</td>
-                        
-                       
-                    </tr>
-
-
-                    <tr>
-                        <td>Grupo
+                        <td style="width: 50px">
                             <asp:ObjectDataSource ID="ObjGrupos" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetbyProc" TypeName="Grupos">
                                 <SelectParameters>
                                     <asp:ControlParameter ControlID="TxtNprocA" Name="Num_Proc" PropertyName="Text" Type="String" />
                                 </SelectParameters>
                             </asp:ObjectDataSource>
                         </td>
-                        <td>
-                            <asp:DropDownList ID="CboGrupos" runat="server" AutoPostBack="True" DataSourceID="ObjGrupos" DataTextField="Grupos" DataValueField="Grupo">
+                        
+                       
+                        <td style="width: 50px">
+                            <asp:DropDownList ID="CboGrupos" runat="server" AutoPostBack="True" DataSourceID="ObjGrupos" DataTextField="Grupos" DataValueField="Grupo" Visible="False">
                                 <asp:ListItem Value="0">Seleccione...</asp:ListItem>
                             </asp:DropDownList>
                         </td>
-                        <td style="width: 30px">&nbsp;</td>
+                        
+                       
                     </tr>
+
+
                     <tr>
                         <td>Etapa<asp:ObjectDataSource ID="ObjEtapa" runat="server" InsertMethod="Insert" OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" TypeName="Etapas" UpdateMethod="Update">
                             <InsertParameters>
@@ -65,67 +63,71 @@
                             <asp:DropDownList ID="cboEtapas" runat="server" AutoPostBack="True" DataSourceID="ObjEtapa" DataTextField="NOM_ETA" DataValueField="COD_ETA">
                             </asp:DropDownList>
                         </td>
-                        <td>
-                            &nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>Tipo<asp:ObjectDataSource ID="ObjTipDoc" runat="server" InsertMethod="Insert" OldValuesParameterFormatString="original_{0}" SelectMethod="GetbyEtapa" TypeName="Tip_Doc" UpdateMethod="Update">
-                            <InsertParameters>
-                                <asp:Parameter Name="Cod_Tip" Type="String" />
-                                <asp:Parameter Name="Des_Tip" Type="String" />
-                                <asp:Parameter Name="Est_Tip" Type="String" />
-                                <asp:Parameter Name="Cod_Etapa" Type="String" />
-                            </InsertParameters>
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="cboEtapas" Name="Cod_Eta" PropertyName="SelectedValue" Type="String" />
-                            </SelectParameters>
-                            <UpdateParameters>
-                                <asp:Parameter Name="Cod_Tip_O" Type="String" />
-                                <asp:Parameter Name="Cod_Tip" Type="String" />
-                                <asp:Parameter Name="Des_Tip" Type="String" />
-                                <asp:Parameter Name="Est_Tip" Type="String" />
-                                <asp:Parameter Name="Cod_Etapa" Type="String" />
-                            </UpdateParameters>
-                            </asp:ObjectDataSource>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="cboTipDoc" runat="server" AutoPostBack="True" DataSourceID="ObjTipDoc" DataTextField="DES_TIP" DataValueField="COD_TIP">
-                            </asp:DropDownList>
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>Plantilla<asp:ObjectDataSource ID="ObjPlantillas" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetPreCon" TypeName="PPlantillas">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="cboTipDoc" Name="CODIGO" PropertyName="SelectedValue" Type="String" />
-                            </SelectParameters>
-                            </asp:ObjectDataSource>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="CboPlantilla" runat="server" DataSourceID="ObjPlantillas" DataTextField="Nom_Pla" DataValueField="Ide_Pla" Height="21px" Width="226px">
-                            </asp:DropDownList>
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>Fecha </td>
-                        <td>
-                            <asp:TextBox ID="txtFecha" runat="server"></asp:TextBox>
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>
-                            <asp:ImageButton ID="BtnGen" runat="server" Height="32px" SkinID="IBtnMinuta" style="text-align: center" Width="32px" />
-                        </td>
-                    </tr>
-                    <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td>Generar Archivo</td>
+                        <tr>
+                            <td>Tipo<asp:ObjectDataSource ID="ObjTipDoc" runat="server" InsertMethod="Insert" OldValuesParameterFormatString="original_{0}" SelectMethod="GetbyEtapa" TypeName="Tip_Doc" UpdateMethod="Update">
+                                <InsertParameters>
+                                    <asp:Parameter Name="Cod_Tip" Type="String" />
+                                    <asp:Parameter Name="Des_Tip" Type="String" />
+                                    <asp:Parameter Name="Est_Tip" Type="String" />
+                                    <asp:Parameter Name="Cod_Etapa" Type="String" />
+                                </InsertParameters>
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="cboEtapas" Name="Cod_Eta" PropertyName="SelectedValue" Type="String" />
+                                </SelectParameters>
+                                <UpdateParameters>
+                                    <asp:Parameter Name="Cod_Tip_O" Type="String" />
+                                    <asp:Parameter Name="Cod_Tip" Type="String" />
+                                    <asp:Parameter Name="Des_Tip" Type="String" />
+                                    <asp:Parameter Name="Est_Tip" Type="String" />
+                                    <asp:Parameter Name="Cod_Etapa" Type="String" />
+                                </UpdateParameters>
+                                </asp:ObjectDataSource>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="cboTipDoc" runat="server" AutoPostBack="True" DataSourceID="ObjTipDoc" DataTextField="DES_TIP" DataValueField="COD_TIP">
+                                </asp:DropDownList>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Plantilla<asp:ObjectDataSource ID="ObjPlantillas" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetPreCon" TypeName="PPlantillas">
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="cboTipDoc" Name="CODIGO" PropertyName="SelectedValue" Type="String" />
+                                </SelectParameters>
+                                </asp:ObjectDataSource>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="CboPlantilla" runat="server" DataSourceID="ObjPlantillas" DataTextField="Nom_Pla" DataValueField="Ide_Pla" Height="21px" Width="226px">
+                                </asp:DropDownList>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha </td>
+                            <td>
+                                <asp:TextBox ID="txtFecha" runat="server"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <asp:ImageButton ID="BtnGen" runat="server" Height="32px" SkinID="IBtnMinuta" style="text-align: center" Width="32px" />
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>Generar Archivo</td>
+                            <td>&nbsp;</td>
+                        </tr>
                     </tr>
                 </table>
 
@@ -177,14 +179,14 @@
                             <asp:TextBox ID="TxtLog" ReadOnly="true" Height="300" runat="server" Text="" TextMode="MultiLine"
                                 Width="100%" Visible="False"></asp:TextBox>
                             <br />
-                            Minuta del Contrato<asp:GridView ID="GrdMin" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="ObjPGContratosM" EnableModelValidation="True">
+                           <%-- Minuta del Contrato<asp:GridView ID="GrdMin" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="ObjPGContratosM" EnableModelValidation="True">
                                 <Columns>
                                     <asp:BoundField DataField="Fec_Reg" HeaderText="Fecha de Generación" />
                                     <asp:CommandField ButtonType="Image" HeaderText="Ver .Doc" SelectImageUrl="~/images/2012/EditarM.png" SelectText="Ver" ShowSelectButton="True" />
                                     <asp:ButtonField ButtonType="Image" CommandName="pdf" HeaderText="Ver PDF" ImageUrl="~/images/2013/pdf.png" Text="Ver PDF" />
                                     <asp:ButtonField ButtonType="Image" CommandName="Inhabilitar" HeaderText="Anular" ImageUrl="~/images/2012/AnularMinuta.png" Text="Anular" />
                                 </Columns>
-                            </asp:GridView>
+                            </asp:GridView>--%>
                         </td>
                         <td>&nbsp;
                         </td>

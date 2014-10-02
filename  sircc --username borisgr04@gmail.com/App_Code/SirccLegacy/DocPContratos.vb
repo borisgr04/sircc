@@ -267,18 +267,9 @@ Public Class DocPContratos
     Public Function GetDocs2(ByVal NUM_PROC As String) As DataTable
         Me.Conectar()
 
-        querystring = "SELECT dc.num_proc, dc.ID, dc.estado, dc.fec_doc, dc.tipdocumento,"
-        querystring += "dc.editable, dc.nombre, td.nom_eta, td.des_tip,"
-        querystring += " CASE"
-        querystring += " WHEN dc.editable = '1' "
-        querystring += " THEN 'EDITABLE' "
-        querystring += " ELSE 'NO EDITABLE' "
-        querystring += " END nom_editable, "
-        querystring += " CASE "
-        querystring += " WHEN dc.estado = 'AC' "
-        querystring += " THEN 'ACTIVO' "
-        querystring += " ELSE 'INACTIVO' "
-        querystring += " END nom_estado, dc.fec_reg "
+        querystring = "SELECT dc.num_proc, dc.ID, dc.fec_doc, dc.tipdocumento,"
+        querystring += "dc.nombre,"
+        querystring += " dc.fec_reg "
         querystring += " FROM docpcontratos dc LEFT JOIN vtip_doc td ON td.cod_tip = dc.tipdocumento  Where estado='AC' and NUM_PROC=:NUM_PROC"
 
         Me.CrearComando(querystring)

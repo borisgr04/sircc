@@ -47,18 +47,7 @@
                         <td style="width: 30px">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>Etapa<asp:ObjectDataSource ID="ObjEtapa" runat="server" InsertMethod="Insert" OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" TypeName="Etapas" UpdateMethod="Update">
-                            <InsertParameters>
-                                <asp:Parameter Name="Cod_Eta" Type="String" />
-                                <asp:Parameter Name="Nom_Eta" Type="String" />
-                                <asp:Parameter Name="Estado" Type="String" />
-                            </InsertParameters>
-                            <UpdateParameters>
-                                <asp:Parameter Name="Cod_Eta_O" Type="String" />
-                                <asp:Parameter Name="Cod_Eta" Type="String" />
-                                <asp:Parameter Name="Nom_Eta" Type="String" />
-                                <asp:Parameter Name="Estado" Type="String" />
-                            </UpdateParameters>
+                        <td>Etapa<asp:ObjectDataSource ID="ObjEtapa" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetRecords" TypeName="Etapas">
                             </asp:ObjectDataSource>
                         </td>
                         <td>
@@ -70,22 +59,11 @@
                     </tr>
                     <tr>
                         <td>Tipo<asp:ObjectDataSource ID="ObjTipDoc" runat="server" InsertMethod="Insert" OldValuesParameterFormatString="original_{0}" SelectMethod="GetbyEtapa" TypeName="Tip_Doc" UpdateMethod="Update">
-                            <InsertParameters>
-                                <asp:Parameter Name="Cod_Tip" Type="String" />
-                                <asp:Parameter Name="Des_Tip" Type="String" />
-                                <asp:Parameter Name="Est_Tip" Type="String" />
-                                <asp:Parameter Name="Cod_Etapa" Type="String" />
-                            </InsertParameters>
+                            
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="cboEtapas" Name="Cod_Eta" PropertyName="SelectedValue" Type="String" />
                             </SelectParameters>
-                            <UpdateParameters>
-                                <asp:Parameter Name="Cod_Tip_O" Type="String" />
-                                <asp:Parameter Name="Cod_Tip" Type="String" />
-                                <asp:Parameter Name="Des_Tip" Type="String" />
-                                <asp:Parameter Name="Est_Tip" Type="String" />
-                                <asp:Parameter Name="Cod_Etapa" Type="String" />
-                            </UpdateParameters>
+                            
                             </asp:ObjectDataSource>
                         </td>
                         <td>
@@ -112,20 +90,21 @@
                         <td>
                             <asp:TextBox ID="txtFecha" runat="server"></asp:TextBox>
                         </td>
-                        <td>&nbsp;</td>
+                        <td>
+                            <asp:ImageButton ID="BtnGen" runat="server" Height="32px" SkinID="IBtnMinuta" style="text-align: center" Width="32px" />
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             &nbsp;</td>
                         <td>&nbsp;</td>
                         <td>
-                            <asp:ImageButton ID="BtnGen" runat="server" Height="32px" SkinID="IBtnMinuta" style="text-align: center" Width="32px" />
-                        </td>
+                            Generar Archivo</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td>Generar Archivo</td>
+                        <td>&nbsp;</td>
                     </tr>
                 </table>
 
@@ -134,26 +113,13 @@
 
                 <table style="width: 100%;">
                     <tr>
-                        <td>&nbsp;
-                        </td>
-                        <td>&nbsp;
-                        </td>
-                        <td>&nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <br />
-                        </td>
-                    </tr>
-                    <tr>
                         <td>
                             <br />
                             Lista de Documentos<asp:GridView ID="grdDocP" runat="server" DataSourceID="ObjDocP" EnableModelValidation="True" DataKeyNames="Id">
                                 <Columns>
-                                    <asp:CommandField ShowSelectButton="True" />
-                                    <asp:CommandField SelectText="Ver" HeaderText="Ver .Doc" SelectImageUrl="~/images/2012/EditarM.png"
-                                        ShowSelectButton="True" ButtonType="Image" />
+                                    
+                                    <asp:ButtonField ButtonType="Image" HeaderText="Ver DOC" ImageUrl="~/images/2012/EditarM.png"
+                                        CommandName="doc" Text="Ver PDF" />
                                     <asp:ButtonField ButtonType="Image" HeaderText="Ver PDF" ImageUrl="~/images/2013/pdf.png"
                                         CommandName="pdf" Text="Ver PDF" />
                                     <asp:ButtonField ButtonType="Image" HeaderText="Anular" ImageUrl="~/images/2012/AnularMinuta.png"
@@ -177,10 +143,11 @@
                             <asp:TextBox ID="TxtLog" ReadOnly="true" Height="300" runat="server" Text="" TextMode="MultiLine"
                                 Width="100%" Visible="False"></asp:TextBox>
                             <br />
-                            Minuta del Contrato<asp:GridView ID="GrdMin" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="ObjPGContratosM" EnableModelValidation="True">
+                            Minuta del Contrato
+                            <asp:GridView ID="GrdMin" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="ObjPGContratosM" EnableModelValidation="True">
                                 <Columns>
                                     <asp:BoundField DataField="Fec_Reg" HeaderText="Fecha de Generación" />
-                                    <asp:CommandField ButtonType="Image" HeaderText="Ver .Doc" SelectImageUrl="~/images/2012/EditarM.png" SelectText="Ver" ShowSelectButton="True" />
+                                    <asp:ButtonField ButtonType="Image" CommandName="doc" HeaderText="Ver DOC" ImageUrl="~/images/2012/EditarM.png" Text="Ver Doc" />
                                     <asp:ButtonField ButtonType="Image" CommandName="pdf" HeaderText="Ver PDF" ImageUrl="~/images/2013/pdf.png" Text="Ver PDF" />
                                     <asp:ButtonField ButtonType="Image" CommandName="Inhabilitar" HeaderText="Anular" ImageUrl="~/images/2012/AnularMinuta.png" Text="Anular" />
                                 </Columns>

@@ -421,7 +421,9 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:DropDownList ID="cboDep" runat="server" DataSourceID="ObjDep" DataTextField="nom_dep"
+                                                    
+
+                                                    <asp:DropDownList ID="CboDepP" runat="server" DataSourceID="ObjDepDel" DataTextField="nom_dep"
                                                         DataValueField="cod_dep" Width="250px">
                                                     </asp:DropDownList>
                                                 </td>
@@ -429,7 +431,7 @@
                                                     &nbsp;
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="CboDepP" runat="server" DataSourceID="ObjDepDel" DataTextField="nom_dep"
+                                                    <asp:DropDownList ID="cboDep" runat="server" DataSourceID="ObjDep" DataTextField="nom_dep"
                                                         DataValueField="cod_dep" Width="250px">
                                                     </asp:DropDownList>
                                                 </td>
