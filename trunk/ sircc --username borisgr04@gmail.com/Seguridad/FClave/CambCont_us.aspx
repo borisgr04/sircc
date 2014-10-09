@@ -7,7 +7,7 @@
     &nbsp;
     <asp:Label ID="Tit" runat="server" CssClass="Titulo" Text="Forzar Cambio de Contraseña"></asp:Label>
     <br />
-    <asp:Label ID="LMSgBox" runat="server"></asp:Label><br />
+    <asp:Label SkinID="MsgResult"  ID="LMSgBox" runat="server"></asp:Label><br />
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     &nbsp;<br />
     <table style="text-align: center">

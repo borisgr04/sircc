@@ -127,6 +127,7 @@
                 EnableModelValidation="True">
 <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
 <Columns>
+    <asp:CommandField ShowSelectButton="True" />
     <asp:TemplateField HeaderText="Seleccionar">
         <ItemTemplate>
             <asp:CheckBox ID="ChkProp" runat="server" Checked='<%# eval("est") %>'/>

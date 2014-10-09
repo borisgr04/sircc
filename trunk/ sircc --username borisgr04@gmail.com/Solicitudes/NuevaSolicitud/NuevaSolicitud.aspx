@@ -368,19 +368,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="5">
                             <asp:TextBox ID="TxtIde" runat="server" AutoPostBack="True" CssClass="txt" Width="121px"></asp:TextBox>
-                        </td>
-                        <td>
                             <asp:Button ID="BtnBCon" runat="server" CausesValidation="False" Text="..." />
-                        </td>
-                        <td>
-                            <asp:TextBox ID="TxtNom" runat="server" CssClass="txt" ReadOnly="True" Width="100%"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender ID="TxtIde_FilteredTextBoxExtender1" runat="server"
-                                Enabled="True" FilterType="Numbers" TargetControlID="TxtIde" ValidChars="">
-                            </ajaxToolkit:FilteredTextBoxExtender>
-                        </td>
-                        <td>
+                            <asp:TextBox ID="TxtNom" runat="server" CssClass="txt" ReadOnly="True" Width="399px"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="TxtIde_FilteredTextBoxExtender1" runat="server" Enabled="True" FilterType="Numbers" TargetControlID="TxtIde" ValidChars="">
+                            </cc1:FilteredTextBoxExtender>
                             &nbsp;
                         </td>
                     </tr>

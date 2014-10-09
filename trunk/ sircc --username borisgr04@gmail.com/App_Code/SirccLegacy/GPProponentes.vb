@@ -411,6 +411,7 @@ Public Class GPProponentes
                         Me.AsignarParametroCadena(":Grupo", Grupo)
                         EjecutarComando()
                         NumAdj += 1
+
                     End If
                     numFila = (numFila + 1)
                 Loop
@@ -425,6 +426,46 @@ Public Class GPProponentes
         Catch ex As Exception
             Me.Msg = "Error:" + ex.Message
             'Me.CancelarTransaccion()
+            Me.lErrorG = True
+        Finally
+            Me.Desconectar()
+        End Try
+        Return Msg
+    End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
+    Public Function Adjudicar(Ide_Prop As String, ByVal NUM_PROC As String, ByVal FECHA_ADJUDICACION As Date, ByVal Grupo As String) As String
+        Me.Conectar()
+        Me.ComenzarTransaccion()
+        
+        Try
+            querystring = "UPDATE GPProponentes SET ADJUDICADO='N' WHERE NUM_PROC='" + NUM_PROC + "' And Grupo='" + Grupo + "'"
+            Me.CrearComando(querystring)
+            num_reg = EjecutarComando()
+
+            querystring = "UPDATE GPProponentes SET ADJUDICADO='S', FECHA_ADJUDICACION=to_date(:FECHA_ADJUDICACION,'dd/mm/yyyy') WHERE NUM_PROC=:NUM_PROC AND IDE_PROP=:IDE_PROP And Grupo=:Grupo"
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":FECHA_ADJUDICACION", FECHA_ADJUDICACION)
+            Me.AsignarParametroCadena(":NUM_PROC", NUM_PROC)
+            Me.AsignarParametroCadena(":IDE_PROP", Ide_Prop)
+            Me.AsignarParametroCadena(":Grupo", Grupo)
+            num_reg += EjecutarComando()
+
+
+            querystring = "UPDATE gprocesos SET IDE_CON=:IDE_PROP WHERE PRO_SEL_NRO=:NUM_PROC And Grupo=:Grupo"
+            Me.CrearComando(querystring)
+            Me.AsignarParametroCadena(":NUM_PROC", NUM_PROC)
+            Me.AsignarParametroCadena(":IDE_PROP", Ide_Prop)
+            Me.AsignarParametroCadena(":Grupo", Grupo)
+            num_reg += EjecutarComando()
+
+                
+            Msg = "Se adjudico con exitó el Proceso al Proponente " & Ide_Prop + " Filas Afectadas:" + num_reg.ToString
+            lErrorG = False
+
+            ConfirmarTransaccion()
+        Catch ex As Exception
+            Me.Msg = "Error:" + ex.Message
+            Me.CancelarTransaccion()
             Me.lErrorG = True
         Finally
             Me.Desconectar()
