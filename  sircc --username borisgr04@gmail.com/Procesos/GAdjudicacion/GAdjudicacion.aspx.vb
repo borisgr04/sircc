@@ -30,9 +30,11 @@ Partial Class Procesos_GAdjudicacion_Default
     End Sub
 
     Protected Sub IbAdjudicar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles IbAdjudicar.Click
+        Dim Ide_Prop As String = Me.GridView1.SelectedValue
+
         If DetPContrato1.Encontrado Then
             If IsDate(TxtFecAdju.Text) Then
-                MsgResult.Text = obj.Adjudicar(Me.GridView1, Me.DetPContrato1.CodigoPContrato, CDate(TxtFecAdju.Text).ToShortDateString, Me.DetPContrato1.Grupo)
+                MsgResult.Text = obj.Adjudicar(Ide_Prop, Me.DetPContrato1.CodigoPContrato, CDate(TxtFecAdju.Text).ToShortDateString, Me.DetPContrato1.Grupo)
                 MsgBox(MsgResult, obj.lErrorG)
                 GridView1.DataBind()
             Else

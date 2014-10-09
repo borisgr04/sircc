@@ -268,7 +268,7 @@ Public Class Terceros
 
             Me.Conectar()
 
-            Me.ComenzarTransaccion()
+            'Me.ComenzarTransaccion()
 
             ape1 = UCase(ape1)
             ape2 = IIf(UCase(ape2) <> "", UCase(ape2), " ")
@@ -302,11 +302,11 @@ Public Class Terceros
 
             Me.EjecutarComando()
 
-            Me.ConfirmarTransaccion()
+            'Me.ConfirmarTransaccion()
             lErrorG = False
         Catch ex As Exception
             Msg = ex.Message
-            Me.CancelarTransaccion()
+            'Me.CancelarTransaccion()
             lErrorG = True
         Finally
             Me.Desconectar()
