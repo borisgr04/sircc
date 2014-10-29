@@ -15,6 +15,21 @@
 <br />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+
+
+            <telerik:RadTabStrip ID="RadTabStrip1" runat="server" SelectedIndex="0" 
+    Skin="Windows7" MultiPageID="RadMultiPage1">
+    <Tabs>
+        <telerik:RadTab runat="server" Text="Radicación" Selected="True">
+        </telerik:RadTab>
+        <telerik:RadTab runat="server" Text="Histórico de Modificatorios">
+        </telerik:RadTab>
+    </Tabs>
+</telerik:RadTabStrip>
+<telerik:RadMultiPage ID="RadMultiPage1" Runat="server" SelectedIndex="0">
+    <telerik:RadPageView ID="RadPageView1" runat="server">
+        
+
             <table ID="TABLE1">
                 <tr>
                     <td class="Titulos" colspan="2" style="text-align: center">
@@ -134,6 +149,14 @@
                         &nbsp;</td>
                 </tr>
             </table>
+            </telerik:RadPageView>
+<telerik:RadPageView ID="RadPageView2" runat="server">
+    <br />
+            <asp:GridView ID="grdCesiones" runat="server"></asp:GridView>
+    </telerik:RadPageView>
+    </telerik:RadMultiPage>
+            
+
         </ContentTemplate>
     </asp:UpdatePanel>
     <ajaxToolkit:ModalPopupExtender ID="ModalPopup" runat="server" 
