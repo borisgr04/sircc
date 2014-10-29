@@ -51,7 +51,7 @@ Partial Class GesDocumentos_Pre_Contractual_GDProcesos
 
             If ESProceso = "SI" Then
                 Dim proc As New ConGProcesos
-                GM.dtDatosCruzas = proc.GetByPkC(GM.Num_Proc, GM.Grupo)
+                GM.dtDatosCruzas = proc.GetByPkC_Plantillas(GM.Num_Proc, GM.Grupo)
             Else
                 ''Asignar una consulta con los datos requeridos ademas se debe asignar el nombre de la vista
                 ''GM.dtDatosCruzas = 
