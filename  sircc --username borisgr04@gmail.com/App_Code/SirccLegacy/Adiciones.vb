@@ -16,6 +16,27 @@ Imports System.Data.Common
         End Get
     End Property
 
+    <DataObjectMethodAttribute(DataObjectMethodType.Update, True)> _
+    Public Overloads Function Update(ByVal Nro_Adi As String, OBSER As String) As String
+        Try
+            Conectar()
+            querystring = "UPDATE ADICIONES SET OBSER=:OBSER WHERE Nro_Adi = :Nro_Adi "
+            CrearComando(querystring)
+            AsignarParametroCadena(":Nro_Adi", Nro_Adi)
+            AsignarParametroCadena(":OBSER", OBSER)
+            num_reg = EjecutarComando()
+            Msg = MsgOk + " Filas Afectadas " + num_reg.ToString
+            lErrorG = False
+        Catch ex As Exception
+            lErrorG = True
+            Msg = ex.Message
+        Finally
+            Desconectar()
+        End Try
+        Return Msg
+    End Function
+
+
     <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
     Public Overloads Function Delete(ByVal Nro_Adi As String) As String
         Try
@@ -170,6 +191,7 @@ Imports System.Data.Common
                 AsignarParametroCadena(":VIG_ADI", vigencia) 'Vigencia en la cual se realiza la adición
                 AsignarParametroCadena(":NRO_ADI", nro)
                 AsignarParametroCadena(":TIP_ADI", tip)
+
                 AsignarParametroCadena(":OBSER", OBSER)
                 AsignarParametroDecimal(":VAL_ADI", valor)
 
