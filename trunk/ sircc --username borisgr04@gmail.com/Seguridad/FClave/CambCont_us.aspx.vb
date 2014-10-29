@@ -12,11 +12,14 @@ Partial Class Seguridad_Usuarios_Cam_CambCont_us
     End Sub
 
     Protected Sub BTfor_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BTfor.Click
-
-        Dim obj As Usuarios = New Usuarios
-        Me.LMSgBox.Text = obj.Forzar_Cambio_Clave(Me.Tus.Text, Me.Tcont.Text)
-        Me.MsgBox(Me.LMSgBox, obj.lErrorG)
-
+        If Me.Tcont.Text = Me.Tconf.Text Then
+            Dim obj As Usuarios = New Usuarios
+            Me.MsgResult.Text = obj.Forzar_Cambio_Clave(Me.Tus.Text, Me.Tcont.Text)
+            Me.MsgBox(Me.MsgResult, obj.lErrorG)
+        Else
+            Me.MsgResult.Text = "La Nueva contraseña y la confirmación de la contraseña no coinciden"
+            Me.MsgBox(Me.MsgResult, True)
+        End If
     End Sub
 
   
