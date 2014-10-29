@@ -1,16 +1,26 @@
 <%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="CambCont_us.aspx.vb" Inherits="Seguridad_Usuarios_Cam_CambCont_us" title="Untitled Page" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" Runat="Server">
-<div class="demoarea">
+    <div class="demoarea">
     <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </ajaxToolkit:ToolkitScriptManager>
     &nbsp;
     <asp:Label ID="Tit" runat="server" CssClass="Titulo" Text="Forzar Cambio de Contraseña"></asp:Label>
     <br />
-    <asp:Label SkinID="MsgResult"  ID="LMSgBox" runat="server"></asp:Label><br />
+       
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     &nbsp;<br />
     <table style="text-align: center">
+        <tr>
+            <td style="width: 20px; height: 22px">
+                &nbsp;</td>
+            <td style="height: 22px; " colspan="3">
+                <%--<asp:Label ID="LMSgBox" runat="server"></asp:Label>--%>
+                <asp:Label ID="MsgResult" runat="server" Height="30px" Text="Label" Visible="False"
+                    Width="80%"></asp:Label>
+    </td>
+
+        </tr>
         <tr>
             <td style="width: 20px; height: 22px">
             </td>
@@ -18,7 +28,7 @@
                 Usuario &nbsp;</td>
             <td style="width: 183px; height: 22px">
                 <asp:TextBox ID="Tus" runat="server"></asp:TextBox></td>
-            <td style="width: 389px; height: 22px">
+            <td style="width: 389px; height: 22px; text-align: left;">
                 <asp:RequiredFieldValidator ID="ReqUs" runat="server" ControlToValidate="Tus" ErrorMessage="Digite el Usuario"
                     ValidationGroup="Forzar">*</asp:RequiredFieldValidator></td>
         </tr>
@@ -26,13 +36,13 @@
             <td style="width: 20px; height: 23px">
             </td>
             <td style="width: 171px; height: 23px; text-align: right">
-                Nuevo Contraseña
+                Nueva Contraseña
             </td>
             <td style="width: 183px; height: 23px">
                 <asp:TextBox ID="Tcont" runat="server" TextMode="Password"></asp:TextBox></td>
             <td style="width: 389px; height: 23px; text-align: left;">
                 <asp:RequiredFieldValidator ID="ReqNuev" runat="server" ControlToValidate="Tcont"
-                    ErrorMessage="Digite la Comfirmacio0n de la Contraseña" ValidationGroup="Forzar">*</asp:RequiredFieldValidator>
+                    ErrorMessage="Digite la Comfirmación de la Contraseña" ValidationGroup="Forzar">*</asp:RequiredFieldValidator>
                 <asp:Label ID="TxtClave_HelpLabel" runat="server"></asp:Label></td>
         </tr>
         <tr>

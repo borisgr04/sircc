@@ -31,6 +31,19 @@ Public Class ConGProcesos
         Return dataTb
     End Function
 
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetByPkC_Plantillas(ByVal Num_Proc As String, ByVal Grupo As String) As DataTable
+        Me.Num_PCon = Num_PCon
+        Me.Conectar()
+        querystring = "SELECT * FROM VGPROCESOSC_Plantillas where Pro_Sel_Nro=:Num_Proc AND GRUPO=:Grupo"
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":Num_Proc", Num_Proc)
+        Me.AsignarParametroCadena(":Grupo", Grupo)
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
+
     ''' <summary>
     ''' Procesos para el Usuario Actual
     ''' </summary>
