@@ -36,4 +36,10 @@ Partial Class Contratos_Cesiones_Default
     Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
         VerModalPopup("CON")
     End Sub
+
+    Protected Sub DetContrato1_AceptarClicked(sender As Object, e As EventArgs) Handles DetContrato1.AceptarClicked
+        Dim obj As New CesionesDAO
+        grdCesiones.DataSource = obj.GetRecords(DetContrato1.Cod_Con)
+        grdCesiones.DataBind()
+    End Sub
 End Class
