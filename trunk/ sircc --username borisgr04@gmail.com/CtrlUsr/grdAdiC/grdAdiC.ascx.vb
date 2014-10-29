@@ -151,18 +151,21 @@ Partial Class CtrlUsr_grdAdiC_grdAdiC
     End Sub
 
     Protected Sub RowUpdating(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewUpdateEventArgs) Handles grd.RowUpdating
-        'Dim txtEditFec_Apr_Pol As TextBox = DirectCast(grd.Rows(e.RowIndex).FindControl("txtEditFec_Apr_Pol"), TextBox)
-        'Dim CboEditLegalizado As DropDownList = DirectCast(grd.Rows(e.RowIndex).FindControl("CboEditLegalizado"), DropDownList)
-        'Dim lbEditTipo As Label = DirectCast(grd.Rows(e.RowIndex).FindControl("lbEditTipo"), Label)
-        'Dim Docu As String = Me.grd.DataKeys(e.RowIndex).Values(0).ToString()
-        'Me.MsgResult.Text = obj.Update(Docu, CDate(txtEditFec_Apr_Pol.Text), CboEditLegalizado.SelectedValue, lbEditTipo.Text)
-        'Me.grd.EditIndex = -1
-        'LlenarGrid()
-        Dim CboeditTipAdi As DropDownList = DirectCast(grd.FooterRow.FindControl("CboeditTipAdi"), DropDownList)
-        Dim txteditVal_Adi As TextBox = DirectCast(grd.FooterRow.FindControl("txteditVal_Adi"), TextBox)
-        Dim txteditPla_Eje_Adi As TextBox = DirectCast(grd.FooterRow.FindControl("txteditPla_Eje_Adi"), TextBox)
-        Dim txteditFec_Sus_Adi As TextBox = DirectCast(grd.FooterRow.FindControl("txteditFec_Sus_Adi"), TextBox)
-        'Me.MsgResult.Text = obj.Insert(Me.Cod_Con, CDate(txtnewFec_Sus_Adi.Text), CInt(txtnewPla_Eje_Adi.Text), CDec(txtnewVal_Adi.Text), CbonewTipAdi.SelectedValue, Vigencia_Cookie)
+
+
+        Dim obj As New Adiciones
+        Dim txtEditObs As TextBox = DirectCast(grd.Rows(e.RowIndex).FindControl("txtEditObs"), TextBox)
+        Dim NroAdi As String = Me.grd.DataKeys(e.RowIndex).Values(0).ToString()
+
+
+        'Me.MsgResult.Text = obj.in
+        MsgBox(MsgResult, obj.lErrorG)
+        Me.grd.EditIndex = -1
+        LlenarGrid()
+        
+
+        Me.MsgResult.Text = obj.Update(NroAdi, txtEditObs.Text)
+
         If obj.lErrorG = True Then
             Me.MsgResult.Font.Bold = True
         Else
@@ -171,6 +174,7 @@ Partial Class CtrlUsr_grdAdiC_grdAdiC
             grd.EditIndex = -1
             LlenarGrid()
         End If
+
     End Sub
 
     Protected Sub SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grd.SelectedIndexChanged

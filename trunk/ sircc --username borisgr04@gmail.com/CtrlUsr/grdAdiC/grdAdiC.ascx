@@ -41,7 +41,7 @@
 <telerik:RadMultiPage ID="RadMultiPage1" Runat="server" SelectedIndex="0">
     <telerik:RadPageView ID="RadPageView1" runat="server">
         
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <TABLE width="100%"><TBODY><TR>
     <TD style="TEXT-ALIGN: center" class="Titulos" 
         colSpan=10>
@@ -168,74 +168,43 @@
     </tr>
     </TBODY></TABLE>
         
-&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
     </telerik:RadPageView>
 <telerik:RadPageView ID="RadPageView2" runat="server">
     
-&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
     <br />
     
-&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
     <asp:Label ID="Label8" runat="server" CssClass="SubTitulo" 
         Text="LISTADO DE MODIFICATORIOS"></asp:Label>
     
-&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
     <br />
     
-&nbsp;&nbsp;&nbsp;
-    <asp:GridView ID="grd" runat="server" AllowSorting="True" 
-        AutoGenerateColumns="False" DataKeyNames="NRO_ADI" EnableModelValidation="True" 
-        ShowFooter="True">
-        <Columns>
-            <asp:TemplateField HeaderText="N° Documento">
-                <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("NRO_ADI") %>'></asp:Label>
-                </ItemTemplate>
-            
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Tipo Documento">
-                <ItemTemplate>
-                    <asp:Label ID="Label6" runat="server" Text='<%# Bind("NOM_tip") %>'></asp:Label>
-                </ItemTemplate>
-            
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Fecha de Suscripción">
-                <ItemTemplate>
-                    <asp:Label ID="Label2" runat="server" 
-                        Text='<%# Bind("FEC_SUS_ADI", "{0:d}") %>'></asp:Label>
-                </ItemTemplate>
-            
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Plazo de Ejecución">
-                <ItemTemplate>
-                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("PLA_EJE_ADI") %>'></asp:Label>
-                </ItemTemplate>
-            
-                <ItemStyle HorizontalAlign="Right" />
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Valor Adición">
-                <ItemTemplate>
-                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("VAL_ADI", "{0:c}") %>'></asp:Label>
-                </ItemTemplate>
-            
-                <ItemStyle HorizontalAlign="Right" />
-            </asp:TemplateField>
-            <asp:BoundField DataField="Obser" HeaderText="Observación" />
-            <asp:ButtonField ButtonType="Image" CommandName="editar" 
-                ImageUrl="~/images/2012/edit.png" Text="Editar" Visible="False" />
-            <asp:TemplateField ShowHeader="False">
-                <ItemTemplate>
-                     <asp:ImageButton ID="IbtnEliminar" runat="server" CausesValidation="false" 
-                        CommandArgument='<%# Right(Eval("Nro_Adi"),2) %>' CommandName="eliminar"  
-                        ImageUrl="~/images/Operaciones/delete2.png" 
-                        OnClientClick="return confirm('Confirme si quiere Eliminar el Registro?');" 
-                        Text="Eliminar" 
-                        visible='<%#IIF((DataBinder.Eval(Container.DataItem, "Ult")="1"),True,False)%>' />
-                </ItemTemplate>
-            
-            </asp:TemplateField>
+    &nbsp;&nbsp;&nbsp;
+    <asp:GridView ID="grd" runat="server" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="NRO_ADI" EnableModelValidation="True" ShowFooter="True" Width="100%"><Columns><asp:TemplateField HeaderText="N° Documento"><ItemTemplate><asp:Label ID="Label1" runat="server" Text='<%# Bind("NRO_ADI") %>'></asp:Label>
+        </ItemTemplate>
+        </asp:TemplateField><asp:TemplateField HeaderText="Tipo Documento"><ItemTemplate><asp:Label ID="Label6" runat="server" Text='<%# Bind("NOM_tip") %>'></asp:Label>
+        </ItemTemplate>
+        </asp:TemplateField><asp:TemplateField HeaderText="Fecha de Suscripción"><ItemTemplate><asp:Label ID="Label2" runat="server" Text='<%# Bind("FEC_SUS_ADI", "{0:d}") %>'></asp:Label>
+        </ItemTemplate>
+        </asp:TemplateField><asp:TemplateField HeaderText="Plazo de Ejecución"><ItemTemplate><asp:Label ID="Label3" runat="server" Text='<%# Bind("PLA_EJE_ADI") %>'></asp:Label>
+        </ItemTemplate>
+        <ItemStyle HorizontalAlign="Right" />
+        </asp:TemplateField><asp:TemplateField HeaderText="Valor Adición"><ItemTemplate><asp:Label ID="Label4" runat="server" Text='<%# Bind("VAL_ADI", "{0:c}") %>'></asp:Label>
+        </ItemTemplate>
+        <ItemStyle HorizontalAlign="Right" />
+        </asp:TemplateField><asp:TemplateField HeaderText="Observación" ItemStyle-Width="50%"><EditItemTemplate><asp:TextBox ID="txtEditObs" runat="server" Rows="4" Text='<%# Bind("Obser") %>' TextMode="MultiLine" Width="300px"></asp:TextBox>
+        </EditItemTemplate>
+        <ItemTemplate>
+            <asp:Label ID="Label5" runat="server" Text='<%# Bind("Obser") %>'></asp:Label>
+        </ItemTemplate>
+        <ItemStyle Width="50%" />
+        </asp:TemplateField><asp:ButtonField ButtonType="Image" CommandName="editar" ImageUrl="~/images/2012/edit.png" Text="Editar" Visible="False" /><asp:TemplateField ShowHeader="False"><ItemTemplate><asp:ImageButton ID="IbtnEliminar" runat="server" CausesValidation="false" CommandArgument='<%# Right(Eval("Nro_Adi"),2) %>' CommandName="eliminar" ImageUrl="~/images/Operaciones/delete2.png" OnClientClick="return confirm('Confirme si quiere Eliminar el Registro?');" Text="Eliminar" visible='<%#IIF((DataBinder.Eval(Container.DataItem, "Ult")="1"),True,False)%>' />
+        </ItemTemplate>
+        </asp:TemplateField><asp:CommandField ShowEditButton="True" />
         </Columns>
-        
     </asp:GridView>
     
 
