@@ -18,14 +18,21 @@
         NewPasswordRequiredErrorMessage="Nueva Contraseña es requerida ."
         PasswordRequiredErrorMessage="Contraseña es requerida." SuccessText="Tu Contraseña ha sido cambiada!. No la Olvides"
         SuccessTitleText="Cambio de Contraseña Terminado" Height="99px" 
-        Width="343px">
+        Width="369px">
         <ChangePasswordTemplate>
                         <table cellpadding="5px" >
                             <tr>
-                                <td align="right">
-                                    &nbsp;</td>
-                                <td>
-                                    &nbsp;</td>
+                                
+                               <td align="center" colspan="2" style="color: red">
+                                   <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
+                                </td>
+                                <td align="center" style="color: red; width: 25px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="2" style="color: red">
+                                    <asp:CompareValidator ID="NewPasswordCompare" runat="server" ControlToCompare="NewPassword" ControlToValidate="ConfirmNewPassword" Display="Dynamic" ErrorMessage="La Contraseña Confirmada debe ser Igual a la Nueva Contrasela." ValidationGroup="ChangePassword1"></asp:CompareValidator>
+                                </td>
+                                <td align="center" style="color: red; width: 25px;">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td align="right">
@@ -34,30 +41,26 @@
                                 <td>
                                     <asp:LoginName ID="LoginName3" runat="server" />
                                 </td>
+                                <td style="width: 25px">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td align="right">
                                     <asp:Label ID="CurrentPasswordLabel" runat="server" AssociatedControlID="CurrentPassword">Contraseña Actual:</asp:Label></td>
                                 <td>
                                     <asp:TextBox ID="CurrentPassword" runat="server" TextMode="Password"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="CurrentPasswordRequired" runat="server" ControlToValidate="CurrentPassword"
-                                        ErrorMessage="Contraseña es requerida." ToolTip="Contraseña es requerida." ValidationGroup="ChangePassword1">*</asp:RequiredFieldValidator>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    &nbsp;</td>
-                                <td>
-                                    &nbsp;</td>
+                                <td style="width: 25px">
+                                    <asp:RequiredFieldValidator ID="CurrentPasswordRequired" runat="server" ControlToValidate="CurrentPassword" ErrorMessage="Contraseña es requerida." ToolTip="Contraseña es requerida." ValidationGroup="ChangePassword1">*</asp:RequiredFieldValidator>
+                                </td>
                             </tr>
                             <tr>
                                 <td align="right">
                                     <asp:Label ID="NewPasswordLabel" runat="server" AssociatedControlID="NewPassword">Nueva Contraseña:</asp:Label></td>
                                 <td>
                                     <asp:TextBox ID="NewPassword" runat="server" TextMode="Password"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="NewPasswordRequired" runat="server" ControlToValidate="NewPassword"
-                                        ErrorMessage="Nueva Contraseña es requerida ." ToolTip="Nueva Contraseña es requerida ."
-                                        ValidationGroup="ChangePassword1">*</asp:RequiredFieldValidator>
+                                </td>
+                                <td style="width: 25px">
+                                    <asp:RequiredFieldValidator ID="NewPasswordRequired" runat="server" ControlToValidate="NewPassword" ErrorMessage="Nueva Contraseña es requerida ." ToolTip="Nueva Contraseña es requerida ." ValidationGroup="ChangePassword1">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -65,21 +68,9 @@
                                     <asp:Label ID="ConfirmNewPasswordLabel" runat="server" AssociatedControlID="ConfirmNewPassword">Confirme Nueva Contraseña:</asp:Label></td>
                                 <td>
                                     <asp:TextBox ID="ConfirmNewPassword" runat="server" TextMode="Password"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="ConfirmNewPasswordRequired" runat="server" ControlToValidate="ConfirmNewPassword"
-                                        ErrorMessage="Confirmar Nueva Contraseña esRequerida." ToolTip="Confirmar Nueva Contraseña esRequerida."
-                                        ValidationGroup="ChangePassword1">*</asp:RequiredFieldValidator>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td align="center" colspan="2">
-                                    <asp:CompareValidator ID="NewPasswordCompare" runat="server" ControlToCompare="NewPassword"
-                                        ControlToValidate="ConfirmNewPassword" Display="Dynamic" ErrorMessage="La Contraseña Confirmada debe ser Igual a la Nueva Contrasela."
-                                        ValidationGroup="ChangePassword1"></asp:CompareValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="center" colspan="2" style="color: red">
-                                    <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
+                                <td style="width: 25px">
+                                    <asp:RequiredFieldValidator ID="ConfirmNewPasswordRequired" runat="server" ControlToValidate="ConfirmNewPassword" ErrorMessage="Confirmar Nueva Contraseña esRequerida." ToolTip="Confirmar Nueva Contraseña esRequerida." ValidationGroup="ChangePassword1">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -91,6 +82,7 @@
                                     <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel"
                                         Text="Cancelar" Width="129px" />
                                 </td>
+                                <td style="width: 25px">&nbsp;</td>
                             </tr>
                         </table>
                         <asp:Label ID="Label1" runat="server" AssociatedControlID="CurrentPassword" 
