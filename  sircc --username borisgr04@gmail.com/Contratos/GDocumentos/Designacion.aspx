@@ -37,6 +37,9 @@
            </table>     
             
         </div>
+        <asp:Label ID="MsgResult" runat="server" Height="30px" Text="Label" Visible="False"
+                    Width="80%"></asp:Label>
+
         <div style="text-align: justify" contenteditable="true" class="hoja">
             <asp:Literal ID="ltPlantilla" runat="server">
                 <table class="tbconborde" style="width:100%">

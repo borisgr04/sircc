@@ -69,7 +69,7 @@ Public Class Pagos_Gprocesos
         End If
         Try
             If Me.Valor_Restante < CDbl(val_pa) And PagaGober = "1" And Tipo_pago <> "AN" Then
-                Throw New Exception("El valor del Pago no puede ser superior al restante del valor del contrato (" & FormatCurrency(Me.Valor_Restante) & ")")
+                Throw New Exception("El valor del Pago (" + val_pa + ") no puede ser superior al restante del valor del contrato (" & FormatCurrency(Me.Valor_Restante) & ")")
             ElseIf Me.Valor_Restante = 0 And PagaGober = "1" And Tipo_pago <> "AN" Then
                 Throw New Exception("Los pagos han cubierto la totalidad del contrato")
             Else
