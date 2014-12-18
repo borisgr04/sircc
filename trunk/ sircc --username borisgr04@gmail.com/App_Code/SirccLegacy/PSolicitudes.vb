@@ -844,15 +844,15 @@ Public Class PSolicitudes
 
             is_commit = True
             If concepto = "R" Then
-                Dim nr As New NotificacionesEmail
-                msgNot = nr.Notificar_RevisionSol(COD_SOL_PK, id_Hrev)
-                msgNot = "<BR/>Resultado Envio de Notificación :" + msgNot
-                Me.Msg = Me.Msg + msgNot
+                'Dim nr As New NotificacionesEmail
+                'msgNot = nr.Notificar_RevisionSol(COD_SOL_PK, id_Hrev)
+                'msgNot = "<BR/>Resultado Envio de Notificación :" + msgNot
+                'Me.Msg = Me.Msg + msgNot
             End If
 
 
         Catch ex As Exception
-            Me.Msg += "Error:" + ex.Message + ex.StackTrace
+            Me.Msg += "Error:" + ex.Message '+ ex.StackTrace
             If Not is_commit Then
                 Me.CancelarTransaccion()
             End If
