@@ -316,15 +316,15 @@
         DataField="NOM_EST" >
     </asp:BoundField>
 
-    <asp:ButtonField ButtonType="Image" CommandName="hojaRutas" HeaderText="Hoja de Ruta" 
+    <asp:ButtonField ButtonType="Image" CommandName="hojaRutas" HeaderText="Hoja de Ruta" Visible="false" 
                                     ImageUrl="~/images/2013/listcheck.png" Text="Diligenciar Hoja de Ruta" />
     <asp:ButtonField ButtonType="Image" CommandName="crono" HeaderText="Cronograma" 
         ImageUrl="~/images/mnProcesos/Calendar-icon24.png" Text="Cronograma">
     <ItemStyle HorizontalAlign="Center" />
     </asp:ButtonField>
-    <asp:ButtonField ButtonType="Image" CommandName="documentos" HeaderText="Documentos"
+    <asp:ButtonField ButtonType="Image" CommandName="documentos" HeaderText="Documentos" Visible="false"
                                     ImageUrl="~/images/2012/archivo.png" Text="Documentos Precontractuales" />
-    <asp:ButtonField ButtonType="Image" Visible="false" CommandName="dbproc" 
+    <asp:ButtonField ButtonType="Image" Visible="true" CommandName="dbproc" 
         HeaderText="Datos del Proceso" ImageUrl="~/images/Operaciones/Edit.png">
     <ItemStyle HorizontalAlign="Center" />
     </asp:ButtonField>
