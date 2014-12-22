@@ -33,7 +33,15 @@ Partial Class Publico_Default
     Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
             Dim obj As New BDDatos
-            Dim Script As String = TextBox2.Text + " " + TextBox1.Text + " And " + TextBox3.Text
+
+            Dim Script As String = txtScript.Text
+
+            Script=Script.Replace("@v", "Pct" + txtVig.Text)
+            Script=Script.Replace("@ei", txtei.Text)
+            Script=Script.Replace("@ef", txtef.Text)
+			
+			txtScript.Text=Script
+
             Dim grd As New GridView
             grd.DataSource = obj.GetSelect(Script)
             grd.DataBind()
@@ -51,6 +59,6 @@ Partial Class Publico_Default
     End Sub
 
     Protected Sub Configuración_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Chk1.CheckedChanged
-        TextBox2.Visible = Chk1.Checked
+        txtScript.visible = Chk1.Checked
     End Sub
 End Class
