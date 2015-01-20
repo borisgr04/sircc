@@ -18,8 +18,21 @@
                         PropertyName="Cod_Con" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
-    &nbsp;<asp:LinkButton ID="LnkRPC" runat="server" >SOLICITUD   DE   REGISTRO  PRESUPUESTAL DE  COMPROMISOS</asp:LinkButton><br />
-    &nbsp;<asp:LinkButton ID="LinkDesSup" runat="server">CARTA DE DESIGNACION DE SUPERVISOR</asp:LinkButton>
+    &nbsp;<br />
+    &nbsp;<br />
+         <asp:Label ID="Msg" runat="server"></asp:Label>
+
+         <asp:GridView ID="grdOficios" runat="server" EnableModelValidation="True" AutoGenerateColumns="False" DataKeyNames="tip_ofi" Width="100%">
+             <Columns>
+                 <asp:BoundField DataField="ID" HeaderText="Id" />
+                 <asp:BoundField DataField="tip_ofi" HeaderText="Tipo" />
+                 <asp:BoundField DataField="nom_ofi" HeaderText="Nombre" />
+                 <asp:BoundField DataField="ESTADO" HeaderText="Estado" />
+                 <asp:BoundField DataField="FEC_OFI" HeaderText="Fecha Generación" />
+                 <asp:CommandField ShowSelectButton="True" />
+             </Columns>
+         </asp:GridView>
+
          
          
          </div>
