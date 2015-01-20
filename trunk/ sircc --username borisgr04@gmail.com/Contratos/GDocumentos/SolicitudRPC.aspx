@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link href="docEP.css" rel="stylesheet" />
+    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -18,6 +19,11 @@
                     <td class="auto-style1"> <asp:ImageButton ID="IBtnImp"  runat="server" Height="32px" Width="32px"  OnClientClick="window.print();" SkinID="IBtnImp" /></td>
                     
                     <td class="auto-style2"><asp:ImageButton ID="IBtnAtras" runat="server" Height="32px" Width="33px"  SkinID="IBtnAtras" /></td>
+
+                    
+
+                   
+
                    </tr>
                <tr >
                    <td class="auto-style1"><b>Imprimir</b> </td>

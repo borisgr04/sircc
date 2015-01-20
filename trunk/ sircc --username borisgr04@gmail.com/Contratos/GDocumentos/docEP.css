@@ -1,22 +1,15 @@
-﻿
-
-
-       
-
-        @page rotated
-        {
+﻿@page rotated
+{
             size: landscape;
-        }
+}
 
 
 @media screen
 {
-    
-
     .hoja
     {
         font-family: Tahoma;
-        font-size: 10pt;
+        font-size: 12pt;
         background-color: white;
         padding: 10px;
     }
@@ -93,7 +86,7 @@ position: fixed;
    background-color: #ffffff; 
     width: 600px; 
    border: 2px solid #cccccc; 
-   font-size:10pt; 
+   font-size:12pt; 
 }
 
 
