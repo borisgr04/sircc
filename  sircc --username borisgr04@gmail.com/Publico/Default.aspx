@@ -11,7 +11,7 @@
     <div>
     <div class="demoarea">
             <asp:Label ID="LbNav" runat="server" Text=""></asp:Label>
-            <br />
+            <br />Vigencia
             <asp:TextBox ID="txtVig" runat="server"></asp:TextBox>
             <br />
             <br />
@@ -52,19 +52,19 @@
   Select distinct  
 de.Num_egreso,
 de.nit
-, CLS_EGRESO
-,Ben_cheque
-,Nro_ctabancaria
-,cod_banco
-,cta_banco
-,nro_cheque
-,cod_banco_nit
-,tipo_cta_banco,
+, de.CLS_EGRESO
+,de.Ben_cheque
+,de.Nro_ctabancaria
+,de.cod_banco
+,de.cta_banco
+,de.nro_cheque
+,de.cod_banco_nit
+,de.tipo_cta_banco,
 mo.Val_Total, 
 mo.Val_Neto,
 mo.num_orden,
-RUBRO, 
-NOM_GASTO,origen
+G.RUBRO, 
+G.NOM_GASTO
 From @v.Degreso de  
 inner join @v.MOrden mo  On de.num_egreso= mo.num_egreso  
 inner join @v.MEgreso me On de.num_egreso = me.num_egreso 
@@ -76,7 +76,7 @@ LEFT JOIN @v.ppto_gastos_v1 g
            AND d.cod_recurso = g.cod_recurso
            AND g.vigencia = Mo.VIGENCIA
            
-           WHERE DE.ESTADO<>'A' AND CLS_EGRESO='E' AND NRO_CHEQUE IS NULL AND CTA_BANCO IS NOT NULL
+           WHERE DE.ESTADO<>'A' AND CLS_EGRESO='E' AND DE.NRO_CHEQUE IS NULL AND DE.CTA_BANCO IS NOT NULL
 AND de.NUM_EGRESO BETWEEN @ei AND @ef
 ORDER BY de.NUM_EGRESO ASC 
 
