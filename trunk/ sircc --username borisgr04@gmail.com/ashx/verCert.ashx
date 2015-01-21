@@ -19,8 +19,8 @@ Public Class verDoc : Implements IHttpHandler
         If oCert.Cargar(nro_cert, vig_cert) Then
             context.Response.Clear()
             'Response.ContentType = mimeType
-            context.Response.AddHeader("content-disposition", "attachment; filename=" + cod_serie+ ".pdf")
-            context.Response.BinaryWrite(oCert.Doc_PDF)
+            context.Response.AddHeader("content-disposition", "attachment; filename=" + cod_serie + ".doc")
+            context.Response.BinaryWrite(oCert.Doc_Doc)
             context.Response.End()
             'Dim SalPDF As Byte() = {}
             'PdfManipulation2.ExtractPdfPage(DirectCast(dt.Rows(0)("DOCUMENTO"), Byte()), 10, 13, SalPDF)

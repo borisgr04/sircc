@@ -176,7 +176,7 @@
                         <%--<asp:BoundField DataField="NRO_IMP" HeaderText="N° Impresiones" SortExpression="NRO_IMP" />--%>
                         <asp:BoundField DataField="UsAp" HeaderText="Usuario" SortExpression="UsAp" />
                         <asp:BoundField DataField="FREG" HeaderText="Fecha Generación" SortExpression="FREG" />
-                        <asp:CommandField ShowSelectButton="True" ButtonType="Image" SelectImageUrl="~/images/2012/pdf-icon.png" />
+                        <%--<asp:CommandField ShowSelectButton="True" ButtonType="Image" SelectImageUrl="~/images/2012/pdf-icon.png" />--%>
                     </Columns>
                 </asp:GridView>
             </telerik:RadPageView>
