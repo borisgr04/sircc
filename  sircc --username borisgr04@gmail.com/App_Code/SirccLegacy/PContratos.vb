@@ -242,6 +242,7 @@ Public Class PContratos
         Return dataTb
 
     End Function
+
     <DataObjectMethodAttribute(DataObjectMethodType.Insert, True)> _
     Public Function Insert(ByVal COD_TPRO As String, ByVal PRO_SEL_NRO As String, ByVal OBJ_CON As String, ByVal PRO_CON As String, ByVal PLA_EJE_CON As String, ByVal DEP_CON As String, ByVal DEP_PCON As String, ByVal VIG_CON As Decimal, ByVal TIP_CON As String, ByVal STIP_CON As String, ByVal VAL_CON As Decimal, ByVal VAL_APO_GOB As Decimal, ByVal COD_SEC As String, ByVal TIP_FOR As String, ByVal NRO_PLA_CON As String, ByVal URG_MAN As String, ByVal EST_CONV As String, ByVal APL_GAC As String, ByVal LUG_EJE As String, ByVal TPlazo As String) As String
         'Me.Desconectar()
@@ -326,7 +327,7 @@ Public Class PContratos
 
 
         Me.CrearNumProc(DEP_PCON, COD_TPRO, VIG_CON)
-        querystring = "Insert Into PCONTRATOS (COD_TPRO, PRO_SEL_NRO, OBJ_CON, DEP_CON, DEP_PCON, VIG_CON, TIP_CON, STIP_CON, FECHARECIBIDO, NUM_SOL, VAL_CON, VAL_APO_GOB, IDE_CON, IDE_REP) Values(:COD_TPRO, :PRO_SEL_NRO,  :OBJ_CON,  :DEP_CON, :DEP_PCON, :VIG_CON, :TIP_CON, :STIP_CON, to_date(:FEC_RECIBIDO,'dd/mm/yyyy'), :NUM_SOL, :VAL_CON, :VAL_APO_GOB, :IDE_CON,:IDE_REP)"
+        querystring = "Insert Into PCONTRATOS (COD_TPRO, PRO_SEL_NRO, OBJ_CON, DEP_CON, DEP_PCON, VIG_CON, TIP_CON, STIP_CON, FECHARECIBIDO, NUM_SOL, VAL_CON, VAL_APO_GOB, IDE_CON, IDE_REP,TIPO_PLAZO) Values(:COD_TPRO, :PRO_SEL_NRO,  :OBJ_CON,  :DEP_CON, :DEP_PCON, :VIG_CON, :TIP_CON, :STIP_CON, to_date(:FEC_RECIBIDO,'dd/mm/yyyy'), :NUM_SOL, :VAL_CON, :VAL_APO_GOB, :IDE_CON,:IDE_REP,'D')"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":COD_TPRO", COD_TPRO)
         Me.AsignarParametroCadena(":PRO_SEL_NRO", Me.Num_PCon)
@@ -344,11 +345,13 @@ Public Class PContratos
         Me.AsignarParametroDecimal(":VAL_APO_GOB", VAL_CON)
         Me.AsignarParametroCadena(":IDE_CON", IDE_CON)
         Me.AsignarParametroCadena(":IDE_REP", IDE_CON)
+        'Me.AsignarParametroCadena(":TIPO_PLAZO", "D")
+        'Me.AsignarParametroCadena(":NUMGRUPOS", 1)
         'Throw New Exception(_Comando.CommandText)
 
         Me.num_reg = Me.EjecutarComando()
 
-        querystring = "UPDATE PCONTRATOS SET NUMGRUPOS=1, TIPO_PLAZO='D' WHERE PRO_SEL_NRO=:PRO_SEL_NRO"
+        querystring = "UPDATE PCONTRATOS SET NUMGRUPOS=1  WHERE PRO_SEL_NRO=:PRO_SEL_NRO"
         Me.CrearComando(querystring)
         Me.AsignarParametroCadena(":PRO_SEL_NRO", Me.Num_PCon)
         EjecutarComando()

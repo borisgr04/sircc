@@ -80,7 +80,7 @@
         <br />    
         <br />
         
-        Atentamente,
+        
         <br />
         <br />
         <br />

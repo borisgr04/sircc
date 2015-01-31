@@ -8,7 +8,7 @@
 {
     .hoja
     {
-        font-family: Tahoma;
+        font-family: Arial;
         font-size: 12pt;
         background-color: white;
         padding: 10px;
@@ -19,23 +19,34 @@
 
 
 @media print
-{
-      
-    .BtnImprimir
-    {
-        visibility:hidden;
-    }
+{  
 
-    @page
+ @page
  {
             size:letter;
-            margin: 2cm 2cm 2cm 2cm;
+            margin: 2cm 3cm 3cm 3cm;
             orphans : 4;
             widows : 4;
             size: portrait;
           
             
  }
+
+    .BtnImprimir
+    {
+        visibility:hidden;
+    }
+
+    p.txtcentrado {
+        text-align:center;
+        
+    }
+    
+   p.txtsize {
+        font-size: x-small;
+       }
+
+ 
            
        
 }
@@ -86,7 +97,7 @@ position: fixed;
    background-color: #ffffff; 
     width: 600px; 
    border: 2px solid #cccccc; 
-   font-size:12pt; 
+   font-size:13pt; 
 }
 
 

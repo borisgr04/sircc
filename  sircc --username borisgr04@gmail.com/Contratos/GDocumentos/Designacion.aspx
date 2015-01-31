@@ -74,14 +74,14 @@
             <b>{CAR_SUPERVISOR}</b><br />
             <b>{DEP_SUPERVISOR}</b><br />
             Gobernación Departamento del Cesar<br />
-            Valledupar <br />
+            <br />
             <br />
         <br />
         Cordial Saludo:
         <br />
         <br />
         <p>
-            Por medio de la presente, me permito comunicarle que el cargo que usted ocupa ha sido designado como Supervisor del <b>{CLASE_CONTRATO}</b>: No <b>{NUMERO}</b> suscrito con: <b>{NOM_CONTRATISTA}</b>, cuyo Objeto consiste en: <b>{OBJETO}</b>.</p>
+            Por medio de la presente, me permito comunicarle que el cargo que usted ocupa ha sido designado como Supervisor del {CLASE_CONTRATO}: No <b>{NUMERO}</b> suscrito con: <b>{NOM_CONTRATISTA}</b>, cuyo Objeto consiste en: <b>{OBJETO}</b>.</p>
         <br />
         <p>
             Para la eficaz realización de la actividad que se le encomienda deberá dar cumplimiento a lo dispuesto en el Manual de Interventoría Departamental, adoptado mediante Resolución No. 000124 del 23 de mayo de 2013, verificando entre otras el cumplimiento de las obligaciones por parte del contratista, proyectar y suscribir actas e informes de ejecución, verificar y dejar constancia del pago de aportes parafiscales y el cumplimiento de obligaciones con el sistema de salud integral,  liquidación del contrato.
