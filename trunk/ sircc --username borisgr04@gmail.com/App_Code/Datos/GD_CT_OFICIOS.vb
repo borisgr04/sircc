@@ -25,7 +25,6 @@ Public Class GD_CT_OFICIOS
         ctx.Conectar()
         Try
             ctx.ComenzarTransaccion()
-
             Dim querystring As String = "select Max(ID) ID From GD_CT_OFICIOS"
             ctx.CrearComando(querystring)
             Try
@@ -33,7 +32,6 @@ Public Class GD_CT_OFICIOS
             Catch ex As Exception
                 dto.ID = 1
             End Try
-
             querystring = "INSERT INTO GD_CT_OFICIOS(ID, FEC_OFI, COD_CON,TIP_OFI,EST_OFI)VALUES(:ID, Sysdate, :COD_CON,:TIP_OFI,'AC') "
             ctx.CrearComando(querystring)
             ctx.AsignarParametroCadena(":ID", dto.ID)

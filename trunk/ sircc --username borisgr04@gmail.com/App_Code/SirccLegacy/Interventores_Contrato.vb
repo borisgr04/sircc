@@ -33,6 +33,7 @@ Public Class Interventores_Contrato
     '    Return dataTb
 
     'End Function
+
     ''' <summary>
     ''' Consulta impuestos relacionados con un contrato/convenio
     ''' </summary>
@@ -59,7 +60,26 @@ Public Class Interventores_Contrato
         Me.Desconectar()
         Return dataTb
     End Function
+    <DataObjectMethodAttribute(DataObjectMethodType.Select, True)> _
+    Public Overloads Function GetRecordsAC(ByVal Cod_Con As String) As DataTable
+        Me.Conectar()
+        'querystring = "SELECT * FROM vInterventores_Contrato Where Cod_Con=:Cod_Con"
+        querystring = " SELECT ic.ide_int ide_int, tr.nom_ter nom_ter, ic.est_int est_int,ic.obs_int obs_int,nom_tip ntip_int,ic.tip_int tip_int, ic.cod_con cod_con,cod_con_int "
+        querystring += " FROM interventores_contrato ic "
+        querystring += " INNER JOIN vterceros tr ON ic.ide_int = tr.ide_ter "
+        querystring += " INNER JOIN tipo_interventor ti ON  ic.tip_int=ti.COD_TIP "
+        querystring += " Where Cod_Con=:Cod_Con And Est_Int='AC'"
 
+        Me.CrearComando(querystring)
+        Me.AsignarParametroCadena(":Cod_Con", Cod_Con)
+        'If Cod_Con <> "" Then
+        ' Throw New Exception(Me.vComando.CommandText)
+        'End If
+
+        Dim dataTb As DataTable = Me.EjecutarConsultaDataTable()
+        Me.Desconectar()
+        Return dataTb
+    End Function
 
     Function GetRegistros(Cod_Con As String) As List(Of EInterventores_Contrato)
         Dim dataTb As DataTable

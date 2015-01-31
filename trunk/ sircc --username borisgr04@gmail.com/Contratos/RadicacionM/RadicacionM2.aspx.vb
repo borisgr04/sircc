@@ -564,9 +564,9 @@ Partial Class Contratos_RadicacionM2_Default
 
     End Sub
 
-  
+
     Sub AbrirP()
-        
+
         Dim ctr As New CtrRadicar
         Dim dt As DataTable = ctr.GetProceso(TxtNProc.Text, CboGrupos.SelectedValue)
 
@@ -621,7 +621,13 @@ Partial Class Contratos_RadicacionM2_Default
             'Me.ChkApo.Checked = IIf(dt.Rows(0)("PER_APO").ToString = "1", True, False)
             'Me.TxtNEmpleos.Text = dt.Rows(0)("NEMPLEOS").ToString.Replace(",", ".")
 
-            Me.CboTPlazo.Text = dt.Rows(0)("TIPO_PLAZO").ToString
+            Try
+                Me.CboTPlazo.SelectedValue = dt.Rows(0)("TIPO_PLAZO").ToString
+            Catch ex As Exception
+                Me.CboTPlazo.SelectedValue = "D"
+            End Try
+
+
             Me.TxtPla.Text = dt.Rows(0)("pla_eje_con").ToString ''toma el plazo  de ejecución de la primera casilla
             If Not (DBNull.Value Is dt.Rows(0)("TIPO_PLAZO2")) Then
                 Me.CboTPlazo3.Text = dt.Rows(0)("TIPO_PLAZO2").ToString
