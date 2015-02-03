@@ -223,6 +223,8 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableE
                     </asp:TemplateField>
                     <asp:BoundField DataField="ENCARGADO" HeaderText="Encargado" 
                     SortExpression="ENCARGADO" />
+                    <asp:BoundField DataField="Nom_Con" HeaderText="Contratista" 
+                        SortExpression="Nom_Con" />
                     <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
                         <ItemTemplate>
                             <asp:Label ID="LbEst1" runat="server" 
@@ -313,6 +315,8 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableE
                     </asp:TemplateField>
                     <asp:BoundField DataField="ENCARGADO" HeaderText="Encargado" 
                     SortExpression="Dep_Del" />
+                    <asp:BoundField DataField="Nom_Con" HeaderText="Contratista" 
+                        SortExpression="Nom_Con" />
                     <asp:TemplateField HeaderText="Dependencia a Cargo" SortExpression="Dep_Del">
                         <ItemTemplate>
                             <asp:Label ID="LbEst1" runat="server" 
@@ -492,6 +496,8 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableE
                 </asp:TemplateField>
                     <asp:BoundField DataField="Encargado" HeaderText="Encargado" 
                         SortExpression="Encargado" />
+                    <asp:BoundField DataField="Nom_Con" HeaderText="Contratista" 
+                        SortExpression="Nom_Con" />
                 <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
                     <ItemTemplate>
                 <asp:Label id="Lbcimp0" runat="server" Text='<%# Bind("Obj_sol") %>' 
@@ -562,6 +568,8 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableE
                                     Text='<%# Bind("encargado") %>'></asp:Label>
                          </ItemTemplate>
                          </asp:TemplateField>
+                        <asp:BoundField DataField="Nom_Con" HeaderText="Contratista" 
+                        SortExpression="Nom_Con" />
                         <asp:TemplateField HeaderText="Objeto del Contrato" SortExpression="Obj_sol">
                             <ItemTemplate>
                                 <asp:Label ID="Lbcimp" runat="server" 
@@ -692,6 +700,8 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableE
         SortExpression="Fec_Reg" />
     <asp:BoundField DataField="Encargado" HeaderText="Encargado" 
         SortExpression="Encargado" />
+    <asp:BoundField DataField="Contratista" HeaderText="Contratista" 
+        SortExpression="Contratista" />
     <asp:BoundField DataField="Nom_TProc" HeaderText="Tipo de Procesos" 
         SortExpression="Nom_TProc" />
     <asp:BoundField HeaderText="Objeto a Contratar" SortExpression="Obj_Con" 
