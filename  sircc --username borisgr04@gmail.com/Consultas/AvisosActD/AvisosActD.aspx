@@ -724,11 +724,11 @@ CodeFile="AvisosActD.aspx.vb" Inherits="Consultas_AvisosActD_AvisosActD" enableE
         DataField="NOM_EST" >
     </asp:BoundField>
 
-    <asp:ButtonField ButtonType="Image" CommandName="crono" HeaderText="Cronograma" 
+    <asp:ButtonField ButtonType="Image" CommandName="crono" HeaderText="" 
         ImageUrl="~/images/mnProcesos/Calendar-icon24.png" Text="Cronograma">
     <ItemStyle HorizontalAlign="Center" />
     </asp:ButtonField>
-    <asp:ButtonField ButtonType="Image" CommandName="documentos" HeaderText="Documentos"
+    <asp:ButtonField ButtonType="Image" CommandName="documentos" HeaderText=""
                                     ImageUrl="~/images/2012/archivo.png" Text="Documentos Precontractuales" />
     <asp:ButtonField ButtonType="Image" Visible="false" CommandName="dbproc" 
         HeaderText="Datos del Proceso" ImageUrl="~/images/Operaciones/Edit.png">
