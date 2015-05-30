@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" EnableEventValidation="false"
     CodeFile="Certificados.aspx.vb" Inherits="Reportes_Certificados_Certificados" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SampleContent" runat="Server">
